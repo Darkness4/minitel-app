@@ -34,6 +34,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _pingDNS5 = "";
   var _nsLookupEMSE = "";
   var _nsLookupGoogle = "";
+
   // var _loading = false;
   // (
   //   _status == "" &&
@@ -63,8 +64,11 @@ class _DiagnosePageState extends State<DiagnosePage> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Text(_alert, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
-                Text("SSID: $_ssid, Level: $_level, IP: $_ip", style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(_alert,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.red)),
+                Text("SSID: $_ssid, Level: $_level, IP: $_ip",
+                    style: TextStyle(fontWeight: FontWeight.bold)),
                 LogWidget("Permission Coarse Location (for SSID)", _permission),
                 LogWidget("Ping Loopback", _pingLo),
                 LogWidget("Ping Local", _pingLocal),
@@ -85,9 +89,10 @@ class _DiagnosePageState extends State<DiagnosePage> {
       floatingActionButton: Builder(
         builder: (context) => FloatingActionButton(
               onPressed: () {
-                _diagnose();},
+                _diagnose();
+              },
               child: Icon(Icons.zoom_in),
-        ),
+            ),
       ),
     );
   }
@@ -95,28 +100,47 @@ class _DiagnosePageState extends State<DiagnosePage> {
   _diagnose() async {
     setState(() => _alert = "");
     var argsPing = "-c 1 -w 1 -W 1";
-    SimplePermissions.requestPermission(Permission.AccessCoarseLocation).then((status) => setState(() => _permission = status.toString()));
+    SimplePermissions.requestPermission(Permission.AccessCoarseLocation)
+        .then((status) => setState(() => _permission = status.toString()));
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
       Connectivity().getWifiName().then((ssid) => setState(() => _ssid = ssid));
       Wifi.level.then((level) => setState(() => _level = '$level'));
       Wifi.ip.then((ip) => setState(() => _ip = ip));
 
-      exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) => setState(() => _pingLo = out));
-      exec("ping", [argsPing, "172.17.0.5"]).runGetOutput().then((out) => setState(() => _pingLocal = out));
-      exec("ping", [argsPing, "192.168.130.33"]).runGetOutput().then((out) => setState(() => _pingDNS1 = out));
-      exec("ping", [argsPing, "192.168.130.3"]).runGetOutput().then((out) => setState(() => _pingDNS2 = out));
-      exec("ping", [argsPing, "8.8.8.8"]).runGetOutput().then((out) => setState(() => _pingDNS3 = out));
-      exec("ping", [argsPing, "1.1.1.1"]).runGetOutput().then((out) => setState(() => _pingDNS4 = out));
-      exec("ping", [argsPing, "172.17.0.6"]).runGetOutput().then((out) => setState(() => _pingDNS5 = out));
+      exec("ping", [argsPing, "127.0.0.1"])
+          .runGetOutput()
+          .then((out) => setState(() => _pingLo = out));
+      exec("ping", [argsPing, "172.17.0.5"])
+          .runGetOutput()
+          .then((out) => setState(() => _pingLocal = out));
+      exec("ping", [argsPing, "192.168.130.33"])
+          .runGetOutput()
+          .then((out) => setState(() => _pingDNS1 = out));
+      exec("ping", [argsPing, "192.168.130.3"])
+          .runGetOutput()
+          .then((out) => setState(() => _pingDNS2 = out));
+      exec("ping", [argsPing, "8.8.8.8"])
+          .runGetOutput()
+          .then((out) => setState(() => _pingDNS3 = out));
+      exec("ping", [argsPing, "1.1.1.1"])
+          .runGetOutput()
+          .then((out) => setState(() => _pingDNS4 = out));
+      exec("ping", [argsPing, "172.17.0.6"])
+          .runGetOutput()
+          .then((out) => setState(() => _pingDNS5 = out));
 
       _getStatus("172.17.0.1");
 
-      InternetAddress.lookup("fw-cgcp.emse.fr")
-                     .then((addresses) => addresses.forEach((address) => setState(() => _nsLookupEMSE = "Host: ${address.host}\nLookup: ${address.address}")));
-      InternetAddress.lookup("google.com")
-                     .then((addresses) => addresses.forEach((address) => setState(() => _nsLookupGoogle = "Host: ${address.host}\nLookup: ${address.address}")));
-    } else setState(() => _alert = "Not connected to Wifi nor Mobile.");
+      InternetAddress.lookup("fw-cgcp.emse.fr").then((addresses) =>
+          addresses.forEach((address) => setState(() => _nsLookupEMSE =
+              "Host: ${address.host}\nLookup: ${address.address}")));
+      InternetAddress.lookup("google.com").then((addresses) =>
+          addresses.forEach((address) => setState(() => _nsLookupGoogle =
+              "Host: ${address.host}\nLookup: ${address.address}")));
+    } else
+      setState(() => _alert = "Not connected to Wifi nor Mobile.");
   }
 
   _getStatus(String selectedUrl) {

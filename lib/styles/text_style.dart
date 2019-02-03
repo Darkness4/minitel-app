@@ -19,14 +19,21 @@ class LogWidget extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[Container(padding:EdgeInsets.all(10),
-                                     child:Text(title, style: styleLogImportant()),
-                                     decoration: BoxDecoration(color: Colors.black12,),),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text(text, style: styleLog()),
-                  decoration: BoxDecoration(color: Colors.black87),
-                ),],),
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text(title, style: styleLogImportant()),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text(text, style: styleLog()),
+            decoration: BoxDecoration(color: Colors.black87),
+          ),
+        ],
+      ),
     );
   }
 }

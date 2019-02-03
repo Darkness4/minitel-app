@@ -5,14 +5,13 @@ class MainDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        padding: const EdgeInsets.all(0.0),  // fix regression, TODO: Remove when fixed
+        padding: const EdgeInsets.all(0.0),
+        // fix regression, TODO: Remove when fixed
         children: <Widget>[
           DrawerHeader(
             child: Text(
               "Minitel toolbox",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32),
+              style: TextStyle(color: Colors.white, fontSize: 32),
             ),
             decoration: BoxDecoration(
               color: Colors.green,
