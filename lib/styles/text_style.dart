@@ -16,16 +16,22 @@ class LogWidget extends StatelessWidget {
 
   Widget build(context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          color: Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 1,
+            ),
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             padding: EdgeInsets.all(10),
             child: Text(title, style: styleLogImportant()),
-            decoration: BoxDecoration(
-              color: Colors.black12,
-            ),
           ),
           Container(
             padding: EdgeInsets.all(10),
