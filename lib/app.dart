@@ -1,6 +1,7 @@
-import 'pages/login.dart';
-import 'pages/diagnose.dart';
 import 'package:flutter/material.dart';
+
+import 'pages/diagnose.dart';
+import 'pages/login.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

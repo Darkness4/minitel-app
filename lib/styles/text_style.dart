@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-TextStyle styleLogImportant() {
-  return TextStyle(fontWeight: FontWeight.bold);
-}
-
 TextStyle styleLog() {
   return TextStyle(color: Colors.white);
+}
+
+TextStyle styleLogImportant() {
+  return TextStyle(fontWeight: FontWeight.bold);
 }
 
 class LogWidget extends StatelessWidget {
