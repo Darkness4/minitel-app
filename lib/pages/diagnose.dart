@@ -34,6 +34,23 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _pingDNS5 = "";
   var _nsLookupEMSE = "";
   var _nsLookupGoogle = "";
+  // var _loading = false;
+  // (
+  //   _status == "" &&
+  //   _ssid == "" &&
+  //   _level == "" &&
+  //   _ip == "" &&
+  // _permission == "" &&
+  // _pingLo == "" &&
+  // _pingLocal == "" &&
+  // _pingDNS1 == "" &&
+  // _pingDNS2 == "" &&
+  // _pingDNS3 == "" &&
+  // _pingDNS4 == "" &&
+  // _pingDNS5 == "" &&
+  // _nsLookupEMSE == "" &&
+  // _nsLookupGoogle == ""
+  // )
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +61,6 @@ class _DiagnosePageState extends State<DiagnosePage> {
       body: Center(
         child: Scrollbar(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
                 Text(_alert, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
@@ -68,7 +84,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
       drawer: MainDrawer(),
       floatingActionButton: Builder(
         builder: (context) => FloatingActionButton(
-              onPressed: _diagnose,
+              onPressed: () {
+                _diagnose();},
               child: Icon(Icons.zoom_in),
         ),
       ),
