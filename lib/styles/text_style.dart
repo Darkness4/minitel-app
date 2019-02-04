@@ -5,7 +5,7 @@ TextStyle styleLog() {
 }
 
 TextStyle styleLogImportant() {
-  return TextStyle(fontWeight: FontWeight.bold);
+  return TextStyle(fontWeight: FontWeight.bold, color: Colors.white);
 }
 
 class LogWidget extends StatelessWidget {
@@ -17,28 +17,26 @@ class LogWidget extends StatelessWidget {
   Widget build(context) {
     return Container(
       margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: Colors.white,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black38,
-              blurRadius: 1,
+      child: Material(
+        elevation: 5.0,
+        color: Colors.lightBlue,
+        borderRadius: BorderRadius.circular(4.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Text(title, style: styleLogImportant()),
             ),
-          ]),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Text(title, style: styleLogImportant()),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Text(text, style: styleLog()),
-            decoration: BoxDecoration(color: Colors.black87),
-          ),
-        ],
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Text(text, style: styleLog()),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.0),
+                  color: Colors.black87),
+            ),
+          ],
+        ),
       ),
     );
   }

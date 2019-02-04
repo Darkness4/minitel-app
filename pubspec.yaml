@@ -20,6 +20,9 @@ dependencies:
   connectivity: ^0.4.0+1
   dscript_exec: ^2.0.1
   simple_permissions: ^0.1.9
+  font_awesome_flutter: ^8.2.0
+  flutter_search_bar: ^2.0.7
+  markdown: ^2.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

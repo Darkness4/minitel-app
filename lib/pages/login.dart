@@ -41,22 +41,41 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: Center(
         child: Container(
+          color: Colors.lightBlueAccent,
           padding: const EdgeInsets.all(20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Column(children: <Widget>[
-                  Text("Status: ", style: TextStyle(fontSize: 24)),
-                  Text(
-                    _status,
-                    style: TextStyle(fontSize: 24, color: Colors.red),
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                height: 150,
+                child: Material(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  type: MaterialType.card,
+                  elevation: 10.0,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Text("Status: ", style: TextStyle(fontSize: 24,)),
+                          Text(
+                            _status,
+                            style: TextStyle(fontSize: 24, color: Colors.red),
+                          ),
+                        ]),
                   ),
-                ]),
+                ),
               ),
-              Expanded(
-                  flex: 6,
+              Material(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4)),
+                type: MaterialType.card,
+                elevation: 10.0,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
                   child: Column(
                     children: <Widget>[
                       Row(children: <Widget>[
@@ -115,7 +134,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ],
-                  ))
+                  ),
+                ),
+              ),
             ],
           ),
         ),

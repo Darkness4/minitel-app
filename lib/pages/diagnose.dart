@@ -27,6 +27,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _permission = "";
   var _pingLo = "";
   var _pingLocal = "";
+  var _pingGateway = "";
   var _pingDNS1 = "";
   var _pingDNS2 = "";
   var _pingDNS3 = "";
@@ -67,12 +68,23 @@ class _DiagnosePageState extends State<DiagnosePage> {
                 Text(_alert,
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.red)),
-                Text("SSID: $_ssid, Level: $_level, IP: $_ip",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Material(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40.0)),
+                  color: Colors.deepOrange,
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text("SSID: $_ssid, Level: $_level, IP: $_ip",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white)),
+                  ),
+                ),
                 LogWidget("Permission Coarse Location (for SSID)", _permission),
                 LogWidget("Ping Loopback", _pingLo),
                 LogWidget("Ping Local", _pingLocal),
                 LogWidget("HTTP Gateway Response", _status),
+                LogWidget("Ping Gateway", _pingGateway),
                 LogWidget("Ping DNS 1", _pingDNS1),
                 LogWidget("Ping DNS 2", _pingDNS2),
                 LogWidget("Ping DNS 3", _pingDNS3),
@@ -99,7 +111,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
 
   _diagnose() async {
     setState(() => _alert = "");
-    var argsPing = "-c 1 -w 1 -W 1";
+    var argsPing = "-c 4 -w 5 -W 5";
     SimplePermissions.requestPermission(Permission.AccessCoarseLocation)
         .then((status) => setState(() => _permission = status.toString()));
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -115,6 +127,9 @@ class _DiagnosePageState extends State<DiagnosePage> {
       exec("ping", [argsPing, "172.17.0.5"])
           .runGetOutput()
           .then((out) => setState(() => _pingLocal = out));
+      exec("ping", [argsPing, "172.17.0.1"])
+          .runGetOutput()
+          .then((out) => setState(() => _pingGateway = out));
       exec("ping", [argsPing, "192.168.130.33"])
           .runGetOutput()
           .then((out) => setState(() => _pingDNS1 = out));

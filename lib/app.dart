@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'pages/diagnose.dart';
+import 'pages/docs.dart';
 import 'pages/login.dart';
 
 class MyApp extends StatelessWidget {
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginPage(title: 'fw-cgcp.emse.fr Login'),
         '/login': (context) => LoginPage(title: 'fw-cgcp.emse.fr Login'),
         '/diagnose': (context) => DiagnosePage(title: 'Diagnose'),
+        '/docs': (context) => DocumentationPage(title: 'Documentation'),
       },
     );
   }

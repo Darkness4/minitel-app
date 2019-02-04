@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -18,18 +19,28 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-              title: Text("fw-cgcp.emse.fr Login"),
+              title: Text("Gateway Login"),
+              leading: Icon(Icons.vpn_key),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/login');
               }),
           ListTile(
-              title: Text("Diagnose internet"),
+              title: Text("Internet Diagnosis"),
+              leading: Icon(Icons.network_wifi),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/diagnose');
+              }),
+          ListTile(
+              title: Text("Documentation"),
+              leading: Icon(FontAwesomeIcons.solidFileAlt),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/docs');
               }),
         ],
       ),
