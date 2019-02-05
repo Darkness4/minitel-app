@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:auto_login_flutter/components/drawer.dart';
+import 'package:auto_login_flutter/funcs/http_resquests.dart';
 import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
-import 'package:http/io_client.dart';
 import 'package:share/share.dart';
 import 'package:simple_permissions/simple_permissions.dart';
 import 'package:wifi/wifi.dart';
@@ -189,7 +189,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
           .runGetOutput()
           .then((out) => setState(() => _pingDNS5 = out));
 
-      _getStatus("172.17.0.1");
+      getStatus("172.17.0.1").then((status) =>
+          setState(() => _status = status));
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
           .then((addresses) =>
@@ -208,38 +209,5 @@ class _DiagnosePageState extends State<DiagnosePage> {
           .catchError((e) => setState(() => _nsLookupGoogle = e.toString()));
     } else
       setState(() => _alert = "Not connected to Wifi nor Mobile.");
-  }
-
-  _getStatus(String selectedUrl) {
-    var url = 'https://$selectedUrl/auth/';
-    RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
-
-    HttpClient client = HttpClient();
-    client.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) =>
-            true); // SECURITY WARNING  Bypass certificate!!!
-    IOClient ioClient = IOClient(client);
-
-    ioClient
-        .post(url) // TODO: GET instead of POST
-        .then((response) {
-          // debugPrint(response.body);
-          if (response.statusCode == 200) {
-            if (!response.body.contains('l_rtime'))
-              throw ("Not logged in");
-            else
-              return response.body;
-          } else
-            throw Exception("HttpError: ${response.statusCode}");
-        })
-        .then((body) => exp.firstMatch(body))
-        .then((match) {
-          if (match.group(1) is! String)
-            throw Exception(
-                "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-          else
-            setState(() => _status = '${match.group(1)} seconds left');
-        })
-        .catchError((e) => setState(() => _status = e.toString()));
   }
 }
