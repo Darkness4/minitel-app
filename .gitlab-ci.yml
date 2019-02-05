@@ -1,4 +1,4 @@
-image: cirrusci/flutter:latest
+image: nathansamson/flutter-builder-docker:	v1.0.0
 
 variables:
 before_script:
