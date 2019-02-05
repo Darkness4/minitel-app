@@ -16,3 +16,4 @@ build:
   artifacts:
     paths:
       - app.apk
+    expire_in: 1 week
