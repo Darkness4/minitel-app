@@ -42,25 +42,27 @@ class _LoginPageState extends State<LoginPage> {
       body: Center(
         child: Container(
           color: Colors.lightBlueAccent,
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(bottom: 10),
-                height: 150,
+                margin: EdgeInsets.only(bottom: 30),
                 child: Material(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
                   type: MaterialType.card,
                   elevation: 10.0,
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(25),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Text("Status: ", style: TextStyle(fontSize: 24,)),
+                          Text("Status: ",
+                              style: TextStyle(
+                                fontSize: 24,
+                              )),
                           Text(
                             _status,
                             style: TextStyle(fontSize: 24, color: Colors.red),
@@ -75,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 type: MaterialType.card,
                 elevation: 10.0,
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(20),
                   child: Column(
                     children: <Widget>[
                       Row(children: <Widget>[
@@ -157,6 +159,8 @@ class _LoginPageState extends State<LoginPage> {
               //onPressed: _incrementCounter,
               tooltip: 'Increment',
               child: Icon(Icons.lock_open),
+          backgroundColor: Colors.yellow,
+          foregroundColor: Colors.black,
             ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
@@ -239,9 +243,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _changedTimeItem(String selectedTime) {
-    setState(() {
-      _selectedTime = selectedTime;
-    });
+    setState(() => _selectedTime = selectedTime);
   }
 
   _changedUrlItem(String selectedUrl) {

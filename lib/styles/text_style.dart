@@ -18,7 +18,7 @@ class LogWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       child: Material(
-        elevation: 5.0,
+        elevation: 2.0,
         color: Colors.lightBlue,
         borderRadius: BorderRadius.circular(4.0),
         child: Column(

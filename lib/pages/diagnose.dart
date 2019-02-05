@@ -6,6 +6,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:http/io_client.dart';
+import 'package:share/share.dart';
 import 'package:simple_permissions/simple_permissions.dart';
 import 'package:wifi/wifi.dart';
 
@@ -59,17 +60,24 @@ class _DiagnosePageState extends State<DiagnosePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: _share,
+          ),
+        ],
       ),
       body: Center(
         child: Scrollbar(
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               children: <Widget>[
                 Text(_alert,
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.red)),
                 Material(
-                  elevation: 5.0,
+                  elevation: 2.0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40.0)),
                   color: Colors.deepOrange,
@@ -99,27 +107,62 @@ class _DiagnosePageState extends State<DiagnosePage> {
       ),
       drawer: MainDrawer(),
       floatingActionButton: Builder(
-        builder: (context) => FloatingActionButton(
+        builder: (context) =>
+            FloatingActionButton.extended(
               onPressed: () {
                 _diagnose();
               },
-              child: Icon(Icons.zoom_in),
+              icon: Icon(Icons.zoom_in),
+              label: Text("Diagnose"),
             ),
       ),
     );
   }
 
+  _share() {
+    var now = DateTime.now().toString();
+    Share.share("---Report $now---\n"
+        "SSID: $_ssid, Level: $_level, Ip: $_ip\n\n"
+        "Permission Coarse Location: \n$_permission\n\n"
+        "Ping Loopback: \n$_pingLo\n\n"
+        "Ping Local: \n$_pingLocal\n\n"
+        "HTTP Gateway Response: \n$_status\n\n"
+        "Ping Gateway: \n$_pingLo\n\n"
+        "Ping DNS1: \n$_pingDNS1\n\n"
+        "Ping DNS2: \n$_pingDNS2\n\n"
+        "Ping DNS3: \n$_pingDNS3\n\n"
+        "Ping DNS4: \n$_pingDNS4\n\n"
+        "Ping DNS5: \n$_pingDNS5\n\n"
+        "NSLookup EMSE: \n$_nsLookupEMSE\n\n"
+        "NSLookup Google: \n$_nsLookupGoogle\n\n");
+  }
+
   _diagnose() async {
     setState(() => _alert = "");
     var argsPing = "-c 4 -w 5 -W 5";
-    SimplePermissions.requestPermission(Permission.AccessCoarseLocation)
-        .then((status) => setState(() => _permission = status.toString()));
-    var connectivityResult = await (Connectivity().checkConnectivity());
+    var status = await SimplePermissions.checkPermission(
+        Permission.AccessCoarseLocation);
+    if (!status) {
+      await SimplePermissions.requestPermission(
+          Permission.AccessCoarseLocation);
+    }
+    status = await SimplePermissions.checkPermission(
+        Permission.AccessCoarseLocation);
+
+    setState(() => _permission = (status ? "Authorized" : "Forbidded"));
+
+    var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      Connectivity().getWifiName().then((ssid) => setState(() => _ssid = ssid));
-      Wifi.level.then((level) => setState(() => _level = '$level'));
-      Wifi.ip.then((ip) => setState(() => _ip = ip));
+      var ssid = await Connectivity().getWifiName();
+      var level = await Wifi.level;
+      var ip = await Wifi.ip;
+
+      setState(() {
+        _ssid = ssid;
+        _level = '$level';
+        _ip = ip;
+      });
 
       exec("ping", [argsPing, "127.0.0.1"])
           .runGetOutput()
@@ -148,12 +191,24 @@ class _DiagnosePageState extends State<DiagnosePage> {
 
       _getStatus("172.17.0.1");
 
-      InternetAddress.lookup("fw-cgcp.emse.fr").then((addresses) =>
-          addresses.forEach((address) => setState(() => _nsLookupEMSE =
-              "Host: ${address.host}\nLookup: ${address.address}")));
-      InternetAddress.lookup("google.com").then((addresses) =>
-          addresses.forEach((address) => setState(() => _nsLookupGoogle =
-              "Host: ${address.host}\nLookup: ${address.address}")));
+      try {
+        InternetAddress.lookup("fw-cgcp.emse.fr").then((addresses) =>
+            addresses.forEach((address) =>
+                setState(() =>
+                _nsLookupEMSE =
+                "Host: ${address.host}\nLookup: ${address.address}")));
+      } catch (e) {
+        setState(() => _nsLookupEMSE = e);
+      }
+      try {
+        InternetAddress.lookup("google.com").then((addresses) =>
+            addresses.forEach((address) =>
+                setState(() =>
+                _nsLookupGoogle =
+                "Host: ${address.host}\nLookup: ${address.address}")));
+      } catch (e) {
+        setState(() => _nsLookupGoogle = e);
+      }
     } else
       setState(() => _alert = "Not connected to Wifi nor Mobile.");
   }
