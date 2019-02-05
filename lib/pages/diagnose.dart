@@ -191,24 +191,21 @@ class _DiagnosePageState extends State<DiagnosePage> {
 
       _getStatus("172.17.0.1");
 
-      try {
-        InternetAddress.lookup("fw-cgcp.emse.fr").then((addresses) =>
-            addresses.forEach((address) =>
-                setState(() =>
-                _nsLookupEMSE =
-                "Host: ${address.host}\nLookup: ${address.address}")));
-      } catch (e) {
-        setState(() => _nsLookupEMSE = e);
-      }
-      try {
-        InternetAddress.lookup("google.com").then((addresses) =>
-            addresses.forEach((address) =>
-                setState(() =>
-                _nsLookupGoogle =
-                "Host: ${address.host}\nLookup: ${address.address}")));
-      } catch (e) {
-        setState(() => _nsLookupGoogle = e);
-      }
+      InternetAddress.lookup("fw-cgcp.emse.fr")
+          .then((addresses) =>
+          addresses.forEach((address) =>
+              setState(() =>
+              _nsLookupEMSE =
+              "Host: ${address.host}\nLookup: ${address.address}")))
+          .catchError((e) => setState(() => _nsLookupEMSE = e.toString()));
+
+      InternetAddress.lookup("google.com")
+          .then((addresses) =>
+          addresses.forEach((address) =>
+              setState(() =>
+              _nsLookupGoogle =
+              "Host: ${address.host}\nLookup: ${address.address}")))
+          .catchError((e) => setState(() => _nsLookupGoogle = e.toString()));
     } else
       setState(() => _alert = "Not connected to Wifi nor Mobile.");
   }
