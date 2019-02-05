@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -36,11 +35,27 @@ class MainDrawer extends StatelessWidget {
               }),
           ListTile(
               title: Text("Documentation"),
-              leading: Icon(FontAwesomeIcons.solidFileAlt),
+              leading: Icon(Icons.description),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pushReplacementNamed(context, '/docs');
+              }),
+          ListTile(
+              title: Text("News"),
+              leading: Icon(Icons.rss_feed),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/news');
+              }),
+          ListTile(
+              title: Text("Calendar"),
+              leading: Icon(Icons.calendar_today),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/calendar');
               }),
         ],
       ),

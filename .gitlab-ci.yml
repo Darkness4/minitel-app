@@ -1,0 +1,18 @@
+image: cirrusci/flutter:latest
+
+variables:
+before_script:
+  - flutter channel dev
+  - flutter upgrade
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - flutter build apk --release
+    - mv build/app/outputs/apk/app.apk app.apk
+  artifacts:
+    paths:
+      - app.apk

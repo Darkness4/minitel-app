@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'pages/calendar.dart';
 import 'pages/diagnose.dart';
 import 'pages/docs.dart';
 import 'pages/login.dart';
+import 'pages/news.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(title: 'fw-cgcp.emse.fr Login'),
         '/diagnose': (context) => DiagnosePage(title: 'Diagnose'),
         '/docs': (context) => DocumentationPage(title: 'Documentation'),
+        '/calendar': (context) => CalendarPage(title: 'Calendar'),
+        '/news': (context) => NewsPage(title: 'News'),
       },
     );
   }
