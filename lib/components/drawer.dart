@@ -24,7 +24,7 @@ class MainDrawer extends StatelessWidget {
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushReplacementNamed(context, '/login');
               }),
           ListTile(
               title: Text("Internet Diagnosis"),
@@ -32,7 +32,7 @@ class MainDrawer extends StatelessWidget {
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/diagnose');
+                Navigator.pushReplacementNamed(context, '/diagnose');
               }),
           ListTile(
               title: Text("Documentation"),
@@ -40,7 +40,7 @@ class MainDrawer extends StatelessWidget {
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/docs');
+                Navigator.pushReplacementNamed(context, '/docs');
               }),
         ],
       ),

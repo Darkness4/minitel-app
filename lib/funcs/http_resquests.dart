@@ -8,9 +8,15 @@ import 'package:http/io_client.dart';
 /// Be aware, if the local DNS can forward the public address to the local.
 /// Be also aware, if the local gateway can forward to the server (195.83.139.7).
 ///
-/// If connected, the response will be "[Duration] seconds left".
+/// If connected, the response will be "[time] seconds left".
 /// If not, the response will be "Not logged in"
 /// If no response is received, the HTTP error will be outputted.
+///
+/// You can use [getStatus] like this:
+///
+/// ```
+/// String status = await getStatus("172.17.0.1") // "x seconds left"
+/// ```
 Future<String> getStatus(String selectedUrl) async {
   var url = 'https://$selectedUrl/auth/';
   var status = "";
@@ -47,6 +53,24 @@ Future<String> getStatus(String selectedUrl) async {
   return status;
 }
 
+
+/// Connect to the portal.
+///
+/// The [selectedUrl] is either local (172.17.0.1) or public (fw-cgcp.emse.fr).
+/// Be aware, if the local DNS can forward the public address to the local.
+/// Be also aware, if the local gateway can forward to the server (195.83.139.7).
+/// The [uid] and [pswd] correspond to the Username and Password.
+/// The [selectedTime] is listed on the website and is in minutes.
+///
+/// If connected, the response will be "[time] seconds left".
+/// If a response is received, it will be manually decrypted using RegEx like "Bad Username or Password".
+/// If no response is received, the HTTP error will be outputted.
+///
+/// You can use [autoLogin] like this:
+///
+/// ```
+/// String status = await autoLogin("MyName", "MyPassword", "172.17.0.1", 480) // "28800 seconds left"
+/// ```
 Future<String> autoLogin(
     String uid, String pswd, String selectedUrl, int selectedTime) async {
   var status = "";
@@ -57,9 +81,7 @@ Future<String> autoLogin(
           true); // SECURITY WARNING  Bypass certificate!!!
   IOClient ioClient = IOClient(client);
 
-  print("1");
   try {
-    print("2");
     var sessionId = await ioClient.post("https://$selectedUrl/auth/plain.html",
         body: {
           'uid': uid,
@@ -67,7 +89,6 @@ Future<String> autoLogin(
           'pswd': pswd
         }).then((response) {
       // debugPrint(response.body);
-      print("3");
       if (response.statusCode == 200) {
         if (response.body.contains('title_error'))
           throw ("Error: Bad Username or Password");
@@ -84,17 +105,15 @@ Future<String> autoLogin(
         throw Exception(
             "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
       else
-        return match; // This is the SessionId.
+        return match;
     });
 
-    print("4");
     status = await ioClient.post("https://$selectedUrl/auth/disclaimer.html",
         body: {
           'session': sessionId,
           'read': 'accepted',
           'action': "J'accepte"
         }).then((response) {
-      print("5");
       if (response.body.contains('title_error'))
         throw Exception(
             "Error: SessionId is incorrect. Please check the RegEx.");

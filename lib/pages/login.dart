@@ -141,8 +141,8 @@ class _LoginPageState extends State<LoginPage> {
                 );
                 Scaffold.of(context).showSnackBar(snackBar);
                 autoLogin(_uidController.text, _pswdController.text,
-                    _selectedUrl, _timeMap[_selectedTime]).then((status) =>
-                    setState(() => _status = status));
+                    _selectedUrl, _timeMap[_selectedTime])
+                    .then((status) => setState(() => _status = status));
               },
               //onPressed: _incrementCounter,
               tooltip: 'Increment',
