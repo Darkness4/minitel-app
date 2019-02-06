@@ -134,6 +134,5 @@ Future<String> autoLogin(
     status = e.toString();
   }
 
-  print("End");
   return status;
 }

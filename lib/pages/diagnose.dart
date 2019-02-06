@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:auto_login_flutter/localizations.dart';
 import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
@@ -113,7 +114,9 @@ class _DiagnosePageState extends State<DiagnosePage> {
                 _diagnose();
               },
               icon: Icon(Icons.zoom_in),
-              label: Text("Diagnose"),
+              label: Text(AppLoc
+                  .of(context)
+                  .verbDiagnose),
             ),
       ),
     );
@@ -208,6 +211,9 @@ class _DiagnosePageState extends State<DiagnosePage> {
               "Host: ${address.host}\nLookup: ${address.address}")))
           .catchError((e) => setState(() => _nsLookupGoogle = e.toString()));
     } else
-      setState(() => _alert = "Not connected to Wifi nor Mobile.");
+      setState(() =>
+      _alert = AppLoc
+          .of(context)
+          .sentenceNotConnected);
   }
 }

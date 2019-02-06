@@ -1,5 +1,6 @@
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -78,7 +79,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: <Widget>[
                       Row(children: <Widget>[
-                        Text("Domain Name / IP "),
+                        Text("${AppLoc
+                            .of(context)
+                            .wordDomain} / IP "),
                         DropdownButton<String>(
                           value: _selectedUrl,
                           items: _urlRootList.map((String value) {
@@ -92,7 +95,9 @@ class _LoginPageState extends State<LoginPage> {
                       ]),
                       Row(
                         children: <Widget>[
-                          Text("Authentication duration "),
+                          Text(AppLoc
+                              .of(context)
+                              .wordsAuthDuration),
                           DropdownButton<String>(
                             value: _selectedTime,
                             items: _timeMap.keys.map((String value) {
@@ -112,15 +117,23 @@ class _LoginPageState extends State<LoginPage> {
                             TextFormField(
                                 controller: _uidController,
                                 decoration: InputDecoration(
-                                    hintText: 'Surname.Name',
-                                    labelText: 'Username')),
+                                    hintText: AppLoc
+                                        .of(context)
+                                        .wordSurnameName,
+                                    labelText: AppLoc
+                                        .of(context)
+                                        .wordUsername)),
                             TextFormField(
                                 controller: _pswdController,
                                 obscureText: true,
                                 // Use secure text for passwords.
                                 decoration: InputDecoration(
-                                    hintText: 'Password',
-                                    labelText: 'Password')),
+                                    hintText: AppLoc
+                                        .of(context)
+                                        .wordPassword,
+                                    labelText: AppLoc
+                                        .of(context)
+                                        .wordPassword)),
                           ],
                         ),
                       ),
@@ -162,8 +175,10 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  @override
   initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) =>
         getStatus(_selectedUrl)
             .then((status) => setState(() => _status = status)));

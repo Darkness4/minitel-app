@@ -1,3 +1,4 @@
+import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -10,7 +11,9 @@ class MainDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Text(
-              "Minitel toolbox",
+              AppLoc
+                  .of(context)
+                  .title,
               style: TextStyle(color: Colors.white, fontSize: 32),
             ),
             decoration: BoxDecoration(
@@ -18,7 +21,9 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-              title: Text("Gateway Login"),
+              title: Text(AppLoc
+                  .of(context)
+                  .titleLoginPage),
               leading: Icon(Icons.vpn_key),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -26,7 +31,9 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/login');
               }),
           ListTile(
-              title: Text("Internet Diagnosis"),
+              title: Text(AppLoc
+                  .of(context)
+                  .titleDiagnosePage),
               leading: Icon(Icons.network_wifi),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -34,7 +41,9 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/diagnose');
               }),
           ListTile(
-              title: Text("Documentation"),
+              title: Text(AppLoc
+                  .of(context)
+                  .titleDocumentationPage),
               leading: Icon(Icons.description),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -42,7 +51,9 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/docs');
               }),
           ListTile(
-              title: Text("News"),
+              title: Text(AppLoc
+                  .of(context)
+                  .titleNewsPage),
               leading: Icon(Icons.rss_feed),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -50,7 +61,9 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/news');
               }),
           ListTile(
-              title: Text("Calendar"),
+              title: Text(AppLoc
+                  .of(context)
+                  .titleCalendarPage),
               leading: Icon(Icons.calendar_today),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {

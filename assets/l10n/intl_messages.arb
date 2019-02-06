@@ -1,0 +1,79 @@
+{
+  "@@last_modified": "2019-02-06T21:50:21.774308",
+  "title": "Minitel Toolbox",
+  "@title": {
+    "description": "The application title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleLoginPage": "Gateway Login",
+  "@titleLoginPage": {
+    "description": "The LoginPage title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleDiagnosePage": "Diagnosis",
+  "@titleDiagnosePage": {
+    "description": "The DiagnosePage title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleDocumentationPage": "Documentation",
+  "@titleDocumentationPage": {
+    "description": "The DocumentationPage title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleNewsPage": "News",
+  "@titleNewsPage": {
+    "description": "The NewsPage title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleCalendarPage": "Calendar",
+  "@titleCalendarPage": {
+    "description": "The CalendarPage title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "verbDiagnose": "Diagnose",
+  "@verbDiagnose": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceNotConnected": "Not connected to Wifi nor Mobile.",
+  "@sentenceNotConnected": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wordHour": "hour",
+  "@wordHour": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wordSurnameName": "Surname.Name",
+  "@wordSurnameName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wordUsername": "Username",
+  "@wordUsername": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wordPassword": "Password",
+  "@wordPassword": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wordsAuthDuration": "Authentication duration ",
+  "@wordsAuthDuration": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wordDomain": "Domain Name",
+  "@wordDomain": {
+    "type": "text",
+    "placeholders": {}
+  }
+}
