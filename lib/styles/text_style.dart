@@ -88,130 +88,61 @@ class Header extends StatelessWidget {
     switch (level) {
       case 1:
         return Container(
-            margin: EdgeInsets.only(top: 24, bottom: 16),
-            padding: EdgeInsets.only(bottom: 9.6),
-            decoration: BoxDecoration(
-                border:
-                Border(bottom: BorderSide(color: const Color(0xffeaecef)))),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  text,
-                  style: header1,
-                ),
-              ],
+            margin: EdgeInsets.only(top: 16, bottom: 8),
+            child: Text(
+              text,
+              style: header1,
             ));
         break;
       case 2:
         return Container(
-            margin: EdgeInsets.only(top: 24, bottom: 16),
-            padding: EdgeInsets.only(bottom: 7.2),
-            decoration: BoxDecoration(
-                border:
-                Border(bottom: BorderSide(color: const Color(0xffeaecef)))),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  text,
-                  style: header2,
-                ),
-              ],
+            margin: EdgeInsets.only(top: 16, bottom: 8),
+            child: Text(
+              text,
+              style: header2,
             ));
         break;
       case 3:
         return Container(
-            margin: EdgeInsets.only(top: 24, bottom: 16),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  text,
-                  style: header3,
-                ),
-              ],
+            margin: EdgeInsets.only(top: 16, bottom: 8),
+            child: Text(
+              text,
+              style: header3,
             ));
       case 4:
         return Container(
-            margin: EdgeInsets.only(top: 24, bottom: 16),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  text,
-                  style: header4,
-                ),
-              ],
+            margin: EdgeInsets.only(top: 16, bottom: 8),
+            child: Text(
+              text,
+              style: header4,
             ));
         break;
       case 5:
         return Container(
-            margin: EdgeInsets.only(top: 24, bottom: 16),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  text,
-                  style: header5,
-                ),
-              ],
+            margin: EdgeInsets.only(top: 16, bottom: 8),
+            child: Text(
+              text,
+              style: header5,
             ));
         break;
       case 6:
         return Container(
-            margin: EdgeInsets.only(top: 24, bottom: 16),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  text,
-                  style: header6,
-                ),
-              ],
+            margin: EdgeInsets.only(top: 16, bottom: 8),
+            child: Text(
+              text,
+              style: header6,
             ));
         break;
       default:
         return Container(
-            margin: EdgeInsets.only(top: 24, bottom: 16),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  text,
-                  style: header6,
-                ),
-              ],
+            margin: EdgeInsets.only(top: 16, bottom: 8),
+            child: Text(
+              text,
+              style: header1,
             ));
         break;
     }
   }
 }
 
-class LogWidget extends StatelessWidget {
-  final String title;
-  final String text;
 
-  LogWidget(this.title, this.text);
-
-  @override
-  Widget build(context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Material(
-        elevation: 2.0,
-        color: Colors.lightBlue,
-        borderRadius: BorderRadius.circular(4.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Text(title, style: styleLogImportant),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Text(text, style: styleLog),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color: Colors.black87),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

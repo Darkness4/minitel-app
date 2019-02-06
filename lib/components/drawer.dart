@@ -34,7 +34,7 @@ class MainDrawer extends StatelessWidget {
               title: Text(AppLoc
                   .of(context)
                   .titleDiagnosePage),
-              leading: Icon(Icons.network_wifi),
+              leading: Icon(Icons.zoom_in),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context);

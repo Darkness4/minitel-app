@@ -61,6 +61,9 @@ class AppLoc {
       Intl.message("Authentication duration ", name: 'wordsAuthDuration');
 
   String get wordDomain => Intl.message("Domain Name", name: 'wordDomain');
+
+// Documentation
+
 }
 
 class AppLocDelegate extends LocalizationsDelegate<AppLoc> {

@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:auto_login_flutter/components/cards.dart';
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
 import 'package:auto_login_flutter/localizations.dart';
-import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
@@ -89,18 +89,52 @@ class _DiagnosePageState extends State<DiagnosePage> {
                             fontWeight: FontWeight.bold, color: Colors.white)),
                   ),
                 ),
-                LogWidget("Permission Coarse Location (for SSID)", _permission),
-                LogWidget("Ping Loopback", _pingLo),
-                LogWidget("Ping Local", _pingLocal),
-                LogWidget("HTTP Gateway Response", _status),
-                LogWidget("Ping Gateway", _pingGateway),
-                LogWidget("Ping DNS 1", _pingDNS1),
-                LogWidget("Ping DNS 2", _pingDNS2),
-                LogWidget("Ping DNS 3", _pingDNS3),
-                LogWidget("Ping DNS 4", _pingDNS4),
-                LogWidget("Ping DNS 5", _pingDNS5),
-                LogWidget("NSLookupEMSE", _nsLookupEMSE),
-                LogWidget("NSLookupGoogle", _nsLookupGoogle),
+                LogCard(_permission,
+                    title: "Permission Coarse Location (for SSID)"),
+                LogCard(
+                  _pingLo,
+                  title: "Ping Loopback",
+                ),
+                LogCard(
+                  _pingLocal,
+                  title: "Ping Local",
+                ),
+                LogCard(
+                  _status,
+                  title: "HTTP Gateway Response",
+                ),
+                LogCard(
+                  _pingGateway,
+                  title: "Ping Gateway",
+                ),
+                LogCard(
+                  _pingDNS1,
+                  title: "Ping DNS 1",
+                ),
+                LogCard(
+                  _pingDNS2,
+                  title: "Ping DNS 2",
+                ),
+                LogCard(
+                  _pingDNS3,
+                  title: "Ping DNS 3",
+                ),
+                LogCard(
+                  _pingDNS4,
+                  title: "Ping DNS 4",
+                ),
+                LogCard(
+                  _pingDNS5,
+                  title: "Ping DNS 5",
+                ),
+                LogCard(
+                  _nsLookupEMSE,
+                  title: "NSLookupEMSE",
+                ),
+                LogCard(
+                  _nsLookupGoogle,
+                  title: "NSLookupGoogle",
+                ),
               ],
             ),
           ),
@@ -192,8 +226,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
           .runGetOutput()
           .then((out) => setState(() => _pingDNS5 = out));
 
-      getStatus("172.17.0.1").then((status) =>
-          setState(() => _status = status));
+      getStatus("172.17.0.1")
+          .then((status) => setState(() => _status = status));
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
           .then((addresses) =>
