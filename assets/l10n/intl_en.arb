@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-02-06T21:50:21.774308",
+  "@@last_modified": "2019-02-07T12:38:06.656517",
   "title": "Minitel Toolbox",
   "@title": {
     "description": "The application title",
@@ -73,6 +73,106 @@
   },
   "wordDomain": "Domain Name",
   "@wordDomain": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocLogin1": "Choose between fw-cgcp.emse.fr and 172.17.0.1\n",
+  "@sentenceDocLogin1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocLogin2": "If your local network is WiFi MINITEL, use 172.17.0.1.\nOtherwise, you can try fw-cgcp.emse.fr.",
+  "@sentenceDocLogin2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePerm": "    Indicates whether you have authorized GPS to determine the SSID.",
+  "@sentenceDocDiagnosePerm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLo": "    Verify if the TCP/IP software works. Should be always positive.",
+  "@sentenceDocDiagnosePingLo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLocal1": "    Ping to a local computer (172.17.0.5, which is the Minitel Server and should be always on).\n\nIf the packets are lost, these are the most possible scenarios:\n",
+  "@sentenceDocDiagnosePingLocal1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLocal2": "    1.  You have no IP.",
+  "@sentenceDocDiagnosePingLocal2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLocal3": " (Report this immediatly to Minitel)\n",
+  "@sentenceDocDiagnosePingLocal3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLocal4": "    2.  You are not connected to the local Network.\n    3.  The server (172.17.0.5) has been shutdown. (you can ping 172.17.0.1, 172.17.0.10)\n",
+  "@sentenceDocDiagnosePingLocal4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP1": "HTTP GET https://172.17.0.1/auth/\nIt should display the same result as \"Gateway Login Status\".\n\n    OS Error are mostly caused if the phone cannot connect to the gateway 172.17.0.1.",
+  "@sentenceDocDiagnoseHTTP1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP2": "    If a 4xx error occurs, please report it to the developers.",
+  "@sentenceDocDiagnoseHTTP2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP3": "    If you have an OS error, the Gateway has a problem and you should report it to the DSI.",
+  "@sentenceDocDiagnoseHTTP3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP4": "    If you have a 4xx HTTP error, the diagnostic tool has a problem and you should report it to the developpers.",
+  "@sentenceDocDiagnoseHTTP4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP5": "    If you have a 5xx HTTP error, the Gateway has a problem  and you should report it to the DSI.",
+  "@sentenceDocDiagnoseHTTP5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP6": "    A share button exists to send 90% of the needed informations for a full repair.\n    On 172.17.0.10, you can report to the admins.",
+  "@sentenceDocDiagnoseHTTP6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleHowShouldIReact": "How should i react?",
+  "@titleHowShouldIReact": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingGateway": "    This information does nothing. The gateway ignores pings. However, if a ping is received, someone is probably taking his IP. But none of this is certain.",
+  "@sentenceDocDiagnosePingGateway": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingDNS": "    If one of the DNS (besides 172.17.0.6) responds, you are connected to the internet.",
+  "@sentenceDocDiagnosePingDNS": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseNSLookup1": "    If there is no answer in one of them, but the DNS ping worked, your computer probably has a DNS cache problem.",
+  "@sentenceDocDiagnoseNSLookup1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseNSLookup2": "    These are the best fixes:",
+  "@sentenceDocDiagnoseNSLookup2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseNSLookup3": "    For portable devices, restart the Wifi.",
+  "@sentenceDocDiagnoseNSLookup3": {
     "type": "text",
     "placeholders": {}
   }

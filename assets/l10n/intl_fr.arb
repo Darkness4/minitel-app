@@ -75,5 +75,105 @@
   "@wordDomain": {
     "type": "text",
     "placeholders": {}
+  },
+  "sentenceDocLogin1": "Choisir entre fw-cgcp.emse.fr et 172.17.0.1\n",
+  "@sentenceDocLogin1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocLogin2": "Si le réseau local est WiFi MINITEL, utiliser 172.17.0.1.\nSinon, vous pouvez essayer fw-cgcp.emse.fr.",
+  "@sentenceDocLogin2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePerm": "    Indique si vous avez authorisé le GPS pour déterminer le SSID.",
+  "@sentenceDocDiagnosePerm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLo": "    Vérifie si le logiciel TCP/IP fonctionne. Devrait être toujours positif.",
+  "@sentenceDocDiagnosePingLo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLocal1": "    Ping à un ordinateur local (172.17.0.5, qui est le serveur Minitel et devrait être toujours allumé).\n\nSi les paquets sont perdus, ceci sont les scenarios les plus probable:\n",
+  "@sentenceDocDiagnosePingLocal1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLocal2": "    1.  Vous n'avez pas d'IP.",
+  "@sentenceDocDiagnosePingLocal2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLocal3": " (Alertez immediatement à Minitel)\n",
+  "@sentenceDocDiagnosePingLocal3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingLocal4": "    2.  Vous n'êtes pas connecté au réseau local.\n    3.  Le serveur (172.17.0.5) est éteint. (vous pouvez ping 172.17.0.1, 172.17.0.10)\n",
+  "@sentenceDocDiagnosePingLocal4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP1": "HTTP GET https://172.17.0.1/auth/\nIl devrait afficher le même résultat que \"Connexion à la Passerelle Status\".\n\n    OS Error sont généralement causées si le téléphone ne peut pas se connecter à la passerelle 172.17.0.1.",
+  "@sentenceDocDiagnoseHTTP1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP2": "    Si une erreur 4xx apparait, veuillez le signaler aux developeurs.",
+  "@sentenceDocDiagnoseHTTP2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP3": "    Si vous avez une erreur OS, la passerelle a un problème, et vous drvriez le signaler à la DSI.",
+  "@sentenceDocDiagnoseHTTP3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP4": "    Si vous avez une erreur HTTP 4xx, l'outil de diagnostique a un problème, et vous drvriez le signaler aux developeurs.",
+  "@sentenceDocDiagnoseHTTP4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP5": "    Si vous avez une erreur HTTP 5xx, la passerelle a un problème, et vous drvriez le signaler à la DSI.",
+  "@sentenceDocDiagnoseHTTP5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseHTTP6": "    Un bouton Partage a été mis en place pour envoyer 90% des informations nécessaire pour une réparation complète.\n    Sur 172.17.0.10, vous pouvez signaler aux administrateurs.",
+  "@sentenceDocDiagnoseHTTP6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleHowShouldIReact": "Comment devrais-je réagir?",
+  "@titleHowShouldIReact": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingGateway": "    Cette information ne sert à rien. La passerelle ignore les pings. Cependant, si un ping est reçu, quelqu'un a probablement pris sont IP. Mais, rien est certain.",
+  "@sentenceDocDiagnosePingGateway": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnosePingDNS": "    Si un des DNS (sauf 172.17.0.6) répond, vous êtes connecté à Internet.",
+  "@sentenceDocDiagnosePingDNS": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseNSLookup1": "    S'il n'y a aucune réponse, mais le ping DNS fonctionne, votre appareil a un problème de cache DNS.",
+  "@sentenceDocDiagnoseNSLookup1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseNSLookup2": "    Voici les meilleures solutions:",
+  "@sentenceDocDiagnoseNSLookup2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseNSLookup3": "    Pour les appareils portable, redémarrez le Wifi.",
+  "@sentenceDocDiagnoseNSLookup3": {
+    "type": "text",
+    "placeholders": {}
   }
 }
