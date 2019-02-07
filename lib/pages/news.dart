@@ -20,7 +20,7 @@ class _NewsPageState extends State<NewsPage> {
   void initState() {
     super.initState();
     _generateFeedCard(
-            "https://github.com/Darkness4/csgo-gsi-arduino-lcd/commits/master.atom")
+            "https://github.com/Darkness4/minitel-app/commits/develop.atom")
         .then((newsCards) => setState(() => _newsCards = newsCards));
   }
 
