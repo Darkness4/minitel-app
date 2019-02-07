@@ -46,10 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Container(
                 margin: EdgeInsets.only(bottom: 30),
-                child: Material(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                  type: MaterialType.card,
+                child: Card(
                   elevation: 10.0,
                   child: Padding(
                     padding: EdgeInsets.all(25),
@@ -69,10 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Material(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4)),
-                type: MaterialType.card,
+              Card(
                 elevation: 10.0,
                 child: Padding(
                   padding: EdgeInsets.all(20),
