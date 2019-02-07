@@ -24,65 +24,41 @@ class _DocumentationPageState extends State<DocumentationPage> {
         child: ListView(
           physics: BouncingScrollPhysics(),
           children: <Widget>[
-            SuperCard(
+            DocCard(
               children: <Widget>[
-                Header(AppLoc
-                    .of(context)
-                    .titleLoginPage),
-                Header("${AppLoc
-                    .of(context)
-                    .wordDomain} / IP", level: 2),
+                Header(AppLoc.of(context).titleLoginPage),
+                Header("${AppLoc.of(context).wordDomain} / IP", level: 2),
                 Paragraph(
-                  AppLoc
-                      .of(context)
-                      .sentenceDocLogin1,
+                  AppLoc.of(context).sentenceDocLogin1,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Paragraph(AppLoc
-                    .of(context)
-                    .sentenceDocLogin2),
+                Paragraph(AppLoc.of(context).sentenceDocLogin2),
               ],
             ),
-            SuperCard(children: <Widget>[
-              Header(AppLoc
-                  .of(context)
-                  .titleDiagnosePage),
+            DocCard(children: <Widget>[
+              Header(AppLoc.of(context).titleDiagnosePage),
               Header("Permission Coarse Location", level: 2),
               Paragraph(
-                AppLoc
-                    .of(context)
-                    .sentenceDocDiagnosePerm,
+                AppLoc.of(context).sentenceDocDiagnosePerm,
               ),
               Header("Ping Loopback", level: 2),
-              Paragraph(AppLoc
-                  .of(context)
-                  .sentenceDocDiagnosePingLo),
+              Paragraph(AppLoc.of(context).sentenceDocDiagnosePingLo),
               Header("Ping Local", level: 2),
               RichText(
                   text: TextSpan(
                       style: TextStyle(color: Colors.black),
-                      text: AppLoc
-                          .of(context)
-                          .sentenceDocDiagnosePingLocal1,
+                      text: AppLoc.of(context).sentenceDocDiagnosePingLocal1,
                       children: <TextSpan>[
-                        TextSpan(
-                            text: AppLoc
-                                .of(context)
-                                .sentenceDocDiagnosePingLocal2),
-                        TextSpan(
-                            text: AppLoc
-                                .of(context)
-                                .sentenceDocDiagnosePingLocal3,
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text: AppLoc
-                                .of(context)
-                                .sentenceDocDiagnosePingLocal4),
-                      ])),
+                    TextSpan(
+                        text: AppLoc.of(context).sentenceDocDiagnosePingLocal2),
+                    TextSpan(
+                        text: AppLoc.of(context).sentenceDocDiagnosePingLocal3,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(
+                        text: AppLoc.of(context).sentenceDocDiagnosePingLocal4),
+                  ])),
               Header("HTTP Gateway Response", level: 2),
-              Paragraph(AppLoc
-                  .of(context)
-                  .sentenceDocDiagnoseHTTP1),
+              Paragraph(AppLoc.of(context).sentenceDocDiagnoseHTTP1),
               Header("HTTP Codes", level: 3),
               Header("1xx Informational response", level: 4),
               Header("2xx Success", level: 4),
@@ -93,11 +69,9 @@ class _DocumentationPageState extends State<DocumentationPage> {
               ),
               Header("4xx Client errors", level: 4),
               Text(
-                AppLoc
-                    .of(context)
-                    .sentenceDocDiagnoseHTTP2,
+                AppLoc.of(context).sentenceDocDiagnoseHTTP2,
                 style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
               ),
               Text(
                 "    400 Bad Request",
@@ -128,29 +102,16 @@ class _DocumentationPageState extends State<DocumentationPage> {
                 "    504 Gateway Timeout",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Header(AppLoc
-                  .of(context)
-                  .titleHowShouldIReact, level: 3),
-              Paragraph(AppLoc
-                  .of(context)
-                  .sentenceDocDiagnoseHTTP3),
-              Paragraph(AppLoc
-                  .of(context)
-                  .sentenceDocDiagnoseHTTP4),
-              Paragraph(AppLoc
-                  .of(context)
-                  .sentenceDocDiagnoseHTTP5),
+              Header(AppLoc.of(context).titleHowShouldIReact, level: 3),
+              Paragraph(AppLoc.of(context).sentenceDocDiagnoseHTTP3),
+              Paragraph(AppLoc.of(context).sentenceDocDiagnoseHTTP4),
+              Paragraph(AppLoc.of(context).sentenceDocDiagnoseHTTP5),
               Paragraph(
-                AppLoc
-                    .of(context)
-                    .sentenceDocDiagnoseHTTP6,
+                AppLoc.of(context).sentenceDocDiagnoseHTTP6,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Header("Ping Gateway", level: 2),
-              Paragraph(
-                  AppLoc
-                      .of(context)
-                      .sentenceDocDiagnosePingGateway),
+              Paragraph(AppLoc.of(context).sentenceDocDiagnosePingGateway),
               Header("Ping DNS", level: 2),
               Paragraph(
                 "    DNS 1: 192.168.130.33\n"
@@ -160,19 +121,11 @@ class _DocumentationPageState extends State<DocumentationPage> {
                     "    DNS 5: 172.17.0.6\n",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Paragraph(
-                  AppLoc
-                      .of(context)
-                      .sentenceDocDiagnosePingDNS),
+              Paragraph(AppLoc.of(context).sentenceDocDiagnosePingDNS),
               Header("NSLookup", level: 2),
+              Paragraph(AppLoc.of(context).sentenceDocDiagnoseNSLookup1),
               Paragraph(
-                  AppLoc
-                      .of(context)
-                      .sentenceDocDiagnoseNSLookup1),
-              Paragraph(
-                AppLoc
-                    .of(context)
-                    .sentenceDocDiagnoseNSLookup2,
+                AppLoc.of(context).sentenceDocDiagnoseNSLookup2,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               LogCard("ipconfig /flushdns",
@@ -187,15 +140,13 @@ class _DocumentationPageState extends State<DocumentationPage> {
                   title: "bash    (Linux Traditional)"),
               LogCard("sudo killall -HUP mDNSResponder",
                   title:
-                  "Terminal    (OSX Yosemite and later, Mavericks, Mountain Lion and Lion)"),
+                      "Terminal    (OSX Yosemite and later, Mavericks, Mountain Lion and Lion)"),
               LogCard("sudo discoveryutil mdnsflushcache",
                   title: "Terminal    (OSX Yosemite v10.10 through v10.10.3)"),
               LogCard("sudo dscacheutil -flushcache",
                   title: "Terminal    (OSX Snow Leopard)"),
               Paragraph(
-                AppLoc
-                    .of(context)
-                    .sentenceDocDiagnoseNSLookup3,
+                AppLoc.of(context).sentenceDocDiagnoseNSLookup3,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ]),

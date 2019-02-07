@@ -79,9 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: <Widget>[
                       Row(children: <Widget>[
-                        Text("${AppLoc
-                            .of(context)
-                            .wordDomain} / IP "),
+                        Text("${AppLoc.of(context).wordDomain} / IP "),
                         DropdownButton<String>(
                           value: _selectedUrl,
                           items: _urlRootList.map((String value) {
@@ -95,9 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                       ]),
                       Row(
                         children: <Widget>[
-                          Text(AppLoc
-                              .of(context)
-                              .wordsAuthDuration),
+                          Text(AppLoc.of(context).wordsAuthDuration),
                           DropdownButton<String>(
                             value: _selectedTime,
                             items: _timeMap.keys.map((String value) {
@@ -117,23 +113,18 @@ class _LoginPageState extends State<LoginPage> {
                             TextFormField(
                                 controller: _uidController,
                                 decoration: InputDecoration(
-                                    hintText: AppLoc
-                                        .of(context)
-                                        .wordSurnameName,
-                                    labelText: AppLoc
-                                        .of(context)
-                                        .wordUsername)),
+                                    hintText:
+                                        AppLoc.of(context).wordSurnameName,
+                                    labelText:
+                                        AppLoc.of(context).wordUsername)),
                             TextFormField(
                                 controller: _pswdController,
                                 obscureText: true,
                                 // Use secure text for passwords.
                                 decoration: InputDecoration(
-                                    hintText: AppLoc
-                                        .of(context)
-                                        .wordPassword,
-                                    labelText: AppLoc
-                                        .of(context)
-                                        .wordPassword)),
+                                    hintText: AppLoc.of(context).wordPassword,
+                                    labelText:
+                                        AppLoc.of(context).wordPassword)),
                           ],
                         ),
                       ),
@@ -154,14 +145,14 @@ class _LoginPageState extends State<LoginPage> {
                 );
                 Scaffold.of(context).showSnackBar(snackBar);
                 autoLogin(_uidController.text, _pswdController.text,
-                    _selectedUrl, _timeMap[_selectedTime])
+                        _selectedUrl, _timeMap[_selectedTime])
                     .then((status) => setState(() => _status = status));
               },
               //onPressed: _incrementCounter,
-              tooltip: 'Increment',
+              tooltip: 'Log in',
               child: Icon(Icons.lock_open),
-          backgroundColor: Colors.yellow,
-          foregroundColor: Colors.black,
+              backgroundColor: Colors.yellow,
+              foregroundColor: Colors.black,
             ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
@@ -179,9 +170,8 @@ class _LoginPageState extends State<LoginPage> {
   initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
-        getStatus(_selectedUrl)
-            .then((status) => setState(() => _status = status)));
+    WidgetsBinding.instance.addPostFrameCallback((_) => getStatus(_selectedUrl)
+        .then((status) => setState(() => _status = status)));
   }
 
   _changedTimeItem(String selectedTime) {

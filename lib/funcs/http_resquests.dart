@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:http/io_client.dart';
+import 'package:webfeed/webfeed.dart';
 
 /// Get the connection status of the portal.
 ///
@@ -29,7 +30,7 @@ Future<String> getStatus(String selectedUrl) async {
   IOClient ioClient = IOClient(client);
 
   status = await ioClient
-      .post(url) // TODO: GET instead of POST
+      .post(url)  // TODO: GET instead of POST
       .then((response) {
         // debugPrint(response.body);
         if (response.statusCode == 200) {
@@ -135,4 +136,19 @@ Future<String> autoLogin(
   }
 
   return status;
+}
+
+
+Future<AtomFeed> getAtom(String atomUrl) async {
+  var response;
+  IOClient ioClient = IOClient(HttpClient());
+  response = await ioClient.get("$atomUrl");
+  return AtomFeed.parse(response.body);
+}
+
+Future<RssFeed> getRss(String rssUrl) async {
+  var response;
+  IOClient ioClient = IOClient(HttpClient());
+  response = await ioClient.get("$rssUrl");
+  return RssFeed.parse(response.body);
 }

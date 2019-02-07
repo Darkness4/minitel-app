@@ -142,36 +142,15 @@ class _DiagnosePageState extends State<DiagnosePage> {
       ),
       drawer: MainDrawer(),
       floatingActionButton: Builder(
-        builder: (context) =>
-            FloatingActionButton.extended(
+        builder: (context) => FloatingActionButton.extended(
               onPressed: () {
                 _diagnose();
               },
               icon: Icon(Icons.zoom_in),
-              label: Text(AppLoc
-                  .of(context)
-                  .verbDiagnose),
+              label: Text(AppLoc.of(context).verbDiagnose),
             ),
       ),
     );
-  }
-
-  _share() {
-    var now = DateTime.now().toString();
-    Share.share("---Report $now---\n"
-        "SSID: $_ssid, Level: $_level, Ip: $_ip\n\n"
-        "Permission Coarse Location: \n$_permission\n\n"
-        "Ping Loopback: \n$_pingLo\n\n"
-        "Ping Local: \n$_pingLocal\n\n"
-        "HTTP Gateway Response: \n$_status\n\n"
-        "Ping Gateway: \n$_pingLo\n\n"
-        "Ping DNS1: \n$_pingDNS1\n\n"
-        "Ping DNS2: \n$_pingDNS2\n\n"
-        "Ping DNS3: \n$_pingDNS3\n\n"
-        "Ping DNS4: \n$_pingDNS4\n\n"
-        "Ping DNS5: \n$_pingDNS5\n\n"
-        "NSLookup EMSE: \n$_nsLookupEMSE\n\n"
-        "NSLookup Google: \n$_nsLookupGoogle\n\n");
   }
 
   _diagnose() async {
@@ -230,24 +209,35 @@ class _DiagnosePageState extends State<DiagnosePage> {
           .then((status) => setState(() => _status = status));
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
-          .then((addresses) =>
-          addresses.forEach((address) =>
-              setState(() =>
+          .then((addresses) => addresses.forEach((address) => setState(() =>
               _nsLookupEMSE =
-              "Host: ${address.host}\nLookup: ${address.address}")))
+                  "Host: ${address.host}\nLookup: ${address.address}")))
           .catchError((e) => setState(() => _nsLookupEMSE = e.toString()));
 
       InternetAddress.lookup("google.com")
-          .then((addresses) =>
-          addresses.forEach((address) =>
-              setState(() =>
+          .then((addresses) => addresses.forEach((address) => setState(() =>
               _nsLookupGoogle =
-              "Host: ${address.host}\nLookup: ${address.address}")))
+                  "Host: ${address.host}\nLookup: ${address.address}")))
           .catchError((e) => setState(() => _nsLookupGoogle = e.toString()));
     } else
-      setState(() =>
-      _alert = AppLoc
-          .of(context)
-          .sentenceNotConnected);
+      setState(() => _alert = AppLoc.of(context).sentenceNotConnected);
+  }
+
+  _share() {
+    var now = DateTime.now().toString();
+    Share.share("---Report $now---\n"
+        "SSID: $_ssid, Level: $_level, Ip: $_ip\n\n"
+        "Permission Coarse Location: \n$_permission\n\n"
+        "Ping Loopback: \n$_pingLo\n\n"
+        "Ping Local: \n$_pingLocal\n\n"
+        "HTTP Gateway Response: \n$_status\n\n"
+        "Ping Gateway: \n$_pingLo\n\n"
+        "Ping DNS1: \n$_pingDNS1\n\n"
+        "Ping DNS2: \n$_pingDNS2\n\n"
+        "Ping DNS3: \n$_pingDNS3\n\n"
+        "Ping DNS4: \n$_pingDNS4\n\n"
+        "Ping DNS5: \n$_pingDNS5\n\n"
+        "NSLookup EMSE: \n$_nsLookupEMSE\n\n"
+        "NSLookup Google: \n$_nsLookupGoogle\n\n");
   }
 }

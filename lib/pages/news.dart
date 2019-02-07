@@ -1,4 +1,7 @@
 import 'package:auto_login_flutter/components/drawer.dart';
+import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:auto_login_flutter/components/cards.dart';
+
 import 'package:flutter/material.dart';
 
 class NewsPage extends StatefulWidget {
@@ -11,6 +14,16 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
+  List<Widget> _newsCards = [Text("")];
+
+  @override
+  void initState() {
+    super.initState();
+    _generateFeedCard(
+            "https://github.com/Darkness4/csgo-gsi-arduino-lcd/commits/master.atom")
+        .then((newsCards) => setState(() => _newsCards = newsCards));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +34,22 @@ class _NewsPageState extends State<NewsPage> {
         child: Scrollbar(
           child: SingleChildScrollView(
             child: Column(
-              children: <Widget>[],
+              children: _newsCards,
             ),
           ),
         ),
       ),
       drawer: MainDrawer(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Refresh',
+      ),
     );
+  }
+
+  Future<List<Widget>> _generateFeedCard(String url) async {
+    var feed = await getAtom(url);
+    List<dynamic> _newsCards = feed.items;
+    return _newsCards.map((myitem) => NewsCard(item: myitem)).toList();
   }
 }
