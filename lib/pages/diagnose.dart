@@ -27,6 +27,12 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _level = "";
   var _ip = "";
   var _permission = "";
+  var _ip_all = "";
+  var _ifconfig = "";
+  var _arp = "";
+  var _tracertGoogle = "";
+  var _tracertGoogleDNS = "";
+  var _netstat = "";
   var _pingLo = "";
   var _pingLocal = "";
   var _pingGateway = "";
@@ -91,6 +97,30 @@ class _DiagnosePageState extends State<DiagnosePage> {
                 ),
                 LogCard(_permission,
                     title: "Permission Coarse Location (for SSID)"),
+                LogCard(
+                  _ip_all,
+                  title: "ip a",
+                ),
+                LogCard(
+                  _ifconfig,
+                  title: "ifconfig all",
+                ),
+                LogCard(
+                  _arp,
+                  title: "Address Resolution Protocol",
+                ),
+                LogCard(
+                  _tracertGoogle,
+                  title: "Traceroute Google",
+                ),
+                LogCard(
+                  _tracertGoogleDNS,
+                  title: "Traceroute GoogleDNS",
+                ),
+                LogCard(
+                  _netstat,
+                  title: "NetStat",
+                ),
                 LogCard(
                   _pingLo,
                   title: "Ping Loopback",
@@ -180,33 +210,56 @@ class _DiagnosePageState extends State<DiagnosePage> {
         _ip = ip;
       });
 
-      exec("ping", [argsPing, "127.0.0.1"])
-          .runGetOutput()
-          .then((out) => setState(() => _pingLo = out));
-      exec("ping", [argsPing, "172.17.0.5"])
-          .runGetOutput()
-          .then((out) => setState(() => _pingLocal = out));
-      exec("ping", [argsPing, "172.17.0.1"])
-          .runGetOutput()
-          .then((out) => setState(() => _pingGateway = out));
-      exec("ping", [argsPing, "192.168.130.33"])
-          .runGetOutput()
-          .then((out) => setState(() => _pingDNS1 = out));
-      exec("ping", [argsPing, "192.168.130.3"])
-          .runGetOutput()
-          .then((out) => setState(() => _pingDNS2 = out));
-      exec("ping", [argsPing, "8.8.8.8"])
-          .runGetOutput()
-          .then((out) => setState(() => _pingDNS3 = out));
-      exec("ping", [argsPing, "1.1.1.1"])
-          .runGetOutput()
-          .then((out) => setState(() => _pingDNS4 = out));
-      exec("ping", [argsPing, "172.17.0.6"])
-          .runGetOutput()
-          .then((out) => setState(() => _pingDNS5 = out));
+      exec("ip", [
+        'a',
+      ]).runGetOutput().then((out) =>
+          setState(() => _ip_all = out.isEmpty ? "Nothing to show" : out));
+      exec("ifconfig", [
+        '-a',
+      ]).runGetOutput().then((out) =>
+          setState(() => _ifconfig = out.isEmpty ? "Nothing to show" : out));
+      exec("arp", [
+        '-a',
+      ]).runGetOutput().then((out) =>
+          setState(() => _arp = out.isEmpty ? "Nothing to show" : out));
+      exec("su", [
+        '-c',
+        'traceroute',
+        'google.com',
+      ]).runGetOutput().then((out) =>
+          setState(
+                  () =>
+              _tracertGoogle = out.isEmpty ? "Nothing to show" : out));
+      exec("su", [
+        '-c',
+        'traceroute',
+        '8.8.8.8',
+      ]).runGetOutput().then((out) =>
+          setState(
+                  () =>
+              _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out));
+      exec("netstat", []).runGetOutput().then((out) =>
+          setState(() => _netstat = out.isEmpty ? "Nothing to show" : out));
+      exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) =>
+          setState(() => _pingLo = out.isEmpty ? "Nothing to show" : out));
+      exec("ping", [argsPing, "172.17.0.5"]).runGetOutput().then((out) =>
+          setState(() => _pingLocal = out.isEmpty ? "Nothing to show" : out));
+      exec("ping", [argsPing, "172.17.0.1"]).runGetOutput().then((out) =>
+          setState(() => _pingGateway = out.isEmpty ? "Nothing to show" : out));
+      exec("ping", [argsPing, "192.168.130.33"]).runGetOutput().then((out) =>
+          setState(() => _pingDNS1 = out.isEmpty ? "Nothing to show" : out));
+      exec("ping", [argsPing, "192.168.130.3"]).runGetOutput().then((out) =>
+          setState(() => _pingDNS2 = out.isEmpty ? "Nothing to show" : out));
+      exec("ping", [argsPing, "8.8.8.8"]).runGetOutput().then((out) =>
+          setState(() => _pingDNS3 = out.isEmpty ? "Nothing to show" : out));
+      exec("ping", [argsPing, "1.1.1.1"]).runGetOutput().then((out) =>
+          setState(() => _pingDNS4 = out.isEmpty ? "Nothing to show" : out));
+      exec("ping", [argsPing, "172.17.0.6"]).runGetOutput().then((out) =>
+          setState(() => _pingDNS5 = out.isEmpty ? "Nothing to show" : out));
 
-      getStatus("172.17.0.1")
-          .then((status) => setState(() => _status = status));
+      getStatus("172.17.0.1").then((status) =>
+          setState(
+                  () => _status = status.isEmpty ? "Nothing to show" : status));
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
           .then((addresses) => addresses.forEach((address) => setState(() =>
@@ -228,6 +281,12 @@ class _DiagnosePageState extends State<DiagnosePage> {
     Share.share("---Report $now---\n"
         "SSID: $_ssid, Level: $_level, Ip: $_ip\n\n"
         "Permission Coarse Location: \n$_permission\n\n"
+        "ip a: \n$_ip_all\n\n"
+        "ifconfig: \n$_ifconfig\n\n"
+        "ARP: \n$_arp\n\n"
+        "NetStat: \n$_netstat\n\n"
+        "Traceroute Google: \n$_tracertGoogle\n\n"
+        "Traceroute Google DNS: \n$_tracertGoogle\n\n"
         "Ping Loopback: \n$_pingLo\n\n"
         "Ping Local: \n$_pingLocal\n\n"
         "HTTP Gateway Response: \n$_status\n\n"

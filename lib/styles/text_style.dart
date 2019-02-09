@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-TextStyle styleLog = TextStyle(color: Colors.white);
+TextStyle styleLog = TextStyle(color: Colors.white,
+    fontFamily: 'RobotoMono',
+    fontSize: 9,
+    fontWeight: FontWeight.w500);
 
 TextStyle styleLogImportant =
 TextStyle(fontWeight: FontWeight.bold, color: Colors.white);

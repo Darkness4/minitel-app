@@ -33,14 +33,16 @@ class DocCard extends StatelessWidget {
 class LogCard extends StatelessWidget {
   final String title;
   final String text;
+  final double elevation;
 
-  LogCard(this.text, {this.title});
+  LogCard(this.text, {this.title, this.elevation: 3});
 
   @override
   Widget build(context) {
     return Container(
       margin: EdgeInsets.all(10),
       child: Card(
+        elevation: elevation,
         color: Colors.lightBlue,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

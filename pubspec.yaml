@@ -47,6 +47,32 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  fonts:
+    - family: RobotoMono
+      fonts:
+        - asset: fonts/RobotoMono-Regular.ttf
+        - asset: fonts/RobotoMono-Italic.ttf
+          style: italic
+        - asset: fonts/RobotoMono-Bold.ttf
+          weight: 700
+        - asset: fonts/RobotoMono-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: fonts/RobotoMono-Light.ttf
+          weight: 300
+        - asset: fonts/RobotoMono-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/RobotoMono-Medium.ttf
+          weight: 500
+        - asset: fonts/RobotoMono-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: fonts/RobotoMono-Thin.ttf
+          weight: 100
+        - asset: fonts/RobotoMono-ThinItalic.ttf
+          weight: 100
+          style: italic
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
