@@ -1,4 +1,4 @@
-image: nathansamson/flutter-builder-docker:v1.0.0
+image: darkness4/flutter-builder:27
 
 variables:
 before_script:
