@@ -43,6 +43,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _pingDNS5 = "";
   var _nsLookupEMSE = "";
   var _nsLookupGoogle = "";
+  var _nsLookupEMSEBusybox = "";
+  var _nsLookupGoogleBusybox = "";
 
   // var _loading = false;
   // (
@@ -165,6 +167,14 @@ class _DiagnosePageState extends State<DiagnosePage> {
                   _nsLookupGoogle,
                   title: "NSLookupGoogle",
                 ),
+                LogCard(
+                  _nsLookupEMSEBusybox,
+                  title: "NSLookupEMSE (Busybox)",
+                ),
+                LogCard(
+                  _nsLookupGoogleBusybox,
+                  title: "NSLookupGoogle (Busybox)",
+                ),
               ],
             ),
           ),
@@ -256,6 +266,10 @@ class _DiagnosePageState extends State<DiagnosePage> {
           setState(() => _pingDNS4 = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "172.17.0.6"]).runGetOutput().then((out) =>
           setState(() => _pingDNS5 = out.isEmpty ? "Nothing to show" : out));
+       exec("nslookup", ["fw-cgcp.emse.fr"]).runGetOutput().then((out) =>
+          setState(() => _nsLookupEMSEBusybox = out.isEmpty ? "Nothing to show" : out));
+      exec("nslookup", ["google.com"]).runGetOutput().then((out) =>
+          setState(() => _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out));
 
       getStatus("172.17.0.1").then((status) =>
           setState(
