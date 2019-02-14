@@ -9,23 +9,53 @@ class DiagnoseDoc extends StatelessWidget {
     return SingleChildScrollView(
         child: DocCard(children: <Widget>[
       Header(AppLoc.of(context).titleDiagnosePage),
-      // TODO: Add NSLookup (Busybox), ARP, traceroute, netstat, ifconfig, ip a
+
       Header("Permission Coarse Location", level: 2),
       Paragraph(
         AppLoc.of(context).sentenceDocDiagnosePerm,
       ),
+
+      Header("ifconfig all/ip a", level: 2),
+      Paragraph(
+        AppLoc
+            .of(context)
+            .sentenceDocDiagnoseifconfig,
+      ),
+
+      Header("Address Resolution Protocol", level: 2),
+      Paragraph(
+        AppLoc
+            .of(context)
+            .sentenceDocDiagnoseARP,
+      ),
+
+      Header("Traceroute", level: 2),
+      Paragraph(
+        AppLoc
+            .of(context)
+            .sentenceDocDiagnoseTraceroute,
+      ),
+
+      Header("NetStat", level: 2),
+      Paragraph(
+        AppLoc
+            .of(context)
+            .sentenceDocDiagnoseNetstat,
+      ),
+
       Header("Ping Loopback", level: 2),
       Paragraph(AppLoc.of(context).sentenceDocDiagnosePingLo),
+
       Header("Ping Local", level: 2),
       RichText(
           text: TextSpan(
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.black, height: 1.5),
               text: AppLoc.of(context).sentenceDocDiagnosePingLocal1,
               children: <TextSpan>[
             TextSpan(text: AppLoc.of(context).sentenceDocDiagnosePingLocal2),
             TextSpan(
                 text: AppLoc.of(context).sentenceDocDiagnosePingLocal3,
-                style: TextStyle(fontWeight: FontWeight.bold)),
+                style: TextStyle(fontWeight: FontWeight.bold, height: 1.5)),
             TextSpan(text: AppLoc.of(context).sentenceDocDiagnosePingLocal4),
           ])),
       Header("HTTP Gateway Response", level: 2),
@@ -78,7 +108,7 @@ class DiagnoseDoc extends StatelessWidget {
       Paragraph(AppLoc.of(context).sentenceDocDiagnoseHTTP5),
       Paragraph(
         AppLoc.of(context).sentenceDocDiagnoseHTTP6,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold, height: 1.5),
       ),
       Header("Ping Gateway", level: 2),
       Paragraph(AppLoc.of(context).sentenceDocDiagnosePingGateway),

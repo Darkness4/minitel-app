@@ -49,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sentenceDocDiagnosePingLo": MessageLookupByLibrary.simpleMessage(
             "    Vérifie si le logiciel TCP/IP fonctionne. Devrait être toujours positif."),
         "sentenceDocDiagnosePingLocal1": MessageLookupByLibrary.simpleMessage(
-            "    Ping à un ordinateur local (172.17.0.5, qui est le serveur Minitel et devrait être toujours allumé).\n\nSi les paquets sont perdus, ceci sont les scenarios les plus probable:\n"),
+            "    Ping à un ordinateur local (172.17.0.5, qui est le serveur Minitel et devrait être toujours allumé).\n\n    Si les paquets sont perdus, ceci sont les scenarios les plus probable:\n"),
         "sentenceDocDiagnosePingLocal2": MessageLookupByLibrary.simpleMessage(
             "    1.  Vous n\'avez pas d\'IP."),
         "sentenceDocDiagnosePingLocal3": MessageLookupByLibrary.simpleMessage(

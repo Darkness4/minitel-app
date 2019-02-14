@@ -10,7 +10,7 @@ class DocCard extends StatelessWidget {
 
   DocCard(
       {@required this.children,
-      this.elevation,
+        this.elevation: 4.0,
       this.extPadding: 10.0,
       this.intPadding: 15.0});
 

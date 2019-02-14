@@ -24,7 +24,7 @@ class Paragraph extends StatelessWidget {
 
   Paragraph(this.text,
       {this.key,
-        this.style,
+        this.style: const TextStyle(height: 1.5),
         this.textAlign: TextAlign.justify,
         this.textDirection: TextDirection.ltr,
         this.locale,

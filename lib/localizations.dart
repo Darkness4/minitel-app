@@ -86,17 +86,15 @@ class AppLoc {
   String get sentenceDocDiagnosePingLocal1 =>
       Intl.message(
           "    Ping to a local computer (172.17.0.5, which is the Minitel Server and should be always on).\n\n"
-              "If the packets are lost, these are the most possible scenarios:\n",
+              "    If the packets are lost, these are the most possible scenarios:\n",
           name: 'sentenceDocDiagnosePingLocal1');
 
   String get sentenceDocDiagnosePingLocal2 =>
-      Intl.message(
-          "    1.  You have no IP.",
+      Intl.message("    1.  You have no IP.",
           name: 'sentenceDocDiagnosePingLocal2');
 
   String get sentenceDocDiagnosePingLocal3 =>
-      Intl.message(
-          " (Report this immediatly to Minitel)\n",
+      Intl.message(" (Report this immediatly to Minitel)\n",
           name: 'sentenceDocDiagnosePingLocal3');
 
   String get sentenceDocDiagnosePingLocal4 =>
@@ -138,9 +136,7 @@ class AppLoc {
           name: 'sentenceDocDiagnoseHTTP6');
 
   String get titleHowShouldIReact =>
-      Intl.message(
-          "How should i react?",
-          name: 'titleHowShouldIReact');
+      Intl.message("How should i react?", name: 'titleHowShouldIReact');
 
   String get sentenceDocDiagnosePingGateway =>
       Intl.message(
@@ -158,14 +154,35 @@ class AppLoc {
           name: 'sentenceDocDiagnoseNSLookup1');
 
   String get sentenceDocDiagnoseNSLookup2 =>
-      Intl.message(
-          "    These are the best fixes:",
+      Intl.message("    These are the best fixes:",
           name: 'sentenceDocDiagnoseNSLookup2');
 
   String get sentenceDocDiagnoseNSLookup3 =>
-      Intl.message(
-          "    For portable devices, restart the Wifi.",
+      Intl.message("    For portable devices, restart the Wifi.",
           name: 'sentenceDocDiagnoseNSLookup3');
+
+  String get sentenceDocDiagnoseifconfig =>
+      Intl.message(
+          "    Gives useful information about the hardware.\n\n"
+              "    Useful informations:\n"
+              "      - Status\n"
+              "      - IP Address\n"
+              "      - MAC Address\n",
+          name: 'sentenceDocDiagnoseifconfig');
+
+  String get sentenceDocDiagnoseARP =>
+      Intl.message(
+          "    Displays the MAC addresses of all devices that have connected to the phone.",
+          name: 'sentenceDocDiagnoseARP');
+
+  String get sentenceDocDiagnoseTraceroute =>
+      Intl.message(
+          "    Show the path and the delays of packets to a Google server.",
+          name: 'sentenceDocDiagnoseTraceroute');
+
+  String get sentenceDocDiagnoseNetstat =>
+      Intl.message("    Shows statistics about TCP connections.",
+          name: 'sentenceDocDiagnoseNetstat');
 }
 
 class AppLocDelegate extends LocalizationsDelegate<AppLoc> {

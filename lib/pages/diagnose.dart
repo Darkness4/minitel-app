@@ -248,7 +248,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
           setState(
                   () =>
               _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out));
-      exec("netstat", []).runGetOutput().then((out) =>
+      exec("ip", ["-s", "link"]).runGetOutput().then((out) =>
           setState(() => _netstat = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) =>
           setState(() => _pingLo = out.isEmpty ? "Nothing to show" : out));
@@ -311,6 +311,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
         "Ping DNS4: \n$_pingDNS4\n\n"
         "Ping DNS5: \n$_pingDNS5\n\n"
         "NSLookup EMSE: \n$_nsLookupEMSE\n\n"
-        "NSLookup Google: \n$_nsLookupGoogle\n\n");
+        "NSLookup Google: \n$_nsLookupGoogle\n\n"
+        "NSLookup EMSE (Busybox): \n$_nsLookupEMSEBusybox\n\n"
+        "NSLookup Google (Busybox): \n$_nsLookupGoogleBusybox\n\n");
   }
 }
