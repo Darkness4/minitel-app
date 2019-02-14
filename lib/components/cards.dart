@@ -93,34 +93,65 @@ class NewsCard extends StatelessWidget {
         color: Colors.white,
         elevation: elevation,
         child: InkWell(
+          highlightColor: Color(0xa0000000),
+          splashColor: Colors.black,
           onTap: () {
             _launchURL(item.links.map((link) => link.href).toList().first);
           },
           child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                colors: [
+                  const Color(0xef667eea),
+                  const Color(0xef764ba2)
+                ], // whitish to gray
+              ),
+            ),
             padding: EdgeInsets.all(intPadding),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
-                    Widget>[
-              Header(RegExp(r'\n\s+([^\\]*)\n').firstMatch(item.title).group(1),
-                  level: 2), // Regex delete \n\s\s\sText with spaces\n
-              Header(
-                  (item.authors)
-                      .map((author) => author.name)
-                      .toList()
-                      .join(" "),
-                  level: 3),
-              Paragraph(item.summary != null ? item.summary : ""),
-              // Paragraph(item.content.toString()),
-              // Paragraph(item.published.toString()),
-              // Paragraph(item.source.toString()),
-              Paragraph(item.links.map((link) => link.href).toList().join("")),
-              // Paragraph(item.categories.map((category) => category.lavel).toList().join(" ")),
-              // Paragraph((item.contributors).map((contributor) => contributor.name).toList().join(" ")),
-              // Paragraph(item.rights.toString()),
-              // Paragraph(item.media.toString()),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Header(
+                    RegExp(r'\n\s+([^\\]*)\n').firstMatch(item.title).group(1),
+                    level: 2,
+                    color: Colors.white,
+                  ),
+                  // Regex delete \n\s\s\sText with spaces\n
+                  Header(
+                    (item.authors)
+                        .map((author) => author.name)
+                        .toList()
+                        .join(" "),
+                    level: 3,
+                    color: Colors.white,
+                  ),
+                  Paragraph(
+                    item.summary != null ? item.summary : "",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  // Paragraph(item.content.toString()),
+                  // Paragraph(item.published.toString()),
+                  // Paragraph(item.source.toString()),
+                  Paragraph(
+                    item.links.map((link) => link.href).toList().join(""),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  // Paragraph(item.categories.map((category) => category.lavel).toList().join(" ")),
+                  // Paragraph((item.contributors).map((contributor) => contributor.name).toList().join(" ")),
+                  // Paragraph(item.rights.toString()),
+                  // Paragraph(item.media.toString()),
 
-              Text(item.updated, style: TextStyle(fontStyle: FontStyle.italic)),
-            ]),
+                  Text(item.updated,
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white,
+                      )),
+                ]),
           ),
         ),
       ),

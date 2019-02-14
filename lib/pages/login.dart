@@ -39,7 +39,15 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: Center(
         child: Container(
-          color: Colors.lightBlueAccent,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              colors: [
+                const Color(0xff89f7fe),
+                const Color(0xff66a6ff)
+              ], // whitish to gray
+            ),
+          ),
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
