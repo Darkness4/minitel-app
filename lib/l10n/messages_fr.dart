@@ -64,7 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Non connecté au Wifi ni au Mobile."),
         "title": MessageLookupByLibrary.simpleMessage("Boîte à outils Minitel"),
         "titleCalendarPage": MessageLookupByLibrary.simpleMessage("Calendrier"),
-        "titleDiagnosePage": MessageLookupByLibrary.simpleMessage("Diagnostic"),
+            "titleDiagnosePage": MessageLookupByLibrary.simpleMessage(
+                "Diagnostique"),
         "titleDocumentationPage": MessageLookupByLibrary.simpleMessage(
             "Documentation"),
         "titleHowShouldIReact": MessageLookupByLibrary.simpleMessage(

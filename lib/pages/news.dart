@@ -30,8 +30,7 @@ class _NewsPageState extends State<NewsPage> {
                       return Column(
                         children: snapshot.data,
                       );
-                    }
-                    else {
+                    } else {
                       return Text("Loading...");
                     }
                   })),
@@ -44,6 +43,6 @@ class _NewsPageState extends State<NewsPage> {
   Future<List<Widget>> _generateFeedCard(String url) async {
     var feed = await getAtom(url);
     List<dynamic> _newsCards = feed.items;
-    return _newsCards.map((myitem) => NewsCard(item: myitem)).toList();
+    return _newsCards.map((item) => NewsCard(item: item)).toList();
   }
 }

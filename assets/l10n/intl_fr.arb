@@ -12,7 +12,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "titleDiagnosePage": "Diagnostic",
+  "titleDiagnosePage": "Diagnostique",
   "@titleDiagnosePage": {
     "description": "The DiagnosePage title",
     "type": "text",
