@@ -11,6 +11,7 @@ stages:
 build:
   stage: build
   script:
+    - flutter packages get
     - flutter -v build apk --release
     - mv build/app/outputs/apk/app.apk app.apk
   artifacts:
