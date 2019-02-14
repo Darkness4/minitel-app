@@ -109,15 +109,15 @@ class _DiagnosePageState extends State<DiagnosePage> {
                 ),
                 LogCard(
                   _arp,
-                  title: "Address Resolution Protocol",
+                  title: "Address Resolution Protocol (Busybox)",
                 ),
                 LogCard(
                   _tracertGoogle,
-                  title: "Traceroute Google",
+                  title: "Traceroute Google (Busybox)",
                 ),
                 LogCard(
                   _tracertGoogleDNS,
-                  title: "Traceroute GoogleDNS",
+                  title: "Traceroute GoogleDNS (Busybox)",
                 ),
                 LogCard(
                   _netstat,
@@ -194,6 +194,32 @@ class _DiagnosePageState extends State<DiagnosePage> {
   }
 
   _diagnose() async {
+    setState(() {
+      _alert = "Loading...";
+      _status = "Loading...";
+      _ssid = "Loading...";
+      _level = "Loading...";
+      _ip = "Loading...";
+      _permission = "Loading...";
+      _ipAll = "Loading...";
+      _ifconfig = "Loading...";
+      _arp = "Loading...";
+      _tracertGoogle = "Loading...";
+      _tracertGoogleDNS = "Loading...";
+      _netstat = "Loading...";
+      _pingLo = "Loading...";
+      _pingLocal = "Loading...";
+      _pingGateway = "Loading...";
+      _pingDNS1 = "Loading...";
+      _pingDNS2 = "Loading...";
+      _pingDNS3 = "Loading...";
+      _pingDNS4 = "Loading...";
+      _pingDNS5 = "Loading...";
+      _nsLookupEMSE = "Loading...";
+      _nsLookupGoogle = "Loading...";
+      _nsLookupEMSEBusybox = "Loading...";
+      _nsLookupGoogleBusybox = "Loading...";
+    });
     setState(() => _alert = "");
     var argsPing = "-c 4 -w 5 -W 5";
     var status = await SimplePermissions.checkPermission(
@@ -266,7 +292,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
           setState(() => _pingDNS4 = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "172.17.0.6"]).runGetOutput().then((out) =>
           setState(() => _pingDNS5 = out.isEmpty ? "Nothing to show" : out));
-       exec("nslookup", ["fw-cgcp.emse.fr"]).runGetOutput().then((out) =>
+      exec("nslookup", ["fw-cgcp.emse.fr"]).runGetOutput().then((out) =>
           setState(() => _nsLookupEMSEBusybox = out.isEmpty ? "Nothing to show" : out));
       exec("nslookup", ["google.com"]).runGetOutput().then((out) =>
           setState(() => _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out));
@@ -277,14 +303,14 @@ class _DiagnosePageState extends State<DiagnosePage> {
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
           .then((addresses) => addresses.forEach((address) => setState(() =>
-              _nsLookupEMSE =
-                  "Host: ${address.host}\nLookup: ${address.address}")))
+      _nsLookupEMSE =
+      "Host: ${address.host}\nLookup: ${address.address}")))
           .catchError((e) => setState(() => _nsLookupEMSE = e.toString()));
 
       InternetAddress.lookup("google.com")
           .then((addresses) => addresses.forEach((address) => setState(() =>
-              _nsLookupGoogle =
-                  "Host: ${address.host}\nLookup: ${address.address}")))
+      _nsLookupGoogle =
+      "Host: ${address.host}\nLookup: ${address.address}")))
           .catchError((e) => setState(() => _nsLookupGoogle = e.toString()));
     } else
       setState(() => _alert = AppLoc.of(context).sentenceNotConnected);
