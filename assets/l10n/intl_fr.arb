@@ -175,5 +175,25 @@
   "@sentenceDocDiagnoseNSLookup3": {
     "type": "text",
     "placeholders": {}
+  },
+  "sentenceDocDiagnoseifconfig": "    Donne des informations utiles sur le matériel.\n\n    Informations utiles:\n      - Status\n      - Addresse IP\n      - Addresse MAC\n",
+  "@sentenceDocDiagnoseifconfig": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseARP": "    Affiche les adresses MAC de tous les appareils connectés au téléphone.",
+  "@sentenceDocDiagnoseARP": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseTraceroute": "    Affiche le chemin et les délais des paquets vers un serveur Google.",
+  "@sentenceDocDiagnoseTraceroute": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseNetstat": "    Affiche des statistiques sur les connexions TCP.",
+  "@sentenceDocDiagnoseNetstat": {
+    "type": "text",
+    "placeholders": {}
   }
 }

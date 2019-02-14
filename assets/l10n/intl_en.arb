@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-02-07T12:38:06.656517",
+  "@@last_modified": "2019-02-14T18:36:36.605903",
   "title": "Minitel Toolbox",
   "@title": {
     "description": "The application title",
@@ -96,7 +96,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "sentenceDocDiagnosePingLocal1": "    Ping to a local computer (172.17.0.5, which is the Minitel Server and should be always on).\n\nIf the packets are lost, these are the most possible scenarios:\n",
+  "sentenceDocDiagnosePingLocal1": "    Ping to a local computer (172.17.0.5, which is the Minitel Server and should be always on).\n\n    If the packets are lost, these are the most possible scenarios:\n",
   "@sentenceDocDiagnosePingLocal1": {
     "type": "text",
     "placeholders": {}
@@ -173,6 +173,26 @@
   },
   "sentenceDocDiagnoseNSLookup3": "    For portable devices, restart the Wifi.",
   "@sentenceDocDiagnoseNSLookup3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseifconfig": "    Gives useful information about the hardware.\n\n    Useful informations:\n      - Status\n      - IP Address\n      - MAC Address\n",
+  "@sentenceDocDiagnoseifconfig": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseARP": "    Displays the MAC addresses of all devices that have connected to the phone.",
+  "@sentenceDocDiagnoseARP": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseTraceroute": "    Show the path and the delays of packets to a Google server.",
+  "@sentenceDocDiagnoseTraceroute": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sentenceDocDiagnoseNetstat": "    Shows statistics about TCP connections.",
+  "@sentenceDocDiagnoseNetstat": {
     "type": "text",
     "placeholders": {}
   }
