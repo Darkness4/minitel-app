@@ -37,6 +37,7 @@ class _DocumentationPageState extends State<DocumentationPage> {
             ),
             DocCard(children: <Widget>[
               Header(AppLoc.of(context).titleDiagnosePage),
+              // TODO: Add NSLookup (Busybox), ARP, traceroute, netstat, ifconfig, ip a
               Header("Permission Coarse Location", level: 2),
               Paragraph(
                 AppLoc.of(context).sentenceDocDiagnosePerm,

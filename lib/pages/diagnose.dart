@@ -27,7 +27,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _level = "";
   var _ip = "";
   var _permission = "";
-  var _ip_all = "";
+  var _ipAll = "";
   var _ifconfig = "";
   var _arp = "";
   var _tracertGoogle = "";
@@ -100,7 +100,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
                 LogCard(_permission,
                     title: "Permission Coarse Location (for SSID)"),
                 LogCard(
-                  _ip_all,
+                  _ipAll,
                   title: "ip a",
                 ),
                 LogCard(
@@ -223,7 +223,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
       exec("ip", [
         'a',
       ]).runGetOutput().then((out) =>
-          setState(() => _ip_all = out.isEmpty ? "Nothing to show" : out));
+          setState(() => _ipAll = out.isEmpty ? "Nothing to show" : out));
       exec("ifconfig", [
         '-a',
       ]).runGetOutput().then((out) =>
@@ -295,7 +295,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
     Share.share("---Report $now---\n"
         "SSID: $_ssid, Level: $_level, Ip: $_ip\n\n"
         "Permission Coarse Location: \n$_permission\n\n"
-        "ip a: \n$_ip_all\n\n"
+        "ip a: \n$_ipAll\n\n"
         "ifconfig: \n$_ifconfig\n\n"
         "ARP: \n$_arp\n\n"
         "NetStat: \n$_netstat\n\n"
