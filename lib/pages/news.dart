@@ -1,7 +1,6 @@
+import 'package:auto_login_flutter/components/cards.dart';
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
-import 'package:auto_login_flutter/components/cards.dart';
-
 import 'package:flutter/material.dart';
 
 class NewsPage extends StatefulWidget {
@@ -14,16 +13,6 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-  List<Widget> _newsCards = [Text("")];
-
-  @override
-  void initState() {
-    super.initState();
-    _generateFeedCard(
-            "https://github.com/Darkness4/minitel-app/commits/develop.atom")
-        .then((newsCards) => setState(() => _newsCards = newsCards));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,17 +22,22 @@ class _NewsPageState extends State<NewsPage> {
       body: Center(
         child: Scrollbar(
           child: SingleChildScrollView(
-            child: Column(
-              children: _newsCards,
-            ),
-          ),
+              child: FutureBuilder(
+                  future: _generateFeedCard(
+                      "https://github.com/Darkness4/minitel-app/commits/develop.atom"),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(
+                        children: snapshot.data,
+                      );
+                    }
+                    else {
+                      return Text("Loading...");
+                    }
+                  })),
         ),
       ),
       drawer: MainDrawer(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Refresh',
-      ),
     );
   }
 
