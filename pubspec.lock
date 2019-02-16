@@ -102,13 +102,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_search_bar:
-    dependency: "direct main"
-    description:
-      name: flutter_search_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.7"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -128,6 +121,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.7"
+  google_maps_flutter:
+    dependency: "direct main"
+    description:
+      name: google_maps_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0+3"
   html:
     dependency: transitive
     description:
@@ -247,6 +247,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.0"
+  simple_permissions:
+    dependency: "direct main"
+    description:
+      name: simple_permissions
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.9"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -359,4 +366,4 @@ packages:
     version: "2.1.15"
 sdks:
   dart: ">=2.1.0 <3.0.0"
-  flutter: ">=0.5.6 <2.0.0"
+  flutter: ">=0.11.9 <2.0.0"

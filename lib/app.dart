@@ -7,6 +7,7 @@ import 'pages/diagnose.dart';
 import 'pages/docs.dart';
 import 'pages/login.dart';
 import 'pages/news.dart';
+import 'pages/maps.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -55,6 +56,10 @@ class MyApp extends StatelessWidget {
             NewsPage(title: AppLoc
                 .of(context)
                 .titleNewsPage),
+                '/maps': (context) =>
+            MapsPage(title: AppLoc
+                .of(context)
+                .titleMapsPage),
       },
     );
   }

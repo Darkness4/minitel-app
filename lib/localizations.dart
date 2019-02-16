@@ -40,6 +40,9 @@ class AppLoc {
   String get titleCalendarPage => Intl.message('Calendar',
       name: 'titleCalendarPage', desc: 'The CalendarPage title');
 
+  String get titleMapsPage =>  Intl.message('Map',
+      name: 'titleMapsPage', desc: 'The MapsPage title');
+
   // pages/diagnose
   String get verbDiagnose => Intl.message('Diagnose', name: 'verbDiagnose');
 

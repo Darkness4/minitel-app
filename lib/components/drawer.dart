@@ -70,6 +70,16 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.pushReplacementNamed(context, '/calendar');
               }),
+          ListTile(
+              title: Text(AppLoc
+                  .of(context)
+                  .titleMapsPage),
+              leading: Icon(Icons.map),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/maps');
+              }),
         ],
       ),
     );

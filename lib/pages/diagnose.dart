@@ -161,9 +161,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
       drawer: MainDrawer(),
       floatingActionButton: Builder(
         builder: (context) => FloatingActionButton.extended(
-              onPressed: () {
-                _diagnose();
-              },
+              onPressed: _diagnose,
               icon: Icon(Icons.zoom_in),
               label: Text(AppLoc.of(context).verbDiagnose),
             ),
@@ -226,18 +224,14 @@ class _DiagnosePageState extends State<DiagnosePage> {
         '-c',
         'traceroute',
         'google.com',
-      ]).runGetOutput().then((out) =>
-          setState(
-                  () =>
-              _tracertGoogle = out.isEmpty ? "Nothing to show" : out));
+      ]).runGetOutput().then((out) => setState(
+          () => _tracertGoogle = out.isEmpty ? "Nothing to show" : out));
       exec("su", [
         '-c',
         'traceroute',
         '8.8.8.8',
-      ]).runGetOutput().then((out) =>
-          setState(
-                  () =>
-              _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out));
+      ]).runGetOutput().then((out) => setState(
+          () => _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out));
       exec("ip", ["-s", "link"]).runGetOutput().then((out) =>
           setState(() => _netstat = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) =>
@@ -257,24 +251,25 @@ class _DiagnosePageState extends State<DiagnosePage> {
       exec("ping", [argsPing, "172.17.0.6"]).runGetOutput().then((out) =>
           setState(() => _pingDNS5 = out.isEmpty ? "Nothing to show" : out));
       exec("nslookup", ["fw-cgcp.emse.fr"]).runGetOutput().then((out) =>
-          setState(() => _nsLookupEMSEBusybox = out.isEmpty ? "Nothing to show" : out));
-      exec("nslookup", ["google.com"]).runGetOutput().then((out) =>
-          setState(() => _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out));
+          setState(() =>
+              _nsLookupEMSEBusybox = out.isEmpty ? "Nothing to show" : out));
+      exec("nslookup", ["google.com"]).runGetOutput().then((out) => setState(
+          () =>
+              _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out));
 
-      getStatus("172.17.0.1").then((status) =>
-          setState(
-                  () => _status = status.isEmpty ? "Nothing to show" : status));
+      getStatus("172.17.0.1").then((status) => setState(
+          () => _status = status.isEmpty ? "Nothing to show" : status));
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
           .then((addresses) => addresses.forEach((address) => setState(() =>
-      _nsLookupEMSE =
-      "Host: ${address.host}\nLookup: ${address.address}")))
+              _nsLookupEMSE =
+                  "Host: ${address.host}\nLookup: ${address.address}")))
           .catchError((e) => setState(() => _nsLookupEMSE = e.toString()));
 
       InternetAddress.lookup("google.com")
           .then((addresses) => addresses.forEach((address) => setState(() =>
-      _nsLookupGoogle =
-      "Host: ${address.host}\nLookup: ${address.address}")))
+              _nsLookupGoogle =
+                  "Host: ${address.host}\nLookup: ${address.address}")))
           .catchError((e) => setState(() => _nsLookupGoogle = e.toString()));
     } else
       setState(() => _alert = AppLoc.of(context).sentenceNotConnected);
