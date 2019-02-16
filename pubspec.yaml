@@ -21,7 +21,6 @@ dependencies:
   wifi: ^0.1.4
   connectivity: ^0.4.0+1
   dscript_exec: ^2.0.1
-  simple_permissions: ^0.1.9
   flutter_search_bar: ^2.0.7
   share: ^0.6.0
   webfeed: ^0.4.2

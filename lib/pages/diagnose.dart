@@ -8,7 +8,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:simple_permissions/simple_permissions.dart';
+// import 'package:simple_permissions/simple_permissions.dart';
 import 'package:wifi/wifi.dart';
 
 class DiagnosePage extends StatefulWidget {
@@ -23,10 +23,8 @@ class DiagnosePage extends StatefulWidget {
 class _DiagnosePageState extends State<DiagnosePage> {
   var _alert = "";
   var _status = "";
-  var _ssid = "";
   var _level = "";
   var _ip = "";
-  var _permission = "";
   var _ipAll = "";
   var _ifconfig = "";
   var _arp = "";
@@ -45,24 +43,6 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _nsLookupGoogle = "";
   var _nsLookupEMSEBusybox = "";
   var _nsLookupGoogleBusybox = "";
-
-  // var _loading = false;
-  // (
-  //   _status == "" &&
-  //   _ssid == "" &&
-  //   _level == "" &&
-  //   _ip == "" &&
-  // _permission == "" &&
-  // _pingLo == "" &&
-  // _pingLocal == "" &&
-  // _pingDNS1 == "" &&
-  // _pingDNS2 == "" &&
-  // _pingDNS3 == "" &&
-  // _pingDNS4 == "" &&
-  // _pingDNS5 == "" &&
-  // _nsLookupEMSE == "" &&
-  // _nsLookupGoogle == ""
-  // )
 
   @override
   Widget build(BuildContext context) {
@@ -92,13 +72,11 @@ class _DiagnosePageState extends State<DiagnosePage> {
                   color: Colors.deepOrange,
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
-                    child: Text("SSID: $_ssid, Level: $_level, IP: $_ip",
+                    child: Text("Level: $_level, IP: $_ip",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white)),
                   ),
                 ),
-                LogCard(_permission,
-                    title: "Permission Coarse Location (for SSID)"),
                 LogCard(
                   _ipAll,
                   title: "ip a",
@@ -113,11 +91,11 @@ class _DiagnosePageState extends State<DiagnosePage> {
                 ),
                 LogCard(
                   _tracertGoogle,
-                  title: "Traceroute Google (Busybox)",
+                  title: "Traceroute Google (Busybox + Root)",
                 ),
                 LogCard(
                   _tracertGoogleDNS,
-                  title: "Traceroute GoogleDNS (Busybox)",
+                  title: "Traceroute GoogleDNS (Busybox + Root)",
                 ),
                 LogCard(
                   _netstat,
@@ -197,10 +175,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
     setState(() {
       _alert = "Loading...";
       _status = "Loading...";
-      _ssid = "Loading...";
       _level = "Loading...";
       _ip = "Loading...";
-      _permission = "Loading...";
       _ipAll = "Loading...";
       _ifconfig = "Loading...";
       _arp = "Loading...";
@@ -222,26 +198,14 @@ class _DiagnosePageState extends State<DiagnosePage> {
     });
     setState(() => _alert = "");
     var argsPing = "-c 4 -w 5 -W 5";
-    var status = await SimplePermissions.checkPermission(
-        Permission.AccessCoarseLocation);
-    if (!status) {
-      await SimplePermissions.requestPermission(
-          Permission.AccessCoarseLocation);
-    }
-    status = await SimplePermissions.checkPermission(
-        Permission.AccessCoarseLocation);
-
-    setState(() => _permission = (status ? "Authorized" : "Forbidded"));
 
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      var ssid = await Connectivity().getWifiName();
       var level = await Wifi.level;
       var ip = await Wifi.ip;
 
       setState(() {
-        _ssid = ssid;
         _level = '$level';
         _ip = ip;
       });
@@ -319,8 +283,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
   _share() {
     var now = DateTime.now().toString();
     Share.share("---Report $now---\n"
-        "SSID: $_ssid, Level: $_level, Ip: $_ip\n\n"
-        "Permission Coarse Location: \n$_permission\n\n"
+        "Level: $_level, Ip: $_ip\n\n"
         "ip a: \n$_ipAll\n\n"
         "ifconfig: \n$_ifconfig\n\n"
         "ARP: \n$_arp\n\n"
