@@ -16,7 +16,11 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _uidController = TextEditingController();
   final _pswdController = TextEditingController();
-  final List<String> _urlRootList = ['172.17.0.1', 'fw-cgcp.emse.fr'];
+  final List<String> _urlRootList = [
+    '172.17.0.1',
+    'fw-cgcp.emse.fr',
+    '195.83.139.7',
+  ];
   final Map<String, int> _timeMap = {
     '15 minutes': 15,
     '30 minutes': 30,
@@ -84,12 +88,12 @@ class _LoginPageState extends State<LoginPage> {
                         Text("${AppLoc.of(context).wordDomain} / IP "),
                         DropdownButton<String>(
                           value: _selectedUrl,
-                          items: _urlRootList.map((String value) {
-                            return DropdownMenuItem<String>(
-                              child: Text(value),
-                              value: value,
-                            );
-                          }).toList(),
+                          items: _urlRootList
+                              .map((String value) => DropdownMenuItem<String>(
+                                    child: Text(value),
+                                    value: value,
+                                  ))
+                              .toList(),
                           onChanged: _changedUrlItem,
                         ),
                       ]),
@@ -98,12 +102,12 @@ class _LoginPageState extends State<LoginPage> {
                           Text(AppLoc.of(context).wordsAuthDuration),
                           DropdownButton<String>(
                             value: _selectedTime,
-                            items: _timeMap.keys.map((String value) {
-                              return DropdownMenuItem<String>(
-                                child: Text(value),
-                                value: value,
-                              );
-                            }).toList(),
+                            items: _timeMap.keys
+                                .map((String value) => DropdownMenuItem<String>(
+                                      child: Text(value),
+                                      value: value,
+                                    ))
+                                .toList(),
                             onChanged: _changedTimeItem,
                           ),
                         ],
@@ -155,14 +159,13 @@ class _LoginPageState extends State<LoginPage> {
               child: Icon(Icons.lock_open),
               backgroundColor: Colors.yellow,
               foregroundColor: Colors.black,
-            ), // This trailing comma makes auto-formatting nicer for build methods.
+            ),
       ),
     );
   }
 
   @override
   dispose() {
-    // Clean up the controller when the Widget is disposed
     _uidController.dispose();
     _pswdController.dispose();
     super.dispose();

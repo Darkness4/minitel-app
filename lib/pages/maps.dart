@@ -39,7 +39,7 @@ class _MapsPageState extends State<MapsPage> {
   }
 
   void _onMapCreated() async {
-    if (!await SimplePermissions.checkPermission(Permission.AlwaysLocation)) SimplePermissions.requestPermission(Permission.AlwaysLocation);
+    if (!await SimplePermissions.checkPermission(Permission.AccessFineLocation)) SimplePermissions.requestPermission(Permission.AccessFineLocation);
   }
 }
 

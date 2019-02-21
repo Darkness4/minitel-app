@@ -8,7 +8,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-// import 'package:simple_permissions/simple_permissions.dart';
+import 'package:simple_permissions/simple_permissions.dart';
 import 'package:wifi/wifi.dart';
 
 class DiagnosePage extends StatefulWidget {
@@ -24,6 +24,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _alert = "";
   var _status = "";
   var _level = "";
+  var _ssid = "";
   var _ip = "";
   var _ipAll = "";
   var _ifconfig = "";
@@ -72,7 +73,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
                   color: Colors.deepOrange,
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
-                    child: Text("Level: $_level, IP: $_ip",
+                    child: Text("SSID: $_ssid, Level: $_level, IP: $_ip",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white)),
                   ),
@@ -171,8 +172,9 @@ class _DiagnosePageState extends State<DiagnosePage> {
 
   _diagnose() async {
     setState(() {
-      _alert = "Loading...";
+      _alert = "";
       _status = "Loading...";
+      _ssid = "Loading...";
       _level = "Loading...";
       _ip = "Loading...";
       _ipAll = "Loading...";
@@ -194,16 +196,22 @@ class _DiagnosePageState extends State<DiagnosePage> {
       _nsLookupEMSEBusybox = "Loading...";
       _nsLookupGoogleBusybox = "Loading...";
     });
-    setState(() => _alert = "");
-    var argsPing = "-c 4 -w 5 -W 5";
+    const argsPing = "-c 4 -w 5 -W 5";
 
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
+      String ssid;
+      SimplePermissions.requestPermission(Permission.AccessCoarseLocation)
+          .then((answer) {
+        if (answer == PermissionStatus.authorized)
+          Connectivity().getWifiName().then((out) => ssid = out);
+      });
       var level = await Wifi.level;
       var ip = await Wifi.ip;
 
       setState(() {
+        _ssid = ssid;
         _level = '$level';
         _ip = ip;
       });
@@ -278,7 +286,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
   _share() {
     var now = DateTime.now().toString();
     Share.share("---Report $now---\n"
-        "Level: $_level, Ip: $_ip\n\n"
+        "SSID: $_ssid, Level: $_level, Ip: $_ip\n\n"
         "ip a: \n$_ipAll\n\n"
         "ifconfig: \n$_ifconfig\n\n"
         "ARP: \n$_arp\n\n"
