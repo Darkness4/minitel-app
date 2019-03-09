@@ -50,5 +50,8 @@
 
 	<key>NSLocationAlwaysUsageDescription</key>
 	<value>So I can track you at all times</value>
+
+	<key>NSCalendarsUsageDescription</key>
+	<string>So I can know when you work</string>
 </dict>
 </plist>

@@ -97,11 +97,9 @@ Future<String> autoLogin(
           return response.body;
       } else
         throw Exception("HttpError: ${response.statusCode}");
-    }).then((body) {
-      return RegExp(r'"(id=([^"]*))') // SessionId finder.
+    }).then((body) => RegExp(r'"(id=([^"]*))') // SessionId finder.
           .firstMatch(body)
-          .group(1);
-    }).then((match) {
+          .group(1)).then((match) {
       if (match is! String)
         throw Exception(
             "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
