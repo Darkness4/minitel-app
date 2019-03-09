@@ -11,9 +11,7 @@ class MainDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Text(
-              AppLoc
-                  .of(context)
-                  .title,
+              AppLoc.of(context).title,
               style: TextStyle(color: Colors.white, fontSize: 32),
             ),
             decoration: BoxDecoration(
@@ -21,9 +19,7 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-              title: Text(AppLoc
-                  .of(context)
-                  .titleLoginPage),
+              title: Text(AppLoc.of(context).titleLoginPage),
               leading: Icon(Icons.vpn_key),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -31,9 +27,7 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/login');
               }),
           ListTile(
-              title: Text(AppLoc
-                  .of(context)
-                  .titleDiagnosePage),
+              title: Text(AppLoc.of(context).titleDiagnosePage),
               leading: Icon(Icons.zoom_in),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -41,9 +35,7 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/diagnose');
               }),
           ListTile(
-              title: Text(AppLoc
-                  .of(context)
-                  .titleDocumentationPage),
+              title: Text(AppLoc.of(context).titleDocumentationPage),
               leading: Icon(Icons.description),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -51,9 +43,7 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/docs');
               }),
           ListTile(
-              title: Text(AppLoc
-                  .of(context)
-                  .titleNewsPage),
+              title: Text(AppLoc.of(context).titleNewsPage),
               leading: Icon(Icons.rss_feed),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -61,9 +51,7 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/news');
               }),
           ListTile(
-              title: Text(AppLoc
-                  .of(context)
-                  .titleCalendarPage),
+              title: Text(AppLoc.of(context).titleCalendarPage),
               leading: Icon(Icons.calendar_today),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -71,9 +59,7 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/calendar');
               }),
           ListTile(
-              title: Text(AppLoc
-                  .of(context)
-                  .titleMapsPage),
+              title: Text(AppLoc.of(context).titleMapsPage),
               leading: Icon(Icons.map),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {

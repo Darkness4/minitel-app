@@ -73,7 +73,7 @@ class NewsCard extends StatelessWidget {
 
   NewsCard(
       {this.item,
-        this.elevation: 4.0,
+      this.elevation: 4.0,
       this.extPadding: 10.0,
       this.intPadding: 15.0});
 

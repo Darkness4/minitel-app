@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final _uidController = TextEditingController();
   final _pswdController = TextEditingController();
   final List<String> _urlRootList = [
-    '172.17.0.1',
+    '10.163.0.2',
     'fw-cgcp.emse.fr',
     '195.83.139.7',
   ];
