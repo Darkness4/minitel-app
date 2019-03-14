@@ -8,7 +8,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-// import 'package:simple_permissions/simple_permissions.dart'; // TODO: permissions AndroidX
+import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi/wifi.dart';
 
 class DiagnosePage extends StatefulWidget {
@@ -173,28 +173,12 @@ class _DiagnosePageState extends State<DiagnosePage> {
   _diagnose() async {
     setState(() {
       _alert = "";
-      _status = "Loading...";
-      _ssid = "Loading...";
-      _level = "Loading...";
-      _ip = "Loading...";
-      _ipAll = "Loading...";
-      _ifconfig = "Loading...";
-      _arp = "Loading...";
-      _tracertGoogle = "Loading...";
-      _tracertGoogleDNS = "Loading...";
-      _netstat = "Loading...";
-      _pingLo = "Loading...";
-      _pingLocal = "Loading...";
-      _pingGateway = "Loading...";
-      _pingDNS1 = "Loading...";
-      _pingDNS2 = "Loading...";
-      _pingDNS3 = "Loading...";
-      _pingDNS4 = "Loading...";
-      _pingDNS5 = "Loading...";
-      _nsLookupEMSE = "Loading...";
-      _nsLookupGoogle = "Loading...";
-      _nsLookupEMSEBusybox = "Loading...";
-      _nsLookupGoogleBusybox = "Loading...";
+      _status = _ssid = _level = _ip = _ipAll = _ifconfig = _arp =
+          _tracertGoogle = _tracertGoogleDNS = _netstat = _pingLo = _pingLocal =
+              _pingGateway = _pingDNS1 = _pingDNS2 = _pingDNS3 = _pingDNS4 =
+                  _pingDNS5 = _nsLookupEMSE = _nsLookupGoogle =
+                      _nsLookupEMSEBusybox = _nsLookupGoogleBusybox =
+                          _nsLookupGoogleBusybox = "Loading...";
     });
     const argsPing = "-c 4 -w 5 -W 5";
 
@@ -202,11 +186,14 @@ class _DiagnosePageState extends State<DiagnosePage> {
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       String ssid;
-      // SimplePermissions.requestPermission(Permission.AccessCoarseLocation)
-      //     .then((answer) {
-      //   if (answer == PermissionStatus.authorized)
-      //     Connectivity().getWifiName().then((out) => ssid = out);
-      // });
+      PermissionHandler()
+          .checkPermissionStatus(PermissionGroup.location)
+          .then((answer) {
+        if (answer == PermissionStatus.granted)
+          Connectivity().getWifiName().then((out) => ssid = out);
+        else
+          PermissionHandler().requestPermissions([PermissionGroup.location]);
+      });
       var level = await Wifi.level;
       var ip = await Wifi.ip;
 

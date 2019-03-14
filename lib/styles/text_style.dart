@@ -65,7 +65,6 @@ class Header extends StatelessWidget {
   @override
   Widget build(context) {
     switch (level) {
-      defaultCase:
       case 1:
         return Container(
             margin: EdgeInsets.only(top: 16, bottom: 8),
@@ -138,7 +137,17 @@ class Header extends StatelessWidget {
             ));
         break;
       default:
-        continue defaultCase;
+        return Container(
+            margin: EdgeInsets.only(top: 16, bottom: 8),
+            child: Text(
+              text,
+              style: TextStyle(
+                color: color,
+                fontWeight: FontWeight.w600,
+                fontSize: 32,
+              ),
+            ));
+        break;
     }
   }
 }

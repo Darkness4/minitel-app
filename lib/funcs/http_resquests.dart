@@ -138,15 +138,13 @@ Future<String> autoLogin(
 
 
 Future<AtomFeed> getAtom(String atomUrl) async {
-  var response;
   IOClient ioClient = IOClient(HttpClient());
-  response = await ioClient.get("$atomUrl");
+  var response = await ioClient.get("$atomUrl");
   return AtomFeed.parse(response.body);
 }
 
 Future<RssFeed> getRss(String rssUrl) async {
-  var response;
   IOClient ioClient = IOClient(HttpClient());
-  response = await ioClient.get("$rssUrl");
+  var response = await ioClient.get("$rssUrl");
   return RssFeed.parse(response.body);
 }

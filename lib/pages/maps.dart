@@ -1,6 +1,6 @@
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:simple_permissions/simple_permissions.dart'; TODO: permissions AndroidX
+import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 
 class MapsPage extends StatefulWidget {
@@ -13,7 +13,6 @@ class MapsPage extends StatefulWidget {
 }
 
 class _MapsPageState extends State<MapsPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +37,9 @@ class _MapsPageState extends State<MapsPage> {
   }
 
   void _onMapCreated() async {
-//    if (!await SimplePermissions.checkPermission(Permission.AccessFineLocation)) SimplePermissions.requestPermission(Permission.AccessFineLocation); TODO: permissions AndroidX
+    if (await PermissionHandler()
+            .checkPermissionStatus(PermissionGroup.location) !=
+        PermissionStatus.granted)
+      PermissionHandler().requestPermissions([PermissionGroup.location]);
   }
 }
-
