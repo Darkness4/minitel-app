@@ -19,13 +19,13 @@ dependencies:
     sdk: flutter
   http: ^0.12.0+1
   wifi: ^0.1.4
-  connectivity: ^0.4.0+1
+  connectivity: ^0.4.2
   dscript_exec: ^2.0.1
   share: ^0.6.0
   webfeed: ^0.4.2
   url_launcher: ^5.0.0
-  google_maps_flutter: ^0.2.0+3
-  simple_permissions: ^0.1.9
+  google_maps_flutter: ^0.4.0
+  # simple_permissions: ^0.1.9  # Wait for AndroidX Update
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

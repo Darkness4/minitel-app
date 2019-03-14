@@ -7,7 +7,7 @@ packages:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.33.6+1"
+    version: "0.35.3"
   args:
     dependency: transitive
     description:
@@ -49,7 +49,7 @@ packages:
       name: connectivity
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0+1"
+    version: "0.4.2"
   convert:
     dependency: transitive
     description:
@@ -84,7 +84,7 @@ packages:
       name: dart_style
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.4"
   dscript_exec:
     dependency: "direct main"
     description:
@@ -113,7 +113,7 @@ packages:
       name: front_end
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.6+9"
+    version: "0.1.13"
   glob:
     dependency: transitive
     description:
@@ -127,14 +127,14 @@ packages:
       name: google_maps_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0+3"
+    version: "0.4.0"
   html:
     dependency: transitive
     description:
       name: html
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.3+3"
+    version: "0.13.4+1"
   http:
     dependency: "direct main"
     description:
@@ -162,14 +162,14 @@ packages:
       name: intl_translation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.17.2"
+    version: "0.17.3"
   kernel:
     dependency: transitive
     description:
       name: kernel
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.6+9"
+    version: "0.3.13"
   logging:
     dependency: transitive
     description:
@@ -218,7 +218,7 @@ packages:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.2.1"
   plugin:
     dependency: transitive
     description:
@@ -246,14 +246,7 @@ packages:
       name: share
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0"
-  simple_permissions:
-    dependency: "direct main"
-    description:
-      name: simple_permissions
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.9"
+    version: "0.6.0+1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -314,7 +307,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "5.0.2"
   utf:
     dependency: transitive
     description:
@@ -349,14 +342,14 @@ packages:
       name: wifi
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.4"
+    version: "0.1.5"
   xml:
     dependency: transitive
     description:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.1"
+    version: "3.4.1"
   yaml:
     dependency: transitive
     description:
@@ -365,5 +358,5 @@ packages:
     source: hosted
     version: "2.1.15"
 sdks:
-  dart: ">=2.1.1-dev.0.0 <3.0.0"
+  dart: ">=2.2.0 <3.0.0"
   flutter: ">=0.11.9 <2.0.0"

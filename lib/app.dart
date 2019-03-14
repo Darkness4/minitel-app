@@ -6,8 +6,8 @@ import 'pages/calendar.dart';
 import 'pages/diagnose.dart';
 import 'pages/docs.dart';
 import 'pages/login.dart';
-import 'pages/news.dart';
 import 'pages/maps.dart';
+import 'pages/news.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -19,10 +19,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      onGenerateTitle: (BuildContext context) =>
-      AppLoc
-          .of(context)
-          .title,
+      onGenerateTitle: (BuildContext context) => AppLoc.of(context).title,
       supportedLocales: [
         const Locale('en', ''), // English
         const Locale('fr', ''), // French
@@ -32,34 +29,17 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) =>
-            LoginPage(title: AppLoc
-                .of(context)
-                .titleLoginPage),
+        '/': (context) => LoginPage(title: AppLoc.of(context).titleLoginPage),
         '/login': (context) =>
-            LoginPage(title: AppLoc
-                .of(context)
-                .titleLoginPage),
+            LoginPage(title: AppLoc.of(context).titleLoginPage),
         '/diagnose': (context) =>
-            DiagnosePage(title: AppLoc
-                .of(context)
-                .titleDiagnosePage),
+            DiagnosePage(title: AppLoc.of(context).titleDiagnosePage),
         '/docs': (context) =>
-            DocumentationPage(title: AppLoc
-                .of(context)
-                .titleDocumentationPage),
+            DocumentationPage(title: AppLoc.of(context).titleDocumentationPage),
         '/calendar': (context) =>
-            CalendarPage(title: AppLoc
-                .of(context)
-                .titleCalendarPage),
-        '/news': (context) =>
-            NewsPage(title: AppLoc
-                .of(context)
-                .titleNewsPage),
-                '/maps': (context) =>
-            MapsPage(title: AppLoc
-                .of(context)
-                .titleMapsPage),
+            CalendarPage(title: AppLoc.of(context).titleCalendarPage),
+        '/news': (context) => NewsPage(title: AppLoc.of(context).titleNewsPage),
+        '/maps': (context) => MapsPage(title: AppLoc.of(context).titleMapsPage),
       },
     );
   }

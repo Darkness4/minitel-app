@@ -8,7 +8,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:simple_permissions/simple_permissions.dart';
+// import 'package:simple_permissions/simple_permissions.dart'; // TODO: permissions AndroidX
 import 'package:wifi/wifi.dart';
 
 class DiagnosePage extends StatefulWidget {
@@ -202,11 +202,11 @@ class _DiagnosePageState extends State<DiagnosePage> {
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       String ssid;
-      SimplePermissions.requestPermission(Permission.AccessCoarseLocation)
-          .then((answer) {
-        if (answer == PermissionStatus.authorized)
-          Connectivity().getWifiName().then((out) => ssid = out);
-      });
+      // SimplePermissions.requestPermission(Permission.AccessCoarseLocation)
+      //     .then((answer) {
+      //   if (answer == PermissionStatus.authorized)
+      //     Connectivity().getWifiName().then((out) => ssid = out);
+      // });
       var level = await Wifi.level;
       var ip = await Wifi.ip;
 

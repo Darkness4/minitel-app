@@ -1,6 +1,6 @@
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:simple_permissions/simple_permissions.dart';
+// import 'package:simple_permissions/simple_permissions.dart'; TODO: permissions AndroidX
 import 'package:flutter/material.dart';
 
 class MapsPage extends StatefulWidget {
@@ -30,7 +30,6 @@ class _MapsPageState extends State<MapsPage> {
             onMapCreated: (controller) => _onMapCreated(),
             myLocationEnabled: true,
             compassEnabled: true,
-            trackCameraPosition: true,
           )
         ],
       ),
@@ -39,7 +38,7 @@ class _MapsPageState extends State<MapsPage> {
   }
 
   void _onMapCreated() async {
-    if (!await SimplePermissions.checkPermission(Permission.AccessFineLocation)) SimplePermissions.requestPermission(Permission.AccessFineLocation);
+//    if (!await SimplePermissions.checkPermission(Permission.AccessFineLocation)) SimplePermissions.requestPermission(Permission.AccessFineLocation); TODO: permissions AndroidX
   }
 }
 
