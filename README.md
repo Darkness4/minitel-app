@@ -9,12 +9,17 @@ Principale ligne de survie dans l'ISMIN.
 
 ## Features
 
-## Depedencies
+## Development
 
-## Contribution
+Code of Conduct and Contributing guide. Location of TODO list. Milestones.
+
+## Building
+
+Wiki.
 
 ## License
 
+```txt
 MIT License
 
 Copyright (c) 2019 NGUYEN Marc
@@ -36,3 +41,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```

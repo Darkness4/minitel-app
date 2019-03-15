@@ -25,7 +25,6 @@ dependencies:
   webfeed: ^0.4.2
   url_launcher: ^5.0.0
   google_maps_flutter: ^0.4.0
-  # simple_permissions: ^0.1.9  # Wait for AndroidX Update
   permission_handler: ^3.0.0
 
   # The following adds the Cupertino Icons font to your application.
