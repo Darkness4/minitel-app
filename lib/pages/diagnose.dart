@@ -231,9 +231,9 @@ class _DiagnosePageState extends State<DiagnosePage> {
           setState(() => _netstat = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) =>
           setState(() => _pingLo = out.isEmpty ? "Nothing to show" : out));
-      exec("ping", [argsPing, "172.17.0.5"]).runGetOutput().then((out) =>
+      exec("ping", [argsPing, "10.163.0.5"]).runGetOutput().then((out) =>
           setState(() => _pingLocal = out.isEmpty ? "Nothing to show" : out));
-      exec("ping", [argsPing, "172.17.0.1"]).runGetOutput().then((out) =>
+      exec("ping", [argsPing, "10.163.0.2"]).runGetOutput().then((out) =>
           setState(() => _pingGateway = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "192.168.130.33"]).runGetOutput().then((out) =>
           setState(() => _pingDNS1 = out.isEmpty ? "Nothing to show" : out));
@@ -243,7 +243,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
           setState(() => _pingDNS3 = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "1.1.1.1"]).runGetOutput().then((out) =>
           setState(() => _pingDNS4 = out.isEmpty ? "Nothing to show" : out));
-      exec("ping", [argsPing, "172.17.0.6"]).runGetOutput().then((out) =>
+      exec("ping", [argsPing, "10.163.0.6"]).runGetOutput().then((out) =>
           setState(() => _pingDNS5 = out.isEmpty ? "Nothing to show" : out));
       exec("nslookup", ["fw-cgcp.emse.fr"]).runGetOutput().then((out) =>
           setState(() =>
@@ -252,7 +252,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
           () =>
               _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out));
 
-      getStatus("172.17.0.1").then((status) => setState(
+      getStatus("10.163.0.2").then((status) => setState(
           () => _status = status.isEmpty ? "Nothing to show" : status));
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
