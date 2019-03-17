@@ -22,7 +22,8 @@ class DiagnosePage extends StatefulWidget {
 
 class _DiagnosePageState extends State<DiagnosePage> {
   var _alert = "";
-  var _status = "";
+  var _statusPublic = "";
+  var _statusDNS = "";
   var _level = "";
   var _ssid = "";
   var _ip = "";
@@ -31,7 +32,6 @@ class _DiagnosePageState extends State<DiagnosePage> {
   var _arp = "";
   var _tracertGoogle = "";
   var _tracertGoogleDNS = "";
-  var _netstat = "";
   var _pingLo = "";
   var _pingLocal = "";
   var _pingGateway = "";
@@ -99,10 +99,6 @@ class _DiagnosePageState extends State<DiagnosePage> {
                   title: "Traceroute GoogleDNS (Busybox + Root)",
                 ),
                 LogCard(
-                  _netstat,
-                  title: "NetStat",
-                ),
-                LogCard(
                   _pingLo,
                   title: "Ping Loopback",
                 ),
@@ -111,8 +107,12 @@ class _DiagnosePageState extends State<DiagnosePage> {
                   title: "Ping Local",
                 ),
                 LogCard(
-                  _status,
-                  title: "HTTP Gateway Response",
+                  _statusPublic,
+                  title: "HTTP Portal Response (195.83.139.7)",
+                ),
+                LogCard(
+                  _statusDNS,
+                  title: "HTTP Portal Response (fw-cgcp.emse.fr)",
                 ),
                 LogCard(
                   _pingGateway,
@@ -173,8 +173,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
   _diagnose() async {
     setState(() {
       _alert = "";
-      _status = _ssid = _level = _ip = _ipAll = _ifconfig = _arp =
-          _tracertGoogle = _tracertGoogleDNS = _netstat = _pingLo = _pingLocal =
+      _statusPublic = _statusDNS = _ssid = _level = _ip = _ipAll = _ifconfig = _arp =
+          _tracertGoogle = _tracertGoogleDNS = _pingLo = _pingLocal =
               _pingGateway = _pingDNS1 = _pingDNS2 = _pingDNS3 = _pingDNS4 =
                   _pingDNS5 = _nsLookupEMSE = _nsLookupGoogle =
                       _nsLookupEMSEBusybox = _nsLookupGoogleBusybox =
@@ -227,8 +227,6 @@ class _DiagnosePageState extends State<DiagnosePage> {
         '8.8.8.8',
       ]).runGetOutput().then((out) => setState(
           () => _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out));
-      exec("ip", ["-s", "link"]).runGetOutput().then((out) =>
-          setState(() => _netstat = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) =>
           setState(() => _pingLo = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "10.163.0.5"]).runGetOutput().then((out) =>
@@ -252,8 +250,10 @@ class _DiagnosePageState extends State<DiagnosePage> {
           () =>
               _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out));
 
-      getStatus("10.163.0.2").then((status) => setState(
-          () => _status = status.isEmpty ? "Nothing to show" : status));
+      getStatus("195.83.139.7").then((status) => setState(
+          () => _statusPublic = status.isEmpty ? "Nothing to show" : status));
+      getStatus("fw-cgcp.emse.fr").then((status) => setState(
+          () => _statusDNS = status.isEmpty ? "Nothing to show" : status));
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
           .then((addresses) => addresses.forEach((address) => setState(() =>
@@ -277,12 +277,12 @@ class _DiagnosePageState extends State<DiagnosePage> {
         "ip a: \n$_ipAll\n\n"
         "ifconfig: \n$_ifconfig\n\n"
         "ARP: \n$_arp\n\n"
-        "NetStat: \n$_netstat\n\n"
         "Traceroute Google: \n$_tracertGoogle\n\n"
         "Traceroute Google DNS: \n$_tracertGoogle\n\n"
         "Ping Loopback: \n$_pingLo\n\n"
         "Ping Local: \n$_pingLocal\n\n"
-        "HTTP Gateway Response: \n$_status\n\n"
+        "HTTP Portal Response: \n$_statusPublic\n\n"
+        "HTTP Portal Response: \n$_statusDNS\n\n"
         "Ping Gateway: \n$_pingLo\n\n"
         "Ping DNS1: \n$_pingDNS1\n\n"
         "Ping DNS2: \n$_pingDNS2\n\n"
