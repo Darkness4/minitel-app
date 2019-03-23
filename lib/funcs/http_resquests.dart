@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:http/io_client.dart';
 import 'package:webfeed/webfeed.dart';
@@ -30,7 +31,7 @@ Future<String> getStatus(String selectedUrl) async {
   IOClient ioClient = IOClient(client);
 
   status = await ioClient
-      .post(url)  // TODO: GET instead of POST
+      .post(url) // TODO: GET instead of POST
       .then((response) {
         // debugPrint(response.body);
         if (response.statusCode == 200) {
@@ -53,7 +54,6 @@ Future<String> getStatus(String selectedUrl) async {
 
   return status;
 }
-
 
 /// Connect to the portal.
 ///
@@ -83,29 +83,29 @@ Future<String> autoLogin(
   IOClient ioClient = IOClient(client);
 
   try {
-    var sessionId = await ioClient.post("https://$selectedUrl/auth/plain.html",
-        body: {
-          'uid': uid,
-          'time': '$selectedTime',
-          'pswd': pswd
-        }).then((response) {
-      // debugPrint(response.body);
-      if (response.statusCode == 200) {
-        if (response.body.contains('title_error'))
-          throw ("Error: Bad Username or Password");
-        else
-          return response.body;
-      } else
-        throw Exception("HttpError: ${response.statusCode}");
-    }).then((body) => RegExp(r'"(id=([^"]*))') // SessionId finder.
-          .firstMatch(body)
-          .group(1)).then((match) {
-      if (match is! String)
-        throw Exception(
-            "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
-      else
-        return match;
-    });
+    var sessionId = await ioClient
+        .post("https://$selectedUrl/auth/plain.html",
+            body: {'uid': uid, 'time': '$selectedTime', 'pswd': pswd})
+        .then((response) {
+          // debugPrint(response.body);
+          if (response.statusCode == 200) {
+            if (response.body.contains('title_error'))
+              throw ("Error: Bad Username or Password");
+            else
+              return response.body;
+          } else
+            throw Exception("HttpError: ${response.statusCode}");
+        })
+        .then((body) => RegExp(r'"(id=([^"]*))') // SessionId finder.
+            .firstMatch(body)
+            .group(1))
+        .then((match) {
+          if (match is! String)
+            throw Exception(
+                "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
+          else
+            return match;
+        });
 
     status = await ioClient.post("https://$selectedUrl/auth/disclaimer.html",
         body: {
@@ -136,7 +136,6 @@ Future<String> autoLogin(
   return status;
 }
 
-
 Future<AtomFeed> getAtom(String atomUrl) async {
   IOClient ioClient = IOClient(HttpClient());
   var response = await ioClient.get("$atomUrl");
@@ -147,4 +146,39 @@ Future<RssFeed> getRss(String rssUrl) async {
   IOClient ioClient = IOClient(HttpClient());
   var response = await ioClient.get("$rssUrl");
   return RssFeed.parse(response.body);
+}
+
+Future<String> report(String text, {String title}) async {
+  var status = "";
+
+  if (text != "" && title != "") {
+    var client = HttpClient();
+    var out = title != "" ? "*$title*\n" : title;
+    out +="$text\n"
+    "_Report ${DateTime.now()}_";
+    var data = {
+      'text': out,
+      'channel': "projet_flutter_notif",
+    };
+
+    try {
+      HttpClientRequest request = await client.postUrl(Uri.parse(
+          'https://hooks.slack.com/services/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'));
+
+      request.headers.contentType =
+          ContentType("application", "json", charset: "utf-8");
+      request.write(json.encode(data));
+      HttpClientResponse response = await request.close();
+      var stream = response.transform(Utf8Decoder());
+      await for (var char in stream) {
+        status += char;
+      }
+    } catch (e) {
+      status = e;
+    }
+  } else {
+    status = "Not enough information.";
+  }
+
+  return status;
 }

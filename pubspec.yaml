@@ -24,7 +24,7 @@ dependencies:
   share: ^0.6.0
   webfeed: ^0.4.2
   url_launcher: ^5.0.0
-  google_maps_flutter: ^0.4.0
+  google_maps_flutter: ^0.4.0  # Heavy
   permission_handler: ^3.0.0
 
   # The following adds the Cupertino Icons font to your application.

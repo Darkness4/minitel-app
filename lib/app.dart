@@ -8,6 +8,7 @@ import 'pages/docs.dart';
 import 'pages/login.dart';
 import 'pages/maps.dart';
 import 'pages/news.dart';
+import 'pages/reporting.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -30,6 +31,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(title: AppLoc.of(context).titleLoginPage),
+        '/reporting': (context) =>
+            ReportingPage(title: AppLoc.of(context).titleReportingPage),
         '/login': (context) =>
             LoginPage(title: AppLoc.of(context).titleLoginPage),
         '/diagnose': (context) =>

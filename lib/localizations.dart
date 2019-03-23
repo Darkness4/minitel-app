@@ -25,6 +25,9 @@ class AppLoc {
   String get title => Intl.message('Minitel Toolbox',
       name: 'title', desc: 'The application title');
 
+  String get titleReportingPage => Intl.message('Report to Minitel',
+      name: 'titleReportingPage', desc: 'The ReportingPage title');
+
   String get titleLoginPage => Intl.message('Gateway Login',
       name: 'titleLoginPage', desc: 'The LoginPage title');
 
