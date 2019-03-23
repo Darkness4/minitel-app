@@ -148,17 +148,17 @@ Future<RssFeed> getRss(String rssUrl) async {
   return RssFeed.parse(response.body);
 }
 
-Future<String> report(String text, {String title}) async {
+Future<String> report(String text, {String title}) async {  // TODO: Add UnitTest
   var status = "";
 
   if (text != "" && title != "") {
     var client = HttpClient();
-    var out = title != "" ? "*$title*\n" : title;
-    out +="$text\n"
-    "_Report ${DateTime.now()}_";
+    var out ="*--Report ${DateTime.now()}--*\n"
+    "*$title*\n"
+    "$text\n";
     var data = {
       'text': out,
-      'channel': "projet_flutter_notif",
+      'channel': "DE8PA0Z1C",
     };
 
     try {
