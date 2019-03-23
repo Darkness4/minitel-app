@@ -214,19 +214,19 @@ class _DiagnosePageState extends State<DiagnosePage> {
       exec("arp", [
         '-a',
       ]).runGetOutput().then((out) =>
-          setState(() => _arp = out.isEmpty ? "Nothing to show" : out));
+          setState(() => _arp = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _arp);
       exec("su", [
         '-c',
         'traceroute',
         'google.com',
       ]).runGetOutput().then((out) => setState(
-          () => _tracertGoogle = out.isEmpty ? "Nothing to show" : out));
+          () => _tracertGoogle = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _tracertGoogle);
       exec("su", [
         '-c',
         'traceroute',
         '8.8.8.8',
       ]).runGetOutput().then((out) => setState(
-          () => _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out));
+          () => _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _tracertGoogleDNS);
       exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) =>
           setState(() => _pingLo = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "10.163.0.5"]).runGetOutput().then((out) =>
@@ -245,10 +245,10 @@ class _DiagnosePageState extends State<DiagnosePage> {
           setState(() => _pingDNS5 = out.isEmpty ? "Nothing to show" : out));
       exec("nslookup", ["fw-cgcp.emse.fr"]).runGetOutput().then((out) =>
           setState(() =>
-              _nsLookupEMSEBusybox = out.isEmpty ? "Nothing to show" : out));
+              _nsLookupEMSEBusybox = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _nsLookupEMSEBusybox);
       exec("nslookup", ["google.com"]).runGetOutput().then((out) => setState(
           () =>
-              _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out));
+              _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _nsLookupGoogleBusybox);
 
       getStatus("195.83.139.7").then((status) => setState(
           () => _statusPublic = status.isEmpty ? "Nothing to show" : status));
