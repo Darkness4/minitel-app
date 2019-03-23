@@ -32,7 +32,6 @@ Future<String> diagnose(BuildContext context) async {
     diagnosis["SSID"] = ssid;
     diagnosis["Level"] = '$level';
     diagnosis["IP"] = ip;
-    print("Start");
 
     await Future.wait([
       exec("ip", [
@@ -111,8 +110,6 @@ Future<String> diagnose(BuildContext context) async {
                   "Host: ${address.host}\nLookup: ${address.address}"))
           .catchError((e) => diagnosis["nsLookupGoogle"] = e.toString()),
     ]);
-
-    print("It's done");
 
     out =
         "```\nSSID: ${diagnosis["SSID"]}, Level: ${diagnosis["Level"]}, Ip: ${diagnosis["IP"]}\n\n"

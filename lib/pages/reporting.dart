@@ -19,6 +19,7 @@ class _ReportingPageState extends State<ReportingPage> {
   final _descriptionFocusNode = FocusNode();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  bool _isLoading = false;
 
   setTimeout() async {
     final prefs = await SharedPreferences.getInstance();
@@ -99,8 +100,9 @@ class _ReportingPageState extends State<ReportingPage> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
+                setState(() => _isLoading = true);
                 getTimeout().then((timeout) {
-                  if (true) // DateTime.now().isAfter(timeout)
+                  if (DateTime.now().isAfter(timeout))
                     diagnose(context).then((diagnosis) {
                       report(
                               "_${_descriptionController.text}_\n\n"
@@ -113,7 +115,7 @@ class _ReportingPageState extends State<ReportingPage> {
                           content: Text(status),
                         ));
                       });
-                    });
+                    }).then((out) => setState(() => _isLoading = false));
                   else
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content:
@@ -121,12 +123,10 @@ class _ReportingPageState extends State<ReportingPage> {
                     ));
                 });
               },
-              //onPressed: _incrementCounter,
               tooltip: 'Report',
-              icon: Icon(
-                Icons.send,
-                color: Colors.white,
-              ),
+              icon: _isLoading
+                  ? CircularProgressIndicator()
+                  : Icon(Icons.send, color: Colors.white),
               backgroundColor: Colors.red,
               foregroundColor: Colors.black,
             ),
