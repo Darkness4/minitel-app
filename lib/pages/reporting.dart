@@ -62,7 +62,6 @@ class _ReportingPageState extends State<ReportingPage> {
                               FocusScope.of(context)
                                   .requestFocus(_descriptionFocusNode);
                             },
-                            autofocus: true,
                           ),
                           TextField(
                             controller: _descriptionController,
