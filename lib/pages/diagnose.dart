@@ -160,13 +160,11 @@ class _DiagnosePageState extends State<DiagnosePage> {
         ),
       ),
       drawer: MainDrawer(),
-      floatingActionButton: Builder(
-        builder: (context) => FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton.extended(
               onPressed: _diagnose,
               icon: Icon(Icons.zoom_in),
               label: Text(AppLoc.of(context).verbDiagnose),
             ),
-      ),
     );
   }
 
