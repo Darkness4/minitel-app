@@ -14,11 +14,15 @@ class DocumentationPage extends StatefulWidget {
 }
 
 class _DocumentationPageState extends State<DocumentationPage> {
-  final controller = PageController(
-    initialPage: 0,
-  );
+  final _controller = PageController(initialPage: 0);
 
   @override
+  @override
+  void dispose() { 
+    _controller.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +30,7 @@ class _DocumentationPageState extends State<DocumentationPage> {
       ),
       body: Scrollbar(
         child: PageView(
-          controller: controller,
+          controller: _controller,
           children: <Widget>[
             LoginDoc(),
             DiagnoseDoc(),
@@ -59,7 +63,7 @@ class _DocumentationPageState extends State<DocumentationPage> {
                     .titleLoginPage),
                 onTap: () {
                   Navigator.pop(context);
-                  controller.jumpToPage(0);
+                  _controller.jumpToPage(0);
                 }),
             ListTile(
                 title: Text(AppLoc
@@ -67,7 +71,7 @@ class _DocumentationPageState extends State<DocumentationPage> {
                     .titleDiagnosePage),
                 onTap: () {
                   Navigator.pop(context);
-                  controller.jumpToPage(1);
+                  _controller.jumpToPage(1);
                 }),
           ],
         ),
