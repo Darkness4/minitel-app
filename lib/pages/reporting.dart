@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:auto_login_flutter/components/cards.dart';
 import 'package:auto_login_flutter/components/drawer.dart';
@@ -7,7 +6,6 @@ import 'package:auto_login_flutter/funcs/diagnosis_suite.dart';
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
 import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportingPage extends StatefulWidget {
@@ -26,6 +24,8 @@ class _ReportingPageState extends State<ReportingPage> {
   final _descriptionController = TextEditingController();
   int _reportState = 0; // 0 = None, 1 = Loading, 2 = Done
   int _diagnosisState = 0; // 0 = None, 1 = Loading, 2 = Done
+  double _percentageDiagnoseProgress = 0.0;
+  String _report = "";
 
   setTimeout() async {
     final prefs = await SharedPreferences.getInstance();
@@ -39,36 +39,6 @@ class _ReportingPageState extends State<ReportingPage> {
     return DateTime.parse(timeout);
   }
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/report.txt');
-  }
-
-  Future<File> writeReport(String contents) async {
-    final file = await _localFile;
-
-    // Write the file
-    return file.writeAsString(contents);
-  }
-
-  Future<String> readReport() async {
-    try {
-      final file = await _localFile;
-
-      // Read the file
-      return file.readAsString();
-    } catch (e) {
-      // If encountering an error, return 0
-      return e.toString();
-    }
-  }
-
   Widget buildDiagnosisIcon() {
     switch (_diagnosisState) {
       case 0:
@@ -76,6 +46,7 @@ class _ReportingPageState extends State<ReportingPage> {
         break;
       case 1:
         return CircularProgressIndicator(
+          value: _percentageDiagnoseProgress,
           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
         );
         break;
@@ -90,7 +61,10 @@ class _ReportingPageState extends State<ReportingPage> {
   Widget buildReportIcon() {
     switch (_reportState) {
       case 0:
-        return Icon(Icons.send, color: Colors.white,);
+        return Icon(
+          Icons.send,
+          color: Colors.white,
+        );
         break;
       case 1:
         return CircularProgressIndicator(
@@ -98,7 +72,10 @@ class _ReportingPageState extends State<ReportingPage> {
         );
         break;
       case 2:
-        return Icon(Icons.done, color: Colors.white,);
+        return Icon(
+          Icons.done,
+          color: Colors.white,
+        );
         break;
       default:
         return Text("");
@@ -113,21 +90,21 @@ class _ReportingPageState extends State<ReportingPage> {
         style: TextStyle(color: Colors.white),
       ),
       onPressed: () {
-        setState(() => _reportState = 1);
+        if (_reportState != 1) {
+          setState(() => _reportState = 1);
           getTimeout().then((timeout) {
             if (DateTime.now().isAfter(timeout))
-              readReport().then((diagnosis) =>
-                report(
+              report(
                       "_${_descriptionController.text}_\n\n"
                       "*Diagnosis*\n"
-                      "$diagnosis",
+                      "$_report",
                       title: _titleController.text)
                   .then((status) {
                 if (status == "ok") setTimeout();
                 Scaffold.of(ctxt).showSnackBar(SnackBar(
                   content: Text(status),
                 ));
-              }).then((out) => setState(() => _reportState = 2)));
+              }).then((out) => setState(() => _reportState = 2));
             else {
               _reportState = 0;
               Scaffold.of(ctxt).showSnackBar(SnackBar(
@@ -135,10 +112,11 @@ class _ReportingPageState extends State<ReportingPage> {
               ));
             }
           });
+        }
       },
       tooltip: 'Report',
       icon: buildReportIcon(),
-      backgroundColor: Colors.red,
+      backgroundColor: _reportState == 2 ? Colors.green : Colors.red,
       foregroundColor: Colors.black,
     );
   }
@@ -148,11 +126,18 @@ class _ReportingPageState extends State<ReportingPage> {
       FloatingActionButton(
         backgroundColor: _diagnosisState == 2 ? Colors.green : Colors.blue,
         onPressed: () {
-          setState(() => _diagnosisState = 1);
-          diagnose(context).then((diagnosis) {
-            writeReport(diagnosis);
-            setState(() => _diagnosisState = 2);
-          });
+          if (_diagnosisState != 1) {
+            setState(() => _diagnosisState = 1);
+            _percentageDiagnoseProgress = 0;
+            Timer.periodic(
+                const Duration(seconds: 1),
+                (Timer t) =>
+                    setState(() => _percentageDiagnoseProgress += 1 / 60));
+            diagnose(context).then((diagnosis) {
+              _report = diagnosis;
+              setState(() => _diagnosisState = 2);
+            });
+          }
         },
         child: buildDiagnosisIcon(),
         mini: _diagnosisState == 2,
@@ -226,14 +211,18 @@ class _ReportingPageState extends State<ReportingPage> {
                     elevation: 4,
                     children: <Widget>[
                       Header("How to report without internet?"),
+                      Header(
+                          "NOTE: It is recommended to have Root and Busybox installed.",
+                          level: 2),
                       Header("1. Connect to 'WiFi Minitel'", level: 2),
-                      Header("2. Run the diagnostic suite by pushing the button.", level: 2),
+                      Header(
+                          "2. Run the diagnostic suite by pushing the button and wait 1 minute.",
+                          level: 2),
                       Header("3. Fill the report.", level: 2),
                       Paragraph("Example : \n"
                           "Title: 2012, no internet since monday.\n"
                           "Description: I'm loosing frequently the connection when i'm on Ethernet. Wifi is ok."),
-                      Header("4. Connect to a working network.",
-                          level: 2),
+                      Header("4. Connect to a working network.", level: 2),
                       Header("5. Send the report.", level: 2),
                     ],
                   ),

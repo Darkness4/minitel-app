@@ -28,10 +28,10 @@ Future<String> getStatus(String selectedUrl) async {
       ((X509Certificate cert, String host, int port) =>
           true); // SECURITY WARNING  Bypass certificate!!!
 
-  HttpClientRequest request = await client.postUrl(Uri.parse(url));
-  HttpClientResponse response = await request.close();
-  var stream = response.transform(Utf8Decoder());
   try {
+    HttpClientRequest request = await client.postUrl(Uri.parse(url));
+    HttpClientResponse response = await request.close();
+    var stream = response.transform(Utf8Decoder());
     if (response.statusCode == 200) {
       var body = "";
       await for (var char in stream) body += char;
@@ -193,7 +193,7 @@ Future<String> report(String text, {String title}) async {
         status += char;
       }
     } catch (e) {
-      status = e;
+      status = e.toString();
     }
   } else {
     status = "Not enough information.";
