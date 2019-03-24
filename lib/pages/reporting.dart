@@ -97,6 +97,15 @@ class _ReportingPageState extends State<ReportingPage> {
                           level: 2),
                     ],
                   ),
+                  DocCard(
+                    elevation: 4,
+                    children: <Widget>[
+                      Header("Autre Contacts"),
+                      Header("Facebook: Minitel Ismin", level: 2),
+                      Header("G*: Contact Admin", level: 2),
+                      Header("Mail: minitel13120@gmail.com", level: 2),
+                    ],
+                  ),
                 ]),
               ),
             ),
