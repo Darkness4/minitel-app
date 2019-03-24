@@ -77,14 +77,6 @@ class NewsCard extends StatelessWidget {
       this.extPadding: 10.0,
       this.intPadding: 15.0});
 
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -156,5 +148,13 @@ class NewsCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
