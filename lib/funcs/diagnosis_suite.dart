@@ -10,6 +10,21 @@ import 'package:wifi/wifi.dart';
 
 import 'http_resquests.dart';
 
+/// Run a diagnosis suite with a 1 minute time out.
+///
+/// Run multiples command and store into the [diagnosis] Map.
+/// The suite is composed of :
+/// - SSID, Level, IP scan from [Connectivity]
+/// - ip a
+/// - ifconfig -a
+/// - arp -a
+/// - su -c traceroute google.com and 8.8.8.8
+/// - ping loopback, 10.163.0.5 (DHCP), 10.163.0.2 (Gateway),
+/// 192.168.130.33 (School DNS), 192.168.130.3 (School DNS),
+/// 1.1.1.1 (Cloudflare DNS), 8.8.8.8 (Google DNS), 10.163.0.6 (Private DNS).
+/// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
+/// If the diagnosis takes too much time, the function return any given
+/// informations after one minute.
 Future<String> diagnose(BuildContext context) async {
   var out = "";
   Map<String, String> diagnosis = {};

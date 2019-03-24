@@ -9,7 +9,7 @@ class DiagnoseDoc extends StatelessWidget {
     return SingleChildScrollView(
         child: DocCard(children: <Widget>[
       Header(AppLoc.of(context).titleDiagnosePage),
-      Header("Permission Coarse Location", level: 2),
+      Header("Permission Location", level: 2),
       Paragraph(
         AppLoc.of(context).sentenceDocDiagnosePerm,
       ),

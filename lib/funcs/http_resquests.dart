@@ -166,6 +166,16 @@ Future<RssFeed> getRss(String rssUrl) async {
   return RssFeed.parse(status);
 }
 
+
+/// Report data to the Slack of Minitel
+///
+/// Send a POST data to the Webhook of the Slack of Minitel by using [HttpClientRequest].
+/// 
+/// You can use [report] like this:
+/// 
+/// ```
+/// String status = await report("Description", title: "Title");
+/// ```
 Future<String> report(String text, {String title}) async {
   // TODO: Add UnitTest
   var status = "";
