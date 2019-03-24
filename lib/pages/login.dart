@@ -42,105 +42,115 @@ class _LoginPageState extends State<LoginPage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              colors: [
-                const Color(0xff89f7fe),
-                const Color(0xff66a6ff)
-              ], // whitish to gray
+        child: Stack(children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                colors: [
+                  const Color(0xff89f7fe),
+                  const Color(0xff66a6ff)
+                ], // whitish to gray
+              ),
             ),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(bottom: 30),
-                child: Card(
-                  elevation: 10.0,
-                  child: Padding(
-                    padding: EdgeInsets.all(25),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Text("Status: ",
-                              style: TextStyle(
-                                fontSize: 24,
-                              )),
-                          Text(
-                            _status,
-                            style: TextStyle(fontSize: 24, color: Colors.red),
-                          ),
-                        ]),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(bottom: 30),
+                    child: Card(
+                      elevation: 10.0,
+                      child: Padding(
+                        padding: EdgeInsets.all(25),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Text("Status: ",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                  )),
+                              Text(
+                                _status,
+                                style:
+                                    TextStyle(fontSize: 24, color: Colors.red),
+                              ),
+                            ]),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Card(
-                elevation: 10.0,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    children: <Widget>[
-                      Row(children: <Widget>[
-                        Text("${AppLoc.of(context).wordDomain} / IP "),
-                        DropdownButton<String>(
-                          value: _selectedUrl,
-                          items: _urlRootList
-                              .map((String value) => DropdownMenuItem<String>(
-                                    child: Text(value),
-                                    value: value,
-                                  ))
-                              .toList(),
-                          onChanged: _changedUrlItem,
-                        ),
-                      ]),
-                      Row(
+                  Card(
+                    elevation: 10.0,
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
                         children: <Widget>[
-                          Text(AppLoc.of(context).wordsAuthDuration),
-                          DropdownButton<String>(
-                            value: _selectedTime,
-                            items: _timeMap.keys
-                                .map((String value) => DropdownMenuItem<String>(
-                                      child: Text(value),
-                                      value: value,
-                                    ))
-                                .toList(),
-                            onChanged: _changedTimeItem,
+                          Row(children: <Widget>[
+                            Text("${AppLoc.of(context).wordDomain} / IP "),
+                            DropdownButton<String>(
+                              value: _selectedUrl,
+                              items: _urlRootList
+                                  .map((String value) =>
+                                      DropdownMenuItem<String>(
+                                        child: Text(value),
+                                        value: value,
+                                      ))
+                                  .toList(),
+                              onChanged: _changedUrlItem,
+                            ),
+                          ]),
+                          Row(
+                            children: <Widget>[
+                              Text(AppLoc.of(context).wordsAuthDuration),
+                              DropdownButton<String>(
+                                value: _selectedTime,
+                                items: _timeMap.keys
+                                    .map((String value) =>
+                                        DropdownMenuItem<String>(
+                                          child: Text(value),
+                                          value: value,
+                                        ))
+                                    .toList(),
+                                onChanged: _changedTimeItem,
+                              ),
+                            ],
+                          ),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              children: <Widget>[
+                                TextFormField(
+                                    controller: _uidController,
+                                    decoration: InputDecoration(
+                                        hintText:
+                                            AppLoc.of(context).wordSurnameName,
+                                        labelText:
+                                            AppLoc.of(context).wordUsername)),
+                                TextFormField(
+                                    controller: _pswdController,
+                                    obscureText: true,
+                                    // Use secure text for passwords.
+                                    decoration: InputDecoration(
+                                        hintText:
+                                            AppLoc.of(context).wordPassword,
+                                        labelText:
+                                            AppLoc.of(context).wordPassword)),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          children: <Widget>[
-                            TextFormField(
-                                controller: _uidController,
-                                decoration: InputDecoration(
-                                    hintText:
-                                        AppLoc.of(context).wordSurnameName,
-                                    labelText:
-                                        AppLoc.of(context).wordUsername)),
-                            TextFormField(
-                                controller: _pswdController,
-                                obscureText: true,
-                                // Use secure text for passwords.
-                                decoration: InputDecoration(
-                                    hintText: AppLoc.of(context).wordPassword,
-                                    labelText:
-                                        AppLoc.of(context).wordPassword)),
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ]),
       ),
       drawer: MainDrawer(),
       floatingActionButton: Builder(
