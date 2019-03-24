@@ -7,7 +7,7 @@ TextStyle styleLog = TextStyle(
     fontWeight: FontWeight.w500);
 
 TextStyle styleLogImportant =
-TextStyle(fontWeight: FontWeight.bold, color: Colors.white);
+    TextStyle(fontWeight: FontWeight.bold, color: Colors.white);
 
 class Paragraph extends StatelessWidget {
   final Key key;
@@ -24,15 +24,15 @@ class Paragraph extends StatelessWidget {
 
   Paragraph(this.text,
       {this.key,
-        this.style: const TextStyle(height: 1.5),
-        this.textAlign: TextAlign.justify,
-        this.textDirection: TextDirection.ltr,
-        this.locale,
-        this.softWrap: true,
-        this.overflow,
-        this.textScaleFactor,
-        this.maxLines,
-        this.semanticsLabel});
+      this.style: const TextStyle(height: 1.5),
+      this.textAlign: TextAlign.justify,
+      this.textDirection: TextDirection.ltr,
+      this.locale,
+      this.softWrap: true,
+      this.overflow,
+      this.textScaleFactor,
+      this.maxLines,
+      this.semanticsLabel});
 
   @override
   Widget build(context) {

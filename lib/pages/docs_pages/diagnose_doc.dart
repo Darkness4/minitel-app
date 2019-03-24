@@ -9,43 +9,28 @@ class DiagnoseDoc extends StatelessWidget {
     return SingleChildScrollView(
         child: DocCard(children: <Widget>[
       Header(AppLoc.of(context).titleDiagnosePage),
-
       Header("Permission Coarse Location", level: 2),
       Paragraph(
         AppLoc.of(context).sentenceDocDiagnosePerm,
       ),
-
       Header("ifconfig all/ip a", level: 2),
       Paragraph(
-        AppLoc
-            .of(context)
-            .sentenceDocDiagnoseifconfig,
+        AppLoc.of(context).sentenceDocDiagnoseifconfig,
       ),
-
       Header("Address Resolution Protocol", level: 2),
       Paragraph(
-        AppLoc
-            .of(context)
-            .sentenceDocDiagnoseARP,
+        AppLoc.of(context).sentenceDocDiagnoseARP,
       ),
-
       Header("Traceroute", level: 2),
       Paragraph(
-        AppLoc
-            .of(context)
-            .sentenceDocDiagnoseTraceroute,
+        AppLoc.of(context).sentenceDocDiagnoseTraceroute,
       ),
-
       Header("NetStat", level: 2),
       Paragraph(
-        AppLoc
-            .of(context)
-            .sentenceDocDiagnoseNetstat,
+        AppLoc.of(context).sentenceDocDiagnoseNetstat,
       ),
-
       Header("Ping Loopback", level: 2),
       Paragraph(AppLoc.of(context).sentenceDocDiagnosePingLo),
-
       Header("Ping Local", level: 2),
       RichText(
           text: TextSpan(

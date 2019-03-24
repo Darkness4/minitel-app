@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:dscript_exec/dscript_exec.dart';
-import 'package:connectivity/connectivity.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'http_resquests.dart';
-import 'package:wifi/wifi.dart';
-import 'dart:io';
 import 'dart:async';
+import 'dart:io';
+
 import 'package:auto_login_flutter/localizations.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:dscript_exec/dscript_exec.dart';
+import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:wifi/wifi.dart';
+
+import 'http_resquests.dart';
 
 Future<String> diagnose(BuildContext context) async {
   var out = "";

@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:webfeed/webfeed.dart';
 
@@ -88,7 +88,7 @@ Future<String> autoLogin(
     request.headers.contentType =
         ContentType("application", "x-www-form-urlencoded", charset: 'utf-8');
     var data = "uid=$uid&time=$selectedTime&pswd=$pswd";
-    request.headers.contentLength = data.length;  // Needed
+    request.headers.contentLength = data.length; // Needed
     request.write(data);
     HttpClientResponse response = await request.close();
     var sessionId = "";
@@ -110,8 +110,8 @@ Future<String> autoLogin(
       throw Exception("HttpError: ${response.statusCode}");
 
     // Status
-    request =
-        await client.postUrl(Uri.parse('https://$selectedUrl/auth/disclaimer.html'));
+    request = await client
+        .postUrl(Uri.parse('https://$selectedUrl/auth/disclaimer.html'));
     request.headers.contentType =
         ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
     data = "session=$sessionId&read=accepted&action=J'accepte";
@@ -166,14 +166,15 @@ Future<RssFeed> getRss(String rssUrl) async {
   return RssFeed.parse(status);
 }
 
-Future<String> report(String text, {String title}) async {  // TODO: Add UnitTest
+Future<String> report(String text, {String title}) async {
+  // TODO: Add UnitTest
   var status = "";
 
   if (text != "" && title != "") {
     var client = HttpClient();
-    var out ="*--Report ${DateTime.now()}--*\n"
-    "*$title*\n"
-    "$text\n";
+    var out = "*--Report ${DateTime.now()}--*\n"
+        "*$title*\n"
+        "$text\n";
     var data = {
       'text': out,
       'channel': "DE8PA0Z1C",

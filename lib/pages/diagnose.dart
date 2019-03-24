@@ -7,8 +7,8 @@ import 'package:auto_login_flutter/localizations.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share/share.dart';
 import 'package:wifi/wifi.dart';
 
 class DiagnosePage extends StatefulWidget {
