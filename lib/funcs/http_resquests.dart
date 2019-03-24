@@ -1,6 +1,6 @@
 import 'dart:io';
+import 'dart:convert';
 
-import 'package:http/io_client.dart';
 import 'package:webfeed/webfeed.dart';
 
 /// Get the connection status of the portal.
@@ -27,33 +27,32 @@ Future<String> getStatus(String selectedUrl) async {
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) =>
           true); // SECURITY WARNING  Bypass certificate!!!
-  IOClient ioClient = IOClient(client);
 
-  status = await ioClient
-      .post(url)  // TODO: GET instead of POST
-      .then((response) {
-        // debugPrint(response.body);
-        if (response.statusCode == 200) {
-          if (!response.body.contains('l_rtime'))
-            throw ("Not logged in");
-          else
-            return response.body;
-        } else
-          throw Exception("HttpError: ${response.statusCode}");
-      })
-      .then((body) => exp.firstMatch(body).group(1))
-      .then((match) {
+  HttpClientRequest request = await client.postUrl(Uri.parse(url));
+  HttpClientResponse response = await request.close();
+  var stream = response.transform(Utf8Decoder());
+  try {
+    if (response.statusCode == 200) {
+      var body = "";
+      await for (var char in stream) body += char;
+      if (!body.contains('l_rtime')) {
+        throw ("Not logged in");
+      } else {
+        var match = exp.firstMatch(body).group(1);
         if (match is! String)
           throw Exception(
               "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
         else
-          return '$match seconds left';
-      })
-      .catchError((e) => e.toString());
+          status = '$match seconds left';
+      }
+    } else
+      throw Exception("HttpError: ${response.statusCode}");
+  } catch (e) {
+    status = e.toString();
+  }
 
   return status;
 }
-
 
 /// Connect to the portal.
 ///
@@ -80,55 +79,62 @@ Future<String> autoLogin(
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) =>
           true); // SECURITY WARNING  Bypass certificate!!!
-  IOClient ioClient = IOClient(client);
 
   try {
-    var sessionId = await ioClient.post("https://$selectedUrl/auth/plain.html",
-        body: {
-          'uid': uid,
-          'time': '$selectedTime',
-          'pswd': pswd
-        }).then((response) {
-      // debugPrint(response.body);
-      if (response.statusCode == 200) {
-        if (response.body.contains('title_error'))
-          throw ("Error: Bad Username or Password");
-        else
-          return response.body;
-      } else
-        throw Exception("HttpError: ${response.statusCode}");
-    }).then((body) => RegExp(r'"(id=([^"]*))') // SessionId finder.
-          .firstMatch(body)
-          .group(1)).then((match) {
-      if (match is! String)
-        throw Exception(
-            "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
-      else
-        return match;
-    });
+    // SessionId
+    HttpClientRequest request =
+        await client.postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'));
 
-    status = await ioClient.post("https://$selectedUrl/auth/disclaimer.html",
-        body: {
-          'session': sessionId,
-          'read': 'accepted',
-          'action': "J'accepte"
-        }).then((response) {
-      if (response.body.contains('title_error'))
-        throw Exception(
-            "Error: SessionId is incorrect. Please check the RegEx.");
-      else
-        return response.body;
-    }).then((body) {
-      return RegExp(r'<span id="l_rtime">([^<]*)<\/span>') // Time finder.
+    request.headers.contentType =
+        ContentType("application", "x-www-form-urlencoded", charset: 'utf-8');
+    var data = "uid=$uid&time=$selectedTime&pswd=$pswd";
+    request.headers.contentLength = data.length;  // Needed
+    request.write(data);
+    HttpClientResponse response = await request.close();
+    var sessionId = "";
+    var body = "";
+    var stream = response.transform(Utf8Decoder());
+    await for (var str in stream) body += str;
+    if (response.statusCode == 200) {
+      if (body.contains('title_error')) {
+        throw ("Error: Bad Username or Password");
+      } else {
+        var match = RegExp(r'"(id=([^"]*))').firstMatch(body).group(1); // Id
+        if (match is! String)
+          throw Exception(
+              "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
+        else
+          sessionId = match;
+      }
+    } else
+      throw Exception("HttpError: ${response.statusCode}");
+
+    // Status
+    request =
+        await client.postUrl(Uri.parse('https://$selectedUrl/auth/disclaimer.html'));
+    request.headers.contentType =
+        ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
+    data = "session=$sessionId&read=accepted&action=J'accepte";
+    request.headers.contentLength = data.length;
+    request.write(data);
+
+    response = await request.close();
+    body = "";
+    stream = response.transform(Utf8Decoder());
+    await for (var str in stream) body += str;
+    body.split('\n').forEach(print);
+    if (body.contains('title_error'))
+      throw Exception("Error: SessionId is incorrect. Please check the RegEx.");
+    else {
+      var match = RegExp(r'<span id="l_rtime">([^<]*)<\/span>') // Time finder.
           .firstMatch(body)
           .group(1);
-    }).then((match) {
       if (match is! String)
         throw Exception(
             "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
       else
-        return '$match seconds left';
-    });
+        status = '$match seconds left';
+    }
   } catch (e) {
     status = e.toString();
   }
@@ -136,15 +142,26 @@ Future<String> autoLogin(
   return status;
 }
 
-
 Future<AtomFeed> getAtom(String atomUrl) async {
-  IOClient ioClient = IOClient(HttpClient());
-  var response = await ioClient.get("$atomUrl");
-  return AtomFeed.parse(response.body);
+  var status = "";
+  HttpClient client = HttpClient();
+  HttpClientRequest request = await client.getUrl(Uri.parse(atomUrl));
+  HttpClientResponse response = await request.close();
+  var stream = response.transform(Utf8Decoder());
+  await for (var char in stream) {
+    status += char;
+  }
+  return AtomFeed.parse(status);
 }
 
 Future<RssFeed> getRss(String rssUrl) async {
-  IOClient ioClient = IOClient(HttpClient());
-  var response = await ioClient.get("$rssUrl");
-  return RssFeed.parse(response.body);
+  var status = "";
+  HttpClient client = HttpClient();
+  HttpClientRequest request = await client.getUrl(Uri.parse(rssUrl));
+  HttpClientResponse response = await request.close();
+  var stream = response.transform(Utf8Decoder());
+  await for (var char in stream) {
+    status += char;
+  }
+  return RssFeed.parse(status);
 }
