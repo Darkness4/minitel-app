@@ -177,7 +177,7 @@ Future<String> report(String text, {String title}) async {
         "$text\n";
     var data = {
       'text': out,
-      'channel': "DE8PA0Z1C",
+      'channel': "projet_flutter_notif",  // Marc : DE8PA0Z1C
     };
 
     try {
