@@ -14,10 +14,6 @@ unit-tests:
   script:
     - flutter packages get
     - dart test/unit_test.dart
-  artifacts:
-    paths:
-      - app.apk
-    expire_in: 1 week
 
 build-test:
   stage: test
@@ -35,3 +31,5 @@ build:
     paths:
       - app.apk
     expire_in: 1 week
+  only:
+    - master
