@@ -11,7 +11,7 @@ void main() {
     });
 
     test('Good Username and Password to fw-cgcp.emse.fr', () async {
-      var status = await autoLogin("marc.nguyen", utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "fw-cgcp.emse.fr", 480);
+      var status = await autoLogin("marc.nguyen", utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "fw-cgcp.emse.fr", 240);
 
       expect(status.contains("second"), true);
     });
