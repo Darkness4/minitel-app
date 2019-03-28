@@ -71,7 +71,6 @@ Future<String> autoLogin(
     body = "";
     stream = response.transform(Utf8Decoder());
     await for (var str in stream) body += str;
-    body.split('\n').forEach(print);
     if (body.contains('title_error'))
       throw Exception("Error: SessionId is incorrect. Please check the RegEx.");
     else {
@@ -175,7 +174,7 @@ Future<String> getStatus(String selectedUrl) async {
 /// ```
 /// String status = await report("Description", title: "Title");
 /// ```
-Future<String> report(String text, {String title}) async {
+Future<String> report(String text, {String title, String channel: "projet_flutter_notif"}) async {
   // TODO: Add UnitTest
   var status = "";
 
@@ -186,7 +185,9 @@ Future<String> report(String text, {String title}) async {
         "$text\n";
     var data = {
       'text': out,
-      'channel': "projet_flutter_notif", // Marc : DE8PA0Z1C
+      'username': 'Flutter Reporter Bot',
+      'icon_url': 'https://raw.githubusercontent.com/dart-lang/logos/master/flutter/logo%2Btext/vertical/default.png',
+      'channel': channel, // Marc : DE8PA0Z1C
     };
 
     try {
