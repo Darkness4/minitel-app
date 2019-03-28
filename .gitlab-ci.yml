@@ -6,7 +6,20 @@ before_script:
   - flutter upgrade
 
 stages:
+  - test
   - build
+
+unit-tests:
+  stage: test
+  script:
+    - flutter packages get
+    - dart test/unit_test.dart
+
+build-test:
+  stage: test
+  script:
+    - flutter packages get
+    - flutter -v build apk --release
 
 build:
   stage: build
@@ -18,3 +31,5 @@ build:
     paths:
       - app.apk
     expire_in: 1 week
+  only:
+    - master

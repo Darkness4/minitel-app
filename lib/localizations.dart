@@ -25,6 +25,9 @@ class AppLoc {
   String get title => Intl.message('Minitel Toolbox',
       name: 'title', desc: 'The application title');
 
+  String get titleReportingPage => Intl.message('Report to Minitel',
+      name: 'titleReportingPage', desc: 'The ReportingPage title');
+
   String get titleLoginPage => Intl.message('Gateway Login',
       name: 'titleLoginPage', desc: 'The LoginPage title');
 
@@ -40,8 +43,8 @@ class AppLoc {
   String get titleCalendarPage => Intl.message('Calendar',
       name: 'titleCalendarPage', desc: 'The CalendarPage title');
 
-  String get titleMapsPage =>  Intl.message('Map',
-      name: 'titleMapsPage', desc: 'The MapsPage title');
+  String get titleMapsPage =>
+      Intl.message('Map', name: 'titleMapsPage', desc: 'The MapsPage title');
 
   // pages/diagnose
   String get verbDiagnose => Intl.message('Diagnose', name: 'verbDiagnose');
@@ -67,30 +70,26 @@ class AppLoc {
 
 // Documentation
   String get sentenceDocLogin1 =>
-      Intl.message("Choose between fw-cgcp.emse.fr and 172.17.0.1\n",
+      Intl.message("Choose between fw-cgcp.emse.fr and 10.163.0.2\n",
           name: 'sentenceDocLogin1');
 
-  String get sentenceDocLogin2 =>
-      Intl.message(
-          "If your local network is WiFi MINITEL, use 172.17.0.1.\n"
-              "Otherwise, you can try fw-cgcp.emse.fr.",
-          name: 'sentenceDocLogin2');
+  String get sentenceDocLogin2 => Intl.message(
+      "If your local network is WiFi MINITEL, use 10.163.0.2.\n"
+      "Otherwise, you can try fw-cgcp.emse.fr.",
+      name: 'sentenceDocLogin2');
 
-  String get sentenceDocDiagnosePerm =>
-      Intl.message(
-          "    Indicates whether you have authorized GPS to determine the SSID.",
-          name: 'sentenceDocDiagnosePerm');
+  String get sentenceDocDiagnosePerm => Intl.message(
+      "    Indicates whether you have authorized GPS to determine the SSID.",
+      name: 'sentenceDocDiagnosePerm');
 
-  String get sentenceDocDiagnosePingLo =>
-      Intl.message(
-          "    Verify if the TCP/IP software works. Should be always positive.",
-          name: 'sentenceDocDiagnosePingLo');
+  String get sentenceDocDiagnosePingLo => Intl.message(
+      "    Verify if the TCP/IP software works. Should be always positive.",
+      name: 'sentenceDocDiagnosePingLo');
 
-  String get sentenceDocDiagnosePingLocal1 =>
-      Intl.message(
-          "    Ping to a local computer (172.17.0.5, which is the Minitel Server and should be always on).\n\n"
-              "    If the packets are lost, these are the most possible scenarios:\n",
-          name: 'sentenceDocDiagnosePingLocal1');
+  String get sentenceDocDiagnosePingLocal1 => Intl.message(
+      "    Ping to a local computer (10.163.0.5, which is the Minitel Server and should be always on).\n\n"
+      "    If the packets are lost, these are the most possible scenarios:\n",
+      name: 'sentenceDocDiagnosePingLocal1');
 
   String get sentenceDocDiagnosePingLocal2 =>
       Intl.message("    1.  You have no IP.",
@@ -100,61 +99,51 @@ class AppLoc {
       Intl.message(" (Report this immediatly to Minitel)\n",
           name: 'sentenceDocDiagnosePingLocal3');
 
-  String get sentenceDocDiagnosePingLocal4 =>
-      Intl.message(
-          "    2.  You are not connected to the local Network.\n"
-              "    3.  The server (172.17.0.5) has been shutdown. (you can ping 172.17.0.1, 172.17.0.10)\n",
-          name: 'sentenceDocDiagnosePingLocal4');
+  String get sentenceDocDiagnosePingLocal4 => Intl.message(
+      "    2.  You are not connected to the local Network.\n"
+      "    3.  The server (172.17.0.5) has been shutdown. (you can ping 10.163.0.10)\n",
+      name: 'sentenceDocDiagnosePingLocal4');
 
-  String get sentenceDocDiagnoseHTTP1 =>
-      Intl.message(
-          "HTTP GET https://172.17.0.1/auth/\nIt should display the same result as \"Gateway Login Status\".\n\n"
-              "    OS Error are mostly caused if the phone cannot connect to the gateway 172.17.0.1.",
-          name: 'sentenceDocDiagnoseHTTP1');
+  String get sentenceDocDiagnoseHTTP1 => Intl.message(
+      "HTTP GET https://10.163.0.2/auth/\nIt should display the same result as \"Gateway Login Status\".\n\n"
+      "    OS Error are mostly caused if the phone cannot connect to the gateway 10.163.0.2.",
+      name: 'sentenceDocDiagnoseHTTP1');
 
-  String get sentenceDocDiagnoseHTTP2 =>
-      Intl.message(
-          "    If a 4xx error occurs, please report it to the developers.",
-          name: 'sentenceDocDiagnoseHTTP2');
+  String get sentenceDocDiagnoseHTTP2 => Intl.message(
+      "    If a 4xx error occurs, please report it to the developers.",
+      name: 'sentenceDocDiagnoseHTTP2');
 
-  String get sentenceDocDiagnoseHTTP3 =>
-      Intl.message(
-          "    If you have an OS error, the Gateway has a problem and you should report it to the DSI.",
-          name: 'sentenceDocDiagnoseHTTP3');
+  String get sentenceDocDiagnoseHTTP3 => Intl.message(
+      "    If you have an OS error, the Gateway has a problem and you should report it to the DSI.",
+      name: 'sentenceDocDiagnoseHTTP3');
 
-  String get sentenceDocDiagnoseHTTP4 =>
-      Intl.message(
-          "    If you have a 4xx HTTP error, the diagnostic tool has a problem and you should report it to the developpers.",
-          name: 'sentenceDocDiagnoseHTTP4');
+  String get sentenceDocDiagnoseHTTP4 => Intl.message(
+      "    If you have a 4xx HTTP error, the diagnostic tool has a problem and you should report it to the developpers.",
+      name: 'sentenceDocDiagnoseHTTP4');
 
-  String get sentenceDocDiagnoseHTTP5 =>
-      Intl.message(
-          "    If you have a 5xx HTTP error, the Gateway has a problem  and you should report it to the DSI.",
-          name: 'sentenceDocDiagnoseHTTP5');
+  String get sentenceDocDiagnoseHTTP5 => Intl.message(
+      "    If you have a 5xx HTTP error, the Gateway has a problem  and you should report it to the DSI.",
+      name: 'sentenceDocDiagnoseHTTP5');
 
-  String get sentenceDocDiagnoseHTTP6 =>
-      Intl.message(
-          "    A share button exists to send 90% of the needed informations for a full repair.\n"
-              "    On 172.17.0.10, you can report to the admins.",
-          name: 'sentenceDocDiagnoseHTTP6');
+  String get sentenceDocDiagnoseHTTP6 => Intl.message(
+      "    A share button exists to send 90% of the needed informations for a full repair.\n"
+      "    On 10.163.0.10, you can report to the admins.",
+      name: 'sentenceDocDiagnoseHTTP6');
 
   String get titleHowShouldIReact =>
       Intl.message("How should i react?", name: 'titleHowShouldIReact');
 
-  String get sentenceDocDiagnosePingGateway =>
-      Intl.message(
-          "    This information does nothing. The gateway ignores pings. However, if a ping is received, someone is probably taking his IP. But none of this is certain.",
-          name: 'sentenceDocDiagnosePingGateway');
+  String get sentenceDocDiagnosePingGateway => Intl.message(
+      "    This information does nothing. The gateway ignores pings. However, if a ping is received, someone is probably taking his IP. But none of this is certain.",
+      name: 'sentenceDocDiagnosePingGateway');
 
-  String get sentenceDocDiagnosePingDNS =>
-      Intl.message(
-          "    If one of the DNS (besides 172.17.0.6) responds, you are connected to the internet.",
-          name: 'sentenceDocDiagnosePingDNS');
+  String get sentenceDocDiagnosePingDNS => Intl.message(
+      "    If one of the DNS (besides 10.163.0.6) responds, you are connected to the internet.",
+      name: 'sentenceDocDiagnosePingDNS');
 
-  String get sentenceDocDiagnoseNSLookup1 =>
-      Intl.message(
-          "    If there is no answer in one of them, but the DNS ping worked, your computer probably has a DNS cache problem.",
-          name: 'sentenceDocDiagnoseNSLookup1');
+  String get sentenceDocDiagnoseNSLookup1 => Intl.message(
+      "    If there is no answer in one of them, but the DNS ping worked, your computer probably has a DNS cache problem.",
+      name: 'sentenceDocDiagnoseNSLookup1');
 
   String get sentenceDocDiagnoseNSLookup2 =>
       Intl.message("    These are the best fixes:",
@@ -164,28 +153,55 @@ class AppLoc {
       Intl.message("    For portable devices, restart the Wifi.",
           name: 'sentenceDocDiagnoseNSLookup3');
 
-  String get sentenceDocDiagnoseifconfig =>
-      Intl.message(
-          "    Gives useful information about the hardware.\n\n"
-              "    Useful informations:\n"
-              "      - Status\n"
-              "      - IP Address\n"
-              "      - MAC Address\n",
-          name: 'sentenceDocDiagnoseifconfig');
+  String get sentenceDocDiagnoseifconfig => Intl.message(
+      "    Gives useful information about the hardware.\n\n"
+      "    Useful informations:\n"
+      "      - Status\n"
+      "      - IP Address\n"
+      "      - MAC Address\n",
+      name: 'sentenceDocDiagnoseifconfig');
 
-  String get sentenceDocDiagnoseARP =>
-      Intl.message(
-          "    Displays the MAC addresses of all devices that have connected to the phone.",
-          name: 'sentenceDocDiagnoseARP');
+  String get sentenceDocDiagnoseARP => Intl.message(
+      "    Displays the MAC addresses of all devices that have connected to the phone.\n"
+      "    The Gateway should be shown and should be 00-0d-b4-10-99-e1. Otherwise, this should be reported to Minitel.",
+      name: 'sentenceDocDiagnoseARP');
 
-  String get sentenceDocDiagnoseTraceroute =>
-      Intl.message(
-          "    Show the path and the delays of packets to a Google server.",
-          name: 'sentenceDocDiagnoseTraceroute');
+  String get sentenceDocDiagnoseTraceroute => Intl.message(
+      "    Show the path and the delays of packets to a Google server.",
+      name: 'sentenceDocDiagnoseTraceroute');
 
   String get sentenceDocDiagnoseNetstat =>
       Intl.message("    Shows statistics about TCP connections.",
           name: 'sentenceDocDiagnoseNetstat');
+
+  // Reporting
+  String get sentenceReportingTitle =>
+      Intl.message("How to report without internet?",
+          name: 'sentenceReportingTitle');
+  String get sentenceReportingNOTE =>
+      Intl.message("NOTE: It is recommended to have Root and Busybox installed.",
+          name: 'sentenceReportingNOTE');
+  String get sentenceReportingSubTitle1 =>
+      Intl.message("1. Connect to 'WiFi Minitel'",
+          name: 'sentenceReportingSubTitle1');
+  String get sentenceReportingSubtitle2 =>
+      Intl.message("2. Run the diagnostic suite by pushing the button and wait 1 minute.",
+          name: 'sentenceReportingSubtitle2');
+  String get sentenceReportingSubtitle3 =>
+      Intl.message("3. Fill the report.",
+          name: 'sentenceReportingSubtitle3');
+  String get sentenceReportingParagraph =>
+      Intl.message("Example : \n"
+                          "Title: 2012, no internet since monday.\n"
+                          "Description: I'm loosing frequently the connection when i'm on Ethernet. Wifi is ok.",
+          name: 'sentenceReportingParagraph');
+  String get sentenceReportingSubtitle4 =>
+      Intl.message("4. Connect to a working network.",
+          name: 'sentenceReportingSubtitle4');
+  String get sentenceReportingSubtitle5 =>
+      Intl.message("5. Send the report.",
+          name: 'sentenceReportingSubtitle5');
+  
 }
 
 class AppLocDelegate extends LocalizationsDelegate<AppLoc> {

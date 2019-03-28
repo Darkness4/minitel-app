@@ -10,7 +10,7 @@ class DocCard extends StatelessWidget {
 
   DocCard(
       {@required this.children,
-        this.elevation: 4.0,
+      this.elevation: 4.0,
       this.extPadding: 10.0,
       this.intPadding: 15.0});
 
@@ -76,14 +76,6 @@ class NewsCard extends StatelessWidget {
       this.elevation: 4.0,
       this.extPadding: 10.0,
       this.intPadding: 15.0});
-
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,5 +148,13 @@ class NewsCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

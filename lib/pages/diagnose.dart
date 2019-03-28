@@ -7,8 +7,8 @@ import 'package:auto_login_flutter/localizations.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share/share.dart';
 import 'package:wifi/wifi.dart';
 
 class DiagnosePage extends StatefulWidget {
@@ -23,7 +23,7 @@ class DiagnosePage extends StatefulWidget {
 class _DiagnosePageState extends State<DiagnosePage> {
   var _alert = "";
   var _statusPublic = "";
-  var _statusDNS = "";
+  var _statusGateway = "";
   var _level = "";
   var _ssid = "";
   var _ip = "";
@@ -111,8 +111,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
                   title: "HTTP Portal Response (195.83.139.7)",
                 ),
                 LogCard(
-                  _statusDNS,
-                  title: "HTTP Portal Response (fw-cgcp.emse.fr)",
+                  _statusGateway,
+                  title: "HTTP Portal Response (10.163.0.2)",
                 ),
                 LogCard(
                   _pingGateway,
@@ -171,7 +171,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
   _diagnose() async {
     setState(() {
       _alert = "";
-      _statusPublic = _statusDNS = _ssid = _level = _ip = _ipAll = _ifconfig = _arp =
+      _statusPublic = _statusGateway = _ssid = _level = _ip = _ipAll = _ifconfig = _arp =
           _tracertGoogle = _tracertGoogleDNS = _pingLo = _pingLocal =
               _pingGateway = _pingDNS1 = _pingDNS2 = _pingDNS3 = _pingDNS4 =
                   _pingDNS5 = _nsLookupEMSE = _nsLookupGoogle =
@@ -250,8 +250,8 @@ class _DiagnosePageState extends State<DiagnosePage> {
 
       getStatus("195.83.139.7").then((status) => setState(
           () => _statusPublic = status.isEmpty ? "Nothing to show" : status));
-      getStatus("fw-cgcp.emse.fr").then((status) => setState(
-          () => _statusDNS = status.isEmpty ? "Nothing to show" : status));
+      getStatus("10.163.0.2").then((status) => setState(
+          () => _statusGateway = status.isEmpty ? "Nothing to show" : status));
 
       InternetAddress.lookup("fw-cgcp.emse.fr")
           .then((addresses) => addresses.forEach((address) => setState(() =>
@@ -280,7 +280,7 @@ class _DiagnosePageState extends State<DiagnosePage> {
         "Ping Loopback: \n$_pingLo\n\n"
         "Ping Local: \n$_pingLocal\n\n"
         "HTTP Portal Response: \n$_statusPublic\n\n"
-        "HTTP Portal Response: \n$_statusDNS\n\n"
+        "HTTP Portal Response: \n$_statusGateway\n\n"
         "Ping Gateway: \n$_pingLo\n\n"
         "Ping DNS1: \n$_pingDNS1\n\n"
         "Ping DNS2: \n$_pingDNS2\n\n"

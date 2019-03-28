@@ -18,6 +18,27 @@ class MainDrawer extends StatelessWidget {
               color: Colors.green,
             ),
           ),
+          Container(
+            color: Colors.red,
+            child: ListTile(
+                title: Text(
+                  AppLoc.of(context).titleReportingPage,
+                  style: TextStyle(color: Colors.white),
+                ),
+                leading: Icon(
+                  Icons.error,
+                  color: Colors.white,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  Navigator.pop(context);  // Close Drawer
+                  if (ModalRoute.of(context).settings.name != '/reporting')
+                    Navigator.pushNamed(context, '/reporting');
+                }),
+          ),
           ListTile(
               title: Text(AppLoc.of(context).titleLoginPage),
               leading: Icon(Icons.vpn_key),

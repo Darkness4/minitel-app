@@ -49,26 +49,20 @@ class _DocumentationPageState extends State<DocumentationPage> {
                 height: 90,
                 child: DrawerHeader(
                   child: Text(
-                    AppLoc
-                        .of(context)
-                        .titleDocumentationPage,
+                    AppLoc.of(context).titleDocumentationPage,
                     style: TextStyle(fontSize: 32),
                   ),
                 ),
               ),
             ),
             ListTile(
-                title: Text(AppLoc
-                    .of(context)
-                    .titleLoginPage),
+                title: Text(AppLoc.of(context).titleLoginPage),
                 onTap: () {
                   Navigator.pop(context);
                   _controller.jumpToPage(0);
                 }),
             ListTile(
-                title: Text(AppLoc
-                    .of(context)
-                    .titleDiagnosePage),
+                title: Text(AppLoc.of(context).titleDiagnosePage),
                 onTap: () {
                   Navigator.pop(context);
                   _controller.jumpToPage(1);
