@@ -87,9 +87,8 @@ class NewsCard extends StatelessWidget {
         child: InkWell(
           highlightColor: Color(0xa0000000),
           splashColor: Colors.black,
-          onTap: () {
-            _launchURL(item.links.map((link) => link.href).toList().first);
-          },
+          onTap: () =>
+              _launchURL(item.links.map((link) => link.href).toList().first),
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(

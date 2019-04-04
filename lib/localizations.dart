@@ -46,6 +46,9 @@ class AppLoc {
   String get titleMapsPage =>
       Intl.message('Map', name: 'titleMapsPage', desc: 'The MapsPage title');
 
+  String get titlePortalPage => Intl.message('Portal',
+      name: 'titlePortalPage', desc: 'The PortalPage title');
+
   // pages/diagnose
   String get verbDiagnose => Intl.message('Diagnose', name: 'verbDiagnose');
 
@@ -178,30 +181,27 @@ class AppLoc {
   String get sentenceReportingTitle =>
       Intl.message("How to report without internet?",
           name: 'sentenceReportingTitle');
-  String get sentenceReportingNOTE =>
-      Intl.message("NOTE: It is recommended to have Root and Busybox installed.",
-          name: 'sentenceReportingNOTE');
+  String get sentenceReportingNOTE => Intl.message(
+      "NOTE: It is recommended to have Root and Busybox installed.",
+      name: 'sentenceReportingNOTE');
   String get sentenceReportingSubTitle1 =>
       Intl.message("1. Connect to 'WiFi Minitel'",
           name: 'sentenceReportingSubTitle1');
-  String get sentenceReportingSubtitle2 =>
-      Intl.message("2. Run the diagnostic suite by pushing the button and wait 1 minute.",
-          name: 'sentenceReportingSubtitle2');
+  String get sentenceReportingSubtitle2 => Intl.message(
+      "2. Run the diagnostic suite by pushing the button and wait 1 minute.",
+      name: 'sentenceReportingSubtitle2');
   String get sentenceReportingSubtitle3 =>
-      Intl.message("3. Fill the report.",
-          name: 'sentenceReportingSubtitle3');
-  String get sentenceReportingParagraph =>
-      Intl.message("Example : \n"
-                          "Title: 2012, no internet since monday.\n"
-                          "Description: I'm loosing frequently the connection when i'm on Ethernet. Wifi is ok.",
-          name: 'sentenceReportingParagraph');
+      Intl.message("3. Fill the report.", name: 'sentenceReportingSubtitle3');
+  String get sentenceReportingParagraph => Intl.message(
+      "Example : \n"
+      "Title: 2012, no internet since monday.\n"
+      "Description: I'm loosing frequently the connection when i'm on Ethernet. Wifi is ok.",
+      name: 'sentenceReportingParagraph');
   String get sentenceReportingSubtitle4 =>
       Intl.message("4. Connect to a working network.",
           name: 'sentenceReportingSubtitle4');
   String get sentenceReportingSubtitle5 =>
-      Intl.message("5. Send the report.",
-          name: 'sentenceReportingSubtitle5');
-  
+      Intl.message("5. Send the report.", name: 'sentenceReportingSubtitle5');
 }
 
 class AppLocDelegate extends LocalizationsDelegate<AppLoc> {
