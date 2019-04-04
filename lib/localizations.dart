@@ -101,7 +101,7 @@ class AppLoc {
 
   String get sentenceDocDiagnosePingLocal4 => Intl.message(
       "    2.  You are not connected to the local Network.\n"
-      "    3.  The server (172.17.0.5) has been shutdown. (you can ping 10.163.0.10)\n",
+      "    3.  The server (10.163.0.5) has been shutdown. (you can ping 10.163.0.10)\n",
       name: 'sentenceDocDiagnosePingLocal4');
 
   String get sentenceDocDiagnoseHTTP1 => Intl.message(

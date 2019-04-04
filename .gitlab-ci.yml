@@ -8,12 +8,32 @@ before_script:
 stages:
   - test
   - build
+  - deploy
 
 unit-tests:
   stage: test
   script:
+    - apt update
+    - apt install -y lcov
     - flutter packages get
-    - dart test/unit_test.dart
+    - flutter test --coverage
+    - genhtml -o coverage coverage/lcov.info
+  artifacts:
+    paths:
+    - coverage/
+
+pages:
+  stage: deploy
+  dependencies:
+    - unit-tests
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+  - master
+  - develop
 
 build-test:
   stage: test

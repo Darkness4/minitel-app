@@ -10,10 +10,10 @@ class DocumentationPage extends StatefulWidget {
   DocumentationPage({Key key, this.title}) : super(key: key);
 
   @override
-  _DocumentationPageState createState() => _DocumentationPageState();
+  DocumentationPageState createState() => DocumentationPageState();
 }
 
-class _DocumentationPageState extends State<DocumentationPage> {
+class DocumentationPageState extends State<DocumentationPage> {
   final _controller = PageController(initialPage: 0);
 
   @override

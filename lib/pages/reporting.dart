@@ -12,14 +12,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportingPage extends StatefulWidget {
   final String title;
+  final String channel;
 
-  ReportingPage({Key key, this.title}) : super(key: key);
+  const ReportingPage(
+      {Key key, this.title, this.channel: "projet_flutter_notif"})
+      : super(key: key);
 
   @override
-  _ReportingPageState createState() => _ReportingPageState();
+  ReportingPageState createState() => ReportingPageState();
 }
 
-class _ReportingPageState extends State<ReportingPage> {
+class ReportingPageState extends State<ReportingPage> {
   final _titleFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _titleController = TextEditingController();
@@ -103,7 +106,7 @@ class _ReportingPageState extends State<ReportingPage> {
                       Header("Autre Contacts"),
                       Header("Facebook: Minitel Ismin", level: 2),
                       Header("G*: Contact Admin", level: 2),
-                      Header("Mail: minitel13120@gmail.com", level: 2),
+                      Header("Mail: minitelismin@gmail.com", level: 2),
                     ],
                   ),
                 ]),
@@ -116,13 +119,15 @@ class _ReportingPageState extends State<ReportingPage> {
       floatingActionButton: Builder(
         builder: (context) => Column(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: buildFloatingActionButtons(context),
+              children:
+                  buildFloatingActionButtons(context, channel: widget.channel),
             ),
       ),
     );
   }
 
-  List<Widget> buildFloatingActionButtons(BuildContext ctxt) {
+  List<Widget> buildFloatingActionButtons(BuildContext ctxt,
+      {String channel: "projet_flutter_notif"}) {
     var lsWidgets = <Widget>[
       _buildDiagnosisButton(),
     ];
@@ -134,7 +139,7 @@ class _ReportingPageState extends State<ReportingPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               _buildShareButton(),
-              _buildReportButton(ctxt),
+              _buildReportButton(ctxt, channel: channel),
             ],
           ));
     }
@@ -203,7 +208,8 @@ class _ReportingPageState extends State<ReportingPage> {
     }
   }
 
-  Widget _buildReportButton(BuildContext ctxt) {
+  Widget _buildReportButton(BuildContext ctxt,
+      {String channel: "projet_flutter_notif"}) {
     return FloatingActionButton(
       onPressed: () {
         if (_reportState != 1) {
@@ -211,11 +217,12 @@ class _ReportingPageState extends State<ReportingPage> {
           getTimeout().then((timeout) {
             if (DateTime.now().isAfter(timeout))
               report(
-                      "_${_descriptionController.text}_\n\n"
-                      "*Diagnosis*\n"
-                      "$_report",
-                      title: _titleController.text)
-                  .then((status) {
+                "_${_descriptionController.text}_\n\n"
+                "*Diagnosis*\n"
+                "$_report",
+                title: _titleController.text,
+                channel: channel,
+              ).then((status) {
                 if (status == "ok") setTimeout();
                 Scaffold.of(ctxt).showSnackBar(SnackBar(
                   content: Text(status),

@@ -9,10 +9,10 @@ class MapsPage extends StatefulWidget {
   MapsPage({Key key, this.title}) : super(key: key);
 
   @override
-  _MapsPageState createState() => _MapsPageState();
+  MapsPageState createState() => MapsPageState();
 }
 
-class _MapsPageState extends State<MapsPage> {
+class MapsPageState extends State<MapsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

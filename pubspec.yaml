@@ -37,6 +37,8 @@ dev_dependencies:
     sdk: flutter
   intl_translation: ^0.17.1
   test: ^1.5.3
+  clock: ^1.0.1
+  fake_async: ^1.0.1
 
 
 # For information on the generic Dart part of this file, see the

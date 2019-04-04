@@ -5,7 +5,7 @@ import 'package:webfeed/webfeed.dart';
 
 /// Connect to the portal.
 ///
-/// The [selectedUrl] is either local (172.17.0.1) or public (fw-cgcp.emse.fr).
+/// The [selectedUrl] is either local (10.163.0.2) or public (fw-cgcp.emse.fr).
 /// Be aware, if the local DNS can forward the public address to the local.
 /// Be also aware, if the local gateway can forward to the server (195.83.139.7).
 /// The [uid] and [pswd] correspond to the Username and Password.
@@ -18,7 +18,7 @@ import 'package:webfeed/webfeed.dart';
 /// You can use [autoLogin] like this:
 ///
 /// ```
-/// String status = await autoLogin("MyName", "MyPassword", "172.17.0.1", 480) // "28800 seconds left"
+/// String status = await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
 /// ```
 Future<String> autoLogin(
     String uid, String pswd, String selectedUrl, int selectedTime) async {
@@ -116,7 +116,7 @@ Future<RssFeed> getRss(String rssUrl) async {
 
 /// Get the connection status of the portal.
 ///
-/// The [selectedUrl] is either local (172.17.0.1) or public (fw-cgcp.emse.fr).
+/// The [selectedUrl] is either local (10.163.0.2) or public (fw-cgcp.emse.fr).
 /// Be aware, if the local DNS can forward the public address to the local.
 /// Be also aware, if the local gateway can forward to the server (195.83.139.7).
 ///

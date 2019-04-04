@@ -9,10 +9,10 @@ class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _uidController = TextEditingController();
   final _pswdController = TextEditingController();

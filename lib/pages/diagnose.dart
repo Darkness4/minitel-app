@@ -17,10 +17,10 @@ class DiagnosePage extends StatefulWidget {
   DiagnosePage({Key key, this.title}) : super(key: key);
 
   @override
-  _DiagnosePageState createState() => _DiagnosePageState();
+  DiagnosePageState createState() => DiagnosePageState();
 }
 
-class _DiagnosePageState extends State<DiagnosePage> {
+class DiagnosePageState extends State<DiagnosePage> {
   var _alert = "";
   var _statusPublic = "";
   var _statusGateway = "";

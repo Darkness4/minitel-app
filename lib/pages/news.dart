@@ -9,10 +9,10 @@ class NewsPage extends StatefulWidget {
   NewsPage({Key key, this.title}) : super(key: key);
 
   @override
-  _NewsPageState createState() => _NewsPageState();
+  NewsPageState createState() => NewsPageState();
 }
 
-class _NewsPageState extends State<NewsPage> {
+class NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
