@@ -40,6 +40,8 @@ build-test:
   script:
     - flutter packages get
     - flutter -v build apk --release
+  except:
+  - tests
 
 build:
   stage: build

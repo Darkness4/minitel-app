@@ -19,11 +19,35 @@ void main() {
       expect(status.contains("seconds"), true);
     });
 
-    test('Get status from 195.83.139.7', () async {
+    test('Bad Username and Password to google.fr', () async {
+      var status = await autoLogin("", "", "google.fr", 0);
+      print(status);
+
+      expect(status.contains("404"), true);
+    });
+
+    test('Get status Not logged in from 195.83.139.7 without success',
+        () async {
       var status = await getStatus("195.83.139.7");
       print(status);
 
       expect(status.contains("logged"), true);
+    });
+
+    test('Get status SUCCESS from 195.83.139.7', () async {
+      await autoLogin("marc.nguyen",
+          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
+      var status = await getStatus("195.83.139.7");
+      print(status);
+
+      expect(status.contains("seconds"), true);
+    });
+
+    test('Get status from google.fr with 404 error', () async {
+      var status = await getStatus("google.fr");
+      print(status);
+
+      expect(status.contains("404"), true);
     });
 
     test('Report to slack', () async {
