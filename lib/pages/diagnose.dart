@@ -161,20 +161,20 @@ class DiagnosePageState extends State<DiagnosePage> {
       ),
       drawer: MainDrawer(),
       floatingActionButton: FloatingActionButton.extended(
-              onPressed: _diagnose,
-              icon: Icon(Icons.zoom_in),
-              label: Text(AppLoc.of(context).verbDiagnose),
-            ),
+        onPressed: _diagnose,
+        icon: Icon(Icons.zoom_in),
+        label: Text(AppLoc.of(context).verbDiagnose),
+      ),
     );
   }
 
   _diagnose() async {
     setState(() {
       _alert = "";
-      _statusPublic = _statusGateway = _ssid = _level = _ip = _ipAll = _ifconfig = _arp =
-          _tracertGoogle = _tracertGoogleDNS = _pingLo = _pingLocal =
-              _pingGateway = _pingDNS1 = _pingDNS2 = _pingDNS3 = _pingDNS4 =
-                  _pingDNS5 = _nsLookupEMSE = _nsLookupGoogle =
+      _statusPublic = _statusGateway = _ssid = _level = _ip = _ipAll =
+          _ifconfig = _arp = _tracertGoogle = _tracertGoogleDNS = _pingLo =
+              _pingLocal = _pingGateway = _pingDNS1 = _pingDNS2 = _pingDNS3 =
+                  _pingDNS4 = _pingDNS5 = _nsLookupEMSE = _nsLookupGoogle =
                       _nsLookupEMSEBusybox = _nsLookupGoogleBusybox =
                           _nsLookupGoogleBusybox = "Loading...";
     });
@@ -211,20 +211,29 @@ class DiagnosePageState extends State<DiagnosePage> {
           setState(() => _ifconfig = out.isEmpty ? "Nothing to show" : out));
       exec("arp", [
         '-a',
-      ]).runGetOutput().then((out) =>
-          setState(() => _arp = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _arp = e.toString());
+      ])
+          .runGetOutput()
+          .then((out) =>
+              setState(() => _arp = out.isEmpty ? "Nothing to show" : out))
+          .catchError((e) => _arp = e.toString());
       exec("su", [
         '-c',
         'traceroute',
         'google.com',
-      ]).runGetOutput().then((out) => setState(
-          () => _tracertGoogle = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _tracertGoogle = e.toString());
+      ])
+          .runGetOutput()
+          .then((out) => setState(
+              () => _tracertGoogle = out.isEmpty ? "Nothing to show" : out))
+          .catchError((e) => _tracertGoogle = e.toString());
       exec("su", [
         '-c',
         'traceroute',
         '8.8.8.8',
-      ]).runGetOutput().then((out) => setState(
-          () => _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _tracertGoogleDNS = e.toString());
+      ])
+          .runGetOutput()
+          .then((out) => setState(
+              () => _tracertGoogleDNS = out.isEmpty ? "Nothing to show" : out))
+          .catchError((e) => _tracertGoogleDNS = e.toString());
       exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) =>
           setState(() => _pingLo = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "10.163.0.5"]).runGetOutput().then((out) =>
@@ -241,12 +250,16 @@ class DiagnosePageState extends State<DiagnosePage> {
           setState(() => _pingDNS4 = out.isEmpty ? "Nothing to show" : out));
       exec("ping", [argsPing, "10.163.0.6"]).runGetOutput().then((out) =>
           setState(() => _pingDNS5 = out.isEmpty ? "Nothing to show" : out));
-      exec("nslookup", ["fw-cgcp.emse.fr"]).runGetOutput().then((out) =>
-          setState(() =>
-              _nsLookupEMSEBusybox = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _nsLookupEMSEBusybox = e.toString());
-      exec("nslookup", ["google.com"]).runGetOutput().then((out) => setState(
-          () =>
-              _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out)).catchError((e) => _nsLookupGoogleBusybox = e.toString());
+      exec("nslookup", ["fw-cgcp.emse.fr"])
+          .runGetOutput()
+          .then((out) => setState(() =>
+              _nsLookupEMSEBusybox = out.isEmpty ? "Nothing to show" : out))
+          .catchError((e) => _nsLookupEMSEBusybox = e.toString());
+      exec("nslookup", ["google.com"])
+          .runGetOutput()
+          .then((out) => setState(() =>
+              _nsLookupGoogleBusybox = out.isEmpty ? "Nothing to show" : out))
+          .catchError((e) => _nsLookupGoogleBusybox = e.toString());
 
       getStatus("195.83.139.7").then((status) => setState(
           () => _statusPublic = status.isEmpty ? "Nothing to show" : status));

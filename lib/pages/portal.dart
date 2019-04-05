@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'portal_apps/sogo.dart';
+import 'portal_apps/annuaire.dart';
+import 'portal_apps/campus.dart';
+import 'portal_apps/logiciels.dart';
+import 'portal_apps/gitlab.dart';
+import 'portal_apps/promethee.dart';
 
 class PortalPage extends StatefulWidget {
   final String title;
@@ -38,12 +44,10 @@ class PortalPageState extends State<PortalPage> {
               color: Colors.lightGreen[100],
               elevation: 4,
               child: InkWell(
-                onTap: () => _launchURL("https://sogo.emse.fr/"),
-                // TODO push Named Sogo WebView
-                // WebView(
-                //   initialUrl: 'https://flutter.io',
-                //   javascriptMode: JavascriptMode.unrestricted,
-                // )
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SogoWebView()),
+                    ),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -57,7 +61,10 @@ class PortalPageState extends State<PortalPage> {
             Card(
               elevation: 4,
               child: InkWell(
-                onTap: () => _launchURL("https://campus.emse.fr/"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CampusWebView()),
+                    ),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -73,7 +80,11 @@ class PortalPageState extends State<PortalPage> {
               child: InkWell(
                 highlightColor: Color(0xa0000000),
                 splashColor: Colors.black,
-                onTap: () => _launchURL("https://promethee.emse.fr/"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PrometheeWebView()),
+                    ),
                 child: Opacity(
                   opacity: 0.9,
                   child: DecoratedBox(
@@ -92,7 +103,11 @@ class PortalPageState extends State<PortalPage> {
               child: InkWell(
                 highlightColor: Color(0xa0000000),
                 splashColor: Colors.black,
-                onTap: () => _launchURL("http://edusoft.emse.fr/"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LogicielsWebView()),
+                    ),
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -131,7 +146,10 @@ class PortalPageState extends State<PortalPage> {
             Card(
               elevation: 4,
               child: InkWell(
-                onTap: () => _launchURL("https://gitlab.emse.fr/"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GitlabWebView()),
+                    ),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -145,7 +163,11 @@ class PortalPageState extends State<PortalPage> {
             Card(
               elevation: 4,
               child: InkWell(
-                onTap: () => _launchURL("http://annuaire.emse.fr/"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AnnuaireWebView()),
+                    ),
                 child: LayoutBuilder(
                   builder: (context, constraint) => Column(
                         children: <Widget>[

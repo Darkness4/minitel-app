@@ -17,13 +17,13 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  wifi: ^0.1.4  # Flutter Team
+  wifi: ^0.1.5  # Lewis
   connectivity: ^0.4.2
   dscript_exec: ^2.0.1  #  Ravi Teja Gudapti
-  share: ^0.6.0  # Flutter Team
+  share: ^0.6.0+1  # Flutter Team
   webfeed: ^0.4.2  # Wito Chandra
   url_launcher: ^5.0.2  # Flutter Team
-  google_maps_flutter: ^0.4.0  # Heavy
+  google_maps_flutter: ^0.5.2  # Heavy Flutter Team
   permission_handler: ^3.0.0  # Baseflow
   shared_preferences: ^0.5.1+2  # Flutter Team
   webview_flutter: 0.3.5+3
