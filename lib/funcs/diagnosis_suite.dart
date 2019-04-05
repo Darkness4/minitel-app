@@ -6,7 +6,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:wifi/wifi.dart';
 
 import 'http_resquests.dart';
 
@@ -14,7 +13,7 @@ import 'http_resquests.dart';
 ///
 /// Run multiples command and store into the [diagnosis] Map.
 /// The suite is composed of :
-/// - SSID, Level, IP scan from [Connectivity]
+/// - SSID, IP scan from [Connectivity]
 /// - ip a
 /// - ifconfig -a
 /// - arp -a
@@ -43,11 +42,9 @@ Future<String> diagnose(BuildContext context) async {
       else
         PermissionHandler().requestPermissions([PermissionGroup.location]);
     });
-    var level = await Wifi.level;
-    var ip = await Wifi.ip;
+    var ip = await Connectivity().getWifiIP();
 
     diagnosis["SSID"] = ssid;
-    diagnosis["Level"] = '$level';
     diagnosis["IP"] = ip;
 
     exec("ip", [
@@ -125,8 +122,7 @@ Future<String> diagnose(BuildContext context) async {
         .catchError((e) => diagnosis["nsLookupGoogle"] = e.toString());
     await Future.delayed(const Duration(minutes: 1));
 
-    out =
-        "\n*SSID: ${diagnosis["SSID"]}, Level: ${diagnosis["Level"]}, Ip: ${diagnosis["IP"]}*\n\n"
+    out = "\n*SSID: ${diagnosis["SSID"]}, Ip: ${diagnosis["IP"]}*\n\n"
         "*ip a:* \n${diagnosis["ip a"]}\n\n"
         "*ifconfig:* \n${diagnosis["ifconfig"]}\n\n"
         "*ARP:* \n${diagnosis["arp"]}\n\n"
