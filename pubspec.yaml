@@ -17,7 +17,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  wifi: ^0.1.5  # Lewis
   connectivity: ^0.4.2
   dscript_exec: ^2.0.1  #  Ravi Teja Gudapti
   share: ^0.6.0+1  # Flutter Team

@@ -9,7 +9,6 @@ import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share/share.dart';
-import 'package:wifi/wifi.dart';
 
 class DiagnosePage extends StatefulWidget {
   final String title;
@@ -24,7 +23,6 @@ class DiagnosePageState extends State<DiagnosePage> {
   var _alert = "";
   var _statusPublic = "";
   var _statusGateway = "";
-  var _level = "";
   var _ssid = "";
   var _ip = "";
   var _ipAll = "";
@@ -73,7 +71,7 @@ class DiagnosePageState extends State<DiagnosePage> {
                   color: Colors.deepOrange,
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
-                    child: Text("SSID: $_ssid, Level: $_level, IP: $_ip",
+                    child: Text("SSID: $_ssid, IP: $_ip",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white)),
                   ),
@@ -171,10 +169,10 @@ class DiagnosePageState extends State<DiagnosePage> {
   _diagnose() async {
     setState(() {
       _alert = "";
-      _statusPublic = _statusGateway = _ssid = _level = _ip = _ipAll =
-          _ifconfig = _arp = _tracertGoogle = _tracertGoogleDNS = _pingLo =
-              _pingLocal = _pingGateway = _pingDNS1 = _pingDNS2 = _pingDNS3 =
-                  _pingDNS4 = _pingDNS5 = _nsLookupEMSE = _nsLookupGoogle =
+      _statusPublic = _statusGateway = _ssid = _ip = _ipAll = _ifconfig = _arp =
+          _tracertGoogle = _tracertGoogleDNS = _pingLo = _pingLocal =
+              _pingGateway = _pingDNS1 = _pingDNS2 = _pingDNS3 = _pingDNS4 =
+                  _pingDNS5 = _nsLookupEMSE = _nsLookupGoogle =
                       _nsLookupEMSEBusybox = _nsLookupGoogleBusybox =
                           _nsLookupGoogleBusybox = "Loading...";
     });
@@ -192,12 +190,10 @@ class DiagnosePageState extends State<DiagnosePage> {
         else
           PermissionHandler().requestPermissions([PermissionGroup.location]);
       });
-      var level = await Wifi.level;
-      var ip = await Wifi.ip;
+      var ip = await Connectivity().getWifiIP();
 
       setState(() {
         _ssid = ssid;
-        _level = '$level';
         _ip = ip;
       });
 
@@ -284,7 +280,7 @@ class DiagnosePageState extends State<DiagnosePage> {
   _share() {
     var now = DateTime.now().toString();
     Share.share("---Report $now---\n"
-        "SSID: $_ssid, Level: $_level, Ip: $_ip\n\n"
+        "SSID: $_ssid, Ip: $_ip\n\n"
         "ip a: \n$_ipAll\n\n"
         "ifconfig: \n$_ifconfig\n\n"
         "ARP: \n$_arp\n\n"
