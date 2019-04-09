@@ -99,5 +99,9 @@ void main() {
 
       expect(status.title.contains("JetBrains Blog"), true);
     });
+
+    test('Login to Sogo', () async {
+      await loginSogo("marc.nguyen", "stickman963").then(print);
+    });
   });
 }

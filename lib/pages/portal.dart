@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:auto_login_flutter/components/drawer.dart';
+import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'portal_apps/sogo.dart';
-import 'portal_apps/annuaire.dart';
-import 'portal_apps/campus.dart';
-import 'portal_apps/logiciels.dart';
-import 'portal_apps/gitlab.dart';
-import 'portal_apps/promethee.dart';
-import 'portal_apps/imprimante.dart';
+// import 'portal_apps/sogo.dart';
+// import 'portal_apps/annuaire.dart';
+// import 'portal_apps/campus.dart';
+// import 'portal_apps/logiciels.dart';
+// import 'portal_apps/gitlab.dart';
+// import 'portal_apps/promethee.dart';
+// import 'portal_apps/imprimante.dart';
 
 class PortalPage extends StatefulWidget {
   final String title;
@@ -18,14 +19,6 @@ class PortalPage extends StatefulWidget {
 }
 
 class PortalPageState extends State<PortalPage> {
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +42,7 @@ class PortalPageState extends State<PortalPage> {
                 //       context,
                 //       MaterialPageRoute(builder: (context) => SogoWebView()),
                 //     ),
-                onTap: _launchURL('https://sogo.emse.fr/'),
+                onTap: () => _launchURL('https://sogo.emse.fr/'),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -67,7 +60,7 @@ class PortalPageState extends State<PortalPage> {
                 //       context,
                 //       MaterialPageRoute(builder: (context) => CampusWebView()),
                 //     ),
-                onTap: _launchURL('https://campus.emse.fr/'),
+                onTap: () => _launchURL('https://campus.emse.fr/'),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -88,7 +81,7 @@ class PortalPageState extends State<PortalPage> {
                 //       MaterialPageRoute(
                 //           builder: (context) => PrometheeWebView()),
                 //     ),
-                onTap: _launchURL('https://promethee.emse.fr/'),
+                onTap: () => _launchURL('https://promethee.emse.fr/'),
                 child: Opacity(
                   opacity: 0.9,
                   child: DecoratedBox(
@@ -112,7 +105,7 @@ class PortalPageState extends State<PortalPage> {
                 //       MaterialPageRoute(
                 //           builder: (context) => LogicielsWebView()),
                 //     ),
-                onTap: _launchURL('http://edusoft.emse.fr/'),
+                onTap: () => _launchURL('http://edusoft.emse.fr/'),
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -155,7 +148,7 @@ class PortalPageState extends State<PortalPage> {
                 //       context,
                 //       MaterialPageRoute(builder: (context) => GitlabWebView()),
                 //     ),
-                onTap: _launchURL('https://gitlab.emse.fr/'),
+                onTap: () => _launchURL('https://gitlab.emse.fr/'),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -174,7 +167,7 @@ class PortalPageState extends State<PortalPage> {
                 //       MaterialPageRoute(
                 //           builder: (context) => AnnuaireWebView()),
                 //     ),
-                onTap: _launchURL('http://annuaire.emse.fr/'),
+                onTap: () => _launchURL('http://annuaire.emse.fr/'),
                 child: LayoutBuilder(
                   builder: (context, constraint) => Column(
                         children: <Widget>[
@@ -226,5 +219,13 @@ class PortalPageState extends State<PortalPage> {
       ),
       drawer: MainDrawer(),
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

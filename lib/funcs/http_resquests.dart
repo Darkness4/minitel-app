@@ -24,7 +24,7 @@ Future<String> autoLogin(
     String uid, String pswd, String selectedUrl, int selectedTime) async {
   var status = "";
 
-  HttpClient client = HttpClient();
+  var client = HttpClient();
   client.badCertificateCallback = (cert, host, port) => true;
 
   try {
@@ -85,7 +85,7 @@ Future<String> autoLogin(
 }
 
 Future<AtomFeed> getAtom(String atomUrl) async {
-  HttpClient client = HttpClient();
+  var client = HttpClient();
   HttpClientRequest request = await client.getUrl(Uri.parse(atomUrl));
   HttpClientResponse response = await request.close();
   var status = await response.transform(Utf8Decoder()).join();
@@ -93,7 +93,7 @@ Future<AtomFeed> getAtom(String atomUrl) async {
 }
 
 Future<RssFeed> getRss(String rssUrl) async {
-  HttpClient client = HttpClient();
+  var client = HttpClient();
   HttpClientRequest request = await client.getUrl(Uri.parse(rssUrl));
   HttpClientResponse response = await request.close();
   var status = await response.transform(Utf8Decoder()).join();
@@ -120,7 +120,7 @@ Future<String> getStatus(String selectedUrl) async {
   var status = "";
   RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
-  HttpClient client = HttpClient();
+  var client = HttpClient();
   client.badCertificateCallback = (cert, host, port) => true;
 
   try {
@@ -163,7 +163,7 @@ Future<String> disconnectGateway(String selectedUrl) async {
       'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
   var status = "";
 
-  HttpClient client = HttpClient();
+  var client = HttpClient();
   client.badCertificateCallback = (cert, host, port) => true;
 
   try {
@@ -195,7 +195,6 @@ Future<String> disconnectGateway(String selectedUrl) async {
 /// ```
 Future<String> report(String text,
     {String title, String channel: "projet_flutter_notif"}) async {
-  // TODO: Add UnitTest
   var status = "";
 
   if (text != "" && title != "") {
@@ -225,6 +224,32 @@ Future<String> report(String text,
     }
   } else {
     status = "Not enough information.";
+  }
+
+  return status;
+}
+
+Future<String> loginSogo(String uid, String pswd) async {
+  var url = 'https://sogo.emse.fr/SOGo/connect';
+  var status = "";
+
+  var client = HttpClient();
+
+  try {
+    HttpClientRequest request = await client.postUrl(Uri.parse(url));
+    var data = {'userName': uid, 'password': pswd, 'rememberLogin': '1'};
+    request.headers.contentLength = json.encode(data).length; // Needed
+    request.headers.contentType =
+        ContentType("application", "json", charset: "utf-8");
+    request.write(json.encode(data));
+    HttpClientResponse response = await request.close();
+    var body = await response.transform(Utf8Decoder()).join();
+    print(body);
+    if (response.statusCode == 200) {
+    } else
+      throw Exception("HttpError: ${response.statusCode}");
+  } catch (e) {
+    status = e.toString();
   }
 
   return status;
