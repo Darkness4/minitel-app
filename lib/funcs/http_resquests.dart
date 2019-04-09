@@ -25,9 +25,7 @@ Future<String> autoLogin(
   var status = "";
 
   HttpClient client = HttpClient();
-  client.badCertificateCallback =
-      ((X509Certificate cert, String host, int port) =>
-          true); // SECURITY WARNING  Bypass certificate!!!
+  client.badCertificateCallback = (cert, host, port) => true;
 
   try {
     // SessionId
@@ -41,9 +39,7 @@ Future<String> autoLogin(
     request.write(data);
     HttpClientResponse response = await request.close();
     var sessionId = "";
-    var body = "";
-    var stream = response.transform(Utf8Decoder());
-    await for (var str in stream) body += str;
+    var body = await response.transform(Utf8Decoder()).join();
     if (response.statusCode == 200) {
       if (body.contains('title_error')) {
         throw ("Error: Bad Username or Password");
@@ -68,9 +64,7 @@ Future<String> autoLogin(
     request.write(data);
 
     response = await request.close();
-    body = "";
-    stream = response.transform(Utf8Decoder());
-    await for (var str in stream) body += str;
+    body = await response.transform(Utf8Decoder()).join();
     if (body.contains('title_error'))
       throw Exception("Error: SessionId is incorrect. Please check the RegEx.");
     else {
@@ -91,26 +85,18 @@ Future<String> autoLogin(
 }
 
 Future<AtomFeed> getAtom(String atomUrl) async {
-  var status = "";
   HttpClient client = HttpClient();
   HttpClientRequest request = await client.getUrl(Uri.parse(atomUrl));
   HttpClientResponse response = await request.close();
-  var stream = response.transform(Utf8Decoder());
-  await for (var char in stream) {
-    status += char;
-  }
+  var status = await response.transform(Utf8Decoder()).join();
   return AtomFeed.parse(status);
 }
 
 Future<RssFeed> getRss(String rssUrl) async {
-  var status = "";
   HttpClient client = HttpClient();
   HttpClientRequest request = await client.getUrl(Uri.parse(rssUrl));
   HttpClientResponse response = await request.close();
-  var stream = response.transform(Utf8Decoder());
-  await for (var char in stream) {
-    status += char;
-  }
+  var status = await response.transform(Utf8Decoder()).join();
   return RssFeed.parse(status);
 }
 
@@ -130,22 +116,22 @@ Future<RssFeed> getRss(String rssUrl) async {
 /// String status = await getStatus("172.17.0.1") // "x seconds left"
 /// ```
 Future<String> getStatus(String selectedUrl) async {
-  var url = 'https://$selectedUrl/auth/';
+  var url = 'https://$selectedUrl/auth/login.html';
   var status = "";
   RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
   HttpClient client = HttpClient();
-  client.badCertificateCallback =
-      ((X509Certificate cert, String host, int port) =>
-          true); // SECURITY WARNING  Bypass certificate!!!
+  client.badCertificateCallback = (cert, host, port) => true;
 
   try {
-    HttpClientRequest request = await client.postUrl(Uri.parse(url));
+    HttpClientRequest request = await client.getUrl(Uri.parse(url));
+    request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    // print(request.method.toString());
+    // print(request.headers.toString());
+
     HttpClientResponse response = await request.close();
-    var stream = response.transform(Utf8Decoder());
+    var body = await response.transform(Utf8Decoder()).join();
     if (response.statusCode == 200) {
-      var body = "";
-      await for (var char in stream) body += char;
       if (!body.contains('l_rtime')) {
         throw ("Not logged in");
       } else {
@@ -165,6 +151,39 @@ Future<String> getStatus(String selectedUrl) async {
   return status;
 }
 
+/// Disconnect from the portal.
+///
+///
+///
+/// ```
+/// String status = await getStatus("172.17.0.1") // "x seconds left"
+/// ```
+Future<String> disconnectGateway(String selectedUrl) async {
+  var url =
+      'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
+  var status = "";
+
+  HttpClient client = HttpClient();
+  client.badCertificateCallback = (cert, host, port) => true;
+
+  try {
+    HttpClientRequest request = await client.getUrl(Uri.parse(url));
+    request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    HttpClientResponse response = await request.close();
+    var body = await response.transform(Utf8Decoder()).join();
+    if (response.statusCode == 200) {
+      status = body.contains('title_success')
+          ? 'You have logged out'
+          : "Disconnection failed.";
+    } else
+      throw Exception("HttpError: ${response.statusCode}");
+  } catch (e) {
+    status = e.toString();
+  }
+
+  return status;
+}
+
 /// Report data to the Slack of Minitel
 ///
 /// Send a POST data to the Webhook of the Slack of Minitel by using [HttpClientRequest].
@@ -174,7 +193,8 @@ Future<String> getStatus(String selectedUrl) async {
 /// ```
 /// String status = await report("Description", title: "Title");
 /// ```
-Future<String> report(String text, {String title, String channel: "projet_flutter_notif"}) async {
+Future<String> report(String text,
+    {String title, String channel: "projet_flutter_notif"}) async {
   // TODO: Add UnitTest
   var status = "";
 
@@ -186,7 +206,8 @@ Future<String> report(String text, {String title, String channel: "projet_flutte
     var data = {
       'text': out,
       'username': 'Flutter Reporter Bot',
-      'icon_url': 'https://raw.githubusercontent.com/dart-lang/logos/master/flutter/logo%2Btext/vertical/default.png',
+      'icon_url':
+          'https://raw.githubusercontent.com/dart-lang/logos/master/flutter/logo%2Btext/vertical/default.png',
       'channel': channel, // Marc : DE8PA0Z1C
     };
 
@@ -198,10 +219,7 @@ Future<String> report(String text, {String title, String channel: "projet_flutte
           ContentType("application", "json", charset: "utf-8");
       request.write(json.encode(data));
       HttpClientResponse response = await request.close();
-      var stream = response.transform(Utf8Decoder());
-      await for (var char in stream) {
-        status += char;
-      }
+      status = await response.transform(Utf8Decoder()).join();
     } catch (e) {
       status = e.toString();
     }
