@@ -22,19 +22,16 @@ void main() {
 
     test('Get status Not logged in from 195.83.139.7', () async {
       await disconnectGateway("195.83.139.7");
-      var status = await getStatus("fw-cgcp.emse.fr");
+      var status = await getStatus("195.83.139.7");
       print(status);
 
       expect(status.contains("logged"), true);
     });
 
-    test('Get status SUCCESS from fw-cgcp.emse.fr', () async {
-      await autoLogin(
-          "marc.nguyen",
-          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")),
-          "fw-cgcp.emse.fr",
-          240);
-      var status = await getStatus("fw-cgcp.emse.fr");
+    test('Get status SUCCESS from 195.83.139.7', () async {
+      await autoLogin("marc.nguyen",
+          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
+      var status = await getStatus("195.83.139.7");
       print(status);
 
       expect(status.contains("seconds"), true);
@@ -55,6 +52,8 @@ void main() {
     });
 
     test('Disconnect from 195.83.139.7', () async {
+      await autoLogin("marc.nguyen",
+          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
       var status = await disconnectGateway("195.83.139.7");
       print(status);
 
