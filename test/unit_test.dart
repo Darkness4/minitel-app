@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
 import 'package:test/test.dart';
@@ -28,14 +27,17 @@ void main() {
       expect(status.contains("logged"), true);
     });
 
-    test('Get status SUCCESS from 195.83.139.7', () async {
-      await autoLogin("marc.nguyen",
-          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
-      var status = await getStatus("195.83.139.7");
-      print(status);
+    // test('Get status SUCCESS from 195.83.139.7', () async {
+    //   var status = await autoLogin(
+    //           "marc.nguyen",
+    //           utf8.decode(base64.decode("c3RpY2ttYW45NjM=")),
+    //           "195.83.139.7",
+    //           240)
+    //       .then((out) => getStatus("195.83.139.7"));
+    //   print(status);
 
-      expect(status.contains("seconds"), true);
-    });
+    //   expect(status.contains("seconds"), true);
+    // });
 
     test('Get status intentionaly from google.fr to get error', () async {
       var status = await getStatus("www.google.fr");
@@ -51,14 +53,14 @@ void main() {
       expect(status.contains("HttpError"), true);
     });
 
-    test('Disconnect from 195.83.139.7', () async {
-      await autoLogin("marc.nguyen",
-          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
-      var status = await disconnectGateway("195.83.139.7");
-      print(status);
+    // test('Disconnect from 195.83.139.7', () async {
+    //   await autoLogin("marc.nguyen",
+    //       utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
+    //   var status = await disconnectGateway("195.83.139.7");
+    //   print(status);
 
-      expect(status.contains("You have logged out"), true);
-    });
+    //   expect(status.contains("You have logged out"), true);
+    // });
 
     test('Good Username and Password to 195.83.139.7', () async {
       var status = await autoLogin("marc.nguyen",
