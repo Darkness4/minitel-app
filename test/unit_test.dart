@@ -1,6 +1,8 @@
-import 'package:test/test.dart';
 import 'dart:convert';
+import 'dart:io';
+
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Http Requests', () {
@@ -11,43 +13,60 @@ void main() {
       expect(status, "Error: Bad Username or Password");
     });
 
+    test('Bad Username and Password to google.fr to get HttpError', () async {
+      var status = await autoLogin("", "", "google.fr", 0);
+      print(status);
+
+      expect(status.contains("HttpError"), true);
+    });
+
+    test('Get status Not logged in from 195.83.139.7', () async {
+      await disconnectGateway("195.83.139.7");
+      var status = await getStatus("fw-cgcp.emse.fr");
+      print(status);
+
+      expect(status.contains("logged"), true);
+    });
+
+    test('Get status SUCCESS from fw-cgcp.emse.fr', () async {
+      await autoLogin(
+          "marc.nguyen",
+          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")),
+          "fw-cgcp.emse.fr",
+          240);
+      var status = await getStatus("fw-cgcp.emse.fr");
+      print(status);
+
+      expect(status.contains("seconds"), true);
+    });
+
+    test('Get status intentionaly from google.fr to get error', () async {
+      var status = await getStatus("www.google.fr");
+      print(status);
+
+      expect(status.contains("HttpError"), true);
+    });
+
+    test('Disconnect intentionaly from google.fr to get error', () async {
+      var status = await disconnectGateway("www.google.fr");
+      print(status);
+
+      expect(status.contains("HttpError"), true);
+    });
+
+    test('Disconnect from 195.83.139.7', () async {
+      var status = await disconnectGateway("195.83.139.7");
+      print(status);
+
+      expect(status.contains("You have logged out"), true);
+    });
+
     test('Good Username and Password to 195.83.139.7', () async {
       var status = await autoLogin("marc.nguyen",
           utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
       print(status);
 
       expect(status.contains("seconds"), true);
-    });
-
-    test('Bad Username and Password to google.fr', () async {
-      var status = await autoLogin("", "", "google.fr", 0);
-      print(status);
-
-      expect(status.contains("404"), true);
-    });
-
-    test('Get status Not logged in from 195.83.139.7 without success',
-        () async {
-      var status = await getStatus("195.83.139.7");
-      print(status);
-
-      expect(status.contains("logged"), true);
-    });
-
-    test('Get status SUCCESS from 195.83.139.7', () async {
-      await autoLogin("marc.nguyen",
-          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
-      var status = await getStatus("195.83.139.7");
-      print(status);
-
-      expect(status.contains("seconds"), true);
-    });
-
-    test('Get status from google.fr with 404 error', () async {
-      var status = await getStatus("google.fr");
-      print(status);
-
-      expect(status.contains("404"), true);
     });
 
     test('Report to slack', () async {
