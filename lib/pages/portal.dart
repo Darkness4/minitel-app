@@ -7,6 +7,7 @@ import 'portal_apps/campus.dart';
 import 'portal_apps/logiciels.dart';
 import 'portal_apps/gitlab.dart';
 import 'portal_apps/promethee.dart';
+import 'portal_apps/imprimante.dart';
 
 class PortalPage extends StatefulWidget {
   final String title;
@@ -44,10 +45,11 @@ class PortalPageState extends State<PortalPage> {
               color: Colors.lightGreen[100],
               elevation: 4,
               child: InkWell(
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SogoWebView()),
-                    ),
+                // onTap: () => Navigator.push(
+                //       context,
+                //       MaterialPageRoute(builder: (context) => SogoWebView()),
+                //     ),
+                onTap: _launchURL('https://sogo.emse.fr/'),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -61,10 +63,11 @@ class PortalPageState extends State<PortalPage> {
             Card(
               elevation: 4,
               child: InkWell(
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CampusWebView()),
-                    ),
+                // onTap: () => Navigator.push(
+                //       context,
+                //       MaterialPageRoute(builder: (context) => CampusWebView()),
+                //     ),
+                onTap: _launchURL('https://campus.emse.fr/'),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -80,11 +83,12 @@ class PortalPageState extends State<PortalPage> {
               child: InkWell(
                 highlightColor: Color(0xa0000000),
                 splashColor: Colors.black,
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PrometheeWebView()),
-                    ),
+                // onTap: () => Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => PrometheeWebView()),
+                //     ),
+                onTap: _launchURL('https://promethee.emse.fr/'),
                 child: Opacity(
                   opacity: 0.9,
                   child: DecoratedBox(
@@ -103,11 +107,12 @@ class PortalPageState extends State<PortalPage> {
               child: InkWell(
                 highlightColor: Color(0xa0000000),
                 splashColor: Colors.black,
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LogicielsWebView()),
-                    ),
+                // onTap: () => Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => LogicielsWebView()),
+                //     ),
+                onTap: _launchURL('http://edusoft.emse.fr/'),
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -146,10 +151,11 @@ class PortalPageState extends State<PortalPage> {
             Card(
               elevation: 4,
               child: InkWell(
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => GitlabWebView()),
-                    ),
+                // onTap: () => Navigator.push(
+                //       context,
+                //       MaterialPageRoute(builder: (context) => GitlabWebView()),
+                //     ),
+                onTap: _launchURL('https://gitlab.emse.fr/'),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -163,11 +169,12 @@ class PortalPageState extends State<PortalPage> {
             Card(
               elevation: 4,
               child: InkWell(
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AnnuaireWebView()),
-                    ),
+                // onTap: () => Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => AnnuaireWebView()),
+                //     ),
+                onTap: _launchURL('http://annuaire.emse.fr/'),
                 child: LayoutBuilder(
                   builder: (context, constraint) => Column(
                         children: <Widget>[
@@ -178,6 +185,31 @@ class PortalPageState extends State<PortalPage> {
                           ),
                           Text(
                             "Annuaire",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[700],
+                            ),
+                          )
+                        ],
+                      ),
+                ),
+              ),
+            ),
+            Card(
+              elevation: 4,
+              child: InkWell(
+                onTap: () => _launchURL("http://192.168.130.2/watchdoc"),
+                child: LayoutBuilder(
+                  builder: (context, constraint) => Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.print,
+                            size: constraint.biggest.height - 40,
+                            color: Colors.blue,
+                          ),
+                          Text(
+                            "Imprimante",
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
