@@ -19,22 +19,13 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-              title: Text(AppLoc.of(context).titleLoginPage),
-              leading: Icon(Icons.vpn_key),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/')
-                  Navigator.pushNamed(context, '/');
-              }),
-          ListTile(
               title: Text(AppLoc.of(context).titlePortalPage),
               leading: Icon(Icons.apps),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/portal')
-                  Navigator.pushNamed(context, '/portal');
+                if (ModalRoute.of(context).settings.name != '/')
+                  Navigator.pushNamed(context, '/');
               }),
           Divider(),
           ListTile(
