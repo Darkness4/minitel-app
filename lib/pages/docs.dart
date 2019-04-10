@@ -16,13 +16,6 @@ class DocumentationPage extends StatefulWidget {
 class DocumentationPageState extends State<DocumentationPage> {
   final _controller = PageController(initialPage: 0);
 
-  @override
-  @override
-  void dispose() { 
-    _controller.dispose();
-    super.dispose();
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -71,5 +64,11 @@ class DocumentationPageState extends State<DocumentationPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

@@ -100,10 +100,10 @@ class DiagnoseDoc extends StatelessWidget {
       Header("Ping DNS", level: 2),
       Paragraph(
         "    DNS 1: 192.168.130.33\n"
-            "    DNS 2: 192.168.130.3\n"
-            "    DNS 3: 8.8.8.8\n"
-            "    DNS 4: 1.1.1.1\n"
-            "    DNS 5: 10.163.0.6\n",
+        "    DNS 2: 192.168.130.3\n"
+        "    DNS 3: 8.8.8.8\n"
+        "    DNS 4: 1.1.1.1\n"
+        "    DNS 5: 10.163.0.6\n",
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       Paragraph(AppLoc.of(context).sentenceDocDiagnosePingDNS),

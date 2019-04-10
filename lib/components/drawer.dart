@@ -18,6 +18,44 @@ class MainDrawer extends StatelessWidget {
               color: Colors.green,
             ),
           ),
+          ListTile(
+              title: Text(AppLoc.of(context).titlePortalPage),
+              leading: Icon(Icons.apps),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context); // Close Drawer
+                if (ModalRoute.of(context).settings.name != '/')
+                  Navigator.pushNamed(context, '/');
+              }),
+          Divider(),
+          ListTile(
+              title: Text(AppLoc.of(context).titleNewsPage),
+              leading: Icon(Icons.rss_feed),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context); // Close Drawer
+                if (ModalRoute.of(context).settings.name != '/news')
+                  Navigator.pushNamed(context, '/news');
+              }),
+          ListTile(
+              title: Text(AppLoc.of(context).titleCalendarPage),
+              leading: Icon(Icons.calendar_today),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context); // Close Drawer
+                if (ModalRoute.of(context).settings.name != '/calendar')
+                  Navigator.pushNamed(context, '/calendar');
+              }),
+          ListTile(
+              title: Text(AppLoc.of(context).titleMapsPage),
+              leading: Icon(Icons.map),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context); // Close Drawer
+                if (ModalRoute.of(context).settings.name != '/maps')
+                  Navigator.pushNamed(context, '/maps');
+              }),
+          Divider(),
           Container(
             color: Colors.red,
             child: ListTile(
@@ -34,64 +72,28 @@ class MainDrawer extends StatelessWidget {
                   color: Colors.white,
                 ),
                 onTap: () {
-                  Navigator.pop(context);  // Close Drawer
+                  Navigator.pop(context); // Close Drawer
                   if (ModalRoute.of(context).settings.name != '/reporting')
                     Navigator.pushNamed(context, '/reporting');
                 }),
           ),
           ListTile(
-              title: Text(AppLoc.of(context).titleLoginPage),
-              leading: Icon(Icons.vpn_key),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.pop(context);  // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/')
-                    Navigator.pushNamed(context, '/');
-              }),
-          ListTile(
               title: Text(AppLoc.of(context).titleDiagnosePage),
               leading: Icon(Icons.zoom_in),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                Navigator.pop(context);  // Close Drawer
+                Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/diagnose')
-                    Navigator.pushNamed(context, '/diagnose');
+                  Navigator.pushNamed(context, '/diagnose');
               }),
           ListTile(
               title: Text(AppLoc.of(context).titleDocumentationPage),
               leading: Icon(Icons.description),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                Navigator.pop(context);  // Close Drawer
+                Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/docs')
-                    Navigator.pushNamed(context, '/docs');
-              }),
-          ListTile(
-              title: Text(AppLoc.of(context).titleNewsPage),
-              leading: Icon(Icons.rss_feed),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.pop(context);  // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/news')
-                    Navigator.pushNamed(context, '/news');
-              }),
-          ListTile(
-              title: Text(AppLoc.of(context).titleCalendarPage),
-              leading: Icon(Icons.calendar_today),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.pop(context);  // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/calendar')
-                    Navigator.pushNamed(context, '/calendar');
-              }),
-          ListTile(
-              title: Text(AppLoc.of(context).titleMapsPage),
-              leading: Icon(Icons.map),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.pop(context);  // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/maps')
-                    Navigator.pushNamed(context, '/maps');
+                  Navigator.pushNamed(context, '/docs');
               }),
         ],
       ),
