@@ -84,6 +84,39 @@ Future<String> autoLogin(
   return status;
 }
 
+/// Disconnect from the portal.
+///
+///
+///
+/// ```
+/// String status = await getStatus("172.17.0.1") // "x seconds left"
+/// ```
+Future<String> disconnectGateway(String selectedUrl) async {
+  var url =
+      'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
+  var status = "";
+
+  var client = HttpClient();
+  client.badCertificateCallback = (cert, host, port) => true;
+
+  try {
+    HttpClientRequest request = await client.getUrl(Uri.parse(url));
+    request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    HttpClientResponse response = await request.close();
+    var body = await response.transform(Utf8Decoder()).join();
+    if (response.statusCode == 200) {
+      status = body.contains('title_success')
+          ? 'You have logged out'
+          : "Disconnection failed.";
+    } else
+      throw Exception("HttpError: ${response.statusCode}");
+  } catch (e) {
+    status = e.toString();
+  }
+
+  return status;
+}
+
 Future<AtomFeed> getAtom(String atomUrl) async {
   var client = HttpClient();
   HttpClientRequest request = await client.getUrl(Uri.parse(atomUrl));
@@ -151,30 +184,23 @@ Future<String> getStatus(String selectedUrl) async {
   return status;
 }
 
-/// Disconnect from the portal.
-///
-///
-///
-/// ```
-/// String status = await getStatus("172.17.0.1") // "x seconds left"
-/// ```
-Future<String> disconnectGateway(String selectedUrl) async {
-  var url =
-      'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
+Future<String> loginSogo(String uid, String pswd) async {
+  var url = 'https://sogo.emse.fr/SOGo/connect';
   var status = "";
 
   var client = HttpClient();
-  client.badCertificateCallback = (cert, host, port) => true;
 
   try {
-    HttpClientRequest request = await client.getUrl(Uri.parse(url));
-    request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    HttpClientRequest request = await client.postUrl(Uri.parse(url));
+    var data = {'userName': uid, 'password': pswd, 'rememberLogin': '1'};
+    request.headers.contentLength = json.encode(data).length; // Needed
+    request.headers.contentType =
+        ContentType("application", "json", charset: "utf-8");
+    request.write(json.encode(data));
     HttpClientResponse response = await request.close();
     var body = await response.transform(Utf8Decoder()).join();
+    print(body);
     if (response.statusCode == 200) {
-      status = body.contains('title_success')
-          ? 'You have logged out'
-          : "Disconnection failed.";
     } else
       throw Exception("HttpError: ${response.statusCode}");
   } catch (e) {
@@ -224,32 +250,6 @@ Future<String> report(String text,
     }
   } else {
     status = "Not enough information.";
-  }
-
-  return status;
-}
-
-Future<String> loginSogo(String uid, String pswd) async {
-  var url = 'https://sogo.emse.fr/SOGo/connect';
-  var status = "";
-
-  var client = HttpClient();
-
-  try {
-    HttpClientRequest request = await client.postUrl(Uri.parse(url));
-    var data = {'userName': uid, 'password': pswd, 'rememberLogin': '1'};
-    request.headers.contentLength = json.encode(data).length; // Needed
-    request.headers.contentType =
-        ContentType("application", "json", charset: "utf-8");
-    request.write(json.encode(data));
-    HttpClientResponse response = await request.close();
-    var body = await response.transform(Utf8Decoder()).join();
-    print(body);
-    if (response.statusCode == 200) {
-    } else
-      throw Exception("HttpError: ${response.statusCode}");
-  } catch (e) {
-    status = e.toString();
   }
 
   return status;

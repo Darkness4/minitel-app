@@ -2,8 +2,8 @@ import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
-import 'portal_tabs/login.dart';
 import 'portal_tabs/apps_list.dart';
+import 'portal_tabs/login.dart';
 // import 'portal_tabs/portal_apps/sogo.dart';
 // import 'portal_tabs/portal_apps/annuaire.dart';
 // import 'portal_tabs/portal_apps/campus.dart';
