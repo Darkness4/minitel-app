@@ -26,53 +26,34 @@ class PortalPageState extends State<PortalPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.blue,
-        //   title: Text(widget.title),
-        //   bottom: TabBar(
-        //     tabs: <Widget>[
-        //       Tab(
-        //         icon: Icon(Icons.vpn_key),
-        //         text: "Login",
-        //       ),
-        //       Tab(
-        //         icon: Icon(Icons.apps),
-        //         text: "Apps",
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        
         body: NestedScrollView(
-          body: TabBarView(
-            children: <Widget>[
-              LoginPage(title: AppLoc.of(context).titleLoginPage),
-              AppsList(),
-            ],
-          ),
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) 
-        => <Widget>[
-          SliverAppBar(
-            title: Text(widget.title),
-            pinned: true,
-            floating: true,
-            forceElevated: innerBoxIsScrolled,
-            bottom: TabBar(
-              tabs: <Tab>[
-                Tab(
-                icon: Icon(Icons.vpn_key),
-                text: "Login",
-              ),
-              Tab(
-                icon: Icon(Icons.apps),
-                text: "Apps",
-              ),
+            body: TabBarView(
+              children: <Widget>[
+                LoginPage(title: AppLoc.of(context).titleLoginPage),
+                AppsList(),
               ],
             ),
-          ),
-        ]
-          
-        ),
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
+                      SliverAppBar(
+                        title: Text(widget.title),
+                        pinned: true,
+                        floating: true,
+                        forceElevated: innerBoxIsScrolled,
+                        bottom: TabBar(
+                          tabs: <Tab>[
+                            Tab(
+                              icon: Icon(Icons.vpn_key),
+                              text: "Login",
+                            ),
+                            Tab(
+                              icon: Icon(Icons.apps),
+                              text: "Apps",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
         drawer: MainDrawer(),
       ),
     );
