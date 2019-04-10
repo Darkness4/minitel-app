@@ -38,16 +38,26 @@ pages:
 build-test:
   stage: test
   script:
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
     - flutter packages get
-    - flutter -v build apk --release
+    - flutter build apk --release
   except:
   - tests
 
 build:
   stage: build
   script:
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
     - flutter packages get
-    - flutter -v build apk --release
+    - flutter build apk --release
     - mv build/app/outputs/apk/app.apk app.apk
   artifacts:
     paths:
