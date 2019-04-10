@@ -2,10 +2,17 @@
 
 Principale ligne de survie dans l'ISMIN.
 
-[![Build Status](https://img.shields.io/gitlab/pipeline/Darkness4/minitel-app.svg?style=flat-square)](https://gitlab.com/Darkness4/minitel-app/pipelines)
-![License: MIT](https://img.shields.io/github/license/Darkness4/minitel-app.svg?style=flat-square)
+[![Build Status](https://img.shields.io/gitlab/pipeline/Darkness4/minitel-app.svg?style=flat)](https://gitlab.com/Darkness4/minitel-app/pipelines)
+![License: MIT](https://img.shields.io/github/license/Darkness4/minitel-app.svg?style=flat)
+[![Codemagic build status](https://api.codemagic.io/apps/5caa704d02fe6a0008c69612/5caa704d02fe6a0008c69611/status_badge.svg)](https://codemagic.io/apps/5caa704d02fe6a0008c69612/5caa704d02fe6a0008c69611/latest_build)
 
 ## Screenshots
+
+![Login Screenshot](./docs/screenshots/login.png)
+![Apps Screenshot](./docs/screenshots/apps.png)
+![Sogo Screenshot](./docs/screenshots/sogo.png)
+![Diagnose Screenshot](./docs/screenshots/diagnose.png)
+![Reporting Screenshot](./docs/screenshots/reporting.png)
 
 ## Features
 
