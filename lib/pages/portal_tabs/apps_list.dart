@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-_launchURL(String url) async {
+_launchURL(String url, {forceWebView: true}) async {
   if (await canLaunch(url)) {
     await launch(
       url,
-      forceWebView: true,
+      forceWebView: forceWebView,
       enableJavaScript: true,
     );
   } else {
@@ -191,7 +191,10 @@ class AppsList extends StatelessWidget {
             Card(
               elevation: 4,
               child: InkWell(
-                onTap: () => _launchURL("http://192.168.130.2/watchdoc"),
+                onTap: () => _launchURL(
+                      "http://192.168.130.2/watchdoc",
+                      forceWebView: false,
+                    ),
                 child: LayoutBuilder(
                   builder: (context, constraint) => Column(
                         children: <Widget>[
