@@ -42,14 +42,7 @@ class AppsList extends StatelessWidget {
                 //       MaterialPageRoute(builder: (context) => SogoWebView()),
                 //     ),
                 onTap: () => _launchURL('https://sogo.emse.fr/'),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/img/mail.png'),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
+                child: Image.asset('assets/img/mail.png'),
               ),
             ),
             Card(
@@ -60,14 +53,7 @@ class AppsList extends StatelessWidget {
                 //       MaterialPageRoute(builder: (context) => CampusWebView()),
                 //     ),
                 onTap: () => _launchURL('https://campus.emse.fr/'),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/img/moodle.png'),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
+                child: Image.asset('assets/img/moodle.png'),
               ),
             ),
             Card(
@@ -83,13 +69,9 @@ class AppsList extends StatelessWidget {
                 onTap: () => _launchURL('https://promethee.emse.fr/'),
                 child: Opacity(
                   opacity: 0.9,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/img/promethee.png'),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
+                  child: Image.asset(
+                    'assets/img/promethee.png',
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
@@ -148,14 +130,7 @@ class AppsList extends StatelessWidget {
                 //       MaterialPageRoute(builder: (context) => GitlabWebView()),
                 //     ),
                 onTap: () => _launchURL('https://gitlab.emse.fr/'),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/img/gitlab.png'),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
+                child: Image.asset('assets/img/gitlab.png'),
               ),
             ),
             Card(
