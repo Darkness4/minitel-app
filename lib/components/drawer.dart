@@ -10,9 +10,20 @@ class MainDrawer extends StatelessWidget {
         // fix regression, TODO: Remove when fixed
         children: <Widget>[
           DrawerHeader(
-            child: Text(
-              AppLoc.of(context).title,
-              style: TextStyle(color: Colors.white, fontSize: 32),
+            child: Flex(
+              direction: Axis.vertical,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(
+                  child: Image.asset("assets/img/logo_minitel.png"),
+                  height: 75,
+                ),
+                Text(
+                  AppLoc.of(context).title,
+                  style: TextStyle(color: Colors.white, fontSize: 23),
+                ),
+              ],
             ),
             decoration: BoxDecoration(
               color: Colors.green,
