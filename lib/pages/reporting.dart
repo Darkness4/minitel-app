@@ -1,23 +1,20 @@
 import 'dart:async';
 
-import 'package:auto_login_flutter/components/cards.dart';
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/diagnosis_suite.dart';
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
-import 'package:auto_login_flutter/localizations.dart';
-import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'reporting_tabs/diagnose_tab.dart';
+import 'reporting_tabs/report_tab.dart';
+
 class ReportingPage extends StatefulWidget {
   final String title;
-  final String channel;
 
-  const ReportingPage(
-      {Key key, this.title, this.channel: "projet_flutter_notif"})
-      : super(key: key);
+  const ReportingPage({Key key, this.title}) : super(key: key);
 
   @override
   ReportingPageState createState() => ReportingPageState();
@@ -25,29 +22,26 @@ class ReportingPage extends StatefulWidget {
 
 class ReportingPageState extends State<ReportingPage>
     with SingleTickerProviderStateMixin {
-  final _titleFocusNode = FocusNode();
-  final _descriptionFocusNode = FocusNode();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
 
-  /// State of the "Send to Slack" action.
-  ///
-  /// 0 = None, 1 = Loading, 2 = Done
-  int _reportState = 0;
+  /// Control the animation of the speed dial.
+  AnimationController _animationController;
+
+  String _report = "";
 
   /// State of the Diagnosis.
   ///
   /// 0 = None, 1 = Loading, 2 = Done
   int _diagnosisState = 0;
 
+  /// State of the "Send to Slack" action.
+  ///
+  /// 0 = None, 1 = Loading, 2 = Done
+  int _reportState = 0;
+
   /// Used for the [CircularProgressIndicator], between 0.0 and 1.0.
   double _percentageDiagnoseProgress = 0.0;
-
-  /// Control the animation of the speed dial.
-  AnimationController _animationController;
-
-  /// This is the diagnosis report.
-  String _report = "";
 
   Widget get _diagnosisButton {
     return FloatingActionButton(
@@ -157,46 +151,59 @@ class ReportingPageState extends State<ReportingPage>
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Colors.red,
-      ),
-      body: Container(
-        color: Colors.red,
-        child: Center(
-          child: Scrollbar(
-            child: ListView(children: <Widget>[
-              _ReportCard(
-                  titleController: _titleController,
-                  titleFocusNode: _titleFocusNode,
-                  descriptionFocusNode: _descriptionFocusNode,
-                  descriptionController: _descriptionController),
-              _TutorialCard(),
-              _ContactsCard(),
-            ]),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder:
+              (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
+                    SliverAppBar(
+                      title: Text(widget.title),
+                      pinned: true,
+                      floating: true,
+                      forceElevated: innerBoxIsScrolled,
+                      bottom: TabBar(
+                        tabs: <Tab>[
+                          Tab(
+                            icon: Icon(Icons.warning),
+                            text: "Report",
+                          ),
+                          Tab(
+                            icon: Icon(Icons.zoom_in),
+                            text: "Diagnosis",
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+          body: TabBarView(
+            children: <Widget>[
+              ReportTab(
+                titleController: _titleController,
+                descriptionController: _descriptionController,
+              ),
+              DiagnoseTab(),
+            ],
           ),
         ),
-      ),
-      drawer: MainDrawer(),
-      floatingActionButton: Builder(
-        builder: (context) => Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                _shareButton,
-                _mailButton,
-                _buildReportButton(context, channel: widget.channel),
-                _diagnosisButton,
-              ],
-            ),
+        drawer: MainDrawer(),
+        floatingActionButton: Builder(
+          builder: (context) => Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  _shareButton,
+                  _mailButton,
+                  _buildReportButton(context),
+                  _diagnosisButton,
+                ],
+              ),
+        ),
       ),
     );
   }
 
   @override
   void dispose() {
-    _descriptionFocusNode.dispose();
-    _titleFocusNode.dispose();
     _titleController.dispose();
     _descriptionController.dispose();
     super.dispose();
@@ -277,111 +284,5 @@ class ReportingPageState extends State<ReportingPage>
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(
         'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
-  }
-}
-
-/// Shows all possible ways of communication to Minitel.
-class _ContactsCard extends StatelessWidget {
-  const _ContactsCard({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DocCard(
-      elevation: 4,
-      children: <Widget>[
-        Header("Contacts"),
-        Header("Facebook: Minitel Ismin", level: 2),
-        Header("G*: Contact Admin", level: 2),
-        Header("Mail: minitelismin@gmail.com", level: 2),
-      ],
-    );
-  }
-}
-
-/// This is the form needed to be filled.
-class _ReportCard extends StatelessWidget {
-  final TextEditingController _titleController;
-
-  final FocusNode _titleFocusNode;
-  final FocusNode _descriptionFocusNode;
-  final TextEditingController _descriptionController;
-  const _ReportCard({
-    Key key,
-    @required TextEditingController titleController,
-    @required FocusNode titleFocusNode,
-    @required FocusNode descriptionFocusNode,
-    @required TextEditingController descriptionController,
-  })  : _titleController = titleController,
-        _titleFocusNode = titleFocusNode,
-        _descriptionFocusNode = descriptionFocusNode,
-        _descriptionController = descriptionController,
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Card(
-        elevation: 4,
-        child: Container(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            children: <Widget>[
-              TextField(
-                controller: _titleController,
-                style: TextStyle(fontWeight: FontWeight.bold),
-                focusNode: _titleFocusNode,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  labelText: "Title",
-                  hintText: "Room number : Short description.",
-                ),
-                onSubmitted: (term) {
-                  _titleFocusNode.unfocus();
-                  FocusScope.of(context).requestFocus(_descriptionFocusNode);
-                },
-              ),
-              TextField(
-                controller: _descriptionController,
-                maxLines: null,
-                focusNode: _descriptionFocusNode,
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  labelText: "Description",
-                  hintText: "Describe your issue.",
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Shows how to fill a report.
-class _TutorialCard extends StatelessWidget {
-  const _TutorialCard({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DocCard(
-      elevation: 4,
-      children: <Widget>[
-        Header(AppLoc.of(context).sentenceReportingTitle),
-        Header(AppLoc.of(context).sentenceReportingNOTE, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubTitle1, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle2, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle3, level: 2),
-        Paragraph(AppLoc.of(context).sentenceReportingParagraph),
-        Header(AppLoc.of(context).sentenceReportingSubtitle4, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle5, level: 2),
-      ],
-    );
   }
 }

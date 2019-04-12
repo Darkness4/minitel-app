@@ -3,9 +3,7 @@ import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  final String title;
-
-  LoginPage({Key key, this.title}) : super(key: key);
+  LoginPage({Key key}) : super(key: key);
 
   @override
   LoginPageState createState() => LoginPageState();

@@ -89,15 +89,6 @@ class MainDrawer extends StatelessWidget {
                 }),
           ),
           ListTile(
-              title: Text(AppLoc.of(context).titleDiagnosePage),
-              leading: Icon(Icons.zoom_in),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/diagnose')
-                  Navigator.pushNamed(context, '/diagnose');
-              }),
-          ListTile(
               title: Text(AppLoc.of(context).titleDocumentationPage),
               leading: Icon(Icons.description),
               trailing: Icon(Icons.arrow_forward),

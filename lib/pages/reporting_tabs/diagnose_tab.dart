@@ -1,25 +1,21 @@
 import 'dart:io';
 
 import 'package:auto_login_flutter/components/cards.dart';
-import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
 import 'package:auto_login_flutter/localizations.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:share/share.dart';
 
-class DiagnosePage extends StatefulWidget {
-  final String title;
-
-  DiagnosePage({Key key, this.title}) : super(key: key);
+class DiagnoseTab extends StatefulWidget {
+  DiagnoseTab({Key key}) : super(key: key);
 
   @override
-  DiagnosePageState createState() => DiagnosePageState();
+  DiagnoseTabState createState() => DiagnoseTabState();
 }
 
-class DiagnosePageState extends State<DiagnosePage> {
+class DiagnoseTabState extends State<DiagnoseTab> {
   var _alert = "";
   var _statusPublic = "";
   var _statusGateway = "";
@@ -45,20 +41,9 @@ class DiagnosePageState extends State<DiagnosePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.share),
-            onPressed: _share,
-          ),
-        ],
-      ),
-      body: Center(
+    return Container(
         child: Scrollbar(
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
             child: Column(
               children: <Widget>[
                 Text(_alert,
@@ -156,13 +141,6 @@ class DiagnosePageState extends State<DiagnosePage> {
             ),
           ),
         ),
-      ),
-      drawer: MainDrawer(),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _diagnose,
-        icon: Icon(Icons.zoom_in),
-        label: Text(AppLoc.of(context).verbDiagnose),
-      ),
     );
   }
 
@@ -275,30 +253,5 @@ class DiagnosePageState extends State<DiagnosePage> {
           .catchError((e) => setState(() => _nsLookupGoogle = e.toString()));
     } else
       setState(() => _alert = AppLoc.of(context).sentenceNotConnected);
-  }
-
-  _share() {
-    var now = DateTime.now().toString();
-    Share.share("---Report $now---\n"
-        "SSID: $_ssid, Ip: $_ip\n\n"
-        "ip a: \n$_ipAll\n\n"
-        "ifconfig: \n$_ifconfig\n\n"
-        "ARP: \n$_arp\n\n"
-        "Traceroute Google: \n$_tracertGoogle\n\n"
-        "Traceroute Google DNS: \n$_tracertGoogle\n\n"
-        "Ping Loopback: \n$_pingLo\n\n"
-        "Ping Local: \n$_pingLocal\n\n"
-        "HTTP Portal Response: \n$_statusPublic\n\n"
-        "HTTP Portal Response: \n$_statusGateway\n\n"
-        "Ping Gateway: \n$_pingLo\n\n"
-        "Ping DNS1: \n$_pingDNS1\n\n"
-        "Ping DNS2: \n$_pingDNS2\n\n"
-        "Ping DNS3: \n$_pingDNS3\n\n"
-        "Ping DNS4: \n$_pingDNS4\n\n"
-        "Ping DNS5: \n$_pingDNS5\n\n"
-        "NSLookup EMSE: \n$_nsLookupEMSE\n\n"
-        "NSLookup Google: \n$_nsLookupGoogle\n\n"
-        "NSLookup EMSE (Busybox): \n$_nsLookupEMSEBusybox\n\n"
-        "NSLookup Google (Busybox): \n$_nsLookupGoogleBusybox\n\n");
   }
 }
