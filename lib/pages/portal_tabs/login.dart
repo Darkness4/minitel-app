@@ -57,28 +57,7 @@ class LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(bottom: 30),
-                  child: Card(
-                    elevation: 10.0,
-                    child: Padding(
-                      padding: EdgeInsets.all(25),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            Text("Status: ",
-                                style: TextStyle(
-                                  fontSize: 24,
-                                )),
-                            Text(
-                              _status,
-                              style: TextStyle(fontSize: 24, color: Colors.red),
-                            ),
-                          ]),
-                    ),
-                  ),
-                ),
+                _StatusCard(status: _status),
                 Card(
                   elevation: 10.0,
                   child: Padding(
@@ -95,7 +74,11 @@ class LoginPageState extends State<LoginPage> {
                                       value: value,
                                     ))
                                 .toList(),
-                            onChanged: _changedUrlItem,
+                            onChanged: (String selectedUrl) {
+                              _selectedUrl = selectedUrl;
+                              getStatus(_selectedUrl).then(
+                                  (status) => setState(() => _status = status));
+                            },
                           ),
                         ]),
                         Row(
@@ -110,7 +93,8 @@ class LoginPageState extends State<LoginPage> {
                                         value: value,
                                       ))
                                   .toList(),
-                              onChanged: _changedTimeItem,
+                              onChanged: (selectedTime) =>
+                                  setState(() => _selectedTime = selectedTime),
                             ),
                           ],
                         ),
@@ -197,13 +181,40 @@ class LoginPageState extends State<LoginPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) => getStatus(_selectedUrl)
         .then((status) => setState(() => _status = status)));
   }
+}
 
-  _changedTimeItem(String selectedTime) {
-    setState(() => _selectedTime = selectedTime);
-  }
+class _StatusCard extends StatelessWidget {
+  const _StatusCard({
+    Key key,
+    @required String status,
+  })  : _status = status,
+        super(key: key);
 
-  _changedUrlItem(String selectedUrl) {
-    _selectedUrl = selectedUrl;
-    getStatus(_selectedUrl).then((status) => setState(() => _status = status));
+  final String _status;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 30),
+      child: Card(
+        elevation: 10.0,
+        child: Padding(
+          padding: EdgeInsets.all(25),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text("Status: ",
+                    style: TextStyle(
+                      fontSize: 24,
+                    )),
+                Text(
+                  _status,
+                  style: TextStyle(fontSize: 24, color: Colors.red),
+                ),
+              ]),
+        ),
+      ),
+    );
   }
 }

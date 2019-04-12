@@ -139,22 +139,22 @@
     "type": "text",
     "placeholders": {}
   },
-  "sentenceDocDiagnoseHTTP3": "    Si vous avez une erreur OS, la passerelle a un problème, et vous drvriez le signaler à la DSI.",
+  "sentenceDocDiagnoseHTTP3": "    Si vous avez une erreur OS, la passerelle a un problème, et vous devriez le signaler à la DSI.",
   "@sentenceDocDiagnoseHTTP3": {
     "type": "text",
     "placeholders": {}
   },
-  "sentenceDocDiagnoseHTTP4": "    Si vous avez une erreur HTTP 4xx, l'outil de diagnostique a un problème, et vous drvriez le signaler aux developeurs.",
+  "sentenceDocDiagnoseHTTP4": "    Si vous avez une erreur HTTP 4xx, l'outil de diagnostique a un problème, et vous devriez le signaler aux developeurs.",
   "@sentenceDocDiagnoseHTTP4": {
     "type": "text",
     "placeholders": {}
   },
-  "sentenceDocDiagnoseHTTP5": "    Si vous avez une erreur HTTP 5xx, la passerelle a un problème, et vous drvriez le signaler à la DSI.",
+  "sentenceDocDiagnoseHTTP5": "    Si vous avez une erreur HTTP 5xx, la passerelle a un problème, et vous devriez le signaler à la DSI.",
   "@sentenceDocDiagnoseHTTP5": {
     "type": "text",
     "placeholders": {}
   },
-  "sentenceDocDiagnoseHTTP6": "    Un bouton Partage a été mis en place pour envoyer 90% des informations nécessaire pour une réparation complète.\n    Sur 10.163.0.10, vous pouvez signaler aux administrateurs.",
+  "sentenceDocDiagnoseHTTP6": "    Un bouton Partage a été mis en place pour envoyer 90% des informations nécessaire pour une réparation complète.\n    Sur 10.163.0.10, vous pouvez signaler les problèmes aux administrateurs.",
   "@sentenceDocDiagnoseHTTP6": {
     "type": "text",
     "placeholders": {}
@@ -164,7 +164,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "sentenceDocDiagnosePingGateway": "    Cette information ne sert à rien. La passerelle ignore les pings. Cependant, si un ping est reçu, quelqu'un a probablement pris sont IP. Mais, rien est certain.",
+  "sentenceDocDiagnosePingGateway": "    Cette information ne sert à rien. La passerelle ignore les pings. Cependant, si un ping est reçu, quelqu'un a probablement pris son IP. Mais, rien n'est certain.",
   "@sentenceDocDiagnosePingGateway": {
     "type": "text",
     "placeholders": {}
