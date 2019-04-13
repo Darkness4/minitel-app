@@ -401,7 +401,7 @@ class ReportingPageState extends State<ReportingPage>
                       title: Text(widget.title),
                       backgroundColor: Colors.red,
                       pinned: true,
-                      floating: false,
+                      floating: true,
                       forceElevated: true,
                       bottom: TabBar(
                         indicatorColor: Colors.white,

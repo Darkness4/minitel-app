@@ -31,7 +31,7 @@ class PortalPageState extends State<PortalPage> {
                         title: Text(widget.title),
                         pinned: true,
                         floating: true,
-                        forceElevated: innerBoxIsScrolled,
+                        forceElevated: true,
                         bottom: TabBar(
                           tabs: <Tab>[
                             Tab(
