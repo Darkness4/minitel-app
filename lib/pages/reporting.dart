@@ -15,6 +15,240 @@ import 'package:url_launcher/url_launcher.dart';
 import 'reporting_tabs/diagnose_tab.dart';
 import 'reporting_tabs/report_tab.dart';
 
+/// This stores all diagnosis results.
+///
+/// To obtain the report, simply use:
+/// ```
+/// Diagnosis diagnosis;
+/// diagnosis.report["name"];
+/// ```
+///
+/// By default, everything is [null].
+/// All data can be initialized to "" using `diagnosis.onInit()`.
+///
+/// To generates all the data : `diagnosis.diagnose()`
+///
+/// The data is generated asynchronously. The process times out after one minute.
+///
+/// This is all the data that you can get:
+///
+/// - "alert",
+/// - "statusPublic",
+/// - "statusGateway",
+/// - "SSID",
+/// - "IP",
+/// - "ip a",
+/// - "ifconfig",
+/// - "arp",
+/// - "traceroute",
+/// - "traceroute Google",
+/// - "pingLo",
+/// - "pingLocal",
+/// - "pingGateway",
+/// - "pingDNS1",
+/// - "pingDNS2",
+/// - "pingDNS3",
+/// - "pingDNS4",
+/// - "pingDNS5",
+/// - "nsLookupEMSE",
+/// - "nsLookupEMSEBusybox",
+/// - "nsLookupGoogle",
+/// - "nsLookupGoogleBusybox"
+class Diagnosis {
+  Map<String, String> _report = {};
+
+  Map<String, String> get report => _report;
+
+  /// Run a report suite with a 1 minute time out.
+  ///
+  /// Run multiples command and store into the [report] Map.
+  /// The suite is composed of :
+  /// - SSID, IP scan from [Connectivity]
+  /// - ip a
+  /// - ifconfig -a
+  /// - arp -a
+  /// - su -c traceroute google.com and 8.8.8.8
+  /// - ping loopback, 10.163.0.5 (DHCP), 10.163.0.2 (Gateway),
+  /// 192.168.130.33 (School DNS), 192.168.130.3 (School DNS),
+  /// 1.1.1.1 (Cloudflare DNS), 8.8.8.8 (Google DNS), 10.163.0.6 (Private DNS).
+  /// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
+  /// If the report takes too much time, the function return any given
+  /// informations after one minute.
+  Future<String> diagnose(BuildContext context) async {
+    var out = "";
+    const argsPing = "-c 4 -w 5 -W 5";
+    _report["alert"] = "";
+    _report["statusPublic"] = "Loading...";
+    _report["statusGateway"] = "Loading...";
+    _report["SSID"] = "Loading...";
+    _report["IP"] = "Loading...";
+    _report["ip a"] = "Loading...";
+    _report["ifconfig"] = "Loading...";
+    _report["arp"] = "Loading...";
+    _report["traceroute"] = "Loading...";
+    _report["traceroute Google"] = "Loading...";
+    _report["pingLo"] = "Loading...";
+    _report["pingLocal"] = "Loading...";
+    _report["pingGateway"] = "Loading...";
+    _report["pingDNS1"] = "Loading...";
+    _report["pingDNS2"] = "Loading...";
+    _report["pingDNS3"] = "Loading...";
+    _report["pingDNS4"] = "Loading...";
+    _report["pingDNS5"] = "Loading...";
+    _report["nsLookupEMSE"] = "Loading...";
+    _report["nsLookupEMSEBusybox"] = "Loading...";
+    _report["nsLookupGoogle"] = "Loading...";
+    _report["nsLookupGoogleBusybox"] = "Loading...";
+
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      String ssid;
+      PermissionHandler()
+          .checkPermissionStatus(PermissionGroup.location)
+          .then((answer) {
+        if (answer == PermissionStatus.granted)
+          Connectivity().getWifiName().then((output) => ssid = output);
+        else
+          PermissionHandler().requestPermissions([PermissionGroup.location]);
+      });
+      var ip = await Connectivity().getWifiIP();
+
+      _report["SSID"] = ssid;
+      _report["IP"] = ip;
+
+      await Future.wait([
+        exec("ip", [
+          'a',
+        ]).runGetOutput().then(
+            (out) => _report["ip a"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ifconfig", [
+          '-a',
+        ]).runGetOutput().then((out) =>
+            _report["ifconfig"] = out.isEmpty ? "Nothing to show" : out),
+        exec("arp", [
+          '-a',
+        ])
+            .runGetOutput()
+            .then(
+                (out) => _report["arp"] = out.isEmpty ? "Nothing to show" : out)
+            .catchError((out) => _report["arp"] = out.toString()),
+        exec("su", [
+          '-c',
+          'traceroute',
+          'google.com',
+        ])
+            .runGetOutput()
+            .then((out) =>
+                _report["traceroute"] = out.isEmpty ? "Nothing to show" : out)
+            .catchError((out) => _report["traceroute"] = out.toString()),
+        exec("su", [
+          '-c',
+          'traceroute',
+          '8.8.8.8',
+        ])
+            .runGetOutput()
+            .then((out) => _report["traceroute Google"] =
+                out.isEmpty ? "Nothing to show" : out)
+            .catchError((out) => _report["traceroute Google"] = out.toString()),
+        exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then(
+            (out) => _report["pingLo"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "10.163.0.5"]).runGetOutput().then((out) =>
+            _report["pingLocal"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "10.163.0.2"]).runGetOutput().then((out) =>
+            _report["pingGateway"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "192.168.130.33"]).runGetOutput().then((out) =>
+            _report["pingDNS1"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "192.168.130.3"]).runGetOutput().then((out) =>
+            _report["pingDNS2"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "8.8.8.8"]).runGetOutput().then((out) =>
+            _report["pingDNS3"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "1.1.1.1"]).runGetOutput().then((out) =>
+            _report["pingDNS4"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "10.163.0.6"]).runGetOutput().then((out) =>
+            _report["pingDNS5"] = out.isEmpty ? "Nothing to show" : out),
+        exec("nslookup", ["fw-cgcp.emse.fr"])
+            .runGetOutput()
+            .then((out) => _report["nsLookupEMSEBusybox"] =
+                out.isEmpty ? "Nothing to show" : out)
+            .catchError(
+                (out) => _report["nsLookupEMSEBusybox"] = out.toString()),
+        exec("nslookup", ["google.com"])
+            .runGetOutput()
+            .then((out) => _report["nsLookupGoogleBusybox"] =
+                out.isEmpty ? "Nothing to show" : out)
+            .catchError(
+                (out) => _report["nsLookupGoogleBusybox"] = out.toString()),
+        getStatus("195.83.139.7").then((status) => _report["statusPublic"] =
+            status.isEmpty ? "Nothing to show" : status),
+        getStatus("10.163.0.2").then((status) => _report["statusGateway"] =
+            status.isEmpty ? "Nothing to show" : status),
+        InternetAddress.lookup("fw-cgcp.emse.fr")
+            .then((addresses) => addresses.forEach((address) =>
+                _report["nsLookupEMSE"] =
+                    "Host: ${address.host}\nLookup: ${address.address}"))
+            .catchError((e) => _report["nsLookupEMSE"] = e.toString()),
+        InternetAddress.lookup("google.com")
+            .then((addresses) => addresses.forEach((address) =>
+                _report["nsLookupGoogle"] =
+                    "Host: ${address.host}\nLookup: ${address.address}"))
+            .catchError((e) => _report["nsLookupGoogle"] = e.toString()),
+      ]).timeout(const Duration(minutes: 1), onTimeout: () {
+        _report["alert"] = "Diagnosis has timed out !";
+      });
+
+      out = "\n*SSID: ${_report["SSID"]}, Ip: ${_report["IP"]}*\n\n"
+          "*ip a:* \n${_report["ip a"]}\n\n"
+          "*ifconfig:* \n${_report["ifconfig"]}\n\n"
+          "*ARP:* \n${_report["arp"]}\n\n"
+          "*Traceroute Google:* \n${_report["traceroute"]}\n\n"
+          "*Traceroute Google DNS:* \n${_report["traceroute Google"]}\n\n"
+          "*Ping Loopback:* \n${_report["pingLo"]}\n\n"
+          "*Ping Local:* \n${_report["pingLocal"]}\n\n"
+          "*HTTP Portal Response Public:* \n${_report["statusPublic"]}\n\n"
+          "*HTTP Portal Response Gateway:* \n${_report["statusGateway"]}\n\n"
+          "*Ping Gateway:* \n${_report["pingGateway"]}\n\n"
+          "*Ping DNS1:* \n${_report["pingDNS1"]}\n\n"
+          "*Ping DNS2:* \n${_report["pingDNS2"]}\n\n"
+          "*Ping DNS3:* \n${_report["pingDNS3"]}\n\n"
+          "*Ping DNS4:* \n${_report["pingDNS4"]}\n\n"
+          "*Ping DNS5:* \n${_report["pingDNS5"]}\n\n"
+          "*NSLookup EMSE:* \n${_report["nsLookupEMSE"]}\n\n"
+          "*NSLookup Google:* \n${_report["nsLookupGoogle"]}\n\n"
+          "*NSLookup EMSE (Busybox):* \n${_report["nsLookupEMSEBusybox"]}\n\n"
+          "*NSLookup Google (Busybox):* \n${_report["nsLookupGoogleBusybox"]}\n\n";
+    } else
+      _report["alert"] = AppLoc.of(context).sentenceNotConnected;
+
+    return out;
+  }
+
+  void onInit() {
+    _report["alert"] = "";
+    _report["statusPublic"] = "";
+    _report["statusGateway"] = "";
+    _report["SSID"] = "";
+    _report["IP"] = "";
+    _report["ip a"] = "";
+    _report["ifconfig"] = "";
+    _report["arp"] = "";
+    _report["traceroute"] = "";
+    _report["traceroute Google"] = "";
+    _report["pingLo"] = "";
+    _report["pingLocal"] = "";
+    _report["pingGateway"] = "";
+    _report["pingDNS1"] = "";
+    _report["pingDNS2"] = "";
+    _report["pingDNS3"] = "";
+    _report["pingDNS4"] = "";
+    _report["pingDNS5"] = "";
+    _report["nsLookupEMSE"] = "";
+    _report["nsLookupEMSEBusybox"] = "";
+    _report["nsLookupGoogle"] = "";
+    _report["nsLookupGoogleBusybox"] = "";
+  }
+}
+
 class ReportingPage extends StatefulWidget {
   final String title;
 
@@ -32,7 +266,7 @@ class ReportingPageState extends State<ReportingPage>
   /// Control the animation of the speed dial.
   AnimationController _animationController;
 
-  Map<String, String> _diagnosis = {};
+  var _diagnosis = Diagnosis();
 
   String _report = "";
 
@@ -61,7 +295,7 @@ class ReportingPageState extends State<ReportingPage>
               const Duration(seconds: 1),
               (Timer t) =>
                   setState(() => _percentageDiagnoseProgress += 1 / 60));
-          _diagnose(context).then((diagnosis) {
+          _diagnosis.diagnose(context).then((diagnosis) {
             _report = diagnosis;
             setState(() => _diagnosisState = 2);
           });
@@ -191,28 +425,29 @@ class ReportingPageState extends State<ReportingPage>
                 descriptionController: _descriptionController,
               ),
               DiagnoseTab(
-                alert: _diagnosis["alert"],
-                statusPublic: _diagnosis["statusPublic"],
-                statusGateway: _diagnosis["statusGateway"],
-                ssid: _diagnosis["SSID"],
-                ip: _diagnosis["IP"],
-                ipAll: _diagnosis["ip a"],
-                ifconfig: _diagnosis["ifconfig"],
-                arp: _diagnosis["arp"],
-                tracertGoogle: _diagnosis["traceroute"],
-                tracertGoogleDNS: _diagnosis["traceroute Google"],
-                pingLo: _diagnosis["pingLo"],
-                pingLocal: _diagnosis["pingLocal"],
-                pingGateway: _diagnosis["pingGateway"],
-                pingDNS1: _diagnosis["pingDNS1"],
-                pingDNS2: _diagnosis["pingDNS2"],
-                pingDNS3: _diagnosis["pingDNS3"],
-                pingDNS4: _diagnosis["pingDNS4"],
-                pingDNS5: _diagnosis["pingDNS5"],
-                nsLookupEMSE: _diagnosis["nsLookupEMSE"],
-                nsLookupEMSEBusybox: _diagnosis["nsLookupEMSEBusybox"],
-                nsLookupGoogle: _diagnosis["nsLookupGoogle"],
-                nsLookupGoogleBusybox: _diagnosis["nsLookupGoogleBusybox"],
+                alert: _diagnosis.report["alert"],
+                statusPublic: _diagnosis.report["statusPublic"],
+                statusGateway: _diagnosis.report["statusGateway"],
+                ssid: _diagnosis.report["SSID"],
+                ip: _diagnosis.report["IP"],
+                ipAll: _diagnosis.report["ip a"],
+                ifconfig: _diagnosis.report["ifconfig"],
+                arp: _diagnosis.report["arp"],
+                tracertGoogle: _diagnosis.report["traceroute"],
+                tracertGoogleDNS: _diagnosis.report["traceroute Google"],
+                pingLo: _diagnosis.report["pingLo"],
+                pingLocal: _diagnosis.report["pingLocal"],
+                pingGateway: _diagnosis.report["pingGateway"],
+                pingDNS1: _diagnosis.report["pingDNS1"],
+                pingDNS2: _diagnosis.report["pingDNS2"],
+                pingDNS3: _diagnosis.report["pingDNS3"],
+                pingDNS4: _diagnosis.report["pingDNS4"],
+                pingDNS5: _diagnosis.report["pingDNS5"],
+                nsLookupEMSE: _diagnosis.report["nsLookupEMSE"],
+                nsLookupEMSEBusybox: _diagnosis.report["nsLookupEMSEBusybox"],
+                nsLookupGoogle: _diagnosis.report["nsLookupGoogle"],
+                nsLookupGoogleBusybox:
+                    _diagnosis.report["nsLookupGoogleBusybox"],
               ),
             ],
           ),
@@ -249,28 +484,7 @@ class ReportingPageState extends State<ReportingPage>
   @override
   void initState() {
     super.initState();
-    _diagnosis["alert"] = "";
-    _diagnosis["statusPublic"] = "";
-    _diagnosis["statusGateway"] = "";
-    _diagnosis["SSID"] = "";
-    _diagnosis["IP"] = "";
-    _diagnosis["ip a"] = "";
-    _diagnosis["ifconfig"] = "";
-    _diagnosis["arp"] = "";
-    _diagnosis["traceroute"] = "";
-    _diagnosis["traceroute Google"] = "";
-    _diagnosis["pingLo"] = "";
-    _diagnosis["pingLocal"] = "";
-    _diagnosis["pingGateway"] = "";
-    _diagnosis["pingDNS1"] = "";
-    _diagnosis["pingDNS2"] = "";
-    _diagnosis["pingDNS3"] = "";
-    _diagnosis["pingDNS4"] = "";
-    _diagnosis["pingDNS5"] = "";
-    _diagnosis["nsLookupEMSE"] = "";
-    _diagnosis["nsLookupEMSEBusybox"] = "";
-    _diagnosis["nsLookupGoogle"] = "";
-    _diagnosis["nsLookupGoogleBusybox"] = "";
+    _diagnosis.onInit();
     _animationController = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin
       duration: const Duration(milliseconds: 500),
@@ -323,171 +537,6 @@ class ReportingPageState extends State<ReportingPage>
         mini: true,
       ),
     );
-  }
-
-  /// Run a diagnosis suite with a 1 minute time out.
-  ///
-  /// Run multiples command and store into the [diagnosis] Map.
-  /// The suite is composed of :
-  /// - SSID, IP scan from [Connectivity]
-  /// - ip a
-  /// - ifconfig -a
-  /// - arp -a
-  /// - su -c traceroute google.com and 8.8.8.8
-  /// - ping loopback, 10.163.0.5 (DHCP), 10.163.0.2 (Gateway),
-  /// 192.168.130.33 (School DNS), 192.168.130.3 (School DNS),
-  /// 1.1.1.1 (Cloudflare DNS), 8.8.8.8 (Google DNS), 10.163.0.6 (Private DNS).
-  /// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
-  /// If the diagnosis takes too much time, the function return any given
-  /// informations after one minute.
-  Future<String> _diagnose(BuildContext context) async {
-    var out = "";
-    const argsPing = "-c 4 -w 5 -W 5";
-    _diagnosis["alert"] = "";
-    _diagnosis["statusPublic"] = "Loading...";
-    _diagnosis["statusGateway"] = "Loading...";
-    _diagnosis["SSID"] = "Loading...";
-    _diagnosis["IP"] = "Loading...";
-    _diagnosis["ip a"] = "Loading...";
-    _diagnosis["ifconfig"] = "Loading...";
-    _diagnosis["arp"] = "Loading...";
-    _diagnosis["traceroute"] = "Loading...";
-    _diagnosis["traceroute Google"] = "Loading...";
-    _diagnosis["pingLo"] = "Loading...";
-    _diagnosis["pingLocal"] = "Loading...";
-    _diagnosis["pingGateway"] = "Loading...";
-    _diagnosis["pingDNS1"] = "Loading...";
-    _diagnosis["pingDNS2"] = "Loading...";
-    _diagnosis["pingDNS3"] = "Loading...";
-    _diagnosis["pingDNS4"] = "Loading...";
-    _diagnosis["pingDNS5"] = "Loading...";
-    _diagnosis["nsLookupEMSE"] = "Loading...";
-    _diagnosis["nsLookupEMSEBusybox"] = "Loading...";
-    _diagnosis["nsLookupGoogle"] = "Loading...";
-    _diagnosis["nsLookupGoogleBusybox"] = "Loading...";
-
-    var connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
-      String ssid;
-      PermissionHandler()
-          .checkPermissionStatus(PermissionGroup.location)
-          .then((answer) {
-        if (answer == PermissionStatus.granted)
-          Connectivity().getWifiName().then((output) => ssid = output);
-        else
-          PermissionHandler().requestPermissions([PermissionGroup.location]);
-      });
-      var ip = await Connectivity().getWifiIP();
-
-      _diagnosis["SSID"] = ssid;
-      _diagnosis["IP"] = ip;
-
-      await Future.wait([
-        exec("ip", [
-          'a',
-        ]).runGetOutput().then((out) =>
-            _diagnosis["ip a"] = out.isEmpty ? "Nothing to show" : out),
-        exec("ifconfig", [
-          '-a',
-        ]).runGetOutput().then((out) =>
-            _diagnosis["ifconfig"] = out.isEmpty ? "Nothing to show" : out),
-        exec("arp", [
-          '-a',
-        ])
-            .runGetOutput()
-            .then((out) =>
-                _diagnosis["arp"] = out.isEmpty ? "Nothing to show" : out)
-            .catchError((out) => _diagnosis["arp"] = out.toString()),
-        exec("su", [
-          '-c',
-          'traceroute',
-          'google.com',
-        ])
-            .runGetOutput()
-            .then((out) => _diagnosis["traceroute"] =
-                out.isEmpty ? "Nothing to show" : out)
-            .catchError((out) => _diagnosis["traceroute"] = out.toString()),
-        exec("su", [
-          '-c',
-          'traceroute',
-          '8.8.8.8',
-        ])
-            .runGetOutput()
-            .then((out) => _diagnosis["traceroute Google"] =
-                out.isEmpty ? "Nothing to show" : out)
-            .catchError(
-                (out) => _diagnosis["traceroute Google"] = out.toString()),
-        exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then((out) =>
-            _diagnosis["pingLo"] = out.isEmpty ? "Nothing to show" : out),
-        exec("ping", [argsPing, "10.163.0.5"]).runGetOutput().then((out) =>
-            _diagnosis["pingLocal"] = out.isEmpty ? "Nothing to show" : out),
-        exec("ping", [argsPing, "10.163.0.2"]).runGetOutput().then((out) =>
-            _diagnosis["pingGateway"] = out.isEmpty ? "Nothing to show" : out),
-        exec("ping", [argsPing, "192.168.130.33"]).runGetOutput().then((out) =>
-            _diagnosis["pingDNS1"] = out.isEmpty ? "Nothing to show" : out),
-        exec("ping", [argsPing, "192.168.130.3"]).runGetOutput().then((out) =>
-            _diagnosis["pingDNS2"] = out.isEmpty ? "Nothing to show" : out),
-        exec("ping", [argsPing, "8.8.8.8"]).runGetOutput().then((out) =>
-            _diagnosis["pingDNS3"] = out.isEmpty ? "Nothing to show" : out),
-        exec("ping", [argsPing, "1.1.1.1"]).runGetOutput().then((out) =>
-            _diagnosis["pingDNS4"] = out.isEmpty ? "Nothing to show" : out),
-        exec("ping", [argsPing, "10.163.0.6"]).runGetOutput().then((out) =>
-            _diagnosis["pingDNS5"] = out.isEmpty ? "Nothing to show" : out),
-        exec("nslookup", ["fw-cgcp.emse.fr"])
-            .runGetOutput()
-            .then((out) => _diagnosis["nsLookupEMSEBusybox"] =
-                out.isEmpty ? "Nothing to show" : out)
-            .catchError(
-                (out) => _diagnosis["nsLookupEMSEBusybox"] = out.toString()),
-        exec("nslookup", ["google.com"])
-            .runGetOutput()
-            .then((out) => _diagnosis["nsLookupGoogleBusybox"] =
-                out.isEmpty ? "Nothing to show" : out)
-            .catchError(
-                (out) => _diagnosis["nsLookupGoogleBusybox"] = out.toString()),
-        getStatus("195.83.139.7").then((status) => _diagnosis["statusPublic"] =
-            status.isEmpty ? "Nothing to show" : status),
-        getStatus("10.163.0.2").then((status) => _diagnosis["statusGateway"] =
-            status.isEmpty ? "Nothing to show" : status),
-        InternetAddress.lookup("fw-cgcp.emse.fr")
-            .then((addresses) => addresses.forEach((address) =>
-                _diagnosis["nsLookupEMSE"] =
-                    "Host: ${address.host}\nLookup: ${address.address}"))
-            .catchError((e) => _diagnosis["nsLookupEMSE"] = e.toString()),
-        InternetAddress.lookup("google.com")
-            .then((addresses) => addresses.forEach((address) =>
-                _diagnosis["nsLookupGoogle"] =
-                    "Host: ${address.host}\nLookup: ${address.address}"))
-            .catchError((e) => _diagnosis["nsLookupGoogle"] = e.toString()),
-      ]).timeout(const Duration(minutes: 1), onTimeout: () {
-        _diagnosis["alert"] = "Diagnosis has timed out !";
-      });
-
-      out = "\n*SSID: ${_diagnosis["SSID"]}, Ip: ${_diagnosis["IP"]}*\n\n"
-          "*ip a:* \n${_diagnosis["ip a"]}\n\n"
-          "*ifconfig:* \n${_diagnosis["ifconfig"]}\n\n"
-          "*ARP:* \n${_diagnosis["arp"]}\n\n"
-          "*Traceroute Google:* \n${_diagnosis["traceroute"]}\n\n"
-          "*Traceroute Google DNS:* \n${_diagnosis["traceroute Google"]}\n\n"
-          "*Ping Loopback:* \n${_diagnosis["pingLo"]}\n\n"
-          "*Ping Local:* \n${_diagnosis["pingLocal"]}\n\n"
-          "*HTTP Portal Response Public:* \n${_diagnosis["statusPublic"]}\n\n"
-          "*HTTP Portal Response Gateway:* \n${_diagnosis["statusGateway"]}\n\n"
-          "*Ping Gateway:* \n${_diagnosis["pingGateway"]}\n\n"
-          "*Ping DNS1:* \n${_diagnosis["pingDNS1"]}\n\n"
-          "*Ping DNS2:* \n${_diagnosis["pingDNS2"]}\n\n"
-          "*Ping DNS3:* \n${_diagnosis["pingDNS3"]}\n\n"
-          "*Ping DNS4:* \n${_diagnosis["pingDNS4"]}\n\n"
-          "*Ping DNS5:* \n${_diagnosis["pingDNS5"]}\n\n"
-          "*NSLookup EMSE:* \n${_diagnosis["nsLookupEMSE"]}\n\n"
-          "*NSLookup Google:* \n${_diagnosis["nsLookupGoogle"]}\n\n"
-          "*NSLookup EMSE (Busybox):* \n${_diagnosis["nsLookupEMSEBusybox"]}\n\n"
-          "*NSLookup Google (Busybox):* \n${_diagnosis["nsLookupGoogleBusybox"]}\n\n";
-    } else
-      _diagnosis["alert"] = AppLoc.of(context).sentenceNotConnected;
-
-    return out;
   }
 
   _launchURL(String url) async {

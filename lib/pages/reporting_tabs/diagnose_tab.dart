@@ -83,7 +83,10 @@ class DiagnoseTab extends StatelessWidget {
             children: <Widget>[
               Text(_alert,
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.red)),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                    fontSize: 15,
+                  )),
               Material(
                 elevation: 2.0,
                 shape: RoundedRectangleBorder(
