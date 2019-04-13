@@ -182,13 +182,13 @@ class LoginPageState extends State<LoginPage> {
 }
 
 class _StatusCard extends StatelessWidget {
+  final String _status;
+
   const _StatusCard({
     Key key,
     @required String status,
   })  : _status = status,
         super(key: key);
-
-  final String _status;
 
   @override
   Widget build(BuildContext context) {
