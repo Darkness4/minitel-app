@@ -42,6 +42,7 @@ class AppsList extends StatelessWidget {
             _GitlabEMSECard(),
             _AnnuaireCard(),
             _ImprimanteCard(),
+            _WikiMinitelCard(),
           ],
         ),
       ),
@@ -279,6 +280,27 @@ class _SogoCard extends StatelessWidget {
         //     ),
         onTap: () => _launchURL('https://sogo.emse.fr/'),
         child: Image.asset('assets/img/mail.png'),
+      ),
+    );
+  }
+}
+
+class _WikiMinitelCard extends StatelessWidget {
+  const _WikiMinitelCard({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.green,
+      elevation: 4,
+      child: InkWell(
+        onTap: () => _launchURL('http://minitel.emse.fr/wiki/Wiki-user'),
+        child: Image.asset(
+          'assets/img/logo_minitel.png',
+          fit: BoxFit.scaleDown,
+        ),
       ),
     );
   }

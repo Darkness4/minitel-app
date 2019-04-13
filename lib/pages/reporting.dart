@@ -1,23 +1,258 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:auto_login_flutter/components/cards.dart';
 import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/funcs/diagnosis_suite.dart';
 import 'package:auto_login_flutter/funcs/http_resquests.dart';
 import 'package:auto_login_flutter/localizations.dart';
-import 'package:auto_login_flutter/styles/text_style.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'reporting_tabs/diagnose_tab.dart';
+import 'reporting_tabs/report_tab.dart';
+
+/// This stores all diagnosis results.
+///
+/// To obtain the report, simply use:
+/// ```
+/// Diagnosis diagnosis;
+/// diagnosis.report["name"];
+/// ```
+///
+/// By default, everything is [null].
+/// All data can be initialized to "" using `diagnosis.onInit()`.
+///
+/// To generates all the data : `diagnosis.diagnose()`
+///
+/// The data is generated asynchronously. The process times out after one minute.
+///
+/// This is all the data that you can get:
+///
+/// - "alert",
+/// - "statusPublic",
+/// - "statusGateway",
+/// - "SSID",
+/// - "IP",
+/// - "ip a",
+/// - "ifconfig",
+/// - "arp",
+/// - "traceroute",
+/// - "traceroute Google",
+/// - "pingLo",
+/// - "pingLocal",
+/// - "pingGateway",
+/// - "pingDNS1",
+/// - "pingDNS2",
+/// - "pingDNS3",
+/// - "pingDNS4",
+/// - "pingDNS5",
+/// - "nsLookupEMSE",
+/// - "nsLookupEMSEBusybox",
+/// - "nsLookupGoogle",
+/// - "nsLookupGoogleBusybox"
+class Diagnosis {
+  Map<String, String> _report = {};
+
+  Map<String, String> get report => _report;
+
+  /// Run a report suite with a 1 minute time out.
+  ///
+  /// Run multiples command and store into the [report] Map.
+  /// The suite is composed of :
+  /// - SSID, IP scan from [Connectivity]
+  /// - ip a
+  /// - ifconfig -a
+  /// - arp -a
+  /// - su -c traceroute google.com and 8.8.8.8
+  /// - ping loopback, 10.163.0.5 (DHCP), 10.163.0.2 (Gateway),
+  /// 192.168.130.33 (School DNS), 192.168.130.3 (School DNS),
+  /// 1.1.1.1 (Cloudflare DNS), 8.8.8.8 (Google DNS), 10.163.0.6 (Private DNS).
+  /// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
+  /// If the report takes too much time, the function return any given
+  /// informations after one minute.
+  Future<String> diagnose(BuildContext context) async {
+    var out = "";
+    const argsPing = "-c 4 -w 5 -W 5";
+    _report["alert"] = "";
+    _report["statusPublic"] = "Loading...";
+    _report["statusGateway"] = "Loading...";
+    _report["SSID"] = "Loading...";
+    _report["IP"] = "Loading...";
+    _report["ip a"] = "Loading...";
+    _report["ifconfig"] = "Loading...";
+    _report["arp"] = "Loading...";
+    _report["traceroute"] = "Loading...";
+    _report["traceroute Google"] = "Loading...";
+    _report["pingLo"] = "Loading...";
+    _report["pingLocal"] = "Loading...";
+    _report["pingGateway"] = "Loading...";
+    _report["pingDNS1"] = "Loading...";
+    _report["pingDNS2"] = "Loading...";
+    _report["pingDNS3"] = "Loading...";
+    _report["pingDNS4"] = "Loading...";
+    _report["pingDNS5"] = "Loading...";
+    _report["nsLookupEMSE"] = "Loading...";
+    _report["nsLookupEMSEBusybox"] = "Loading...";
+    _report["nsLookupGoogle"] = "Loading...";
+    _report["nsLookupGoogleBusybox"] = "Loading...";
+
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      String ssid;
+      PermissionHandler()
+          .checkPermissionStatus(PermissionGroup.location)
+          .then((answer) {
+        if (answer == PermissionStatus.granted)
+          Connectivity().getWifiName().then((output) => ssid = output);
+        else
+          PermissionHandler().requestPermissions([PermissionGroup.location]);
+      });
+      var ip = await Connectivity().getWifiIP();
+
+      _report["SSID"] = ssid;
+      _report["IP"] = ip;
+
+      await Future.wait([
+        exec("ip", [
+          'a',
+        ]).runGetOutput().then(
+            (out) => _report["ip a"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ifconfig", [
+          '-a',
+        ]).runGetOutput().then((out) =>
+            _report["ifconfig"] = out.isEmpty ? "Nothing to show" : out),
+        exec("arp", [
+          '-a',
+        ])
+            .runGetOutput()
+            .then(
+                (out) => _report["arp"] = out.isEmpty ? "Nothing to show" : out)
+            .catchError((out) => _report["arp"] = out.toString()),
+        exec("su", [
+          '-c',
+          'traceroute',
+          'google.com',
+        ])
+            .runGetOutput()
+            .then((out) =>
+                _report["traceroute"] = out.isEmpty ? "Nothing to show" : out)
+            .catchError((out) => _report["traceroute"] = out.toString()),
+        exec("su", [
+          '-c',
+          'traceroute',
+          '8.8.8.8',
+        ])
+            .runGetOutput()
+            .then((out) => _report["traceroute Google"] =
+                out.isEmpty ? "Nothing to show" : out)
+            .catchError((out) => _report["traceroute Google"] = out.toString()),
+        exec("ping", [argsPing, "127.0.0.1"]).runGetOutput().then(
+            (out) => _report["pingLo"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "10.163.0.5"]).runGetOutput().then((out) =>
+            _report["pingLocal"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "10.163.0.2"]).runGetOutput().then((out) =>
+            _report["pingGateway"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "192.168.130.33"]).runGetOutput().then((out) =>
+            _report["pingDNS1"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "192.168.130.3"]).runGetOutput().then((out) =>
+            _report["pingDNS2"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "8.8.8.8"]).runGetOutput().then((out) =>
+            _report["pingDNS3"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "1.1.1.1"]).runGetOutput().then((out) =>
+            _report["pingDNS4"] = out.isEmpty ? "Nothing to show" : out),
+        exec("ping", [argsPing, "10.163.0.6"]).runGetOutput().then((out) =>
+            _report["pingDNS5"] = out.isEmpty ? "Nothing to show" : out),
+        exec("nslookup", ["fw-cgcp.emse.fr"])
+            .runGetOutput()
+            .then((out) => _report["nsLookupEMSEBusybox"] =
+                out.isEmpty ? "Nothing to show" : out)
+            .catchError(
+                (out) => _report["nsLookupEMSEBusybox"] = out.toString()),
+        exec("nslookup", ["google.com"])
+            .runGetOutput()
+            .then((out) => _report["nsLookupGoogleBusybox"] =
+                out.isEmpty ? "Nothing to show" : out)
+            .catchError(
+                (out) => _report["nsLookupGoogleBusybox"] = out.toString()),
+        getStatus("195.83.139.7").then((status) => _report["statusPublic"] =
+            status.isEmpty ? "Nothing to show" : status),
+        getStatus("10.163.0.2").then((status) => _report["statusGateway"] =
+            status.isEmpty ? "Nothing to show" : status),
+        InternetAddress.lookup("fw-cgcp.emse.fr")
+            .then((addresses) => addresses.forEach((address) =>
+                _report["nsLookupEMSE"] =
+                    "Host: ${address.host}\nLookup: ${address.address}"))
+            .catchError((e) => _report["nsLookupEMSE"] = e.toString()),
+        InternetAddress.lookup("google.com")
+            .then((addresses) => addresses.forEach((address) =>
+                _report["nsLookupGoogle"] =
+                    "Host: ${address.host}\nLookup: ${address.address}"))
+            .catchError((e) => _report["nsLookupGoogle"] = e.toString()),
+      ]).timeout(const Duration(minutes: 1), onTimeout: () {
+        _report["alert"] = "Diagnosis has timed out !";
+      });
+
+      out = "\n*SSID: ${_report["SSID"]}, Ip: ${_report["IP"]}*\n\n"
+          "*ip a:* \n${_report["ip a"]}\n\n"
+          "*ifconfig:* \n${_report["ifconfig"]}\n\n"
+          "*ARP:* \n${_report["arp"]}\n\n"
+          "*Traceroute Google:* \n${_report["traceroute"]}\n\n"
+          "*Traceroute Google DNS:* \n${_report["traceroute Google"]}\n\n"
+          "*Ping Loopback:* \n${_report["pingLo"]}\n\n"
+          "*Ping Local:* \n${_report["pingLocal"]}\n\n"
+          "*HTTP Portal Response Public:* \n${_report["statusPublic"]}\n\n"
+          "*HTTP Portal Response Gateway:* \n${_report["statusGateway"]}\n\n"
+          "*Ping Gateway:* \n${_report["pingGateway"]}\n\n"
+          "*Ping DNS1:* \n${_report["pingDNS1"]}\n\n"
+          "*Ping DNS2:* \n${_report["pingDNS2"]}\n\n"
+          "*Ping DNS3:* \n${_report["pingDNS3"]}\n\n"
+          "*Ping DNS4:* \n${_report["pingDNS4"]}\n\n"
+          "*Ping DNS5:* \n${_report["pingDNS5"]}\n\n"
+          "*NSLookup EMSE:* \n${_report["nsLookupEMSE"]}\n\n"
+          "*NSLookup Google:* \n${_report["nsLookupGoogle"]}\n\n"
+          "*NSLookup EMSE (Busybox):* \n${_report["nsLookupEMSEBusybox"]}\n\n"
+          "*NSLookup Google (Busybox):* \n${_report["nsLookupGoogleBusybox"]}\n\n";
+    } else
+      _report["alert"] = AppLoc.of(context).sentenceNotConnected;
+
+    return out;
+  }
+
+  void onInit() {
+    _report["alert"] = "";
+    _report["statusPublic"] = "";
+    _report["statusGateway"] = "";
+    _report["SSID"] = "";
+    _report["IP"] = "";
+    _report["ip a"] = "";
+    _report["ifconfig"] = "";
+    _report["arp"] = "";
+    _report["traceroute"] = "";
+    _report["traceroute Google"] = "";
+    _report["pingLo"] = "";
+    _report["pingLocal"] = "";
+    _report["pingGateway"] = "";
+    _report["pingDNS1"] = "";
+    _report["pingDNS2"] = "";
+    _report["pingDNS3"] = "";
+    _report["pingDNS4"] = "";
+    _report["pingDNS5"] = "";
+    _report["nsLookupEMSE"] = "";
+    _report["nsLookupEMSEBusybox"] = "";
+    _report["nsLookupGoogle"] = "";
+    _report["nsLookupGoogleBusybox"] = "";
+  }
+}
+
 class ReportingPage extends StatefulWidget {
   final String title;
-  final String channel;
 
-  const ReportingPage(
-      {Key key, this.title, this.channel: "projet_flutter_notif"})
-      : super(key: key);
+  const ReportingPage({Key key, this.title}) : super(key: key);
 
   @override
   ReportingPageState createState() => ReportingPageState();
@@ -25,29 +260,28 @@ class ReportingPage extends StatefulWidget {
 
 class ReportingPageState extends State<ReportingPage>
     with SingleTickerProviderStateMixin {
-  final _titleFocusNode = FocusNode();
-  final _descriptionFocusNode = FocusNode();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
 
-  /// State of the "Send to Slack" action.
-  ///
-  /// 0 = None, 1 = Loading, 2 = Done
-  int _reportState = 0;
+  /// Control the animation of the speed dial.
+  AnimationController _animationController;
+
+  var _diagnosis = Diagnosis();
+
+  String _report = "";
 
   /// State of the Diagnosis.
   ///
   /// 0 = None, 1 = Loading, 2 = Done
   int _diagnosisState = 0;
 
+  /// State of the "Send to Slack" action.
+  ///
+  /// 0 = None, 1 = Loading, 2 = Done
+  int _reportState = 0;
+
   /// Used for the [CircularProgressIndicator], between 0.0 and 1.0.
   double _percentageDiagnoseProgress = 0.0;
-
-  /// Control the animation of the speed dial.
-  AnimationController _animationController;
-
-  /// This is the diagnosis report.
-  String _report = "";
 
   Widget get _diagnosisButton {
     return FloatingActionButton(
@@ -61,7 +295,7 @@ class ReportingPageState extends State<ReportingPage>
               const Duration(seconds: 1),
               (Timer t) =>
                   setState(() => _percentageDiagnoseProgress += 1 / 60));
-          diagnose(context).then((diagnosis) {
+          _diagnosis.diagnose(context).then((diagnosis) {
             _report = diagnosis;
             setState(() => _diagnosisState = 2);
           });
@@ -157,46 +391,85 @@ class ReportingPageState extends State<ReportingPage>
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Colors.red,
-      ),
-      body: Container(
-        color: Colors.red,
-        child: Center(
-          child: Scrollbar(
-            child: ListView(children: <Widget>[
-              _ReportCard(
-                  titleController: _titleController,
-                  titleFocusNode: _titleFocusNode,
-                  descriptionFocusNode: _descriptionFocusNode,
-                  descriptionController: _descriptionController),
-              _TutorialCard(),
-              _ContactsCard(),
-            ]),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder:
+              (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
+                    SliverAppBar(
+                      title: Text(widget.title),
+                      backgroundColor: Colors.red,
+                      pinned: true,
+                      floating: true,
+                      forceElevated: true,
+                      bottom: TabBar(
+                        indicatorColor: Colors.white,
+                        tabs: <Tab>[
+                          Tab(
+                            icon: Icon(Icons.warning),
+                            text: "Report",
+                          ),
+                          Tab(
+                            icon: Icon(Icons.zoom_in),
+                            text: "Diagnosis",
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+          body: TabBarView(
+            children: <Widget>[
+              ReportTab(
+                titleController: _titleController,
+                descriptionController: _descriptionController,
+              ),
+              DiagnoseTab(
+                alert: _diagnosis.report["alert"],
+                statusPublic: _diagnosis.report["statusPublic"],
+                statusGateway: _diagnosis.report["statusGateway"],
+                ssid: _diagnosis.report["SSID"],
+                ip: _diagnosis.report["IP"],
+                ipAll: _diagnosis.report["ip a"],
+                ifconfig: _diagnosis.report["ifconfig"],
+                arp: _diagnosis.report["arp"],
+                tracertGoogle: _diagnosis.report["traceroute"],
+                tracertGoogleDNS: _diagnosis.report["traceroute Google"],
+                pingLo: _diagnosis.report["pingLo"],
+                pingLocal: _diagnosis.report["pingLocal"],
+                pingGateway: _diagnosis.report["pingGateway"],
+                pingDNS1: _diagnosis.report["pingDNS1"],
+                pingDNS2: _diagnosis.report["pingDNS2"],
+                pingDNS3: _diagnosis.report["pingDNS3"],
+                pingDNS4: _diagnosis.report["pingDNS4"],
+                pingDNS5: _diagnosis.report["pingDNS5"],
+                nsLookupEMSE: _diagnosis.report["nsLookupEMSE"],
+                nsLookupEMSEBusybox: _diagnosis.report["nsLookupEMSEBusybox"],
+                nsLookupGoogle: _diagnosis.report["nsLookupGoogle"],
+                nsLookupGoogleBusybox:
+                    _diagnosis.report["nsLookupGoogleBusybox"],
+              ),
+            ],
           ),
         ),
-      ),
-      drawer: MainDrawer(),
-      floatingActionButton: Builder(
-        builder: (context) => Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                _shareButton,
-                _mailButton,
-                _buildReportButton(context, channel: widget.channel),
-                _diagnosisButton,
-              ],
-            ),
+        drawer: MainDrawer(),
+        floatingActionButton: Builder(
+          builder: (context) => Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  _shareButton,
+                  _mailButton,
+                  _buildReportButton(context),
+                  _diagnosisButton,
+                ],
+              ),
+        ),
       ),
     );
   }
 
   @override
   void dispose() {
-    _descriptionFocusNode.dispose();
-    _titleFocusNode.dispose();
     _titleController.dispose();
     _descriptionController.dispose();
     super.dispose();
@@ -211,6 +484,7 @@ class ReportingPageState extends State<ReportingPage>
   @override
   void initState() {
     super.initState();
+    _diagnosis.onInit();
     _animationController = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin
       duration: const Duration(milliseconds: 500),
@@ -277,111 +551,5 @@ class ReportingPageState extends State<ReportingPage>
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(
         'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
-  }
-}
-
-/// Shows all possible ways of communication to Minitel.
-class _ContactsCard extends StatelessWidget {
-  const _ContactsCard({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DocCard(
-      elevation: 4,
-      children: <Widget>[
-        Header("Contacts"),
-        Header("Facebook: Minitel Ismin", level: 2),
-        Header("G*: Contact Admin", level: 2),
-        Header("Mail: minitelismin@gmail.com", level: 2),
-      ],
-    );
-  }
-}
-
-/// This is the form needed to be filled.
-class _ReportCard extends StatelessWidget {
-  final TextEditingController _titleController;
-
-  final FocusNode _titleFocusNode;
-  final FocusNode _descriptionFocusNode;
-  final TextEditingController _descriptionController;
-  const _ReportCard({
-    Key key,
-    @required TextEditingController titleController,
-    @required FocusNode titleFocusNode,
-    @required FocusNode descriptionFocusNode,
-    @required TextEditingController descriptionController,
-  })  : _titleController = titleController,
-        _titleFocusNode = titleFocusNode,
-        _descriptionFocusNode = descriptionFocusNode,
-        _descriptionController = descriptionController,
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Card(
-        elevation: 4,
-        child: Container(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            children: <Widget>[
-              TextField(
-                controller: _titleController,
-                style: TextStyle(fontWeight: FontWeight.bold),
-                focusNode: _titleFocusNode,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  labelText: "Title",
-                  hintText: "Room number : Short description.",
-                ),
-                onSubmitted: (term) {
-                  _titleFocusNode.unfocus();
-                  FocusScope.of(context).requestFocus(_descriptionFocusNode);
-                },
-              ),
-              TextField(
-                controller: _descriptionController,
-                maxLines: null,
-                focusNode: _descriptionFocusNode,
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  labelText: "Description",
-                  hintText: "Describe your issue.",
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Shows how to fill a report.
-class _TutorialCard extends StatelessWidget {
-  const _TutorialCard({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DocCard(
-      elevation: 4,
-      children: <Widget>[
-        Header(AppLoc.of(context).sentenceReportingTitle),
-        Header(AppLoc.of(context).sentenceReportingNOTE, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubTitle1, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle2, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle3, level: 2),
-        Paragraph(AppLoc.of(context).sentenceReportingParagraph),
-        Header(AppLoc.of(context).sentenceReportingSubtitle4, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle5, level: 2),
-      ],
-    );
   }
 }

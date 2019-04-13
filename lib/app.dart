@@ -3,7 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'localizations.dart';
 import 'pages/calendar.dart';
-import 'pages/diagnose.dart';
 import 'pages/docs.dart';
 import 'pages/maps.dart';
 import 'pages/news.dart';
@@ -33,8 +32,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => PortalPage(title: AppLoc.of(context).titlePortalPage),
         '/reporting': (context) =>
             ReportingPage(title: AppLoc.of(context).titleReportingPage),
-        '/diagnose': (context) =>
-            DiagnosePage(title: AppLoc.of(context).titleDiagnosePage),
         '/docs': (context) =>
             DocumentationPage(title: AppLoc.of(context).titleDocumentationPage),
         '/calendar': (context) =>

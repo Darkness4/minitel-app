@@ -1,16 +1,8 @@
 import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'portal_tabs/apps_list.dart';
 import 'portal_tabs/login.dart';
-// import 'portal_tabs/portal_apps/sogo.dart';
-// import 'portal_tabs/portal_apps/annuaire.dart';
-// import 'portal_tabs/portal_apps/campus.dart';
-// import 'portal_tabs/portal_apps/logiciels.dart';
-// import 'portal_tabs/portal_apps/gitlab.dart';
-// import 'portal_tabs/portal_apps/promethee.dart';
-// import 'portal_tabs/portal_apps/imprimante.dart';
 
 class PortalPage extends StatefulWidget {
   final String title;
@@ -29,7 +21,7 @@ class PortalPageState extends State<PortalPage> {
         body: NestedScrollView(
             body: TabBarView(
               children: <Widget>[
-                LoginPage(title: AppLoc.of(context).titleLoginPage),
+                LoginPage(),
                 AppsList(),
               ],
             ),
@@ -39,7 +31,7 @@ class PortalPageState extends State<PortalPage> {
                         title: Text(widget.title),
                         pinned: true,
                         floating: true,
-                        forceElevated: innerBoxIsScrolled,
+                        forceElevated: true,
                         bottom: TabBar(
                           tabs: <Tab>[
                             Tab(
