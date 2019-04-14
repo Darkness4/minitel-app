@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
-
-import 'package:webfeed/webfeed.dart';
+import 'dart:convert';
 
 /// Connect to the portal.
 ///
@@ -39,8 +37,8 @@ Future<String> autoLogin(
     request.write(data);
     HttpClientResponse response = await request.close();
     var sessionId = "";
-    var body = await response.transform(Utf8Decoder()).join();
     if (response.statusCode == 200) {
+      var body = await response.transform(Utf8Decoder()).join();
       if (body.contains('title_error')) {
         throw ("Error: Bad Username or Password");
       } else {
@@ -64,19 +62,24 @@ Future<String> autoLogin(
     request.write(data);
 
     response = await request.close();
-    body = await response.transform(Utf8Decoder()).join();
-    if (body.contains('title_error'))
-      throw Exception("Error: SessionId is incorrect. Please check the RegEx.");
-    else {
-      var match = RegExp(r'<span id="l_rtime">([^<]*)<\/span>') // Time finder.
-          .firstMatch(body)
-          .group(1);
-      if (match is! String)
+    if (response.statusCode == 200) {
+      var body = await response.transform(Utf8Decoder()).join();
+      if (body.contains('title_error'))
         throw Exception(
-            "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-      else
-        status = '$match seconds left';
-    }
+            "Error: SessionId is incorrect. Please check the RegEx.");
+      else {
+        var match =
+            RegExp(r'<span id="l_rtime">([^<]*)<\/span>') // Time finder.
+                .firstMatch(body)
+                .group(1);
+        if (match is! String)
+          throw Exception(
+              "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
+        else
+          status = '$match seconds left';
+      }
+    } else
+      throw Exception("HttpError: ${response.statusCode}");
   } catch (e) {
     status = e.toString();
   }
@@ -86,10 +89,8 @@ Future<String> autoLogin(
 
 /// Disconnect from the portal.
 ///
-///
-///
 /// ```
-/// String status = await getStatus("172.17.0.1") // "x seconds left"
+/// String status = await disconnectGateway("172.17.0.1") // "x seconds left"
 /// ```
 Future<String> disconnectGateway(String selectedUrl) async {
   var url =
@@ -115,22 +116,6 @@ Future<String> disconnectGateway(String selectedUrl) async {
   }
 
   return status;
-}
-
-Future<AtomFeed> getAtom(String atomUrl) async {
-  var client = HttpClient();
-  HttpClientRequest request = await client.getUrl(Uri.parse(atomUrl));
-  HttpClientResponse response = await request.close();
-  var status = await response.transform(Utf8Decoder()).join();
-  return AtomFeed.parse(status);
-}
-
-Future<RssFeed> getRss(String rssUrl) async {
-  var client = HttpClient();
-  HttpClientRequest request = await client.getUrl(Uri.parse(rssUrl));
-  HttpClientResponse response = await request.close();
-  var status = await response.transform(Utf8Decoder()).join();
-  return RssFeed.parse(status);
 }
 
 /// Get the connection status of the portal.
@@ -179,77 +164,6 @@ Future<String> getStatus(String selectedUrl) async {
       throw Exception("HttpError: ${response.statusCode}");
   } catch (e) {
     status = e.toString();
-  }
-
-  return status;
-}
-
-Future<String> loginSogo(String uid, String pswd) async {
-  var url = 'https://sogo.emse.fr/SOGo/connect';
-  var status = "";
-
-  var client = HttpClient();
-
-  try {
-    HttpClientRequest request = await client.postUrl(Uri.parse(url));
-    var data = {'userName': uid, 'password': pswd, 'rememberLogin': '1'};
-    request.headers.contentLength = json.encode(data).length; // Needed
-    request.headers.contentType =
-        ContentType("application", "json", charset: "utf-8");
-    request.write(json.encode(data));
-    HttpClientResponse response = await request.close();
-    var body = await response.transform(Utf8Decoder()).join();
-    print(body);
-    if (response.statusCode == 200) {
-    } else
-      throw Exception("HttpError: ${response.statusCode}");
-  } catch (e) {
-    status = e.toString();
-  }
-
-  return status;
-}
-
-/// Report data to the Slack of Minitel
-///
-/// Send a POST data to the Webhook of the Slack of Minitel by using [HttpClientRequest].
-///
-/// You can use [report] like this:
-///
-/// ```
-/// String status = await report("Description", title: "Title");
-/// ```
-Future<String> report(String text,
-    {String title, String channel: "projet_flutter_notif"}) async {
-  var status = "";
-
-  if (text != "" && title != "") {
-    var client = HttpClient();
-    var out = "*--Report ${DateTime.now()}--*\n"
-        "*$title*\n"
-        "$text\n";
-    var data = {
-      'text': out,
-      'username': 'Flutter Reporter Bot',
-      'icon_url':
-          'https://raw.githubusercontent.com/dart-lang/logos/master/flutter/logo%2Btext/vertical/default.png',
-      'channel': channel, // Marc : DE8PA0Z1C
-    };
-
-    try {
-      HttpClientRequest request = await client.postUrl(Uri.parse(
-          'https://hooks.slack.com/services/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'));
-
-      request.headers.contentType =
-          ContentType("application", "json", charset: "utf-8");
-      request.write(json.encode(data));
-      HttpClientResponse response = await request.close();
-      status = await response.transform(Utf8Decoder()).join();
-    } catch (e) {
-      status = e.toString();
-    }
-  } else {
-    status = "Not enough information.";
   }
 
   return status;

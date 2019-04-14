@@ -1,6 +1,6 @@
 import 'package:auto_login_flutter/components/cards.dart';
 import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:auto_login_flutter/funcs/http_webfeed.dart';
 import 'package:flutter/material.dart';
 
 class NewsPage extends StatefulWidget {

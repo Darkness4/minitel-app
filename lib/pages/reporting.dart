@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:auto_login_flutter/funcs/http_portail.dart';
+import 'package:auto_login_flutter/funcs/http_webhook.dart';
 import 'package:auto_login_flutter/localizations.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';

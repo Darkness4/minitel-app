@@ -1,4 +1,4 @@
-import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:auto_login_flutter/funcs/http_portail.dart';
 import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
