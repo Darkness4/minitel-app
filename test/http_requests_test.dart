@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-import 'package:auto_login_flutter/funcs/http_resquests.dart';
+import 'package:auto_login_flutter/funcs/http_portail.dart';
+import 'package:auto_login_flutter/funcs/http_webfeed.dart';
+import 'package:auto_login_flutter/funcs/http_webhook.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -98,10 +100,6 @@ void main() {
       print(status.toString());
 
       expect(status.title.contains("JetBrains Blog"), true);
-    });
-
-    test('Login to Sogo', () async {
-      await loginSogo("marc.nguyen", "stickman963").then(print);
     });
   });
 }
