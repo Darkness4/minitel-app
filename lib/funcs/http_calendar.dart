@@ -60,7 +60,8 @@ Future<String> bypassCAS(
     response = await request.close();
 
     var location = response.headers.value('location');
-    print("Location: $jSessionID");
+    print("Location: $location");
+    if (location == null) throw "Error : Bad login";
 
     // GET CAS
     request = await client.postUrl(Uri.parse(location));
@@ -116,7 +117,7 @@ Future<String> readCalendar() async {
   }
 }
 
-Future<File> saveCalendar({username, password}) async {
+Future<bool> saveCalendar({username, password}) async {
   final file = await _calendar;
 
   var phpSessionId = await bypassCAS(
@@ -124,6 +125,8 @@ Future<File> saveCalendar({username, password}) async {
     password: password,
     referee: "https://portail.emse.fr/ics/",
   );
+
+  if (phpSessionId == "Error : Bad login") return false;
 
   var icsUrl = await getCalendarURL(
     phpSessionIDCAS: phpSessionId,
@@ -134,6 +137,8 @@ Future<File> saveCalendar({username, password}) async {
 
   iCalendar = await getCalendar(icsUrl);
 
+  file.writeAsString(iCalendar);
+
   // Write the file
-  return file.writeAsString(iCalendar);
+  return true;
 }
