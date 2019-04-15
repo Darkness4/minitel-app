@@ -10,6 +10,11 @@ Future<File> get _calendar async {
   return File('$path/calendar.ics');
 }
 
+Future<File> get _savedCalendarURL async {
+  final path = await _localPath;
+  return File('$path/savedCalendarURL');
+}
+
 Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
 
@@ -105,6 +110,8 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
 
 Future<String> readCalendar() async {
   final file = await _calendar;
+  if (!(await file.exists()))
+    throw Exception("File calendar.ics do not exists");
 
   // Read the file
   String contents = await file.readAsString();
@@ -112,7 +119,24 @@ Future<String> readCalendar() async {
   return contents;
 }
 
-Future<bool> saveCalendar({username, password}) async {
+Future<String> getSavedCalendarURL() async {
+  final file = await _savedCalendarURL;
+  if (!(await file.exists()))
+    throw Exception("File savedCalendarURL do not exists");
+
+  // Read the file
+  String contents = await file.readAsString();
+  if (!contents.contains("http")) throw "Error : This is not an URL";
+
+  return contents;
+}
+
+Future<void> saveCalendarURL(String url) async {
+  final file = await _savedCalendarURL;
+  file.writeAsString(url);
+}
+
+Future<bool> saveCalendarFromLogin({String username, String password}) async {
   final file = await _calendar;
 
   var phpSessionId = await bypassCAS(
@@ -128,12 +152,22 @@ Future<bool> saveCalendar({username, password}) async {
     url: "https://portail.emse.fr/ics/",
   );
 
+  saveCalendarURL(icsUrl);
+
   var iCalendar = "";
 
   iCalendar = await getCalendar(icsUrl);
-
   file.writeAsString(iCalendar);
 
-  // Write the file
   return true;
+}
+
+Future<void> saveCalendarFromUrl(String url) async {
+  final file = await _calendar;
+
+  var iCalendar = "";
+
+  iCalendar = await getCalendar(url);
+  if (!iCalendar.contains("VCALENDAR")) throw "Error: This is not a calendar";
+  file.writeAsString(iCalendar);
 }

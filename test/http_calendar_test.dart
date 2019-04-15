@@ -51,14 +51,14 @@ void main() {
   });
 
   test('saveCalendar', () async {
-    var response =
-        await saveCalendar(username: "marc.nguyen", password: "stickman963");
+    var response = await saveCalendarFromLogin(
+        username: "marc.nguyen", password: "stickman963");
 
     expect(response, true);
   });
 
   test('FAIL to saveCalendar', () async {
-    var response = await saveCalendar(username: "", password: "");
+    var response = await saveCalendarFromLogin(username: "", password: "");
 
     expect(response, false);
   });
@@ -75,8 +75,26 @@ void main() {
     expect(phpSessionId, "Error : Bad login");
   });
 
-  test('readCalendar', () async {
-    await saveCalendar(username: "marc.nguyen", password: "stickman963");
+  test('saveCalendarFromLogin', () async {
+    await saveCalendarFromLogin(
+        username: "marc.nguyen", password: "stickman963");
+    print(await readCalendar());
+  });
+
+  test('saveCalendarFromUrl', () async {
+    var phpSessionId = await bypassCAS(
+      username: "marc.nguyen",
+      password: "stickman963",
+      referee: "https://portail.emse.fr/ics/",
+    );
+
+    if (phpSessionId == "Error : Bad login") return false;
+
+    var icsUrl = await getCalendarURL(
+      phpSessionIDCAS: phpSessionId,
+      url: "https://portail.emse.fr/ics/",
+    );
+    await saveCalendarFromUrl(icsUrl);
     print(await readCalendar());
   });
 

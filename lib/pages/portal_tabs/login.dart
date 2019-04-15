@@ -151,7 +151,7 @@ class LoginPageState extends State<LoginPage> {
                           _selectedUrl,
                           _timeMap[_selectedTime],
                         ).then((status) => setState(() => _status = status));
-                        saveCalendar(
+                        saveCalendarFromLogin(
                           username: _uidController.text,
                           password: _pswdController.text,
                         ).then((out) => setState(() => _savedCalendar = out));

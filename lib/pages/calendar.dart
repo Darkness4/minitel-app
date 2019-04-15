@@ -54,6 +54,16 @@ class CalendarPageState extends State<CalendarPage> {
 
   Future<List<Widget>> get _listEventCards async {
     String calendar = "";
+
+    // Refresh the calendar if possible
+    try {
+      var url = await getSavedCalendarURL();
+      await saveCalendarFromUrl(url);
+    } catch (e) {
+      print(e.toString());
+    }
+
+    // Read the actual calendar
     try {
       calendar = await readCalendar();
     } catch (e) {
@@ -197,7 +207,7 @@ class CalendarPageState extends State<CalendarPage> {
                 shape: ContinuousRectangleBorder(),
                 color: Colors.greenAccent[400],
                 elevation: 4,
-                onPressed: () => saveCalendar(
+                onPressed: () => saveCalendarFromLogin(
                       username: _uidController.text,
                       password: _pswdController.text,
                     ).then((out) => setState(() {})),
