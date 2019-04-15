@@ -20,16 +20,18 @@ class CalendarPageState extends State<CalendarPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Scrollbar(
-            child: FutureBuilder(
-          future: _buildListEventCards(
-              "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics"),
-          builder: (BuildContext context, AsyncSnapshot snapshot) =>
-              snapshot.hasData
-                  ? PageView(children: snapshot.data)
-                  : Text("Loading..."),
-        )),
+      body: Container(
+        color: Colors.blueAccent,
+        child: Center(
+          child: FutureBuilder(
+            future: _buildListEventCards(
+                "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics"),
+            builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                snapshot.hasData
+                    ? Scrollbar(child: PageView(children: snapshot.data))
+                    : Text("Loading..."),
+          ),
+        ),
       ),
       drawer: MainDrawer(),
     );
