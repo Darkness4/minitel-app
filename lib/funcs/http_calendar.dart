@@ -1,5 +1,55 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
+import 'icalendar_parser.dart';
+
+Future<String> get _localPath async {
+  final directory = await getTemporaryDirectory();
+
+  return directory.path;
+}
+
+Future<File> get _calendar async {
+  final path = await _localPath;
+  return File('$path/calendar.ics');
+}
+
+Future<File> saveCalendar({username, password}) async {
+  final file = await _calendar;
+
+  var phpSessionId = await bypassCAS(
+    username: username,
+    password: password,
+    referee: "https://portail.emse.fr/ics/",
+  );
+
+  var icsUrl = await getCalendarURL(
+    phpSessionIDCAS: phpSessionId,
+    url: "https://portail.emse.fr/ics/",
+  );
+
+  var iCalendar = "";
+
+  iCalendar = await getCalendar(icsUrl);
+
+  // Write the file
+  return file.writeAsString(iCalendar);
+}
+
+Future<String> readCalendar() async {
+  try {
+    final file = await _calendar;
+
+    // Read the file
+    String contents = await file.readAsString();
+
+    return contents;
+  } catch (e) {
+    // If encountering an error, return 0
+    return e.toString();
+  }
+}
 
 Future<String> bypassCAS(
     {String username, String password, String referee}) async {
@@ -68,7 +118,7 @@ Future<String> bypassCAS(
   return status;
 }
 
-Future<String> getCalendar({String phpSessionIDCAS, String url}) async {
+Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
   var status = "";
 
   var client = HttpClient();
@@ -79,8 +129,6 @@ Future<String> getCalendar({String phpSessionIDCAS, String url}) async {
     request.headers.set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDCAS");
     HttpClientResponse response = await request.close();
     var body = await response.transform(Utf8Decoder()).join();
-    print(body);
-
     status = RegExp(r'https(.*)ics').stringMatch(body);
   } catch (e) {
     status = e.toString();

@@ -1,5 +1,5 @@
 import 'package:auto_login_flutter/funcs/icalendar_parser.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('getCalendar', () async {
