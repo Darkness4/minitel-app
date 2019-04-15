@@ -108,4 +108,31 @@ void main() {
       expect(e.toString(), contains("FileSystemException"));
     }
   });
+
+  test('getSavedCalendarUrl', () async {
+    await saveCalendarFromLogin(
+        username: "marc.nguyen", password: "stickman963");
+    String url = await getSavedCalendarURL();
+    expect(url, contains("http"));
+  });
+
+  test('Read a non existing calendar', () async {
+    try {
+      await readCalendar();
+      return -1;
+    } catch (e) {
+      print(e.toString());
+      expect(e.toString(), contains("File calendar.ics do not exists"));
+    }
+  });
+
+  test('Read a non existing calendarURL', () async {
+    try {
+      await getSavedCalendarURL();
+      return -1;
+    } catch (e) {
+      print(e.toString());
+      expect(e.toString(), contains("File savedCalendarURL do not exists"));
+    }
+  });
 }
