@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 
+/// GET the .ics from url
 Future<String> getCalendar(String url) async {
   var status = "";
 
@@ -22,6 +23,7 @@ Future<String> getCalendar(String url) async {
   return status;
 }
 
+///
 Future<ICalendar> parseCalendar(String calendar) async {
   ICalendar iCalendar = ICalendar();
   List<List<String>> lines =
