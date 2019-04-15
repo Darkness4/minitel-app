@@ -1,10 +1,10 @@
 import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/funcs/icalendar_parser.dart';
 import 'package:auto_login_flutter/funcs/http_calendar.dart';
-import 'package:auto_login_flutter/styles/text_style.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
+import 'package:auto_login_flutter/funcs/icalendar_parser.dart';
 import 'package:auto_login_flutter/localizations.dart';
+import 'package:auto_login_flutter/styles/text_style.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CalendarPage extends StatefulWidget {
   final String title;
@@ -20,37 +20,6 @@ class CalendarPageState extends State<CalendarPage> {
   var _pswdController = TextEditingController();
   var _uidFocusNode = FocusNode();
   var _pswdFocusNode = FocusNode();
-
-  @override
-  void dispose() {
-    _uidController.dispose();
-    _pswdController.dispose();
-    _uidFocusNode.dispose();
-    _pswdFocusNode.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        color: Colors.blueAccent,
-        child: Center(
-          child: FutureBuilder(
-            future: _listEventCards,
-            builder: (BuildContext context, AsyncSnapshot snapshot) =>
-                snapshot.hasData
-                    ? Scrollbar(child: PageView(children: snapshot.data))
-                    : Text("Loading..."),
-          ),
-        ),
-      ),
-      drawer: MainDrawer(),
-    );
-  }
 
   Future<List<Widget>> get _listEventCards async {
     String calendar = "";
@@ -146,6 +115,37 @@ class CalendarPageState extends State<CalendarPage> {
     return widgets;
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Container(
+        color: Colors.blueAccent,
+        child: Center(
+          child: FutureBuilder(
+            future: _listEventCards,
+            builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                snapshot.hasData
+                    ? Scrollbar(child: PageView(children: snapshot.data))
+                    : Text("Loading..."),
+          ),
+        ),
+      ),
+      drawer: MainDrawer(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _uidController.dispose();
+    _pswdController.dispose();
+    _uidFocusNode.dispose();
+    _pswdFocusNode.dispose();
+    super.dispose();
+  }
+
   List<Widget> _errorHandlerWidget(dynamic e) {
     return <Widget>[
       Column(
@@ -228,6 +228,33 @@ class CalendarPageState extends State<CalendarPage> {
   }
 }
 
+class DayCard extends StatelessWidget {
+  final String _day;
+  final Color backgroundColor;
+  final Color foregroundColor;
+
+  DayCard(
+    String day, {
+    this.backgroundColor: Colors.blue,
+    this.foregroundColor: Colors.white,
+  }) : _day = day;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: CircleBorder(),
+      color: backgroundColor,
+      child: Center(
+        child: Header(
+          _day,
+          color: foregroundColor,
+          level: 3,
+        ),
+      ),
+    );
+  }
+}
+
 class EventCard extends StatelessWidget {
   final Map<String, String> _event;
 
@@ -257,33 +284,6 @@ class EventCard extends StatelessWidget {
               level: 2,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class DayCard extends StatelessWidget {
-  final String _day;
-  final Color backgroundColor;
-  final Color foregroundColor;
-
-  DayCard(
-    String day, {
-    this.backgroundColor: Colors.blue,
-    this.foregroundColor: Colors.white,
-  }) : _day = day;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: CircleBorder(),
-      color: backgroundColor,
-      child: Center(
-        child: Header(
-          _day,
-          color: foregroundColor,
-          level: 3,
         ),
       ),
     );

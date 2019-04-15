@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
 /// GET the .ics from url
 Future<String> getCalendar(String url) async {

@@ -10,15 +10,15 @@ Future<File> get _calendar async {
   return File('$path/calendar.ics');
 }
 
-Future<File> get _savedCalendarURL async {
-  final path = await _localPath;
-  return File('$path/savedCalendarURL');
-}
-
 Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
 
   return directory.path;
+}
+
+Future<File> get _savedCalendarURL async {
+  final path = await _localPath;
+  return File('$path/savedCalendarURL');
 }
 
 Future<String> bypassCAS(
@@ -108,17 +108,6 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
   return status;
 }
 
-Future<String> readCalendar() async {
-  final file = await _calendar;
-  if (!(await file.exists()))
-    throw Exception("File calendar.ics do not exists");
-
-  // Read the file
-  String contents = await file.readAsString();
-
-  return contents;
-}
-
 Future<String> getSavedCalendarURL() async {
   final file = await _savedCalendarURL;
   if (!(await file.exists()))
@@ -131,9 +120,15 @@ Future<String> getSavedCalendarURL() async {
   return contents;
 }
 
-Future<void> saveCalendarURL(String url) async {
-  final file = await _savedCalendarURL;
-  file.writeAsString(url);
+Future<String> readCalendar() async {
+  final file = await _calendar;
+  if (!(await file.exists()))
+    throw Exception("File calendar.ics do not exists");
+
+  // Read the file
+  String contents = await file.readAsString();
+
+  return contents;
 }
 
 Future<bool> saveCalendarFromLogin({String username, String password}) async {
@@ -170,4 +165,9 @@ Future<void> saveCalendarFromUrl(String url) async {
   iCalendar = await getCalendar(url);
   if (!iCalendar.contains("VCALENDAR")) throw "Error: This is not a calendar";
   file.writeAsString(iCalendar);
+}
+
+Future<void> saveCalendarURL(String url) async {
+  final file = await _savedCalendarURL;
+  file.writeAsString(url);
 }
