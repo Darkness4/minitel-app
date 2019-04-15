@@ -11,7 +11,7 @@ Future<File> get _calendar async {
 }
 
 Future<String> get _localPath async {
-  final directory = await getTemporaryDirectory();
+  final directory = await getApplicationDocumentsDirectory();
 
   return directory.path;
 }
@@ -104,17 +104,12 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
 }
 
 Future<String> readCalendar() async {
-  try {
-    final file = await _calendar;
+  final file = await _calendar;
 
-    // Read the file
-    String contents = await file.readAsString();
+  // Read the file
+  String contents = await file.readAsString();
 
-    return contents;
-  } catch (e) {
-    // If encountering an error, return 0
-    return e.toString();
-  }
+  return contents;
 }
 
 Future<bool> saveCalendar({username, password}) async {

@@ -217,7 +217,7 @@ class _StatusCard extends StatelessWidget {
             children: <Widget>[
               RichText(
                 text: TextSpan(
-                  text: "Passerelle: ",
+                  text: "Gateway: ",
                   style: TextStyle(fontSize: 24, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
@@ -230,7 +230,7 @@ class _StatusCard extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Text(
-                    "Calendrier: ",
+                    "Calendar: ",
                     style: TextStyle(
                       fontSize: 20,
                     ),

@@ -1,8 +1,10 @@
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/icalendar_parser.dart';
+import 'package:auto_login_flutter/funcs/http_calendar.dart';
 import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_login_flutter/localizations.dart';
 
 class CalendarPage extends StatefulWidget {
   final String title;
@@ -14,6 +16,20 @@ class CalendarPage extends StatefulWidget {
 }
 
 class CalendarPageState extends State<CalendarPage> {
+  var _uidController = TextEditingController();
+  var _pswdController = TextEditingController();
+  var _uidFocusNode = FocusNode();
+  var _pswdFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _uidController.dispose();
+    _pswdController.dispose();
+    _uidFocusNode.dispose();
+    _pswdFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +40,7 @@ class CalendarPageState extends State<CalendarPage> {
         color: Colors.blueAccent,
         child: Center(
           child: FutureBuilder(
-            future: _buildListEventCards(
-                "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics"),
+            future: _listEventCards,
             builder: (BuildContext context, AsyncSnapshot snapshot) =>
                 snapshot.hasData
                     ? Scrollbar(child: PageView(children: snapshot.data))
@@ -37,9 +52,16 @@ class CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  Future<List<Widget>> _buildListEventCards(String url) async {
-    String calendar = await getCalendar(url);
+  Future<List<Widget>> get _listEventCards async {
+    String calendar = "";
+    try {
+      calendar = await readCalendar();
+    } catch (e) {
+      return _errorHandlerWidget(e);
+    }
+
     ICalendar ical = await parseCalendar(calendar);
+
     Map<int, Color> colorPalette = {
       DateTime.january: Colors.red,
       DateTime.february: Colors.pink,
@@ -112,6 +134,87 @@ class CalendarPageState extends State<CalendarPage> {
     });
 
     return widgets;
+  }
+
+  List<Widget> _errorHandlerWidget(dynamic e) {
+    return <Widget>[
+      Column(
+        children: <Widget>[
+          Card(
+            elevation: 4,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  e.toString(),
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Card(
+            elevation: 4,
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              child: Form(
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      focusNode: _uidFocusNode,
+                      controller: _uidController,
+                      decoration: InputDecoration(
+                        hintText: AppLoc.of(context).wordSurnameName,
+                        labelText: AppLoc.of(context).wordUsername,
+                      ),
+                      onEditingComplete: () {
+                        _uidFocusNode.unfocus();
+                        FocusScope.of(context).requestFocus(_pswdFocusNode);
+                      },
+                    ),
+                    TextFormField(
+                      controller: _pswdController,
+                      obscureText: true,
+                      focusNode: _pswdFocusNode,
+                      decoration: InputDecoration(
+                          hintText: AppLoc.of(context).wordPassword,
+                          labelText: AppLoc.of(context).wordPassword),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(30),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              child: RaisedButton(
+                shape: ContinuousRectangleBorder(),
+                color: Colors.greenAccent[400],
+                elevation: 4,
+                onPressed: () => saveCalendar(
+                      username: _uidController.text,
+                      password: _pswdController.text,
+                    ).then((out) => setState(() {})),
+                child: Text(
+                  "LOGIN",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      )
+    ];
   }
 }
 

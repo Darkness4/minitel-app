@@ -14,7 +14,7 @@ void main() {
         .setMockMethodCallHandler((MethodCall methodCall) async {
       // If you're getting the apps documents directory, return the path to the
       // temp directory on the test environment instead.
-      if (methodCall.method == 'getTemporaryDirectory') {
+      if (methodCall.method == 'getApplicationDocumentsDirectory') {
         return directory.path;
       }
       return null;
@@ -83,8 +83,8 @@ void main() {
   test('FAIL to readCalendar', () async {
     try {
       var out = await readCalendar();
-      print(out);
-      return false;
+      print("FAIL : $out");
+      return -1;
     } catch (e) {
       print(e.toString());
       expect(e.toString(), contains("FileSystemException"));
