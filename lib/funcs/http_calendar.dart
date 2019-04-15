@@ -2,53 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+
 import 'icalendar_parser.dart';
-
-Future<String> get _localPath async {
-  final directory = await getTemporaryDirectory();
-
-  return directory.path;
-}
 
 Future<File> get _calendar async {
   final path = await _localPath;
   return File('$path/calendar.ics');
 }
 
-Future<File> saveCalendar({username, password}) async {
-  final file = await _calendar;
+Future<String> get _localPath async {
+  final directory = await getTemporaryDirectory();
 
-  var phpSessionId = await bypassCAS(
-    username: username,
-    password: password,
-    referee: "https://portail.emse.fr/ics/",
-  );
-
-  var icsUrl = await getCalendarURL(
-    phpSessionIDCAS: phpSessionId,
-    url: "https://portail.emse.fr/ics/",
-  );
-
-  var iCalendar = "";
-
-  iCalendar = await getCalendar(icsUrl);
-
-  // Write the file
-  return file.writeAsString(iCalendar);
-}
-
-Future<String> readCalendar() async {
-  try {
-    final file = await _calendar;
-
-    // Read the file
-    String contents = await file.readAsString();
-
-    return contents;
-  } catch (e) {
-    // If encountering an error, return 0
-    return e.toString();
-  }
+  return directory.path;
 }
 
 Future<String> bypassCAS(
@@ -135,4 +100,40 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
   }
 
   return status;
+}
+
+Future<String> readCalendar() async {
+  try {
+    final file = await _calendar;
+
+    // Read the file
+    String contents = await file.readAsString();
+
+    return contents;
+  } catch (e) {
+    // If encountering an error, return 0
+    return e.toString();
+  }
+}
+
+Future<File> saveCalendar({username, password}) async {
+  final file = await _calendar;
+
+  var phpSessionId = await bypassCAS(
+    username: username,
+    password: password,
+    referee: "https://portail.emse.fr/ics/",
+  );
+
+  var icsUrl = await getCalendarURL(
+    phpSessionIDCAS: phpSessionId,
+    url: "https://portail.emse.fr/ics/",
+  );
+
+  var iCalendar = "";
+
+  iCalendar = await getCalendar(icsUrl);
+
+  // Write the file
+  return file.writeAsString(iCalendar);
 }
