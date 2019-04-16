@@ -56,7 +56,30 @@ import 'reporting_tabs/report_tab.dart';
 /// - "nsLookupGoogle",
 /// - "nsLookupGoogleBusybox"
 class Diagnosis {
-  Map<String, String> _report = {};
+  Map<String, String> _report = {
+    "alert": "",
+    "statusPublic": "",
+    "statusGateway": "",
+    "SSID": "",
+    "IP": "",
+    "ip a": "",
+    "ifconfig": "",
+    "arp": "",
+    "traceroute": "",
+    "traceroute Google": "",
+    "pingLo": "",
+    "pingLocal": "",
+    "pingGateway": "",
+    "pingDNS1": "",
+    "pingDNS2": "",
+    "pingDNS3": "",
+    "pingDNS4": "",
+    "pingDNS5": "",
+    "nsLookupEMSE": "",
+    "nsLookupEMSEBusybox": "",
+    "nsLookupGoogle": "",
+    "nsLookupGoogleBusybox": "",
+  };
 
   Map<String, String> get report => _report;
 
@@ -223,31 +246,6 @@ class Diagnosis {
 
     return out;
   }
-
-  void onInit() {
-    _report["alert"] = "";
-    _report["statusPublic"] = "";
-    _report["statusGateway"] = "";
-    _report["SSID"] = "";
-    _report["IP"] = "";
-    _report["ip a"] = "";
-    _report["ifconfig"] = "";
-    _report["arp"] = "";
-    _report["traceroute"] = "";
-    _report["traceroute Google"] = "";
-    _report["pingLo"] = "";
-    _report["pingLocal"] = "";
-    _report["pingGateway"] = "";
-    _report["pingDNS1"] = "";
-    _report["pingDNS2"] = "";
-    _report["pingDNS3"] = "";
-    _report["pingDNS4"] = "";
-    _report["pingDNS5"] = "";
-    _report["nsLookupEMSE"] = "";
-    _report["nsLookupEMSEBusybox"] = "";
-    _report["nsLookupGoogle"] = "";
-    _report["nsLookupGoogleBusybox"] = "";
-  }
 }
 
 class ReportingPage extends StatefulWidget {
@@ -284,70 +282,66 @@ class ReportingPageState extends State<ReportingPage>
   /// Used for the [CircularProgressIndicator], between 0.0 and 1.0.
   double _percentageDiagnoseProgress = 0.0;
 
-  Widget get _diagnosisButton {
-    return FloatingActionButton(
-      backgroundColor: _diagnosisState == 2 ? Colors.green : Colors.blue,
-      onPressed: () {
-        if (!_animationController.isDismissed) _animationController.reverse();
-        if (_diagnosisState != 1) {
-          setState(() => _diagnosisState = 1);
-          _percentageDiagnoseProgress = 0.0;
-          Timer.periodic(
-              const Duration(seconds: 1),
-              (Timer t) =>
-                  setState(() => _percentageDiagnoseProgress += 1 / 60));
-          _diagnosis.diagnose(context).then((diagnosis) {
-            _report = diagnosis;
-            setState(() => _diagnosisState = 2);
-          });
-        }
-      },
-      child: _diagnosisIcon,
-    );
-  }
+  Widget get _diagnosisButton => FloatingActionButton(
+        backgroundColor: _diagnosisState == 2 ? Colors.green : Colors.blue,
+        onPressed: () {
+          if (!_animationController.isDismissed) _animationController.reverse();
+          if (_diagnosisState != 1) {
+            setState(() => _diagnosisState = 1);
+            _percentageDiagnoseProgress = 0.0;
+            Timer.periodic(
+                const Duration(seconds: 1),
+                (Timer t) =>
+                    setState(() => _percentageDiagnoseProgress += 1 / 60));
+            _diagnosis.diagnose(context).then((diagnosis) {
+              _report = diagnosis;
+              setState(() => _diagnosisState = 2);
+            });
+          }
+        },
+        child: _diagnosisIcon,
+      );
 
   Widget get _diagnosisIcon {
     switch (_diagnosisState) {
       case 0:
-        return Icon(Icons.zoom_in);
+        return const Icon(Icons.zoom_in);
         break;
       case 1:
         return CircularProgressIndicator(
           value: _percentageDiagnoseProgress,
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
         );
         break;
       case 2:
         if (_animationController.isDismissed) _animationController.forward();
-        return Icon(Icons.done);
+        return const Icon(Icons.done);
         break;
       default:
-        return Container();
+        return const Text("");
     }
   }
 
-  Widget get _mailButton {
-    return ScaleTransition(
-      scale: CurvedAnimation(
-        parent: _animationController,
-        curve: Interval(0.0, 0.5, curve: Curves.easeOut),
-      ),
-      child: FloatingActionButton(
-          heroTag: null,
-          backgroundColor: Colors.red,
-          child: Icon(Icons.mail),
-          mini: true,
-          onPressed: () async {
-            var body = "---Report ${DateTime.now().toString()}---\n\n"
-                "Titre: ${_titleController.text}\n"
-                "Description: ${_descriptionController.text}\n\n"
-                "*Diagnosis*\n"
-                "$_report";
-            _launchURL(
-                "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
-          }),
-    );
-  }
+  Widget get _mailButton => ScaleTransition(
+        scale: CurvedAnimation(
+          parent: _animationController,
+          curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
+        ),
+        child: FloatingActionButton(
+            heroTag: null,
+            backgroundColor: Colors.red,
+            child: const Icon(Icons.mail),
+            mini: true,
+            onPressed: () async {
+              var body = "---Report ${DateTime.now().toString()}---\n\n"
+                  "Titre: ${_titleController.text}\n"
+                  "Description: ${_descriptionController.text}\n\n"
+                  "*Diagnosis*\n"
+                  "$_report";
+              _launchURL(
+                  "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
+            }),
+      );
 
   Widget get _reportIcon {
     switch (_reportState) {
@@ -355,41 +349,38 @@ class ReportingPageState extends State<ReportingPage>
         return Image.asset("assets/img/Slack_Mark_Monochrome_White.png");
         break;
       case 1:
-        return CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        );
+        return const CircularProgressIndicator(
+            valueColor: const AlwaysStoppedAnimation<Color>(Colors.white));
         break;
       case 2:
-        return Icon(
+        return const Icon(
           Icons.done,
           color: Colors.white,
         );
         break;
       default:
-        return Text("");
+        return const Text("");
     }
   }
 
-  Widget get _shareButton {
-    return ScaleTransition(
-      scale: CurvedAnimation(
-        parent: _animationController,
-        curve: Interval(0.0, 1.0, curve: Curves.easeOut),
-      ),
-      child: FloatingActionButton(
-        heroTag: null,
-        backgroundColor: Colors.red,
-        child: Icon(Icons.share),
-        mini: true,
-        onPressed: () =>
-            Share.share("---Report ${DateTime.now().toString()}---\n\n"
-                "Titre: ${_titleController.text}\n"
-                "Description: ${_descriptionController.text}\n\n"
-                "*Diagnosis*\n"
-                "$_report"),
-      ),
-    );
-  }
+  Widget get _shareButton => ScaleTransition(
+        scale: CurvedAnimation(
+          parent: _animationController,
+          curve: const Interval(0.0, 1.0, curve: Curves.easeOut),
+        ),
+        child: FloatingActionButton(
+          heroTag: null,
+          backgroundColor: Colors.red,
+          child: const Icon(Icons.share),
+          mini: true,
+          onPressed: () =>
+              Share.share("---Report ${DateTime.now().toString()}---\n\n"
+                  "Titre: ${_titleController.text}\n"
+                  "Description: ${_descriptionController.text}\n\n"
+                  "*Diagnosis*\n"
+                  "$_report"),
+        ),
+      );
 
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -404,15 +395,15 @@ class ReportingPageState extends State<ReportingPage>
                       pinned: true,
                       floating: true,
                       forceElevated: true,
-                      bottom: TabBar(
+                      bottom: const TabBar(
                         indicatorColor: Colors.white,
                         tabs: <Tab>[
-                          Tab(
-                            icon: Icon(Icons.warning),
+                          const Tab(
+                            icon: const Icon(Icons.warning),
                             text: "Report",
                           ),
-                          Tab(
-                            icon: Icon(Icons.zoom_in),
+                          const Tab(
+                            icon: const Icon(Icons.zoom_in),
                             text: "Diagnosis",
                           ),
                         ],
@@ -453,7 +444,7 @@ class ReportingPageState extends State<ReportingPage>
             ],
           ),
         ),
-        drawer: MainDrawer(),
+        drawer: const MainDrawer(),
         floatingActionButton: Builder(
           builder: (context) => Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -485,7 +476,6 @@ class ReportingPageState extends State<ReportingPage>
   @override
   void initState() {
     super.initState();
-    _diagnosis.onInit();
     _animationController = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin
       duration: const Duration(milliseconds: 500),

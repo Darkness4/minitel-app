@@ -14,100 +14,107 @@ class Header extends StatelessWidget {
   final int level;
   final Color color;
 
-  Header(this.text, {this.level: 1, this.color: Colors.black});
+  const Header(this.text, {Key key, this.level: 1, this.color: Colors.black})
+      : super(key: key);
 
   @override
   Widget build(context) {
     switch (level) {
       case 1:
         return Container(
-            margin: EdgeInsets.only(top: 16, bottom: 8),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w600,
-                fontSize: 32,
-              ),
-            ));
+          margin: const EdgeInsets.only(top: 16, bottom: 8),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 32,
+            ),
+          ),
+        );
         break;
       case 2:
         return Container(
-            margin: EdgeInsets.only(top: 16, bottom: 8),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w600,
-                fontSize: 24,
-              ),
-            ));
+          margin: const EdgeInsets.only(top: 16, bottom: 8),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 24,
+            ),
+          ),
+        );
         break;
       case 3:
         return Container(
-            margin: EdgeInsets.only(top: 16, bottom: 8),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w600,
-                fontSize: 20,
-              ),
-            ));
+          margin: const EdgeInsets.only(top: 16, bottom: 8),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
+          ),
+        );
       case 4:
         return Container(
-            margin: EdgeInsets.only(top: 16, bottom: 8),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-            ));
+          margin: const EdgeInsets.only(top: 16, bottom: 8),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+          ),
+        );
         break;
       case 5:
         return Container(
-            margin: EdgeInsets.only(top: 16, bottom: 8),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-              ),
-            ));
+          margin: const EdgeInsets.only(top: 16, bottom: 8),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
+        );
         break;
       case 6:
         return Container(
-            margin: EdgeInsets.only(top: 16, bottom: 8),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w600,
-                fontSize: 12,
-              ),
-            ));
+          margin: const EdgeInsets.only(top: 16, bottom: 8),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+          ),
+        );
         break;
       default:
         return Container(
-            margin: EdgeInsets.only(top: 16, bottom: 8),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w600,
-                fontSize: 32,
-              ),
-            ));
+          margin: const EdgeInsets.only(top: 16, bottom: 8),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 32,
+            ),
+          ),
+        );
         break;
     }
   }
 }
 
 class Paragraph extends StatelessWidget {
-  final Key key;
   final String text;
   final TextStyle style;
   final TextAlign textAlign;
@@ -120,7 +127,7 @@ class Paragraph extends StatelessWidget {
   final String semanticsLabel;
 
   Paragraph(this.text,
-      {this.key,
+      {Key key,
       this.style: const TextStyle(height: 1.5),
       this.textAlign: TextAlign.justify,
       this.textDirection: TextDirection.ltr,
@@ -129,12 +136,13 @@ class Paragraph extends StatelessWidget {
       this.overflow,
       this.textScaleFactor,
       this.maxLines,
-      this.semanticsLabel});
+      this.semanticsLabel})
+      : super(key: key);
 
   @override
   Widget build(context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       child: Text(
         text,
         style: style,

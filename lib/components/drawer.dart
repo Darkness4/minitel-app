@@ -2,6 +2,8 @@ import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
+  const MainDrawer();
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -21,7 +23,7 @@ class MainDrawer extends StatelessWidget {
                 ),
                 Text(
                   AppLoc.of(context).title,
-                  style: TextStyle(color: Colors.white, fontSize: 23),
+                  style: const TextStyle(color: Colors.white, fontSize: 23),
                 ),
               ],
             ),
@@ -31,8 +33,8 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
               title: Text(AppLoc.of(context).titlePortalPage),
-              leading: Icon(Icons.apps),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.apps),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/')
@@ -41,8 +43,8 @@ class MainDrawer extends StatelessWidget {
           Divider(),
           ListTile(
               title: Text(AppLoc.of(context).titleNewsPage),
-              leading: Icon(Icons.rss_feed),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.rss_feed),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/news')
@@ -50,8 +52,8 @@ class MainDrawer extends StatelessWidget {
               }),
           ListTile(
               title: Text(AppLoc.of(context).titleCalendarPage),
-              leading: Icon(Icons.calendar_today),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.calendar_today),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/calendar')
@@ -59,8 +61,8 @@ class MainDrawer extends StatelessWidget {
               }),
           ListTile(
               title: Text(AppLoc.of(context).titleMapsPage),
-              leading: Icon(Icons.map),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.map),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/maps')
@@ -72,13 +74,13 @@ class MainDrawer extends StatelessWidget {
             child: ListTile(
                 title: Text(
                   AppLoc.of(context).titleReportingPage,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
-                leading: Icon(
+                leading: const Icon(
                   Icons.error,
                   color: Colors.white,
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.arrow_forward,
                   color: Colors.white,
                 ),
@@ -90,8 +92,8 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
               title: Text(AppLoc.of(context).titleDocumentationPage),
-              leading: Icon(Icons.description),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.description),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/docs')

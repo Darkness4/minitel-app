@@ -4,7 +4,7 @@ import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key key}) : super(key: key);
 
   @override
   LoginPageState createState() => LoginPageState();
@@ -41,8 +41,8 @@ class LoginPageState extends State<LoginPage> {
     return Stack(
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: const LinearGradient(
               begin: Alignment.topRight,
               colors: [
                 const Color(0xff89f7fe),
@@ -64,26 +64,29 @@ class LoginPageState extends State<LoginPage> {
                 Card(
                   elevation: 10.0,
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       children: <Widget>[
-                        Row(children: <Widget>[
-                          Text("${AppLoc.of(context).wordDomain} / IP "),
-                          DropdownButton<String>(
-                            value: _selectedUrl,
-                            items: _urlRootList
-                                .map((String value) => DropdownMenuItem<String>(
-                                      child: Text(value),
-                                      value: value,
-                                    ))
-                                .toList(),
-                            onChanged: (String selectedUrl) {
-                              _selectedUrl = selectedUrl;
-                              getStatus(_selectedUrl).then(
-                                  (status) => setState(() => _status = status));
-                            },
-                          ),
-                        ]),
+                        Row(
+                          children: <Widget>[
+                            Text("${AppLoc.of(context).wordDomain} / IP "),
+                            DropdownButton<String>(
+                              value: _selectedUrl,
+                              items: _urlRootList
+                                  .map((String value) =>
+                                      DropdownMenuItem<String>(
+                                        child: Text(value),
+                                        value: value,
+                                      ))
+                                  .toList(),
+                              onChanged: (String selectedUrl) {
+                                _selectedUrl = selectedUrl;
+                                getStatus(_selectedUrl).then((status) =>
+                                    setState(() => _status = status));
+                              },
+                            ),
+                          ],
+                        ),
                         Row(
                           children: <Widget>[
                             Text(AppLoc.of(context).wordsAuthDuration),
@@ -123,8 +126,9 @@ class LoginPageState extends State<LoginPage> {
                                 obscureText: true,
                                 focusNode: _pswdFocusNode,
                                 decoration: InputDecoration(
-                                    hintText: AppLoc.of(context).wordPassword,
-                                    labelText: AppLoc.of(context).wordPassword),
+                                  hintText: AppLoc.of(context).wordPassword,
+                                  labelText: AppLoc.of(context).wordPassword,
+                                ),
                               ),
                             ],
                           ),
@@ -134,13 +138,13 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 100,
                     child: RaisedButton(
-                      shape: ContinuousRectangleBorder(),
-                      color: Colors.greenAccent[400],
+                      shape: const ContinuousRectangleBorder(),
+                      color: Colors.green,
                       elevation: 4,
                       onPressed: () {
                         final snackBar = SnackBar(content: Text('Requested'));
@@ -156,9 +160,9 @@ class LoginPageState extends State<LoginPage> {
                           password: _pswdController.text,
                         ).then((out) => setState(() => _savedCalendar = out));
                       },
-                      child: Text(
+                      child: const Text(
                         "LOGIN",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
@@ -206,11 +210,11 @@ class _StatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 30),
+      margin: const EdgeInsets.only(bottom: 30),
       child: Card(
         elevation: 10.0,
         child: Padding(
-          padding: EdgeInsets.all(25),
+          padding: const EdgeInsets.all(25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -218,26 +222,24 @@ class _StatusCard extends StatelessWidget {
               Text.rich(
                 TextSpan(
                   text: "Gateway: ",
-                  style: TextStyle(fontSize: 24),
+                  style: const TextStyle(fontSize: 24),
                   children: <TextSpan>[
                     TextSpan(
                       text: _status,
-                      style: TextStyle(fontSize: 24, color: Colors.red),
+                      style: const TextStyle(fontSize: 24, color: Colors.red),
                     ),
                   ],
                 ),
               ),
               Row(
                 children: <Widget>[
-                  Text(
+                  const Text(
                     "Calendar: ",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
+                    style: const TextStyle(fontSize: 20),
                   ),
                   _savedCalendar
-                      ? Icon(Icons.done, color: Colors.green)
-                      : Icon(Icons.close, color: Colors.red),
+                      ? const Icon(Icons.done, color: Colors.green)
+                      : const Icon(Icons.close, color: Colors.red),
                 ],
               ),
             ],

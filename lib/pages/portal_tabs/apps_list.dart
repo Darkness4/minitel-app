@@ -16,11 +16,13 @@ _launchURL(String url, {forceWebView: true}) async {
 
 /// Fragment listing in a [GridView] multiple supported Apps.
 class AppsList extends StatelessWidget {
+  const AppsList({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
+      decoration: const BoxDecoration(
+        gradient: const LinearGradient(
           begin: Alignment.topRight,
           colors: [
             const Color(0xff89f7fe),
@@ -30,19 +32,19 @@ class AppsList extends StatelessWidget {
       ),
       child: Scrollbar(
         child: GridView.count(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           crossAxisCount: 2,
           children: <Widget>[
-            _SogoCard(),
-            _CampusCard(),
-            _PrometheeCard(),
-            _EduSoftCard(),
-            _GitlabEMSECard(),
-            _AnnuaireCard(),
-            _ImprimanteCard(),
-            _WikiMinitelCard(),
+            const _SogoCard(),
+            const _CampusCard(),
+            const _PrometheeCard(),
+            const _EduSoftCard(),
+            const _GitlabEMSECard(),
+            const _AnnuaireCard(),
+            const _ImprimanteCard(),
+            const _WikiMinitelCard(),
           ],
         ),
       ),
@@ -52,9 +54,7 @@ class AppsList extends StatelessWidget {
 
 /// [Card] responsible for the Annuaire App.
 class _AnnuaireCard extends StatelessWidget {
-  const _AnnuaireCard({
-    Key key,
-  }) : super(key: key);
+  const _AnnuaireCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +77,10 @@ class _AnnuaireCard extends StatelessWidget {
                   ),
                   Text(
                     "Annuaire",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[700],
+                      color: Colors.black54,
                     ),
                   )
                 ],
@@ -93,9 +93,7 @@ class _AnnuaireCard extends StatelessWidget {
 
 /// [Card] responsible for the Campus App.
 class _CampusCard extends StatelessWidget {
-  const _CampusCard({
-    Key key,
-  }) : super(key: key);
+  const _CampusCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,16 +113,14 @@ class _CampusCard extends StatelessWidget {
 
 /// [Card] responsible for the EduSoft App.
 class _EduSoftCard extends StatelessWidget {
-  const _EduSoftCard({
-    Key key,
-  }) : super(key: key);
+  const _EduSoftCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
       child: InkWell(
-        highlightColor: Color(0xa0000000),
+        highlightColor: const Color(0xa0000000),
         splashColor: Colors.black,
         // onTap: () => Navigator.push(
         //       context,
@@ -137,7 +133,7 @@ class _EduSoftCard extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              stops: [0.1, 0.7],
+              stops: const [0.1, 0.7],
               colors: [
                 Colors.lightBlue[200].withAlpha(240),
                 Colors.blue.withAlpha(240),
@@ -153,9 +149,9 @@ class _EduSoftCard extends StatelessWidget {
                       size: constraint.biggest.height - 40,
                       color: Colors.white,
                     ),
-                    Text(
+                    const Text(
                       "Logiciels",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -172,9 +168,7 @@ class _EduSoftCard extends StatelessWidget {
 
 /// [Card] responsible for the GitlabEMSE App.
 class _GitlabEMSECard extends StatelessWidget {
-  const _GitlabEMSECard({
-    Key key,
-  }) : super(key: key);
+  const _GitlabEMSECard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -194,9 +188,7 @@ class _GitlabEMSECard extends StatelessWidget {
 
 /// [Card] responsible for the Imprimante App.
 class _ImprimanteCard extends StatelessWidget {
-  const _ImprimanteCard({
-    Key key,
-  }) : super(key: key);
+  const _ImprimanteCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -233,9 +225,7 @@ class _ImprimanteCard extends StatelessWidget {
 
 /// [Card] responsible for the Promethee App.
 class _PrometheeCard extends StatelessWidget {
-  const _PrometheeCard({
-    Key key,
-  }) : super(key: key);
+  const _PrometheeCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -264,9 +254,7 @@ class _PrometheeCard extends StatelessWidget {
 
 /// [Card] responsible for the Sogo App.
 class _SogoCard extends StatelessWidget {
-  const _SogoCard({
-    Key key,
-  }) : super(key: key);
+  const _SogoCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -286,9 +274,7 @@ class _SogoCard extends StatelessWidget {
 }
 
 class _WikiMinitelCard extends StatelessWidget {
-  const _WikiMinitelCard({
-    Key key,
-  }) : super(key: key);
+  const _WikiMinitelCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,10 @@ import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:flutter/material.dart';
 
 class DiagnoseDoc extends StatelessWidget {
+  const DiagnoseDoc({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -34,13 +38,17 @@ class DiagnoseDoc extends StatelessWidget {
       Header("Ping Local", level: 2),
       Text.rich(
         TextSpan(
-            style: TextStyle(height: 1.5),
+            style: const TextStyle(height: 1.5),
             text: AppLoc.of(context).sentenceDocDiagnosePingLocal1,
             children: <TextSpan>[
               TextSpan(text: AppLoc.of(context).sentenceDocDiagnosePingLocal2),
               TextSpan(
-                  text: AppLoc.of(context).sentenceDocDiagnosePingLocal3,
-                  style: TextStyle(fontWeight: FontWeight.bold, height: 1.5)),
+                text: AppLoc.of(context).sentenceDocDiagnosePingLocal3,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                ),
+              ),
               TextSpan(text: AppLoc.of(context).sentenceDocDiagnosePingLocal4),
             ]),
       ),
@@ -52,41 +60,41 @@ class DiagnoseDoc extends StatelessWidget {
       Header("3xx Redirection", level: 4),
       Text(
         "    301 Moved Permanently",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       Header("4xx Client errors", level: 4),
       Text(
         AppLoc.of(context).sentenceDocDiagnoseHTTP2,
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
       ),
       Text(
         "    400 Bad Request",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       Text(
         "    401 Unauthorized",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       Text(
         "    403 Forbidden",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       Header("5xx Server errors", level: 4),
       Text(
         "    500 Internal Server Error",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       Text(
         "    502 Bad Gateway",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       Text(
         "    503 Service Unavailable",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       Text(
         "    504 Gateway Timeout",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       Header(AppLoc.of(context).titleHowShouldIReact, level: 3),
       Paragraph(AppLoc.of(context).sentenceDocDiagnoseHTTP3),
@@ -94,7 +102,10 @@ class DiagnoseDoc extends StatelessWidget {
       Paragraph(AppLoc.of(context).sentenceDocDiagnoseHTTP5),
       Paragraph(
         AppLoc.of(context).sentenceDocDiagnoseHTTP6,
-        style: TextStyle(fontWeight: FontWeight.bold, height: 1.5),
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          height: 1.5,
+        ),
       ),
       Header("Ping Gateway", level: 2),
       Paragraph(AppLoc.of(context).sentenceDocDiagnosePingGateway),
@@ -112,7 +123,7 @@ class DiagnoseDoc extends StatelessWidget {
       Paragraph(AppLoc.of(context).sentenceDocDiagnoseNSLookup1),
       Paragraph(
         AppLoc.of(context).sentenceDocDiagnoseNSLookup2,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       LogCard("ipconfig /flushdns", title: "cmd.exe (Admin)    (Windows)"),
       LogCard("sudo systemd-resolve --flush-caches",
@@ -131,7 +142,7 @@ class DiagnoseDoc extends StatelessWidget {
           title: "Terminal    (OSX Snow Leopard)"),
       Paragraph(
         AppLoc.of(context).sentenceDocDiagnoseNSLookup3,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ]));
   }

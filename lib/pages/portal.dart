@@ -7,7 +7,7 @@ import 'portal_tabs/login.dart';
 class PortalPage extends StatefulWidget {
   final String title;
 
-  PortalPage({Key key, this.title}) : super(key: key);
+  const PortalPage({Key key, this.title}) : super(key: key);
 
   PortalPageState createState() => PortalPageState();
 }
@@ -19,10 +19,10 @@ class PortalPageState extends State<PortalPage> {
       length: 2,
       child: Scaffold(
         body: NestedScrollView(
-            body: TabBarView(
+            body: const TabBarView(
               children: <Widget>[
-                LoginPage(),
-                AppsList(),
+                const LoginPage(),
+                const AppsList(),
               ],
             ),
             headerSliverBuilder:
@@ -32,21 +32,21 @@ class PortalPageState extends State<PortalPage> {
                         pinned: true,
                         floating: true,
                         forceElevated: true,
-                        bottom: TabBar(
-                          tabs: <Tab>[
-                            Tab(
-                              icon: Icon(Icons.vpn_key),
+                        bottom: const TabBar(
+                          tabs: const <Tab>[
+                            const Tab(
+                              icon: const Icon(Icons.vpn_key),
                               text: "Login",
                             ),
-                            Tab(
-                              icon: Icon(Icons.apps),
+                            const Tab(
+                              icon: const Icon(Icons.apps),
                               text: "Apps",
                             ),
                           ],
                         ),
                       ),
                     ]),
-        drawer: MainDrawer(),
+        drawer: const MainDrawer(),
       ),
     );
   }

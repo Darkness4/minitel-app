@@ -34,8 +34,8 @@ class ReportTabState extends State<ReportTab> {
               titleFocusNode: _titleFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
               descriptionController: widget.descriptionController),
-          _TutorialCard(),
-          _ContactsCard(),
+          const _TutorialCard(),
+          const _ContactsCard(),
         ]),
       ),
     );
@@ -57,13 +57,13 @@ class _ContactsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DocCard(
+    return const DocCard(
       elevation: 4,
-      children: <Widget>[
-        Header("Contacts"),
-        Header("Facebook: Minitel Ismin", level: 2),
-        Header("G*: Contact Admin", level: 2),
-        Header("Mail: minitelismin@gmail.com", level: 2),
+      children: const <Widget>[
+        const Header("Contacts"),
+        const Header("Facebook: Minitel Ismin", level: 2),
+        const Header("G*: Contact Admin", level: 2),
+        const Header("Mail: minitelismin@gmail.com", level: 2),
       ],
     );
   }
@@ -96,15 +96,15 @@ class _ReportCard extends StatelessWidget {
         child: Card(
           elevation: 4,
           child: Container(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Column(
               children: <Widget>[
                 TextField(
                   controller: _titleController,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                   focusNode: _titleFocusNode,
                   textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Title",
                     hintText: "Room number : Short description.",
                   ),
@@ -119,7 +119,7 @@ class _ReportCard extends StatelessWidget {
                   focusNode: _descriptionFocusNode,
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Description",
                     hintText: "Describe your issue.",
                   ),

@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PrometheeWebView extends StatelessWidget {
-  final Widget child;
-
-  PrometheeWebView({Key key, this.child}) : super(key: key);
+  const PrometheeWebView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple,
-        title: Text("Prométhée"),
+        title: const Text("Prométhée"),
       ),
-      body: WebView(
+      body: const WebView(
         initialUrl: 'https://promethee.emse.fr/',
         javascriptMode: JavascriptMode.unrestricted,
       ),

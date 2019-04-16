@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class DocumentationPage extends StatefulWidget {
   final String title;
 
-  DocumentationPage({Key key, this.title}) : super(key: key);
+  const DocumentationPage({Key key, this.title}) : super(key: key);
 
   @override
   DocumentationPageState createState() => DocumentationPageState();
@@ -30,7 +30,7 @@ class DocumentationPageState extends State<DocumentationPage> {
           ],
         ),
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       endDrawer: Drawer(
         child: ListView(
           padding: const EdgeInsets.all(0.0),

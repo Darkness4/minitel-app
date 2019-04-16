@@ -8,7 +8,7 @@ class DocCard extends StatelessWidget {
   final double extPadding;
   final double intPadding;
 
-  DocCard(
+  const DocCard(
       {@required this.children,
       this.elevation: 4.0,
       this.extPadding: 10.0,
@@ -23,7 +23,9 @@ class DocCard extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(intPadding),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, children: children),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: children,
+          ),
         ),
       ),
     );
@@ -35,12 +37,12 @@ class LogCard extends StatelessWidget {
   final String text;
   final double elevation;
 
-  LogCard(this.text, {this.title, this.elevation: 3});
+  const LogCard(this.text, {this.title, this.elevation: 3});
 
   @override
   Widget build(context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Card(
         elevation: elevation,
         color: Colors.lightBlue,
@@ -48,11 +50,11 @@ class LogCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Text(title, style: styleLogImportant),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Text(text, style: styleLog),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.0),
@@ -71,7 +73,7 @@ class NewsCard extends StatelessWidget {
   final double extPadding;
   final double intPadding;
 
-  NewsCard(
+  const NewsCard(
       {this.item,
       this.elevation: 4.0,
       this.extPadding: 10.0,

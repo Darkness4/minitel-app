@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SogoWebView extends StatelessWidget {
-  final Widget child;
-
-  SogoWebView({Key key, this.child}) : super(key: key);
+  const SogoWebView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Sogo"),
+        title: const Text("Sogo"),
       ),
-      body: WebView(
+      body: const WebView(
         initialUrl: 'https://sogo.emse.fr/',
         javascriptMode: JavascriptMode.unrestricted,
       ),

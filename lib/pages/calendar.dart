@@ -10,17 +10,17 @@ import 'package:intl/intl.dart';
 class CalendarPage extends StatefulWidget {
   final String title;
 
-  CalendarPage({Key key, this.title}) : super(key: key);
+  const CalendarPage({Key key, this.title}) : super(key: key);
 
   @override
   CalendarPageState createState() => CalendarPageState();
 }
 
 class CalendarPageState extends State<CalendarPage> {
-  var _uidController = TextEditingController();
-  var _pswdController = TextEditingController();
-  var _uidFocusNode = FocusNode();
-  var _pswdFocusNode = FocusNode();
+  final _uidController = TextEditingController();
+  final _pswdController = TextEditingController();
+  final _uidFocusNode = FocusNode();
+  final _pswdFocusNode = FocusNode();
 
   Future<List<Widget>> get _listEventCards async {
     String calendar = "";
@@ -42,7 +42,7 @@ class CalendarPageState extends State<CalendarPage> {
 
     ICalendar ical = await parseCalendar(calendar);
 
-    Map<int, Color> colorPalette = {
+    const Map<int, Color> colorPalette = {
       DateTime.january: Colors.red,
       DateTime.february: Colors.pink,
       DateTime.march: Colors.purple,
@@ -59,24 +59,29 @@ class CalendarPageState extends State<CalendarPage> {
 
     List<Widget> widgets = [];
     List<Widget> monthlyWidgets = [];
+    List<Widget> dailyEvents = [];
 
     ical.events.sort((event1, event2) => DateTime.parse(event1["DTSTART"])
         .compareTo(DateTime.parse(event2["DTSTART"])));
 
-    int day = DateTime.parse(ical.events.first["DTSTART"]).day;
-    int month = DateTime.parse(ical.events.first["DTSTART"]).month;
-    monthlyWidgets.add(
-      Center(
-        child: Header(
-          "${DateFormat.MMMM().format(DateTime.parse(ical.events.first["DTSTART"])).toUpperCase()}",
-          color: Colors.white,
-        ),
-      ),
-    );
+    int day;
+    int month;
     ical.events.forEach(
       (event) {
         DateTime dt = DateTime.parse(event["DTSTART"]);
         if (dt.isAfter(DateTime.now())) {
+          if (month == null) {
+            month = dt.month;
+            monthlyWidgets.add(
+              Center(
+                child: Header(
+                  "${DateFormat.MMMM().format(dt).toUpperCase()}",
+                  color: Colors.white,
+                ),
+              ),
+            );
+          }
+          if (day == null) day = dt.day;
           if (dt.month != month) {
             month = dt.month;
             // Finish
@@ -111,19 +116,39 @@ class CalendarPageState extends State<CalendarPage> {
           // New Day
           if (dt.day != day) {
             day = dt.day;
-            monthlyWidgets.add(
-              Container(
-                child: DayCard(
-                  "${DateFormat.MMMMEEEEd().format(dt)}",
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
+            monthlyWidgets.add(StickyHeader(
+              header: Container(
+                child: Row(
+                  children: <Widget>[
+                    Card(
+                      elevation: 10,
+                      shape: const ContinuousRectangleBorder(),
+                      color: Colors.white,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Header(
+                            "${DateFormat.MMMMEEEEd().format(dt)}",
+                            color: Colors.black87,
+                            level: 3,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            );
+              content: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: dailyEvents,
+              ),
+            ));
+            dailyEvents = [];
           }
 
           // New Event
-          monthlyWidgets.add(EventCard(event));
+          dailyEvents.add(EventCard(event));
         }
       },
     );
@@ -145,11 +170,11 @@ class CalendarPageState extends State<CalendarPage> {
             builder: (BuildContext context, AsyncSnapshot snapshot) =>
                 snapshot.hasData
                     ? Scrollbar(child: PageView(children: snapshot.data))
-                    : Text("Loading..."),
+                    : const Text("Loading..."),
           ),
         ),
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
     );
   }
 
@@ -173,7 +198,7 @@ class CalendarPageState extends State<CalendarPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   e.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -185,7 +210,7 @@ class CalendarPageState extends State<CalendarPage> {
           Card(
             elevation: 4,
             child: Container(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Form(
                 child: Column(
                   children: <Widget>[
@@ -215,12 +240,12 @@ class CalendarPageState extends State<CalendarPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 100,
               child: RaisedButton(
-                shape: ContinuousRectangleBorder(),
+                shape: const ContinuousRectangleBorder(),
                 color: Colors.greenAccent[400],
                 elevation: 4,
                 onPressed: () => saveCalendarFromLogin(
@@ -229,7 +254,7 @@ class CalendarPageState extends State<CalendarPage> {
                     ).then((out) => setState(() {})),
                 child: Text(
                   "LOGIN",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
@@ -244,62 +269,33 @@ class CalendarPageState extends State<CalendarPage> {
   }
 }
 
-class DayCard extends StatelessWidget {
-  final String _day;
-  final Color backgroundColor;
-  final Color foregroundColor;
-
-  DayCard(
-    String day, {
-    this.backgroundColor: Colors.blue,
-    this.foregroundColor: Colors.white,
-  }) : _day = day;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: StadiumBorder(),
-      color: backgroundColor,
-      child: Center(
-        child: Header(
-          _day,
-          color: foregroundColor,
-          level: 3,
-        ),
-      ),
-    );
-  }
-}
-
 class EventCard extends StatelessWidget {
   final Map<String, String> _event;
 
-  EventCard(Map<String, String> event) : _event = event;
+  const EventCard(Map<String, String> event, {Key key})
+      : _event = event,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
       child: Container(
-        padding: EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(4.0),
         child: Column(
           children: <Widget>[
             Text(
               _event["SUMMARY"],
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             Text(
               "${_event["DESCRIPTION"]}",
-              style: TextStyle(
-                height: 1.4,
-              ),
+              style: const TextStyle(height: 1.4),
             ),
             Text(
               "➡️ ${_event["LOCATION"]} ",
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.red,
                 fontSize: 16,
@@ -309,7 +305,7 @@ class EventCard extends StatelessWidget {
               "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
               " - "
               "${DateFormat.Hm().format(DateTime.parse(_event["DTEND"]))}",
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
