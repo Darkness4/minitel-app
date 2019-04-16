@@ -32,17 +32,18 @@ class DiagnoseDoc extends StatelessWidget {
       Header("Ping Loopback", level: 2),
       Paragraph(AppLoc.of(context).sentenceDocDiagnosePingLo),
       Header("Ping Local", level: 2),
-      RichText(
-          text: TextSpan(
-              style: TextStyle(color: Colors.black, height: 1.5),
-              text: AppLoc.of(context).sentenceDocDiagnosePingLocal1,
-              children: <TextSpan>[
-            TextSpan(text: AppLoc.of(context).sentenceDocDiagnosePingLocal2),
-            TextSpan(
-                text: AppLoc.of(context).sentenceDocDiagnosePingLocal3,
-                style: TextStyle(fontWeight: FontWeight.bold, height: 1.5)),
-            TextSpan(text: AppLoc.of(context).sentenceDocDiagnosePingLocal4),
-          ])),
+      Text.rich(
+        TextSpan(
+            style: TextStyle(height: 1.5),
+            text: AppLoc.of(context).sentenceDocDiagnosePingLocal1,
+            children: <TextSpan>[
+              TextSpan(text: AppLoc.of(context).sentenceDocDiagnosePingLocal2),
+              TextSpan(
+                  text: AppLoc.of(context).sentenceDocDiagnosePingLocal3,
+                  style: TextStyle(fontWeight: FontWeight.bold, height: 1.5)),
+              TextSpan(text: AppLoc.of(context).sentenceDocDiagnosePingLocal4),
+            ]),
+      ),
       Header("HTTP Gateway Response", level: 2),
       Paragraph(AppLoc.of(context).sentenceDocDiagnoseHTTP1),
       Header("HTTP Codes", level: 3),

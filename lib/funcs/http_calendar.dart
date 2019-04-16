@@ -152,7 +152,7 @@ Future<bool> saveCalendarFromLogin({String username, String password}) async {
   var iCalendar = "";
 
   iCalendar = await getCalendar(icsUrl);
-  file.writeAsString(iCalendar);
+  await file.writeAsString(iCalendar);
 
   return true;
 }

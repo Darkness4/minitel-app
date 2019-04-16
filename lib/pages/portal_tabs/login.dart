@@ -215,10 +215,10 @@ class _StatusCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              RichText(
-                text: TextSpan(
+              Text.rich(
+                TextSpan(
                   text: "Gateway: ",
-                  style: TextStyle(fontSize: 24, color: Colors.black),
+                  style: TextStyle(fontSize: 24),
                   children: <TextSpan>[
                     TextSpan(
                       text: _status,

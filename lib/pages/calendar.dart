@@ -3,6 +3,7 @@ import 'package:auto_login_flutter/funcs/http_calendar.dart';
 import 'package:auto_login_flutter/funcs/icalendar_parser.dart';
 import 'package:auto_login_flutter/localizations.dart';
 import 'package:auto_login_flutter/styles/text_style.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -64,53 +65,68 @@ class CalendarPageState extends State<CalendarPage> {
 
     int day = DateTime.parse(ical.events.first["DTSTART"]).day;
     int month = DateTime.parse(ical.events.first["DTSTART"]).month;
-    monthlyWidgets.add(Center(
-      child: Header(
-        "${DateFormat.MMMM().format(DateTime.parse(ical.events.first["DTSTART"])).toUpperCase()}",
-        color: Colors.white,
+    monthlyWidgets.add(
+      Center(
+        child: Header(
+          "${DateFormat.MMMM().format(DateTime.parse(ical.events.first["DTSTART"])).toUpperCase()}",
+          color: Colors.white,
+        ),
       ),
-    ));
-    ical.events.forEach((event) {
-      DateTime dt = DateTime.parse(event["DTSTART"]);
-      if (dt.isAfter(DateTime.now())) {
-        if (dt.month != month) {
-          month = dt.month;
-          // Finish
-          widgets.add(SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                color: colorPalette[month],
-                elevation: 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: monthlyWidgets,
+    );
+    ical.events.forEach(
+      (event) {
+        DateTime dt = DateTime.parse(event["DTSTART"]);
+        if (dt.isAfter(DateTime.now())) {
+          if (dt.month != month) {
+            month = dt.month;
+            // Finish
+            widgets.add(
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    color: colorPalette[month],
+                    elevation: 4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: monthlyWidgets,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ));
-          monthlyWidgets = [];
+            );
+            monthlyWidgets = [];
 
-          // New Month
-          monthlyWidgets.add(Center(
-            child: Header(
-              "${DateFormat.MMMM().format(dt).toUpperCase()}",
-              color: Colors.white,
-            ),
-          ));
+            // New Month
+            monthlyWidgets.add(
+              Center(
+                child: Header(
+                  "${DateFormat.MMMM().format(dt).toUpperCase()}",
+                  color: Colors.white,
+                ),
+              ),
+            );
+          }
+
+          // New Day
+          if (dt.day != day) {
+            day = dt.day;
+            monthlyWidgets.add(
+              Container(
+                child: DayCard(
+                  "${DateFormat.MMMMEEEEd().format(dt)}",
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                ),
+              ),
+            );
+          }
+
+          // New Event
+          monthlyWidgets.add(EventCard(event));
         }
-        if (dt.day != day) {
-          day = dt.day;
-          monthlyWidgets.add(Container(
-              child: DayCard(
-            "${dt.day}",
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-          )));
-        }
-        monthlyWidgets.add(EventCard(event));
-      }
-    });
+      },
+    );
 
     return widgets;
   }
@@ -148,7 +164,7 @@ class CalendarPageState extends State<CalendarPage> {
 
   List<Widget> _errorHandlerWidget(dynamic e) {
     return <Widget>[
-      Column(
+      ListView(
         children: <Widget>[
           Card(
             elevation: 4,
@@ -242,7 +258,7 @@ class DayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: CircleBorder(),
+      shape: StadiumBorder(),
       color: backgroundColor,
       child: Center(
         child: Header(
@@ -263,25 +279,40 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 4,
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(4.0),
         child: Column(
           children: <Widget>[
-            Header(
+            Text(
               _event["SUMMARY"],
-              level: 4,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-            Text("${_event["DESCRIPTION"]}"),
-            Header(
-              "➡️ ${_event["LOCATION"]}",
-              level: 1,
-              color: Colors.red,
+            Text(
+              "${_event["DESCRIPTION"]}",
+              style: TextStyle(
+                height: 1.4,
+              ),
             ),
-            Header(
+            Text(
+              "➡️ ${_event["LOCATION"]} ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+                fontSize: 16,
+              ),
+            ),
+            Text(
               "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
               " - "
               "${DateFormat.Hm().format(DateTime.parse(_event["DTEND"]))}",
-              level: 2,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
           ],
         ),
