@@ -49,6 +49,8 @@ build-test:
     - flutter packages get
     - flutter build apk --release
   except:
+  - master
+  - develop
   - tests
 
 build:
@@ -68,3 +70,4 @@ build:
     expire_in: 1 week
   only:
     - master
+    - develop
