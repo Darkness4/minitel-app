@@ -3,9 +3,9 @@ import 'package:auto_login_flutter/funcs/http_calendar.dart';
 import 'package:auto_login_flutter/funcs/icalendar_parser.dart';
 import 'package:auto_login_flutter/localizations.dart';
 import 'package:auto_login_flutter/styles/text_style.dart';
-import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 class CalendarPage extends StatefulWidget {
   final String title;
@@ -48,7 +48,7 @@ class CalendarPageState extends State<CalendarPage> {
       DateTime.march: Colors.purple,
       DateTime.april: Colors.indigo,
       DateTime.may: Colors.blue,
-      DateTime.june: Colors.cyan,
+      DateTime.june: Colors.lightBlue,
       DateTime.july: Colors.green,
       DateTime.august: Colors.lime,
       DateTime.september: Colors.yellow,
@@ -116,28 +116,28 @@ class CalendarPageState extends State<CalendarPage> {
           // New Day
           if (dt.day != day) {
             day = dt.day;
-            monthlyWidgets.add(StickyHeader(
-              header: Container(
-                child: Row(
-                  children: <Widget>[
-                    Card(
-                      elevation: 10,
-                      shape: const ContinuousRectangleBorder(),
-                      color: Colors.white,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Header(
-                            "${DateFormat.MMMMEEEEd().format(dt)}",
-                            color: Colors.black87,
-                            level: 3,
-                          ),
-                        ),
+            monthlyWidgets.add(StickyHeaderBuilder(
+              builder: (BuildContext context, double stuckAmount) {
+                stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
+                return Material(
+                  elevation: stuckAmount * 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular((1 - stuckAmount) * 30)),
+                  color: Color.lerp(
+                      Colors.transparent, Colors.transparent, stuckAmount),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Header(
+                        "${DateFormat.MMMMEEEEd().format(dt)}",
+                        color: Colors.white,
+                        level: 3,
                       ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -276,10 +276,33 @@ class EventCard extends StatelessWidget {
       : _event = event,
         super(key: key);
 
+  Color get _cardColor {
+    var upper = _event["SUMMARY"].toLowerCase();
+    if (upper.contains("examen"))
+      return Colors.red[200];
+    else if (upper.contains("tp"))
+      return Colors.orange[200];
+    else if (upper.contains("td"))
+      return Colors.green[200];
+    else if (upper.contains("tutorat"))
+      return Colors.blue[200];
+    else if (upper.contains("sport") ||
+        upper.contains("vacance") ||
+        upper.contains("férié"))
+      return Colors.transparent;
+    else
+      return Colors.white;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
+      color: _cardColor,
+      elevation: (_event["SUMMARY"].toLowerCase().contains("sport") ||
+              _event["SUMMARY"].toLowerCase().contains("vacance") ||
+              _event["SUMMARY"].toLowerCase().contains("férié"))
+          ? 0
+          : 4,
       child: Container(
         padding: const EdgeInsets.all(4.0),
         child: Column(
@@ -292,14 +315,16 @@ class EventCard extends StatelessWidget {
             Text(
               "${_event["DESCRIPTION"]}",
               style: const TextStyle(height: 1.4),
+              textAlign: TextAlign.center,
             ),
             Text(
-              "➡️ ${_event["LOCATION"]} ",
+              "${_event["LOCATION"] != "" ? '➡' : ''} ${_event["LOCATION"]} ",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.red,
                 fontSize: 16,
               ),
+              textAlign: TextAlign.center,
             ),
             Text(
               "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
@@ -309,6 +334,7 @@ class EventCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
