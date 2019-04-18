@@ -43,7 +43,7 @@ class CalendarPageState extends State<CalendarPage> {
       var url = await getSavedCalendarURL();
       await saveCalendarFromUrl(url);
     } catch (e) {
-      print(e.toString());
+      return _errorHandlerWidget(e);
     }
 
     // Read the actual calendar
@@ -205,15 +205,6 @@ class CalendarPageState extends State<CalendarPage> {
         ),
       ),
       drawer: const MainDrawer(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async => _showNotification(
-              title: "Test",
-              description:
-                  "TestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\n",
-              payload:
-                  "TestTestTestTestTestTestTestTest;TestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\n",
-            ),
-      ),
     );
   }
 
@@ -351,19 +342,19 @@ class CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  Future<void> _showNotification(
-      {String title: "Title",
-      String description: "Description",
-      String payload: "Title;Description"}) async {
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      title,
-      description,
-      NotificationDetails(
-          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
-      payload: payload,
-    );
-  }
+  // Future<void> _showNotification(
+  //     {String title: "Title",
+  //     String description: "Description",
+  //     String payload: "Title;Description"}) async {
+  //   await flutterLocalNotificationsPlugin.show(
+  //     0,
+  //     title,
+  //     description,
+  //     NotificationDetails(
+  //         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
+  //     payload: payload,
+  //   );
+  // }
 }
 
 class EventCard extends StatelessWidget {

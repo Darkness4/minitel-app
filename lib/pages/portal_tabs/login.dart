@@ -146,7 +146,7 @@ class LoginPageState extends State<LoginPage> {
                       shape: const ContinuousRectangleBorder(),
                       color: Colors.lightBlueAccent,
                       elevation: 4,
-                      onPressed: () async {
+                      onPressed: () {
                         final snackBar = SnackBar(content: Text('Requested'));
                         Scaffold.of(context).showSnackBar(snackBar);
                         autoLogin(
