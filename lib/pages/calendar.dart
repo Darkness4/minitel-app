@@ -83,26 +83,29 @@ class CalendarPageState extends State<CalendarPage> {
 
     Future.forEach(
       filteredEvents,
-      (event) => _scheduleNotification(
-            title: event["SUMMARY"],
-            description: "${event["LOCATION"]}\n"
-                "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
-                " - "
-                "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
-            scheduledNotificationDateTime: DateTime.parse(event["DTSTART"])
-                .subtract(const Duration(minutes: 10)),
-            payload: "${event["DESCRIPTION"]};"
-                "${event["LOCATION"]}\n"
-                "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
-                " - "
-                "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
-          ),
+      (event) async {
+        _scheduleNotification(
+          id: DateTime.parse(event["DTSTART"]).hashCode,
+          title: event["SUMMARY"],
+          description: "${event["LOCATION"]}\n"
+              "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
+              " - "
+              "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
+          scheduledNotificationDateTime: DateTime.parse(event["DTSTART"])
+              .subtract(const Duration(minutes: 10)),
+          payload: "${event["DESCRIPTION"]};"
+              "${event["LOCATION"]}\n"
+              "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
+              " - "
+              "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
+        );
+      },
     );
 
     int day;
     int month;
 
-    filteredEvents.forEach((event) {
+    Future.forEach(filteredEvents, (event) {
       DateTime dt = DateTime.parse(event["DTSTART"]);
 
       if (dt.month != month) {
@@ -298,13 +301,13 @@ class CalendarPageState extends State<CalendarPage> {
               height: 100,
               child: RaisedButton(
                 shape: const ContinuousRectangleBorder(),
-                color: Colors.greenAccent[400],
+                color: Colors.red,
                 elevation: 4,
                 onPressed: () => saveCalendarFromLogin(
                       username: _uidController.text,
                       password: _pswdController.text,
                     ).then((out) => setState(() {})),
-                child: Text(
+                child: const Text(
                   "LOGIN",
                   style: const TextStyle(
                     color: Colors.white,
@@ -337,13 +340,16 @@ class CalendarPageState extends State<CalendarPage> {
   Future<void> _scheduleNotification(
       {@required String title,
       @required String description,
+      @required int id,
       @required DateTime scheduledNotificationDateTime,
       String payload: "Title;Description"}) async {
     // print(
     //     "Event scheduled at ${DateFormat.yMMMMd().format(scheduledNotificationDateTime)} ${DateFormat.Hms().format(scheduledNotificationDateTime)}");
+    // pendingNotificationRequests.forEach((out) => flutterLocalNotificationsPlugin.cancel(out.id));
+
     await flutterLocalNotificationsPlugin.cancelAll();
-    await flutterLocalNotificationsPlugin.schedule(
-      0,
+    flutterLocalNotificationsPlugin.schedule(
+      id,
       title,
       description,
       scheduledNotificationDateTime,
