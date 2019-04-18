@@ -151,7 +151,7 @@ class CalendarPageState extends State<CalendarPage> {
           builder: (BuildContext context, double stuckAmount) {
             stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
             return Material(
-              elevation: stuckAmount * 4,
+              elevation: stuckAmount * 10,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular((1 - stuckAmount) * 100)),
               color: Color.lerp(

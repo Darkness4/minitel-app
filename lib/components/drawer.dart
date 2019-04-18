@@ -38,7 +38,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/')
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pushReplacementNamed(context, '/');
               }),
           Divider(),
           ListTile(
@@ -48,7 +48,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/news')
-                  Navigator.pushNamed(context, '/news');
+                  Navigator.pushReplacementNamed(context, '/news');
               }),
           ListTile(
               title: Text(AppLoc.of(context).titleCalendarPage),
@@ -57,7 +57,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/calendar')
-                  Navigator.pushNamed(context, '/calendar');
+                  Navigator.pushReplacementNamed(context, '/calendar');
               }),
           ListTile(
               title: Text(AppLoc.of(context).titleMapsPage),
@@ -66,7 +66,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/maps')
-                  Navigator.pushNamed(context, '/maps');
+                  Navigator.pushReplacementNamed(context, '/maps');
               }),
           Divider(),
           Container(
@@ -87,7 +87,7 @@ class MainDrawer extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context); // Close Drawer
                   if (ModalRoute.of(context).settings.name != '/reporting')
-                    Navigator.pushNamed(context, '/reporting');
+                    Navigator.pushReplacementNamed(context, '/reporting');
                 }),
           ),
           ListTile(
@@ -97,7 +97,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != '/docs')
-                  Navigator.pushNamed(context, '/docs');
+                  Navigator.pushReplacementNamed(context, '/docs');
               }),
         ],
       ),
