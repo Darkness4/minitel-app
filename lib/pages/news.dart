@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class NewsPage extends StatefulWidget {
   final String title;
 
-  NewsPage({Key key, this.title}) : super(key: key);
+  const NewsPage({Key key, this.title}) : super(key: key);
 
   @override
   NewsPageState createState() => NewsPageState();
@@ -16,12 +16,10 @@ class NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
+        decoration: const BoxDecoration(
+          gradient: const LinearGradient(
             begin: Alignment.topLeft,
             colors: [
               const Color(0xfffdfcfb),
@@ -32,22 +30,19 @@ class NewsPageState extends State<NewsPage> {
         child: Center(
           child: Scrollbar(
             child: SingleChildScrollView(
-                child: FutureBuilder(
-                    future: _generateFeedCard(
-                        "https://github.com/Darkness4/minitel-app/commits/develop.atom"),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        return Column(
-                          children: snapshot.data,
-                        );
-                      } else {
-                        return Text("Loading...");
-                      }
-                    })),
+              child: FutureBuilder(
+                future: _generateFeedCard(
+                    "https://github.com/Darkness4/minitel-app/commits/develop.atom"),
+                builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                    snapshot.hasData
+                        ? Column(children: snapshot.data)
+                        : const Text("Loading..."),
+              ),
+            ),
           ),
         ),
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
     );
   }
 

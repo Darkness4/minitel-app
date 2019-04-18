@@ -81,22 +81,26 @@ class DiagnoseTab extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Text(_alert,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red,
-                    fontSize: 15,
-                  )),
+              Text(
+                _alert,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  fontSize: 15,
+                ),
+              ),
               Material(
                 elevation: 2.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40.0)),
                 color: Colors.deepOrange,
                 child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text("SSID: $_ssid, IP: $_ip",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    "SSID: $_ssid, IP: $_ip",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
                 ),
               ),
               LogCard(

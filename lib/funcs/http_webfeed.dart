@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:webfeed/webfeed.dart';
 
-
 Future<AtomFeed> getAtom(String atomUrl) async {
   var client = HttpClient();
   HttpClientRequest request = await client.getUrl(Uri.parse(atomUrl));

@@ -1,9 +1,10 @@
+import 'package:auto_login_flutter/funcs/http_calendar.dart';
 import 'package:auto_login_flutter/funcs/http_portail.dart';
 import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key key}) : super(key: key);
 
   @override
   LoginPageState createState() => LoginPageState();
@@ -31,6 +32,7 @@ class LoginPageState extends State<LoginPage> {
     '8 hours': 480,
   };
   var _status = "";
+  var _savedCalendar = false;
   var _selectedTime = '4 hours'; // Default
   var _selectedUrl = 'fw-cgcp.emse.fr';
 
@@ -39,8 +41,8 @@ class LoginPageState extends State<LoginPage> {
     return Stack(
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: const LinearGradient(
               begin: Alignment.topRight,
               colors: [
                 const Color(0xff89f7fe),
@@ -55,30 +57,36 @@ class LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                _StatusCard(status: _status),
+                _StatusCard(
+                  status: _status,
+                  savedCalendar: _savedCalendar,
+                ),
                 Card(
                   elevation: 10.0,
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       children: <Widget>[
-                        Row(children: <Widget>[
-                          Text("${AppLoc.of(context).wordDomain} / IP "),
-                          DropdownButton<String>(
-                            value: _selectedUrl,
-                            items: _urlRootList
-                                .map((String value) => DropdownMenuItem<String>(
-                                      child: Text(value),
-                                      value: value,
-                                    ))
-                                .toList(),
-                            onChanged: (String selectedUrl) {
-                              _selectedUrl = selectedUrl;
-                              getStatus(_selectedUrl).then(
-                                  (status) => setState(() => _status = status));
-                            },
-                          ),
-                        ]),
+                        Row(
+                          children: <Widget>[
+                            Text("${AppLoc.of(context).wordDomain} / IP "),
+                            DropdownButton<String>(
+                              value: _selectedUrl,
+                              items: _urlRootList
+                                  .map((String value) =>
+                                      DropdownMenuItem<String>(
+                                        child: Text(value),
+                                        value: value,
+                                      ))
+                                  .toList(),
+                              onChanged: (String selectedUrl) {
+                                _selectedUrl = selectedUrl;
+                                getStatus(_selectedUrl).then((status) =>
+                                    setState(() => _status = status));
+                              },
+                            ),
+                          ],
+                        ),
                         Row(
                           children: <Widget>[
                             Text(AppLoc.of(context).wordsAuthDuration),
@@ -114,13 +122,14 @@ class LoginPageState extends State<LoginPage> {
                                 },
                               ),
                               TextFormField(
-                                  controller: _pswdController,
-                                  obscureText: true,
-                                  focusNode: _pswdFocusNode,
-                                  decoration: InputDecoration(
-                                      hintText: AppLoc.of(context).wordPassword,
-                                      labelText:
-                                          AppLoc.of(context).wordPassword)),
+                                controller: _pswdController,
+                                obscureText: true,
+                                focusNode: _pswdFocusNode,
+                                decoration: InputDecoration(
+                                  hintText: AppLoc.of(context).wordPassword,
+                                  labelText: AppLoc.of(context).wordPassword,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -129,26 +138,31 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 100,
                     child: RaisedButton(
-                      shape: ContinuousRectangleBorder(),
-                      color: Colors.greenAccent[400],
+                      shape: const ContinuousRectangleBorder(),
+                      color: Colors.lightBlueAccent,
                       elevation: 4,
                       onPressed: () {
-                        final snackBar = SnackBar(
-                          content: Text('Requested'),
-                        );
+                        final snackBar = SnackBar(content: Text('Requested'));
                         Scaffold.of(context).showSnackBar(snackBar);
-                        autoLogin(_uidController.text, _pswdController.text,
-                                _selectedUrl, _timeMap[_selectedTime])
-                            .then((status) => setState(() => _status = status));
+                        autoLogin(
+                          _uidController.text,
+                          _pswdController.text,
+                          _selectedUrl,
+                          _timeMap[_selectedTime],
+                        ).then((status) => setState(() => _status = status));
+                        saveCalendarFromLogin(
+                          username: _uidController.text,
+                          password: _pswdController.text,
+                        ).then((out) => setState(() => _savedCalendar = out));
                       },
-                      child: Text(
+                      child: const Text(
                         "LOGIN",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
@@ -183,34 +197,53 @@ class LoginPageState extends State<LoginPage> {
 
 class _StatusCard extends StatelessWidget {
   final String _status;
+  final bool _savedCalendar;
 
   const _StatusCard({
     Key key,
     @required String status,
+    @required bool savedCalendar,
   })  : _status = status,
+        _savedCalendar = savedCalendar,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 30),
+      margin: const EdgeInsets.only(bottom: 30),
       child: Card(
         elevation: 10.0,
         child: Padding(
-          padding: EdgeInsets.all(25),
+          padding: const EdgeInsets.all(25),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text("Status: ",
-                    style: TextStyle(
-                      fontSize: 24,
-                    )),
-                Text(
-                  _status,
-                  style: TextStyle(fontSize: 24, color: Colors.red),
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text.rich(
+                TextSpan(
+                  text: "Gateway: ",
+                  style: const TextStyle(fontSize: 24),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: _status,
+                      style: const TextStyle(fontSize: 24, color: Colors.red),
+                    ),
+                  ],
                 ),
-              ]),
+              ),
+              Row(
+                children: <Widget>[
+                  const Text(
+                    "Calendar: ",
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  _savedCalendar
+                      ? const Icon(Icons.done, color: Colors.green)
+                      : const Icon(Icons.close, color: Colors.red),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
