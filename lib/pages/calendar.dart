@@ -4,6 +4,7 @@ import 'package:auto_login_flutter/funcs/icalendar_parser.dart';
 import 'package:auto_login_flutter/localizations.dart';
 import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
@@ -21,6 +22,18 @@ class CalendarPageState extends State<CalendarPage> {
   final _pswdController = TextEditingController();
   final _uidFocusNode = FocusNode();
   final _pswdFocusNode = FocusNode();
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  final initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/launcher_icon');
+  final initializationSettingsIOS = IOSInitializationSettings();
+  final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    'minitel_channel',
+    'Minitel Channel',
+    'Notification channel for the Minitel App',
+    importance: Importance.Max,
+    priority: Priority.High,
+  );
+  final iOSPlatformChannelSpecifics = IOSNotificationDetails();
 
   Future<List<Widget>> get _listEventCards async {
     String calendar = "";
@@ -61,97 +74,105 @@ class CalendarPageState extends State<CalendarPage> {
     List<Widget> monthlyWidgets = [];
     List<Widget> dailyEvents = [];
 
-    ical.events.sort((event1, event2) => DateTime.parse(event1["DTSTART"])
+    var filteredEvents = ical.events
+        .where(
+            (event) => DateTime.parse(event["DTSTART"]).isAfter(DateTime.now()))
+        .toList();
+    filteredEvents.sort((event1, event2) => DateTime.parse(event1["DTSTART"])
         .compareTo(DateTime.parse(event2["DTSTART"])));
+
+    Future.forEach(
+      filteredEvents,
+      (event) => _scheduleNotification(
+            title: event["SUMMARY"],
+            description: "${event["LOCATION"]}\n"
+                "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
+                " - "
+                "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
+            scheduledNotificationDateTime: DateTime.parse(event["DTSTART"])
+                .subtract(const Duration(minutes: 10)),
+            payload: "${event["DESCRIPTION"]};"
+                "${event["LOCATION"]}\n"
+                "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
+                " - "
+                "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
+          ),
+    );
 
     int day;
     int month;
-    ical.events.forEach(
-      (event) {
-        DateTime dt = DateTime.parse(event["DTSTART"]);
-        if (dt.isAfter(DateTime.now())) {
-          if (month == null) {
-            month = dt.month;
-            monthlyWidgets.add(
-              Center(
-                child: Header(
-                  "${DateFormat.MMMM().format(dt).toUpperCase()}",
-                  color: Colors.white,
+
+    filteredEvents.forEach((event) {
+      DateTime dt = DateTime.parse(event["DTSTART"]);
+
+      if (dt.month != month) {
+        month = dt.month;
+        monthlyWidgets = [];
+
+        // Finish
+        widgets.add(
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                color: colorPalette[month],
+                elevation: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: monthlyWidgets,
                 ),
               ),
-            );
-          }
-          if (day == null) day = dt.day;
-          if (dt.month != month) {
-            month = dt.month;
-            // Finish
-            widgets.add(
-              SingleChildScrollView(
+            ),
+          ),
+        );
+
+        // New Month
+        monthlyWidgets.add(
+          Center(
+            child: Header(
+              "${DateFormat.MMMM().format(dt).toUpperCase()}",
+              color: Colors.white,
+            ),
+          ),
+        );
+      }
+
+      // New Day
+      if (dt.day != day) {
+        day = dt.day;
+        dailyEvents = [];
+        monthlyWidgets.add(StickyHeaderBuilder(
+          builder: (BuildContext context, double stuckAmount) {
+            stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
+            return Material(
+              elevation: stuckAmount * 2,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular((1 - stuckAmount) * 30)),
+              color: Color.lerp(
+                  Colors.transparent, Colors.transparent, stuckAmount),
+              child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    color: colorPalette[month],
-                    elevation: 4,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: monthlyWidgets,
-                    ),
+                  padding: const EdgeInsets.all(2.0),
+                  child: Header(
+                    "${DateFormat.MMMMEEEEd().format(dt)}",
+                    color: Colors.white,
+                    level: 3,
                   ),
                 ),
               ),
             );
-            monthlyWidgets = [];
+          },
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: dailyEvents,
+          ),
+        ));
+      }
 
-            // New Month
-            monthlyWidgets.add(
-              Center(
-                child: Header(
-                  "${DateFormat.MMMM().format(dt).toUpperCase()}",
-                  color: Colors.white,
-                ),
-              ),
-            );
-          }
-
-          // New Day
-          if (dt.day != day) {
-            day = dt.day;
-            monthlyWidgets.add(StickyHeaderBuilder(
-              builder: (BuildContext context, double stuckAmount) {
-                stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
-                return Material(
-                  elevation: stuckAmount * 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular((1 - stuckAmount) * 30)),
-                  color: Color.lerp(
-                      Colors.transparent, Colors.transparent, stuckAmount),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Header(
-                        "${DateFormat.MMMMEEEEd().format(dt)}",
-                        color: Colors.white,
-                        level: 3,
-                      ),
-                    ),
-                  ),
-                );
-              },
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: dailyEvents,
-              ),
-            ));
-            dailyEvents = [];
-          }
-
-          // New Event
-          dailyEvents.add(EventCard(event));
-        }
-      },
-    );
+      // New Event
+      dailyEvents.add(EventCard(event));
+    });
 
     return widgets;
   }
@@ -175,6 +196,15 @@ class CalendarPageState extends State<CalendarPage> {
         ),
       ),
       drawer: const MainDrawer(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showNotification(
+              title: "Test",
+              description:
+                  "TestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\n",
+              payload:
+                  "TestTestTestTestTestTestTestTest;TestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\n",
+            ),
+      ),
     );
   }
 
@@ -185,6 +215,28 @@ class CalendarPageState extends State<CalendarPage> {
     _uidFocusNode.dispose();
     _pswdFocusNode.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    var initializationSettings = InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: (payload) =>
+            onSelectNotification(payload, context));
+  }
+
+  Future<void> onSelectNotification(
+      String payload, BuildContext context) async {
+    List<String> output = payload.split(';');
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+            title: Text("${output[0]}"),
+            content: Text("${output.length < 2 ? "null" : output[1]}"),
+          ),
+    );
   }
 
   List<Widget> _errorHandlerWidget(dynamic e) {
@@ -267,6 +319,39 @@ class CalendarPageState extends State<CalendarPage> {
       )
     ];
   }
+
+  Future<void> _showNotification(
+      {String title: "Title",
+      String description: "Description",
+      String payload: "Title;Description"}) async {
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      description,
+      NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
+      payload: payload,
+    );
+  }
+
+  Future<void> _scheduleNotification(
+      {@required String title,
+      @required String description,
+      @required DateTime scheduledNotificationDateTime,
+      String payload: "Title;Description"}) async {
+    // print(
+    //     "Event scheduled at ${DateFormat.yMMMMd().format(scheduledNotificationDateTime)} ${DateFormat.Hms().format(scheduledNotificationDateTime)}");
+    await flutterLocalNotificationsPlugin.cancelAll();
+    await flutterLocalNotificationsPlugin.schedule(
+      0,
+      title,
+      description,
+      scheduledNotificationDateTime,
+      NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
+      payload: payload,
+    );
+  }
 }
 
 class EventCard extends StatelessWidget {
@@ -313,7 +398,7 @@ class EventCard extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              "${_event["DESCRIPTION"]}",
+              _event["DESCRIPTION"],
               style: const TextStyle(height: 1.4),
               textAlign: TextAlign.center,
             ),

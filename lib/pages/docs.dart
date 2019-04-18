@@ -55,11 +55,12 @@ class DocumentationPageState extends State<DocumentationPage> {
                   _controller.jumpToPage(0);
                 }),
             ListTile(
-                title: Text(AppLoc.of(context).titleDiagnosePage),
-                onTap: () {
-                  Navigator.pop(context);
-                  _controller.jumpToPage(1);
-                }),
+              title: Text(AppLoc.of(context).titleDiagnosePage),
+              onTap: () {
+                Navigator.pop(context);
+                _controller.jumpToPage(1);
+              },
+            ),
           ],
         ),
       ),
