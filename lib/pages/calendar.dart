@@ -84,28 +84,31 @@ class CalendarPageState extends State<CalendarPage> {
     Future.forEach(
       filteredEvents,
       (event) async {
-        _scheduleNotification(
-          id: DateTime.parse(event["DTSTART"]).hashCode,
-          title: event["SUMMARY"],
-          description: "${event["LOCATION"]}\n"
-              "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
-              " - "
-              "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
-          scheduledNotificationDateTime: DateTime.parse(event["DTSTART"])
-              .subtract(const Duration(minutes: 10)),
-          payload: "${event["DESCRIPTION"]};"
-              "${event["LOCATION"]}\n"
-              "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
-              " - "
-              "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
-        );
+        if (!DateTime.parse(event["DTSTART"]).isAfter(DateTime.now().add(
+            const Duration(days: 15)))) // Notifications only work for x days
+          _scheduleNotification(
+            id: DateTime.parse(event["DTSTART"]).hashCode,
+            title: event["SUMMARY"],
+            description: "${event["LOCATION"]}\n"
+                "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
+                " - "
+                "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
+            scheduledNotificationDateTime: DateTime.parse(event["DTSTART"])
+                .subtract(const Duration(minutes: 10)),
+            payload: "${event["SUMMARY"]};"
+                "${event["DESCRIPTION"]}\n"
+                "${event["LOCATION"]}\n"
+                "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
+                " - "
+                "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
+          );
       },
     );
 
     int day;
     int month;
 
-    Future.forEach(filteredEvents, (event) {
+    Future.forEach(filteredEvents, (event) async {
       DateTime dt = DateTime.parse(event["DTSTART"]);
 
       if (dt.month != month) {
@@ -323,20 +326,6 @@ class CalendarPageState extends State<CalendarPage> {
     ];
   }
 
-  Future<void> _showNotification(
-      {String title: "Title",
-      String description: "Description",
-      String payload: "Title;Description"}) async {
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      title,
-      description,
-      NotificationDetails(
-          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
-      payload: payload,
-    );
-  }
-
   Future<void> _scheduleNotification(
       {@required String title,
       @required String description,
@@ -353,6 +342,20 @@ class CalendarPageState extends State<CalendarPage> {
       title,
       description,
       scheduledNotificationDateTime,
+      NotificationDetails(
+          androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
+      payload: payload,
+    );
+  }
+
+  Future<void> _showNotification(
+      {String title: "Title",
+      String description: "Description",
+      String payload: "Title;Description"}) async {
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      description,
       NotificationDetails(
           androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
       payload: payload,
