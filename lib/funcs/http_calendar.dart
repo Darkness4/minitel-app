@@ -64,6 +64,7 @@ Future<String> bypassCAS(
     request.write(data);
     response = await request.close();
 
+    print("Look for location: ${response.headers}");
     var location = response.headers.value('location');
     print("Location: $location");
     if (location == null) throw "Error : Bad login";

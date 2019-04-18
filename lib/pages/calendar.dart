@@ -22,6 +22,7 @@ class CalendarPageState extends State<CalendarPage> {
   final _pswdController = TextEditingController();
   final _uidFocusNode = FocusNode();
   final _pswdFocusNode = FocusNode();
+  final _formKey = GlobalKey<FormState>();
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   final initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/launcher_icon');
@@ -81,29 +82,27 @@ class CalendarPageState extends State<CalendarPage> {
     filteredEvents.sort((event1, event2) => DateTime.parse(event1["DTSTART"])
         .compareTo(DateTime.parse(event2["DTSTART"])));
 
-    Future.forEach(
-      filteredEvents,
-      (event) async {
-        if (!DateTime.parse(event["DTSTART"]).isAfter(DateTime.now().add(
-            const Duration(days: 15)))) // Notifications only work for x days
-          _scheduleNotification(
-            id: DateTime.parse(event["DTSTART"]).hashCode,
-            title: event["SUMMARY"],
-            description: "${event["LOCATION"]}\n"
-                "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
-                " - "
-                "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
-            scheduledNotificationDateTime: DateTime.parse(event["DTSTART"])
-                .subtract(const Duration(minutes: 10)),
-            payload: "${event["SUMMARY"]};"
-                "${event["DESCRIPTION"]}\n"
-                "${event["LOCATION"]}\n"
-                "${DateFormat.Hm().format(DateTime.parse(event["DTSTART"]))}"
-                " - "
-                "${DateFormat.Hm().format(DateTime.parse(event["DTEND"]))}",
-          );
-      },
-    );
+    for (var i = 0; i < filteredEvents.length; i++) {
+      if (DateTime.parse(filteredEvents[i]["DTSTART"]).isBefore(DateTime.now()
+          .add(const Duration(days: 15)))) // Notifications only work for x days
+        _scheduleNotification(
+          id: i,
+          title: filteredEvents[i]["SUMMARY"],
+          description: "${filteredEvents[i]["LOCATION"]}\n"
+              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTSTART"]))}"
+              " - "
+              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTEND"]))}",
+          scheduledNotificationDateTime:
+              DateTime.parse(filteredEvents[i]["DTSTART"])
+                  .subtract(const Duration(minutes: 10)),
+          payload: "${filteredEvents[i]["SUMMARY"]};"
+              "${filteredEvents[i]["DESCRIPTION"]}\n"
+              "${filteredEvents[i]["LOCATION"]}\n"
+              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTSTART"]))}"
+              " - "
+              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTEND"]))}",
+        );
+    }
 
     int day;
     int month;
@@ -264,6 +263,7 @@ class CalendarPageState extends State<CalendarPage> {
             child: Container(
               padding: const EdgeInsets.all(8.0),
               child: Form(
+                key: _formKey,
                 child: Column(
                   children: <Widget>[
                     TextFormField(
