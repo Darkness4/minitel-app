@@ -150,19 +150,22 @@ class CalendarPageState extends State<CalendarPage> {
         monthlyWidgets.add(StickyHeaderBuilder(
           builder: (BuildContext context, double stuckAmount) {
             stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
-            return Material(
-              elevation: stuckAmount * 10,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular((1 - stuckAmount) * 100)),
-              color: Color.lerp(
-                  Colors.transparent, colorPalette[dt.month], stuckAmount),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Header(
-                    "${DateFormat.MMMMEEEEd().format(dt)}",
-                    color: Colors.white,
-                    level: 3,
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                elevation: stuckAmount * 10,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(stuckAmount * 100)),
+                color: Color.lerp(
+                    Colors.transparent, colorPalette[dt.month], stuckAmount),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Header(
+                      "${DateFormat.MMMMEEEEd().format(dt)}",
+                      color: Colors.white,
+                      level: 2,
+                    ),
                   ),
                 ),
               ),
