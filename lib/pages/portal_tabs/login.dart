@@ -144,9 +144,9 @@ class LoginPageState extends State<LoginPage> {
                     height: 100,
                     child: RaisedButton(
                       shape: const ContinuousRectangleBorder(),
-                      color: Colors.green,
+                      color: Colors.lightBlueAccent,
                       elevation: 4,
-                      onPressed: () {
+                      onPressed: () async {
                         final snackBar = SnackBar(content: Text('Requested'));
                         Scaffold.of(context).showSnackBar(snackBar);
                         autoLogin(

@@ -284,7 +284,7 @@ class ReportingPageState extends State<ReportingPage>
 
   Widget get _diagnosisButton => FloatingActionButton(
         backgroundColor: _diagnosisState == 2 ? Colors.green : Colors.blue,
-        onPressed: () {
+        onPressed: () async {
           if (!_animationController.isDismissed) _animationController.reverse();
           if (_diagnosisState != 1) {
             setState(() => _diagnosisState = 1);
@@ -491,7 +491,7 @@ class ReportingPageState extends State<ReportingPage>
       ),
       child: FloatingActionButton(
         heroTag: null,
-        onPressed: () {
+        onPressed: () async {
           if (_reportState != 1) {
             setState(() => _reportState = 1);
             getTimeout().then((timeout) {

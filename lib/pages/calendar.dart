@@ -206,7 +206,7 @@ class CalendarPageState extends State<CalendarPage> {
       ),
       drawer: const MainDrawer(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showNotification(
+        onPressed: () async => _showNotification(
               title: "Test",
               description:
                   "TestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\nTestTestTestTestTestTestTestTest\n",
