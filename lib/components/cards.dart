@@ -53,7 +53,8 @@ class LogCard extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
