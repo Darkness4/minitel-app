@@ -35,7 +35,7 @@
 ## Development
 
 Most of the development happens on GitHub. It's also where 
-[our central repository](https://github.com/citra-emu/citra) is hosted.
+[our central repository](https://github.com/Darkness4/minitel-app) is hosted.
 
 If you want to contribute please take a look at the 
 [Contributor's Guide](./CONTRIBUTING.md) and 
