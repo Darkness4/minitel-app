@@ -1,6 +1,4 @@
 import 'package:auto_login_flutter/components/cards.dart';
-import 'package:auto_login_flutter/localizations.dart';
-import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:flutter/material.dart';
 
 class ReportTab extends StatefulWidget {
@@ -57,13 +55,25 @@ class _ContactsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DocCard(
+    return DocCard(
       elevation: 4,
-      children: const <Widget>[
-        const Header("Contacts"),
-        const Header("Facebook: Minitel Ismin", level: 2),
-        const Header("G*: Contact Admin", level: 2),
-        const Header("Mail: minitel13120@gmail.com", level: 2),
+      children: <Widget>[
+        Text(
+          "Contacts",
+          style: Theme.of(context).textTheme.headline,
+        ),
+        Text(
+          "Facebook: Minitel Ismin",
+          style: Theme.of(context).textTheme.title,
+        ),
+        Text(
+          "G*: Contact Admin",
+          style: Theme.of(context).textTheme.title,
+        ),
+        Text(
+          "Mail: minitel13120@gmail.com",
+          style: Theme.of(context).textTheme.title,
+        ),
       ],
     );
   }
@@ -144,14 +154,38 @@ class _TutorialCard extends StatelessWidget {
     return DocCard(
       elevation: 4,
       children: <Widget>[
-        Header(AppLoc.of(context).sentenceReportingTitle),
-        Header(AppLoc.of(context).sentenceReportingNOTE, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubTitle1, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle2, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle3, level: 2),
-        Paragraph(AppLoc.of(context).sentenceReportingParagraph),
-        Header(AppLoc.of(context).sentenceReportingSubtitle4, level: 2),
-        Header(AppLoc.of(context).sentenceReportingSubtitle5, level: 2),
+        Text(
+          "Comment signaler sans internet ?",
+          style: Theme.of(context).textTheme.headline,
+        ),
+        Text(
+          "REMARQUE : Il est recommandé d\'installer le Root et Busybox.",
+          style: Theme.of(context).textTheme.subhead,
+        ),
+        Text(
+          "1. Connectez-vous à \'WiFi Minitel\'",
+          style: Theme.of(context).textTheme.title,
+        ),
+        Text(
+          "2. Lancez la suite de diagnostique en appuyant sur le bouton, et attendez 1 minute.",
+          style: Theme.of(context).textTheme.title,
+        ),
+        Text(
+          "3. Remplissez votre rapport.",
+          style: Theme.of(context).textTheme.title,
+        ),
+        Text(
+          "Exemple : \nTitre: 2012, pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c\'est ok.",
+          style: Theme.of(context).textTheme.body1,
+        ),
+        Text(
+          "4. Connectez-vous sur un réseau où il y a Internet.",
+          style: Theme.of(context).textTheme.title,
+        ),
+        Text(
+          "5. Envoyez le rapport.",
+          style: Theme.of(context).textTheme.title,
+        ),
       ],
     );
   }

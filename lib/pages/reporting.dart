@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/http_portail.dart';
 import 'package:auto_login_flutter/funcs/http_webhook.dart';
-import 'package:auto_login_flutter/localizations.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
@@ -242,7 +241,7 @@ class Diagnosis {
           "*NSLookup EMSE (Busybox):* \n${_report["nsLookupEMSEBusybox"]}\n\n"
           "*NSLookup Google (Busybox):* \n${_report["nsLookupGoogleBusybox"]}\n\n";
     } else
-      _report["alert"] = AppLoc.of(context).sentenceNotConnected;
+      _report["alert"] = "Pas de Wifi";
 
     return out;
   }

@@ -72,7 +72,7 @@ class _AnnuaireCard extends StatelessWidget {
                 children: <Widget>[
                   Icon(
                     Icons.person,
-                    size: constraint.biggest.height - 40,
+                    size: constraint.biggest.height - 50,
                     color: Colors.blue,
                   ),
                   Text(
@@ -146,7 +146,7 @@ class _EduSoftCard extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.cloud_download,
-                      size: constraint.biggest.height - 40,
+                      size: constraint.biggest.height - 50,
                       color: Colors.white,
                     ),
                     const Text(
@@ -204,7 +204,7 @@ class _ImprimanteCard extends StatelessWidget {
                 children: <Widget>[
                   Icon(
                     Icons.print,
-                    size: constraint.biggest.height - 40,
+                    size: constraint.biggest.height - 50,
                     color: Colors.blue,
                   ),
                   Text(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'localizations.dart';
 import 'components/page_animation.dart';
 import 'pages/calendar.dart';
 import 'pages/docs.dart';
@@ -16,73 +15,68 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: [
-        const AppLocDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      onGenerateTitle: (BuildContext context) => AppLoc.of(context).title,
+      title: "Minitel Toolbox",
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/':
             return FadeRoute(
               builder: (BuildContext context) =>
-                  PortalPage(title: AppLoc.of(context).titlePortalPage),
+                  PortalPage(title: "Authentification"),
               settings: settings,
             );
           case '/reporting':
             return FadeRoute(
               builder: (BuildContext context) =>
-                  ReportingPage(title: AppLoc.of(context).titleReportingPage),
+                  ReportingPage(title: "Signaler Minitel"),
               settings: settings,
             );
           case '/docs':
             return FadeRoute(
-              builder: (BuildContext context) => DocumentationPage(
-                  title: AppLoc.of(context).titleDocumentationPage),
+              builder: (BuildContext context) =>
+                  DocumentationPage(title: "Documentation"),
               settings: settings,
             );
           case '/news':
             return FadeRoute(
-              builder: (BuildContext context) =>
-                  NewsPage(title: AppLoc.of(context).titleNewsPage),
+              builder: (BuildContext context) => NewsPage(title: "Nouveautés"),
               settings: settings,
             );
           case '/maps':
             return FadeRoute(
-              builder: (BuildContext context) =>
-                  MapsPage(title: AppLoc.of(context).titleMapsPage),
+              builder: (BuildContext context) => MapsPage(title: "Maps"),
               settings: settings,
             );
           case '/calendar':
             return FadeRoute(
               builder: (BuildContext context) =>
-                  CalendarPage(title: AppLoc.of(context).titleCalendarPage),
+                  CalendarPage(title: "Calendrier"),
               settings: settings,
             );
         }
         assert(false);
       },
       supportedLocales: [
-        const Locale('en', ''), // English
-        const Locale('fr', ''), // French
+        const Locale('fr'), // French
       ],
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          fontFamily: 'NotoSans',
+          textTheme: TextTheme(
+            body1: TextStyle(height: 1.2),
+            body2: TextStyle(fontWeight: FontWeight.bold),
+            headline: TextStyle(height: 1.5, fontWeight: FontWeight.bold),
+            title: TextStyle(height: 1.5, fontWeight: FontWeight.bold),
+            display1: TextStyle(height: 1.5),
+            display2: TextStyle(height: 1.5),
+            display3: TextStyle(height: 1.5),
+            display4: TextStyle(height: 1.5),
+            subhead: TextStyle(height: 1.5),
+            subtitle: TextStyle(height: 1.5),
+          )),
       initialRoute: '/',
-      // routes: {
-      //   '/': (context) => PortalPage(title: AppLoc.of(context).titlePortalPage),
-      //   '/reporting': (context) =>
-      //       ReportingPage(title: AppLoc.of(context).titleReportingPage),
-      //   '/docs': (context) =>
-      //       DocumentationPage(title: AppLoc.of(context).titleDocumentationPage),
-      //   '/calendar': (context) =>
-      //       CalendarPage(title: AppLoc.of(context).titleCalendarPage),
-      //   '/news': (context) => NewsPage(title: AppLoc.of(context).titleNewsPage),
-      //   '/maps': (context) => MapsPage(title: AppLoc.of(context).titleMapsPage),
-      //   // '/portal': (context) =>
-      //   //     PortalPage(title: AppLoc.of(context).titlePortalPage),
-      // },
     );
   }
 }

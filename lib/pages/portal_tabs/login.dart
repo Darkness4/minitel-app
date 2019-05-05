@@ -1,6 +1,5 @@
 import 'package:auto_login_flutter/funcs/http_calendar.dart';
 import 'package:auto_login_flutter/funcs/http_portail.dart';
-import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -69,7 +68,7 @@ class LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text("${AppLoc.of(context).wordDomain} / IP "),
+                            Text("Nom de domaine / IP "),
                             DropdownButton<String>(
                               value: _selectedUrl,
                               items: _urlRootList
@@ -89,7 +88,7 @@ class LoginPageState extends State<LoginPage> {
                         ),
                         Row(
                           children: <Widget>[
-                            Text(AppLoc.of(context).wordsAuthDuration),
+                            Text("Durée d\'authentification "),
                             DropdownButton<String>(
                               value: _selectedTime,
                               items: _timeMap.keys
@@ -112,8 +111,8 @@ class LoginPageState extends State<LoginPage> {
                                 focusNode: _uidFocusNode,
                                 controller: _uidController,
                                 decoration: InputDecoration(
-                                  hintText: AppLoc.of(context).wordSurnameName,
-                                  labelText: AppLoc.of(context).wordUsername,
+                                  hintText: "prénom.nom",
+                                  labelText: "Nom d'utilisateur",
                                 ),
                                 onEditingComplete: () {
                                   _uidFocusNode.unfocus();
@@ -126,8 +125,8 @@ class LoginPageState extends State<LoginPage> {
                                 obscureText: true,
                                 focusNode: _pswdFocusNode,
                                 decoration: InputDecoration(
-                                  hintText: AppLoc.of(context).wordPassword,
-                                  labelText: AppLoc.of(context).wordPassword,
+                                  hintText: "Mot de passe",
+                                  labelText: "Mot de passe",
                                 ),
                               ),
                             ],

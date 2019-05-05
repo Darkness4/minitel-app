@@ -1,8 +1,6 @@
 import 'package:auto_login_flutter/components/drawer.dart';
 import 'package:auto_login_flutter/funcs/http_calendar.dart';
 import 'package:auto_login_flutter/funcs/icalendar_parser.dart';
-import 'package:auto_login_flutter/localizations.dart';
-import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
@@ -134,9 +132,16 @@ class CalendarPageState extends State<CalendarPage> {
         // New Month
         monthlyWidgets.add(
           Center(
-            child: Header(
-              "${DateFormat.MMMM().format(dt).toUpperCase()}",
-              color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "${DateFormat.MMMM().format(dt).toUpperCase()}",
+                style: Theme.of(context).textTheme.display2.apply(
+                      color: Colors.white,
+                      fontWeightDelta: 1,
+                      fontFamily: "Roboto",
+                    ),
+              ),
             ),
           ),
         );
@@ -159,11 +164,13 @@ class CalendarPageState extends State<CalendarPage> {
                     Colors.transparent, colorPalette[dt.month], stuckAmount),
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Header(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
                       "${DateFormat.MMMMEEEEd().format(dt)}",
-                      color: Colors.white,
-                      level: 2,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline
+                          .apply(color: Colors.white),
                     ),
                   ),
                 ),
@@ -270,8 +277,8 @@ class CalendarPageState extends State<CalendarPage> {
                       focusNode: _uidFocusNode,
                       controller: _uidController,
                       decoration: InputDecoration(
-                        hintText: AppLoc.of(context).wordSurnameName,
-                        labelText: AppLoc.of(context).wordUsername,
+                        hintText: "prénom.nom",
+                        labelText: "Nom d'utilisateur",
                       ),
                       onEditingComplete: () {
                         _uidFocusNode.unfocus();
@@ -283,8 +290,9 @@ class CalendarPageState extends State<CalendarPage> {
                       obscureText: true,
                       focusNode: _pswdFocusNode,
                       decoration: InputDecoration(
-                          hintText: AppLoc.of(context).wordPassword,
-                          labelText: AppLoc.of(context).wordPassword),
+                        hintText: "Mot de passe",
+                        labelText: "Mot de passe",
+                      ),
                     ),
                   ],
                 ),

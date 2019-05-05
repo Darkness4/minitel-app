@@ -1,4 +1,3 @@
-import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -22,7 +21,7 @@ class MainDrawer extends StatelessWidget {
                   height: 75,
                 ),
                 Text(
-                  AppLoc.of(context).title,
+                  "Boîte à outils Minitel",
                   style: const TextStyle(color: Colors.white, fontSize: 23),
                 ),
               ],
@@ -32,7 +31,7 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-              title: Text(AppLoc.of(context).titlePortalPage),
+              title: Text("Authentification"),
               leading: const Icon(Icons.apps),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
@@ -42,7 +41,7 @@ class MainDrawer extends StatelessWidget {
               }),
           Divider(),
           ListTile(
-              title: Text(AppLoc.of(context).titleNewsPage),
+              title: Text("Nouveautés"),
               leading: const Icon(Icons.rss_feed),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
@@ -51,7 +50,7 @@ class MainDrawer extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, '/news');
               }),
           ListTile(
-              title: Text(AppLoc.of(context).titleCalendarPage),
+              title: Text("Agenda"),
               leading: const Icon(Icons.calendar_today),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
@@ -60,7 +59,7 @@ class MainDrawer extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, '/calendar');
               }),
           ListTile(
-              title: Text(AppLoc.of(context).titleMapsPage),
+              title: Text("Maps"),
               leading: const Icon(Icons.map),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
@@ -73,7 +72,7 @@ class MainDrawer extends StatelessWidget {
             color: Colors.red,
             child: ListTile(
                 title: Text(
-                  AppLoc.of(context).titleReportingPage,
+                  "Signaler Minitel",
                   style: const TextStyle(color: Colors.white),
                 ),
                 leading: const Icon(
@@ -91,7 +90,7 @@ class MainDrawer extends StatelessWidget {
                 }),
           ),
           ListTile(
-              title: Text(AppLoc.of(context).titleDocumentationPage),
+              title: Text("Documentation"),
               leading: const Icon(Icons.description),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {

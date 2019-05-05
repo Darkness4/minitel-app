@@ -1,4 +1,3 @@
-import 'package:auto_login_flutter/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -51,11 +50,24 @@ class LogCard extends StatelessWidget {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(10),
-              child: Text(title, style: styleLogImportant),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.white,
+                ),
+              ),
             ),
             Container(
               padding: const EdgeInsets.all(10),
-              child: Text(text, style: styleLog),
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 8,
+                  fontFamily: "RobotoMono",
+                  color: Colors.white,
+                ),
+              ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.0),
                   color: Colors.black87),
@@ -103,47 +115,51 @@ class NewsCard extends StatelessWidget {
             ),
             padding: EdgeInsets.all(intPadding),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Header(
+                  Text(
                     RegExp(r'\n\s+([^\\]*)\n').firstMatch(item.title).group(1),
-                    level: 2,
-                    color: Colors.white,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline
+                        .apply(color: Colors.white),
                   ),
                   // Regex delete \n\s\s\sText with spaces\n
-                  Header(
+                  Text(
                     (item.authors)
                         .map((author) => author.name)
                         .toList()
                         .join(" "),
-                    level: 3,
-                    color: Colors.white,
+                    style: Theme.of(context)
+                        .textTheme
+                        .subhead
+                        .apply(color: Colors.white),
                   ),
-                  Paragraph(
-                    item.summary != null ? item.summary : "",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
+                  // Paragraph(
+                  //   item.summary != null ? item.summary : "",
+                  //   style: TextStyle(
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
                   // Paragraph(item.content.toString()),
                   // Paragraph(item.published.toString()),
                   // Paragraph(item.source.toString()),
-                  Paragraph(
-                    item.links.map((link) => link.href).toList().join(""),
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
+                  // Paragraph(
+                  //   item.links.map((link) => link.href).toList().join(""),
+                  //   style: TextStyle(
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
                   // Paragraph(item.categories.map((category) => category.lavel).toList().join(" ")),
                   // Paragraph((item.contributors).map((contributor) => contributor.name).toList().join(" ")),
                   // Paragraph(item.rights.toString()),
                   // Paragraph(item.media.toString()),
 
-                  Text(item.updated,
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.white,
-                      )),
+                  // Text(item.updated,
+                  //     style: TextStyle(
+                  //       fontStyle: FontStyle.italic,
+                  //       color: Colors.white,
+                  //     )),
                 ]),
           ),
         ),

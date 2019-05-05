@@ -83,6 +83,31 @@ flutter:
         - asset: fonts/RobotoMono-ThinItalic.ttf
           weight: 100
           style: italic
+    - family: NotoSans
+      fonts:
+        - asset: fonts/NotoSans-Regular.ttf
+        - asset: fonts/NotoSans-Italic.ttf
+          style: italic
+        - asset: fonts/NotoSans-Bold.ttf
+          weight: 700
+        - asset: fonts/NotoSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: fonts/NotoSans-Light.ttf
+          weight: 300
+        - asset: fonts/NotoSans-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/NotoSans-Medium.ttf
+          weight: 500
+        - asset: fonts/NotoSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: fonts/NotoSans-Thin.ttf
+          weight: 100
+        - asset: fonts/NotoSans-ThinItalic.ttf
+          weight: 100
+          style: italic
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
