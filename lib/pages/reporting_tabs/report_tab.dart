@@ -63,7 +63,7 @@ class _ContactsCard extends StatelessWidget {
         const Header("Contacts"),
         const Header("Facebook: Minitel Ismin", level: 2),
         const Header("G*: Contact Admin", level: 2),
-        const Header("Mail: minitelismin@gmail.com", level: 2),
+        const Header("Mail: minitel13120@gmail.com", level: 2),
       ],
     );
   }

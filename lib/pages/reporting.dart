@@ -339,7 +339,7 @@ class ReportingPageState extends State<ReportingPage>
                   "*Diagnosis*\n"
                   "$_report";
               _launchURL(
-                  "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
+                  "mailto:minitel13120@gmail.com?subject=${_titleController.text}&body=$body");
             }),
       );
 
