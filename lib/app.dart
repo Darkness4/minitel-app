@@ -58,9 +58,7 @@ class MyApp extends StatelessWidget {
         }
         assert(false);
       },
-      supportedLocales: [
-        const Locale('fr'), // French
-      ],
+      supportedLocales: [const Locale('fr', 'FR')],
       theme: ThemeData(
           primarySwatch: Colors.blue,
           fontFamily: 'NotoSans',

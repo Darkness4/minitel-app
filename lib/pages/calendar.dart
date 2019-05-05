@@ -135,7 +135,7 @@ class CalendarPageState extends State<CalendarPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "${DateFormat.MMMM().format(dt).toUpperCase()}",
+                "${DateFormat.MMMM("fr_FR").format(dt).toUpperCase()}",
                 style: Theme.of(context).textTheme.display2.apply(
                       color: Colors.white,
                       fontWeightDelta: 1,
@@ -166,7 +166,7 @@ class CalendarPageState extends State<CalendarPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Text(
-                      "${DateFormat.MMMMEEEEd().format(dt)}",
+                      "${DateFormat.MMMMEEEEd("fr_FR").format(dt)}",
                       style: Theme.of(context)
                           .textTheme
                           .headline
