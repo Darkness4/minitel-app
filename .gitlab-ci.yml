@@ -29,7 +29,7 @@ pages:
   script:
     - pub global activate coveralls
     - export PATH="$PATH":"$HOME/.pub-cache/bin"
-    - "echo 'repo_token: ${COVERALLS_TOKEN}' > .coveralls.yml"
+    - "echo \"repo_token: ${COVERALLS_TOKEN}\" > .coveralls.yml"
     - coveralls ./coverage/lcov.info
     - mv coverage/ public/
   artifacts:
