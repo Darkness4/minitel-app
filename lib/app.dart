@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'components/page_animation.dart';
+import 'pages/about.dart';
 import 'pages/calendar.dart';
 import 'pages/docs.dart';
 import 'pages/maps.dart';
@@ -53,6 +54,12 @@ class MyApp extends StatelessWidget {
             return FadeRoute(
               builder: (BuildContext context) =>
                   CalendarPage(title: "Calendrier"),
+              settings: settings,
+            );
+          case '/about':
+            return MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  AboutPage(title: "A propos de l'application"),
               settings: settings,
             );
         }

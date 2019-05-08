@@ -30,6 +30,7 @@ dependencies:
   sticky_headers: ^0.1.7  # Flutter Community
   flutter_local_notifications: ^0.7.0  # Michael Bui
   html: ^0.14.0+2  # Dart Team
+  package_info: ^0.4.0+3  # Flutter Team
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

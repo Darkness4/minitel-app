@@ -98,6 +98,15 @@ class MainDrawer extends StatelessWidget {
                 if (ModalRoute.of(context).settings.name != '/docs')
                   Navigator.pushReplacementNamed(context, '/docs');
               }),
+          ListTile(
+              title: Text("A propos..."),
+              leading: const Icon(Icons.info),
+              trailing: const Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.pop(context); // Close Drawer
+                if (ModalRoute.of(context).settings.name != '/about')
+                  Navigator.pushNamed(context, '/about');
+              }),
         ],
       ),
     );
