@@ -22,7 +22,7 @@ dependencies:
   share: ^0.6.1+1  # Flutter Team
   webfeed: ^0.4.2  # Wito Chandra
   url_launcher: ^5.0.2  # Flutter Team
-  google_maps_flutter: ^0.5.12  # Flutter Team
+  google_maps_flutter: ^0.5.13  # Flutter Team
   permission_handler: ^3.0.1  # Baseflow
   shared_preferences: ^0.5.2  # Flutter Team
   webview_flutter: ^0.3.6  # Flutter Team
@@ -31,11 +31,7 @@ dependencies:
   flutter_local_notifications: ^0.7.0  # Michael Bui
   html: ^0.14.0+2  # Dart Team
   package_info: ^0.4.0+3  # Flutter Team
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  # font_awesome_flutter: ^8.2.0
-  cupertino_icons: ^0.1.2
+  # font_awesome_flutter: ^8.4.0  # Brian Egan
 
 dev_dependencies:
   flutter_test:
