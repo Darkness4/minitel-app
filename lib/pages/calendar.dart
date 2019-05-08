@@ -300,20 +300,18 @@ class CalendarPageState extends State<CalendarPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(30),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 100,
-              child: RaisedButton(
-                shape: const ContinuousRectangleBorder(),
-                color: Colors.red,
-                elevation: 4,
-                onPressed: () => saveCalendarFromLogin(
-                      username: _uidController.text,
-                      password: _pswdController.text,
-                    ).then((out) => setState(() {})),
+            padding: const EdgeInsets.all(20.0),
+            child: RaisedButton(
+              color: Colors.red,
+              elevation: 10.0,
+              onPressed: () => saveCalendarFromLogin(
+                    username: _uidController.text,
+                    password: _pswdController.text,
+                  ).then((out) => setState(() {})),
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
                 child: const Text(
-                  "LOGIN",
+                  "Se connecter",
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

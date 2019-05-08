@@ -54,7 +54,8 @@ class LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 _StatusCard(
                   status: _status,
@@ -137,30 +138,28 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 100,
-                    child: RaisedButton(
-                      shape: const ContinuousRectangleBorder(),
-                      color: Colors.lightBlueAccent,
-                      elevation: 4,
-                      onPressed: () {
-                        final snackBar = SnackBar(content: Text('Requested'));
-                        Scaffold.of(context).showSnackBar(snackBar);
-                        autoLogin(
-                          _uidController.text,
-                          _pswdController.text,
-                          _selectedUrl,
-                          _timeMap[_selectedTime],
-                        ).then((status) => setState(() => _status = status));
-                        saveCalendarFromLogin(
-                          username: _uidController.text,
-                          password: _pswdController.text,
-                        ).then((out) => setState(() => _savedCalendar = out));
-                      },
+                  padding: const EdgeInsets.all(20.0),
+                  child: RaisedButton(
+                    color: Colors.blueAccent,
+                    elevation: 10.0,
+                    onPressed: () {
+                      final snackBar = SnackBar(content: Text('Requested'));
+                      Scaffold.of(context).showSnackBar(snackBar);
+                      autoLogin(
+                        _uidController.text,
+                        _pswdController.text,
+                        _selectedUrl,
+                        _timeMap[_selectedTime],
+                      ).then((status) => setState(() => _status = status));
+                      saveCalendarFromLogin(
+                        username: _uidController.text,
+                        password: _pswdController.text,
+                      ).then((out) => setState(() => _savedCalendar = out));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
                       child: const Text(
-                        "LOGIN",
+                        "Se connecter",
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
