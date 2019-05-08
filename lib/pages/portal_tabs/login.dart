@@ -1,6 +1,5 @@
 import 'package:auto_login_flutter/funcs/http_calendar.dart';
 import 'package:auto_login_flutter/funcs/http_portail.dart';
-import 'package:auto_login_flutter/localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -55,7 +54,8 @@ class LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 _StatusCard(
                   status: _status,
@@ -69,7 +69,7 @@ class LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text("${AppLoc.of(context).wordDomain} / IP "),
+                            Text("Nom de domaine / IP "),
                             DropdownButton<String>(
                               value: _selectedUrl,
                               items: _urlRootList
@@ -89,7 +89,7 @@ class LoginPageState extends State<LoginPage> {
                         ),
                         Row(
                           children: <Widget>[
-                            Text(AppLoc.of(context).wordsAuthDuration),
+                            Text("Durée d\'authentification "),
                             DropdownButton<String>(
                               value: _selectedTime,
                               items: _timeMap.keys
@@ -112,8 +112,8 @@ class LoginPageState extends State<LoginPage> {
                                 focusNode: _uidFocusNode,
                                 controller: _uidController,
                                 decoration: InputDecoration(
-                                  hintText: AppLoc.of(context).wordSurnameName,
-                                  labelText: AppLoc.of(context).wordUsername,
+                                  hintText: "prénom.nom",
+                                  labelText: "Nom d'utilisateur",
                                 ),
                                 onEditingComplete: () {
                                   _uidFocusNode.unfocus();
@@ -126,8 +126,8 @@ class LoginPageState extends State<LoginPage> {
                                 obscureText: true,
                                 focusNode: _pswdFocusNode,
                                 decoration: InputDecoration(
-                                  hintText: AppLoc.of(context).wordPassword,
-                                  labelText: AppLoc.of(context).wordPassword,
+                                  hintText: "Mot de passe",
+                                  labelText: "Mot de passe",
                                 ),
                               ),
                             ],
@@ -138,30 +138,28 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 100,
-                    child: RaisedButton(
-                      shape: const ContinuousRectangleBorder(),
-                      color: Colors.lightBlueAccent,
-                      elevation: 4,
-                      onPressed: () {
-                        final snackBar = SnackBar(content: Text('Requested'));
-                        Scaffold.of(context).showSnackBar(snackBar);
-                        autoLogin(
-                          _uidController.text,
-                          _pswdController.text,
-                          _selectedUrl,
-                          _timeMap[_selectedTime],
-                        ).then((status) => setState(() => _status = status));
-                        saveCalendarFromLogin(
-                          username: _uidController.text,
-                          password: _pswdController.text,
-                        ).then((out) => setState(() => _savedCalendar = out));
-                      },
+                  padding: const EdgeInsets.all(20.0),
+                  child: RaisedButton(
+                    color: Colors.blueAccent,
+                    elevation: 10.0,
+                    onPressed: () {
+                      final snackBar = SnackBar(content: Text('Requested'));
+                      Scaffold.of(context).showSnackBar(snackBar);
+                      autoLogin(
+                        _uidController.text,
+                        _pswdController.text,
+                        _selectedUrl,
+                        _timeMap[_selectedTime],
+                      ).then((status) => setState(() => _status = status));
+                      saveCalendarFromLogin(
+                        username: _uidController.text,
+                        password: _pswdController.text,
+                      ).then((out) => setState(() => _savedCalendar = out));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
                       child: const Text(
-                        "LOGIN",
+                        "Se connecter",
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

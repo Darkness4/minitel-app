@@ -17,27 +17,16 @@ class NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            colors: [
-              const Color(0xfffdfcfb),
-              const Color(0xffe2d1c3),
-            ], // whitish to gray
-          ),
-        ),
-        child: Center(
-          child: Scrollbar(
-            child: SingleChildScrollView(
-              child: FutureBuilder(
-                future: _generateFeedCard(
-                    "https://github.com/Darkness4/minitel-app/commits/develop.atom"),
-                builder: (BuildContext context, AsyncSnapshot snapshot) =>
-                    snapshot.hasData
-                        ? Column(children: snapshot.data)
-                        : const Text("Loading..."),
-              ),
+      body: Center(
+        child: Scrollbar(
+          child: SingleChildScrollView(
+            child: FutureBuilder(
+              future: _generateFeedCard(
+                  "https://github.com/Darkness4/minitel-app/commits/develop.atom"),
+              builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                  snapshot.hasData
+                      ? Column(children: snapshot.data)
+                      : const Text("Loading..."),
             ),
           ),
         ),

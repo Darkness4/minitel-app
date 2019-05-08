@@ -1,5 +1,4 @@
 import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/localizations.dart';
 import 'package:auto_login_flutter/pages/docs_pages/diagnose_doc.dart';
 import 'package:auto_login_flutter/pages/docs_pages/login_doc.dart';
 import 'package:flutter/material.dart';
@@ -42,20 +41,20 @@ class DocumentationPageState extends State<DocumentationPage> {
                 height: 90,
                 child: DrawerHeader(
                   child: Text(
-                    AppLoc.of(context).titleDocumentationPage,
+                    "Documentation",
                     style: TextStyle(fontSize: 32),
                   ),
                 ),
               ),
             ),
             ListTile(
-                title: Text(AppLoc.of(context).titleLoginPage),
+                title: Text("Authentification"),
                 onTap: () {
                   Navigator.pop(context);
                   _controller.jumpToPage(0);
                 }),
             ListTile(
-              title: Text(AppLoc.of(context).titleDiagnosePage),
+              title: Text("Diagnostique"),
               onTap: () {
                 Navigator.pop(context);
                 _controller.jumpToPage(1);
