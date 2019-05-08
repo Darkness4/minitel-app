@@ -1,4 +1,4 @@
-package marc.nguyen.autologinflutter
+package com.minitel.toolbox
 
 import android.os.Bundle
 
