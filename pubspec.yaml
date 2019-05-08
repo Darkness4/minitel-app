@@ -17,13 +17,19 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  http: ^0.12.0+1
-  wifi: ^0.1.4
-  connectivity: ^0.4.0+1
-  dscript_exec: ^2.0.1
-  simple_permissions: ^0.1.9
-  flutter_search_bar: ^2.0.7
-  share: ^0.6.0
+  connectivity: ^0.4.3+1  # Flutter Team
+  dscript_exec: ^2.0.1  # Ravi Teja Gudapti
+  share: ^0.6.1+1  # Flutter Team
+  webfeed: ^0.4.2  # Wito Chandra
+  url_launcher: ^5.0.2  # Flutter Team
+  google_maps_flutter: ^0.5.12  # Flutter Team
+  permission_handler: ^3.0.1  # Baseflow
+  shared_preferences: ^0.5.2  # Flutter Team
+  webview_flutter: ^0.3.6  # Flutter Team
+  path_provider: ^1.0.0  # Flutter Team
+  sticky_headers: ^0.1.7  # Flutter Community
+  flutter_local_notifications: ^0.7.0  # Michael Bui
+  html: ^0.14.0+2  # Dart Team
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -33,18 +39,78 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  intl_translation: ^0.17.1
+  flutter_driver:
+    sdk: flutter
+  intl_translation: any
+  test: any
+  clock: any
+  fake_async: any
+  flutter_launcher_icons: any
 
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#43a047"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+  assets:
+    - assets/img/
+  fonts:
+    - family: RobotoMono
+      fonts:
+        - asset: fonts/RobotoMono-Regular.ttf
+        - asset: fonts/RobotoMono-Italic.ttf
+          style: italic
+        - asset: fonts/RobotoMono-Bold.ttf
+          weight: 700
+        - asset: fonts/RobotoMono-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: fonts/RobotoMono-Light.ttf
+          weight: 300
+        - asset: fonts/RobotoMono-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/RobotoMono-Medium.ttf
+          weight: 500
+        - asset: fonts/RobotoMono-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: fonts/RobotoMono-Thin.ttf
+          weight: 100
+        - asset: fonts/RobotoMono-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: NotoSans
+      fonts:
+        - asset: fonts/NotoSans-Regular.ttf
+        - asset: fonts/NotoSans-Italic.ttf
+          style: italic
+        - asset: fonts/NotoSans-Bold.ttf
+          weight: 700
+        - asset: fonts/NotoSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: fonts/NotoSans-Light.ttf
+          weight: 300
+        - asset: fonts/NotoSans-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/NotoSans-Medium.ttf
+          weight: 500
+        - asset: fonts/NotoSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: fonts/NotoSans-Thin.ttf
+          weight: 100
+        - asset: fonts/NotoSans-ThinItalic.ttf
+          weight: 100
+          style: italic
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

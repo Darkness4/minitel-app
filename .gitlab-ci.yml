@@ -1,4 +1,4 @@
-image: nathansamson/flutter-builder-docker:v1.0.0
+image: darkness4/flutter-builder:28
 
 variables:
 before_script:
@@ -6,14 +6,69 @@ before_script:
   - flutter upgrade
 
 stages:
+  - test
   - build
+  - deploy
+
+unit-tests:
+  stage: test
+  script:
+    - apt update
+    - apt install -y lcov
+    - flutter packages get
+    - flutter test --coverage
+    - genhtml -o coverage coverage/lcov.info
+  artifacts:
+    paths:
+    - coverage/
+
+pages:
+  stage: deploy
+  dependencies:
+    - unit-tests
+  script:
+    - pub global activate coveralls
+    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - "echo \"repo_token: ${COVERALLS_TOKEN}\" > .coveralls.yml"
+    - coveralls ./coverage/lcov.info
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+  - master
+  - develop
+
+build-test:
+  stage: test
+  script:
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
+    - flutter packages get
+    - flutter build apk --release
+  except:
+  - master
+  - develop
+  - tests
 
 build:
   stage: build
   script:
-    - flutter -v build apk --release
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
+    - flutter packages get
+    - flutter build apk --release
     - mv build/app/outputs/apk/app.apk app.apk
   artifacts:
     paths:
       - app.apk
     expire_in: 1 week
+  only:
+    - master
+    - develop

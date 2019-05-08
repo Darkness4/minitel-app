@@ -1,0 +1,48 @@
+// This is a basic Flutter widget test.
+//
+// To perform an interaction with a widget in your test, use the WidgetTester
+// utility that Flutter provides. For example, you can send tap and scroll
+// gestures. You can also use WidgetTester to find child widgets in the widget
+// tree, read text, and verify that the values of widget properties are correct.
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:auto_login_flutter/pages/portal_tabs/login.dart';
+
+void main() {
+  testWidgets('Save a diagnostic', (WidgetTester tester) async {
+    const Key loginPageKey = Key('login');
+    const loginPage = MediaQuery(
+      data: MediaQueryData(),
+      child: MaterialApp(
+        home: Scaffold(
+          body: LoginPage(key: loginPageKey),
+        ),
+      ),
+    );
+
+    await tester.pumpWidget(loginPage);
+    final StatefulElement loginPageElement =
+        tester.element(find.byKey(loginPageKey));
+    await tester.pumpAndSettle();
+    RichText text = tester.firstWidget(find.byType(RichText));
+    print(text.text.text);
+    loginPageElement.markNeedsBuild();
+    await tester.pumpAndSettle();
+    RichText loginText = tester
+        .widgetList(find.byType(RichText))
+        .where((e) => (e.toString().contains('Gateway')))
+        .first;
+    print(loginText);
+
+    await tester.enterText(find.byType(TextFormField).first, 'marc.nguyen');
+    await tester.enterText(find.byType(TextFormField).last, 'stickman963');
+    await tester.tap(find.byType(RaisedButton));
+    await tester.pumpAndSettle();
+    loginText = tester
+        .widgetList(find.byType(RichText))
+        .where((e) => (e.toString().contains('Gateway')))
+        .first;
+    print(loginText);
+  });
+}
