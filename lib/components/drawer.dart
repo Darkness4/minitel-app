@@ -21,7 +21,7 @@ class MainDrawer extends StatelessWidget {
                   height: 75,
                 ),
                 Text(
-                  "Boîte à outils Minitel",
+                  "Minitel Toolbox",
                   style: const TextStyle(color: Colors.white, fontSize: 23),
                 ),
               ],
