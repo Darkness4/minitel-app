@@ -97,6 +97,28 @@ class MainDrawer extends StatelessWidget {
                 if (ModalRoute.of(context).settings.name != '/docs')
                   Navigator.pushReplacementNamed(context, '/docs');
               }),
+          Divider(),
+          Container(
+            color: Colors.red,
+            child: ListTile(
+                title: Text(
+                  "Signaler Minitel",
+                  style: const TextStyle(color: Colors.white),
+                ),
+                leading: const Icon(
+                  Icons.error,
+                  color: Colors.white,
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  Navigator.pop(context); // Close Drawer
+                  if (ModalRoute.of(context).settings.name != '/reporting')
+                    Navigator.pushReplacementNamed(context, '/reporting');
+                }),
+          ),
           ListTile(
               title: Text("A propos..."),
               leading: const Icon(Icons.info),
