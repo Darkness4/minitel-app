@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:auto_login_flutter/funcs/http_calendar.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:minitel_toolbox/funcs/http_calendar.dart';
 
 void main() {
   setUpAll(() async {

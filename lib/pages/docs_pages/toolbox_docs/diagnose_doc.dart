@@ -1,5 +1,5 @@
-import 'package:auto_login_flutter/components/cards.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/components/cards.dart';
 
 class DiagnoseDoc extends StatelessWidget {
   const DiagnoseDoc({
@@ -27,11 +27,11 @@ class DiagnoseDoc extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline,
                 ),
                 Text(
-                  "Indique si vous avez authorisé le GPS pour déterminer le SSID.",
+                  "Indique si vous avez authorisé le GPS pour déterminer le SSID (identifiant du réseau).",
                   style: Theme.of(context).textTheme.body1,
                 ),
                 Text(
-                  "ifconfig all/ip a",
+                  "ifconfig all / ip a",
                   style: Theme.of(context).textTheme.headline,
                 ),
                 Text.rich(
@@ -49,55 +49,80 @@ class DiagnoseDoc extends StatelessWidget {
                 ),
                 Text.rich(
                   TextSpan(
-                      text:
-                          "Affiche les adresses MAC de tous les appareils connectés au téléphone.\n\n"
-                          "La Passerelle devrait être affiché et l\'addresse MAC doit être 00-0d-b4-10-99-e1. Sinon, signalez-le à Minitel.",
-                      style: Theme.of(context).textTheme.body1),
+                    text: "Affiche les adresses MAC de tous les appareils "
+                        "connectés au téléphone.\n\n"
+                        "La Passerelle devrait être affiché et l\'addresse"
+                        " MAC doit être 00-0d-b4-10-99-e1.\n\n"
+                        "Si l'addresse MAC de la passerelle ne correspond pas "
+                        "à celui de la passerelle, on a affaire à une ARP "
+                        "poisonning : \n",
+                    style: Theme.of(context).textTheme.body1,
+                    children: <TextSpan>[
+                      TextSpan(
+                        text:
+                            "Le voleur d'IP de la passerelle répond à la réponse "
+                            "ARP envoyé en broadcast par la victime, plus "
+                            "rapidement que la passerelle.\n\n",
+                        style: Theme.of(context).textTheme.body2,
+                      ),
+                      TextSpan(
+                        text: "Une solution temporaire (uniquement lorsque le "
+                            "WiFi est allumé) est :",
+                        style: Theme.of(context).textTheme.body2,
+                      ),
+                    ],
+                  ),
                 ),
+                LogCard("arp -s 10.163.0.2 00-0d-b4-10-99-e1",
+                    title: "cmd.exe (Admin)    (Windows)"),
+                LogCard("arp -s 10.163.0.2 00:0d:b4:10:99:e1",
+                    title: "Shell    (Linux)"),
                 Text(
                   "Traceroute",
                   style: Theme.of(context).textTheme.headline,
                 ),
                 Text(
-                  "Affiche le chemin et les délais des paquets vers un serveur Google.",
-                  style: Theme.of(context).textTheme.body1,
-                ),
-                Text(
-                  "NetStat",
-                  style: Theme.of(context).textTheme.headline,
-                ),
-                Text(
-                  "Affiche des statistiques sur les connexions TCP.",
+                  "Affiche le chemin et les délais des paquets vers un serveur Google.\n"
+                  "Utile pour voir les causes de lag.",
                   style: Theme.of(context).textTheme.body1,
                 ),
                 Text(
                   "Ping Loopback",
                   style: Theme.of(context).textTheme.headline,
                 ),
-                Text(
-                  "Vérifie si le logiciel TCP/IP fonctionne. Devrait être toujours positif.",
+                Text.rich(TextSpan(
+                  text: "Vérifie si le logiciel TCP/IP fonctionne.\n",
                   style: Theme.of(context).textTheme.body1,
-                ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Devrait être toujours positif.",
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                  ],
+                )),
                 Text(
                   "Ping Local",
                   style: Theme.of(context).textTheme.headline,
                 ),
                 Text.rich(
                   TextSpan(
-                    text:
-                        "Ping à un ordinateur local (10.163.0.5, qui est le serveur Minitel et devrait être toujours allumé).\n\n"
+                    text: "Ping à un ordinateur local (10.163.0.5, qui est le "
+                        "serveur Minitel et devrait être toujours allumé).\n\n"
                         "Si les paquets sont perdus, ceci sont les scenarios les plus probable:\n"
                         "    1.  Vous n\'avez pas d\'IP.",
                     style: Theme.of(context).textTheme.body1,
                     children: <TextSpan>[
                       TextSpan(
-                        text: " (Alertez immediatement à Minitel)\n",
+                        text:
+                            " (Voir ifconfig all ou ip a, et alertez immediatement à Minitel)\n",
                         style: Theme.of(context).textTheme.body2,
                       ),
                       TextSpan(
                         text:
                             "    2.  Vous n\'êtes pas connecté au réseau local.\n"
-                            "    3.  Le serveur (10.163.0.5) est éteint. (vous pouvez ping 10.163.0.10)",
+                            "    3.  Le serveur (10.163.0.5) est déconnecté. (vous pouvez ping 10.163.0.10)\n"
+                            "    4.  Un switch de la Maison des Elèves est déconnecté.\n"
+                            "    5.  Un switch de la résidence est déconnecté.",
                         style: Theme.of(context).textTheme.body1,
                       )
                     ],
@@ -108,8 +133,11 @@ class DiagnoseDoc extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline,
                 ),
                 Text(
-                  "Si une erreur 4xx apparait, veuillez le signaler aux developeurs.",
-                  style: Theme.of(context).textTheme.body2,
+                  "Si une erreur 4xx ou 5xx apparait, veuillez le signaler à Minitel.",
+                  style: Theme.of(context)
+                      .textTheme
+                      .body2
+                      .apply(color: Colors.red),
                 ),
                 Text.rich(
                   TextSpan(
@@ -135,14 +163,6 @@ class DiagnoseDoc extends StatelessWidget {
                       TextSpan(
                         text: "4xx Client errors\n",
                         style: Theme.of(context).textTheme.subtitle,
-                      ),
-                      TextSpan(
-                        text:
-                            "    Si vous avez une erreur OS, la passerelle a un problème, et vous devriez le signaler à la DSI.\n",
-                        style: Theme.of(context)
-                            .textTheme
-                            .body2
-                            .apply(color: Colors.red),
                       ),
                       TextSpan(
                         text: "    400 Bad Request\n",
@@ -183,29 +203,20 @@ class DiagnoseDoc extends StatelessWidget {
                   "Comment devrais-je réagir?",
                   style: Theme.of(context).textTheme.title,
                 ),
-                Text.rich(
-                  TextSpan(
-                    text:
-                        "Si vous avez une erreur OS, la passerelle a un problème, et vous devriez le signaler à la DSI.\n"
-                        "Si vous avez une erreur HTTP 4xx, l\'outil de diagnostique a un problème, et vous devriez le signaler aux developeurs.\n"
-                        "Si vous avez une erreur HTTP 5xx, la passerelle a un problème, et vous devriez le signaler à la DSI.\n",
-                    style: Theme.of(context).textTheme.body1,
-                    children: <TextSpan>[
-                      TextSpan(
-                        text:
-                            "Un bouton Partage a été mis en place pour envoyer 90% des informations nécessaire pour une réparation complète.\n"
-                            "Sur 10.163.0.10, vous pouvez signaler aux administrateurs.",
-                        style: Theme.of(context).textTheme.body2,
-                      ),
-                    ],
-                  ),
+                Text(
+                  "S'il n'y a plus de réseau, contactez Minitel et "
+                  "utilisez la suite diagnostique dans la page"
+                  " \"Signaler Minitel\"",
+                  style: Theme.of(context).textTheme.body2,
                 ),
                 Text(
                   "Ping Gateway",
                   style: Theme.of(context).textTheme.headline,
                 ),
                 Text(
-                  "La passerelle ignore les pings. Cependant, si un ping est reçu, quelqu\'un a probablement pris sont IP. Mais, rien est certain.",
+                  "La passerelle ignore normalement les pings."
+                  " Cependant, si un ping est reçu, quelqu\'un a probablement"
+                  " pris sont IP. Mais, rien est certain.",
                   style: Theme.of(context).textTheme.body1,
                 ),
                 Text(
@@ -239,7 +250,7 @@ class DiagnoseDoc extends StatelessWidget {
                       TextSpan(
                         text:
                             "Pour les appareils portable, redémarrez le Wifi.\n"
-                            "Voici les meilleures solutions:",
+                            "Voici des solutions proposées:",
                         style: Theme.of(context).textTheme.body2,
                       ),
                     ],
@@ -248,13 +259,13 @@ class DiagnoseDoc extends StatelessWidget {
                 LogCard("ipconfig /flushdns",
                     title: "cmd.exe (Admin)    (Windows)"),
                 LogCard("sudo systemd-resolve --flush-caches",
-                    title: "bash    (Ubuntu and Debian-based)"),
+                    title: "Shell    (Ubuntu and Debian-based)"),
                 LogCard("sudo systemctl restart nscd",
-                    title: "bash    (Arch Linux)"),
+                    title: "Shell    (Arch Linux)"),
                 LogCard("sudo systemctl restart dnsmasq",
-                    title: "bash    (Linux in general)"),
+                    title: "Shell    (Linux in general)"),
                 LogCard("sudo systemctl restart named",
-                    title: "bash    (Linux Traditional)"),
+                    title: "Shell    (Linux Traditional)"),
                 LogCard("sudo killall -HUP mDNSResponder",
                     title:
                         "Terminal    (OSX Yosemite and later, Mavericks, Mountain Lion and Lion)"),

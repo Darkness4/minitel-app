@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:auto_login_flutter/funcs/http_portail.dart';
-import 'package:auto_login_flutter/funcs/http_webfeed.dart';
-import 'package:auto_login_flutter/funcs/http_webhook.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:minitel_toolbox/funcs/http_portail.dart';
+import 'package:minitel_toolbox/funcs/http_webfeed.dart';
+import 'package:minitel_toolbox/funcs/http_webhook.dart';
 
 void main() {
   group('Http Requests', () {
