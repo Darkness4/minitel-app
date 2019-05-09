@@ -33,33 +33,23 @@ presented.
    also documents our conflict resolution policy and encourages people
    to ask questions.
 
-2. [Values](https://github.com/Darkness4/minitel-app/Values),
+2. [Values](https://github.com/Darkness4/minitel-app/wiki/Values),
    which talks about what we care most about.
 
-3. [Setting up your development environment](https://github.com/Darkness4/minitel-app/Setting-up-the-development-environment),
+3. [Setting up your development environment](https://github.com/Darkness4/minitel-app/wiki/Setting-up-the-development-environment),
    which describes the steps you need to configure your computer to
    work on the Minitel Toolbox.
 
-4. [Tree hygiene](https://github.com/Darkness4/minitel-app/Tree-hygiene),
+4. [Tree hygiene](https://github.com/Darkness4/minitel-app/wiki/Tree-hygiene),
    which covers how to land a PR, how to do code review, how to
    handle breaking changes, how to handle regressions, and how to
    handle post-commit test failures.
 
-5. [Issue hygiene](https://github.com/Darkness4/minitel-app/Issue-hygiene),
-   which covers our processes around triaging bugs, escalating high
-   priority bugs, assigning bugs, and our GitHub labels and
-   milestones.
-
-6. [Our style guide](https://github.com/Darkness4/minitel-app/Style-guide-for-Flutter-repo),
+5. [Our style guide](https://github.com/Darkness4/minitel-app/wiki/Style-guide-for-Flutter-repo),
    which includes advice for designing APIs for Flutter, and how to
    format code in the framework.
 
 In addition to the above, there are many pages on [our
-Wiki](https://github.com/Darkness4/minitel-app/) that may be of
+Wiki](https://github.com/Darkness4/minitel-app/wiki/) that may be of
 interest. For a curated list of pages see the sidebar on the wiki's
 home page. They are more or less listed in order of importance.
-
-If you would like to chat to other people who work on Flutter, consider joining the
-https://gitter.im/flutter/contributors chat channel. We also have a [general chat
-channel](https://gitter.im/flutter/flutter) for people who aren't working on Flutter
-but who use Flutter.
