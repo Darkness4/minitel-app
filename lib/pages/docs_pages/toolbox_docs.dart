@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/components/drawer.dart';
 import 'package:minitel_toolbox/components/page_animation.dart';
-import 'package:minitel_toolbox/pages/docs_pages/minitel_doc.dart';
-import 'package:minitel_toolbox/pages/docs_pages/toolbox_docs.dart';
 import 'package:minitel_toolbox/pages/docs_pages/wiki_docs.dart';
 
-class DocumentationPage extends StatelessWidget {
-  final String title;
-  const DocumentationPage({Key key, this.title}) : super(key: key);
+import 'toolbox_docs/diagnose_doc.dart';
+import 'toolbox_docs/login_doc.dart';
 
+class ToolboxDocs extends StatelessWidget {
+  final PageController _controller;
+  ToolboxDocs({Key key, PageController controller})
+      : _controller = controller,
+        super(key: key);
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text("Toolbox Documentation"),
       ),
       body: Scrollbar(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              MinitelDoc(),
-            ],
-          ),
+        child: PageView(
+          controller: _controller,
+          children: <Widget>[
+            LoginDoc(),
+            DiagnoseDoc(),
+          ],
         ),
       ),
-      drawer: const MainDrawer(),
       endDrawer: Drawer(
         child: ListView(
           padding: const EdgeInsets.all(0.0),
@@ -45,6 +46,7 @@ class DocumentationPage extends StatelessWidget {
               title: Text("Minitel"),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
             Divider(),
@@ -52,25 +54,21 @@ class DocumentationPage extends StatelessWidget {
               title: Text("Authentification"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                final _controller = PageController(initialPage: 0);
-                Navigator.push(
-                  context,
-                  SlideRightRoute(
-                    widget: ToolboxDocs(controller: _controller),
-                  ),
+                _controller.animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
                 );
               },
             ),
             ListTile(
               title: Text("Diagnostique"),
               onTap: () {
-                Navigator.pop(context); // Close Drawer
-                final _controller = PageController(initialPage: 1);
-                Navigator.push(
-                  context,
-                  SlideRightRoute(
-                    widget: ToolboxDocs(controller: _controller),
-                  ),
+                Navigator.pop(context);
+                _controller.animateToPage(
+                  1,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
                 );
               },
             ),
@@ -80,10 +78,11 @@ class DocumentationPage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(initialPage: 0);
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  SlideRightRoute(
-                    widget: WikiDocs(controller: _controller),
+                  FadeRoute(
+                    builder: (BuildContext bldctx) =>
+                        WikiDocs(controller: _controller),
                   ),
                 );
               },
@@ -93,10 +92,11 @@ class DocumentationPage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(initialPage: 1);
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  SlideRightRoute(
-                    widget: WikiDocs(controller: _controller),
+                  FadeRoute(
+                    builder: (BuildContext bldctx) =>
+                        WikiDocs(controller: _controller),
                   ),
                 );
               },
@@ -106,10 +106,11 @@ class DocumentationPage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(initialPage: 2);
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  SlideRightRoute(
-                    widget: WikiDocs(controller: _controller),
+                  FadeRoute(
+                    builder: (BuildContext bldctx) =>
+                        WikiDocs(controller: _controller),
                   ),
                 );
               },
@@ -119,10 +120,11 @@ class DocumentationPage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(initialPage: 3);
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  SlideRightRoute(
-                    widget: WikiDocs(controller: _controller),
+                  FadeRoute(
+                    builder: (BuildContext bldctx) =>
+                        WikiDocs(controller: _controller),
                   ),
                 );
               },

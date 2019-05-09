@@ -1,7 +1,7 @@
-import 'package:auto_login_flutter/components/cards.dart';
-import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/funcs/http_webfeed.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/components/cards.dart';
+import 'package:minitel_toolbox/components/drawer.dart';
+import 'package:minitel_toolbox/funcs/http_webfeed.dart';
 
 class NewsPage extends StatefulWidget {
   final String title;
@@ -22,7 +22,7 @@ class NewsPageState extends State<NewsPage> {
           child: SingleChildScrollView(
             child: FutureBuilder(
               future: _generateFeedCard(
-                  "https://github.com/Darkness4/minitel-app/commits/develop.atom"),
+                  "https://github.com/Darkness4/minitel-app/commits/master.atom"),
               builder: (BuildContext context, AsyncSnapshot snapshot) =>
                   snapshot.hasData
                       ? Column(children: snapshot.data)

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'components/page_animation.dart';
+import 'pages/about.dart';
 import 'pages/calendar.dart';
 import 'pages/docs.dart';
 import 'pages/maps.dart';
 import 'pages/news.dart';
-import 'pages/reporting.dart';
 import 'pages/portal.dart';
+import 'pages/reporting.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -55,6 +56,12 @@ class MyApp extends StatelessWidget {
                   CalendarPage(title: "Calendrier"),
               settings: settings,
             );
+          case '/about':
+            return MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  AboutPage(title: "A propos de l'application"),
+              settings: settings,
+            );
         }
         assert(false);
       },
@@ -63,16 +70,38 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'NotoSans',
           textTheme: TextTheme(
-            body1: TextStyle(height: 1.2),
-            body2: TextStyle(fontWeight: FontWeight.bold),
-            headline: TextStyle(height: 1.5, fontWeight: FontWeight.bold),
-            title: TextStyle(height: 1.5, fontWeight: FontWeight.bold),
+            body1: TextStyle(
+              height: 1.2,
+              color: Colors.black54,
+            ),
+            body2: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+            headline: TextStyle(
+              height: 1.5,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+            title: TextStyle(
+              height: 1.5,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
             display1: TextStyle(height: 1.5),
-            display2: TextStyle(height: 1.5),
+            display2: TextStyle(
+              height: 1.5,
+            ),
             display3: TextStyle(height: 1.5),
             display4: TextStyle(height: 1.5),
-            subhead: TextStyle(height: 1.5),
-            subtitle: TextStyle(height: 1.5),
+            subhead: TextStyle(
+              height: 1.5,
+              color: Colors.black87,
+            ),
+            subtitle: TextStyle(
+              height: 1.5,
+              color: Colors.black87,
+            ),
           )),
       initialRoute: '/',
     );

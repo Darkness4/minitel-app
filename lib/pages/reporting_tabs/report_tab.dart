@@ -1,5 +1,14 @@
-import 'package:auto_login_flutter/components/cards.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/components/cards.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+_launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 class ReportTab extends StatefulWidget {
   final String channel;
@@ -62,16 +71,33 @@ class _ContactsCard extends StatelessWidget {
           "Contacts",
           style: Theme.of(context).textTheme.headline,
         ),
-        Text(
-          "Facebook: Minitel Ismin",
-          style: Theme.of(context).textTheme.title,
+        FlatButton(
+          textColor: Colors.blueAccent,
+          child: Text(
+            "Facebook: Minitel Ismin",
+            style: Theme.of(context)
+                .textTheme
+                .title
+                .apply(color: Colors.blueAccent),
+          ),
+          onPressed: () =>
+              _launchURL("https://www.messenger.com/t/100012919189214"),
+          color: Colors.lightBlue[100],
+        ),
+        FlatButton(
+          textColor: Colors.blueAccent,
+          child: Text(
+            "Mail: minitel13120@gmail.com",
+            style: Theme.of(context)
+                .textTheme
+                .title
+                .apply(color: Colors.blueAccent),
+          ),
+          onPressed: () => _launchURL("mailto: minitel13120@gmail.com"),
+          color: Colors.lightBlue[100],
         ),
         Text(
           "G*: Contact Admin",
-          style: Theme.of(context).textTheme.title,
-        ),
-        Text(
-          "Mail: minitel13120@gmail.com",
           style: Theme.of(context).textTheme.title,
         ),
       ],

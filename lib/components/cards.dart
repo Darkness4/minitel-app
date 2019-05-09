@@ -38,7 +38,7 @@ class LogCard extends StatelessWidget {
   final String text;
   final double elevation;
 
-  const LogCard(this.text, {this.title, this.elevation: 3});
+  const LogCard(this.text, {@required this.title, this.elevation: 3});
 
   @override
   Widget build(context) {
@@ -66,7 +66,7 @@ class LogCard extends StatelessWidget {
               child: Text(
                 text,
                 style: TextStyle(
-                  fontSize: 8,
+                  fontSize: 10,
                   fontFamily: "RobotoMono",
                   color: Colors.white,
                 ),
@@ -88,7 +88,7 @@ class NewsCard extends StatelessWidget {
   final double extPadding;
 
   const NewsCard({
-    this.item,
+    @required this.item,
     this.elevation: 4.0,
     this.extPadding: 10.0,
   });

@@ -1,5 +1,5 @@
-name: auto_login_flutter
-description: Auto Log in Portail
+name: minitel_toolbox
+description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -7,7 +7,7 @@ description: Auto Log in Portail
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.0.0+1
+version: 0.0.3+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -22,7 +22,7 @@ dependencies:
   share: ^0.6.1+1  # Flutter Team
   webfeed: ^0.4.2  # Wito Chandra
   url_launcher: ^5.0.2  # Flutter Team
-  google_maps_flutter: ^0.5.12  # Flutter Team
+  google_maps_flutter: ^0.5.13  # Flutter Team
   permission_handler: ^3.0.1  # Baseflow
   shared_preferences: ^0.5.2  # Flutter Team
   webview_flutter: ^0.3.6  # Flutter Team
@@ -30,11 +30,8 @@ dependencies:
   sticky_headers: ^0.1.7  # Flutter Community
   flutter_local_notifications: ^0.7.0  # Michael Bui
   html: ^0.14.0+2  # Dart Team
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  # font_awesome_flutter: ^8.2.0
-  cupertino_icons: ^0.1.2
+  package_info: ^0.4.0+3  # Flutter Team
+  # font_awesome_flutter: ^8.4.0  # Brian Egan
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +57,7 @@ flutter_icons:
 flutter:
   assets:
     - assets/img/
+    - assets/icon/
   fonts:
     - family: RobotoMono
       fonts:
