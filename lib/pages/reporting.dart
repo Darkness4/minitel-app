@@ -326,20 +326,36 @@ class ReportingPageState extends State<ReportingPage>
           parent: _animationController,
           curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
         ),
-        child: FloatingActionButton(
-            heroTag: null,
-            backgroundColor: Colors.red,
-            child: const Icon(Icons.mail),
-            mini: true,
-            onPressed: () async {
-              var body = "---Report ${DateTime.now().toString()}---\n\n"
-                  "Titre: ${_titleController.text}\n"
-                  "Description: ${_descriptionController.text}\n\n"
-                  "*Diagnosis*\n"
-                  "$_report";
-              _launchURL(
-                  "mailto:minitel13120@gmail.com?subject=${_titleController.text}&body=$body");
-            }),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Email",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              elevation: 4,
+            ),
+            FloatingActionButton(
+              heroTag: null,
+              backgroundColor: Colors.red,
+              child: const Icon(Icons.mail),
+              mini: true,
+              onPressed: () async {
+                var body = "---Report ${DateTime.now().toString()}---\n\n"
+                    "Titre: ${_titleController.text}\n"
+                    "Description: ${_descriptionController.text}\n\n"
+                    "*Diagnosis*\n"
+                    "$_report";
+                _launchURL(
+                    "mailto:minitel13120@gmail.com?subject=${_titleController.text}&body=$body");
+              },
+            ),
+          ],
+        ),
       );
 
   Widget get _reportIcon {
@@ -367,17 +383,32 @@ class ReportingPageState extends State<ReportingPage>
           parent: _animationController,
           curve: const Interval(0.0, 1.0, curve: Curves.easeOut),
         ),
-        child: FloatingActionButton(
-          heroTag: null,
-          backgroundColor: Colors.red,
-          child: const Icon(Icons.share),
-          mini: true,
-          onPressed: () =>
-              Share.share("---Report ${DateTime.now().toString()}---\n\n"
-                  "Titre: ${_titleController.text}\n"
-                  "Description: ${_descriptionController.text}\n\n"
-                  "*Diagnosis*\n"
-                  "$_report"),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Partager",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              elevation: 4,
+            ),
+            FloatingActionButton(
+              heroTag: null,
+              backgroundColor: Colors.red,
+              child: const Icon(Icons.share),
+              mini: true,
+              onPressed: () =>
+                  Share.share("---Report ${DateTime.now().toString()}---\n\n"
+                      "Titre: ${_titleController.text}\n"
+                      "Description: ${_descriptionController.text}\n\n"
+                      "*Diagnosis*\n"
+                      "$_report"),
+            ),
+          ],
         ),
       );
 
@@ -447,8 +478,8 @@ class ReportingPageState extends State<ReportingPage>
         floatingActionButton: Builder(
           builder: (context) => Column(
                 mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  // TODO: Add Label
                   _shareButton,
                   _mailButton,
                   _buildReportButton(context),
@@ -489,43 +520,67 @@ class ReportingPageState extends State<ReportingPage>
         parent: _animationController,
         curve: Interval(0.0, 0.25, curve: Curves.easeOut),
       ),
-      child: FloatingActionButton(
-        heroTag: null,
-        onPressed: () async {
-          if (_reportState != 1) {
-            setState(() => _reportState = 1);
-            getTimeout().then((timeout) {
-              if (DateTime.now().isAfter(timeout))
-                report(
-                  "_${_descriptionController.text}_\n\n"
-                  "*Diagnosis*\n"
-                  "$_report",
-                  title: _titleController.text,
-                  channel: channel,
-                ).then((status) {
-                  if (status == "ok") {
-                    _setTimeout();
-                    setState(() => _reportState = 2);
-                  } else {
-                    setState(() => _reportState = 0);
-                  }
-                  Scaffold.of(ctxt).showSnackBar(SnackBar(
-                    content: Text(status),
-                  ));
-                });
-              else {
-                _reportState = 0;
-                Scaffold.of(ctxt).showSnackBar(SnackBar(
-                  content: Text("Wait until ${timeout.hour}:${timeout.minute}"),
-                ));
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Notifier sur Slack",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            elevation: 4,
+          ),
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () async {
+              if (_reportState != 1) {
+                setState(() => _reportState = 1);
+                getTimeout().then(
+                  (timeout) {
+                    if (DateTime.now().isAfter(timeout))
+                      report(
+                        "_${_descriptionController.text}_\n\n"
+                        "*Diagnosis*\n"
+                        "$_report",
+                        title: _titleController.text,
+                        channel: channel,
+                      ).then(
+                        (status) {
+                          if (status == "ok") {
+                            _setTimeout();
+                            setState(() => _reportState = 2);
+                          } else {
+                            setState(() => _reportState = 0);
+                          }
+                          Scaffold.of(ctxt).showSnackBar(
+                            SnackBar(
+                              content: Text(status),
+                            ),
+                          );
+                        },
+                      );
+                    else {
+                      _reportState = 0;
+                      Scaffold.of(ctxt).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              "Wait until ${timeout.hour}:${timeout.minute}"),
+                        ),
+                      );
+                    }
+                  },
+                );
               }
-            });
-          }
-        },
-        child: _reportIcon,
-        backgroundColor: _reportState == 2 ? Colors.green : Colors.red,
-        foregroundColor: Colors.black,
-        mini: true,
+            },
+            child: _reportIcon,
+            backgroundColor: _reportState == 2 ? Colors.green : Colors.red,
+            foregroundColor: Colors.black,
+            mini: true,
+          ),
+        ],
       ),
     );
   }
