@@ -8,7 +8,7 @@ import 'pages/docs.dart';
 import 'pages/maps.dart';
 import 'pages/news.dart';
 import 'pages/portal.dart';
-import 'pages/reporting.dart';r
+import 'pages/reporting.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
