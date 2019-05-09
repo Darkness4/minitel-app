@@ -64,7 +64,7 @@ class _ContactsCard extends StatelessWidget {
         ),
         Text(
           "Facebook: Minitel Ismin",
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.title, // TODO: Add button, chat
         ),
         Text(
           "G*: Contact Admin",

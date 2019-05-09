@@ -70,16 +70,38 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'NotoSans',
           textTheme: TextTheme(
-            body1: TextStyle(height: 1.2),
-            body2: TextStyle(fontWeight: FontWeight.bold),
-            headline: TextStyle(height: 1.5, fontWeight: FontWeight.bold),
-            title: TextStyle(height: 1.5, fontWeight: FontWeight.bold),
+            body1: TextStyle(
+              height: 1.2,
+              color: Colors.black54,
+            ),
+            body2: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+            headline: TextStyle(
+              height: 1.5,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+            title: TextStyle(
+              height: 1.5,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
             display1: TextStyle(height: 1.5),
-            display2: TextStyle(height: 1.5),
+            display2: TextStyle(
+              height: 1.5,
+            ),
             display3: TextStyle(height: 1.5),
             display4: TextStyle(height: 1.5),
-            subhead: TextStyle(height: 1.5),
-            subtitle: TextStyle(height: 1.5),
+            subhead: TextStyle(
+              height: 1.5,
+              color: Colors.black87,
+            ),
+            subtitle: TextStyle(
+              height: 1.5,
+              color: Colors.black87,
+            ),
           )),
       initialRoute: '/',
     );

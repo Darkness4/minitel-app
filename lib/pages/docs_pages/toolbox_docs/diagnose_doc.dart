@@ -114,7 +114,7 @@ class DiagnoseDoc extends StatelessWidget {
                     children: <TextSpan>[
                       TextSpan(
                         text:
-                            " (Voir ifconfig all ou ip a et alertez immediatement à Minitel)\n",
+                            " (Voir ifconfig all ou ip a, et alertez immediatement à Minitel)\n",
                         style: Theme.of(context).textTheme.body2,
                       ),
                       TextSpan(
