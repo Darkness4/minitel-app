@@ -50,6 +50,7 @@ class WikiDocs extends StatelessWidget {
               title: Text("Minitel"),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
             Divider(),
