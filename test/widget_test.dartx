@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:auto_login_flutter/pages/portal_tabs/login.dart';
+import 'package:minitel_toolbox/pages/portal_tabs/login.dart';
 
 void main() {
   testWidgets('Save a diagnostic', (WidgetTester tester) async {

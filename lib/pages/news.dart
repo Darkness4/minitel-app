@@ -1,7 +1,7 @@
-import 'package:auto_login_flutter/components/cards.dart';
-import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/funcs/http_webfeed.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/components/cards.dart';
+import 'package:minitel_toolbox/components/drawer.dart';
+import 'package:minitel_toolbox/funcs/http_webfeed.dart';
 
 class NewsPage extends StatefulWidget {
   final String title;

@@ -1,5 +1,5 @@
-import 'package:auto_login_flutter/funcs/http_version_checker.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/funcs/http_version_checker.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 

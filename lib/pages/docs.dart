@@ -1,9 +1,9 @@
-import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/components/page_animation.dart';
-import 'package:auto_login_flutter/pages/docs_pages/minitel_doc.dart';
-import 'package:auto_login_flutter/pages/docs_pages/toolbox_docs.dart';
-import 'package:auto_login_flutter/pages/docs_pages/wiki_docs.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/components/drawer.dart';
+import 'package:minitel_toolbox/components/page_animation.dart';
+import 'package:minitel_toolbox/pages/docs_pages/minitel_doc.dart';
+import 'package:minitel_toolbox/pages/docs_pages/toolbox_docs.dart';
+import 'package:minitel_toolbox/pages/docs_pages/wiki_docs.dart';
 
 class DocumentationPage extends StatelessWidget {
   final String title;

@@ -1,4 +1,4 @@
-import 'package:auto_login_flutter/components/cards.dart';
+import 'package:minitel_toolbox/components/cards.dart';
 import 'package:flutter/material.dart';
 
 class ImprimanteDoc extends StatelessWidget {

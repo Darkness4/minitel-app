@@ -1,6 +1,6 @@
-import 'package:auto_login_flutter/components/drawer.dart';
-import 'package:auto_login_flutter/funcs/http_version_checker.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/components/drawer.dart';
+import 'package:minitel_toolbox/funcs/http_version_checker.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -56,12 +56,6 @@ class PortalPage extends StatefulWidget {
 
 class PortalPageState extends State<PortalPage> {
   @override
-  void initState() {
-    _checkVersion(context);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
@@ -98,5 +92,11 @@ class PortalPageState extends State<PortalPage> {
         drawer: const MainDrawer(),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    _checkVersion(context);
+    super.initState();
   }
 }

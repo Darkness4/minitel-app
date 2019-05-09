@@ -1,6 +1,6 @@
-import 'package:auto_login_flutter/components/page_animation.dart';
-import 'package:auto_login_flutter/pages/docs_pages/toolbox_docs.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/components/page_animation.dart';
+import 'package:minitel_toolbox/pages/docs_pages/toolbox_docs.dart';
 
 import 'wiki_docs/dualboot_doc.dart';
 import 'wiki_docs/imprimante_doc.dart';

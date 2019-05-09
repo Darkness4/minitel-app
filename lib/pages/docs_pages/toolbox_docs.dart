@@ -1,6 +1,6 @@
-import 'package:auto_login_flutter/components/page_animation.dart';
-import 'package:auto_login_flutter/pages/docs_pages/wiki_docs.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/components/page_animation.dart';
+import 'package:minitel_toolbox/pages/docs_pages/wiki_docs.dart';
 
 import 'toolbox_docs/diagnose_doc.dart';
 import 'toolbox_docs/login_doc.dart';

@@ -1,6 +1,6 @@
-import 'package:auto_login_flutter/funcs/http_calendar.dart';
-import 'package:auto_login_flutter/funcs/http_portail.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/funcs/http_calendar.dart';
+import 'package:minitel_toolbox/funcs/http_portail.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
