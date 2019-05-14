@@ -22,7 +22,7 @@ class NewsPageState extends State<NewsPage> {
           child: SingleChildScrollView(
             child: FutureBuilder(
               future: _generateFeedCard(
-                  "https://github.com/Darkness4/minitel-app/commits/master.atom"),
+                  "https://github.com/Darkness4/minitel-app/releases.atom"),
               builder: (BuildContext context, AsyncSnapshot snapshot) =>
                   snapshot.hasData
                       ? Column(children: snapshot.data)

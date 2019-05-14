@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'icalendar_parser.dart';
 
@@ -14,11 +15,6 @@ Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
 
   return directory.path;
-}
-
-Future<File> get _savedCalendarURL async {
-  final path = await _localPath;
-  return File('$path/savedCalendarURL');
 }
 
 Future<String> bypassCAS(
@@ -110,13 +106,8 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
 }
 
 Future<String> getSavedCalendarURL() async {
-  final file = await _savedCalendarURL;
-  if (!(await file.exists()))
-    throw Exception("File savedCalendarURL do not exists");
-
-  // Read the file
-  String contents = await file.readAsString();
-  if (!contents.contains("http")) throw "Error : This is not an URL";
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String contents = prefs.getString('calendarURL') ?? "";
 
   return contents;
 }
@@ -169,6 +160,6 @@ Future<void> saveCalendarFromUrl(String url) async {
 }
 
 Future<void> saveCalendarURL(String url) async {
-  final file = await _savedCalendarURL;
-  file.writeAsString(url);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('calendarURL', url);
 }

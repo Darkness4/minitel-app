@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class AnnuaireWebView extends StatelessWidget {
-
   const AnnuaireWebView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WebviewScaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: const Text("Annuaire"),
       ),
-      body: const WebView(
-        initialUrl: 'http://annuaire.emse.fr/',
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+      url: 'http://annuaire.emse.fr/',
     );
   }
 }

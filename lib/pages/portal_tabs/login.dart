@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/funcs/http_calendar.dart';
+import 'package:minitel_toolbox/funcs/http_gateway.dart';
+import 'package:minitel_toolbox/funcs/http_campus.dart';
 import 'package:minitel_toolbox/funcs/http_portail.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,7 +33,6 @@ class LoginPageState extends State<LoginPage> {
     '8 hours': 480,
   };
   var _status = "";
-  var _savedCalendar = false;
   var _selectedTime = '4 hours'; // Default
   var _selectedUrl = 'fw-cgcp.emse.fr';
 
@@ -59,7 +60,6 @@ class LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 _StatusCard(
                   status: _status,
-                  savedCalendar: _savedCalendar,
                 ),
                 Card(
                   elevation: 10.0,
@@ -154,7 +154,15 @@ class LoginPageState extends State<LoginPage> {
                       saveCalendarFromLogin(
                         username: _uidController.text,
                         password: _pswdController.text,
-                      ).then((out) => setState(() => _savedCalendar = out));
+                      ).then((status) => setState(() {}));
+                      saveCookieCampusFromLogin(
+                        username: _uidController.text,
+                        password: _pswdController.text,
+                      ).then((status) => setState(() {}));
+                      saveCookiePortailFromLogin(
+                        username: _uidController.text,
+                        password: _pswdController.text,
+                      ).then((status) => setState(() {}));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(30.0),
@@ -187,7 +195,6 @@ class LoginPageState extends State<LoginPage> {
   @override
   initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => getStatus(_selectedUrl)
         .then((status) => setState(() => _status = status)));
   }
@@ -195,14 +202,11 @@ class LoginPageState extends State<LoginPage> {
 
 class _StatusCard extends StatelessWidget {
   final String _status;
-  final bool _savedCalendar;
 
   const _StatusCard({
     Key key,
     @required String status,
-    @required bool savedCalendar,
   })  : _status = status,
-        _savedCalendar = savedCalendar,
         super(key: key);
 
   @override
@@ -235,9 +239,80 @@ class _StatusCard extends StatelessWidget {
                     "Calendar: ",
                     style: const TextStyle(fontSize: 20),
                   ),
-                  _savedCalendar
-                      ? const Icon(Icons.done, color: Colors.green)
-                      : const Icon(Icons.close, color: Colors.red),
+                  FutureBuilder<String>(
+                    future:
+                        getSavedCalendarURL(), // a previously-obtained Future<String> or null
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.active:
+                        case ConnectionState.waiting:
+                          return Text('Awaiting result...');
+                        case ConnectionState.done:
+                          if (snapshot.hasError)
+                            return const Icon(Icons.close, color: Colors.red);
+                          else if (snapshot.data == "")
+                            return const Icon(Icons.close, color: Colors.red);
+                          return const Icon(Icons.done, color: Colors.green);
+                      }
+                      return null; // unreachable
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  const Text(
+                    "Campus: ",
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  FutureBuilder<String>(
+                    future: getSavedCookieCampus(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.active:
+                        case ConnectionState.waiting:
+                          return Text('Awaiting result...');
+                        case ConnectionState.done:
+                          if (snapshot.hasError)
+                            return const Icon(Icons.close, color: Colors.red);
+                          else if (snapshot.data == "")
+                            return const Icon(Icons.close, color: Colors.red);
+                          return const Icon(Icons.done, color: Colors.green);
+                      }
+                      return null; // unreachable
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  const Text(
+                    "Portail: ",
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  FutureBuilder<String>(
+                    future: getSavedCookiePortail(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.active:
+                        case ConnectionState.waiting:
+                          return Text('Awaiting result...');
+                        case ConnectionState.done:
+                          if (snapshot.hasError)
+                            return const Icon(Icons.close, color: Colors.red);
+                          else if (snapshot.data == "")
+                            return const Icon(Icons.close, color: Colors.red);
+                          return const Icon(Icons.done, color: Colors.green);
+                      }
+                      return null; // unreachable
+                    },
+                  ),
                 ],
               ),
             ],
