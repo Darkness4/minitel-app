@@ -90,7 +90,7 @@ class AboutPage extends StatelessWidget {
                   var actualVersion = PackageInfo.fromPlatform();
                   dynamic ensemble =
                       await Future.wait([actualVersion, latestVersion]);
-                  if (ensemble[0].version != ensemble[1]) {
+                  if (ensemble[0].version != ensemble[1])
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -115,7 +115,31 @@ class AboutPage extends StatelessWidget {
                         );
                       },
                     );
-                  }
+                  else
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                            "Il s'agit de la dernière version.",
+                          ),
+                          content: Text(
+                              "La version ${ensemble[1]} est la dernière version."),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("Close"),
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                            RaisedButton(
+                              textColor: Colors.white,
+                              child: Text("Télécharger"),
+                              onPressed: () => getLatestVersionURL()
+                                  .then((url) => _launchURL(url)),
+                            )
+                          ],
+                        );
+                      },
+                    );
                 },
               ),
               // ListTile(

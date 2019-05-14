@@ -5,7 +5,7 @@ import 'components/page_animation.dart';
 import 'pages/about.dart';
 import 'pages/calendar.dart';
 import 'pages/docs.dart';
-import 'pages/maps.dart';
+// import 'pages/maps.dart';
 import 'pages/news.dart';
 import 'pages/portal.dart';
 import 'pages/reporting.dart';
@@ -45,11 +45,11 @@ class MyApp extends StatelessWidget {
               builder: (BuildContext context) => NewsPage(title: "Nouveautés"),
               settings: settings,
             );
-          case '/maps':
-            return FadeRoute(
-              builder: (BuildContext context) => MapsPage(title: "Maps"),
-              settings: settings,
-            );
+          // case '/maps':
+          //   return FadeRoute(
+          //     builder: (BuildContext context) => MapsPage(title: "Maps"),
+          //     settings: settings,
+          //   );
           case '/calendar':
             return FadeRoute(
               builder: (BuildContext context) =>

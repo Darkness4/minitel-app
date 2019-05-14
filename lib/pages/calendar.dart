@@ -40,6 +40,7 @@ class CalendarPageState extends State<CalendarPage> {
     // Refresh the calendar if possible
     try {
       var url = await getSavedCalendarURL();
+      if (url == "") throw ("The URL of the calendat was not found.");
       await saveCalendarFromUrl(url);
     } catch (e) {
       return _errorHandlerWidget(e);

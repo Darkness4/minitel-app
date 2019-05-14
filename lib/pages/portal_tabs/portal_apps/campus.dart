@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class CampusWebView extends StatelessWidget {
-
-  const CampusWebView({Key key}) : super(key: key);
+  final String cookie;
+  const CampusWebView({Key key, this.cookie = ""}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WebviewScaffold(
+      headers: <String, String>{'cookie': cookie},
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: const Text("Campus EMSE"),
       ),
-      body: const WebView(
-        initialUrl: 'https://campus.emse.fr/',
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+      url: 'https://campus.emse.fr/',
     );
   }
 }

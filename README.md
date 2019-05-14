@@ -4,7 +4,7 @@
 ![License: MIT](https://img.shields.io/github/license/Darkness4/minitel-app.svg?style=flat)
 [![Codemagic build status](https://api.codemagic.io/apps/5caa704d02fe6a0008c69612/5caa704d02fe6a0008c69611/status_badge.svg)](https://codemagic.io/apps/5caa704d02fe6a0008c69612/5caa704d02fe6a0008c69611/latest_build)
 [![Coverage Status](https://coveralls.io/repos/github/Darkness4/minitel-app/badge.svg?branch=calendar)](https://coveralls.io/github/Darkness4/minitel-app?branch=calendar)
-
+![GitHub All Releases](https://img.shields.io/github/downloads/Darkness4/minitel-app/total.svg)
 
 
 ## Screenshots

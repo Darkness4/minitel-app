@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.minitel.toolbox">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.minitel.toolbox">
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -11,13 +10,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
-    <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:label="Minitel Toolbox"
-        android:icon="@mipmap/launcher_icon"
-        android:usesCleartextTraffic="true">
+    <application android:name="io.flutter.app.FlutterApplication" android:label="Minitel Toolbox" android:icon="@mipmap/launcher_icon" android:usesCleartextTraffic="true">
 
         <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
             <intent-filter>
@@ -27,23 +22,14 @@
         <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <meta-data android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyCPfUnSNdNM1QysxBRVUaRCFFDaEmud5fI"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCPfUnSNdNM1QysxBRVUaRCFFDaEmud5fI"/>
 
-        <activity
-            android:name=".MainActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/LaunchTheme"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+        <activity android:name=".MainActivity" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
             <!-- This keeps the window background of the activity showing
                  until Flutter renders its first frame. It can be removed if
                  there is no splash screen (such as the default splash screen
                  defined in @style/LaunchTheme). -->
-            <meta-data
-                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
-                android:value="true" />
+            <meta-data android:name="io.flutter.app.android.SplashScreenUntilFirstFrame" android:value="true" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

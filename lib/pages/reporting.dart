@@ -5,7 +5,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/components/drawer.dart';
-import 'package:minitel_toolbox/funcs/http_portail.dart';
+import 'package:minitel_toolbox/funcs/http_gateway.dart';
 import 'package:minitel_toolbox/funcs/http_webhook.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share/share.dart';

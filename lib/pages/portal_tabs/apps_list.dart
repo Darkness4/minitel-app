@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:minitel_toolbox/funcs/http_campus.dart';
+import 'package:minitel_toolbox/funcs/http_portail.dart';
 
-/// Launch a url in a WebView.
-_launchURL(String url, {forceWebView: true}) async {
-  if (await canLaunch(url)) {
-    await launch(
-      url,
-      forceWebView: forceWebView,
-      enableJavaScript: true,
-    );
-  } else {
-    throw 'Could not launch $url';
-  }
-}
+import 'portal_apps/annuaire.dart';
+import 'portal_apps/campus.dart';
+import 'portal_apps/gitlab.dart';
+import 'portal_apps/imprimante.dart';
+import 'portal_apps/logiciels.dart';
+import 'portal_apps/minitel.dart';
+import 'portal_apps/portail.dart';
+import 'portal_apps/promethee.dart';
+import 'portal_apps/sogo.dart';
 
 /// Fragment listing in a [GridView] multiple supported Apps.
 class AppsList extends StatelessWidget {
@@ -45,6 +43,7 @@ class AppsList extends StatelessWidget {
             const _AnnuaireCard(),
             const _ImprimanteCard(),
             const _WikiMinitelCard(),
+            const _PortailCard(),
           ],
         ),
       ),
@@ -61,12 +60,11 @@ class _AnnuaireCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        // onTap: () => Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (context) => AnnuaireWebView()),
-        //     ),
-        onTap: () => _launchURL('http://annuaire.emse.fr/'),
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AnnuaireWebView()),
+            ),
+        // onTap: () => _launchURL('http://annuaire.emse.fr/'),
         child: LayoutBuilder(
           builder: (context, constraint) => Column(
                 children: <Widget>[
@@ -100,11 +98,20 @@ class _CampusCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        // onTap: () => Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => CampusWebView()),
-        //     ),
-        onTap: () => _launchURL('https://campus.emse.fr/'),
+        onTap: () async {
+          String cookie = await getSavedCookieCampus();
+          print(cookie);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CampusWebView(
+                    cookie: cookie,
+                  ),
+            ),
+          );
+        },
+        // onTap: () => _launchURL('https://campus.emse.fr/'),
         child: Image.asset('assets/img/moodle.png'),
       ),
     );
@@ -122,12 +129,11 @@ class _EduSoftCard extends StatelessWidget {
       child: InkWell(
         highlightColor: const Color(0xa0000000),
         splashColor: Colors.black,
-        // onTap: () => Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (context) => LogicielsWebView()),
-        //     ),
-        onTap: () => _launchURL('http://edusoft.emse.fr/'),
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LogicielsWebView()),
+            ),
+        // onTap: () => _launchURL('http://edusoft.emse.fr/'),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -175,11 +181,11 @@ class _GitlabEMSECard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        // onTap: () => Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => GitlabWebView()),
-        //     ),
-        onTap: () => _launchURL('https://gitlab.emse.fr/'),
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => GitlabWebView()),
+            ),
+        // onTap: () => _launchURL('https://gitlab.emse.fr/'),
         child: Image.asset('assets/img/gitlab.png'),
       ),
     );
@@ -195,9 +201,13 @@ class _ImprimanteCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        onTap: () => _launchURL(
-              "http://192.168.130.2/watchdoc",
-              forceWebView: false,
+        // onTap: () => _launchURL(
+        //       "http://192.168.130.2/watchdoc",
+        //       forceWebView: false,
+        //     ),
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ImprimanteWebView()),
             ),
         child: LayoutBuilder(
           builder: (context, constraint) => Column(
@@ -223,6 +233,47 @@ class _ImprimanteCard extends StatelessWidget {
   }
 }
 
+class _PortailCard extends StatelessWidget {
+  const _PortailCard({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      elevation: 4,
+      child: InkWell(
+        onTap: () async {
+          String cookie = await getSavedCookiePortail();
+          print(cookie);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PortailWebView(cookie: cookie)),
+          );
+        },
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              child: Image.asset(
+                'assets/img/logo_emse.png',
+                fit: BoxFit.scaleDown,
+              ),
+            ),
+            Text(
+              "Portail",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[700],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /// [Card] responsible for the Promethee App.
 class _PrometheeCard extends StatelessWidget {
   const _PrometheeCard({Key key}) : super(key: key);
@@ -234,12 +285,11 @@ class _PrometheeCard extends StatelessWidget {
       child: InkWell(
         highlightColor: Color(0xa0000000),
         splashColor: Colors.black,
-        // onTap: () => Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (context) => PrometheeWebView()),
-        //     ),
-        onTap: () => _launchURL('https://promethee.emse.fr/'),
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PrometheeWebView()),
+            ),
+        // onTap: () => _launchURL('https://promethee.emse.fr/'),
         child: Opacity(
           opacity: 0.9,
           child: Image.asset(
@@ -262,11 +312,11 @@ class _SogoCard extends StatelessWidget {
       color: Colors.lightGreen[100],
       elevation: 4,
       child: InkWell(
-        // onTap: () => Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => SogoWebView()),
-        //     ),
-        onTap: () => _launchURL('https://sogo.emse.fr/'),
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SogoWebView()),
+            ),
+        // onTap: () => _launchURL('https://sogo.emse.fr/'),
         child: Image.asset('assets/img/mail.png'),
       ),
     );
@@ -282,7 +332,13 @@ class _WikiMinitelCard extends StatelessWidget {
       color: Colors.green,
       elevation: 4,
       child: InkWell(
-        onTap: () => _launchURL('http://minitel.emse.fr/wiki/Wiki-user'),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MinitelWebView()),
+          );
+        },
+        // onTap: () => _launchURL('http://minitel.emse.fr/wiki/Wiki-user'),
         child: Image.asset(
           'assets/img/logo_minitel.png',
           fit: BoxFit.scaleDown,

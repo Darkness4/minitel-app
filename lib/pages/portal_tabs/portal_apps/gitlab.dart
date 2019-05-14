@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class GitlabWebView extends StatelessWidget {
   const GitlabWebView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WebviewScaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: const Text("Gitlab EMSE"),
       ),
-      body: const WebView(
-        initialUrl: 'https://gitlab.emse.fr/',
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+      url: 'https://gitlab.emse.fr/',
     );
   }
 }

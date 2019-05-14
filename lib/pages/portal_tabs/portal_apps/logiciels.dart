@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class LogicielsWebView extends StatelessWidget {
   const LogicielsWebView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WebviewScaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: const Text("Logiciels"),
       ),
-      body: const WebView(
-        initialUrl: 'http://edusoft.emse.fr/',
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+      url: 'http://edusoft.emse.fr/',
     );
   }
 }

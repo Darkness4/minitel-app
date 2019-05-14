@@ -57,15 +57,15 @@ class MainDrawer extends StatelessWidget {
                 if (ModalRoute.of(context).settings.name != '/calendar')
                   Navigator.pushReplacementNamed(context, '/calendar');
               }),
-          ListTile(
-              title: Text("Maps"),
-              leading: const Icon(Icons.map),
-              trailing: const Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/maps')
-                  Navigator.pushReplacementNamed(context, '/maps');
-              }),
+          // ListTile(
+          //     title: Text("Maps"),
+          //     leading: const Icon(Icons.map),
+          //     trailing: const Icon(Icons.arrow_forward),
+          //     onTap: () {
+          //       Navigator.pop(context); // Close Drawer
+          //       if (ModalRoute.of(context).settings.name != '/maps')
+          //         Navigator.pushReplacementNamed(context, '/maps');
+          //     }),
           Divider(),
           Container(
             color: Colors.red,
