@@ -14,6 +14,9 @@
 ![Sogo Screenshot](./docs/screenshots/sogo.png)
 ![Diagnose Screenshot](./docs/screenshots/diagnose.png)
 ![Reporting Screenshot](./docs/screenshots/reporting.png)
+![Documentation Screenshot](./docs/screenshots/documentation.png)
+![News Screenshot](./docs/screenshots/news.png)
+![Calendar Screenshot](./docs/screenshots/calendar.png)
 
 ## Features
 
