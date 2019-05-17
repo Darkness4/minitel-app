@@ -25,7 +25,8 @@ Future<String> bypassCAS(
 
   try {
     // GET ICS
-    HttpClientRequest request = await client.postUrl(Uri.parse(referee));
+    HttpClientRequest request = await client.getUrl(Uri.parse(referee));
+    request.followRedirects = false;
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
     var phpSessionIDreferee = response.headers.value('set-cookie');
@@ -66,8 +67,9 @@ Future<String> bypassCAS(
     if (location == null) throw "Error : Bad login";
 
     // GET CAS
-    request = await client.postUrl(Uri.parse(location));
+    request = await client.getUrl(Uri.parse(location));
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    request.followRedirects = false;
     request.headers
         .set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDreferee");
     response = await request.close();
