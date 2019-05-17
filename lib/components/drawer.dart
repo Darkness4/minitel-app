@@ -16,7 +16,7 @@ class MainDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 SizedBox(
-                  child: Image.asset("assets/img/logo_minitel.png"),
+                  child: Image.asset("assets/img/logo_minitel_white.png"),
                   height: 75,
                 ),
                 Text(

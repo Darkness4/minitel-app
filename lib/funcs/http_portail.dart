@@ -52,36 +52,41 @@ Future<String> getPortailCookie({String username, String password}) async {
     temp = response.headers['set-cookie'].toString();
 
     /// AGIMUS=Value
-    var agimus;
+    String agimus;
     try {
-      agimus = RegExp(r'AGIMUS=([^;]*);').firstMatch(temp).group(0);
+      agimus = RegExp(r'AGIMUS=([^;]*)').firstMatch(temp).group(0);
     } catch (e) {
       throw "AGIMUS not found. Maybe bad username or password.";
     }
 
     var location = response.headers.value('location');
 
-    request = await client.postUrl(Uri.parse(location));
+    request = await client.getUrl(Uri.parse(location));
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     request.headers.set(HttpHeaders.cookieHeader, "$agimus");
+    request.followRedirects = false;
     response = await request.close();
 
     temp = await response.transform(Utf8Decoder()).join();
 
     temp = response.headers['set-cookie'].toString();
+    print(temp);
 
-    var phpSessID = RegExp(r'PHPSESSID=ST([^;]*);').firstMatch(temp).group(0);
+    var phpSessID = RegExp(r'PHPSESSID=ST([^;]*)').firstMatch(temp).group(0);
 
-    location = response.headers.value('location');
+    // location = response.headers.value('location');
 
     // request = await client.getUrl(Uri.parse(location));
     // request.headers.removeAll(HttpHeaders.contentLengthHeader);
     // request.headers.set(HttpHeaders.cookieHeader, "$agimus $phpSessID");
+    // request.followRedirects = false;
     // response = await request.close();
 
-    status = "$agimus $phpSessID";
+    status = "$agimus; $phpSessID";
+    print(status);
   } catch (e) {
     status = e.toString();
+    print(status);
   }
 
   return status;

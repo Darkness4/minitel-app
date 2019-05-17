@@ -76,7 +76,6 @@ class DiagnoseTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       child: Scrollbar(
         child: SingleChildScrollView(
           child: Column(

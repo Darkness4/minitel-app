@@ -29,7 +29,7 @@ Future<String> bypassCAS(
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
     var phpSessionIDreferee = response.headers.value('set-cookie');
-    print("Look for PHPSESSID $phpSessionIDreferee");
+    // print("Look for PHPSESSID $phpSessionIDreferee");
     phpSessionIDreferee =
         RegExp(r'PHPSESSID=([^;]*);').firstMatch(phpSessionIDreferee).group(1);
 
@@ -43,7 +43,7 @@ Future<String> bypassCAS(
     lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(lt).group(1);
 
     var jSessionID = response.headers.value('set-cookie');
-    print("Look for JSESSIONID $jSessionID");
+    // print("Look for JSESSIONID $jSessionID");
     jSessionID = RegExp(r'JSESSIONID=([^;]*);').firstMatch(jSessionID).group(1);
 
     // POST CAS
@@ -60,9 +60,9 @@ Future<String> bypassCAS(
     request.write(data);
     response = await request.close();
 
-    print("Look for location: ${response.headers}");
+    // print("Look for location: ${response.headers}");
     var location = response.headers.value('location');
-    print("Location: $location");
+    // print("Location: $location");
     if (location == null) throw "Error : Bad login";
 
     // GET CAS
@@ -73,7 +73,7 @@ Future<String> bypassCAS(
     response = await request.close();
 
     var phpSessionIDCAS = response.headers.value("set-cookie");
-    print("Look for PHPSESSID $phpSessionIDCAS");
+    // print("Look for PHPSESSID $phpSessionIDCAS");
     phpSessionIDCAS =
         RegExp(r'PHPSESSID=([^;]*);').firstMatch(phpSessionIDCAS).group(1);
 

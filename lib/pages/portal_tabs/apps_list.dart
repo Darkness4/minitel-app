@@ -18,34 +18,23 @@ class AppsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topRight,
-          colors: [
-            const Color(0xff89f7fe),
-            const Color(0xff66a6ff)
-          ], // whitish to gray
-        ),
-      ),
-      child: Scrollbar(
-        child: GridView.count(
-          padding: const EdgeInsets.all(10),
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          crossAxisCount: 2,
-          children: <Widget>[
-            const _SogoCard(),
-            const _CampusCard(),
-            const _PrometheeCard(),
-            const _EduSoftCard(),
-            const _GitlabEMSECard(),
-            const _AnnuaireCard(),
-            const _ImprimanteCard(),
-            const _WikiMinitelCard(),
-            const _PortailCard(),
-          ],
-        ),
+    return Scrollbar(
+      child: GridView.count(
+        padding: const EdgeInsets.all(10),
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        crossAxisCount: 2,
+        children: <Widget>[
+          const _SogoCard(),
+          const _CampusCard(),
+          const _PrometheeCard(),
+          const _EduSoftCard(),
+          const _GitlabEMSECard(),
+          const _AnnuaireCard(),
+          const _ImprimanteCard(),
+          const _WikiMinitelCard(),
+          const _PortailCard(),
+        ],
       ),
     );
   }
@@ -60,10 +49,24 @@ class _AnnuaireCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AnnuaireWebView()),
+        onTap: () async {
+          // String cookie = await getSavedCookiePortail();
+          // print(cookie);
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => AnnuaireWebView(
+          //           cookie: cookie,
+          //         ),
+          //   ),
+          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AnnuaireWebView(),
             ),
+          );
+        },
         // onTap: () => _launchURL('http://annuaire.emse.fr/'),
         child: LayoutBuilder(
           builder: (context, constraint) => Column(
@@ -105,14 +108,31 @@ class _CampusCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CampusWebView(
-                    cookie: cookie,
-                  ),
+              builder: (context) => CampusWebView(cookie: cookie),
             ),
           );
         },
         // onTap: () => _launchURL('https://campus.emse.fr/'),
-        child: Image.asset('assets/img/moodle.png'),
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              child: Center(
+                child: Image.asset('assets/img/moodle.png'),
+              ),
+              flex: 3,
+            ),
+            Flexible(
+              child: Text(
+                "Campus",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -222,7 +242,7 @@ class _ImprimanteCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[700],
+                      color: Colors.black54,
                     ),
                   )
                 ],
@@ -264,7 +284,7 @@ class _PortailCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: Colors.grey[700],
+                color: Colors.black54,
               ),
             )
           ],
@@ -309,7 +329,6 @@ class _SogoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.lightGreen[100],
       elevation: 4,
       child: InkWell(
         onTap: () => Navigator.push(
@@ -329,7 +348,6 @@ class _WikiMinitelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.green,
       elevation: 4,
       child: InkWell(
         onTap: () {
@@ -339,9 +357,23 @@ class _WikiMinitelCard extends StatelessWidget {
           );
         },
         // onTap: () => _launchURL('http://minitel.emse.fr/wiki/Wiki-user'),
-        child: Image.asset(
-          'assets/img/logo_minitel.png',
-          fit: BoxFit.scaleDown,
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              child: Image.asset(
+                'assets/img/logo_minitel.png',
+                fit: BoxFit.scaleDown,
+              ),
+            ),
+            Text(
+              "Wiki",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.black54,
+              ),
+            ),
+          ],
         ),
       ),
     );
