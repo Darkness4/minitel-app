@@ -21,7 +21,7 @@ Future<String> getCampusCookie({String username, String password}) async {
   try {
     HttpClientRequest request =
         await client.getUrl(Uri.parse("https://campus.emse.fr"));
-    var host = request.headers[HttpHeaders.hostHeader];
+    // var host = request.headers[HttpHeaders.hostHeader];
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
 
@@ -31,7 +31,7 @@ Future<String> getCampusCookie({String username, String password}) async {
     var moodleSession =
         RegExp(r'MoodleSession([^;]*);').firstMatch(temp).group(0);
 
-    print("$host:\n$moodleSession");
+    // print("$host:\n$moodleSession");
 
     request = await client.getUrl(Uri.parse(
         "https://campus.emse.fr/Shibboleth.sso/Login?entityID=https%3A%2F%2Fidp.emse.fr%2Fidp%2Fshibboleth&target=https%3A%2F%2Fcampus.emse.fr%2Fauth%2Fshibboleth%2Findex.php"));
@@ -40,7 +40,7 @@ Future<String> getCampusCookie({String username, String password}) async {
     //     .set(HttpHeaders.refererHeader, "https://campus.emse.fr/login/index.php");
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
 
-    host = request.headers[HttpHeaders.hostHeader];
+    // host = request.headers[HttpHeaders.hostHeader];
 
     response = await request.close();
 
@@ -55,14 +55,14 @@ Future<String> getCampusCookie({String username, String password}) async {
     temp = response.headers['set-cookie'].toString();
 
     /// JSESSIONID=[Value]
-    var jSessionIDCampus =
-        RegExp(r'JSESSIONID=([^;]*);').firstMatch(temp).group(1);
+    // var jSessionIDCampus =
+    //     RegExp(r'JSESSIONID=([^;]*);').firstMatch(temp).group(1);
 
     /// JSESSIONID=[Value]
-    var jSessionIDCAS =
-        RegExp(r'jsessionid%3D([^%]*)%').firstMatch(action).group(1);
+    // var jSessionIDCAS =
+    //     RegExp(r'jsessionid%3D([^%]*)%').firstMatch(action).group(1);
 
-    print("$host:\n$lt\n$action\n$jSessionIDCampus\n$jSessionIDCAS\n");
+    // print("$host:\n$lt\n$action\n$jSessionIDCampus\n$jSessionIDCAS\n");
 
     request = await client.postUrl(Uri.parse("https://cas.emse.fr$action"));
     request.headers.contentType =
@@ -70,7 +70,7 @@ Future<String> getCampusCookie({String username, String password}) async {
     var data =
         "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
     request.headers.contentLength = data.length;
-    host = request.headers[HttpHeaders.hostHeader];
+    // host = request.headers[HttpHeaders.hostHeader];
     request.write(data);
     response = await request.close();
 
@@ -86,13 +86,13 @@ Future<String> getCampusCookie({String username, String password}) async {
     var location = response.headers.value('location');
 
     /// jSessionIDIDP=[Value]
-    var jSessionIDIDP =
-        RegExp(r'jsessionid=([^?]*)?').firstMatch(location).group(1);
+    // var jSessionIDIDP =
+    //     RegExp(r'jsessionid=([^?]*)?').firstMatch(location).group(1);
 
-    print("$host:\n$agimus\n$location\n$jSessionIDIDP\n");
+    // print("$host:\n$agimus\n$location\n$jSessionIDIDP\n");
 
     request = await client.getUrl(Uri.parse(location));
-    host = request.headers[HttpHeaders.hostHeader];
+    // host = request.headers[HttpHeaders.hostHeader];
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     request.headers.set(HttpHeaders.cookieHeader, "$agimus");
     // request.headers.set(HttpHeaders.refererHeader, "https://cas.emse.fr$action");
@@ -107,7 +107,7 @@ Future<String> getCampusCookie({String username, String password}) async {
     var samlReponse =
         RegExp(r'name="SAMLResponse" value="(.*)"/>').firstMatch(temp).group(1);
 
-    print("$host:\n$relayState\n${samlReponse.substring(0, 10)}\n");
+    // print("$host:\n$relayState\n${samlReponse.substring(0, 10)}\n");
 
     request = await client
         .postUrl(Uri.parse("https://campus.emse.fr/Shibboleth.sso/SAML2/POST"));
@@ -120,14 +120,14 @@ Future<String> getCampusCookie({String username, String password}) async {
         "RelayState=${Uri.encodeQueryComponent(relayState)}&SAMLResponse=${Uri.encodeQueryComponent(samlReponse)}";
     request.headers.contentLength = data.length;
     request.write(data);
-    host = request.headers[HttpHeaders.hostHeader];
+    // host = request.headers[HttpHeaders.hostHeader];
     response = await request.close();
 
     temp = response.headers['set-cookie'].toString();
     var shibsession = RegExp(r'_shibsession([^;]*);').firstMatch(temp).group(0);
     location = response.headers.value('location');
 
-    print("$host:\n$shibsession\n$location\n");
+    // print("$host:\n$shibsession\n$location\n");
 
     request = await client.getUrl(Uri.parse(location));
     request.headers
@@ -136,17 +136,17 @@ Future<String> getCampusCookie({String username, String password}) async {
     // request.headers.set(HttpHeaders.refererHeader,
     //     "https://campus.emse.fr/Shibboleth.sso/SAML2/POST");
 
-    host = request.headers[HttpHeaders.hostHeader];
+    // host = request.headers[HttpHeaders.hostHeader];
     response = await request.close();
 
     temp = response.headers['set-cookie'].toString();
 
     /// MoodleSession=Value
     moodleSession = RegExp(r'MoodleSession([^;]*);').firstMatch(temp).group(0);
-    print("$host:\n$moodleSession\n");
+    // print("$host:\n$moodleSession\n");
 
     request = await client.getUrl(Uri.parse("https://campus.emse.fr"));
-    host = request.headers[HttpHeaders.hostHeader];
+    // host = request.headers[HttpHeaders.hostHeader];
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     request.headers
         .set(HttpHeaders.cookieHeader, "$agimus $shibsession $moodleSession");

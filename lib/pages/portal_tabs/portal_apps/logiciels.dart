@@ -11,7 +11,7 @@ class LogicielsWebView extends StatelessWidget {
         backgroundColor: Colors.blue,
         title: const Text("Logiciels"),
       ),
-      url: 'http://edusoft.emse.fr/',
+      url: 'https://vpnssl.emse.fr/,DanaInfo=edusoft.emse.fr',
     );
   }
 }

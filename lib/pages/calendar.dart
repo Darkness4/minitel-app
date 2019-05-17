@@ -156,13 +156,11 @@ class CalendarPageState extends State<CalendarPage> {
           builder: (BuildContext context, double stuckAmount) {
             stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 0.0),
               child: Material(
                 elevation: stuckAmount * 10,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(stuckAmount * 100)),
-                color: Color.lerp(
-                    Colors.transparent, colorPalette[dt.month], stuckAmount),
+                color: Color.lerp(Colors.transparent,
+                    colorPalette[dt.month].withOpacity(0.9), stuckAmount),
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
@@ -200,7 +198,7 @@ class CalendarPageState extends State<CalendarPage> {
         title: Text(widget.title),
       ),
       body: Container(
-        color: Colors.blueAccent,
+        color: Colors.white,
         child: Center(
           child: FutureBuilder(
             future: _listEventCards,
@@ -391,47 +389,50 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: _cardColor,
-      elevation: (_event["SUMMARY"].toLowerCase().contains("sport") ||
-              _event["SUMMARY"].toLowerCase().contains("vacance") ||
-              _event["SUMMARY"].toLowerCase().contains("férié"))
-          ? 0
-          : 4,
-      child: Container(
-        padding: const EdgeInsets.all(4.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              _event["SUMMARY"],
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              _event["DESCRIPTION"],
-              style: const TextStyle(height: 1.4),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "${_event["LOCATION"] != "" ? '➡' : ''} ${_event["LOCATION"]} ",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-                fontSize: 16,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Card(
+        color: _cardColor,
+        elevation: (_event["SUMMARY"].toLowerCase().contains("sport") ||
+                _event["SUMMARY"].toLowerCase().contains("vacance") ||
+                _event["SUMMARY"].toLowerCase().contains("férié"))
+            ? 0
+            : 4,
+        child: Container(
+          padding: const EdgeInsets.all(4.0),
+          child: Column(
+            children: <Widget>[
+              Text(
+                _event["SUMMARY"],
+                style: const TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
-              " - "
-              "${DateFormat.Hm().format(DateTime.parse(_event["DTEND"]))}",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+              Text(
+                _event["DESCRIPTION"],
+                style: const TextStyle(height: 1.4),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+              Text(
+                "${_event["LOCATION"] != "" ? '➡' : ''} ${_event["LOCATION"]} ",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
+                " - "
+                "${DateFormat.Hm().format(DateTime.parse(_event["DTEND"]))}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );

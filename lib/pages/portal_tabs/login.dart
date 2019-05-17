@@ -40,17 +40,6 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          decoration: const BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topRight,
-              colors: [
-                const Color(0xff89f7fe),
-                const Color(0xff66a6ff)
-              ], // whitish to gray
-            ),
-          ),
-        ),
         SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -140,7 +129,7 @@ class LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: RaisedButton(
-                    color: Colors.blueAccent,
+                    color: Color(0xff087f23),
                     elevation: 10.0,
                     onPressed: () {
                       final snackBar = SnackBar(content: Text('Requested'));

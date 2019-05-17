@@ -67,12 +67,12 @@ class MyApp extends StatelessWidget {
       },
       supportedLocales: [const Locale('fr', 'FR')],
       theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
           fontFamily: 'NotoSans',
           textTheme: TextTheme(
             body1: TextStyle(
               height: 1.2,
-              color: Colors.black54,
+              color: Colors.black87,
             ),
             body2: TextStyle(
               fontWeight: FontWeight.bold,
