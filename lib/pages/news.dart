@@ -19,15 +19,13 @@ class NewsPageState extends State<NewsPage> {
       appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Scrollbar(
-          child: SingleChildScrollView(
-            child: FutureBuilder(
-              future: _generateFeedCard(
-                  "https://github.com/Darkness4/minitel-app/releases.atom"),
-              builder: (BuildContext context, AsyncSnapshot snapshot) =>
-                  snapshot.hasData
-                      ? Column(children: snapshot.data)
-                      : const CircularProgressIndicator(),
-            ),
+          child: FutureBuilder(
+            future: _generateFeedCard(
+                "https://github.com/Darkness4/minitel-app/releases.atom"),
+            builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                snapshot.hasData
+                    ? ListView(children: snapshot.data)
+                    : const CircularProgressIndicator(),
           ),
         ),
       ),
