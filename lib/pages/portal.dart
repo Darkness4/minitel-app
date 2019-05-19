@@ -67,7 +67,7 @@ class PortalPageState extends State<PortalPage> {
                 begin: Alignment.topCenter,
                 colors: [
                   Color(0xff80e27e),
-                  Colors.green,
+                  Color(0xff087f23),
                 ],
               ),
             ),

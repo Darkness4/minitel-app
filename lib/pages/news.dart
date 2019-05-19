@@ -17,6 +17,7 @@ class NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
+      backgroundColor: Color(0xff087f23),
       body: Center(
         child: Scrollbar(
           child: FutureBuilder(

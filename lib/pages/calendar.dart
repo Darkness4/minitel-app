@@ -84,6 +84,7 @@ class CalendarPageState extends State<CalendarPage> {
     int i = 0;
     int day;
     int month;
+    await flutterLocalNotificationsPlugin.cancelAll();
 
     Future.forEach(filteredEvents, (event) async {
       DateTime dt = DateTime.parse(event["DTSTART"]);
@@ -92,7 +93,6 @@ class CalendarPageState extends State<CalendarPage> {
         i++;
         var dtstart = DateFormat.Hm().format(dt);
         var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
-        flutterLocalNotificationsPlugin.cancelAll();
         _scheduleNotification(
           id: i,
           title: event["SUMMARY"],
