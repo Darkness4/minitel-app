@@ -26,7 +26,7 @@ class NewsPageState extends State<NewsPage> {
               builder: (BuildContext context, AsyncSnapshot snapshot) =>
                   snapshot.hasData
                       ? Column(children: snapshot.data)
-                      : const Text("Loading..."),
+                      : const CircularProgressIndicator(),
             ),
           ),
         ),

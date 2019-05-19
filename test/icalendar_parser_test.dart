@@ -8,7 +8,7 @@ void main() {
   });
 
   test('parseCalendar', () async {
-    String calendar = await getCalendar(
+    Stream<String> calendar = await getCalendar(
         "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics");
     ICalendar ical = await parseCalendar(calendar);
 

@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-/// GET the .ics from url
-Future<String> getCalendar(String url) async {
-  var status = "";
+enum _Mode { None, VEVENT, VTIMEZONE, STANDARD, DAYLIGHT }
 
+/// GET the .ics from url
+Future<Stream<String>> getCalendar(String url) async {
   var client = HttpClient();
   client.badCertificateCallback = (cert, host, port) => true;
 
@@ -13,65 +13,78 @@ Future<String> getCalendar(String url) async {
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      status = await response.transform(Utf8Decoder()).join();
+      return response.transform(Utf8Decoder());
     } else
       throw Exception("HttpError: ${response.statusCode}");
-  } catch (e) {
-    status = e.toString();
-  }
+  } catch (e) {}
 
-  return status;
+  throw Exception("getCalender ends unexpectedly!");
 }
 
-///
-Future<ICalendar> parseCalendar(String calendar) async {
+Future<ICalendar> parseCalendar(Stream<String> calendar) async {
   ICalendar iCalendar = ICalendar();
-  List<List<String>> lines =
-      calendar.split("\n").map((line) => line.trim().split(":")).toList();
-  for (var i = 1; i < lines.length - 1; i++) {
-    // Inside VTIMEZONE
-    if (lines[i][0] == 'BEGIN' && lines[i][1] == 'VTIMEZONE') {
-      i++; // Skip BEGIN:VTIMEZONE
-      while (!(lines[i][0] == 'END' && lines[i][1] == 'VTIMEZONE')) {
-        // Inside STANDARD
-        if (lines[i][0] == 'BEGIN' && lines[i][1] == 'STANDARD') {
-          i++; // Skip BEGIN:STANDARD
-          while (!(lines[i][0] == 'END' && lines[i][1] == 'STANDARD')) {
-            iCalendar.timezone.standard[lines[i][0]] = lines[i][1];
-            i++;
-          }
-        }
 
-        // Inside DAYLIGHT
-        if (lines[i][0] == 'BEGIN' && lines[i][1] == 'DAYLIGHT') {
-          i++; // Skip BEGIN:DAYLIGHT
-          while (!(lines[i][0] == 'END' && lines[i][1] == 'DAYLIGHT')) {
-            iCalendar.timezone.daylight[lines[i][0]] = lines[i][1];
-            i++;
-          }
-        }
+  _Mode mode = _Mode.None;
+  Map<String, String> vEvent = {};
 
-        // Inside VTIMEZONE
-        if (lines[i][0] == "TZID") iCalendar.timezone.tzid = lines[i][1];
-        i++;
-      }
-    }
-
+  await for (var data in calendar.transform(LineSplitter())) {
+    var line = data.trim().split(":");
     // Inside a VEVENT
-    if (lines[i][0] == 'BEGIN' && lines[i][1] == 'VEVENT') {
-      Map<String, String> vEvent = {};
-      i++; // Skip BEGIN:VEVENT
-      while (!(lines[i][0] == 'END' && lines[i][1] == 'VEVENT')) {
-        vEvent[lines[i][0]] = lines[i][1];
-        i++;
-      }
+    if (line[0] == 'BEGIN' && line[1] == 'VEVENT') {
+      vEvent = {};
+      mode = _Mode.VEVENT;
+      continue; // Skip BEGIN:VEVENT
+    }
+    if (line[0] == 'END' && line[1] == 'VEVENT') {
       iCalendar.events.add(vEvent);
+      mode = _Mode.None;
+      continue; // Skip END:VEVENT
+    }
+    if (line[0] == 'BEGIN' && line[1] == 'VTIMEZONE') {
+      mode = _Mode.VTIMEZONE;
+      continue; // Skip BEGIN:VTIMEZONE
+    }
+    if (line[0] == 'END' && line[1] == 'VTIMEZONE') {
+      mode = _Mode.None;
+      continue; // Skip END:VTIMEZONE
+    }
+    if (line[0] == 'BEGIN' && line[1] == 'STANDARD') {
+      mode = _Mode.STANDARD;
+      continue; // Skip BEGIN:STANDARD
+    }
+    if (line[0] == 'END' && line[1] == 'STANDARD') {
+      mode = _Mode.VTIMEZONE;
+      continue; // Skip END:STANDARD
+    }
+    if (line[0] == 'BEGIN' && line[1] == 'DAYLIGHT') {
+      mode = _Mode.DAYLIGHT;
+      continue; // Skip BEGIN:DAYLIGHT
+    }
+    if (line[0] == 'END' && line[1] == 'DAYLIGHT') {
+      mode = _Mode.VTIMEZONE;
+      continue; // Skip END:DAYLIGHT
     }
 
-    // Inside VCALENDAR
-    if (lines[i][0] == "VERSION") iCalendar.version = lines[i][1];
-    if (lines[i][0] == "PRODID") iCalendar.prodID = lines[i][1];
-    if (lines[i][0] == "CALSCALE") iCalendar.calscale = lines[i][1];
+    switch (mode) {
+      case _Mode.VEVENT:
+        vEvent[line[0]] = line[1];
+        break;
+      case _Mode.VTIMEZONE:
+        if (line[0] == "TZID") iCalendar.timezone.tzid = line[1];
+        break;
+      case _Mode.STANDARD:
+        iCalendar.timezone.standard[line[0]] = line[1];
+        break;
+      case _Mode.DAYLIGHT:
+        iCalendar.timezone.daylight[line[0]] = line[1];
+        break;
+      case _Mode.None:
+        if (line[0] == "VERSION") iCalendar.version = line[1];
+        if (line[0] == "PRODID") iCalendar.prodID = line[1];
+        if (line[0] == "CALSCALE") iCalendar.calscale = line[1];
+        break;
+      default:
+    }
   }
 
   return iCalendar;

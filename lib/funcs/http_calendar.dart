@@ -40,7 +40,7 @@ Future<String> bypassCAS(
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     response = await request.close();
 
-    var lt = await response.transform(Utf8Decoder()).join();
+    var lt = await response.transform(utf8.decoder).join();
     lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(lt).group(1);
 
     var jSessionID = response.headers.value('set-cookie');
@@ -98,7 +98,7 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     request.headers.set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDCAS");
     HttpClientResponse response = await request.close();
-    var body = await response.transform(Utf8Decoder()).join();
+    var body = await response.transform(utf8.decoder).join();
     status = RegExp(r'https(.*)ics').stringMatch(body);
   } catch (e) {
     status = e.toString();
@@ -114,13 +114,13 @@ Future<String> getSavedCalendarURL() async {
   return contents;
 }
 
-Future<String> readCalendar() async {
+Future<Stream<String>> readCalendar() async {
   final file = await _calendar;
   if (!(await file.exists()))
     throw Exception("File calendar.ics do not exists");
 
   // Read the file
-  String contents = await file.readAsString();
+  var contents = file.openRead().transform(utf8.decoder);
 
   return contents;
 }
@@ -145,7 +145,9 @@ Future<bool> saveCalendarFromLogin({String username, String password}) async {
 
   var iCalendar = "";
 
-  iCalendar = await getCalendar(icsUrl);
+  var calendarStream = await getCalendar(icsUrl);
+
+  iCalendar = await calendarStream.join();
   await file.writeAsString(iCalendar);
 
   return true;
@@ -156,7 +158,9 @@ Future<void> saveCalendarFromUrl(String url) async {
 
   var iCalendar = "";
 
-  iCalendar = await getCalendar(url);
+  var calendarStream = await getCalendar(url);
+
+  iCalendar = await calendarStream.join();
   if (!iCalendar.contains("VCALENDAR")) throw "Error: This is not a calendar";
   file.writeAsString(iCalendar);
 }
