@@ -35,7 +35,7 @@ class CalendarPageState extends State<CalendarPage> {
   final iOSPlatformChannelSpecifics = IOSNotificationDetails();
 
   Future<List<Widget>> get _listEventCards async {
-    String calendar = "";
+    Stream<String> calendar;
 
     // Refresh the calendar if possible
     try {
@@ -81,33 +81,35 @@ class CalendarPageState extends State<CalendarPage> {
     filteredEvents.sort((event1, event2) => DateTime.parse(event1["DTSTART"])
         .compareTo(DateTime.parse(event2["DTSTART"])));
 
-    for (var i = 0; i < filteredEvents.length; i++) {
-      if (DateTime.parse(filteredEvents[i]["DTSTART"]).isBefore(DateTime.now()
-          .add(const Duration(days: 15)))) // Notifications only work for x days
-        _scheduleNotification(
-          id: i,
-          title: filteredEvents[i]["SUMMARY"],
-          description: "${filteredEvents[i]["LOCATION"]}\n"
-              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTSTART"]))}"
-              " - "
-              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTEND"]))}",
-          scheduledNotificationDateTime:
-              DateTime.parse(filteredEvents[i]["DTSTART"])
-                  .subtract(const Duration(minutes: 10)),
-          payload: "${filteredEvents[i]["SUMMARY"]};"
-              "${filteredEvents[i]["DESCRIPTION"]}\n"
-              "${filteredEvents[i]["LOCATION"]}\n"
-              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTSTART"]))}"
-              " - "
-              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTEND"]))}",
-        );
-    }
-
+    int i = 0;
     int day;
     int month;
 
     Future.forEach(filteredEvents, (event) async {
       DateTime dt = DateTime.parse(event["DTSTART"]);
+
+      if (dt.isBefore(DateTime.now().add(const Duration(days: 14)))) {
+        i++;
+        var dtstart = DateFormat.Hm().format(dt);
+        var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
+        flutterLocalNotificationsPlugin.cancelAll();
+        _scheduleNotification(
+          id: i,
+          title: event["SUMMARY"],
+          description: "${event["LOCATION"]}\n"
+              "$dtstart"
+              " - "
+              "$dtend",
+          scheduledNotificationDateTime:
+              dt.subtract(const Duration(minutes: 10)),
+          payload: "${event["SUMMARY"]};"
+              "${event["DESCRIPTION"]}\n"
+              "${event["LOCATION"]}\n"
+              "$dtstart"
+              " - "
+              "$dtend",
+        );
+      }
 
       if (dt.month != month) {
         month = dt.month;
@@ -205,7 +207,7 @@ class CalendarPageState extends State<CalendarPage> {
             builder: (BuildContext context, AsyncSnapshot snapshot) =>
                 snapshot.hasData
                     ? Scrollbar(child: PageView(children: snapshot.data))
-                    : const Text("Loading..."),
+                    : const CircularProgressIndicator(),
           ),
         ),
       ),
@@ -335,7 +337,6 @@ class CalendarPageState extends State<CalendarPage> {
     //     "Event scheduled at ${DateFormat.yMMMMd().format(scheduledNotificationDateTime)} ${DateFormat.Hms().format(scheduledNotificationDateTime)}");
     // pendingNotificationRequests.forEach((out) => flutterLocalNotificationsPlugin.cancel(out.id));
 
-    await flutterLocalNotificationsPlugin.cancelAll();
     flutterLocalNotificationsPlugin.schedule(
       id,
       title,

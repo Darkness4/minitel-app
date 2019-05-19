@@ -237,7 +237,7 @@ class _StatusCard extends StatelessWidget {
                         case ConnectionState.none:
                         case ConnectionState.active:
                         case ConnectionState.waiting:
-                          return Text('Awaiting result...');
+                          return const CircularProgressIndicator();
                         case ConnectionState.done:
                           if (snapshot.hasError)
                             return const Icon(Icons.close, color: Colors.red);
@@ -264,7 +264,7 @@ class _StatusCard extends StatelessWidget {
                         case ConnectionState.none:
                         case ConnectionState.active:
                         case ConnectionState.waiting:
-                          return Text('Awaiting result...');
+                          return const CircularProgressIndicator();
                         case ConnectionState.done:
                           if (snapshot.hasError)
                             return const Icon(Icons.close, color: Colors.red);
@@ -291,7 +291,7 @@ class _StatusCard extends StatelessWidget {
                         case ConnectionState.none:
                         case ConnectionState.active:
                         case ConnectionState.waiting:
-                          return Text('Awaiting result...');
+                          return const CircularProgressIndicator();
                         case ConnectionState.done:
                           if (snapshot.hasError)
                             return const Icon(Icons.close, color: Colors.red);
