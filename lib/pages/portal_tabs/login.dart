@@ -128,41 +128,38 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: RaisedButton(
-                    color: Color(0xff087f23),
-                    elevation: 10.0,
-                    onPressed: () {
-                      final snackBar = SnackBar(content: Text('Requested'));
-                      Scaffold.of(context).showSnackBar(snackBar);
-                      autoLogin(
-                        _uidController.text,
-                        _pswdController.text,
-                        _selectedUrl,
-                        _timeMap[_selectedTime],
-                      ).then((status) => setState(() => _status = status));
-                      saveCalendarFromLogin(
-                        username: _uidController.text,
-                        password: _pswdController.text,
-                      ).then((status) => setState(() {}));
-                      saveCookieCampusFromLogin(
-                        username: _uidController.text,
-                        password: _pswdController.text,
-                      ).then((status) => setState(() {}));
-                      saveCookiePortailFromLogin(
-                        username: _uidController.text,
-                        password: _pswdController.text,
-                      ).then((status) => setState(() {}));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: const Text(
+                  child: Center(
+                    child: FloatingActionButton.extended(
+                      onPressed: () {
+                        final snackBar = SnackBar(content: Text('Requested'));
+                        Scaffold.of(context).showSnackBar(snackBar);
+                        autoLogin(
+                          _uidController.text,
+                          _pswdController.text,
+                          _selectedUrl,
+                          _timeMap[_selectedTime],
+                        ).then((status) => setState(() => _status = status));
+                        saveCalendarFromLogin(
+                          username: _uidController.text,
+                          password: _pswdController.text,
+                        ).then((status) => setState(() {}));
+                        saveCookieCampusFromLogin(
+                          username: _uidController.text,
+                          password: _pswdController.text,
+                        ).then((status) => setState(() {}));
+                        saveCookiePortailFromLogin(
+                          username: _uidController.text,
+                          password: _pswdController.text,
+                        ).then((status) => setState(() {}));
+                      },
+                      label: const Text(
                         "Se connecter",
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 30,
                         ),
                       ),
+                      icon: Icon(Icons.arrow_forward),
                     ),
                   ),
                 ),
