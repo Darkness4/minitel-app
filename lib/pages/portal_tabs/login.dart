@@ -56,25 +56,27 @@ class LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.all(20),
                     child: Column(
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text("Nom de domaine / IP "),
-                            DropdownButton<String>(
-                              value: _selectedUrl,
-                              items: _urlRootList
-                                  .map((String value) =>
-                                      DropdownMenuItem<String>(
-                                        child: Text(value),
-                                        value: value,
-                                      ))
-                                  .toList(),
-                              onChanged: (String selectedUrl) {
-                                _selectedUrl = selectedUrl;
-                                getStatus(_selectedUrl).then((status) =>
-                                    setState(() => _status = status));
-                              },
-                            ),
-                          ],
+                        FittedBox(
+                          child: Row(
+                            children: <Widget>[
+                              Text("Nom de domaine / IP "),
+                              DropdownButton<String>(
+                                value: _selectedUrl,
+                                items: _urlRootList
+                                    .map((String value) =>
+                                        DropdownMenuItem<String>(
+                                          child: Text(value),
+                                          value: value,
+                                        ))
+                                    .toList(),
+                                onChanged: (String selectedUrl) {
+                                  _selectedUrl = selectedUrl;
+                                  getStatus(_selectedUrl).then((status) =>
+                                      setState(() => _status = status));
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                         Row(
                           children: <Widget>[

@@ -76,14 +76,16 @@ class _AnnuaireCard extends StatelessWidget {
                     size: constraint.biggest.height - 50,
                     color: Colors.blue,
                   ),
-                  Text(
-                    "Annuaire",
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54,
+                  FittedBox(
+                    child: Text(
+                      "Annuaire",
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
         ),
@@ -122,12 +124,14 @@ class _CampusCard extends StatelessWidget {
               flex: 3,
             ),
             Flexible(
-              child: Text(
-                "Campus",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54,
+              child: FittedBox(
+                child: Text(
+                  "Campus",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
                 ),
               ),
             ),
@@ -175,14 +179,16 @@ class _EduSoftCard extends StatelessWidget {
                       size: constraint.biggest.height - 50,
                       color: Colors.white,
                     ),
-                    const Text(
-                      "Logiciels",
-                      style: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                    const FittedBox(
+                      child: Text(
+                        "Logiciels",
+                        style: const TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
           ),
@@ -237,14 +243,16 @@ class _ImprimanteCard extends StatelessWidget {
                     size: constraint.biggest.height - 50,
                     color: Colors.blue,
                   ),
-                  Text(
-                    "Imprimante",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54,
+                  FittedBox(
+                    child: Text(
+                      "Imprimante",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
         ),
@@ -279,12 +287,14 @@ class _PortailCard extends StatelessWidget {
                 fit: BoxFit.scaleDown,
               ),
             ),
-            Text(
-              "Portail",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.black54,
+            FittedBox(
+              child: Text(
+                "Portail",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
               ),
             )
           ],
@@ -365,12 +375,14 @@ class _WikiMinitelCard extends StatelessWidget {
                 fit: BoxFit.scaleDown,
               ),
             ),
-            Text(
-              "Wiki",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.black54,
+            FittedBox(
+              child: Text(
+                "Wiki",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
               ),
             ),
           ],
