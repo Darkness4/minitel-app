@@ -55,6 +55,7 @@ class LoginPageState extends State<LoginPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         FittedBox(
                           child: Row(
@@ -78,22 +79,24 @@ class LoginPageState extends State<LoginPage> {
                             ],
                           ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Text("Durée d\'authentification "),
-                            DropdownButton<String>(
-                              value: _selectedTime,
-                              items: _timeMap.keys
-                                  .map((String value) =>
-                                      DropdownMenuItem<String>(
-                                        child: Text(value),
-                                        value: value,
-                                      ))
-                                  .toList(),
-                              onChanged: (selectedTime) =>
-                                  setState(() => _selectedTime = selectedTime),
-                            ),
-                          ],
+                        FittedBox(
+                          child: Row(
+                            children: <Widget>[
+                              Text("Durée d\'authentification "),
+                              DropdownButton<String>(
+                                value: _selectedTime,
+                                items: _timeMap.keys
+                                    .map((String value) =>
+                                        DropdownMenuItem<String>(
+                                          child: Text(value),
+                                          value: value,
+                                        ))
+                                    .toList(),
+                                onChanged: (selectedTime) => setState(
+                                    () => _selectedTime = selectedTime),
+                              ),
+                            ],
+                          ),
                         ),
                         Form(
                           key: _formKey,
