@@ -154,36 +154,38 @@ class CalendarPageState extends State<CalendarPage> {
       if (dt.day != day) {
         day = dt.day;
         dailyEvents = [];
-        monthlyWidgets.add(StickyHeaderBuilder(
-          builder: (BuildContext context, double stuckAmount) {
-            stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0.0),
-              child: Material(
-                elevation: stuckAmount * 10,
-                color: Color.lerp(Colors.transparent,
-                    colorPalette[dt.month].withOpacity(0.9), stuckAmount),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      "${DateFormat.MMMMEEEEd("fr_FR").format(dt)}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline
-                          .apply(color: Colors.white),
+        monthlyWidgets.add(
+          StickyHeaderBuilder(
+            builder: (BuildContext context, double stuckAmount) {
+              stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                child: Material(
+                  elevation: stuckAmount * 10,
+                  color: Color.lerp(Colors.transparent,
+                      colorPalette[dt.month].withOpacity(0.9), stuckAmount),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        "${DateFormat.MMMMEEEEd("fr_FR").format(dt)}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline
+                            .apply(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
-          content: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: dailyEvents,
+              );
+            },
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: dailyEvents,
+            ),
           ),
-        ));
+        );
       }
 
       // New Event
@@ -200,7 +202,7 @@ class CalendarPageState extends State<CalendarPage> {
         title: Text(widget.title),
       ),
       body: Container(
-        color: Colors.white,
+        color: Colors.green,
         child: Center(
           child: FutureBuilder(
             future: _listEventCards,
@@ -302,23 +304,22 @@ class CalendarPageState extends State<CalendarPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: RaisedButton(
-              color: Colors.red,
-              elevation: 10.0,
-              onPressed: () => saveCalendarFromLogin(
-                    username: _uidController.text,
-                    password: _pswdController.text,
-                  ).then((out) => setState(() {})),
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: const Text(
+            child: Center(
+              child: FloatingActionButton.extended(
+                backgroundColor: Colors.red,
+                elevation: 10.0,
+                onPressed: () => saveCalendarFromLogin(
+                      username: _uidController.text,
+                      password: _pswdController.text,
+                    ).then((out) => setState(() {})),
+                label: const Text(
                   "Se connecter",
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
                   ),
                 ),
+                icon: Icon(Icons.arrow_forward),
               ),
             ),
           ),
