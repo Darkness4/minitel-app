@@ -98,14 +98,28 @@ class MainDrawer extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, '/docs');
               }),
           ListTile(
-              title: Text("A propos..."),
-              leading: const Icon(Icons.info),
+            title: Text("A propos..."),
+            leading: const Icon(Icons.info),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () {
+              Navigator.pop(context); // Close Drawer
+              if (ModalRoute.of(context).settings.name != '/about')
+                Navigator.pushNamed(context, '/about');
+            },
+          ),
+          Container(
+            color: Colors.lightGreen[100],
+            child: ListTile(
+              title: Text("Alpha Feedback"),
+              leading: const Icon(Icons.chat),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/about')
-                  Navigator.pushNamed(context, '/about');
-              }),
+                if (ModalRoute.of(context).settings.name != '/feedback')
+                  Navigator.pushNamed(context, '/feedback');
+              },
+            ),
+          ),
         ],
       ),
     );

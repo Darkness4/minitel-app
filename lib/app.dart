@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'components/page_animation.dart';
-import 'pages/about.dart';
-import 'pages/calendar.dart';
-import 'pages/docs.dart';
-// import 'pages/maps.dart';
-import 'pages/news.dart';
-import 'pages/portal.dart';
-import 'pages/reporting.dart';
+import 'router.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -20,51 +13,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       title: "Minitel Toolbox",
-      onGenerateRoute: (RouteSettings settings) {
-        switch (settings.name) {
-          case '/':
-            return FadeRoute(
-              builder: (BuildContext context) =>
-                  PortalPage(title: "Authentification"),
-              settings: settings,
-            );
-          case '/reporting':
-            return FadeRoute(
-              builder: (BuildContext context) =>
-                  ReportingPage(title: "Signaler Minitel"),
-              settings: settings,
-            );
-          case '/docs':
-            return FadeRoute(
-              builder: (BuildContext context) =>
-                  DocumentationPage(title: "Documentation"),
-              settings: settings,
-            );
-          case '/news':
-            return FadeRoute(
-              builder: (BuildContext context) => NewsPage(title: "Nouveautés"),
-              settings: settings,
-            );
-          // case '/maps':
-          //   return FadeRoute(
-          //     builder: (BuildContext context) => MapsPage(title: "Maps"),
-          //     settings: settings,
-          //   );
-          case '/calendar':
-            return FadeRoute(
-              builder: (BuildContext context) =>
-                  CalendarPage(title: "Calendrier"),
-              settings: settings,
-            );
-          case '/about':
-            return MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  AboutPage(title: "A propos de l'application"),
-              settings: settings,
-            );
-        }
-        assert(false);
-      },
+      onGenerateRoute: Router.generateRoute,
       supportedLocales: [const Locale('fr', 'FR')],
       theme: ThemeData(
           primarySwatch: Colors.green,
