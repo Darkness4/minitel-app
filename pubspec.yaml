@@ -7,7 +7,7 @@ description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un W
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 0.0.4+1
+version: 0.1.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -17,14 +17,14 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  connectivity: ^0.4.3+1  # Flutter Team
+  connectivity: ^0.4.3+2  # Flutter Team
   dscript_exec: ^2.0.1  # Ravi Teja Gudapti
   share: ^0.6.1+1  # Flutter Team
   webfeed: ^0.4.2  # Wito Chandra
   url_launcher: ^5.0.2  # Flutter Team
-  # google_maps_flutter: ^0.5.13  # Flutter Team
+  # google_maps_flutter: ^0.5.15  # Flutter Team
   permission_handler: ^3.1.0  # Baseflow
-  shared_preferences: ^0.5.2+1  # Flutter Team
+  shared_preferences: ^0.5.2+2  # Flutter Team
   # webview_flutter: ^0.3.7+1  # Flutter Team
   flutter_webview_plugin: ^0.3.5  # Flutter Community
   path_provider: ^1.1.0  # Flutter Team
