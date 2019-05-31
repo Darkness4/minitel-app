@@ -258,10 +258,8 @@ class ReportingPage extends StatefulWidget {
 
 class ReportingPageState extends State<ReportingPage>
     with SingleTickerProviderStateMixin {
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
-
-  /// Control the animation of the speed dial.
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   AnimationController _animationController;
 
   var _diagnosis = Diagnosis();
@@ -506,11 +504,11 @@ class ReportingPageState extends State<ReportingPage>
 
   @override
   void initState() {
-    super.initState();
     _animationController = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin
       duration: const Duration(milliseconds: 500),
     );
+    super.initState();
   }
 
   Widget _buildReportButton(BuildContext ctxt,

@@ -3,7 +3,7 @@ import 'package:minitel_toolbox/funcs/http_version_checker.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-_launchURL(String url) async {
+void _launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {

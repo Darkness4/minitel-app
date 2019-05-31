@@ -11,7 +11,9 @@ import 'dart:io';
 /// String status = await report("Description", title: "Title");
 /// ```
 Future<String> report(String text,
-    {String title, String channel: "projet_flutter_notif"}) async {
+    {String title,
+    String channel: "projet_flutter_notif",
+    String botName: "Flutter Reporter Bot"}) async {
   var status = "";
 
   if (text != "" && title != "") {
@@ -21,7 +23,7 @@ Future<String> report(String text,
         "$text\n";
     var data = {
       'text': out,
-      'username': 'Flutter Reporter Bot',
+      'username': botName,
       'icon_url':
           'https://raw.githubusercontent.com/dart-lang/logos/master/flutter/logo%2Btext/vertical/default.png',
       'channel': channel, // Marc : DE8PA0Z1C

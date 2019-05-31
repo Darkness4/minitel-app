@@ -32,6 +32,7 @@ dependencies:
   flutter_local_notifications: ^0.7.1+1  # Michael Bui
   html: ^0.14.0+2  # Dart Team
   package_info: ^0.4.0+3  # Flutter Team
+  device_info: ^0.4.0+2  # Flutter Team
   # font_awesome_flutter: ^8.4.0  # Brian Egan
 
 dev_dependencies:
