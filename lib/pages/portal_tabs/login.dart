@@ -163,12 +163,14 @@ class LoginPageState extends State<LoginPage> {
                           password: _pswdController.text,
                         ).then((status) => setState(() {}));
                         if (rememberMe) {
-                          await prefs.setString("user", _uidController.text);
-                          await prefs.setString("pswd",
+                          prefs.setString("user", _uidController.text);
+                          prefs.setString("time", _selectedTime);
+                          prefs.setString("pswd",
                               base64.encode(utf8.encode(_pswdController.text)));
                         } else {
-                          await prefs.remove("user");
-                          await prefs.remove("pswd");
+                          prefs.remove("user");
+                          prefs.remove("time");
+                          prefs.remove("pswd");
                         }
                         // saveCookieCampusFromLogin(
                         //   username: _uidController.text,
@@ -201,6 +203,7 @@ class LoginPageState extends State<LoginPage> {
   _rememberLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _uidController.text = prefs.getString("user");
+    _selectedTime = prefs.getString("time");
     if (_uidController.text != "") {
       _pswdController.text =
           utf8.decode(base64.decode(prefs.getString("pswd")));
