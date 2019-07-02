@@ -165,7 +165,7 @@ class LoginPageState extends State<LoginPage> {
                         if (rememberMe) {
                           await prefs.setString("user", _uidController.text);
                           await prefs.setString("pswd",
-                              base64.encode(utf8.encode(_uidController.text)));
+                              base64.encode(utf8.encode(_pswdController.text)));
                         } else {
                           await prefs.remove("user");
                           await prefs.remove("pswd");
