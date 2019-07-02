@@ -10,12 +10,9 @@ class PortailWebView extends StatelessWidget {
   Widget build(BuildContext context) {
     return WebviewScaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.deepPurple,
         title: const Text("Portail"),
       ),
-      headers: <String, String>{
-        "Cookie": cookie,
-      },
       url: 'http://portail.emse.fr/',
     );
   }
