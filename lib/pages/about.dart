@@ -3,9 +3,7 @@ import 'package:minitel_toolbox/funcs/http_version_checker.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'about_pages/licence_page.dart';
-
-_launchURL(String url) async {
+void _launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -55,10 +53,33 @@ class AboutPage extends StatelessWidget {
               ListTile(
                 title: Text("Licence"),
                 subtitle: Text("License MIT"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LicencePage()),
+                onTap: () async {
+                  var packageInfo = await PackageInfo.fromPlatform();
+                  showLicensePage(
+                    context: context,
+                    applicationIcon: Flexible(
+                      child: Image.asset('assets/icon/icon.png'),
                     ),
+                    applicationLegalese: "MIT License\n\n"
+                        "Copyright (c) 2019 NGUYEN Marc\n\n"
+                        "Permission is hereby granted, free of charge, to any person obtaining a copy "
+                        "of this software and associated documentation files (the \"Software\"), to deal "
+                        "in the Software without restriction, including without limitation the rights "
+                        "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell "
+                        "copies of the Software, and to permit persons to whom the Software is "
+                        "furnished to do so, subject to the following conditions:\n\n"
+                        "The above copyright notice and this permission notice shall be included in all "
+                        "copies or substantial portions of the Software.\n\n"
+                        "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR "
+                        "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, "
+                        "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE "
+                        "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER "
+                        "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, "
+                        "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE "
+                        "SOFTWARE.",
+                    applicationVersion: packageInfo.version,
+                  );
+                },
               ),
               Divider(),
               ListTile(
@@ -90,7 +111,7 @@ class AboutPage extends StatelessWidget {
                   var actualVersion = PackageInfo.fromPlatform();
                   dynamic ensemble =
                       await Future.wait([actualVersion, latestVersion]);
-                  if (ensemble[0].version != ensemble[1]) {
+                  if (ensemble[0].version != ensemble[1])
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -115,7 +136,31 @@ class AboutPage extends StatelessWidget {
                         );
                       },
                     );
-                  }
+                  else
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                            "Il s'agit de la dernière version.",
+                          ),
+                          content: Text(
+                              "La version ${ensemble[1]} est la dernière version."),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("Close"),
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                            RaisedButton(
+                              textColor: Colors.white,
+                              child: Text("Télécharger"),
+                              onPressed: () => getLatestVersionURL()
+                                  .then((url) => _launchURL(url)),
+                            )
+                          ],
+                        );
+                      },
+                    );
                 },
               ),
               // ListTile(

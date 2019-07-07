@@ -5,7 +5,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/components/drawer.dart';
-import 'package:minitel_toolbox/funcs/http_portail.dart';
+import 'package:minitel_toolbox/funcs/http_gateway.dart';
 import 'package:minitel_toolbox/funcs/http_webhook.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share/share.dart';
@@ -258,10 +258,8 @@ class ReportingPage extends StatefulWidget {
 
 class ReportingPageState extends State<ReportingPage>
     with SingleTickerProviderStateMixin {
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
-
-  /// Control the animation of the speed dial.
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   AnimationController _animationController;
 
   var _diagnosis = Diagnosis();
@@ -351,7 +349,7 @@ class ReportingPageState extends State<ReportingPage>
                     "*Diagnosis*\n"
                     "$_report";
                 _launchURL(
-                    "mailto:minitel13120@gmail.com?subject=${_titleController.text}&body=$body");
+                    "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
               },
             ),
           ],
@@ -506,11 +504,11 @@ class ReportingPageState extends State<ReportingPage>
 
   @override
   void initState() {
-    super.initState();
     _animationController = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin
       duration: const Duration(milliseconds: 500),
     );
+    super.initState();
   }
 
   Widget _buildReportButton(BuildContext ctxt,

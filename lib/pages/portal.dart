@@ -61,33 +61,44 @@ class PortalPageState extends State<PortalPage> {
       length: 2,
       child: Scaffold(
         body: NestedScrollView(
-          body: const TabBarView(
-            children: <Widget>[
-              const LoginPage(),
-              const AppsList(),
-            ],
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                colors: [
+                  Color(0xff80e27e),
+                  Color(0xff087f23),
+                ],
+              ),
+            ),
+            child: const TabBarView(
+              children: <Widget>[
+                const LoginPage(),
+                const AppsList(),
+              ],
+            ),
           ),
           headerSliverBuilder:
               (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
-                    SliverAppBar(
-                      title: Text(widget.title),
-                      pinned: true,
-                      floating: true,
-                      forceElevated: true,
-                      bottom: const TabBar(
-                        tabs: const <Tab>[
-                          const Tab(
-                            icon: const Icon(Icons.vpn_key),
-                            text: "Login",
-                          ),
-                          const Tab(
-                            icon: const Icon(Icons.apps),
-                            text: "Apps",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+            SliverAppBar(
+              title: Text(widget.title),
+              pinned: true,
+              floating: true,
+              forceElevated: true,
+              bottom: const TabBar(
+                tabs: const <Tab>[
+                  const Tab(
+                    icon: const Icon(Icons.vpn_key),
+                    text: "Login",
+                  ),
+                  const Tab(
+                    icon: const Icon(Icons.apps),
+                    text: "Apps",
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         drawer: const MainDrawer(),
       ),

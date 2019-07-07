@@ -16,7 +16,7 @@ class MainDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 SizedBox(
-                  child: Image.asset("assets/img/logo_minitel.png"),
+                  child: Image.asset("assets/img/logo_minitel_white.png"),
                   height: 75,
                 ),
                 Text(
@@ -57,15 +57,15 @@ class MainDrawer extends StatelessWidget {
                 if (ModalRoute.of(context).settings.name != '/calendar')
                   Navigator.pushReplacementNamed(context, '/calendar');
               }),
-          ListTile(
-              title: Text("Maps"),
-              leading: const Icon(Icons.map),
-              trailing: const Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/maps')
-                  Navigator.pushReplacementNamed(context, '/maps');
-              }),
+          // ListTile(
+          //     title: Text("Maps"),
+          //     leading: const Icon(Icons.map),
+          //     trailing: const Icon(Icons.arrow_forward),
+          //     onTap: () {
+          //       Navigator.pop(context); // Close Drawer
+          //       if (ModalRoute.of(context).settings.name != '/maps')
+          //         Navigator.pushReplacementNamed(context, '/maps');
+          //     }),
           Divider(),
           Container(
             color: Colors.red,
@@ -98,14 +98,28 @@ class MainDrawer extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, '/docs');
               }),
           ListTile(
-              title: Text("A propos..."),
-              leading: const Icon(Icons.info),
+            title: Text("A propos..."),
+            leading: const Icon(Icons.info),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () {
+              Navigator.pop(context); // Close Drawer
+              if (ModalRoute.of(context).settings.name != '/about')
+                Navigator.pushNamed(context, '/about');
+            },
+          ),
+          Container(
+            color: Colors.lightGreen[100],
+            child: ListTile(
+              title: Text("Alpha Feedback"),
+              leading: const Icon(Icons.chat),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/about')
-                  Navigator.pushNamed(context, '/about');
-              }),
+                if (ModalRoute.of(context).settings.name != '/feedback')
+                  Navigator.pushNamed(context, '/feedback');
+              },
+            ),
+          ),
         ],
       ),
     );

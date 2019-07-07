@@ -27,8 +27,8 @@ class ReportTab extends StatefulWidget {
 }
 
 class ReportTabState extends State<ReportTab> {
-  final _titleFocusNode = FocusNode();
-  final _descriptionFocusNode = FocusNode();
+  final FocusNode _titleFocusNode = FocusNode();
+  final FocusNode _descriptionFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -87,13 +87,13 @@ class _ContactsCard extends StatelessWidget {
         FlatButton(
           textColor: Colors.blueAccent,
           child: Text(
-            "Mail: minitel13120@gmail.com",
+            "Mail: minitelismin@gmail.com (non recommandée)",
             style: Theme.of(context)
                 .textTheme
                 .title
                 .apply(color: Colors.blueAccent),
           ),
-          onPressed: () => _launchURL("mailto: minitel13120@gmail.com"),
+          onPressed: () => _launchURL("mailto: minitelismin@gmail.com"),
           color: Colors.lightBlue[100],
         ),
         Text(
@@ -108,10 +108,10 @@ class _ContactsCard extends StatelessWidget {
 /// This is the form needed to be filled.
 class _ReportCard extends StatelessWidget {
   final TextEditingController _titleController;
-
   final FocusNode _titleFocusNode;
   final FocusNode _descriptionFocusNode;
   final TextEditingController _descriptionController;
+
   const _ReportCard({
     Key key,
     @required TextEditingController titleController,
@@ -131,7 +131,7 @@ class _ReportCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Card(
           elevation: 4,
-          child: Container(
+          child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
               children: <Widget>[
@@ -159,6 +159,7 @@ class _ReportCard extends StatelessWidget {
                     labelText: "Description",
                     hintText: "Describe your issue.",
                   ),
+                  onSubmitted: (term) => _descriptionFocusNode.unfocus(),
                 ),
               ],
             ),

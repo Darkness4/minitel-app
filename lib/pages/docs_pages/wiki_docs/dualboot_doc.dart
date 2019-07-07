@@ -220,9 +220,11 @@ GRUB_TERMINAL=console""",
                   text:
                       "    •  Kali Linux Lite (chuis à Minitel, trop la flemme de tout télécharger et configurer)\n"
                       "    •  Terminal : ZSH + Oh-my-ZSH + Powerline10K (PurePower) avec autocomplete, syntax-highlight, tmux\n"
-                      "    •  Theme : Canta\n"
+                      "    •  Theme : Canta-dark\n"
+                      "    •  Icons : Flat-Remix\n"
                       "    •  Display Manager : LightDM\n"
-                      "    •  Windows Manager : Xfce4\n"
+                      "    •  Desktop Environnement : Xfce\n"
+                      "    •  Windows Manager : Xfwm4\n"
                       "    •  File Manager : Thunar\n",
                   style: Theme.of(context).textTheme.body1,
                 ),

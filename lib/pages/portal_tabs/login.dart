@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/funcs/http_calendar.dart';
+import 'package:minitel_toolbox/funcs/http_gateway.dart';
 import 'package:minitel_toolbox/funcs/http_portail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -28,28 +31,17 @@ class LoginPageState extends State<LoginPage> {
     '2 hours': 120,
     '3 hours': 180,
     '4 hours': 240,
-    '8 hours': 480,
+    '(8 hours)': 480,
   };
   var _status = "";
-  var _savedCalendar = false;
   var _selectedTime = '4 hours'; // Default
-  var _selectedUrl = 'fw-cgcp.emse.fr';
+  var _selectedUrl = '195.83.139.7';
+  bool rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          decoration: const BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topRight,
-              colors: [
-                const Color(0xff89f7fe),
-                const Color(0xff66a6ff)
-              ], // whitish to gray
-            ),
-          ),
-        ),
         SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -59,50 +51,54 @@ class LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 _StatusCard(
                   status: _status,
-                  savedCalendar: _savedCalendar,
                 ),
                 Card(
                   elevation: 10.0,
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text("Nom de domaine / IP "),
-                            DropdownButton<String>(
-                              value: _selectedUrl,
-                              items: _urlRootList
-                                  .map((String value) =>
-                                      DropdownMenuItem<String>(
-                                        child: Text(value),
-                                        value: value,
-                                      ))
-                                  .toList(),
-                              onChanged: (String selectedUrl) {
-                                _selectedUrl = selectedUrl;
-                                getStatus(_selectedUrl).then((status) =>
-                                    setState(() => _status = status));
-                              },
-                            ),
-                          ],
+                        FittedBox(
+                          child: Row(
+                            children: <Widget>[
+                              Text("Nom de domaine / IP "),
+                              DropdownButton<String>(
+                                value: _selectedUrl,
+                                items: _urlRootList
+                                    .map((String value) =>
+                                        DropdownMenuItem<String>(
+                                          child: Text(value),
+                                          value: value,
+                                        ))
+                                    .toList(),
+                                onChanged: (String selectedUrl) {
+                                  _selectedUrl = selectedUrl;
+                                  getStatus(_selectedUrl).then((status) =>
+                                      setState(() => _status = status));
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Text("Durée d\'authentification "),
-                            DropdownButton<String>(
-                              value: _selectedTime,
-                              items: _timeMap.keys
-                                  .map((String value) =>
-                                      DropdownMenuItem<String>(
-                                        child: Text(value),
-                                        value: value,
-                                      ))
-                                  .toList(),
-                              onChanged: (selectedTime) =>
-                                  setState(() => _selectedTime = selectedTime),
-                            ),
-                          ],
+                        FittedBox(
+                          child: Row(
+                            children: <Widget>[
+                              Text("Durée d\'authentification "),
+                              DropdownButton<String>(
+                                value: _selectedTime,
+                                items: _timeMap.keys
+                                    .map((String value) =>
+                                        DropdownMenuItem<String>(
+                                          child: Text(value),
+                                          value: value,
+                                        ))
+                                    .toList(),
+                                onChanged: (selectedTime) => setState(
+                                    () => _selectedTime = selectedTime),
+                              ),
+                            ],
+                          ),
                         ),
                         Form(
                           key: _formKey,
@@ -133,39 +129,66 @@ class LoginPageState extends State<LoginPage> {
                             ],
                           ),
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Se souvenir "),
+                            Checkbox(
+                              value: rememberMe,
+                              onChanged: (e) => setState(() => rememberMe = e),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: RaisedButton(
-                    color: Colors.blueAccent,
-                    elevation: 10.0,
-                    onPressed: () {
-                      final snackBar = SnackBar(content: Text('Requested'));
-                      Scaffold.of(context).showSnackBar(snackBar);
-                      autoLogin(
-                        _uidController.text,
-                        _pswdController.text,
-                        _selectedUrl,
-                        _timeMap[_selectedTime],
-                      ).then((status) => setState(() => _status = status));
-                      saveCalendarFromLogin(
-                        username: _uidController.text,
-                        password: _pswdController.text,
-                      ).then((out) => setState(() => _savedCalendar = out));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: const Text(
+                  child: Center(
+                    child: FloatingActionButton.extended(
+                      onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        final snackBar = SnackBar(content: Text('Requested'));
+                        Scaffold.of(context).showSnackBar(snackBar);
+                        autoLogin(
+                          _uidController.text,
+                          _pswdController.text,
+                          _selectedUrl,
+                          _timeMap[_selectedTime],
+                        ).then((status) => setState(() => _status = status));
+                        saveCalendarFromLogin(
+                          username: _uidController.text,
+                          password: _pswdController.text,
+                        ).then((status) => setState(() {}));
+                        if (rememberMe) {
+                          prefs.setString("user", _uidController.text);
+                          prefs.setString("time", _selectedTime);
+                          prefs.setString("pswd",
+                              base64.encode(utf8.encode(_pswdController.text)));
+                        } else {
+                          prefs.remove("user");
+                          prefs.remove("time");
+                          prefs.remove("pswd");
+                        }
+                        // saveCookieCampusFromLogin(
+                        //   username: _uidController.text,
+                        //   password: _pswdController.text,
+                        // ).then((status) => setState(() {}));
+                        saveCookiePortailFromLogin(
+                          username: _uidController.text,
+                          password: _pswdController.text,
+                        ).then((status) => setState(() {}));
+                      },
+                      label: const Text(
                         "Se connecter",
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 30,
                         ),
                       ),
+                      icon: Icon(Icons.arrow_forward),
                     ),
                   ),
                 ),
@@ -175,6 +198,17 @@ class LoginPageState extends State<LoginPage> {
         ),
       ],
     );
+  }
+
+  _rememberLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _uidController.text = prefs.getString("user");
+    _selectedTime = prefs.getString("time");
+    if (_uidController.text != "") {
+      _pswdController.text =
+          utf8.decode(base64.decode(prefs.getString("pswd")));
+      rememberMe = true;
+    }
   }
 
   @override
@@ -187,22 +221,19 @@ class LoginPageState extends State<LoginPage> {
   @override
   initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => getStatus(_selectedUrl)
         .then((status) => setState(() => _status = status)));
+    _rememberLogin();
   }
 }
 
 class _StatusCard extends StatelessWidget {
   final String _status;
-  final bool _savedCalendar;
 
   const _StatusCard({
     Key key,
     @required String status,
-    @required bool savedCalendar,
   })  : _status = status,
-        _savedCalendar = savedCalendar,
         super(key: key);
 
   @override
@@ -235,9 +266,80 @@ class _StatusCard extends StatelessWidget {
                     "Calendar: ",
                     style: const TextStyle(fontSize: 20),
                   ),
-                  _savedCalendar
-                      ? const Icon(Icons.done, color: Colors.green)
-                      : const Icon(Icons.close, color: Colors.red),
+                  FutureBuilder<String>(
+                    future:
+                        getSavedCalendarURL(), // a previously-obtained Future<String> or null
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.active:
+                        case ConnectionState.waiting:
+                          return const CircularProgressIndicator();
+                        case ConnectionState.done:
+                          if (snapshot.hasError)
+                            return const Icon(Icons.close, color: Colors.red);
+                          else if (snapshot.data == "")
+                            return const Icon(Icons.close, color: Colors.red);
+                          return const Icon(Icons.done, color: Colors.green);
+                      }
+                      return null; // unreachable
+                    },
+                  ),
+                ],
+              ),
+              // Row(
+              //   children: <Widget>[
+              //     const Text(
+              //       "Campus: ",
+              //       style: const TextStyle(fontSize: 20),
+              //     ),
+              //     FutureBuilder<String>(
+              //       future: getSavedCookieCampus(),
+              //       builder:
+              //           (BuildContext context, AsyncSnapshot<String> snapshot) {
+              //         switch (snapshot.connectionState) {
+              //           case ConnectionState.none:
+              //           case ConnectionState.active:
+              //           case ConnectionState.waiting:
+              //             return const CircularProgressIndicator();
+              //           case ConnectionState.done:
+              //             if (snapshot.hasError)
+              //               return const Icon(Icons.close, color: Colors.red);
+              //             else if (snapshot.data == "")
+              //               return const Icon(Icons.close, color: Colors.red);
+              //             return const Icon(Icons.done, color: Colors.green);
+              //         }
+              //         return null; // unreachable
+              //       },
+              //     ),
+              //   ],
+              // ),
+              Row(
+                children: <Widget>[
+                  const Text(
+                    "Portail: ",
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  FutureBuilder<String>(
+                    future: getSavedCookiePortail(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.active:
+                        case ConnectionState.waiting:
+                          return const CircularProgressIndicator();
+                        case ConnectionState.done:
+                          if (snapshot.hasError)
+                            return const Icon(Icons.close, color: Colors.red);
+                          else if (snapshot.data == "")
+                            return const Icon(Icons.close, color: Colors.red);
+                          return const Icon(Icons.done, color: Colors.green);
+                      }
+                      return null; // unreachable
+                    },
+                  ),
                 ],
               ),
             ],

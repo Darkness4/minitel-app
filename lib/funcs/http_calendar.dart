@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'icalendar_parser.dart';
 
@@ -16,11 +17,6 @@ Future<String> get _localPath async {
   return directory.path;
 }
 
-Future<File> get _savedCalendarURL async {
-  final path = await _localPath;
-  return File('$path/savedCalendarURL');
-}
-
 Future<String> bypassCAS(
     {String username, String password, String referee}) async {
   var status = "";
@@ -29,11 +25,12 @@ Future<String> bypassCAS(
 
   try {
     // GET ICS
-    HttpClientRequest request = await client.postUrl(Uri.parse(referee));
+    HttpClientRequest request = await client.getUrl(Uri.parse(referee));
+    request.followRedirects = false;
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
     var phpSessionIDreferee = response.headers.value('set-cookie');
-    print("Look for PHPSESSID $phpSessionIDreferee");
+    // print("Look for PHPSESSID $phpSessionIDreferee");
     phpSessionIDreferee =
         RegExp(r'PHPSESSID=([^;]*);').firstMatch(phpSessionIDreferee).group(1);
 
@@ -43,11 +40,11 @@ Future<String> bypassCAS(
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     response = await request.close();
 
-    var lt = await response.transform(Utf8Decoder()).join();
+    var lt = await response.cast<List<int>>().transform(utf8.decoder).join();
     lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(lt).group(1);
 
     var jSessionID = response.headers.value('set-cookie');
-    print("Look for JSESSIONID $jSessionID");
+    // print("Look for JSESSIONID $jSessionID");
     jSessionID = RegExp(r'JSESSIONID=([^;]*);').firstMatch(jSessionID).group(1);
 
     // POST CAS
@@ -64,20 +61,21 @@ Future<String> bypassCAS(
     request.write(data);
     response = await request.close();
 
-    print("Look for location: ${response.headers}");
+    // print("Look for location: ${response.headers}");
     var location = response.headers.value('location');
-    print("Location: $location");
+    // print("Location: $location");
     if (location == null) throw "Error : Bad login";
 
     // GET CAS
-    request = await client.postUrl(Uri.parse(location));
+    request = await client.getUrl(Uri.parse(location));
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    request.followRedirects = false;
     request.headers
         .set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDreferee");
     response = await request.close();
 
     var phpSessionIDCAS = response.headers.value("set-cookie");
-    print("Look for PHPSESSID $phpSessionIDCAS");
+    // print("Look for PHPSESSID $phpSessionIDCAS");
     phpSessionIDCAS =
         RegExp(r'PHPSESSID=([^;]*);').firstMatch(phpSessionIDCAS).group(1);
 
@@ -100,7 +98,7 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     request.headers.set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDCAS");
     HttpClientResponse response = await request.close();
-    var body = await response.transform(Utf8Decoder()).join();
+    var body = await response.cast<List<int>>().transform(utf8.decoder).join();
     status = RegExp(r'https(.*)ics').stringMatch(body);
   } catch (e) {
     status = e.toString();
@@ -110,24 +108,19 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
 }
 
 Future<String> getSavedCalendarURL() async {
-  final file = await _savedCalendarURL;
-  if (!(await file.exists()))
-    throw Exception("File savedCalendarURL do not exists");
-
-  // Read the file
-  String contents = await file.readAsString();
-  if (!contents.contains("http")) throw "Error : This is not an URL";
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String contents = prefs.getString('calendarURL') ?? "";
 
   return contents;
 }
 
-Future<String> readCalendar() async {
+Future<Stream<String>> readCalendar() async {
   final file = await _calendar;
   if (!(await file.exists()))
     throw Exception("File calendar.ics do not exists");
 
   // Read the file
-  String contents = await file.readAsString();
+  var contents = file.openRead().cast<List<int>>().transform(utf8.decoder);
 
   return contents;
 }
@@ -152,7 +145,9 @@ Future<bool> saveCalendarFromLogin({String username, String password}) async {
 
   var iCalendar = "";
 
-  iCalendar = await getCalendar(icsUrl);
+  var calendarStream = await getCalendar(icsUrl);
+
+  iCalendar = await calendarStream.join();
   await file.writeAsString(iCalendar);
 
   return true;
@@ -163,12 +158,14 @@ Future<void> saveCalendarFromUrl(String url) async {
 
   var iCalendar = "";
 
-  iCalendar = await getCalendar(url);
+  var calendarStream = await getCalendar(url);
+
+  iCalendar = await calendarStream.join();
   if (!iCalendar.contains("VCALENDAR")) throw "Error: This is not a calendar";
   file.writeAsString(iCalendar);
 }
 
 Future<void> saveCalendarURL(String url) async {
-  final file = await _savedCalendarURL;
-  file.writeAsString(url);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('calendarURL', url);
 }

@@ -156,9 +156,7 @@ class NewsCard extends StatelessWidget {
                         colors: [
                           // Colors are easy thanks to Flutter's Colors class.
                           Colors.black,
-                          Color(int.parse(item.id.toString().substring(33, 39),
-                                  radix: 16) +
-                              0xFF000000),
+                          Color(item.id.hashCode ~/ 100 + 0xFF000000),
                           Colors.deepPurpleAccent,
                         ],
                       ),
@@ -166,7 +164,7 @@ class NewsCard extends StatelessWidget {
                     height: 100,
                     child: Center(
                       child: Text(
-                        "Commit #${item.id.toString().substring(33, 41)}",
+                        "Version v${item.id.substring(41)}",
                         style: Theme.of(context)
                             .textTheme
                             .display1

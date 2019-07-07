@@ -1,170 +1,108 @@
 import 'dart:convert';
 import 'dart:io';
 
-/// Connect to the portal.
+import 'package:shared_preferences/shared_preferences.dart';
+
+/// Récupère le cookie pour se connecter à Portail EMSE
 ///
-/// The [selectedUrl] is either local (10.163.0.2) or public (fw-cgcp.emse.fr).
-/// Be aware, if the local DNS can forward the public address to the local.
-/// Be also aware, if the local gateway can forward to the server (195.83.139.7).
-/// The [uid] and [pswd] correspond to the Username and Password.
-/// The [selectedTime] is listed on the website and is in minutes.
+/// Le reverse engineering a durée plusieurs jours.
+/// Appréciez donc cet effort SVP !  --Marc NGUYEN
 ///
-/// If connected, the response will be "[time] seconds left".
-/// If a response is received, it will be manually decrypted using RegEx like "Bad Username or Password".
-/// If no response is received, the HTTP error will be outputted.
-///
-/// You can use [autoLogin] like this:
+/// [getPortailCookie] s'utilise facilement comme cela :
 ///
 /// ```
-/// String status = await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
+/// String cookie = await getPortailCookie(username: "prenom.nom", password: "motdepasse")
 /// ```
-Future<String> autoLogin(
-    String uid, String pswd, String selectedUrl, int selectedTime) async {
+Future<String> getPortailCookie({String username, String password}) async {
   var status = "";
 
   var client = HttpClient();
-  client.badCertificateCallback = (cert, host, port) => true;
 
   try {
-    // SessionId
-    HttpClientRequest request =
-        await client.postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'));
-
-    request.headers.contentType =
-        ContentType("application", "x-www-form-urlencoded", charset: 'utf-8');
-    var data = "uid=$uid&time=$selectedTime&pswd=$pswd";
-    request.headers.contentLength = data.length; // Needed
-    request.write(data);
+    HttpClientRequest request = await client.getUrl(Uri.parse(
+        "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"));
+    request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
-    var sessionId = "";
-    if (response.statusCode == 200) {
-      var body = await response.transform(Utf8Decoder()).join();
-      if (body.contains('title_error')) {
-        throw ("Error: Bad Username or Password");
-      } else {
-        var match = RegExp(r'"(id=([^"]*))').firstMatch(body).group(1); // Id
-        if (match is! String)
-          throw Exception(
-              "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
-        else
-          sessionId = match;
-      }
-    } else
-      throw Exception("HttpError: ${response.statusCode}");
 
-    // Status
-    request = await client
-        .postUrl(Uri.parse('https://$selectedUrl/auth/disclaimer.html'));
+    var temp = await response.cast<List<int>>().transform(utf8.decoder).join();
+    var lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
+    var action = RegExp(r'action="([^"]*)"').firstMatch(temp).group(1);
+
+    temp = response.headers['set-cookie'].toString();
+    var jSessionIDCampus =
+        RegExp(r'JSESSIONID=([^;]*);').firstMatch(temp).group(0);
+
+    request = await client.postUrl(Uri.parse("https://cas.emse.fr$action"));
+    request.followRedirects = false;
     request.headers.contentType =
         ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
-    data = "session=$sessionId&read=accepted&action=J'accepte";
+    var data =
+        "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
     request.headers.contentLength = data.length;
+    request.headers.set(HttpHeaders.cookieHeader, "$jSessionIDCampus");
     request.write(data);
-
     response = await request.close();
-    if (response.statusCode == 200) {
-      var body = await response.transform(Utf8Decoder()).join();
-      if (body.contains('title_error'))
-        throw Exception(
-            "Error: SessionId is incorrect. Please check the RegEx.");
-      else {
-        var match =
-            RegExp(r'<span id="l_rtime">([^<]*)<\/span>') // Time finder.
-                .firstMatch(body)
-                .group(1);
-        if (match is! String)
-          throw Exception(
-              "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-        else
-          status = '$match seconds left';
-      }
-    } else
-      throw Exception("HttpError: ${response.statusCode}");
+
+    temp = response.headers['set-cookie'].toString();
+    String agimus;
+    try {
+      agimus = RegExp(r'AGIMUS=([^;]*);').firstMatch(temp).group(0);
+    } catch (e) {
+      throw "AGIMUS not found. Maybe bad username or password.";
+    }
+    var location = response.headers.value('location');
+
+    request = await client.getUrl(Uri.parse(location));
+    request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    request.headers.set(HttpHeaders.cookieHeader, "$agimus");
+    request.followRedirects = false;
+    response = await request.close();
+
+    temp = response.headers['set-cookie'].toString();
+    var casAuth = RegExp(r'CASAuth=([^;]*);').firstMatch(temp).group(0);
+    location = response.headers.value('location');
+
+    request = await client.getUrl(Uri.parse(location));
+    request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    request.headers.set(HttpHeaders.cookieHeader, "$agimus $casAuth");
+    response = await request.close();
+
+    temp = response.headers['set-cookie'].toString();
+    var laravelToken =
+        RegExp(r'laravel_token=([^;]*);').firstMatch(temp).group(0);
+    var xsrfToken = RegExp(r'XSRF-TOKEN=([^;]*);').firstMatch(temp).group(0);
+    var portailEntEmseSession =
+        RegExp(r'portail_ent_emse_session=([^;]*);').firstMatch(temp).group(0);
+
+    status = "$agimus $casAuth $xsrfToken $laravelToken $portailEntEmseSession";
   } catch (e) {
     status = e.toString();
+    print(status);
   }
 
   return status;
 }
 
-/// Disconnect from the portal.
-///
-/// ```
-/// String status = await disconnectGateway("172.17.0.1") // "x seconds left"
-/// ```
-Future<String> disconnectGateway(String selectedUrl) async {
-  var url =
-      'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
-  var status = "";
+Future<bool> saveCookiePortailFromLogin(
+    {String username, String password}) async {
+  String cookie =
+      await getPortailCookie(username: username, password: password);
 
-  var client = HttpClient();
-  client.badCertificateCallback = (cert, host, port) => true;
+  if (cookie.contains("bad username or password")) return false;
 
-  try {
-    HttpClientRequest request = await client.getUrl(Uri.parse(url));
-    request.headers.removeAll(HttpHeaders.contentLengthHeader);
-    HttpClientResponse response = await request.close();
-    var body = await response.transform(Utf8Decoder()).join();
-    if (response.statusCode == 200) {
-      status = body.contains('title_success')
-          ? 'You have logged out'
-          : "Disconnection failed.";
-    } else
-      throw Exception("HttpError: ${response.statusCode}");
-  } catch (e) {
-    status = e.toString();
-  }
+  await saveCookiePortail(cookie);
 
-  return status;
+  return true;
 }
 
-/// Get the connection status of the portal.
-///
-/// The [selectedUrl] is either local (10.163.0.2) or public (fw-cgcp.emse.fr).
-/// Be aware, if the local DNS can forward the public address to the local.
-/// Be also aware, if the local gateway can forward to the server (195.83.139.7).
-///
-/// If connected, the response will be "[time] seconds left".
-/// If not, the response will be "Not logged in"
-/// If no response is received, the HTTP error will be outputted.
-///
-/// You can use [getStatus] like this:
-///
-/// ```
-/// String status = await getStatus("172.17.0.1") // "x seconds left"
-/// ```
-Future<String> getStatus(String selectedUrl) async {
-  var url = 'https://$selectedUrl/auth/login.html';
-  var status = "";
-  RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
+Future<void> saveCookiePortail(String cookie) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('cookiePortail', cookie);
+}
 
-  var client = HttpClient();
-  client.badCertificateCallback = (cert, host, port) => true;
+Future<String> getSavedCookiePortail() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String contents = prefs.getString('cookiePortail') ?? "";
 
-  try {
-    HttpClientRequest request = await client.getUrl(Uri.parse(url));
-    request.headers.removeAll(HttpHeaders.contentLengthHeader);
-    // print(request.method.toString());
-    // print(request.headers.toString());
-
-    HttpClientResponse response = await request.close();
-    var body = await response.transform(Utf8Decoder()).join();
-    if (response.statusCode == 200) {
-      if (!body.contains('l_rtime')) {
-        throw ("Not logged in");
-      } else {
-        var match = exp.firstMatch(body).group(1);
-        if (match is! String)
-          throw Exception(
-              "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-        else
-          status = '$match seconds left';
-      }
-    } else
-      throw Exception("HttpError: ${response.statusCode}");
-  } catch (e) {
-    status = e.toString();
-  }
-
-  return status;
+  return contents;
 }

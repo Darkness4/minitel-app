@@ -19,9 +19,52 @@ void main() {
       }
       return null;
     });
+
+    const MethodChannel('plugins.flutter.io/shared_preferences')
+        .setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'getAll') {
+        return <String, dynamic>{}; // set initial values here if desired
+      }
+      return null;
+    });
   });
 
-  group('Http calendar', () {
+  group('FAIL HTTP Requests Calendar', () {
+    test('FAIL to saveCalendar', () async {
+      var response = await saveCalendarFromLogin(username: "", password: "");
+
+      expect(response, false);
+    });
+
+    test('FAIL to bypassCAS', () async {
+      var phpSessionId = await bypassCAS(
+        username: "",
+        password: "",
+        referee: "https://portail.emse.fr/ics/",
+      );
+
+      print(phpSessionId);
+
+      expect(phpSessionId, "Error : Bad login");
+    });
+
+    test('Read a non existing calendar', () async {
+      try {
+        await readCalendar();
+        return -1;
+      } catch (e) {
+        print(e.toString());
+        expect(e.toString(), contains("File calendar.ics do not exists"));
+      }
+    });
+
+    test('Read a non existing calendarURL', () async {
+      String url = await getSavedCalendarURL();
+      expect(url, "");
+    });
+  });
+
+  group('HTTP Requests Calendar', () {
     test('bypassCAS', () async {
       var phpSessionId = await bypassCAS(
         username: "marc.nguyen",
@@ -58,28 +101,10 @@ void main() {
       expect(response, true);
     });
 
-    test('FAIL to saveCalendar', () async {
-      var response = await saveCalendarFromLogin(username: "", password: "");
-
-      expect(response, false);
-    });
-
-    test('FAIL to bypassCAS', () async {
-      var phpSessionId = await bypassCAS(
-        username: "",
-        password: "",
-        referee: "https://portail.emse.fr/ics/",
-      );
-
-      print(phpSessionId);
-
-      expect(phpSessionId, "Error : Bad login");
-    });
-
     test('saveCalendarFromLogin', () async {
       await saveCalendarFromLogin(
           username: "marc.nguyen", password: "stickman963");
-      print(await readCalendar());
+      await readCalendar();
     });
 
     test('saveCalendarFromUrl', () async {
@@ -96,18 +121,7 @@ void main() {
         url: "https://portail.emse.fr/ics/",
       );
       await saveCalendarFromUrl(icsUrl);
-      print(await readCalendar());
-    });
-
-    test('FAIL to readCalendar', () async {
-      try {
-        var out = await readCalendar();
-        print("FAIL : $out");
-        return -1;
-      } catch (e) {
-        print(e.toString());
-        expect(e.toString(), contains("FileSystemException"));
-      }
+      await readCalendar();
     });
 
     test('getSavedCalendarUrl', () async {
@@ -115,26 +129,6 @@ void main() {
           username: "marc.nguyen", password: "stickman963");
       String url = await getSavedCalendarURL();
       expect(url, contains("http"));
-    });
-
-    test('Read a non existing calendar', () async {
-      try {
-        await readCalendar();
-        return -1;
-      } catch (e) {
-        print(e.toString());
-        expect(e.toString(), contains("File calendar.ics do not exists"));
-      }
-    });
-
-    test('Read a non existing calendarURL', () async {
-      try {
-        await getSavedCalendarURL();
-        return -1;
-      } catch (e) {
-        print(e.toString());
-        expect(e.toString(), contains("File savedCalendarURL do not exists"));
-      }
     });
   });
 }

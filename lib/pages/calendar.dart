@@ -35,11 +35,12 @@ class CalendarPageState extends State<CalendarPage> {
   final iOSPlatformChannelSpecifics = IOSNotificationDetails();
 
   Future<List<Widget>> get _listEventCards async {
-    String calendar = "";
+    Stream<String> calendar;
 
     // Refresh the calendar if possible
     try {
       var url = await getSavedCalendarURL();
+      if (url == "") throw ("The URL of the calendar was not found.");
       await saveCalendarFromUrl(url);
     } catch (e) {
       return _errorHandlerWidget(e);
@@ -80,33 +81,35 @@ class CalendarPageState extends State<CalendarPage> {
     filteredEvents.sort((event1, event2) => DateTime.parse(event1["DTSTART"])
         .compareTo(DateTime.parse(event2["DTSTART"])));
 
-    for (var i = 0; i < filteredEvents.length; i++) {
-      if (DateTime.parse(filteredEvents[i]["DTSTART"]).isBefore(DateTime.now()
-          .add(const Duration(days: 15)))) // Notifications only work for x days
-        _scheduleNotification(
-          id: i,
-          title: filteredEvents[i]["SUMMARY"],
-          description: "${filteredEvents[i]["LOCATION"]}\n"
-              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTSTART"]))}"
-              " - "
-              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTEND"]))}",
-          scheduledNotificationDateTime:
-              DateTime.parse(filteredEvents[i]["DTSTART"])
-                  .subtract(const Duration(minutes: 10)),
-          payload: "${filteredEvents[i]["SUMMARY"]};"
-              "${filteredEvents[i]["DESCRIPTION"]}\n"
-              "${filteredEvents[i]["LOCATION"]}\n"
-              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTSTART"]))}"
-              " - "
-              "${DateFormat.Hm().format(DateTime.parse(filteredEvents[i]["DTEND"]))}",
-        );
-    }
-
+    int i = 0;
     int day;
     int month;
+    await flutterLocalNotificationsPlugin.cancelAll();
 
     Future.forEach(filteredEvents, (event) async {
       DateTime dt = DateTime.parse(event["DTSTART"]);
+
+      if (dt.isBefore(DateTime.now().add(const Duration(days: 14)))) {
+        i++;
+        var dtstart = DateFormat.Hm().format(dt);
+        var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
+        _scheduleNotification(
+          id: i,
+          title: event["SUMMARY"],
+          description: "${event["LOCATION"]}\n"
+              "$dtstart"
+              " - "
+              "$dtend",
+          scheduledNotificationDateTime:
+              dt.subtract(const Duration(minutes: 10)),
+          payload: "${event["SUMMARY"]};"
+              "${event["DESCRIPTION"]}\n"
+              "${event["LOCATION"]}\n"
+              "$dtstart"
+              " - "
+              "$dtend",
+        );
+      }
 
       if (dt.month != month) {
         month = dt.month;
@@ -151,38 +154,38 @@ class CalendarPageState extends State<CalendarPage> {
       if (dt.day != day) {
         day = dt.day;
         dailyEvents = [];
-        monthlyWidgets.add(StickyHeaderBuilder(
-          builder: (BuildContext context, double stuckAmount) {
-            stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Material(
-                elevation: stuckAmount * 10,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(stuckAmount * 100)),
-                color: Color.lerp(
-                    Colors.transparent, colorPalette[dt.month], stuckAmount),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      "${DateFormat.MMMMEEEEd("fr_FR").format(dt)}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline
-                          .apply(color: Colors.white),
+        monthlyWidgets.add(
+          StickyHeaderBuilder(
+            builder: (BuildContext context, double stuckAmount) {
+              stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                child: Material(
+                  elevation: stuckAmount * 10,
+                  color: Color.lerp(Colors.transparent,
+                      colorPalette[dt.month].withOpacity(0.9), stuckAmount),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        "${DateFormat.MMMMEEEEd("fr_FR").format(dt)}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline
+                            .apply(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
-          content: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: dailyEvents,
+              );
+            },
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: dailyEvents,
+            ),
           ),
-        ));
+        );
       }
 
       // New Event
@@ -199,14 +202,14 @@ class CalendarPageState extends State<CalendarPage> {
         title: Text(widget.title),
       ),
       body: Container(
-        color: Colors.blueAccent,
+        color: Colors.green,
         child: Center(
           child: FutureBuilder(
             future: _listEventCards,
             builder: (BuildContext context, AsyncSnapshot snapshot) =>
                 snapshot.hasData
                     ? Scrollbar(child: PageView(children: snapshot.data))
-                    : const Text("Loading..."),
+                    : const CircularProgressIndicator(),
           ),
         ),
       ),
@@ -239,9 +242,9 @@ class CalendarPageState extends State<CalendarPage> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-            title: Text("${output[0]}"),
-            content: Text("${output.length < 2 ? "null" : output[1]}"),
-          ),
+        title: Text("${output[0]}"),
+        content: Text("${output.length < 2 ? "null" : output[1]}"),
+      ),
     );
   }
 
@@ -301,23 +304,22 @@ class CalendarPageState extends State<CalendarPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: RaisedButton(
-              color: Colors.red,
-              elevation: 10.0,
-              onPressed: () => saveCalendarFromLogin(
-                    username: _uidController.text,
-                    password: _pswdController.text,
-                  ).then((out) => setState(() {})),
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: const Text(
+            child: Center(
+              child: FloatingActionButton.extended(
+                backgroundColor: Colors.red,
+                elevation: 10.0,
+                onPressed: () => saveCalendarFromLogin(
+                  username: _uidController.text,
+                  password: _pswdController.text,
+                ).then((out) => setState(() {})),
+                label: const Text(
                   "Se connecter",
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
                   ),
                 ),
+                icon: Icon(Icons.arrow_forward),
               ),
             ),
           ),
@@ -336,7 +338,6 @@ class CalendarPageState extends State<CalendarPage> {
     //     "Event scheduled at ${DateFormat.yMMMMd().format(scheduledNotificationDateTime)} ${DateFormat.Hms().format(scheduledNotificationDateTime)}");
     // pendingNotificationRequests.forEach((out) => flutterLocalNotificationsPlugin.cancel(out.id));
 
-    await flutterLocalNotificationsPlugin.cancelAll();
     flutterLocalNotificationsPlugin.schedule(
       id,
       title,
@@ -390,47 +391,50 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: _cardColor,
-      elevation: (_event["SUMMARY"].toLowerCase().contains("sport") ||
-              _event["SUMMARY"].toLowerCase().contains("vacance") ||
-              _event["SUMMARY"].toLowerCase().contains("férié"))
-          ? 0
-          : 4,
-      child: Container(
-        padding: const EdgeInsets.all(4.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              _event["SUMMARY"],
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              _event["DESCRIPTION"],
-              style: const TextStyle(height: 1.4),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "${_event["LOCATION"] != "" ? '➡' : ''} ${_event["LOCATION"]} ",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-                fontSize: 16,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Card(
+        color: _cardColor,
+        elevation: (_event["SUMMARY"].toLowerCase().contains("sport") ||
+                _event["SUMMARY"].toLowerCase().contains("vacance") ||
+                _event["SUMMARY"].toLowerCase().contains("férié"))
+            ? 0
+            : 4,
+        child: Container(
+          padding: const EdgeInsets.all(4.0),
+          child: Column(
+            children: <Widget>[
+              Text(
+                _event["SUMMARY"],
+                style: const TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
-              " - "
-              "${DateFormat.Hm().format(DateTime.parse(_event["DTEND"]))}",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+              Text(
+                _event["DESCRIPTION"],
+                style: const TextStyle(height: 1.4),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+              Text(
+                "${_event["LOCATION"] != "" ? '➡' : ''} ${_event["LOCATION"]} ",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
+                " - "
+                "${DateFormat.Hm().format(DateTime.parse(_event["DTEND"]))}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );
