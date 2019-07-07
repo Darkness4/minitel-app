@@ -31,11 +31,11 @@ class LoginPageState extends State<LoginPage> {
     '2 hours': 120,
     '3 hours': 180,
     '4 hours': 240,
-    '8 hours': 480,
+    '(8 hours)': 480,
   };
   var _status = "";
   var _selectedTime = '4 hours'; // Default
-  var _selectedUrl = 'fw-cgcp.emse.fr';
+  var _selectedUrl = '195.83.139.7';
   bool rememberMe = false;
 
   @override

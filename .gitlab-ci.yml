@@ -1,4 +1,4 @@
-image: darkness4/flutter-builder:28
+image: darkness4/flutter-builder:latest
 
 variables:
 before_script:

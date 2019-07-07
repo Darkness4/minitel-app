@@ -21,6 +21,7 @@ Future<String> get _getLatestVersionAPI async {
 Future<String> getLatestVersion() async {
   var jsonString = await _getLatestVersionAPI;
   Map<String, dynamic> latestVersionJson = jsonDecode(jsonString);
+
   return latestVersionJson["tag_name"];
 }
 

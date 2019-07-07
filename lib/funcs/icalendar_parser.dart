@@ -16,9 +16,9 @@ Future<Stream<String>> getCalendar(String url) async {
       return response.cast<List<int>>().transform(utf8.decoder);
     } else
       throw Exception("HttpError: ${response.statusCode}");
-  } catch (e) {}
-
-  throw Exception("getCalender ends unexpectedly!");
+  } catch (e) {
+    throw e;
+  }
 }
 
 Future<ICalendar> parseCalendar(Stream<String> calendar) async {
