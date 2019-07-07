@@ -41,7 +41,7 @@ void main() {
           username: "marc.nguyen", password: "stickman963");
       print(cookie);
 
-      expect(cookie, contains("PHPSESSID=ST"));
+      expect(cookie, contains("portail_ent_emse_session"));
     });
 
     test('getSavedCookiePortail', () async {
@@ -49,7 +49,7 @@ void main() {
           username: "marc.nguyen", password: "stickman963");
       String cookie = await getSavedCookiePortail();
       print(cookie);
-      expect(cookie, contains("PHPSESSID=ST"));
+      expect(cookie, contains("portail_ent_emse_session"));
     });
 
     test('saveCookiePortailFromLogin', () async {

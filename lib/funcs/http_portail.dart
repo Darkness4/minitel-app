@@ -19,46 +19,37 @@ Future<String> getPortailCookie({String username, String password}) async {
   var client = HttpClient();
 
   try {
-    HttpClientRequest request = await client.getUrl(
-        Uri.parse("https://portail.emse.fr/css-emse/bandeau_login.php"));
+    HttpClientRequest request = await client.getUrl(Uri.parse(
+        "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"));
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
 
-    var temp = await response.transform(Utf8Decoder()).join();
-
-    /// lt=[Value]
+    var temp = await response.cast<List<int>>().transform(utf8.decoder).join();
     var lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
-
-    /// action=[url]
     var action = RegExp(r'action="([^"]*)"').firstMatch(temp).group(1);
 
     temp = response.headers['set-cookie'].toString();
-
-    /// JSESSIONID=[Value]
-    var jSessionIDPortail =
-        RegExp(r'JSESSIONID=([^;]*);').firstMatch(temp).group(1);
+    var jSessionIDCampus =
+        RegExp(r'JSESSIONID=([^;]*);').firstMatch(temp).group(0);
 
     request = await client.postUrl(Uri.parse("https://cas.emse.fr$action"));
+    request.followRedirects = false;
     request.headers.contentType =
         ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
     var data =
         "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
     request.headers.contentLength = data.length;
-    request.headers
-        .set(HttpHeaders.cookieHeader, "JSESSIONID=$jSessionIDPortail");
+    request.headers.set(HttpHeaders.cookieHeader, "$jSessionIDCampus");
     request.write(data);
     response = await request.close();
 
     temp = response.headers['set-cookie'].toString();
-
-    /// AGIMUS=Value
     String agimus;
     try {
-      agimus = RegExp(r'AGIMUS=([^;]*)').firstMatch(temp).group(0);
+      agimus = RegExp(r'AGIMUS=([^;]*);').firstMatch(temp).group(0);
     } catch (e) {
       throw "AGIMUS not found. Maybe bad username or password.";
     }
-
     var location = response.headers.value('location');
 
     request = await client.getUrl(Uri.parse(location));
@@ -67,23 +58,23 @@ Future<String> getPortailCookie({String username, String password}) async {
     request.followRedirects = false;
     response = await request.close();
 
-    temp = await response.transform(Utf8Decoder()).join();
+    temp = response.headers['set-cookie'].toString();
+    var casAuth = RegExp(r'CASAuth=([^;]*);').firstMatch(temp).group(0);
+    location = response.headers.value('location');
+
+    request = await client.getUrl(Uri.parse(location));
+    request.headers.removeAll(HttpHeaders.contentLengthHeader);
+    request.headers.set(HttpHeaders.cookieHeader, "$agimus $casAuth");
+    response = await request.close();
 
     temp = response.headers['set-cookie'].toString();
-    print(temp);
+    var laravelToken =
+        RegExp(r'laravel_token=([^;]*);').firstMatch(temp).group(0);
+    var xsrfToken = RegExp(r'XSRF-TOKEN=([^;]*);').firstMatch(temp).group(0);
+    var portailEntEmseSession =
+        RegExp(r'portail_ent_emse_session=([^;]*);').firstMatch(temp).group(0);
 
-    var phpSessID = RegExp(r'PHPSESSID=ST([^;]*)').firstMatch(temp).group(0);
-
-    // location = response.headers.value('location');
-
-    // request = await client.getUrl(Uri.parse(location));
-    // request.headers.removeAll(HttpHeaders.contentLengthHeader);
-    // request.headers.set(HttpHeaders.cookieHeader, "$agimus $phpSessID");
-    // request.followRedirects = false;
-    // response = await request.close();
-
-    status = "$agimus; $phpSessID";
-    print(status);
+    status = "$agimus $casAuth $xsrfToken $laravelToken $portailEntEmseSession";
   } catch (e) {
     status = e.toString();
     print(status);

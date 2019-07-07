@@ -11,8 +11,7 @@ class ImprimanteWebView extends StatelessWidget {
         backgroundColor: Colors.grey,
         title: const Text("Imprimante EMSE"),
       ),
-      url:
-          'https://vpnssl.emse.fr/dana/home/userpass.cgi?url=%2Fwatchdoc%2F%2CDanaInfo%3D192.168.130.2%2B&domain=EMSE2000&sidebar=off&proxy=0&ssoType=1',
+      url: 'https://vpnssl.emse.fr/watchdoc,DanaInfo=192.168.130.2',
     );
   }
 }

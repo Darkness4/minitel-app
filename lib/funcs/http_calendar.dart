@@ -40,7 +40,7 @@ Future<String> bypassCAS(
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     response = await request.close();
 
-    var lt = await response.transform(utf8.decoder).join();
+    var lt = await response.cast<List<int>>().transform(utf8.decoder).join();
     lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(lt).group(1);
 
     var jSessionID = response.headers.value('set-cookie');
@@ -98,7 +98,7 @@ Future<String> getCalendarURL({String phpSessionIDCAS, String url}) async {
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     request.headers.set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDCAS");
     HttpClientResponse response = await request.close();
-    var body = await response.transform(utf8.decoder).join();
+    var body = await response.cast<List<int>>().transform(utf8.decoder).join();
     status = RegExp(r'https(.*)ics').stringMatch(body);
   } catch (e) {
     status = e.toString();
@@ -120,7 +120,7 @@ Future<Stream<String>> readCalendar() async {
     throw Exception("File calendar.ics do not exists");
 
   // Read the file
-  var contents = file.openRead().transform(utf8.decoder);
+  var contents = file.openRead().cast<List<int>>().transform(utf8.decoder);
 
   return contents;
 }

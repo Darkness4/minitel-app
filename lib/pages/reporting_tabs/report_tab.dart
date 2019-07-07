@@ -87,7 +87,7 @@ class _ContactsCard extends StatelessWidget {
         FlatButton(
           textColor: Colors.blueAccent,
           child: Text(
-            "Mail: minitelismin@gmail.com",
+            "Mail: minitelismin@gmail.com (non recommandée)",
             style: Theme.of(context)
                 .textTheme
                 .title

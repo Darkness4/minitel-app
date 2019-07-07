@@ -80,25 +80,25 @@ class PortalPageState extends State<PortalPage> {
           ),
           headerSliverBuilder:
               (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
-                    SliverAppBar(
-                      title: Text(widget.title),
-                      pinned: true,
-                      floating: true,
-                      forceElevated: true,
-                      bottom: const TabBar(
-                        tabs: const <Tab>[
-                          const Tab(
-                            icon: const Icon(Icons.vpn_key),
-                            text: "Login",
-                          ),
-                          const Tab(
-                            icon: const Icon(Icons.apps),
-                            text: "Apps",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+            SliverAppBar(
+              title: Text(widget.title),
+              pinned: true,
+              floating: true,
+              forceElevated: true,
+              bottom: const TabBar(
+                tabs: const <Tab>[
+                  const Tab(
+                    icon: const Icon(Icons.vpn_key),
+                    text: "Login",
+                  ),
+                  const Tab(
+                    icon: const Icon(Icons.apps),
+                    text: "Apps",
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         drawer: const MainDrawer(),
       ),

@@ -44,7 +44,7 @@ Future<String> getCampusCookie({String username, String password}) async {
 
     response = await request.close();
 
-    temp = await response.transform(Utf8Decoder()).join();
+    temp = await response.cast<List<int>>().transform(utf8.decoder).join();
 
     /// lt=[Value]
     var lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
@@ -98,7 +98,7 @@ Future<String> getCampusCookie({String username, String password}) async {
     // request.headers.set(HttpHeaders.refererHeader, "https://cas.emse.fr$action");
     response = await request.close();
 
-    temp = await response.transform(Utf8Decoder()).join();
+    temp = await response.cast<List<int>>().transform(utf8.decoder).join();
 
     var relayState = RegExp(r'name="RelayState" value="(.*)"/>')
         .firstMatch(temp)

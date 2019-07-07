@@ -40,7 +40,7 @@ class CalendarPageState extends State<CalendarPage> {
     // Refresh the calendar if possible
     try {
       var url = await getSavedCalendarURL();
-      if (url == "") throw ("The URL of the calendat was not found.");
+      if (url == "") throw ("The URL of the calendar was not found.");
       await saveCalendarFromUrl(url);
     } catch (e) {
       return _errorHandlerWidget(e);
@@ -242,9 +242,9 @@ class CalendarPageState extends State<CalendarPage> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-            title: Text("${output[0]}"),
-            content: Text("${output.length < 2 ? "null" : output[1]}"),
-          ),
+        title: Text("${output[0]}"),
+        content: Text("${output.length < 2 ? "null" : output[1]}"),
+      ),
     );
   }
 
@@ -309,9 +309,9 @@ class CalendarPageState extends State<CalendarPage> {
                 backgroundColor: Colors.red,
                 elevation: 10.0,
                 onPressed: () => saveCalendarFromLogin(
-                      username: _uidController.text,
-                      password: _pswdController.text,
-                    ).then((out) => setState(() {})),
+                  username: _uidController.text,
+                  password: _pswdController.text,
+                ).then((out) => setState(() {})),
                 label: const Text(
                   "Se connecter",
                   style: const TextStyle(

@@ -13,12 +13,12 @@ Future<Stream<String>> getCalendar(String url) async {
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      return response.transform(Utf8Decoder());
+      return response.cast<List<int>>().transform(utf8.decoder);
     } else
       throw Exception("HttpError: ${response.statusCode}");
-  } catch (e) {}
-
-  throw Exception("getCalender ends unexpectedly!");
+  } catch (e) {
+    throw e;
+  }
 }
 
 Future<ICalendar> parseCalendar(Stream<String> calendar) async {

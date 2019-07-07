@@ -1,8 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/funcs/http_calendar.dart';
 import 'package:minitel_toolbox/funcs/http_gateway.dart';
-import 'package:minitel_toolbox/funcs/http_campus.dart';
 import 'package:minitel_toolbox/funcs/http_portail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -30,11 +31,12 @@ class LoginPageState extends State<LoginPage> {
     '2 hours': 120,
     '3 hours': 180,
     '4 hours': 240,
-    '8 hours': 480,
+    '(8 hours)': 480,
   };
   var _status = "";
   var _selectedTime = '4 hours'; // Default
-  var _selectedUrl = 'fw-cgcp.emse.fr';
+  var _selectedUrl = '195.83.139.7';
+  bool rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +129,16 @@ class LoginPageState extends State<LoginPage> {
                             ],
                           ),
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Se souvenir "),
+                            Checkbox(
+                              value: rememberMe,
+                              onChanged: (e) => setState(() => rememberMe = e),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -135,7 +147,9 @@ class LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Center(
                     child: FloatingActionButton.extended(
-                      onPressed: () {
+                      onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
                         final snackBar = SnackBar(content: Text('Requested'));
                         Scaffold.of(context).showSnackBar(snackBar);
                         autoLogin(
@@ -148,10 +162,20 @@ class LoginPageState extends State<LoginPage> {
                           username: _uidController.text,
                           password: _pswdController.text,
                         ).then((status) => setState(() {}));
-                        saveCookieCampusFromLogin(
-                          username: _uidController.text,
-                          password: _pswdController.text,
-                        ).then((status) => setState(() {}));
+                        if (rememberMe) {
+                          prefs.setString("user", _uidController.text);
+                          prefs.setString("time", _selectedTime);
+                          prefs.setString("pswd",
+                              base64.encode(utf8.encode(_pswdController.text)));
+                        } else {
+                          prefs.remove("user");
+                          prefs.remove("time");
+                          prefs.remove("pswd");
+                        }
+                        // saveCookieCampusFromLogin(
+                        //   username: _uidController.text,
+                        //   password: _pswdController.text,
+                        // ).then((status) => setState(() {}));
                         saveCookiePortailFromLogin(
                           username: _uidController.text,
                           password: _pswdController.text,
@@ -176,6 +200,17 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
+  _rememberLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _uidController.text = prefs.getString("user");
+    _selectedTime = prefs.getString("time");
+    if (_uidController.text != "") {
+      _pswdController.text =
+          utf8.decode(base64.decode(prefs.getString("pswd")));
+      rememberMe = true;
+    }
+  }
+
   @override
   dispose() {
     _uidController.dispose();
@@ -188,6 +223,7 @@ class LoginPageState extends State<LoginPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => getStatus(_selectedUrl)
         .then((status) => setState(() => _status = status)));
+    _rememberLogin();
   }
 }
 
@@ -252,33 +288,33 @@ class _StatusCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                children: <Widget>[
-                  const Text(
-                    "Campus: ",
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  FutureBuilder<String>(
-                    future: getSavedCookieCampus(),
-                    builder:
-                        (BuildContext context, AsyncSnapshot<String> snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                        case ConnectionState.active:
-                        case ConnectionState.waiting:
-                          return const CircularProgressIndicator();
-                        case ConnectionState.done:
-                          if (snapshot.hasError)
-                            return const Icon(Icons.close, color: Colors.red);
-                          else if (snapshot.data == "")
-                            return const Icon(Icons.close, color: Colors.red);
-                          return const Icon(Icons.done, color: Colors.green);
-                      }
-                      return null; // unreachable
-                    },
-                  ),
-                ],
-              ),
+              // Row(
+              //   children: <Widget>[
+              //     const Text(
+              //       "Campus: ",
+              //       style: const TextStyle(fontSize: 20),
+              //     ),
+              //     FutureBuilder<String>(
+              //       future: getSavedCookieCampus(),
+              //       builder:
+              //           (BuildContext context, AsyncSnapshot<String> snapshot) {
+              //         switch (snapshot.connectionState) {
+              //           case ConnectionState.none:
+              //           case ConnectionState.active:
+              //           case ConnectionState.waiting:
+              //             return const CircularProgressIndicator();
+              //           case ConnectionState.done:
+              //             if (snapshot.hasError)
+              //               return const Icon(Icons.close, color: Colors.red);
+              //             else if (snapshot.data == "")
+              //               return const Icon(Icons.close, color: Colors.red);
+              //             return const Icon(Icons.done, color: Colors.green);
+              //         }
+              //         return null; // unreachable
+              //       },
+              //     ),
+              //   ],
+              // ),
               Row(
                 children: <Widget>[
                   const Text(
