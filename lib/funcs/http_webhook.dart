@@ -37,7 +37,7 @@ Future<String> report(String text,
           ContentType("application", "json", charset: "utf-8");
       request.write(json.encode(data));
       HttpClientResponse response = await request.close();
-      status = await response.transform(Utf8Decoder()).join();
+      status = await response.cast<List<int>>().transform(utf8.decoder).join();
     } catch (e) {
       status = e.toString();
     }

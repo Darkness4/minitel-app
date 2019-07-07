@@ -13,6 +13,7 @@ class PortailWebView extends StatelessWidget {
         backgroundColor: Colors.deepPurple,
         title: const Text("Portail"),
       ),
+      headers: {"cookie": cookie},
       url: 'http://portail.emse.fr/',
     );
   }

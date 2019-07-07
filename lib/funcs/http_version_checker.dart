@@ -10,7 +10,7 @@ Future<String> get _getLatestVersionAPI async {
     HttpClientRequest request = await client.getUrl(Uri.parse(
         "https://api.github.com/repos/Darkness4/minitel-app/releases/latest"));
     HttpClientResponse response = await request.close();
-    status = await response.transform(Utf8Decoder()).join();
+    status = await response.cast<List<int>>().transform(utf8.decoder).join();
   } catch (e) {
     status = e.toString();
   }

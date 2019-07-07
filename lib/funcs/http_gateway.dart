@@ -38,7 +38,8 @@ Future<String> autoLogin(
     HttpClientResponse response = await request.close();
     var sessionId = "";
     if (response.statusCode == 200) {
-      var body = await response.transform(Utf8Decoder()).join();
+      var body =
+          await response.cast<List<int>>().transform(utf8.decoder).join();
       if (body.contains('title_error')) {
         throw ("Error: Bad Username or Password");
       } else {
@@ -63,7 +64,8 @@ Future<String> autoLogin(
 
     response = await request.close();
     if (response.statusCode == 200) {
-      var body = await response.transform(Utf8Decoder()).join();
+      var body =
+          await response.cast<List<int>>().transform(utf8.decoder).join();
       if (body.contains('title_error'))
         throw Exception(
             "Error: SessionId is incorrect. Please check the RegEx.");
@@ -104,7 +106,7 @@ Future<String> disconnectGateway(String selectedUrl) async {
     HttpClientRequest request = await client.getUrl(Uri.parse(url));
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
-    var body = await response.transform(Utf8Decoder()).join();
+    var body = await response.cast<List<int>>().transform(utf8.decoder).join();
     if (response.statusCode == 200) {
       status = body.contains('title_success')
           ? 'You have logged out'
@@ -148,7 +150,7 @@ Future<String> getStatus(String selectedUrl) async {
     // print(request.headers.toString());
 
     HttpClientResponse response = await request.close();
-    var body = await response.transform(Utf8Decoder()).join();
+    var body = await response.cast<List<int>>().transform(utf8.decoder).join();
     if (response.statusCode == 200) {
       if (!body.contains('l_rtime')) {
         throw ("Not logged in");

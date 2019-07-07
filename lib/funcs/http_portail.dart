@@ -24,7 +24,7 @@ Future<String> getPortailCookie({String username, String password}) async {
     request.headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
 
-    var temp = await response.transform(Utf8Decoder()).join();
+    var temp = await response.cast<List<int>>().transform(utf8.decoder).join();
     var lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
     var action = RegExp(r'action="([^"]*)"').firstMatch(temp).group(1);
 

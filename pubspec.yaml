@@ -22,7 +22,7 @@ dependencies:
   share: ^0.6.1+1  # Flutter Team
   webfeed: ^0.4.2  # Wito Chandra
   url_launcher: ^5.0.3  # Flutter Team
-  # google_maps_flutter: ^0.5.19  # Flutter Team
+  # google_maps_flutter: ^0.5.19+2  # Flutter Team
   permission_handler: ^3.1.0  # Baseflow
   shared_preferences: ^0.5.3+1  # Flutter Team
   webview_flutter: ^0.3.9+1  # Flutter Team
