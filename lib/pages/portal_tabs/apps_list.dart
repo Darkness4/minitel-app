@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/funcs/http_portail.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import 'portal_apps/imprimante.dart';
 import 'portal_apps/minitel.dart';
