@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/components/cards.dart';
-import 'package:minitel_toolbox/components/drawer.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:minitel_toolbox/funcs/http_webfeed.dart';
 
 class NewsPage extends StatefulWidget {

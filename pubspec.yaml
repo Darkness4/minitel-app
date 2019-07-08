@@ -33,6 +33,7 @@ dependencies:
   html: ^0.14.0+2  # Dart Team
   package_info: ^0.4.0+4  # Flutter Team
   device_info: ^0.4.0+2  # Flutter Team
+  provider: ^3.0.0+1
   # font_awesome_flutter: ^8.4.0  # Brian Egan
 
 dev_dependencies:

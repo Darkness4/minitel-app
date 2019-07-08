@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/components/page_animation.dart';
+import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 import 'package:minitel_toolbox/pages/docs_pages/wiki_docs.dart';
 
 import 'toolbox_docs/diagnose_doc.dart';

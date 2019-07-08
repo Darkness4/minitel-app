@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/components/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
 class MinitelDoc extends StatelessWidget {
   const MinitelDoc({

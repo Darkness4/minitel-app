@@ -4,9 +4,10 @@ import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/components/drawer.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:minitel_toolbox/funcs/http_gateway.dart';
 import 'package:minitel_toolbox/funcs/http_webhook.dart';
+import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -339,7 +340,7 @@ class ReportingPageState extends State<ReportingPage>
             ),
             FloatingActionButton(
               heroTag: null,
-              backgroundColor: Colors.red,
+              backgroundColor: reportPrimaryColor,
               child: const Icon(Icons.mail),
               mini: true,
               onPressed: () async {
@@ -396,7 +397,7 @@ class ReportingPageState extends State<ReportingPage>
             ),
             FloatingActionButton(
               heroTag: null,
-              backgroundColor: Colors.red,
+              backgroundColor: reportPrimaryColor,
               child: const Icon(Icons.share),
               mini: true,
               onPressed: () =>
@@ -417,27 +418,27 @@ class ReportingPageState extends State<ReportingPage>
         body: NestedScrollView(
           headerSliverBuilder:
               (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
-                    SliverAppBar(
-                      title: Text(widget.title),
-                      backgroundColor: Colors.red,
-                      pinned: true,
-                      floating: true,
-                      forceElevated: true,
-                      bottom: const TabBar(
-                        indicatorColor: Colors.white,
-                        tabs: <Tab>[
-                          const Tab(
-                            icon: const Icon(Icons.warning),
-                            text: "Report",
-                          ),
-                          const Tab(
-                            icon: const Icon(Icons.zoom_in),
-                            text: "Diagnosis",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+            SliverAppBar(
+              title: Text(widget.title),
+              backgroundColor: reportPrimaryColor,
+              pinned: true,
+              floating: true,
+              forceElevated: true,
+              bottom: const TabBar(
+                indicatorColor: Colors.white,
+                tabs: <Tab>[
+                  const Tab(
+                    icon: const Icon(Icons.warning),
+                    text: "Report",
+                  ),
+                  const Tab(
+                    icon: const Icon(Icons.zoom_in),
+                    text: "Diagnosis",
+                  ),
+                ],
+              ),
+            ),
+          ],
           body: TabBarView(
             children: <Widget>[
               ReportTab(
@@ -475,15 +476,15 @@ class ReportingPageState extends State<ReportingPage>
         drawer: const MainDrawer(),
         floatingActionButton: Builder(
           builder: (context) => Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  _shareButton,
-                  _mailButton,
-                  _buildReportButton(context),
-                  _diagnosisButton,
-                ],
-              ),
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              _shareButton,
+              _mailButton,
+              _buildReportButton(context),
+              _diagnosisButton,
+            ],
+          ),
         ),
       ),
     );

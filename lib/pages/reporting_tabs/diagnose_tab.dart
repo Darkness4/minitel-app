@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/components/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
 class DiagnoseTab extends StatelessWidget {
   final String _alert;

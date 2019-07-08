@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer();
@@ -25,12 +26,10 @@ class MainDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            decoration: BoxDecoration(
-              color: Colors.green,
-            ),
+            decoration: BoxDecoration(color: primaryColor),
           ),
           ListTile(
-              title: Text("Authentification"),
+              title: const Text("Authentification"),
               leading: const Icon(Icons.apps),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
@@ -40,7 +39,7 @@ class MainDrawer extends StatelessWidget {
               }),
           Divider(),
           ListTile(
-              title: Text("Nouveautés"),
+              title: const Text("Nouveautés"),
               leading: const Icon(Icons.rss_feed),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
@@ -49,7 +48,7 @@ class MainDrawer extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, '/news');
               }),
           ListTile(
-              title: Text("Agenda"),
+              title: const Text("Agenda"),
               leading: const Icon(Icons.calendar_today),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
@@ -68,7 +67,7 @@ class MainDrawer extends StatelessWidget {
           //     }),
           Divider(),
           Container(
-            color: Colors.red,
+            color: reportPrimaryColor,
             child: ListTile(
                 title: Text(
                   "Signaler Minitel",

@@ -2,8 +2,8 @@ import 'dart:io' show Platform;
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/components/drawer.dart';
-import 'package:minitel_toolbox/components/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/funcs/http_webhook.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';

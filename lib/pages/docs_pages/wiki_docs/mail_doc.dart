@@ -1,4 +1,4 @@
-import 'package:minitel_toolbox/components/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:flutter/material.dart';
 
 class MailDoc extends StatelessWidget {

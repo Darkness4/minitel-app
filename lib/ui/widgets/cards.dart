@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:html/parser.dart' show parseFragment;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
 class DocCard extends StatelessWidget {
   final List<Widget> children;
@@ -46,7 +47,7 @@ class LogCard extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: Card(
         elevation: elevation,
-        color: Colors.lightBlue,
+        color: terminalHeaderColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -68,12 +69,13 @@ class LogCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 10,
                   fontFamily: "RobotoMono",
-                  color: Colors.white,
+                  color: terminalFgColor,
                 ),
               ),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color: Colors.black87),
+                borderRadius: BorderRadius.circular(4.0),
+                color: terminalBgColor,
+              ),
             ),
           ],
         ),

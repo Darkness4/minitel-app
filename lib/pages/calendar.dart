@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
-import 'package:minitel_toolbox/components/drawer.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:minitel_toolbox/funcs/http_calendar.dart';
 import 'package:minitel_toolbox/funcs/icalendar_parser.dart';
+import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -202,7 +203,7 @@ class CalendarPageState extends State<CalendarPage> {
         title: Text(widget.title),
       ),
       body: Container(
-        color: Colors.green,
+        color: primaryColor,
         child: Center(
           child: FutureBuilder(
             future: _listEventCards,

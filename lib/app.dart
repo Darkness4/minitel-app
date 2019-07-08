@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
-import 'router.dart';
+import 'ui/router.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -16,26 +17,26 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: Router.generateRoute,
       supportedLocales: [const Locale('fr', 'FR')],
       theme: ThemeData(
-          primarySwatch: Colors.green,
+          primarySwatch: primaryColor,
           fontFamily: 'NotoSans',
           textTheme: TextTheme(
             body1: TextStyle(
               height: 1.2,
-              color: Colors.black87,
+              color: fontColor,
             ),
             body2: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: fontColor,
             ),
             headline: TextStyle(
               height: 1.5,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: fontColor,
             ),
             title: TextStyle(
               height: 1.5,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: fontColor,
             ),
             display1: TextStyle(height: 1.5),
             display2: TextStyle(
@@ -45,11 +46,11 @@ class MyApp extends StatelessWidget {
             display4: TextStyle(height: 1.5),
             subhead: TextStyle(
               height: 1.5,
-              color: Colors.black87,
+              color: fontColor,
             ),
             subtitle: TextStyle(
               height: 1.5,
-              color: Colors.black87,
+              color: fontColor,
             ),
           )),
       initialRoute: '/',

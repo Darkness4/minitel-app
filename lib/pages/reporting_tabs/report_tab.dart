@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/components/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 _launchURL(String url) async {

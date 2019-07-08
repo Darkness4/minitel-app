@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'components/page_animation.dart';
-import 'pages/about.dart';
-import 'pages/calendar.dart';
-import 'pages/docs.dart';
-import 'pages/news.dart';
-import 'pages/portal.dart';
-import 'pages/reporting.dart';
-import 'pages/feedback.dart';
+import 'widgets/page_animation.dart';
+import '../pages/about.dart';
+import '../pages/calendar.dart';
+import '../pages/docs.dart';
+import '../pages/news.dart';
+import '../pages/portal.dart';
+import '../pages/reporting.dart';
+import '../pages/feedback.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
