@@ -1,5 +1,6 @@
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
 class ImprimanteDoc extends StatelessWidget {
   const ImprimanteDoc({
@@ -11,31 +12,19 @@ class ImprimanteDoc extends StatelessWidget {
     return SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
-          Text(
-            "Configurer l'imprimante",
-            style: Theme.of(context).textTheme.display1,
-          ),
-          Text(
-            "Windows",
-            style: Theme.of(context).textTheme.title,
-          ),
+          BoxMdH("Configurer l'imprimante", 1),
+          BoxMdH("Windows", 2),
           Text(
             """    -  Ouvrir \\\\192.168.130.2 avec l'explorer Windows
     -  Mettre prenom.nom et mot de passe (testez également EMSE2000\\prenom.nom)
     -  Double-cliquer sur \"imprimantes-gpc\"""",
           ),
-          Text(
-            "Ubuntu",
-            style: Theme.of(context).textTheme.title,
-          ),
+          BoxMdH("Ubuntu", 2),
           Text(
             """    -  Ajoutez smb://192.168.130.2/imprimantes-gcp aux imprimantes réseaux
     -  Pilote: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd""",
           ),
-          Text(
-            "Linux: CUPS",
-            style: Theme.of(context).textTheme.title,
-          ),
+          BoxMdH("Linux: CUPS", 2),
           Text("    -  Installez cups"),
           LogCard(
             "sudo apt install cups",
@@ -56,12 +45,9 @@ class ImprimanteDoc extends StatelessWidget {
           Text("    -  Type SMB, addresse smb://192.168.130.2/imprimantes-gcp"),
           Text(
               "    -  Utilisez le fichier PPD : https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd"),
-          Text("   -  Configurez la suite et ça devrait-être ok"),
-          Text(
-            "Code PUK",
-            style: Theme.of(context).textTheme.title,
-          ),
-          Text("Utilisez l'application svp 😄"),
+          Text("    -  Configurez la suite et ça devrait-être ok"),
+          BoxMdH("Code PUK", 2),
+          Text("Utilisez l'application de Minitel > Apps > Imprimante"),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 
 import 'widgets/page_animation.dart';
 import '../pages/about.dart';
@@ -12,25 +13,25 @@ import '../pages/feedback.dart';
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/':
+      case RoutePaths.Authentication:
         return FadeRoute(
           builder: (BuildContext context) =>
               PortalPage(title: "Authentification"),
           settings: settings,
         );
-      case '/reporting':
+      case RoutePaths.Reporting:
         return FadeRoute(
           builder: (BuildContext context) =>
               ReportingPage(title: "Signaler Minitel"),
           settings: settings,
         );
-      case '/docs':
+      case RoutePaths.Docs:
         return FadeRoute(
           builder: (BuildContext context) =>
               DocumentationPage(title: "Documentation"),
           settings: settings,
         );
-      case '/news':
+      case RoutePaths.News:
         return FadeRoute(
           builder: (BuildContext context) => NewsPage(title: "Nouveautés"),
           settings: settings,
@@ -40,18 +41,18 @@ class Router {
       //     builder: (BuildContext context) => MapsPage(title: "Maps"),
       //     settings: settings,
       //   );
-      case '/calendar':
+      case RoutePaths.Calendar:
         return FadeRoute(
           builder: (BuildContext context) => CalendarPage(title: "Calendrier"),
           settings: settings,
         );
-      case '/about':
+      case RoutePaths.About:
         return MaterialPageRoute(
           builder: (BuildContext context) =>
               AboutPage(title: "A propos de l'application"),
           settings: settings,
         );
-      case '/feedback':
+      case RoutePaths.Feedback:
         return FadeRoute(
           builder: (BuildContext context) =>
               FeedbackPage(title: "Alpha Feedback"),

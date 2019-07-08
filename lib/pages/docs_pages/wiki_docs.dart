@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 import 'package:minitel_toolbox/pages/docs_pages/toolbox_docs.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
 import 'wiki_docs/dualboot_doc.dart';
 import 'wiki_docs/imprimante_doc.dart';
@@ -41,7 +42,7 @@ class WikiDocs extends StatelessWidget {
                 child: DrawerHeader(
                   child: Text(
                     "Documentation",
-                    style: Theme.of(context).textTheme.display1,
+                    style: MinitelTextStyles.display1,
                   ),
                 ),
               ),

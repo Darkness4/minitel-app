@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
 class MinitelDoc extends StatelessWidget {
@@ -11,10 +12,7 @@ class MinitelDoc extends StatelessWidget {
     return SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
-          Text(
-            "Minitel",
-            style: Theme.of(context).textTheme.display2,
-          ),
+          BoxMdH("Minitel", 1),
           Image.asset('assets/icon/icon.png'),
           Padding(
             padding: const EdgeInsets.all(8.0),

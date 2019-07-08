@@ -1,5 +1,6 @@
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
 class MailDoc extends StatelessWidget {
   const MailDoc({
@@ -11,10 +12,7 @@ class MailDoc extends StatelessWidget {
     return SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
-          Text(
-            "Importation des mails Sogo",
-            style: Theme.of(context).textTheme.display1,
-          ),
+          BoxMdH("Importation des mails Sogo", 1),
           Text(
               "Avec votre application mail préférée, utilisez la configuration "
               "manuelle et remplissez les champs correspondant."),

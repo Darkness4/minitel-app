@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/funcs/http_portail.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 
 import 'portal_apps/imprimante.dart';
 import 'portal_apps/minitel.dart';
@@ -57,11 +58,7 @@ class _ImprimanteCard extends StatelessWidget {
               FittedBox(
                 child: Text(
                   "Imprimante",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                  ),
+                  style: MinitelTextStyles.appTitle,
                 ),
               ),
             ],
@@ -101,11 +98,7 @@ class _PortailCard extends StatelessWidget {
             FittedBox(
               child: Text(
                 "Portail",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54,
-                ),
+                style: MinitelTextStyles.appTitle,
               ),
             )
           ],
@@ -161,11 +154,7 @@ class _WikiMinitelCard extends StatelessWidget {
             FittedBox(
               child: Text(
                 "Wiki",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54,
-                ),
+                style: MinitelTextStyles.appTitle,
               ),
             ),
           ],

@@ -1,5 +1,6 @@
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
 class DualBootDoc extends StatelessWidget {
   const DualBootDoc({
@@ -11,10 +12,7 @@ class DualBootDoc extends StatelessWidget {
     return SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
-          Text(
-            "L'art du Dual Boot",
-            style: Theme.of(context).textTheme.display1,
-          ),
+          BoxMdH("L'art du Dual Boot", 1),
           Text(
             "Seules les grandes phases sont montrées, vous devez Google chaque étapes.",
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -23,7 +21,7 @@ class DualBootDoc extends StatelessWidget {
             TextSpan(
               text:
                   "Prenez conscience des alternatives avant d'installer Linux (au choix):\n",
-              style: Theme.of(context).textTheme.body2,
+              style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
                   text:
@@ -31,7 +29,7 @@ class DualBootDoc extends StatelessWidget {
                       "    •  Si vous utilisez juste le kernel Linux, un LiveCD est plus intéressant (généralement, on tourne Kali Linux sur une clé)\n"
                       "    •  Le reverse software engineering (disassembler, cracking...) se fait sur Windows\n"
                       "    •  Développer des apps iOS se fait sur OS X\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 )
               ],
             ),
@@ -39,14 +37,14 @@ class DualBootDoc extends StatelessWidget {
           Text.rich(
             TextSpan(
               text: "Prenez conscience des risques d'installer Linux :\n",
-              style: Theme.of(context).textTheme.body2,
+              style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
                   text:
                       "    •  Linux est plus stable, mais les mises à jours de distributions sont plus fragiles\n"
                       "    •  Les pilotes sont les premières causes de crash brutal (NVIDIA, Realtek...)\n"
                       "    •  Une mauvaise config du BIOS peut également vous être fatal\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 )
               ],
             ),
@@ -55,7 +53,7 @@ class DualBootDoc extends StatelessWidget {
             TextSpan(
               text:
                   "La customization n'est pas limitée. Observez quelles distributions convient le mieux :\n",
-              style: Theme.of(context).textTheme.body2,
+              style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
                   text:
@@ -72,7 +70,7 @@ class DualBootDoc extends StatelessWidget {
                       "    •  Envie d'aller en enfer ? Linux From Scratch\n"
                       "    •  Faire ressuciter un Android en serveur ? postmarketOS\n"
                       "    •  Google d'autres distros ...\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 )
               ],
             ),
@@ -80,7 +78,7 @@ class DualBootDoc extends StatelessWidget {
           Text.rich(
             TextSpan(
               text: "Préparations :\n",
-              style: Theme.of(context).textTheme.body2,
+              style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
                   text: "    •  Windows\n"
@@ -90,7 +88,7 @@ class DualBootDoc extends StatelessWidget {
                       "    •  Désactiver le Fast Boot\n"
                       "    •  Préparer une partition vide de minimum 50 Go\n"
                       "    •  Avec Rufus, flashez une image sur la clé, GPT si UEFI, MBR 90 % du temps\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 )
               ],
             ),
@@ -99,7 +97,7 @@ class DualBootDoc extends StatelessWidget {
             TextSpan(
               text:
                   "Installer Linux (booter sur la clé en changeant l'odre de boot sur le BIOS ou via une touche de clavier (F11? Suppr? Insert? F1? F2? F12?)) :\n",
-              style: Theme.of(context).textTheme.body2,
+              style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
                   text: "    •  Langue, Timezone, Network...\n"
@@ -109,7 +107,7 @@ class DualBootDoc extends StatelessWidget {
                       "           •  \"/dev/sda2\" étant le SWAP, Taille = 1.5 * RAM\n"
                       "    •  Vérifiez et confirmez les partitions (regardez si windows est toujours là 🙂)\n"
                       "    •  Etc...\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 )
               ],
             ),
@@ -117,20 +115,20 @@ class DualBootDoc extends StatelessWidget {
           Text.rich(
             TextSpan(
               text: "Post-Install (NVIDIA + Intel Graphics) :\n",
-              style: Theme.of(context).textTheme.body2,
+              style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
                   text: "    Par défaut, Linux va tourner avec Intel. Ce qui "
                       "est très mauvais si vous voulez miner de l'ethereum ou "
                       "faire du Machine Learning.\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 ),
                 TextSpan(
                   text:
                       "    •  Téléchargez les pilotes de NVIDIA sur le site officiel de NVIDIA.\n"
                       "    •  (Téléchargez CUDA si nécessaire, sans pilotes, sans openGL)\n"
                       "    •  Apprenez le raccourci Ctrl + F1, Ctrl + F2 ...\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 ),
               ],
             ),
@@ -194,7 +192,7 @@ GRUB_TERMINAL=console""",
           Text.rich(
             TextSpan(
               text: "Changez de GNU/Linux ou pas...\n",
-              style: Theme.of(context).textTheme.body2,
+              style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
                   text: "    •  Généralement, on ne change pas de Linux. S'il "
@@ -206,7 +204,7 @@ GRUB_TERMINAL=console""",
                       "    •  LTS ? Généralement les LTS sont beaucoup plus stables\n"
                       "    •  Egalement, 80 % des utilisateurs de Ubuntu préfèrent"
                       " réinstaller que faire un dist-upgrade.\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 )
               ],
             ),
@@ -214,25 +212,24 @@ GRUB_TERMINAL=console""",
           Text.rich(
             TextSpan(
               text: "Ma config 2019...\n",
-              style: Theme.of(context).textTheme.body2,
+              style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
-                  text:
-                      "    •  Kali Linux Lite (chuis à Minitel, trop la flemme de tout télécharger et configurer)\n"
-                      "    •  Terminal : ZSH + Oh-my-ZSH + Powerline10K (PurePower) avec autocomplete, syntax-highlight, tmux\n"
+                  text: "    •  MX Linux\n"
+                      "    •  Terminal : ZSH + Oh-my-ZSH + Powerline10K (PurePower) avec autocomplete, syntax-highlight, tmux ...\n"
                       "    •  Theme : Canta-dark\n"
                       "    •  Icons : Flat-Remix\n"
                       "    •  Display Manager : LightDM\n"
                       "    •  Desktop Environnement : Xfce\n"
                       "    •  Windows Manager : Xfwm4\n"
                       "    •  File Manager : Thunar\n",
-                  style: Theme.of(context).textTheme.body1,
+                  style: MinitelTextStyles.body1,
                 ),
                 TextSpan(
                   text:
                       "    •  Egalement, je main Windows avec Alpine en Windows"
-                      " Subsystem, MSYS2 MinGW et VSCode.\n",
-                  style: Theme.of(context).textTheme.body2,
+                      " Subsystem et VSCode.\n",
+                  style: MinitelTextStyles.body2,
                 )
               ],
             ),

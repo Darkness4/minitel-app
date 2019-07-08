@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
-import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:minitel_toolbox/funcs/http_calendar.dart';
 import 'package:minitel_toolbox/funcs/icalendar_parser.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -140,11 +141,11 @@ class CalendarPageState extends State<CalendarPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "${DateFormat.MMMM("fr_FR").format(dt).toUpperCase()}",
-                style: Theme.of(context).textTheme.display2.apply(
-                      color: Colors.white,
-                      fontWeightDelta: 1,
-                      fontFamily: "Roboto",
-                    ),
+                style: MinitelTextStyles.display2.apply(
+                  color: Colors.white,
+                  fontWeightDelta: 1,
+                  fontFamily: "Roboto",
+                ),
               ),
             ),
           ),
@@ -203,7 +204,7 @@ class CalendarPageState extends State<CalendarPage> {
         title: Text(widget.title),
       ),
       body: Container(
-        color: primaryColor,
+        color: MinitelColors.PrimaryColor,
         child: Center(
           child: FutureBuilder(
             future: _listEventCards,
@@ -260,11 +261,7 @@ class CalendarPageState extends State<CalendarPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   e.toString(),
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
+                  style: MinitelTextStyles.error,
                 ),
               ),
             ),

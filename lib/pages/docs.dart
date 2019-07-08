@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/widgets/drawer.dart';
-import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 import 'package:minitel_toolbox/pages/docs_pages/minitel_doc.dart';
 import 'package:minitel_toolbox/pages/docs_pages/toolbox_docs.dart';
 import 'package:minitel_toolbox/pages/docs_pages/wiki_docs.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
+import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
 class DocumentationPage extends StatelessWidget {
   final String title;
@@ -36,7 +37,7 @@ class DocumentationPage extends StatelessWidget {
                 child: DrawerHeader(
                   child: Text(
                     "Documentation",
-                    style: Theme.of(context).textTheme.display1,
+                    style: MinitelTextStyles.display1,
                   ),
                 ),
               ),

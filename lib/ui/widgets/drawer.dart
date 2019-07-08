@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -26,7 +27,7 @@ class MainDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            decoration: BoxDecoration(color: primaryColor),
+            decoration: BoxDecoration(color: MinitelColors.PrimaryColor),
           ),
           ListTile(
               title: const Text("Authentification"),
@@ -34,8 +35,10 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/')
-                  Navigator.pushReplacementNamed(context, '/');
+                if (ModalRoute.of(context).settings.name !=
+                    RoutePaths.Authentication)
+                  Navigator.pushReplacementNamed(
+                      context, RoutePaths.Authentication);
               }),
           Divider(),
           ListTile(
@@ -44,8 +47,8 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/news')
-                  Navigator.pushReplacementNamed(context, '/news');
+                if (ModalRoute.of(context).settings.name != RoutePaths.News)
+                  Navigator.pushReplacementNamed(context, RoutePaths.News);
               }),
           ListTile(
               title: const Text("Agenda"),
@@ -53,8 +56,8 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/calendar')
-                  Navigator.pushReplacementNamed(context, '/calendar');
+                if (ModalRoute.of(context).settings.name != RoutePaths.Calendar)
+                  Navigator.pushReplacementNamed(context, RoutePaths.Calendar);
               }),
           // ListTile(
           //     title: Text("Maps"),
@@ -67,7 +70,7 @@ class MainDrawer extends StatelessWidget {
           //     }),
           Divider(),
           Container(
-            color: reportPrimaryColor,
+            color: MinitelColors.ReportPrimaryColor,
             child: ListTile(
                 title: Text(
                   "Signaler Minitel",
@@ -83,8 +86,10 @@ class MainDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.pop(context); // Close Drawer
-                  if (ModalRoute.of(context).settings.name != '/reporting')
-                    Navigator.pushReplacementNamed(context, '/reporting');
+                  if (ModalRoute.of(context).settings.name !=
+                      RoutePaths.Reporting)
+                    Navigator.pushReplacementNamed(
+                        context, RoutePaths.Reporting);
                 }),
           ),
           ListTile(
@@ -93,8 +98,8 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/docs')
-                  Navigator.pushReplacementNamed(context, '/docs');
+                if (ModalRoute.of(context).settings.name != RoutePaths.Docs)
+                  Navigator.pushReplacementNamed(context, RoutePaths.Docs);
               }),
           ListTile(
             title: Text("A propos..."),
@@ -102,8 +107,8 @@ class MainDrawer extends StatelessWidget {
             trailing: const Icon(Icons.arrow_forward),
             onTap: () {
               Navigator.pop(context); // Close Drawer
-              if (ModalRoute.of(context).settings.name != '/about')
-                Navigator.pushNamed(context, '/about');
+              if (ModalRoute.of(context).settings.name != RoutePaths.About)
+                Navigator.pushNamed(context, RoutePaths.About);
             },
           ),
           Container(
@@ -114,8 +119,8 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != '/feedback')
-                  Navigator.pushNamed(context, '/feedback');
+                if (ModalRoute.of(context).settings.name != RoutePaths.Feedback)
+                  Navigator.pushNamed(context, RoutePaths.Feedback);
               },
             ),
           ),

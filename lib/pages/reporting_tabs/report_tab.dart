@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -67,18 +68,12 @@ class _ContactsCard extends StatelessWidget {
     return DocCard(
       elevation: 4,
       children: <Widget>[
-        Text(
-          "Contacts",
-          style: Theme.of(context).textTheme.headline,
-        ),
+        BoxMdH("Contacts", 1),
         FlatButton(
           textColor: Colors.blueAccent,
           child: Text(
             "Facebook: Minitel Ismin",
-            style: Theme.of(context)
-                .textTheme
-                .title
-                .apply(color: Colors.blueAccent),
+            style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
           onPressed: () =>
               _launchURL("https://www.messenger.com/t/100012919189214"),
@@ -88,17 +83,14 @@ class _ContactsCard extends StatelessWidget {
           textColor: Colors.blueAccent,
           child: Text(
             "Mail: minitelismin@gmail.com (non recommandée)",
-            style: Theme.of(context)
-                .textTheme
-                .title
-                .apply(color: Colors.blueAccent),
+            style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
           onPressed: () => _launchURL("mailto: minitelismin@gmail.com"),
           color: Colors.lightBlue[100],
         ),
         Text(
           "G*: Contact Admin",
-          style: Theme.of(context).textTheme.title,
+          style: MinitelTextStyles.mdH3,
         ),
       ],
     );
@@ -181,38 +173,35 @@ class _TutorialCard extends StatelessWidget {
     return DocCard(
       elevation: 4,
       children: <Widget>[
-        Text(
-          "Comment signaler sans internet ?",
-          style: Theme.of(context).textTheme.headline,
-        ),
-        Text(
+        BoxMdH("Comment signaler sans internet ?", 1),
+        BoxMdBody(Text(
           "REMARQUE : Il est recommandé d\'installer le Root et Busybox.",
-          style: Theme.of(context).textTheme.subhead,
-        ),
-        Text(
+          style: MinitelTextStyles.subhead,
+        )),
+        BoxMdBody(Text(
           "1. Connectez-vous à \'WiFi Minitel\'",
-          style: Theme.of(context).textTheme.title,
-        ),
-        Text(
+          style: MinitelTextStyles.mdH3,
+        )),
+        BoxMdBody(Text(
           "2. Lancez la suite de diagnostique en appuyant sur le bouton, et attendez 1 minute.",
-          style: Theme.of(context).textTheme.title,
-        ),
-        Text(
+          style: MinitelTextStyles.mdH3,
+        )),
+        BoxMdBody(Text(
           "3. Remplissez votre rapport.",
-          style: Theme.of(context).textTheme.title,
-        ),
-        Text(
+          style: MinitelTextStyles.mdH3,
+        )),
+        BoxMdBody(Text(
           "Exemple : \nTitre: 2012, pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c\'est ok.",
-          style: Theme.of(context).textTheme.body1,
-        ),
-        Text(
+          style: MinitelTextStyles.body1,
+        )),
+        BoxMdBody(Text(
           "4. Connectez-vous sur un réseau où il y a Internet.",
-          style: Theme.of(context).textTheme.title,
-        ),
-        Text(
+          style: MinitelTextStyles.mdH3,
+        )),
+        BoxMdBody(Text(
           "5. Envoyez le rapport.",
-          style: Theme.of(context).textTheme.title,
-        ),
+          style: MinitelTextStyles.mdH3,
+        )),
       ],
     );
   }

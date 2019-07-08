@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 import 'package:minitel_toolbox/pages/docs_pages/wiki_docs.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
 import 'toolbox_docs/diagnose_doc.dart';
 import 'toolbox_docs/login_doc.dart';
@@ -37,7 +38,7 @@ class ToolboxDocs extends StatelessWidget {
                 child: DrawerHeader(
                   child: Text(
                     "Documentation",
-                    style: Theme.of(context).textTheme.display1,
+                    style: MinitelTextStyles.display1,
                   ),
                 ),
               ),

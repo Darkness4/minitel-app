@@ -340,7 +340,7 @@ class ReportingPageState extends State<ReportingPage>
             ),
             FloatingActionButton(
               heroTag: null,
-              backgroundColor: reportPrimaryColor,
+              backgroundColor: MinitelColors.ReportPrimaryColor,
               child: const Icon(Icons.mail),
               mini: true,
               onPressed: () async {
@@ -397,7 +397,7 @@ class ReportingPageState extends State<ReportingPage>
             ),
             FloatingActionButton(
               heroTag: null,
-              backgroundColor: reportPrimaryColor,
+              backgroundColor: MinitelColors.ReportPrimaryColor,
               child: const Icon(Icons.share),
               mini: true,
               onPressed: () =>
@@ -420,7 +420,7 @@ class ReportingPageState extends State<ReportingPage>
               (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
             SliverAppBar(
               title: Text(widget.title),
-              backgroundColor: reportPrimaryColor,
+              backgroundColor: MinitelColors.ReportPrimaryColor,
               pinned: true,
               floating: true,
               forceElevated: true,

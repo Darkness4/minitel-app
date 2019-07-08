@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Colors.green;
-const Color fontColor = Colors.black87;
-const Color terminalHeaderColor = Colors.lightBlue;
-const Color terminalBgColor = Colors.black87;
-const Color terminalFgColor = Colors.white;
-const Color reportPrimaryColor = Colors.red;
+class MinitelColors {
+  static const Color PrimaryColor = Colors.green;
+  static const Color FontColor = Colors.black87;
+
+  static const Color TerminalHeaderColor = Colors.lightBlue;
+  static const Color TerminalBgColor = Colors.black87;
+  static const Color TerminalFgColor = Colors.white;
+
+  static const Color ReportPrimaryColor = Colors.red;
+}

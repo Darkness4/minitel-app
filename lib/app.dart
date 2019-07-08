@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 
 import 'ui/router.dart';
 
@@ -17,42 +18,21 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: Router.generateRoute,
       supportedLocales: [const Locale('fr', 'FR')],
       theme: ThemeData(
-          primarySwatch: primaryColor,
-          fontFamily: 'NotoSans',
-          textTheme: TextTheme(
-            body1: TextStyle(
-              height: 1.2,
-              color: fontColor,
-            ),
-            body2: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: fontColor,
-            ),
-            headline: TextStyle(
-              height: 1.5,
-              fontWeight: FontWeight.bold,
-              color: fontColor,
-            ),
-            title: TextStyle(
-              height: 1.5,
-              fontWeight: FontWeight.bold,
-              color: fontColor,
-            ),
-            display1: TextStyle(height: 1.5),
-            display2: TextStyle(
-              height: 1.5,
-            ),
-            display3: TextStyle(height: 1.5),
-            display4: TextStyle(height: 1.5),
-            subhead: TextStyle(
-              height: 1.5,
-              color: fontColor,
-            ),
-            subtitle: TextStyle(
-              height: 1.5,
-              color: fontColor,
-            ),
-          )),
+        primarySwatch: MinitelColors.PrimaryColor,
+        fontFamily: 'NotoSans',
+        textTheme: TextTheme(
+          body1: MinitelTextStyles.body1,
+          body2: MinitelTextStyles.body2,
+          headline: MinitelTextStyles.headline,
+          title: MinitelTextStyles.mdH2,
+          display1: MinitelTextStyles.display1,
+          display2: MinitelTextStyles.display2,
+          display3: MinitelTextStyles.display3,
+          display4: MinitelTextStyles.display4,
+          subtitle: MinitelTextStyles.subtitle,
+          subhead: MinitelTextStyles.subhead,
+        ),
+      ),
       initialRoute: '/',
     );
   }

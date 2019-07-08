@@ -2,9 +2,10 @@ import 'dart:io' show Platform;
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/widgets/drawer.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/funcs/http_webhook.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -84,17 +85,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
               DocCard(
                 elevation: 4,
                 children: <Widget>[
-                  Text(
-                    "Autres Contacts",
-                    style: Theme.of(context).textTheme.headline,
-                  ),
+                  BoxMdH("Autres Contacts", 1),
                   FlatButton(
                     textColor: Colors.blueAccent,
                     child: Text(
                       "Github Issues",
-                      style: Theme.of(context)
-                          .textTheme
-                          .title
+                      style: MinitelTextStyles.mdH2
                           .apply(color: Colors.blueAccent),
                     ),
                     onPressed: () => _launchURL(
@@ -105,9 +101,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     textColor: Colors.blueAccent,
                     child: Text(
                       "Mail : marc.nguyen@etu.emse.fr",
-                      style: Theme.of(context)
-                          .textTheme
-                          .body1
+                      style: MinitelTextStyles.mdH4
                           .apply(color: Colors.blueAccent),
                     ),
                     onPressed: () =>
@@ -116,7 +110,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   ),
                   Text(
                     "IRL : Marc NGUYEN, Chambre 2012",
-                    style: Theme.of(context).textTheme.body1,
+                    style: MinitelTextStyles.body1,
                   ),
                 ],
               ),

@@ -47,7 +47,7 @@ class LogCard extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: Card(
         elevation: elevation,
-        color: terminalHeaderColor,
+        color: MinitelColors.TerminalHeaderColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -69,12 +69,12 @@ class LogCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 10,
                   fontFamily: "RobotoMono",
-                  color: terminalFgColor,
+                  color: MinitelColors.TerminalFgColor,
                 ),
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4.0),
-                color: terminalBgColor,
+                color: MinitelColors.TerminalBgColor,
               ),
             ),
           ],
@@ -174,10 +174,22 @@ class NewsCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      parseFragment(item.content).text,
+                  Container(
+                    margin: EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          parseFragment(item.content).text,
+                          overflow: TextOverflow.fade,
+                          maxLines: 10,
+                        ),
+                        Text("\nSee More...",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold)),
+                      ],
                     ),
                   ),
 
