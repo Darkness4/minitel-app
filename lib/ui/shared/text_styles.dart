@@ -191,6 +191,7 @@ class BoxMdH extends StatelessWidget {
         break;
 
       default:
+        return Container();
     }
   }
 }

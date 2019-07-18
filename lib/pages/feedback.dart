@@ -3,11 +3,11 @@ import 'dart:io' show Platform;
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/funcs/http_webhook.dart';
+import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:package_info/package_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class FeedbackPage extends StatefulWidget {
   final String title;
@@ -93,19 +93,17 @@ class _FeedbackPageState extends State<FeedbackPage> {
                       style: MinitelTextStyles.mdH2
                           .apply(color: Colors.blueAccent),
                     ),
-                    onPressed: () => _launchURL(
-                        "https://github.com/Darkness4/minitel-app/issues"),
+                    onPressed: LaunchURL.githubDarkness4Issues,
                     color: Colors.lightBlue[100],
                   ),
                   FlatButton(
                     textColor: Colors.blueAccent,
                     child: Text(
-                      "Mail : marc.nguyen@etu.emse.fr",
+                      "Mail : marc_nguyen@live.fr",
                       style: MinitelTextStyles.mdH4
                           .apply(color: Colors.blueAccent),
                     ),
-                    onPressed: () =>
-                        _launchURL("mailto: marc.nguyen@etu.emse.fr"),
+                    onPressed: LaunchURL.mailToMarcNGUYEN,
                     color: Colors.lightBlue[100],
                   ),
                   Text(
@@ -146,14 +144,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
     _titleFocusNode = FocusNode();
     _descriptionFocusNode = FocusNode();
     _descriptionController = TextEditingController();
-  }
-
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 
   void _send(BuildContext ctxt) async {

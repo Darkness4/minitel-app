@@ -3,14 +3,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/models/diagnosis.dart';
 import 'package:minitel_toolbox/funcs/http_webhook.dart';
+import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/widgets/buttons.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'reporting_tabs/diagnose_tab.dart';
 import 'reporting_tabs/report_tab.dart';
+
+Future<void> _setTimeout() async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString(
+      'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
+}
 
 class ReportingPage extends StatefulWidget {
   final String title;
@@ -23,26 +30,25 @@ class ReportingPage extends StatefulWidget {
 
 class ReportingPageState extends State<ReportingPage>
     with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  AnimationController _animationController;
-
-  var _diagnosis = Diagnosis();
-
-  String _report = "";
+  final Diagnosis _diagnosis = Diagnosis();
 
   /// State of the Diagnosis.
   ///
   /// 0 = None, 1 = Loading, 2 = Done
   int _diagnosisState = 0;
 
+  /// Used for the [CircularProgressIndicator], between 0.0 and 1.0.
+  double _percentageDiagnoseProgress = 0.0;
+
+  String _report = "";
+
   /// State of the "Send to Slack" action.
   ///
   /// 0 = None, 1 = Loading, 2 = Done
   int _reportState = 0;
-
-  /// Used for the [CircularProgressIndicator], between 0.0 and 1.0.
-  double _percentageDiagnoseProgress = 0.0;
 
   Widget get _diagnosisButton => FloatingActionButton(
         backgroundColor: _diagnosisState == 2 ? Colors.green : Colors.blue,
@@ -84,51 +90,35 @@ class ReportingPageState extends State<ReportingPage>
     }
   }
 
-  Widget get _mailButton => ScaleTransition(
-        scale: CurvedAnimation(
-          parent: _animationController,
-          curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Email",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              elevation: 4,
-            ),
-            FloatingActionButton(
-              heroTag: null,
-              backgroundColor: MinitelColors.ReportPrimaryColor,
-              child: const Icon(Icons.mail),
-              mini: true,
-              onPressed: () async {
-                var body = "---Report ${DateTime.now().toString()}---\n\n"
-                    "Titre: ${_titleController.text}\n"
-                    "Description: ${_descriptionController.text}\n\n"
-                    "*Diagnosis*\n"
-                    "$_report";
-                _launchURL(
-                    "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
-              },
-            ),
-          ],
-        ),
+  Widget get _mailButton => AnimatedFloatingButton(
+        "Email",
+        start: 0.0,
+        end: 0.5,
+        child: Icon(Icons.mail),
+        controller: _animationController,
+        onPressed: () {
+          var body = "---Report ${DateTime.now().toString()}---\n\n"
+              "Titre: ${_titleController.text}\n"
+              "Description: ${_descriptionController.text}\n\n"
+              "*Diagnosis*\n"
+              "$_report";
+          LaunchURL.launchURL(
+              "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
+        },
       );
 
   Widget get _reportIcon {
     switch (_reportState) {
       case 0:
-        return Image.asset("assets/img/Slack_Mark_Monochrome_White.png");
+        return const ImageIcon(
+          AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
+          size: 100.0,
+        );
         break;
       case 1:
         return const CircularProgressIndicator(
-            valueColor: const AlwaysStoppedAnimation<Color>(Colors.white));
+          valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+        );
         break;
       case 2:
         return const Icon(
@@ -141,39 +131,25 @@ class ReportingPageState extends State<ReportingPage>
     }
   }
 
-  Widget get _shareButton => ScaleTransition(
-        scale: CurvedAnimation(
-          parent: _animationController,
-          curve: const Interval(0.0, 1.0, curve: Curves.easeOut),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Partager",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              elevation: 4,
-            ),
-            FloatingActionButton(
-              heroTag: null,
-              backgroundColor: MinitelColors.ReportPrimaryColor,
-              child: const Icon(Icons.share),
-              mini: true,
-              onPressed: () =>
-                  Share.share("---Report ${DateTime.now().toString()}---\n\n"
-                      "Titre: ${_titleController.text}\n"
-                      "Description: ${_descriptionController.text}\n\n"
-                      "*Diagnosis*\n"
-                      "$_report"),
-            ),
-          ],
-        ),
+  Widget get _shareButton => AnimatedFloatingButton(
+        "Partager",
+        start: 0.0,
+        end: 1.0,
+        child: Icon(Icons.share),
+        controller: _animationController,
+        onPressed: () =>
+            Share.share("---Report ${DateTime.now().toString()}---\n\n"
+                "Titre: ${_titleController.text}\n"
+                "Description: ${_descriptionController.text}\n\n"
+                "*Diagnosis*\n"
+                "$_report"),
       );
+
+  Future<DateTime> get _timeout async {
+    final prefs = await SharedPreferences.getInstance();
+    final dateTimeout = prefs.getString('timeout') ?? "0000-00-00 00:00:00.000";
+    return DateTime.parse(dateTimeout);
+  }
 
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -223,7 +199,7 @@ class ReportingPageState extends State<ReportingPage>
             children: <Widget>[
               _shareButton,
               _mailButton,
-              _buildReportButton(context),
+              _reportButton(context),
               _diagnosisButton,
             ],
           ),
@@ -239,12 +215,6 @@ class ReportingPageState extends State<ReportingPage>
     super.dispose();
   }
 
-  Future<DateTime> getTimeout() async {
-    final prefs = await SharedPreferences.getInstance();
-    final timeout = prefs.getString('timeout') ?? "0000-00-00 00:00:00.000";
-    return DateTime.parse(timeout);
-  }
-
   @override
   void initState() {
     _animationController = AnimationController(
@@ -254,89 +224,45 @@ class ReportingPageState extends State<ReportingPage>
     super.initState();
   }
 
-  Widget _buildReportButton(BuildContext ctxt,
-      {String channel: "projet_flutter_notif"}) {
-    return ScaleTransition(
-      scale: CurvedAnimation(
-        parent: _animationController,
-        curve: Interval(0.0, 0.25, curve: Curves.easeOut),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Notifier sur Slack",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            elevation: 4,
-          ),
-          FloatingActionButton(
-            heroTag: null,
-            onPressed: () async {
-              if (_reportState != 1) {
-                setState(() => _reportState = 1);
-                getTimeout().then(
-                  (timeout) {
-                    if (DateTime.now().isAfter(timeout))
-                      report(
-                        "_${_descriptionController.text}_\n\n"
-                        "*Diagnosis*\n"
-                        "$_report",
-                        title: _titleController.text,
-                        channel: channel,
-                      ).then(
-                        (status) {
-                          if (status == "ok") {
-                            _setTimeout();
-                            setState(() => _reportState = 2);
-                          } else {
-                            setState(() => _reportState = 0);
-                          }
-                          Scaffold.of(ctxt).showSnackBar(
-                            SnackBar(
-                              content: Text(status),
-                            ),
-                          );
-                        },
-                      );
-                    else {
-                      _reportState = 0;
-                      Scaffold.of(ctxt).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              "Wait until ${timeout.hour}:${timeout.minute}"),
-                        ),
-                      );
-                    }
-                  },
-                );
+  Widget _reportButton(BuildContext context, {String channel: "DE8PA0Z1C"}) =>
+      AnimatedFloatingButton(
+        "Notifier sur Slack",
+        start: 0.0,
+        end: 0.25,
+        child: _reportIcon,
+        controller: _animationController,
+        onPressed: () async {
+          DateTime timeout = await _timeout;
+          if (_reportState != 1) {
+            setState(() => _reportState = 1);
+            if (DateTime.now().isAfter(timeout)) {
+              String status = await report(
+                "_${_descriptionController.text}_\n\n"
+                "*Diagnosis*\n"
+                "$_report",
+                title: _titleController.text,
+                channel: channel,
+              );
+              if (status == "ok") {
+                _setTimeout();
+                setState(() => _reportState = 2);
+              } else {
+                setState(() => _reportState = 0);
               }
-            },
-            child: _reportIcon,
-            backgroundColor: _reportState == 2 ? Colors.green : Colors.red,
-            foregroundColor: Colors.black,
-            mini: true,
-          ),
-        ],
-      ),
-    );
-  }
-
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  _setTimeout() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(
-        'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
-  }
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(status),
+                ),
+              );
+            } else {
+              _reportState = 0;
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Wait until ${timeout.hour}:${timeout.minute}"),
+                ),
+              );
+            }
+          }
+        },
+      );
 }

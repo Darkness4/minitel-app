@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/funcs/http_version_checker.dart';
+import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:package_info/package_info.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-void _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 
 class AboutPage extends StatelessWidget {
   final String title;
@@ -33,15 +25,14 @@ class AboutPage extends StatelessWidget {
               ListTile(
                 title: Text("Développeur"),
                 subtitle: Text("Marc NGUYEN <nguyen_marc@live.fr>"),
-                onTap: () => _launchURL("mailto:nguyen_marc@live.fr"),
+                onTap: LaunchURL.mailToMarcNGUYEN,
               ),
               Divider(),
               ListTile(
                 title: Text("Dernière version"),
                 subtitle:
                     Text("https://github.com/Darkness4/minitel-app/releases"),
-                onTap: () => _launchURL(
-                    "https://github.com/Darkness4/minitel-app/releases"),
+                onTap: LaunchURL.githubDarkness4Releases,
               ),
               Divider(),
               ListTile(
@@ -130,7 +121,7 @@ class AboutPage extends StatelessWidget {
                               textColor: Colors.white,
                               child: Text("Update"),
                               onPressed: () => getLatestVersionURL()
-                                  .then((url) => _launchURL(url)),
+                                  .then((url) => LaunchURL.launchURL(url)),
                             )
                           ],
                         );
@@ -155,7 +146,7 @@ class AboutPage extends StatelessWidget {
                               textColor: Colors.white,
                               child: Text("Télécharger"),
                               onPressed: () => getLatestVersionURL()
-                                  .then((url) => _launchURL(url)),
+                                  .then((url) => LaunchURL.launchURL(url)),
                             )
                           ],
                         );

@@ -19,7 +19,7 @@ class DiagnoseTab extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text(
-                _diagnosis.report["alert"],
+                _diagnosis.alert ?? "",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.red,
@@ -44,7 +44,7 @@ class DiagnoseTab extends StatelessWidget {
                 if (item != DiagnosisContent.ssid &&
                     item != DiagnosisContent.ip) // Ignore them
                   LogCard(
-                    _diagnosis.report[item],
+                    _diagnosis.report[item] ?? "",
                     title: item,
                   ),
             ],

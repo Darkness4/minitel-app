@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-_launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 
 class ReportTab extends StatefulWidget {
   final String channel;
@@ -75,8 +67,7 @@ class _ContactsCard extends StatelessWidget {
             "Facebook: Minitel Ismin",
             style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
-          onPressed: () =>
-              _launchURL("https://www.messenger.com/t/100012919189214"),
+          onPressed: () => LaunchURL.messengerMarcNGUYEN,
           color: Colors.lightBlue[100],
         ),
         FlatButton(
@@ -85,7 +76,7 @@ class _ContactsCard extends StatelessWidget {
             "Mail: minitelismin@gmail.com (non recommandée)",
             style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
-          onPressed: () => _launchURL("mailto: minitelismin@gmail.com"),
+          onPressed: () => LaunchURL.mailToMinitel,
           color: Colors.lightBlue[100],
         ),
         Text(

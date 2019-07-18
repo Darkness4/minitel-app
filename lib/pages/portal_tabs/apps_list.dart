@@ -39,10 +39,6 @@ class _ImprimanteCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        // onTap: () => _launchURL(
-        //       "http://192.168.130.2/watchdoc",
-        //       forceWebView: false,
-        //     ),
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => ImprimanteWebView()),
@@ -121,7 +117,6 @@ class _SogoCard extends StatelessWidget {
           context,
           MaterialPageRoute(builder: (context) => SogoWebView()),
         ),
-        // onTap: () => _launchURL('https://sogo.emse.fr/'),
         child: Image.asset('assets/img/mail.png'),
       ),
     );
@@ -142,7 +137,6 @@ class _WikiMinitelCard extends StatelessWidget {
             MaterialPageRoute(builder: (context) => MinitelWebView()),
           );
         },
-        // onTap: () => _launchURL('http://minitel.emse.fr/wiki/Wiki-user'),
         child: Column(
           children: <Widget>[
             Flexible(

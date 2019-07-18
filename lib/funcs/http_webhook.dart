@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+const String _webhook =
+    "aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDlTNFhMQzhHL0JHV1NHS1lKVS94RTFzQzdJNEc0MWdDMnNMYXlSZENkM1U=";
+
 /// Report data to the Slack of Minitel
 ///
 /// Send a POST data to the Webhook of the Slack of Minitel by using [HttpClientRequest].
@@ -30,8 +33,8 @@ Future<String> report(String text,
     };
 
     try {
-      HttpClientRequest request = await client.postUrl(Uri.parse(
-          'https://hooks.slack.com/services/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'));
+      HttpClientRequest request =
+          await client.postUrl(Uri.parse(utf8.decode(base64.decode(_webhook))));
 
       request.headers.contentType =
           ContentType("application", "json", charset: "utf-8");
