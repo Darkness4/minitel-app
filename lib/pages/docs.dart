@@ -37,7 +37,7 @@ class DocumentationPage extends StatelessWidget {
                 child: DrawerHeader(
                   child: Text(
                     "Documentation",
-                    style: MinitelTextStyles.display1,
+                    style: MinitelTextStyles.mdH1,
                   ),
                 ),
               ),
@@ -53,7 +53,10 @@ class DocumentationPage extends StatelessWidget {
               title: Text("Authentification"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                final _controller = PageController(initialPage: 0);
+                final _controller = PageController(
+                  initialPage: 0,
+                  viewportFraction: .9,
+                );
                 Navigator.push(
                   context,
                   SlideRightRoute(
@@ -66,7 +69,10 @@ class DocumentationPage extends StatelessWidget {
               title: Text("Diagnostique"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                final _controller = PageController(initialPage: 1);
+                final _controller = PageController(
+                  initialPage: 1,
+                  viewportFraction: .9,
+                );
                 Navigator.push(
                   context,
                   SlideRightRoute(
@@ -80,7 +86,10 @@ class DocumentationPage extends StatelessWidget {
               title: Text("Configuration de l'imprimante"),
               onTap: () {
                 Navigator.pop(context);
-                final _controller = PageController(initialPage: 0);
+                final _controller = PageController(
+                  initialPage: 0,
+                  viewportFraction: .9,
+                );
                 Navigator.push(
                   context,
                   SlideRightRoute(
@@ -93,7 +102,10 @@ class DocumentationPage extends StatelessWidget {
               title: Text("Importation des mails SoGo"),
               onTap: () {
                 Navigator.pop(context);
-                final _controller = PageController(initialPage: 1);
+                final _controller = PageController(
+                  initialPage: 1,
+                  viewportFraction: .9,
+                );
                 Navigator.push(
                   context,
                   SlideRightRoute(
@@ -106,7 +118,10 @@ class DocumentationPage extends StatelessWidget {
               title: Text("Installer un Dual Boot"),
               onTap: () {
                 Navigator.pop(context);
-                final _controller = PageController(initialPage: 2);
+                final _controller = PageController(
+                  initialPage: 2,
+                  viewportFraction: .9,
+                );
                 Navigator.push(
                   context,
                   SlideRightRoute(
@@ -119,7 +134,10 @@ class DocumentationPage extends StatelessWidget {
               title: Text("Jouer avec des VM"),
               onTap: () {
                 Navigator.pop(context);
-                final _controller = PageController(initialPage: 3);
+                final _controller = PageController(
+                  initialPage: 3,
+                  viewportFraction: .9,
+                );
                 Navigator.push(
                   context,
                   SlideRightRoute(

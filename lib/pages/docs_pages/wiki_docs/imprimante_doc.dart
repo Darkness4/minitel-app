@@ -14,12 +14,14 @@ class ImprimanteDoc extends StatelessWidget {
         children: <Widget>[
           BoxMdH("Configurer l'imprimante", 1),
           BoxMdH("Windows", 2),
+          Image.asset("assets/img/Lecteur-reseau.png"),
           Text(
             """    -  Ouvrir \\\\192.168.130.2 avec l'explorer Windows
     -  Mettre prenom.nom et mot de passe (testez également EMSE2000\\prenom.nom)
     -  Double-cliquer sur \"imprimantes-gpc\"""",
           ),
           BoxMdH("Ubuntu", 2),
+          Image.asset("assets/img/Linux.png"),
           Text(
             """    -  Ajoutez smb://192.168.130.2/imprimantes-gcp aux imprimantes réseaux
     -  Pilote: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd""",

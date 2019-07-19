@@ -13,6 +13,10 @@ class LoginDoc extends StatelessWidget {
       child: DocCard(
         children: <Widget>[
           BoxMdH("Authentification", 1),
+          InkWell(
+            child: Image.asset("assets/img/network.jpg"),
+            onTap: () {},
+          ),
           BoxMdH("Nom de domaine / IP", 2),
           Text.rich(
             TextSpan(

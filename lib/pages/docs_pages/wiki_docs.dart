@@ -42,7 +42,7 @@ class WikiDocs extends StatelessWidget {
                 child: DrawerHeader(
                   child: Text(
                     "Documentation",
-                    style: MinitelTextStyles.display1,
+                    style: MinitelTextStyles.mdH1,
                   ),
                 ),
               ),
@@ -59,7 +59,10 @@ class WikiDocs extends StatelessWidget {
               title: Text("Authentification"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                final _controller = PageController(initialPage: 0);
+                final _controller = PageController(
+                  initialPage: 0,
+                  viewportFraction: .9,
+                );
                 Navigator.pushReplacement(
                   context,
                   FadeRoute(
@@ -73,7 +76,10 @@ class WikiDocs extends StatelessWidget {
               title: Text("Diagnostique"),
               onTap: () {
                 Navigator.pop(context);
-                final _controller = PageController(initialPage: 1);
+                final _controller = PageController(
+                  initialPage: 1,
+                  viewportFraction: .9,
+                );
                 Navigator.pushReplacement(
                   context,
                   FadeRoute(

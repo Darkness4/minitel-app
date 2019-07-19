@@ -18,16 +18,13 @@ class DocCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(extPadding),
-      child: Card(
-        elevation: elevation,
-        child: Container(
-          padding: EdgeInsets.all(intPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: children,
-          ),
+    return Card(
+      elevation: elevation,
+      child: Padding(
+        padding: EdgeInsets.all(intPadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: children,
         ),
       ),
     );

@@ -48,8 +48,8 @@ class AboutPage extends StatelessWidget {
                   var packageInfo = await PackageInfo.fromPlatform();
                   showLicensePage(
                     context: context,
-                    applicationIcon: Flexible(
-                      child: Image.asset('assets/icon/icon.png'),
+                    applicationIcon: ImageIcon(
+                      AssetImage('assets/icon/icon.png'),
                     ),
                     applicationLegalese: "MIT License\n\n"
                         "Copyright (c) 2019 NGUYEN Marc\n\n"
