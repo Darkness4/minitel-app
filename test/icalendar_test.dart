@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -74,14 +75,16 @@ void main() async {
     test("getCalendar", () async {
       var ical = ICalendar(_calendarURL);
       var url = await _calendarURL.getCalendarURL(
-          username: "marc.nguyen", password: "stickman963");
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
       await ical.getCalendar(url);
     });
 
     test("saveCalendar", () async {
       var ical = ICalendar(_calendarURL);
       var url = await _calendarURL.getCalendarURL(
-          username: "marc.nguyen", password: "stickman963");
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
       await ical.saveCalendar(url);
     });
 
@@ -93,7 +96,8 @@ void main() async {
     test("parseCalendar from Login", () async {
       var ical = ICalendar(_calendarURL);
       var url = await _calendarURL.getCalendarURL(
-          username: "marc.nguyen", password: "stickman963");
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
       await ical.getCalendar(url);
       await ical.parseCalendar();
       print(ical.timezone.daylight.toString());
@@ -106,7 +110,8 @@ void main() async {
     test("parseCalendar from cache", () async {
       var ical = ICalendar(_calendarURL);
       var url = await _calendarURL.getCalendarURL(
-          username: "marc.nguyen", password: "stickman963");
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
       await ical.saveCalendar(url);
       var ical2 = ICalendar(_calendarURL);
       await ical2.getCalendarFromFile();

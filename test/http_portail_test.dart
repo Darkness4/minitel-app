@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
@@ -40,7 +42,8 @@ void main() {
   group('Http Requests Portail', () {
     test('Get succefully a cookie', () async {
       String cookie = await _portail.getPortailCookie(
-          username: "marc.nguyen", password: "stickman963");
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
       print(cookie);
 
       expect(cookie, contains("portail_ent_emse_session"));
@@ -48,7 +51,8 @@ void main() {
 
     test('getSavedCookiePortail', () async {
       await _portail.saveCookiePortailFromLogin(
-          username: "marc.nguyen", password: "stickman963");
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
       String cookie = await _portail.getSavedCookiePortail();
       print(cookie);
       expect(cookie, contains("portail_ent_emse_session"));
@@ -56,7 +60,8 @@ void main() {
 
     test('saveCookiePortailFromLogin', () async {
       var response = await _portail.saveCookiePortailFromLogin(
-          username: "marc.nguyen", password: "stickman963");
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
 
       expect(response, true);
     });

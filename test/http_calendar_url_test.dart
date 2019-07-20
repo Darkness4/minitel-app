@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
@@ -53,7 +55,7 @@ void main() async {
     test("getCalendarURL", () async {
       String output = await _calendarURL.getCalendarURL(
         username: "marc.nguyen",
-        password: "stickman963",
+        password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")),
       );
       expect(output, equals(RegExp(r'https(.*)\.ics').stringMatch(output)));
     });
