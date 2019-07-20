@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// HTTP requests handler for EMSE Portal
-class Portail {
+class PortailAPI {
+  final _client = HttpClient();
+
   /// Récupère le cookie pour se connecter à Portail EMSE
   ///
   /// Le reverse engineering a durée plusieurs jours.
@@ -15,14 +17,11 @@ class Portail {
   /// ```
   /// String cookie = await getPortailCookie(username: "prenom.nom", password: "motdepasse")
   /// ```
-  static Future<String> getPortailCookie(
-      {String username, String password}) async {
+  Future<String> getPortailCookie({String username, String password}) async {
     var status = "";
 
-    var client = HttpClient();
-
     try {
-      HttpClientRequest request = await client.getUrl(Uri.parse(
+      HttpClientRequest request = await _client.getUrl(Uri.parse(
           "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"));
       request.headers.removeAll(HttpHeaders.contentLengthHeader);
       HttpClientResponse response = await request.close();
@@ -36,7 +35,7 @@ class Portail {
       var jSessionIDCampus =
           RegExp(r'JSESSIONID=([^;]*);').firstMatch(temp).group(0);
 
-      request = await client.postUrl(Uri.parse("https://cas.emse.fr$action"));
+      request = await _client.postUrl(Uri.parse("https://cas.emse.fr$action"));
       request.followRedirects = false;
       request.headers.contentType =
           ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
@@ -56,7 +55,7 @@ class Portail {
       }
       var location = response.headers.value('location');
 
-      request = await client.getUrl(Uri.parse(location));
+      request = await _client.getUrl(Uri.parse(location));
       request.headers.removeAll(HttpHeaders.contentLengthHeader);
       request.headers.set(HttpHeaders.cookieHeader, "$agimus");
       request.followRedirects = false;
@@ -66,7 +65,7 @@ class Portail {
       var casAuth = RegExp(r'CASAuth=([^;]*);').firstMatch(temp).group(0);
       location = response.headers.value('location');
 
-      request = await client.getUrl(Uri.parse(location));
+      request = await _client.getUrl(Uri.parse(location));
       request.headers.removeAll(HttpHeaders.contentLengthHeader);
       request.headers.set(HttpHeaders.cookieHeader, "$agimus $casAuth");
       response = await request.close();
@@ -89,7 +88,7 @@ class Portail {
     return status;
   }
 
-  static Future<bool> saveCookiePortailFromLogin(
+  Future<bool> saveCookiePortailFromLogin(
       {String username, String password}) async {
     String cookie =
         await getPortailCookie(username: username, password: password);
@@ -101,12 +100,12 @@ class Portail {
     return true;
   }
 
-  static Future<void> saveCookiePortail(String cookie) async {
+  Future<void> saveCookiePortail(String cookie) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('cookiePortail', cookie);
   }
 
-  static Future<String> getSavedCookiePortail() async {
+  Future<String> getSavedCookiePortail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String contents = prefs.getString('cookiePortail') ?? "";
 

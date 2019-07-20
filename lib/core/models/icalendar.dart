@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:minitel_toolbox/funcs/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ICalendar {
@@ -11,6 +11,8 @@ class ICalendar {
   String _calscale = "";
   Timezone _timezone = Timezone();
   List<Map<String, String>> _events = [];
+  final CalendarURLAPI calendarURL;
+  ICalendar(this.calendarURL);
 
   String get calscale => _calscale;
 
@@ -165,7 +167,7 @@ class ICalendar {
     await for (var data in _calendarStream) sink.write(data);
     sink.close();
 
-    CalendarURL.saveCalendarURL(url);
+    calendarURL.saveCalendarURL(url);
   }
 }
 

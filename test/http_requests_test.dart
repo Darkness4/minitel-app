@@ -1,29 +1,33 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:minitel_toolbox/funcs/http_gateway.dart';
-import 'package:minitel_toolbox/funcs/http_webfeed.dart';
-import 'package:minitel_toolbox/funcs/http_webhook.dart';
+import 'package:minitel_toolbox/core/services/http_gateway.dart';
+import 'package:minitel_toolbox/core/services/http_webfeed.dart';
+import 'package:minitel_toolbox/core/services/http_webhook.dart';
 
 void main() {
+  final _gateway = GatewayAPI();
+  final _webfeed = WebFeedAPI();
+  final _webhook = WebhookAPI();
+
   group('Http Requests', () {
     test('Bad Username or Password to 195.83.139.7', () async {
-      var status = await Gateway.autoLogin("", "", "195.83.139.7", 480);
+      var status = await _gateway.autoLogin("", "", "195.83.139.7", 480);
       print(status);
 
       expect(status, "Error: Bad Username or Password");
     });
 
     test('Bad Username and Password to google.fr to get HttpError', () async {
-      var status = await Gateway.autoLogin("", "", "google.fr", 0);
+      var status = await _gateway.autoLogin("", "", "google.fr", 0);
       print(status);
 
       expect(status.contains("HttpError"), true);
     });
 
     test('Get status Not logged in from 195.83.139.7', () async {
-      await Gateway.disconnectGateway("195.83.139.7");
-      var status = await Gateway.getStatus("195.83.139.7");
+      await _gateway.disconnectGateway("195.83.139.7");
+      var status = await _gateway.getStatus("195.83.139.7");
       print(status);
 
       expect(status.contains("logged"), true);
@@ -35,21 +39,21 @@ void main() {
     //           utf8.decode(base64.decode("c3RpY2ttYW45NjM=")),
     //           "195.83.139.7",
     //           240)
-    //       .then((out) => Gateway.getStatus("195.83.139.7"));
+    //       .then((out) => _gateway.getStatus("195.83.139.7"));
     //   print(status);
 
     //   expect(status.contains("seconds"), true);
     // });
 
     test('Get status intentionaly from google.fr to get error', () async {
-      var status = await Gateway.getStatus("www.google.fr");
+      var status = await _gateway.getStatus("www.google.fr");
       print(status);
 
       expect(status.contains("HttpError"), true);
     });
 
     test('Disconnect intentionaly from google.fr to get error', () async {
-      var status = await Gateway.disconnectGateway("www.google.fr");
+      var status = await _gateway.disconnectGateway("www.google.fr");
       print(status);
 
       expect(status.contains("HttpError"), true);
@@ -65,7 +69,7 @@ void main() {
     // });
 
     test('Good Username and Password to 195.83.139.7', () async {
-      var status = await Gateway.autoLogin("marc.nguyen",
+      var status = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
       print(status);
 
@@ -73,7 +77,7 @@ void main() {
     });
 
     test('Report to slack', () async {
-      var status = await Webhook.report("Unit test",
+      var status = await _webhook.report("Unit test",
           title: "Unit test", channel: "DE8PA0Z1C");
       print(status);
 
@@ -81,14 +85,14 @@ void main() {
     });
 
     test('Not enough information report', () async {
-      var status = await Webhook.report("", title: "", channel: "DE8PA0Z1C");
+      var status = await _webhook.report("", title: "", channel: "DE8PA0Z1C");
       print(status);
 
       expect(status.contains("Not enough information."), true);
     });
 
     test('Get Atom from Github', () async {
-      var status = await WebFeed.getAtom(
+      var status = await _webfeed.getAtom(
           "https://github.com/Darkness4/minitel-app/commits/develop.atom");
       print(status.toString());
 
@@ -96,7 +100,7 @@ void main() {
     });
 
     test('Get Rss from Github', () async {
-      var status = await WebFeed.getRss("https://blog.jetbrains.com/feed/");
+      var status = await _webfeed.getRss("https://blog.jetbrains.com/feed/");
       print(status.toString());
 
       expect(status.title.contains("JetBrains Blog"), true);

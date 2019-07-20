@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/services/http_webfeed.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
-import 'package:minitel_toolbox/funcs/http_webfeed.dart';
 
 class NewsPage extends StatefulWidget {
   final String title;
@@ -35,7 +35,7 @@ class NewsPageState extends State<NewsPage> {
   }
 
   Future<List<Widget>> _generateFeedCard(String url) async {
-    var feed = await WebFeed.getAtom(url);
+    var feed = await WebFeedAPI().getAtom(url);
     List<dynamic> _newsCards = feed.items;
     return _newsCards.map((item) => NewsCard(item: item)).toList();
   }

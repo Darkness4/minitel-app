@@ -3,16 +3,15 @@ import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CalendarURL {
-  static Future<String> get savedCalendarURL async {
+class CalendarURLAPI {
+  Future<String> get savedCalendarURL async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String contents = prefs.getString('calendarURL') ?? "";
 
     return contents;
   }
 
-  static Future<String> getCalendarURL(
-      {String username, String password}) async {
+  Future<String> getCalendarURL({String username, String password}) async {
     var url = "https://portail.emse.fr/ics/";
     var status = "";
     var client = HttpClient();
@@ -37,12 +36,12 @@ class CalendarURL {
     return status;
   }
 
-  static Future<void> saveCalendarURL(String url) async {
+  Future<void> saveCalendarURL(String url) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('calendarURL', url);
   }
 
-  static Future<String> _bypassCAS({String username, String password}) async {
+  Future<String> _bypassCAS({String username, String password}) async {
     var status = "";
     var referee = "https://portail.emse.fr/ics/";
     var client = HttpClient();

@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:minitel_toolbox/funcs/http_portail.dart';
+import 'package:minitel_toolbox/core/services/http_portail.dart';
 
 void main() {
+  final PortailAPI _portail = PortailAPI();
   setUpAll(() async {
     const MethodChannel('plugins.flutter.io/shared_preferences')
         .setMockMethodCallHandler((MethodCall methodCall) async {
@@ -16,21 +17,21 @@ void main() {
   group('FAIL Http Requests Portail', () {
     test('Fail succefully to get a cookie: Bad login', () async {
       String cookie =
-          await Portail.getPortailCookie(username: "", password: "");
+          await _portail.getPortailCookie(username: "", password: "");
       print(cookie);
 
       expect(cookie, contains("bad username or password"));
     });
 
     test('FAIL getSavedCookiePortail', () async {
-      String cookie = await Portail.getSavedCookiePortail();
+      String cookie = await _portail.getSavedCookiePortail();
       print(cookie);
       expect(cookie == "", true);
     });
 
     test('FAIL to saveCookiePortailFromLogin', () async {
       var response =
-          await Portail.saveCookiePortailFromLogin(username: "", password: "");
+          await _portail.saveCookiePortailFromLogin(username: "", password: "");
 
       expect(response, false);
     });
@@ -38,7 +39,7 @@ void main() {
 
   group('Http Requests Portail', () {
     test('Get succefully a cookie', () async {
-      String cookie = await Portail.getPortailCookie(
+      String cookie = await _portail.getPortailCookie(
           username: "marc.nguyen", password: "stickman963");
       print(cookie);
 
@@ -46,15 +47,15 @@ void main() {
     });
 
     test('getSavedCookiePortail', () async {
-      await Portail.saveCookiePortailFromLogin(
+      await _portail.saveCookiePortailFromLogin(
           username: "marc.nguyen", password: "stickman963");
-      String cookie = await Portail.getSavedCookiePortail();
+      String cookie = await _portail.getSavedCookiePortail();
       print(cookie);
       expect(cookie, contains("portail_ent_emse_session"));
     });
 
     test('saveCookiePortailFromLogin', () async {
-      var response = await Portail.saveCookiePortailFromLogin(
+      var response = await _portail.saveCookiePortailFromLogin(
           username: "marc.nguyen", password: "stickman963");
 
       expect(response, true);

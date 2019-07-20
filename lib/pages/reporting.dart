@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/models/diagnosis.dart';
-import 'package:minitel_toolbox/funcs/http_webhook.dart';
+import 'package:minitel_toolbox/core/services/http_webhook.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/widgets/buttons.dart';
@@ -34,6 +34,7 @@ class ReportingPageState extends State<ReportingPage>
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final Diagnosis _diagnosis = Diagnosis();
+  final WebhookAPI _webhook = WebhookAPI();
 
   /// State of the Diagnosis.
   ///
@@ -236,7 +237,7 @@ class ReportingPageState extends State<ReportingPage>
           if (_reportState != 1) {
             setState(() => _reportState = 1);
             if (DateTime.now().isAfter(timeout)) {
-              String status = await Webhook.report(
+              String status = await _webhook.report(
                 "_${_descriptionController.text}_\n\n"
                 "*Diagnosis*\n"
                 "$_report",

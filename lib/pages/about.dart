@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/funcs/http_version_checker.dart';
+import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:package_info/package_info.dart';
 
 class AboutPage extends StatelessWidget {
   final String title;
+  final _version = VersionAPI();
   AboutPage({Key key, this.title}) : super(key: key);
 
   @override
@@ -98,7 +99,7 @@ class AboutPage extends StatelessWidget {
               ListTile(
                 title: Text("Chercher une mise à jour"),
                 onTap: () async {
-                  var latestVersion = Version.getLatestVersion();
+                  var latestVersion = _version.getLatestVersion();
                   var actualVersion = PackageInfo.fromPlatform();
                   dynamic ensemble =
                       await Future.wait([actualVersion, latestVersion]);
@@ -120,7 +121,8 @@ class AboutPage extends StatelessWidget {
                             RaisedButton(
                               textColor: Colors.white,
                               child: Text("Update"),
-                              onPressed: () => Version.getLatestVersionURL()
+                              onPressed: () => _version
+                                  .getLatestVersionURL()
                                   .then((url) => LaunchURL.launchURL(url)),
                             )
                           ],
@@ -145,7 +147,8 @@ class AboutPage extends StatelessWidget {
                             RaisedButton(
                               textColor: Colors.white,
                               child: Text("Télécharger"),
-                              onPressed: () => Version.getLatestVersionURL()
+                              onPressed: () => _version
+                                  .getLatestVersionURL()
                                   .then((url) => LaunchURL.launchURL(url)),
                             )
                           ],

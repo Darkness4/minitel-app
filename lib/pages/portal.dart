@@ -1,39 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
-import 'package:minitel_toolbox/funcs/http_version_checker.dart';
+import 'package:minitel_toolbox/core/services/http_portail.dart';
+import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:package_info/package_info.dart';
 
 import 'portal_tabs/apps_list.dart';
 import 'portal_tabs/login.dart';
-
-Future<void> _checkVersion(BuildContext context) async {
-  var latestVersion = Version.getLatestVersion();
-  var actualVersion = PackageInfo.fromPlatform();
-  dynamic ensemble = await Future.wait([actualVersion, latestVersion]);
-  if (ensemble[0].version != ensemble[1])
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(
-          "Une nouvelle version est disponible !",
-        ),
-        content: Text("La version ${ensemble[1]} est la dernière version."),
-        actions: <Widget>[
-          FlatButton(
-            child: Text("Close"),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          RaisedButton(
-            textColor: Colors.white,
-            child: Text("Update"),
-            onPressed: () => Version.getLatestVersionURL()
-                .then((url) => LaunchURL.launchURL(url)),
-          )
-        ],
-      ),
-    );
-}
 
 class PortalPage extends StatefulWidget {
   final String title;
@@ -44,6 +18,39 @@ class PortalPage extends StatefulWidget {
 }
 
 class PortalPageState extends State<PortalPage> {
+  final _version = VersionAPI();
+  final _portail = PortailAPI();
+  final _gateway = GatewayAPI();
+
+  Future<void> _checkVersion(BuildContext context) async {
+    var latestVersion = _version.getLatestVersion();
+    var actualVersion = PackageInfo.fromPlatform();
+    dynamic ensemble = await Future.wait([actualVersion, latestVersion]);
+    if (ensemble[0].version != ensemble[1])
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text(
+            "Une nouvelle version est disponible !",
+          ),
+          content: Text("La version ${ensemble[1]} est la dernière version."),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Close"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            RaisedButton(
+              textColor: Colors.white,
+              child: Text("Update"),
+              onPressed: () => _version
+                  .getLatestVersionURL()
+                  .then((url) => LaunchURL.launchURL(url)),
+            )
+          ],
+        ),
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -60,10 +67,15 @@ class PortalPageState extends State<PortalPage> {
                 ],
               ),
             ),
-            child: const TabBarView(
+            child: TabBarView(
               children: <Widget>[
-                const LoginPage(),
-                const AppsList(),
+                LoginPage(
+                  portail: _portail,
+                  gateway: _gateway,
+                ),
+                AppsList(
+                  portail: _portail,
+                ),
               ],
             ),
           ),

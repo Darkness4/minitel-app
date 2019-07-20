@@ -2,7 +2,7 @@ import 'dart:io' show Platform;
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/funcs/http_webhook.dart';
+import 'package:minitel_toolbox/core/services/http_webhook.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
@@ -28,6 +28,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   TextEditingController _descriptionController;
 
   final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  final WebhookAPI _webhook = WebhookAPI();
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +162,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
           "Android: ${androidInfo.version.release}\n"
           "SDK: ${androidInfo.version.sdkInt}\n";
     }
-    await Webhook.report(">$description\n\n",
+    await _webhook.report(">$description\n\n",
         title: "Minitel App v${packageInfo.version} : ${_titleController.text}",
         botName: "Flutter Alpha Feedback Bot");
 

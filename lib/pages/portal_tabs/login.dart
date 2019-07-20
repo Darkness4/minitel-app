@@ -2,13 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
-import 'package:minitel_toolbox/funcs/http_calendar_url.dart';
-import 'package:minitel_toolbox/funcs/http_gateway.dart';
-import 'package:minitel_toolbox/funcs/http_portail.dart';
+import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/http_gateway.dart';
+import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+  final PortailAPI _portail;
+  final GatewayAPI _gateway;
+  const LoginPage(
+      {Key key, @required PortailAPI portail, @required GatewayAPI gateway})
+      : _portail = portail,
+        _gateway = gateway,
+        super(key: key);
 
   @override
   LoginPageState createState() => LoginPageState();
@@ -20,6 +26,7 @@ class LoginPageState extends State<LoginPage> {
   final _pswdFocusNode = FocusNode();
   final _uidController = TextEditingController();
   final _pswdController = TextEditingController();
+  final _calendarURL = CalendarURLAPI();
   final List<String> _urlRootList = [
     '10.163.0.2',
     'fw-cgcp.emse.fr',
@@ -52,6 +59,8 @@ class LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 _StatusCard(
+                  portail: widget._portail,
+                  calendarURL: _calendarURL,
                   status: _status,
                 ),
                 Card(
@@ -76,7 +85,7 @@ class LoginPageState extends State<LoginPage> {
                                     .toList(),
                                 onChanged: (String selectedUrl) {
                                   _selectedUrl = selectedUrl;
-                                  Gateway.getStatus(_selectedUrl).then(
+                                  widget._gateway.getStatus(_selectedUrl).then(
                                       (status) =>
                                           setState(() => _status = status));
                                 },
@@ -155,17 +164,19 @@ class LoginPageState extends State<LoginPage> {
                             await SharedPreferences.getInstance();
                         final snackBar = SnackBar(content: Text('Requested'));
                         Scaffold.of(context).showSnackBar(snackBar);
-                        Gateway.autoLogin(
-                          _uidController.text,
-                          _pswdController.text,
-                          _selectedUrl,
-                          _timeMap[_selectedTime],
-                        ).then((status) => setState(() => _status = status));
-                        String calendarUrl = await CalendarURL.getCalendarURL(
+                        widget._gateway
+                            .autoLogin(
+                              _uidController.text,
+                              _pswdController.text,
+                              _selectedUrl,
+                              _timeMap[_selectedTime],
+                            )
+                            .then((status) => setState(() => _status = status));
+                        String calendarUrl = await _calendarURL.getCalendarURL(
                           username: _uidController.text,
                           password: _pswdController.text,
                         );
-                        ICalendar()
+                        ICalendar(_calendarURL)
                             .saveCalendar(calendarUrl)
                             .then((i) => setState(() {}));
                         if (rememberMe) {
@@ -178,14 +189,12 @@ class LoginPageState extends State<LoginPage> {
                           prefs.remove("time");
                           prefs.remove("pswd");
                         }
-                        // saveCookieCampusFromLogin(
-                        //   username: _uidController.text,
-                        //   password: _pswdController.text,
-                        // ).then((status) => setState(() {}));
-                        Portail.saveCookiePortailFromLogin(
-                          username: _uidController.text,
-                          password: _pswdController.text,
-                        ).then((status) => setState(() {}));
+                        widget._portail
+                            .saveCookiePortailFromLogin(
+                              username: _uidController.text,
+                              password: _pswdController.text,
+                            )
+                            .then((status) => setState(() {}));
                       },
                       label: const Text(
                         "Se connecter",
@@ -216,9 +225,9 @@ class LoginPageState extends State<LoginPage> {
   @override
   initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
-        Gateway.getStatus(_selectedUrl)
-            .then((status) => setState(() => _status = status)));
+    WidgetsBinding.instance.addPostFrameCallback((_) => widget._gateway
+        .getStatus(_selectedUrl)
+        .then((status) => setState(() => _status = status)));
     _rememberLogin();
   }
 
@@ -236,11 +245,17 @@ class LoginPageState extends State<LoginPage> {
 
 class _StatusCard extends StatelessWidget {
   final String _status;
+  final PortailAPI _portail;
+  final CalendarURLAPI _calendarURL;
 
   const _StatusCard({
     Key key,
     @required String status,
+    @required PortailAPI portail,
+    @required CalendarURLAPI calendarURL,
   })  : _status = status,
+        _portail = portail,
+        _calendarURL = calendarURL,
         super(key: key);
 
   @override
@@ -274,7 +289,7 @@ class _StatusCard extends StatelessWidget {
                     style: const TextStyle(fontSize: 20),
                   ),
                   FutureBuilder<String>(
-                    future: CalendarURL
+                    future: _calendarURL
                         .savedCalendarURL, // a previously-obtained Future<String> or null
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -295,33 +310,6 @@ class _StatusCard extends StatelessWidget {
                   ),
                 ],
               ),
-              // Row(
-              //   children: <Widget>[
-              //     const Text(
-              //       "Campus: ",
-              //       style: const TextStyle(fontSize: 20),
-              //     ),
-              //     FutureBuilder<String>(
-              //       future: getSavedCookieCampus(),
-              //       builder:
-              //           (BuildContext context, AsyncSnapshot<String> snapshot) {
-              //         switch (snapshot.connectionState) {
-              //           case ConnectionState.none:
-              //           case ConnectionState.active:
-              //           case ConnectionState.waiting:
-              //             return const CircularProgressIndicator();
-              //           case ConnectionState.done:
-              //             if (snapshot.hasError)
-              //               return const Icon(Icons.close, color: Colors.red);
-              //             else if (snapshot.data == "")
-              //               return const Icon(Icons.close, color: Colors.red);
-              //             return const Icon(Icons.done, color: Colors.green);
-              //         }
-              //         return null; // unreachable
-              //       },
-              //     ),
-              //   ],
-              // ),
               Row(
                 children: <Widget>[
                   const Text(
@@ -329,7 +317,7 @@ class _StatusCard extends StatelessWidget {
                     style: const TextStyle(fontSize: 20),
                   ),
                   FutureBuilder<String>(
-                    future: Portail.getSavedCookiePortail(),
+                    future: _portail.getSavedCookiePortail(),
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
                       switch (snapshot.connectionState) {

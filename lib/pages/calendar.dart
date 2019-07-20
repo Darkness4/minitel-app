@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
-import 'package:minitel_toolbox/funcs/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
@@ -35,13 +35,14 @@ class CalendarPageState extends State<CalendarPage> {
     priority: Priority.High,
   );
   final iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  final CalendarURLAPI _calendarURL = CalendarURLAPI();
 
   Future<List<Widget>> get _listEventCards async {
-    ICalendar ical = ICalendar();
+    ICalendar ical = ICalendar(_calendarURL);
 
     // Refresh the calendar if possible
     try {
-      var url = await CalendarURL.savedCalendarURL;
+      var url = await _calendarURL.savedCalendarURL;
       if (url == "") throw ("The URL of the calendar was not found.");
       await ical.saveCalendar(url);
     } catch (e) {
@@ -307,11 +308,11 @@ class CalendarPageState extends State<CalendarPage> {
                 backgroundColor: Colors.red,
                 elevation: 10.0,
                 onPressed: () async {
-                  var url = await CalendarURL.getCalendarURL(
+                  var url = await _calendarURL.getCalendarURL(
                     username: _uidController.text,
                     password: _pswdController.text,
                   );
-                  setState(() => ICalendar().saveCalendar(url));
+                  setState(() => ICalendar(_calendarURL).saveCalendar(url));
                 },
                 label: const Text(
                   "Se connecter",

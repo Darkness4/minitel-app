@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-class Webhook {
+class WebhookAPI {
   static const String _webhook =
       "aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDlTNFhMQzhHL0JHV1NHS1lKVS94RTFzQzdJNEc0MWdDMnNMYXlSZENkM1U=";
+
+  final _client = HttpClient();
 
   /// Report data to the Slack of Minitel
   ///
@@ -14,14 +16,13 @@ class Webhook {
   /// ```
   /// String status = await report("Description", title: "Title");
   /// ```
-  static Future<String> report(String text,
+  Future<String> report(String text,
       {String title,
       String channel: "projet_flutter_notif",
       String botName: "Flutter Reporter Bot"}) async {
     var status = "";
 
     if (text != "" && title != "") {
-      var client = HttpClient();
       var out = "*--Report ${DateTime.now()}--*\n"
           "*$title*\n"
           "$text\n";
@@ -34,7 +35,7 @@ class Webhook {
       };
 
       try {
-        HttpClientRequest request = await client
+        HttpClientRequest request = await _client
             .postUrl(Uri.parse(utf8.decode(base64.decode(_webhook))));
 
         request.headers.contentType =

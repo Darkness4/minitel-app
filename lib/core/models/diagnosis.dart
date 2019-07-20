@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/funcs/http_gateway.dart';
+import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 /// This stores all diagnosis results.
@@ -22,6 +22,7 @@ import 'package:permission_handler/permission_handler.dart';
 /// The data is generated asynchronously. The process times out after one minute.
 class Diagnosis {
   static String _alert;
+  final GatewayAPI _gateway = GatewayAPI();
   Map<String, String> _report = {};
 
   final _argsPing = "-c 4 -w 5 -W 5";
@@ -162,10 +163,10 @@ class Diagnosis {
           [MyIPAdresses.google],
           DiagnosisContent.nsLookupGoogleBusy,
         ),
-        Gateway.getStatus(MyIPAdresses.stormshieldIP).then((status) =>
+        _gateway.getStatus(MyIPAdresses.stormshieldIP).then((status) =>
             _report[DiagnosisContent.httpPortalPublic] =
                 status.isEmpty ? "Nothing to show" : status),
-        Gateway.getStatus(MyIPAdresses.gatewayIP).then((status) =>
+        _gateway.getStatus(MyIPAdresses.gatewayIP).then((status) =>
             _report[DiagnosisContent.httpPortalGateway] =
                 status.isEmpty ? "Nothing to show" : status),
         InternetAddress.lookup(MyIPAdresses.stormshield)

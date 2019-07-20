@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:minitel_toolbox/funcs/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 
 void main() async {
+  final CalendarURLAPI _calendarURL = CalendarURLAPI();
   group("Must FAIL", () {
     // Mock out the MethodChannel for the path_provider plugin
     const MethodChannel('plugins.flutter.io/shared_preferences')
@@ -13,12 +14,12 @@ void main() async {
       return null;
     });
     test("savedCalendarURL: not existing", () async {
-      String output = await CalendarURL.savedCalendarURL;
+      String output = await _calendarURL.savedCalendarURL;
       expect(output, equals(""));
     });
 
     test("getCalendarURL: bad credentials", () async {
-      String output = await CalendarURL.getCalendarURL(
+      String output = await _calendarURL.getCalendarURL(
         username: "",
         password: "",
       );
@@ -38,19 +39,19 @@ void main() async {
     test("saveCalendarURL", () async {
       var url =
           "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";
-      await CalendarURL.saveCalendarURL(url);
+      await _calendarURL.saveCalendarURL(url);
     });
 
     test("savedCalendarURL not existing", () async {
       var url =
           "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";
-      await CalendarURL.saveCalendarURL(url);
-      String output = await CalendarURL.savedCalendarURL;
+      await _calendarURL.saveCalendarURL(url);
+      String output = await _calendarURL.savedCalendarURL;
       expect(output, equals(RegExp(r'https(.*)\.ics').stringMatch(output)));
     });
 
     test("getCalendarURL", () async {
-      String output = await CalendarURL.getCalendarURL(
+      String output = await _calendarURL.getCalendarURL(
         username: "marc.nguyen",
         password: "stickman963",
       );

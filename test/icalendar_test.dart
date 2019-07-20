@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:minitel_toolbox/funcs/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  final _calendarURL = CalendarURLAPI();
   setUpAll(() async {
     final directory = await Directory.systemTemp.createTemp();
 
@@ -24,7 +25,7 @@ void main() async {
   group('Must FAIL', () {
     test("getCalendar: Empty URL", () async {
       try {
-        await ICalendar().getCalendar("");
+        await ICalendar(_calendarURL).getCalendar("");
         throw "Fail to fail";
       } catch (e) {
         expect(e.toString(), isNot(contains("Fail to fail")));
@@ -33,7 +34,8 @@ void main() async {
 
     test("getCalendar: Wrong URL", () async {
       try {
-        await ICalendar().getCalendar("https://portail.emse.fr/ics/1.ics");
+        await ICalendar(_calendarURL)
+            .getCalendar("https://portail.emse.fr/ics/1.ics");
         throw "Fail to fail";
       } catch (e) {
         expect(e.toString(), isNot(contains("Fail to fail")));
@@ -42,7 +44,7 @@ void main() async {
 
     test("getCalendarFromFile: Not Existing", () async {
       try {
-        await ICalendar().getCalendarFromFile();
+        await ICalendar(_calendarURL).getCalendarFromFile();
         throw "Fail to fail";
       } catch (e) {
         expect(e.toString(), contains("File calendar.ics do not exists"));
@@ -51,7 +53,7 @@ void main() async {
 
     test("parseCalendar: Not Existing", () async {
       try {
-        await ICalendar().parseCalendar();
+        await ICalendar(_calendarURL).parseCalendar();
         throw "Fail to fail";
       } catch (e) {
         expect(e.toString(), contains("Calendar stream not found"));
@@ -59,7 +61,8 @@ void main() async {
     });
     test("saveCalendar: Wrong URL", () async {
       try {
-        await ICalendar().saveCalendar("https://portail.emse.fr/ics/1.ics");
+        await ICalendar(_calendarURL)
+            .saveCalendar("https://portail.emse.fr/ics/1.ics");
         throw "Fail to fail";
       } catch (e) {
         expect(e.toString(), isNot(contains("Fail to fail")));
@@ -69,27 +72,27 @@ void main() async {
 
   group("Must WORK", () {
     test("getCalendar", () async {
-      var ical = ICalendar();
-      var url = await CalendarURL.getCalendarURL(
+      var ical = ICalendar(_calendarURL);
+      var url = await _calendarURL.getCalendarURL(
           username: "marc.nguyen", password: "stickman963");
       await ical.getCalendar(url);
     });
 
     test("saveCalendar", () async {
-      var ical = ICalendar();
-      var url = await CalendarURL.getCalendarURL(
+      var ical = ICalendar(_calendarURL);
+      var url = await _calendarURL.getCalendarURL(
           username: "marc.nguyen", password: "stickman963");
       await ical.saveCalendar(url);
     });
 
     test("getCalendarFromFile", () async {
-      var ical = ICalendar();
+      var ical = ICalendar(_calendarURL);
       await ical.getCalendarFromFile();
     });
 
     test("parseCalendar from Login", () async {
-      var ical = ICalendar();
-      var url = await CalendarURL.getCalendarURL(
+      var ical = ICalendar(_calendarURL);
+      var url = await _calendarURL.getCalendarURL(
           username: "marc.nguyen", password: "stickman963");
       await ical.getCalendar(url);
       await ical.parseCalendar();
@@ -101,11 +104,11 @@ void main() async {
     });
 
     test("parseCalendar from cache", () async {
-      var ical = ICalendar();
-      var url = await CalendarURL.getCalendarURL(
+      var ical = ICalendar(_calendarURL);
+      var url = await _calendarURL.getCalendarURL(
           username: "marc.nguyen", password: "stickman963");
       await ical.saveCalendar(url);
-      var ical2 = ICalendar();
+      var ical2 = ICalendar(_calendarURL);
       await ical2.getCalendarFromFile();
       await ical2.parseCalendar();
       print(ical2.events.length);

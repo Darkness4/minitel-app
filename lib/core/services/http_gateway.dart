@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 /// This class handle the connections through stormshield, aka the gateway.
-class Gateway {
+class GatewayAPI {
+  var _client = HttpClient();
+
   /// Connect to the portal.
   ///
   /// The [selectedUrl] is either local (10.163.0.2) or public (fw-cgcp.emse.fr).
@@ -20,16 +22,15 @@ class Gateway {
   /// ```
   /// String status = await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
   /// ```
-  static Future<String> autoLogin(
+  Future<String> autoLogin(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
     var status = "";
 
-    var client = HttpClient();
-    client.badCertificateCallback = (cert, host, port) => true;
+    _client.badCertificateCallback = (cert, host, port) => true;
 
     try {
       // SessionId
-      HttpClientRequest request = await client
+      HttpClientRequest request = await _client
           .postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'));
 
       request.headers.contentType =
@@ -56,7 +57,7 @@ class Gateway {
         throw Exception("HttpError: ${response.statusCode}");
 
       // Status
-      request = await client
+      request = await _client
           .postUrl(Uri.parse('https://$selectedUrl/auth/disclaimer.html'));
       request.headers.contentType =
           ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
@@ -96,16 +97,15 @@ class Gateway {
   /// ```
   /// String status = await disconnectGateway("172.17.0.1") // "x seconds left"
   /// ```
-  static Future<String> disconnectGateway(String selectedUrl) async {
+  Future<String> disconnectGateway(String selectedUrl) async {
     var url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     var status = "";
 
-    var client = HttpClient();
-    client.badCertificateCallback = (cert, host, port) => true;
+    _client.badCertificateCallback = (cert, host, port) => true;
 
     try {
-      HttpClientRequest request = await client.getUrl(Uri.parse(url));
+      HttpClientRequest request = await _client.getUrl(Uri.parse(url));
       request.headers.removeAll(HttpHeaders.contentLengthHeader);
       HttpClientResponse response = await request.close();
       var body =
@@ -138,16 +138,14 @@ class Gateway {
   /// ```
   /// String status = await getStatus("172.17.0.1") // "x seconds left"
   /// ```
-  static Future<String> getStatus(String selectedUrl) async {
-    var url = 'https://$selectedUrl/auth/login.html';
+  Future<String> getStatus(String selectedUrl) async {
     var status = "";
+    _client.badCertificateCallback = (cert, host, port) => true;
+    var url = 'https://$selectedUrl/auth/login.html';
     RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
-    var client = HttpClient();
-    client.badCertificateCallback = (cert, host, port) => true;
-
     try {
-      HttpClientRequest request = await client.getUrl(Uri.parse(url));
+      HttpClientRequest request = await _client.getUrl(Uri.parse(url));
       request.headers.removeAll(HttpHeaders.contentLengthHeader);
       // print(request.method.toString());
       // print(request.headers.toString());
