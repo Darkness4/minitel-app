@@ -29,10 +29,7 @@ class VirtMachineDoc extends StatelessWidget {
                 ),
                 TextSpan(
                   text: "    Comme les composants sont émulées, les chances de "
-                      "crash d'une VM sont largement moins faibles qu'un "
-                      "système réel pour deux raisons:\n"
-                      "    -  Les pilotes sont toujours à jour\n"
-                      "    -  Le matériel est toujours fonctionnel\n",
+                      "crash d'une VM sont largement moins faibles\n",
                   style: MinitelTextStyles.body1,
                 ),
               ],
@@ -46,7 +43,7 @@ class VirtMachineDoc extends StatelessWidget {
                 TextSpan(
                   text:
                       "    -  Utile pour avoir une sandbox et faire plein de tests.\n"
-                      "    -  Utile pour customizer l'interface graphique.\n"
+                      "    -  Utile pour s'entraîner à Linux (WM, DM, pilotes, installations...), sans faire péter son dual boot.\n"
                       "    -  Utile pour faire des VM de VM de Docker de Docker.\n"
                       "    -  Utile pour faire un VPS.\n",
                   style: MinitelTextStyles.body2,
@@ -55,7 +52,7 @@ class VirtMachineDoc extends StatelessWidget {
             ),
           ),
           Text(
-            "Une VM c'est donc PAS fait pour calculer.\n",
+            "Une VM c'est donc pas fait pour programmer.\n",
             style: MinitelTextStyles.body2,
           ),
           Text(
@@ -63,10 +60,14 @@ class VirtMachineDoc extends StatelessWidget {
             style: MinitelTextStyles.body2,
           ),
           Text(
-            "Exemple: VM1 = Alpine DHCP, VM2 = Alpine DNS, VM3 = Switch, VM4 = Router IOSv.\n",
+            "Exemple: VM1 = Alpine DHCP, VM2 = Alpine DNS, VM3 = GUI Test, VM4 = Router IOSv.\n",
           ),
           Text(
             "Cela va sans dire qu'une VM n'est pas censé avoir d'interface graphique sauf pour customizer l'interface.\n",
+            style: MinitelTextStyles.body2,
+          ),
+          Text(
+            "Très souvent, une connexion SSH est mise en place au lieu d'utiliser l'interface graphique ou tty.\n",
             style: MinitelTextStyles.body2,
           ),
           Text.rich(
@@ -78,7 +79,7 @@ class VirtMachineDoc extends StatelessWidget {
                 TextSpan(
                   text: "    -  Création d'un disque virtuel > 20 Go\n"
                       "    -  Insertion d'une image Linux dans le port CD émulé\n"
-                      "    -  Installation de Linux classique (proche d'un dual boot)\n"
+                      "    -  Installation de Linux (similaire à un dual boot)\n"
                       "    -  Configuration d'un accès SSH/telnet/RDP\n",
                   style: MinitelTextStyles.body2,
                 ),
@@ -91,23 +92,7 @@ class VirtMachineDoc extends StatelessWidget {
           ),
           Text.rich(
             TextSpan(
-              text: "Gardez donc en tête :\n",
-              style: MinitelTextStyles.body2,
-              children: <TextSpan>[
-                TextSpan(
-                  text: "    -  Maltraitez votre VM\n"
-                      "    -  Tuez plein de VM\n"
-                      "    -  N'aimez pas de VM\n"
-                      "    -  Sinon, aimez une VM, puis trompez-la\n"
-                      "    -  Installez 50 VMs\n",
-                  style: MinitelTextStyles.body2,
-                ),
-              ],
-            ),
-          ),
-          Text.rich(
-            TextSpan(
-              text: "Les types :\n",
+              text: "Types de VM :\n",
               style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
@@ -125,12 +110,29 @@ class VirtMachineDoc extends StatelessWidget {
               style: MinitelTextStyles.body2,
               children: <TextSpan>[
                 TextSpan(
-                  text: "    1.  Hyper-V (type 1, Windows, et si possible)\n"
-                      "    2.  KVM (type 1, Linux, pour émuler un appareil Android)\n"
-                      "    3.  VMWare Workstation (type 2, pour les réseaux, GNS3 et tout le reste)\n"
-                      "    4.  VirtualBox (type 2, parce que Hyper-V, ça marche pas et vous savez pas cr*cker VMWare)\n"
-                      "    5.  VMware ESXi (type 1, pour les professionnels)",
+                  text:
+                      "    1.  [Leader] Hyper-V (type 1, Windows, si possible)\n"
+                      "    2.  [Visionary] KVM (type 1, Linux, 👍 Android)\n"
+                      "    3.  [Leader] VMWare Workstation (type 2, 👍 pour les réseaux, GNS3 et tout le reste)\n"
+                      "    4.  [Niche Player] VirtualBox (type 2)\n"
+                      "    5.  [Leader] VMware ESXi (type 1, pour les professionnels)",
                   style: MinitelTextStyles.body2,
+                ),
+              ],
+            ),
+          ),
+          Text.rich(
+            TextSpan(
+              text:
+                  "Si il s'agit d'avoir un simple environnement de développement :\n",
+              style: MinitelTextStyles.body2,
+              children: <TextSpan>[
+                TextSpan(
+                  text:
+                      "    -  Pour Linux : Docker, (Container Linux, c-à-d. environnement dédié par application) (Notez que ça marche aussi sur Windows parce que ça tourne une VM Linux sur Hyper-V en arrière plan.)\n"
+                      "    -  Pour Windows : Windows Subsystem for Linux 1 (Kernel Linux natif. Attention, le matériel n'est pas émulé !)\n"
+                      "    -  Pour Windows : Windows Subsystem for Linux 2 (+ Docker) (Kernel Linux dans une micro-VM. Extrêmement rapide et RAM dynamiquement alloué.)\n",
+                  style: MinitelTextStyles.body1,
                 ),
               ],
             ),
