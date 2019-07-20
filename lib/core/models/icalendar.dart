@@ -155,7 +155,11 @@ class ICalendar {
 
   Future<void> saveCalendar(String url) async {
     final file = await _calendar;
-    await getCalendar(url);
+    try {
+      await getCalendar(url);
+    } catch (e) {
+      throw e;
+    }
 
     var sink = file.openWrite();
     await for (var data in _calendarStream) sink.write(data);

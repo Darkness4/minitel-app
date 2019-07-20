@@ -165,9 +165,9 @@ class LoginPageState extends State<LoginPage> {
                           username: _uidController.text,
                           password: _pswdController.text,
                         );
-                        setState(() {
-                          ICalendar().saveCalendar(calendarUrl);
-                        });
+                        ICalendar()
+                            .saveCalendar(calendarUrl)
+                            .then((i) => setState(() {}));
                         if (rememberMe) {
                           prefs.setString("user", _uidController.text);
                           prefs.setString("time", _selectedTime);
