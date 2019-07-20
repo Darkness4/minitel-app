@@ -98,7 +98,7 @@ class AboutPage extends StatelessWidget {
               ListTile(
                 title: Text("Chercher une mise à jour"),
                 onTap: () async {
-                  var latestVersion = getLatestVersion();
+                  var latestVersion = Version.getLatestVersion();
                   var actualVersion = PackageInfo.fromPlatform();
                   dynamic ensemble =
                       await Future.wait([actualVersion, latestVersion]);
@@ -120,7 +120,7 @@ class AboutPage extends StatelessWidget {
                             RaisedButton(
                               textColor: Colors.white,
                               child: Text("Update"),
-                              onPressed: () => getLatestVersionURL()
+                              onPressed: () => Version.getLatestVersionURL()
                                   .then((url) => LaunchURL.launchURL(url)),
                             )
                           ],
@@ -145,7 +145,7 @@ class AboutPage extends StatelessWidget {
                             RaisedButton(
                               textColor: Colors.white,
                               child: Text("Télécharger"),
-                              onPressed: () => getLatestVersionURL()
+                              onPressed: () => Version.getLatestVersionURL()
                                   .then((url) => LaunchURL.launchURL(url)),
                             )
                           ],

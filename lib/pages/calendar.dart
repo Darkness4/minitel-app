@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
-import 'package:minitel_toolbox/funcs/http_calendar.dart';
-import 'package:minitel_toolbox/funcs/icalendar_parser.dart';
+import 'package:minitel_toolbox/core/models/icalendar.dart';
+import 'package:minitel_toolbox/funcs/http_calendar_url.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
@@ -37,25 +37,25 @@ class CalendarPageState extends State<CalendarPage> {
   final iOSPlatformChannelSpecifics = IOSNotificationDetails();
 
   Future<List<Widget>> get _listEventCards async {
-    Stream<String> calendar;
+    ICalendar ical = ICalendar();
 
     // Refresh the calendar if possible
     try {
-      var url = await getSavedCalendarURL();
+      var url = await CalendarURL.savedCalendarURL;
       if (url == "") throw ("The URL of the calendar was not found.");
-      await saveCalendarFromUrl(url);
+      await ical.saveCalendar(url);
     } catch (e) {
       return _errorHandlerWidget(e);
     }
 
     // Read the actual calendar
     try {
-      calendar = await readCalendar();
+      await ical.getCalendarFromFile();
     } catch (e) {
       return _errorHandlerWidget(e);
     }
 
-    ICalendar ical = await parseCalendar(calendar);
+    ical.parseCalendar();
 
     const Map<int, Color> colorPalette = {
       DateTime.january: Colors.red,
@@ -306,10 +306,13 @@ class CalendarPageState extends State<CalendarPage> {
               child: FloatingActionButton.extended(
                 backgroundColor: Colors.red,
                 elevation: 10.0,
-                onPressed: () => saveCalendarFromLogin(
-                  username: _uidController.text,
-                  password: _pswdController.text,
-                ).then((out) => setState(() {})),
+                onPressed: () async {
+                  var url = await CalendarURL.getCalendarURL(
+                    username: _uidController.text,
+                    password: _pswdController.text,
+                  );
+                  setState(() => ICalendar().saveCalendar(url));
+                },
                 label: const Text(
                   "Se connecter",
                   style: const TextStyle(

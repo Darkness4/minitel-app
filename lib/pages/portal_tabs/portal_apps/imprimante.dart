@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class ImprimanteWebView extends StatelessWidget {
   const ImprimanteWebView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return WebviewScaffold(
+    // return WebviewScaffold(
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.grey,
+    //     title: const Text("Imprimante EMSE"),
+    //   ),
+    //   url: 'https://vpnssl.emse.fr/watchdoc,DanaInfo=192.168.130.2',
+    // );
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
         title: const Text("Imprimante EMSE"),
       ),
-      url: 'https://vpnssl.emse.fr/watchdoc,DanaInfo=192.168.130.2',
+      body: SafeArea(
+        child: WebView(
+          javascriptMode: JavascriptMode.unrestricted,
+          initialUrl: 'https://vpnssl.emse.fr/watchdoc,DanaInfo=192.168.130.2',
+        ),
+      ),
     );
   }
 }

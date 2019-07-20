@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class PortailWebView extends StatelessWidget {
   final String cookie;
@@ -8,13 +8,25 @@ class PortailWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WebviewScaffold(
+    // return WebviewScaffold(
+    //   appBar: AppBar(
+    // backgroundColor: Colors.deepPurple,
+    // title: const Text("Portail"),
+    //   ),
+    //   headers: {"cookie": cookie},
+    //   url: 'http://portail.emse.fr/',
+    // );
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: const Text("Portail"),
       ),
-      headers: {"cookie": cookie},
-      url: 'http://portail.emse.fr/',
+      body: SafeArea(
+        child: WebView(
+          javascriptMode: JavascriptMode.unrestricted,
+          initialUrl: 'http://portail.emse.fr/',
+        ),
+      ),
     );
   }
 }

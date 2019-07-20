@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/funcs/http_calendar.dart';
+import 'package:minitel_toolbox/core/models/icalendar.dart';
+import 'package:minitel_toolbox/funcs/http_calendar_url.dart';
 import 'package:minitel_toolbox/funcs/http_gateway.dart';
 import 'package:minitel_toolbox/funcs/http_portail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -74,8 +76,9 @@ class LoginPageState extends State<LoginPage> {
                                     .toList(),
                                 onChanged: (String selectedUrl) {
                                   _selectedUrl = selectedUrl;
-                                  getStatus(_selectedUrl).then((status) =>
-                                      setState(() => _status = status));
+                                  Gateway.getStatus(_selectedUrl).then(
+                                      (status) =>
+                                          setState(() => _status = status));
                                 },
                               ),
                             ],
@@ -152,16 +155,19 @@ class LoginPageState extends State<LoginPage> {
                             await SharedPreferences.getInstance();
                         final snackBar = SnackBar(content: Text('Requested'));
                         Scaffold.of(context).showSnackBar(snackBar);
-                        autoLogin(
+                        Gateway.autoLogin(
                           _uidController.text,
                           _pswdController.text,
                           _selectedUrl,
                           _timeMap[_selectedTime],
                         ).then((status) => setState(() => _status = status));
-                        saveCalendarFromLogin(
+                        String calendarUrl = await CalendarURL.getCalendarURL(
                           username: _uidController.text,
                           password: _pswdController.text,
-                        ).then((status) => setState(() {}));
+                        );
+                        setState(() {
+                          ICalendar().saveCalendar(calendarUrl);
+                        });
                         if (rememberMe) {
                           prefs.setString("user", _uidController.text);
                           prefs.setString("time", _selectedTime);
@@ -176,7 +182,7 @@ class LoginPageState extends State<LoginPage> {
                         //   username: _uidController.text,
                         //   password: _pswdController.text,
                         // ).then((status) => setState(() {}));
-                        saveCookiePortailFromLogin(
+                        Portail.saveCookiePortailFromLogin(
                           username: _uidController.text,
                           password: _pswdController.text,
                         ).then((status) => setState(() {}));
@@ -200,17 +206,6 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  _rememberLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _uidController.text = prefs.getString("user");
-    _selectedTime = prefs.getString("time");
-    if (_uidController.text != "") {
-      _pswdController.text =
-          utf8.decode(base64.decode(prefs.getString("pswd")));
-      rememberMe = true;
-    }
-  }
-
   @override
   dispose() {
     _uidController.dispose();
@@ -221,9 +216,21 @@ class LoginPageState extends State<LoginPage> {
   @override
   initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => getStatus(_selectedUrl)
-        .then((status) => setState(() => _status = status)));
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        Gateway.getStatus(_selectedUrl)
+            .then((status) => setState(() => _status = status)));
     _rememberLogin();
+  }
+
+  _rememberLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _uidController.text = prefs.getString("user");
+    _selectedTime = prefs.getString("time");
+    if (_uidController.text != "") {
+      _pswdController.text =
+          utf8.decode(base64.decode(prefs.getString("pswd")));
+      rememberMe = true;
+    }
   }
 }
 
@@ -267,8 +274,8 @@ class _StatusCard extends StatelessWidget {
                     style: const TextStyle(fontSize: 20),
                   ),
                   FutureBuilder<String>(
-                    future:
-                        getSavedCalendarURL(), // a previously-obtained Future<String> or null
+                    future: CalendarURL
+                        .savedCalendarURL, // a previously-obtained Future<String> or null
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
                       switch (snapshot.connectionState) {
@@ -322,7 +329,7 @@ class _StatusCard extends StatelessWidget {
                     style: const TextStyle(fontSize: 20),
                   ),
                   FutureBuilder<String>(
-                    future: getSavedCookiePortail(),
+                    future: Portail.getSavedCookiePortail(),
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
                       switch (snapshot.connectionState) {

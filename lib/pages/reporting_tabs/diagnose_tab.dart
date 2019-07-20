@@ -40,7 +40,7 @@ class DiagnoseTab extends StatelessWidget {
                   ),
                 ),
               ),
-              for (String item in DiagnosisContent().all)
+              for (String item in DiagnosisContent())
                 if (item != DiagnosisContent.ssid &&
                     item != DiagnosisContent.ip) // Ignore them
                   LogCard(

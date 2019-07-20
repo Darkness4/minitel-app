@@ -15,21 +15,22 @@ void main() {
 
   group('FAIL Http Requests Portail', () {
     test('Fail succefully to get a cookie: Bad login', () async {
-      String cookie = await getPortailCookie(username: "", password: "");
+      String cookie =
+          await Portail.getPortailCookie(username: "", password: "");
       print(cookie);
 
       expect(cookie, contains("bad username or password"));
     });
 
     test('FAIL getSavedCookiePortail', () async {
-      String cookie = await getSavedCookiePortail();
+      String cookie = await Portail.getSavedCookiePortail();
       print(cookie);
       expect(cookie == "", true);
     });
 
     test('FAIL to saveCookiePortailFromLogin', () async {
       var response =
-          await saveCookiePortailFromLogin(username: "", password: "");
+          await Portail.saveCookiePortailFromLogin(username: "", password: "");
 
       expect(response, false);
     });
@@ -37,7 +38,7 @@ void main() {
 
   group('Http Requests Portail', () {
     test('Get succefully a cookie', () async {
-      String cookie = await getPortailCookie(
+      String cookie = await Portail.getPortailCookie(
           username: "marc.nguyen", password: "stickman963");
       print(cookie);
 
@@ -45,15 +46,15 @@ void main() {
     });
 
     test('getSavedCookiePortail', () async {
-      await saveCookiePortailFromLogin(
+      await Portail.saveCookiePortailFromLogin(
           username: "marc.nguyen", password: "stickman963");
-      String cookie = await getSavedCookiePortail();
+      String cookie = await Portail.getSavedCookiePortail();
       print(cookie);
       expect(cookie, contains("portail_ent_emse_session"));
     });
 
     test('saveCookiePortailFromLogin', () async {
-      var response = await saveCookiePortailFromLogin(
+      var response = await Portail.saveCookiePortailFromLogin(
           username: "marc.nguyen", password: "stickman963");
 
       expect(response, true);

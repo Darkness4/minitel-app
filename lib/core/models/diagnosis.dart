@@ -162,10 +162,10 @@ class Diagnosis {
           [MyIPAdresses.google],
           DiagnosisContent.nsLookupGoogleBusy,
         ),
-        getStatus(MyIPAdresses.stormshieldIP).then((status) =>
+        Gateway.getStatus(MyIPAdresses.stormshieldIP).then((status) =>
             _report[DiagnosisContent.httpPortalPublic] =
                 status.isEmpty ? "Nothing to show" : status),
-        getStatus(MyIPAdresses.gatewayIP).then((status) =>
+        Gateway.getStatus(MyIPAdresses.gatewayIP).then((status) =>
             _report[DiagnosisContent.httpPortalGateway] =
                 status.isEmpty ? "Nothing to show" : status),
         InternetAddress.lookup(MyIPAdresses.stormshield)
@@ -185,7 +185,7 @@ class Diagnosis {
       });
 
       diagnosis = "\n";
-      for (String item in DiagnosisContent().all)
+      for (String item in DiagnosisContent())
         diagnosis += "*$item: ${_report[item]}\n\n";
     } else
       _alert = "Pas de Wifi";
@@ -206,7 +206,7 @@ class Diagnosis {
 }
 
 /// Content of the report after a diagnosis.
-class DiagnosisContent {
+class DiagnosisContent extends Iterable<String> {
   static const String ssid = "SSID";
   static const String ip = "IP";
   static const String ipAddr = "ip addr";
@@ -229,31 +229,29 @@ class DiagnosisContent {
   static const String httpPortalPublic = "HTTP Portal Response Public";
   static const String httpPortalGateway = "HTTP Portal Response Gateway";
 
-  List<String> get all {
-    return [
-      ssid,
-      ip,
-      ipAddr,
-      ifconfigAll,
-      arp,
-      tracertGoogle,
-      tracertGoogleDNS,
-      pingLo,
-      pingLocal,
-      pingGate,
-      pingDNS1,
-      pingDNS2,
-      pingDNS3,
-      pingDNS4,
-      pingDNS5,
-      nsLookupEMSE,
-      nsLookupEMSEBusy,
-      nsLookupGoogle,
-      nsLookupGoogleBusy,
-      httpPortalPublic,
-      httpPortalGateway,
-    ];
-  }
+  Iterator<String> get iterator => [
+        ssid,
+        ip,
+        ipAddr,
+        ifconfigAll,
+        arp,
+        tracertGoogle,
+        tracertGoogleDNS,
+        pingLo,
+        pingLocal,
+        pingGate,
+        pingDNS1,
+        pingDNS2,
+        pingDNS3,
+        pingDNS4,
+        pingDNS5,
+        nsLookupEMSE,
+        nsLookupEMSEBusy,
+        nsLookupGoogle,
+        nsLookupGoogleBusy,
+        httpPortalPublic,
+        httpPortalGateway,
+      ].iterator;
 }
 
 /// All used IP during the diagnosis.

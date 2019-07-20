@@ -35,7 +35,7 @@ class NewsPageState extends State<NewsPage> {
   }
 
   Future<List<Widget>> _generateFeedCard(String url) async {
-    var feed = await getAtom(url);
+    var feed = await WebFeed.getAtom(url);
     List<dynamic> _newsCards = feed.items;
     return _newsCards.map((item) => NewsCard(item: item)).toList();
   }

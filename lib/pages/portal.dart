@@ -8,7 +8,7 @@ import 'portal_tabs/apps_list.dart';
 import 'portal_tabs/login.dart';
 
 Future<void> _checkVersion(BuildContext context) async {
-  var latestVersion = getLatestVersion();
+  var latestVersion = Version.getLatestVersion();
   var actualVersion = PackageInfo.fromPlatform();
   dynamic ensemble = await Future.wait([actualVersion, latestVersion]);
   if (ensemble[0].version != ensemble[1])
@@ -27,8 +27,8 @@ Future<void> _checkVersion(BuildContext context) async {
           RaisedButton(
             textColor: Colors.white,
             child: Text("Update"),
-            onPressed: () =>
-                getLatestVersionURL().then((url) => LaunchURL.launchURL(url)),
+            onPressed: () => Version.getLatestVersionURL()
+                .then((url) => LaunchURL.launchURL(url)),
           )
         ],
       ),

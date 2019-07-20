@@ -75,7 +75,7 @@ class _PortailCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         onTap: () async {
-          String cookie = await getSavedCookiePortail();
+          String cookie = await Portail.getSavedCookiePortail();
           print(cookie);
           Navigator.push(
             context,

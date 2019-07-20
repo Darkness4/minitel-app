@@ -161,7 +161,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
           "Android: ${androidInfo.version.release}\n"
           "SDK: ${androidInfo.version.sdkInt}\n";
     }
-    await report(">$description\n\n",
+    await Webhook.report(">$description\n\n",
         title: "Minitel App v${packageInfo.version} : ${_titleController.text}",
         botName: "Flutter Alpha Feedback Bot");
 

@@ -236,7 +236,7 @@ class ReportingPageState extends State<ReportingPage>
           if (_reportState != 1) {
             setState(() => _reportState = 1);
             if (DateTime.now().isAfter(timeout)) {
-              String status = await report(
+              String status = await Webhook.report(
                 "_${_descriptionController.text}_\n\n"
                 "*Diagnosis*\n"
                 "$_report",
