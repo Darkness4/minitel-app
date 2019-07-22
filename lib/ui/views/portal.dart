@@ -25,14 +25,12 @@ class PortalPageState extends State<PortalPage> {
   Future<void> _checkVersion(BuildContext context) async {
     var latestVersion = _version.getLatestVersion();
     var actualVersion = PackageInfo.fromPlatform();
-    dynamic ensemble = await Future.wait([actualVersion, latestVersion]);
+    List<dynamic> ensemble = await Future.wait([actualVersion, latestVersion]);
     if (ensemble[0].version != ensemble[1])
       showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text(
-            "Une nouvelle version est disponible !",
-          ),
+          title: Text("Une nouvelle version est disponible !"),
           content: Text("La version ${ensemble[1]} est la dernière version."),
           actions: <Widget>[
             FlatButton(

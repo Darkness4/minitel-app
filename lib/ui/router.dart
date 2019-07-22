@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 
 import 'widgets/page_animation.dart';
-import '../pages/about.dart';
-import '../pages/calendar.dart';
-import '../pages/docs.dart';
-import '../pages/news.dart';
-import '../pages/portal.dart';
-import '../pages/reporting.dart';
-import '../pages/feedback.dart';
+import 'views/about.dart';
+import 'views/calendar.dart';
+import 'views/docs.dart';
+import 'views/news.dart';
+import 'views/portal.dart';
+import 'views/reporting.dart';
+import 'views/feedback.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -36,11 +36,6 @@ class Router {
           builder: (BuildContext context) => NewsPage(title: "Nouveautés"),
           settings: settings,
         );
-      // case '/maps':
-      //   return FadeRoute(
-      //     builder: (BuildContext context) => MapsPage(title: "Maps"),
-      //     settings: settings,
-      //   );
       case RoutePaths.Calendar:
         return FadeRoute(
           builder: (BuildContext context) => CalendarPage(title: "Calendrier"),

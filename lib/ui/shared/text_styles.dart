@@ -90,6 +90,19 @@ class MinitelTextStyles {
     fontWeight: FontWeight.bold,
     color: Colors.black54,
   );
+
+  static const textTheme = TextTheme(
+    body1: body1,
+    body2: body2,
+    headline: headline,
+    title: mdH2,
+    display1: display1,
+    display2: display2,
+    display3: display3,
+    display4: display4,
+    subtitle: subtitle,
+    subhead: subhead,
+  );
 }
 
 class BoxMdBody extends StatelessWidget {

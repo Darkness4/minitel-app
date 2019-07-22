@@ -140,12 +140,10 @@ class _WikiMinitelCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MinitelWebView()),
-          );
-        },
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MinitelWebView()),
+        ),
         child: Column(
           children: <Widget>[
             Flexible(

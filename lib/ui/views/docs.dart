@@ -1,36 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/pages/docs_pages/toolbox_docs.dart';
+import 'package:minitel_toolbox/ui/views/docs_pages/minitel_doc.dart';
+import 'package:minitel_toolbox/ui/views/docs_pages/toolbox_docs.dart';
+import 'package:minitel_toolbox/ui/views/docs_pages/wiki_docs.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
-import 'wiki_docs/dualboot_doc.dart';
-import 'wiki_docs/imprimante_doc.dart';
-import 'wiki_docs/mail_doc.dart';
-import 'wiki_docs/virtual_machines_doc.dart';
+class DocumentationPage extends StatelessWidget {
+  final String title;
+  const DocumentationPage({Key key, this.title}) : super(key: key);
 
-class WikiDocs extends StatelessWidget {
-  final PageController _controller;
-  WikiDocs({Key key, PageController controller})
-      : _controller = controller,
-        super(key: key);
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Wiki Documentation"),
+        title: Text(title),
       ),
       body: Scrollbar(
-        child: PageView(
-          controller: _controller,
-          children: <Widget>[
-            ImprimanteDoc(),
-            MailDoc(),
-            DualBootDoc(),
-            VirtMachineDoc(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              MinitelDoc(),
+            ],
+          ),
         ),
       ),
+      drawer: const MainDrawer(),
       endDrawer: Drawer(
         child: ListView(
           padding: const EdgeInsets.all(0.0),
@@ -51,7 +46,6 @@ class WikiDocs extends StatelessWidget {
               title: Text("Minitel"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pop(context);
               },
             ),
             Divider(),
@@ -63,11 +57,10 @@ class WikiDocs extends StatelessWidget {
                   initialPage: 0,
                   viewportFraction: .9,
                 );
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
-                  FadeRoute(
-                    builder: (BuildContext bldctx) =>
-                        ToolboxDocs(controller: _controller),
+                  SlideRightRoute(
+                    widget: ToolboxDocs(controller: _controller),
                   ),
                 );
               },
@@ -75,16 +68,15 @@ class WikiDocs extends StatelessWidget {
             ListTile(
               title: Text("Diagnostique"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pop(context); // Close Drawer
                 final _controller = PageController(
                   initialPage: 1,
                   viewportFraction: .9,
                 );
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
-                  FadeRoute(
-                    builder: (BuildContext bldctx) =>
-                        ToolboxDocs(controller: _controller),
+                  SlideRightRoute(
+                    widget: ToolboxDocs(controller: _controller),
                   ),
                 );
               },
@@ -94,10 +86,15 @@ class WikiDocs extends StatelessWidget {
               title: Text("Configuration de l'imprimante"),
               onTap: () {
                 Navigator.pop(context);
-                _controller.animateToPage(
-                  0,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.fastOutSlowIn,
+                final _controller = PageController(
+                  initialPage: 0,
+                  viewportFraction: .9,
+                );
+                Navigator.push(
+                  context,
+                  SlideRightRoute(
+                    widget: WikiDocs(controller: _controller),
+                  ),
                 );
               },
             ),
@@ -105,10 +102,15 @@ class WikiDocs extends StatelessWidget {
               title: Text("Importation des mails SoGo"),
               onTap: () {
                 Navigator.pop(context);
-                _controller.animateToPage(
-                  1,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.fastOutSlowIn,
+                final _controller = PageController(
+                  initialPage: 1,
+                  viewportFraction: .9,
+                );
+                Navigator.push(
+                  context,
+                  SlideRightRoute(
+                    widget: WikiDocs(controller: _controller),
+                  ),
                 );
               },
             ),
@@ -116,10 +118,15 @@ class WikiDocs extends StatelessWidget {
               title: Text("Installer un Dual Boot"),
               onTap: () {
                 Navigator.pop(context);
-                _controller.animateToPage(
-                  2,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.fastOutSlowIn,
+                final _controller = PageController(
+                  initialPage: 2,
+                  viewportFraction: .9,
+                );
+                Navigator.push(
+                  context,
+                  SlideRightRoute(
+                    widget: WikiDocs(controller: _controller),
+                  ),
                 );
               },
             ),
@@ -127,10 +134,15 @@ class WikiDocs extends StatelessWidget {
               title: Text("Jouer avec des VM"),
               onTap: () {
                 Navigator.pop(context);
-                _controller.animateToPage(
-                  3,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.fastOutSlowIn,
+                final _controller = PageController(
+                  initialPage: 3,
+                  viewportFraction: .9,
+                );
+                Navigator.push(
+                  context,
+                  SlideRightRoute(
+                    widget: WikiDocs(controller: _controller),
+                  ),
                 );
               },
             ),

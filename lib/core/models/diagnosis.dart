@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
-import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -46,7 +45,7 @@ class Diagnosis {
   /// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
   /// If the report takes too much time, the function return any given
   /// informations after one minute.
-  Future<String> diagnose(BuildContext context) async {
+  Future<String> diagnose() async {
     _report = {};
     var diagnosis = "";
 
@@ -70,7 +69,7 @@ class Diagnosis {
       await Future.wait([
         _terminalCommand("ip", ['a'], DiagnosisContent.ipAddr),
         _terminalCommand("ifconfig", ['-a'], DiagnosisContent.ifconfigAll),
-        _terminalCommand("arp", ['-a'], DiagnosisContent.arp),
+        _terminalCommand("su", ['-c', 'arp -a'], DiagnosisContent.arp),
         _terminalCommand(
           "su",
           [
@@ -212,7 +211,7 @@ class DiagnosisContent extends Iterable<String> {
   static const String ip = "IP";
   static const String ipAddr = "ip addr";
   static const String ifconfigAll = "ifconfig all";
-  static const String arp = "Address Resolution Protocol (Busybox)";
+  static const String arp = "Address Resolution Protocol (SU + Busy)";
   static const String tracertGoogle = "Traceroute Google (Superuser)";
   static const String tracertGoogleDNS = "Traceroute Google DNS (Superuser)";
   static const String pingLo = "Ping Loopback";

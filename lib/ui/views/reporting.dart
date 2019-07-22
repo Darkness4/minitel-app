@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/models/diagnosis.dart';
 import 'package:minitel_toolbox/core/services/http_webhook.dart';
@@ -19,6 +20,8 @@ Future<void> _setTimeout() async {
       'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
 }
 
+enum ButtonState { None, Loading, Done }
+
 class ReportingPage extends StatefulWidget {
   final String title;
 
@@ -35,36 +38,26 @@ class ReportingPageState extends State<ReportingPage>
   final TextEditingController _descriptionController = TextEditingController();
   final Diagnosis _diagnosis = Diagnosis();
   final WebhookAPI _webhook = WebhookAPI();
+  final ValueNotifier<double> _percentageDiagnoseProgress =
+      ValueNotifier<double>(0.0);
 
-  /// State of the Diagnosis.
-  ///
-  /// 0 = None, 1 = Loading, 2 = Done
-  int _diagnosisState = 0;
-
-  /// Used for the [CircularProgressIndicator], between 0.0 and 1.0.
-  double _percentageDiagnoseProgress = 0.0;
+  ButtonState _diagnosisState = ButtonState.None;
 
   String _report = "";
 
-  /// State of the "Send to Slack" action.
-  ///
-  /// 0 = None, 1 = Loading, 2 = Done
-  int _reportState = 0;
-
   Widget get _diagnosisButton => FloatingActionButton(
-        backgroundColor: _diagnosisState == 2 ? Colors.green : Colors.blue,
+        backgroundColor:
+            _diagnosisState == ButtonState.Done ? Colors.green : Colors.blue,
         onPressed: () async {
           if (!_animationController.isDismissed) _animationController.reverse();
-          if (_diagnosisState != 1) {
-            setState(() => _diagnosisState = 1);
-            _percentageDiagnoseProgress = 0.0;
-            Timer.periodic(
-                const Duration(seconds: 1),
-                (Timer t) =>
-                    setState(() => _percentageDiagnoseProgress += 1 / 60));
-            _diagnosis.diagnose(context).then((diagnosis) {
+          if (_diagnosisState != ButtonState.Loading) {
+            setState(() => _diagnosisState = ButtonState.Loading);
+            _percentageDiagnoseProgress.value = 0.0;
+            Timer.periodic(const Duration(seconds: 1),
+                (Timer t) => _percentageDiagnoseProgress.value += 1 / 60);
+            _diagnosis.diagnose().then((diagnosis) {
               _report = diagnosis;
-              setState(() => _diagnosisState = 2);
+              setState(() => _diagnosisState = ButtonState.Done);
             });
           }
         },
@@ -72,23 +65,26 @@ class ReportingPageState extends State<ReportingPage>
       );
 
   Widget get _diagnosisIcon {
+    Widget child;
     switch (_diagnosisState) {
-      case 0:
-        return const Icon(Icons.zoom_in);
+      case ButtonState.None:
+        child = const Icon(Icons.zoom_in);
         break;
-      case 1:
-        return CircularProgressIndicator(
-          value: _percentageDiagnoseProgress,
-          valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+      case ButtonState.Loading:
+        child = ValueListenableBuilder<double>(
+          valueListenable: _percentageDiagnoseProgress,
+          builder: (context, value, _) => CircularProgressIndicator(
+            value: value,
+            valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+          ),
         );
         break;
-      case 2:
+      case ButtonState.Done:
         if (_animationController.isDismissed) _animationController.forward();
-        return const Icon(Icons.done);
+        child = const Icon(Icons.done);
         break;
-      default:
-        return const Text("");
     }
+    return child;
   }
 
   Widget get _mailButton => AnimatedFloatingButton(
@@ -107,30 +103,6 @@ class ReportingPageState extends State<ReportingPage>
               "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
         },
       );
-
-  Widget get _reportIcon {
-    switch (_reportState) {
-      case 0:
-        return const ImageIcon(
-          AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
-          size: 100.0,
-        );
-        break;
-      case 1:
-        return const CircularProgressIndicator(
-          valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-        );
-        break;
-      case 2:
-        return const Icon(
-          Icons.done,
-          color: Colors.white,
-        );
-        break;
-      default:
-        return const Text("");
-    }
-  }
 
   Widget get _shareButton => AnimatedFloatingButton(
         "Partager",
@@ -230,40 +202,32 @@ class ReportingPageState extends State<ReportingPage>
         "Notifier sur Slack",
         start: 0.0,
         end: 0.25,
-        child: _reportIcon,
+        child: const ImageIcon(
+          AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
+          size: 100.0,
+        ),
         controller: _animationController,
         onPressed: () async {
           DateTime timeout = await _timeout;
-          if (_reportState != 1) {
-            setState(() => _reportState = 1);
-            if (DateTime.now().isAfter(timeout)) {
-              String status = await _webhook.report(
-                "_${_descriptionController.text}_\n\n"
-                "*Diagnosis*\n"
-                "$_report",
-                title: _titleController.text,
-                channel: channel,
-              );
-              if (status == "ok") {
-                _setTimeout();
-                setState(() => _reportState = 2);
-              } else {
-                setState(() => _reportState = 0);
-              }
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(status),
-                ),
-              );
-            } else {
-              _reportState = 0;
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("Wait until ${timeout.hour}:${timeout.minute}"),
-                ),
-              );
-            }
+          String status;
+          if (DateTime.now().isAfter(timeout)) {
+            status = await _webhook.report(
+              "_${_descriptionController.text}_\n\n"
+              "*Diagnosis*\n"
+              "$_report",
+              title: _titleController.text,
+              channel: channel,
+            );
+            if (status == "ok") _setTimeout();
+          } else {
+            status = "Wait until ${timeout.hour}:${timeout.minute}";
           }
+          if (status != null)
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text(status),
+              ),
+            );
         },
       );
 }

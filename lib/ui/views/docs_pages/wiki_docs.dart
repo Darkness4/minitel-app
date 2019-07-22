@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/pages/docs_pages/wiki_docs.dart';
+import 'package:minitel_toolbox/ui/views/docs_pages/toolbox_docs.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
-import 'toolbox_docs/diagnose_doc.dart';
-import 'toolbox_docs/login_doc.dart';
+import 'wiki_docs/dualboot_doc.dart';
+import 'wiki_docs/imprimante_doc.dart';
+import 'wiki_docs/mail_doc.dart';
+import 'wiki_docs/virtual_machines_doc.dart';
 
-class ToolboxDocs extends StatelessWidget {
+class WikiDocs extends StatelessWidget {
   final PageController _controller;
-  ToolboxDocs({Key key, PageController controller})
+  WikiDocs({Key key, PageController controller})
       : _controller = controller,
         super(key: key);
 
@@ -16,14 +18,16 @@ class ToolboxDocs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Toolbox Documentation"),
+        title: Text("Wiki Documentation"),
       ),
       body: Scrollbar(
         child: PageView(
           controller: _controller,
           children: <Widget>[
-            LoginDoc(),
-            DiagnoseDoc(),
+            ImprimanteDoc(),
+            MailDoc(),
+            DualBootDoc(),
+            VirtMachineDoc(),
           ],
         ),
       ),
@@ -55,29 +59,6 @@ class ToolboxDocs extends StatelessWidget {
               title: Text("Authentification"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                _controller.animateToPage(
-                  0,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.fastOutSlowIn,
-                );
-              },
-            ),
-            ListTile(
-              title: Text("Diagnostique"),
-              onTap: () {
-                Navigator.pop(context);
-                _controller.animateToPage(
-                  1,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.fastOutSlowIn,
-                );
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text("Configuration de l'imprimante"),
-              onTap: () {
-                Navigator.pop(context);
                 final _controller = PageController(
                   initialPage: 0,
                   viewportFraction: .9,
@@ -86,13 +67,13 @@ class ToolboxDocs extends StatelessWidget {
                   context,
                   FadeRoute(
                     builder: (BuildContext bldctx) =>
-                        WikiDocs(controller: _controller),
+                        ToolboxDocs(controller: _controller),
                   ),
                 );
               },
             ),
             ListTile(
-              title: Text("Importation des mails SoGo"),
+              title: Text("Diagnostique"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(
@@ -103,8 +84,31 @@ class ToolboxDocs extends StatelessWidget {
                   context,
                   FadeRoute(
                     builder: (BuildContext bldctx) =>
-                        WikiDocs(controller: _controller),
+                        ToolboxDocs(controller: _controller),
                   ),
+                );
+              },
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Configuration de l'imprimante"),
+              onTap: () {
+                Navigator.pop(context);
+                _controller.animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Importation des mails SoGo"),
+              onTap: () {
+                Navigator.pop(context);
+                _controller.animateToPage(
+                  1,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
                 );
               },
             ),
@@ -112,16 +116,10 @@ class ToolboxDocs extends StatelessWidget {
               title: Text("Installer un Dual Boot"),
               onTap: () {
                 Navigator.pop(context);
-                final _controller = PageController(
-                  initialPage: 2,
-                  viewportFraction: .9,
-                );
-                Navigator.pushReplacement(
-                  context,
-                  FadeRoute(
-                    builder: (BuildContext bldctx) =>
-                        WikiDocs(controller: _controller),
-                  ),
+                _controller.animateToPage(
+                  2,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
                 );
               },
             ),
@@ -129,16 +127,10 @@ class ToolboxDocs extends StatelessWidget {
               title: Text("Jouer avec des VM"),
               onTap: () {
                 Navigator.pop(context);
-                final _controller = PageController(
-                  initialPage: 3,
-                  viewportFraction: .9,
-                );
-                Navigator.pushReplacement(
-                  context,
-                  FadeRoute(
-                    builder: (BuildContext bldctx) =>
-                        WikiDocs(controller: _controller),
-                  ),
+                _controller.animateToPage(
+                  3,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
                 );
               },
             ),
