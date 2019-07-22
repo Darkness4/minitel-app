@@ -147,7 +147,8 @@ class LoginPageState extends State<LoginPage> {
                             Text("Se souvenir "),
                             Checkbox(
                               value: rememberMe,
-                              onChanged: (e) => setState(() => rememberMe = e),
+                              onChanged: (value) =>
+                                  setState(() => rememberMe = value),
                             ),
                           ],
                         ),
@@ -178,7 +179,7 @@ class LoginPageState extends State<LoginPage> {
                         );
                         ICalendar(_calendarURL)
                             .saveCalendar(calendarUrl)
-                            .then((i) => setState(() {}));
+                            .then((_) => setState(() {}));
                         if (rememberMe) {
                           prefs.setString("user", _uidController.text);
                           prefs.setString("time", _selectedTime);
@@ -194,7 +195,7 @@ class LoginPageState extends State<LoginPage> {
                               username: _uidController.text,
                               password: _pswdController.text,
                             )
-                            .then((status) => setState(() {}));
+                            .then((_) => setState(() {}));
                       },
                       label: const Text(
                         "Se connecter",
