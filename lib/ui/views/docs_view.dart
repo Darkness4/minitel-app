@@ -6,9 +6,9 @@ import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
-class DocumentationPage extends StatelessWidget {
+class DocumentationView extends StatelessWidget {
   final String title;
-  const DocumentationPage({Key key, this.title}) : super(key: key);
+  const DocumentationView({Key key, this.title}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Scaffold(

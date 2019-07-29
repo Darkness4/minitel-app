@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
@@ -21,7 +22,10 @@ import 'package:permission_handler/permission_handler.dart';
 /// The data is generated asynchronously. The process times out after one minute.
 class Diagnosis {
   static String _alert;
-  final GatewayAPI _gateway = GatewayAPI();
+  final GatewayAPI _gateway;
+
+  Diagnosis({@required GatewayAPI gatewayAPI}) : _gateway = gatewayAPI;
+
   Map<String, String> _report = {};
 
   final _argsPing = "-c 4 -w 5 -W 5";
@@ -45,9 +49,8 @@ class Diagnosis {
   /// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
   /// If the report takes too much time, the function return any given
   /// informations after one minute.
-  Future<String> diagnose() async {
+  Future<void> diagnose() async {
     _report = {};
-    var diagnosis = "";
 
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
@@ -186,14 +189,8 @@ class Diagnosis {
         _alert = "Diagnosis has timed out !";
         return [];
       });
-
-      diagnosis = "\n";
-      for (String item in DiagnosisContent())
-        diagnosis += "*$item: ${_report[item]}\n\n";
     } else
       _alert = "Pas de Wifi";
-
-    return diagnosis;
   }
 
   Future<void> _terminalCommand(

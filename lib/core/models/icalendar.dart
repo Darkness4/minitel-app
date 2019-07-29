@@ -11,7 +11,7 @@ class ICalendar {
   String _calscale = "";
   Timezone _timezone = Timezone();
   List<Map<String, String>> _events = [];
-  final CalendarURLAPI calendarURL;
+  final CalendarUrlAPI calendarURL;
   ICalendar(this.calendarURL);
 
   String get calscale => _calscale;

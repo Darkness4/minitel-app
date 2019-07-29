@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/services/http_webfeed.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
+import 'package:provider/provider.dart';
 
-class NewsPage extends StatefulWidget {
+class NewsView extends StatefulWidget {
   final String title;
 
-  const NewsPage({Key key, this.title}) : super(key: key);
+  const NewsView({Key key, this.title}) : super(key: key);
 
   @override
-  NewsPageState createState() => NewsPageState();
+  NewsViewState createState() => NewsViewState();
 }
 
-class NewsPageState extends State<NewsPage> {
+class NewsViewState extends State<NewsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,7 @@ class NewsPageState extends State<NewsPage> {
   }
 
   Future<List<Widget>> _generateFeedCard(String url) async {
-    var feed = await WebFeedAPI().getAtom(url);
+    var feed = await Provider.of<WebFeedAPI>(context).getAtom(url);
     List<dynamic> _newsCards = feed.items;
     return _newsCards.map((item) => NewsCard(item: item)).toList();
   }

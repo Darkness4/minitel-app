@@ -8,7 +8,7 @@ import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  final _calendarURL = CalendarURLAPI();
+  final _calendarURL = CalendarUrlAPI();
   setUpAll(() async {
     final directory = await Directory.systemTemp.createTemp();
 

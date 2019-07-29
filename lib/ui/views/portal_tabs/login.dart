@@ -26,7 +26,7 @@ class LoginPageState extends State<LoginPage> {
   final _pswdFocusNode = FocusNode();
   final _uidController = TextEditingController();
   final _pswdController = TextEditingController();
-  final _calendarURL = CalendarURLAPI();
+  final _calendarURL = CalendarUrlAPI();
   final List<String> _urlRootList = [
     '10.163.0.2',
     'fw-cgcp.emse.fr',
@@ -247,13 +247,13 @@ class LoginPageState extends State<LoginPage> {
 class _StatusCard extends StatelessWidget {
   final String _status;
   final PortailAPI _portail;
-  final CalendarURLAPI _calendarURL;
+  final CalendarUrlAPI _calendarURL;
 
   const _StatusCard({
     Key key,
     @required String status,
     @required PortailAPI portail,
-    @required CalendarURLAPI calendarURL,
+    @required CalendarUrlAPI calendarURL,
   })  : _status = status,
         _portail = portail,
         _calendarURL = calendarURL,

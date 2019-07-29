@@ -8,17 +8,18 @@ import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 
-class FeedbackPage extends StatefulWidget {
+class FeedbackView extends StatefulWidget {
   final String title;
 
-  FeedbackPage({Key key, this.title}) : super(key: key);
+  FeedbackView({Key key, this.title}) : super(key: key);
 
   @override
-  _FeedbackPageState createState() => _FeedbackPageState();
+  _FeedbackViewState createState() => _FeedbackViewState();
 }
 
-class _FeedbackPageState extends State<FeedbackPage> {
+class _FeedbackViewState extends State<FeedbackView> {
   TextEditingController _titleController;
 
   FocusNode _titleFocusNode;
@@ -28,7 +29,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
   TextEditingController _descriptionController;
 
   final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  final WebhookAPI _webhook = WebhookAPI();
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +162,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
           "Android: ${androidInfo.version.release}\n"
           "SDK: ${androidInfo.version.sdkInt}\n";
     }
-    await _webhook.report(">$description\n\n",
+    await Provider.of<WebhookAPI>(ctxt).report(">$description\n\n",
         title: "Minitel App v${packageInfo.version} : ${_titleController.text}",
         botName: "Flutter Alpha Feedback Bot");
 

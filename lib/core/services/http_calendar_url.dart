@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CalendarURLAPI {
+class CalendarUrlAPI {
   Future<String> get savedCalendarURL async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String contents = prefs.getString('calendarURL') ?? "";

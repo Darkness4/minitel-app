@@ -1,3 +1,4 @@
+import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:provider/provider.dart';
 
 import 'core/services/http_gateway.dart';
@@ -18,6 +19,7 @@ List<SingleChildCloneableWidget> independentServices = [
   Provider.value(value: VersionAPI()),
   Provider.value(value: WebhookAPI()),
   Provider.value(value: WebFeedAPI()),
+  Provider.value(value: CalendarUrlAPI()),
 ];
 
 List<SingleChildCloneableWidget> dependentServices = [];

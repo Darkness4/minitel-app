@@ -5,7 +5,9 @@ import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
+import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -18,11 +20,6 @@ class CalendarPage extends StatefulWidget {
 }
 
 class CalendarPageState extends State<CalendarPage> {
-  final _uidController = TextEditingController();
-  final _pswdController = TextEditingController();
-  final _uidFocusNode = FocusNode();
-  final _pswdFocusNode = FocusNode();
-  final _formKey = GlobalKey<FormState>();
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   final initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/launcher_icon');
@@ -35,48 +32,36 @@ class CalendarPageState extends State<CalendarPage> {
     priority: Priority.High,
   );
   final iOSPlatformChannelSpecifics = IOSNotificationDetails();
-  final CalendarURLAPI _calendarURL = CalendarURLAPI();
 
-  Future<List<Widget>> get _listEventCards async {
+  Future<ICalendar> _loadCalendar(BuildContext context) async {
+    CalendarUrlAPI _calendarURL = Provider.of<CalendarUrlAPI>(context);
     ICalendar ical = ICalendar(_calendarURL);
 
-    // Refresh the calendar if possible
-    try {
-      var url = await _calendarURL.savedCalendarURL;
-      if (url == "") throw ("The URL of the calendar was not found.");
-      await ical.saveCalendar(url);
-    } catch (e) {
-      return _errorHandlerWidget(e);
-    }
+    var url = await _calendarURL.savedCalendarURL;
+    if (url == "") throw Exception("The URL of the calendar was not found.");
+    await ical.saveCalendar(url);
 
     // Read the actual calendar
-    try {
-      await ical.getCalendarFromFile();
-    } catch (e) {
-      return _errorHandlerWidget(e);
-    }
+    await ical.getCalendarFromFile();
 
-    ical.parseCalendar();
+    return ical;
+  }
 
-    const Map<int, Color> colorPalette = {
-      DateTime.january: Colors.red,
-      DateTime.february: Colors.pink,
-      DateTime.march: Colors.purple,
-      DateTime.april: Colors.indigo,
-      DateTime.may: Colors.blue,
-      DateTime.june: Colors.lightBlue,
-      DateTime.july: Colors.green,
-      DateTime.august: Colors.lime,
-      DateTime.september: Colors.yellow,
-      DateTime.october: Colors.orange,
-      DateTime.november: Colors.deepOrange,
-      DateTime.december: Colors.brown,
-    };
-
+  Future<List<Widget>> _listEventCards(ICalendar ical) async {
+    // TODO: StreamBuilder, yield DTSTART(event) or NEW_DAY or NEW_MONTH
     List<Widget> widgets = [];
     List<Widget> monthlyWidgets = [];
     List<Widget> dailyEvents = [];
+    int i = 0;
+    int day;
+    int month;
 
+    // Refresh the calendar if possible
+
+    // Parse the calendar
+    ical.parseCalendar();
+
+    // Filter the calendar  // TODO: Maybe optimize by filtering at the capture
     var filteredEvents = ical.events
         .where(
             (event) => DateTime.parse(event["DTSTART"]).isAfter(DateTime.now()))
@@ -84,18 +69,18 @@ class CalendarPageState extends State<CalendarPage> {
     filteredEvents.sort((event1, event2) => DateTime.parse(event1["DTSTART"])
         .compareTo(DateTime.parse(event2["DTSTART"])));
 
-    int i = 0;
-    int day;
-    int month;
+    // Throw away the old notifications
     await flutterLocalNotificationsPlugin.cancelAll();
 
     Future.forEach(filteredEvents, (event) async {
       DateTime dt = DateTime.parse(event["DTSTART"]);
 
       if (dt.isBefore(DateTime.now().add(const Duration(days: 14)))) {
-        i++;
         var dtstart = DateFormat.Hm().format(dt);
         var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
+
+        i++;
+
         _scheduleNotification(
           id: i,
           title: event["SUMMARY"],
@@ -118,13 +103,13 @@ class CalendarPageState extends State<CalendarPage> {
         month = dt.month;
         monthlyWidgets = [];
 
-        // Finish
+        // Page
         widgets.add(
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
-                color: colorPalette[month],
+                color: MinitelColors.MonthColorPalette[month],
                 elevation: 4,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -135,7 +120,7 @@ class CalendarPageState extends State<CalendarPage> {
           ),
         );
 
-        // New Month
+        // Month Card
         monthlyWidgets.add(
           Center(
             child: Padding(
@@ -153,10 +138,11 @@ class CalendarPageState extends State<CalendarPage> {
         );
       }
 
-      // New Day
       if (dt.day != day) {
-        day = dt.day;
-        dailyEvents = [];
+        day = dt.day; // New Day
+        dailyEvents = []; // Clear Events
+
+        // Header Bullet + Event Cards
         monthlyWidgets.add(
           StickyHeaderBuilder(
             builder: (BuildContext context, double stuckAmount) {
@@ -165,8 +151,11 @@ class CalendarPageState extends State<CalendarPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 0.0),
                 child: Material(
                   elevation: stuckAmount * 10,
-                  color: Color.lerp(Colors.transparent,
-                      colorPalette[dt.month].withOpacity(0.9), stuckAmount),
+                  color: Color.lerp(
+                      Colors.transparent,
+                      MinitelColors.MonthColorPalette[dt.month]
+                          .withOpacity(0.9),
+                      stuckAmount),
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(4.0),
@@ -191,7 +180,7 @@ class CalendarPageState extends State<CalendarPage> {
         );
       }
 
-      // New Event
+      // Event Card
       dailyEvents.add(EventCard(event));
     });
 
@@ -208,25 +197,28 @@ class CalendarPageState extends State<CalendarPage> {
         color: MinitelColors.PrimaryColor,
         child: Center(
           child: FutureBuilder(
-            future: _listEventCards,
-            builder: (BuildContext context, AsyncSnapshot snapshot) =>
-                snapshot.hasData
-                    ? Scrollbar(child: PageView(children: snapshot.data))
-                    : const CircularProgressIndicator(),
+            future: _loadCalendar(context),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                  return const CircularProgressIndicator();
+                case ConnectionState.done:
+                  if (snapshot.hasError)
+                    return ErrorCalendarWidget(
+                        snapshot.error.toString(), setState);
+                  return Scrollbar(
+                      child:
+                          PageView(children: _listEventCards(snapshot.data)));
+              }
+              return ErrorCalendarWidget(snapshot.error.toString(), setState);
+            },
           ),
         ),
       ),
       drawer: const MainDrawer(),
     );
-  }
-
-  @override
-  void dispose() {
-    _uidController.dispose();
-    _pswdController.dispose();
-    _uidFocusNode.dispose();
-    _pswdFocusNode.dispose();
-    super.dispose();
   }
 
   @override
@@ -236,10 +228,10 @@ class CalendarPageState extends State<CalendarPage> {
         initializationSettingsAndroid, initializationSettingsIOS);
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (payload) =>
-            onSelectNotification(payload, context));
+            _onSelectNotification(payload, context));
   }
 
-  Future<void> onSelectNotification(
+  Future<void> _onSelectNotification(
       String payload, BuildContext context) async {
     List<String> output = payload.split(';');
     showDialog(
@@ -251,95 +243,12 @@ class CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  List<Widget> _errorHandlerWidget(dynamic e) {
-    return <Widget>[
-      ListView(
-        children: <Widget>[
-          Card(
-            elevation: 4,
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  e.toString(),
-                  style: MinitelTextStyles.error,
-                ),
-              ),
-            ),
-          ),
-          Card(
-            elevation: 4,
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      focusNode: _uidFocusNode,
-                      controller: _uidController,
-                      decoration: InputDecoration(
-                        hintText: "prénom.nom",
-                        labelText: "Nom d'utilisateur",
-                      ),
-                      onEditingComplete: () {
-                        _uidFocusNode.unfocus();
-                        FocusScope.of(context).requestFocus(_pswdFocusNode);
-                      },
-                    ),
-                    TextFormField(
-                      controller: _pswdController,
-                      obscureText: true,
-                      focusNode: _pswdFocusNode,
-                      decoration: InputDecoration(
-                        hintText: "Mot de passe",
-                        labelText: "Mot de passe",
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Center(
-              child: FloatingActionButton.extended(
-                backgroundColor: Colors.red,
-                elevation: 10.0,
-                onPressed: () async {
-                  var url = await _calendarURL.getCalendarURL(
-                    username: _uidController.text,
-                    password: _pswdController.text,
-                  );
-                  setState(() => ICalendar(_calendarURL).saveCalendar(url));
-                },
-                label: const Text(
-                  "Se connecter",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                icon: Icon(Icons.arrow_forward),
-              ),
-            ),
-          ),
-        ],
-      )
-    ];
-  }
-
   Future<void> _scheduleNotification(
       {@required String title,
       @required String description,
       @required int id,
       @required DateTime scheduledNotificationDateTime,
       String payload: "Title;Description"}) async {
-    // print(
-    //     "Event scheduled at ${DateFormat.yMMMMd().format(scheduledNotificationDateTime)} ${DateFormat.Hms().format(scheduledNotificationDateTime)}");
-    // pendingNotificationRequests.forEach((out) => flutterLocalNotificationsPlugin.cancel(out.id));
-
     flutterLocalNotificationsPlugin.schedule(
       id,
       title,
@@ -348,97 +257,6 @@ class CalendarPageState extends State<CalendarPage> {
       NotificationDetails(
           androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
       payload: payload,
-    );
-  }
-
-  // Future<void> _showNotification(
-  //     {String title: "Title",
-  //     String description: "Description",
-  //     String payload: "Title;Description"}) async {
-  //   await flutterLocalNotificationsPlugin.show(
-  //     0,
-  //     title,
-  //     description,
-  //     NotificationDetails(
-  //         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics),
-  //     payload: payload,
-  //   );
-  // }
-}
-
-class EventCard extends StatelessWidget {
-  final Map<String, String> _event;
-
-  const EventCard(Map<String, String> event, {Key key})
-      : _event = event,
-        super(key: key);
-
-  Color get _cardColor {
-    var upper = _event["SUMMARY"].toLowerCase();
-    if (upper.contains("examen"))
-      return Colors.red[200];
-    else if (upper.contains("tp"))
-      return Colors.orange[200];
-    else if (upper.contains("td"))
-      return Colors.green[200];
-    else if (upper.contains("tutorat"))
-      return Colors.blue[200];
-    else if (upper.contains("sport") ||
-        upper.contains("vacance") ||
-        upper.contains("férié"))
-      return Colors.transparent;
-    else
-      return Colors.white;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Card(
-        color: _cardColor,
-        elevation: (_event["SUMMARY"].toLowerCase().contains("sport") ||
-                _event["SUMMARY"].toLowerCase().contains("vacance") ||
-                _event["SUMMARY"].toLowerCase().contains("férié"))
-            ? 0
-            : 4,
-        child: Container(
-          padding: const EdgeInsets.all(4.0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                _event["SUMMARY"],
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                _event["DESCRIPTION"],
-                style: const TextStyle(height: 1.4),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "${_event["LOCATION"] != "" ? '➡' : ''} ${_event["LOCATION"]} ",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                  fontSize: 16,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
-                " - "
-                "${DateFormat.Hm().format(DateTime.parse(_event["DTEND"]))}",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

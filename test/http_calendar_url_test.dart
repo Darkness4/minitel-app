@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 
 void main() async {
-  final CalendarURLAPI _calendarURL = CalendarURLAPI();
+  final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
   group("Must FAIL", () {
     // Mock out the MethodChannel for the path_provider plugin
     const MethodChannel('plugins.flutter.io/shared_preferences')

@@ -3,22 +3,30 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:minitel_toolbox/core/models/diagnosis.dart';
+import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_webhook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ButtonState { None, Loading, Done }
 
-class ReportingModel extends ChangeNotifier {
-  final Diagnosis _diagnosis = Diagnosis();
+class ReportingViewModel extends ChangeNotifier {
+  /// Diagnosis used to capture and store data
+  final Diagnosis diagnosis;
+
+  /// Webhook API called for hadling Slack communications
   final WebhookAPI _webhook;
+
+  /// Percentage of completion of the circle
+  final ValueNotifier<double> percentageDiagnoseProgress =
+      ValueNotifier<double>(0.0);
 
   ButtonState diagnosisState = ButtonState.None;
 
-  String report = "";
-
-  ReportingModel({
+  ReportingViewModel({
     @required WebhookAPI webhook,
-  }) : _webhook = webhook;
+    @required GatewayAPI gatewayAPI,
+  })  : _webhook = webhook,
+        diagnosis = Diagnosis(gatewayAPI: gatewayAPI);
 
   Future<DateTime> get _timeout async {
     final prefs = await SharedPreferences.getInstance();
@@ -26,17 +34,17 @@ class ReportingModel extends ChangeNotifier {
     return DateTime.parse(dateTimeout);
   }
 
-  Future diagnose(AnimationController animationController,
-      ValueNotifier<double> percentageDiagnoseProgress) async {
-    if (!animationController.isDismissed) animationController.reverse();
+  Future diagnose() async {
     if (diagnosisState != ButtonState.Loading) {
       diagnosisState = ButtonState.Loading;
       notifyListeners();
-      Timer.periodic(
+      Timer timer = Timer.periodic(
         const Duration(seconds: 1),
         (Timer t) => percentageDiagnoseProgress.value += 1 / 60,
       );
-      report = await _diagnosis.diagnose();
+      await diagnosis.diagnose();
+      timer.cancel();
+      percentageDiagnoseProgress.value = 0.0;
       diagnosisState = ButtonState.Done;
       notifyListeners();
     }
@@ -50,7 +58,7 @@ class ReportingModel extends ChangeNotifier {
       status = await _webhook.report(
         "_${description}_\n\n"
         "*Diagnosis*\n"
-        "$report",
+        "${diagnosis.report.toString()}",
         title: title,
         channel: channel,
       );

@@ -5,25 +5,24 @@ import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 
 import 'portal_tabs/apps_list.dart';
 import 'portal_tabs/login.dart';
 
-class PortalPage extends StatefulWidget {
+class PortalView extends StatefulWidget {
   final String title;
+  final VersionAPI version;
 
-  const PortalPage({Key key, this.title}) : super(key: key);
+  const PortalView({Key key, this.title, @required this.version})
+      : super(key: key);
 
-  PortalPageState createState() => PortalPageState();
+  PortalViewState createState() => PortalViewState();
 }
 
-class PortalPageState extends State<PortalPage> {
-  final _version = VersionAPI();
-  final _portail = PortailAPI();
-  final _gateway = GatewayAPI();
-
-  Future<void> _checkVersion(BuildContext context) async {
-    var latestVersion = _version.getLatestVersion();
+class PortalViewState extends State<PortalView> {
+  Future<void> _checkVersion(VersionAPI version, BuildContext context) async {
+    var latestVersion = version.getLatestVersion();
     var actualVersion = PackageInfo.fromPlatform();
     List<dynamic> ensemble = await Future.wait([actualVersion, latestVersion]);
     if (ensemble[0].version != ensemble[1])
@@ -40,7 +39,7 @@ class PortalPageState extends State<PortalPage> {
             RaisedButton(
               textColor: Colors.white,
               child: Text("Update"),
-              onPressed: () => _version
+              onPressed: () => version
                   .getLatestVersionURL()
                   .then((url) => LaunchURL.launchURL(url)),
             )
@@ -68,11 +67,11 @@ class PortalPageState extends State<PortalPage> {
             child: TabBarView(
               children: <Widget>[
                 LoginPage(
-                  portail: _portail,
-                  gateway: _gateway,
+                  portail: Provider.of<PortailAPI>(context),
+                  gateway: Provider.of<GatewayAPI>(context),
                 ),
                 AppsList(
-                  portail: _portail,
+                  portail: Provider.of<PortailAPI>(context),
                 ),
               ],
             ),
@@ -106,7 +105,7 @@ class PortalPageState extends State<PortalPage> {
 
   @override
   void initState() {
-    _checkVersion(context);
+    _checkVersion(widget.version, context);
     super.initState();
   }
 }

@@ -1,39 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/services/http_version_checker.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/page_animation.dart';
-import 'views/about.dart';
+import 'views/about_view.dart';
 import 'views/calendar.dart';
-import 'views/docs.dart';
-import 'views/news.dart';
-import 'views/portal.dart';
-import 'views/reporting.dart';
-import 'views/feedback.dart';
+import 'views/docs_view.dart';
+import 'views/news_view.dart';
+import 'views/portal_view.dart';
+import 'views/reporting_view.dart';
+import 'views/feedback_view.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutePaths.Authentication:
         return FadeRoute(
-          builder: (BuildContext context) =>
-              PortalPage(title: "Authentification"),
+          builder: (BuildContext context) => PortalView(
+            title: "Authentification",
+            version: Provider.of<VersionAPI>(context),
+          ),
           settings: settings,
         );
       case RoutePaths.Reporting:
         return FadeRoute(
           builder: (BuildContext context) =>
-              ReportingPage(title: "Signaler Minitel"),
+              ReportingView(title: "Signaler Minitel"),
           settings: settings,
         );
       case RoutePaths.Docs:
         return FadeRoute(
           builder: (BuildContext context) =>
-              DocumentationPage(title: "Documentation"),
+              DocumentationView(title: "Documentation"),
           settings: settings,
         );
       case RoutePaths.News:
         return FadeRoute(
-          builder: (BuildContext context) => NewsPage(title: "Nouveautés"),
+          builder: (BuildContext context) => NewsView(title: "Nouveautés"),
           settings: settings,
         );
       case RoutePaths.Calendar:
@@ -44,13 +48,13 @@ class Router {
       case RoutePaths.About:
         return MaterialPageRoute(
           builder: (BuildContext context) =>
-              AboutPage(title: "A propos de l'application"),
+              AboutView(title: "A propos de l'application"),
           settings: settings,
         );
       case RoutePaths.Feedback:
         return FadeRoute(
           builder: (BuildContext context) =>
-              FeedbackPage(title: "Alpha Feedback"),
+              FeedbackView(title: "Alpha Feedback"),
           settings: settings,
         );
       default:
