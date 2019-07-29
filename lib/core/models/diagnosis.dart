@@ -56,12 +56,14 @@ class Diagnosis {
       PermissionStatus permStatus = await PermissionHandler()
           .checkPermissionStatus(PermissionGroup.location);
 
-      if (permStatus == PermissionStatus.granted)
-        Connectivity().getWifiName().then((output) => ssid = output);
-      else
-        PermissionHandler().requestPermissions([PermissionGroup.location]);
+      if (permStatus != PermissionStatus.granted)
+        await PermissionHandler()
+            .requestPermissions([PermissionGroup.location]);
+      Connectivity().getWifiName().then((output) => ssid = output);
 
       var ip = await Connectivity().getWifiIP();
+      if (ssid != "WiFi Minitel")
+        _alert = "Vous ne semblez pas être connecté à WiFi Minitel";
 
       _report[DiagnosisContent.ssid] = ssid;
       _report[DiagnosisContent.ip] = ip;
@@ -182,6 +184,7 @@ class Diagnosis {
                 (e) => _report[DiagnosisContent.nsLookupGoogle] = e.toString()),
       ]).timeout(const Duration(minutes: 1), onTimeout: () {
         _alert = "Diagnosis has timed out !";
+        return [];
       });
 
       diagnosis = "\n";

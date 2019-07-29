@@ -1,3 +1,4 @@
+/// Named Path of each Routes
 class RoutePaths {
   static const String Authentication = '/';
   static const String Reporting = 'reporting';

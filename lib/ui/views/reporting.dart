@@ -53,12 +53,11 @@ class ReportingPageState extends State<ReportingPage>
           if (_diagnosisState != ButtonState.Loading) {
             setState(() => _diagnosisState = ButtonState.Loading);
             _percentageDiagnoseProgress.value = 0.0;
-            Timer.periodic(const Duration(seconds: 1),
+            Timer timer = Timer.periodic(const Duration(seconds: 1),
                 (Timer t) => _percentageDiagnoseProgress.value += 1 / 60);
-            _diagnosis.diagnose().then((diagnosis) {
-              _report = diagnosis;
-              setState(() => _diagnosisState = ButtonState.Done);
-            });
+            _report = await _diagnosis.diagnose();
+            timer.cancel();
+            setState(() => _diagnosisState = ButtonState.Done);
           }
         },
         child: _diagnosisIcon,
