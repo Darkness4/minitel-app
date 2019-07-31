@@ -48,7 +48,7 @@ class CalendarPageState extends State<CalendarPage> {
   }
 
   Future<List<Widget>> _listEventCards(ICalendar ical) async {
-    // TODO: StreamBuilder, yield DTSTART(event) or NEW_DAY or NEW_MONTH
+    // TODO: StreamBuilder, yield DTSTART(event) or NEW_DAY or NEW_MONTH, ListView.builder(day, header, event), PageView.builder(month)
     List<Widget> widgets = [];
     List<Widget> monthlyWidgets = [];
     List<Widget> dailyEvents = [];

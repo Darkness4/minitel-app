@@ -43,9 +43,32 @@ class DiagnoseTab extends StatelessWidget {
               for (String item in DiagnosisContent())
                 if (item != DiagnosisContent.ssid &&
                     item != DiagnosisContent.ip) // Ignore them
-                  LogCard(
-                    _diagnosis.report[item] ?? "",
-                    title: item,
+                  FutureBuilder(
+                    future: _diagnosis.report[item],
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return LogCard(
+                            "",
+                            title: item,
+                          );
+                        case ConnectionState.active:
+                        case ConnectionState.waiting:
+                          return LogCard(
+                            '...',
+                            title: item,
+                          );
+                        case ConnectionState.done:
+                          if (snapshot.hasError)
+                            return Text('${snapshot.error}');
+                          return LogCard(
+                            snapshot.data,
+                            title: item,
+                          );
+                      }
+                      return null; // unreachable
+                    },
                   ),
             ],
           ),
