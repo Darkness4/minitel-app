@@ -90,6 +90,7 @@ class ReportingViewState extends State<ReportingView>
         onPressed: () async {
           if (!_animationController.isDismissed) _animationController.reverse();
           model.diagnose();
+          setState(() {});
         },
         child: _diagnosisIcon(model),
       );

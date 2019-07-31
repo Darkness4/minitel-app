@@ -34,7 +34,7 @@ class ReportingViewModel extends ChangeNotifier {
     return DateTime.parse(dateTimeout);
   }
 
-  Future diagnose() async {
+  Future<void> diagnose() async {
     if (diagnosisState != ButtonState.Loading) {
       diagnosisState = ButtonState.Loading;
       notifyListeners();

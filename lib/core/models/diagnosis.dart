@@ -50,12 +50,11 @@ class Diagnosis {
   /// If the report takes too much time, the function return any given
   /// informations after one minute.
   Future<void> diagnose() async {
-    _report = {};
+    _report = Map();
 
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      String ssid;
       PermissionStatus permStatus = await PermissionHandler()
           .checkPermissionStatus(PermissionGroup.location);
 
@@ -63,225 +62,69 @@ class Diagnosis {
         await PermissionHandler()
             .requestPermissions([PermissionGroup.location]);
 
-      if (ssid != "WiFi Minitel")
-        _alert = "Vous ne semblez pas être connecté à WiFi Minitel";
-
       _report[DiagnosisContent.ssid] = Connectivity().getWifiName();
       _report[DiagnosisContent.ip] = Connectivity().getWifiIP();
 
-      // await Future.wait([
-      //   _terminalCommand("ip", ['a'], DiagnosisContent.ipAddr),
-      //   _terminalCommand("ifconfig", ['-a'], DiagnosisContent.ifconfigAll),
-      //   _terminalCommand("su", ['-c', 'arp -a'], DiagnosisContent.arp),
-      //   _terminalCommand(
-      //     "su",
-      //     [
-      //       '-c',
-      //       'traceroute',
-      //       MyIPAdresses.google,
-      //     ],
-      //     DiagnosisContent.tracertGoogle,
-      //   ),
-      //   _terminalCommand(
-      //     "su",
-      //     [
-      //       '-c',
-      //       'traceroute',
-      //       MyIPAdresses.googleDNSIP,
-      //     ],
-      //     DiagnosisContent.tracertGoogleDNS,
-      //   ),
-      //   _terminalCommand(
-      //     "ping",
-      //     [
-      //       _argsPing,
-      //       MyIPAdresses.localhostIP,
-      //     ],
-      //     DiagnosisContent.pingLo,
-      //   ),
-      //   _terminalCommand(
-      //     "ping",
-      //     [
-      //       _argsPing,
-      //       MyIPAdresses.proliantIP,
-      //     ],
-      //     DiagnosisContent.pingLocal,
-      //   ),
-      //   _terminalCommand(
-      //     "ping",
-      //     [
-      //       _argsPing,
-      //       MyIPAdresses.gatewayIP,
-      //     ],
-      //     DiagnosisContent.pingGate,
-      //   ),
-      //   _terminalCommand(
-      //     "ping",
-      //     [
-      //       _argsPing,
-      //       MyIPAdresses.emseIsminDNS1IP,
-      //     ],
-      //     DiagnosisContent.pingDNS1,
-      //   ),
-      //   _terminalCommand(
-      //     "ping",
-      //     [
-      //       _argsPing,
-      //       MyIPAdresses.emseIsminDNS2IP,
-      //     ],
-      //     DiagnosisContent.pingDNS2,
-      //   ),
-      //   _terminalCommand(
-      //     "ping",
-      //     [
-      //       _argsPing,
-      //       MyIPAdresses.googleDNSIP,
-      //     ],
-      //     DiagnosisContent.pingDNS3,
-      //   ),
-      //   _terminalCommand(
-      //     "ping",
-      //     [
-      //       _argsPing,
-      //       MyIPAdresses.cloudflareDNSIP,
-      //     ],
-      //     DiagnosisContent.pingDNS4,
-      //   ),
-      //   _terminalCommand(
-      //     "ping",
-      //     [
-      //       _argsPing,
-      //       MyIPAdresses.localDNSIP,
-      //     ],
-      //     DiagnosisContent.pingDNS5,
-      //   ),
-      //   _terminalCommand(
-      //     "nslookup",
-      //     [MyIPAdresses.stormshield],
-      //     DiagnosisContent.nsLookupEMSEBusy,
-      //   ),
-      //   _terminalCommand(
-      //     "nslookup",
-      //     [MyIPAdresses.google],
-      //     DiagnosisContent.nsLookupGoogleBusy,
-      //   ),
-      //   _gateway.getStatus(MyIPAdresses.stormshieldIP).then((status) =>
-      //       _report[DiagnosisContent.httpPortalPublic] =
-      //           status.isEmpty ? "Nothing to show" : status),
-      //   _gateway.getStatus(MyIPAdresses.gatewayIP).then((status) =>
-      //       _report[DiagnosisContent.httpPortalGateway] =
-      //           status.isEmpty ? "Nothing to show" : status),
-      //   InternetAddress.lookup(MyIPAdresses.stormshield)
-      //       .then((addresses) => addresses.forEach((address) =>
-      //           _report[DiagnosisContent.nsLookupEMSE] =
-      //               "Host: ${address.host}\nLookup: ${address.address}"))
-      //       .catchError(
-      //           (e, s) => _report[DiagnosisContent.nsLookupEMSE] = "Error: $e\n" "Stacktrace: $s"),
-      //   InternetAddress.lookup(MyIPAdresses.google)
-      //       .then((addresses) => addresses.forEach((address) =>
-      //           _report[DiagnosisContent.nsLookupGoogle] =
-      //               "Host: ${address.host}\nLookup: ${address.address}"))
-      //       .catchError(
-      //           (e, s) => _report[DiagnosisContent.nsLookupGoogle] = "Error: $e\n" "Stacktrace: $s"),
-      // ]).timeout(const Duration(minutes: 1), onTimeout: () {
-      //   _alert = "Diagnosis has timed out !";
-      //   return [];
-      // });
       await Future.wait([
-        _terminalCommand("ip", ['a'], DiagnosisContent.ipAddr),
-        _terminalCommand("ifconfig", ['-a'], DiagnosisContent.ifconfigAll),
-        _terminalCommand("su", ['-c', 'arp -a'], DiagnosisContent.arp),
-        _terminalCommand(
+        _report[DiagnosisContent.ipAddr] = _terminalCommand(
+          "ip",
+          ['a'],
+        ),
+        _report[DiagnosisContent.ifconfigAll] = _terminalCommand(
+          "ifconfig",
+          ['-a'],
+        ),
+        _report[DiagnosisContent.arp] = _terminalCommand(
           "su",
-          [
-            '-c',
-            'traceroute',
-            MyIPAdresses.google,
-          ],
-          DiagnosisContent.tracertGoogle,
+          ['-c', 'arp -a'],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.tracertGoogle] = _terminalCommand(
           "su",
-          [
-            '-c',
-            'traceroute',
-            MyIPAdresses.googleDNSIP,
-          ],
-          DiagnosisContent.tracertGoogleDNS,
+          ['-c', 'traceroute', MyIPAdresses.google],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.tracertGoogleDNS] = _terminalCommand(
+          "su",
+          ['-c', 'traceroute', MyIPAdresses.googleDNSIP],
+        ),
+        _report[DiagnosisContent.pingLo] = _terminalCommand(
           "ping",
-          [
-            _argsPing,
-            MyIPAdresses.localhostIP,
-          ],
-          DiagnosisContent.pingLo,
+          [_argsPing, MyIPAdresses.localhostIP],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.pingLocal] = _terminalCommand(
           "ping",
-          [
-            _argsPing,
-            MyIPAdresses.proliantIP,
-          ],
-          DiagnosisContent.pingLocal,
+          [_argsPing, MyIPAdresses.proliantIP],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.pingGate] = _terminalCommand(
           "ping",
-          [
-            _argsPing,
-            MyIPAdresses.gatewayIP,
-          ],
-          DiagnosisContent.pingGate,
+          [_argsPing, MyIPAdresses.gatewayIP],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.pingDNS1] = _terminalCommand(
           "ping",
-          [
-            _argsPing,
-            MyIPAdresses.emseIsminDNS1IP,
-          ],
-          DiagnosisContent.pingDNS1,
+          [_argsPing, MyIPAdresses.emseIsminDNS1IP],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.pingDNS2] = _terminalCommand(
           "ping",
-          [
-            _argsPing,
-            MyIPAdresses.emseIsminDNS2IP,
-          ],
-          DiagnosisContent.pingDNS2,
+          [_argsPing, MyIPAdresses.emseIsminDNS2IP],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.pingDNS3] = _terminalCommand(
           "ping",
-          [
-            _argsPing,
-            MyIPAdresses.googleDNSIP,
-          ],
-          DiagnosisContent.pingDNS3,
+          [_argsPing, MyIPAdresses.googleDNSIP],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.pingDNS4] = _terminalCommand(
           "ping",
-          [
-            _argsPing,
-            MyIPAdresses.cloudflareDNSIP,
-          ],
-          DiagnosisContent.pingDNS4,
+          [_argsPing, MyIPAdresses.cloudflareDNSIP],
         ),
-        _terminalCommand(
+        _report[DiagnosisContent.pingDNS5] = _terminalCommand(
           "ping",
-          [
-            _argsPing,
-            MyIPAdresses.localDNSIP,
-          ],
-          DiagnosisContent.pingDNS5,
+          [_argsPing, MyIPAdresses.localDNSIP],
         ),
-        _terminalCommand(
-          "nslookup",
-          [MyIPAdresses.stormshield],
-          DiagnosisContent.nsLookupEMSEBusy,
+        _report[DiagnosisContent.nsLookupEMSEBusy] = _terminalCommand(
+          "su",
+          ['-c', "nslookup ${MyIPAdresses.stormshield}"],
         ),
-        _terminalCommand(
-          "nslookup",
-          [MyIPAdresses.google],
-          DiagnosisContent.nsLookupGoogleBusy,
+        _report[DiagnosisContent.nsLookupGoogleBusy] = _terminalCommand(
+          "su",
+          ['-c', "nslookup ${MyIPAdresses.google}"],
         ),
         _report[DiagnosisContent.httpPortalPublic] = _gateway
             .getStatus(MyIPAdresses.stormshieldIP)
@@ -290,15 +133,8 @@ class Diagnosis {
             .getStatus(MyIPAdresses.gatewayIP)
             .then((status) => status.isEmpty ? "Nothing to show" : status),
         _report[DiagnosisContent.nsLookupEMSE] =
-            InternetAddress.lookup(MyIPAdresses.stormshield)
-                .then((addresses) => addresses.forEach((address) =>
-                    "Host: ${address.host}\nLookup: ${address.address}"))
-                .catchError((e, s) => "Error: $e\n" "Stacktrace: $s"),
-        _report[DiagnosisContent.nsLookupGoogle] =
-            InternetAddress.lookup(MyIPAdresses.google)
-                .then((addresses) => addresses.forEach((address) =>
-                    "Host: ${address.host}\nLookup: ${address.address}"))
-                .catchError((e, s) => "Error: $e\n" "Stacktrace: $s"),
+            _lookup(MyIPAdresses.stormshield),
+        _report[DiagnosisContent.nsLookupGoogle] = _lookup(MyIPAdresses.google),
       ]).timeout(const Duration(minutes: 1), onTimeout: () {
         _alert = "Diagnosis has timed out !";
         return [];
@@ -307,18 +143,34 @@ class Diagnosis {
       _alert = "Pas de Wifi";
   }
 
-  Future<void> _terminalCommand(
-      String command, List<String> args, String output) async {
-    // String stdout;
+  Future<String> _terminalCommand(String command, List<String> args) async {
+    String stdout;
     // try {
     //   stdout = await exec(command, args).runGetOutput();
     //   _report[output] = stdout.isEmpty ? "Nothing to show" : stdout;
     // } catch (e, s) {
     //   _report[output] = "Error: $e\n" "Stacktrace: $s";
     // }
-    _report[output] = exec(command, args)
-        .runGetOutput()
-        .catchError((e, s) => "Error: $e\n" "Stacktrace: $s");
+    try {
+      stdout = await exec(command, args).runGetOutput();
+      stdout = stdout.isEmpty ? "Nothing to show" : stdout;
+    } catch (e, s) {
+      stdout = "Error: $e\n" "Stacktrace: $s";
+    }
+    return stdout;
+  }
+
+  Future<String> _lookup(String address) async {
+    String stdout;
+    try {
+      var addresses = await InternetAddress.lookup(MyIPAdresses.stormshield);
+      for (var address in addresses) {
+        stdout = "Host: ${address.host}\nLookup: ${address.address}";
+      }
+    } catch (e, s) {
+      stdout = "Error: $e\n" "Stacktrace: $s";
+    }
+    return stdout;
   }
 }
 
@@ -340,9 +192,9 @@ class DiagnosisContent extends Iterable<String> {
   static const String pingDNS4 = "Ping DNS 4";
   static const String pingDNS5 = "Ping DNS 5";
   static const String nsLookupEMSE = "NSLookup EMSE";
-  static const String nsLookupEMSEBusy = "NSLookup EMSE (Busybox)";
+  static const String nsLookupEMSEBusy = "NSLookup EMSE (SU + Busy)";
   static const String nsLookupGoogle = "NSLookup Google";
-  static const String nsLookupGoogleBusy = "NSLookup Google (Busybox)";
+  static const String nsLookupGoogleBusy = "NSLookup Google (SU + Busy)";
   static const String httpPortalPublic = "HTTP Portal Response Public";
   static const String httpPortalGateway = "HTTP Portal Response Gateway";
 

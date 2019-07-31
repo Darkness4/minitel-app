@@ -33,10 +33,38 @@ class DiagnoseTab extends StatelessWidget {
                 color: Colors.deepOrange,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "${DiagnosisContent.ssid}: ${_diagnosis.report[DiagnosisContent.ssid]}, ${DiagnosisContent.ip}: ${_diagnosis.report[DiagnosisContent.ip]}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
+                  child: FutureBuilder<String>(
+                    future: _diagnosis.report[DiagnosisContent.ssid],
+                    builder: (context, ssidSnapshot) {
+                      if (ssidSnapshot.hasData)
+                        return FutureBuilder<String>(
+                          future: _diagnosis.report[DiagnosisContent.ip],
+                          builder: (context, ipSnapshot) {
+                            if (ipSnapshot.hasData)
+                              return Text(
+                                "${DiagnosisContent.ssid}: ${ssidSnapshot.data}, ${DiagnosisContent.ip}: ${ipSnapshot.data}",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              );
+                            return Text(
+                              "${DiagnosisContent.ssid}: ${ssidSnapshot.data}, ${DiagnosisContent.ip}: ",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            );
+                          },
+                        );
+                      return Text(
+                        "${DiagnosisContent.ssid}: , ${DiagnosisContent.ip}: ",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),

@@ -115,7 +115,7 @@ class VirtMachineDoc extends StatelessWidget {
                       "    2.  [Visionary] KVM (type 1, Linux, 👍 Android)\n"
                       "    3.  [Leader] VMWare Workstation (type 2, 👍 pour les réseaux, GNS3 et tout le reste)\n"
                       "    4.  [Niche Player] VirtualBox (type 2)\n"
-                      "    5.  [Leader] VMware ESXi (type 1, pour les professionnels)",
+                      "    5.  [Leader] VMware ESXi (type 1, pour les professionnels)\n",
                   style: MinitelTextStyles.body2,
                 ),
               ],

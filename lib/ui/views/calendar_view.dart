@@ -19,6 +19,7 @@ class CalendarView extends StatefulWidget {
 }
 
 class CalendarViewState extends State<CalendarView> {
+  final _formKey = GlobalKey<FormState>();
   final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   final _initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/launcher_icon');
@@ -142,41 +143,35 @@ class CalendarViewState extends State<CalendarView> {
           child: FutureBuilder(
             future: _loadCalendar(context),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.active:
-                case ConnectionState.waiting:
-                  return const CircularProgressIndicator();
-                case ConnectionState.done:
-                  if (snapshot.hasError)
-                    return ErrorCalendarWidget(
-                        snapshot.error.toString(), setState);
-                  return Scrollbar(
-                    child: StreamBuilder(
-                      stream: _listEventCards(snapshot.data),
-                      builder:
-                          (BuildContext context, AsyncSnapshot snapshotStream) {
-                        Widget child;
-                        switch (snapshotStream.connectionState) {
-                          case ConnectionState.none:
-                          case ConnectionState.waiting:
-                            child = CircularProgressIndicator();
-                            break;
-                          case ConnectionState.active:
-                            monthPages.add(snapshotStream.data);
-                            break;
-                          case ConnectionState.done:
-                            child = PageView(
-                              children: monthPages,
-                            );
-                            break;
-                        }
-                        return child;
-                      },
-                    ),
-                  );
-              }
-              return ErrorCalendarWidget(snapshot.error.toString(), setState);
+              if (snapshot.hasError)
+                return ErrorCalendarWidget(
+                    snapshot.error.toString(), setState, _formKey);
+              if (snapshot.hasData) {
+                return Scrollbar(
+                  child: StreamBuilder(
+                    stream: _listEventCards(snapshot.data),
+                    builder:
+                        (BuildContext context, AsyncSnapshot snapshotStream) {
+                      switch (snapshotStream.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.waiting:
+                          return const CircularProgressIndicator();
+                        case ConnectionState.active:
+                          monthPages.add(snapshotStream.data);
+                          return PageView(
+                            children: monthPages,
+                          );
+                        case ConnectionState.done:
+                          return PageView(
+                            children: monthPages,
+                          );
+                      }
+                      return null;
+                    },
+                  ),
+                );
+              } else
+                return const CircularProgressIndicator();
             },
           ),
         ),

@@ -306,11 +306,11 @@ class ErrorCalendarWidget extends StatelessWidget {
   final _pswdController = TextEditingController();
   final _uidFocusNode = FocusNode();
   final _pswdFocusNode = FocusNode();
-  final _formKey = GlobalKey<FormState>();
+  final _formKey;
   final String error;
-  final Function(void Function) parentSetState;
+  final Function parentSetState;
 
-  ErrorCalendarWidget(this.error, this.parentSetState);
+  ErrorCalendarWidget(this.error, this.parentSetState, this._formKey);
 
   @override
   Widget build(BuildContext context) {
@@ -375,7 +375,8 @@ class ErrorCalendarWidget extends StatelessWidget {
                   username: _uidController.text,
                   password: _pswdController.text,
                 );
-                parentSetState(() => ICalendar(_calendarURL).saveCalendar(url));
+                ICalendar(_calendarURL).saveCalendar(url);
+                parentSetState(() {});
               },
               label: const Text(
                 "Se connecter",
