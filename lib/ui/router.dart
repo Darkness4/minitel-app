@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'widgets/page_animation.dart';
 import 'views/about_view.dart';
-import 'views/calendar.dart';
+import 'views/calendar_view.dart';
 import 'views/docs_view.dart';
 import 'views/news_view.dart';
 import 'views/portal_view.dart';
@@ -42,7 +42,7 @@ class Router {
         );
       case RoutePaths.Calendar:
         return FadeRoute(
-          builder: (BuildContext context) => CalendarPage(title: "Calendrier"),
+          builder: (BuildContext context) => CalendarView(title: "Calendrier"),
           settings: settings,
         );
       case RoutePaths.About:
