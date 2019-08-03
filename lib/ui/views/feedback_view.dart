@@ -40,46 +40,44 @@ class _FeedbackViewState extends State<FeedbackView> {
       body: Center(
         child: Scrollbar(
           child: ListView(
+            padding: const EdgeInsets.all(10.0),
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Card(
-                  elevation: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Column(
-                      children: <Widget>[
-                        TextField(
-                          controller: _titleController,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                          focusNode: _titleFocusNode,
-                          textInputAction: TextInputAction.next,
-                          decoration: const InputDecoration(
-                            labelText: "Titre",
-                            hintText: "Ex. : La page X est lente.",
-                          ),
-                          onSubmitted: (term) {
-                            _titleFocusNode.unfocus();
-                            FocusScope.of(context)
-                                .requestFocus(_descriptionFocusNode);
-                          },
+              Card(
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: <Widget>[
+                      TextField(
+                        controller: _titleController,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        focusNode: _titleFocusNode,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                          labelText: "Titre",
+                          hintText: "Ex. : La page X est lente.",
                         ),
-                        TextField(
-                          controller: _descriptionController,
-                          maxLines: null,
-                          focusNode: _descriptionFocusNode,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.multiline,
-                          decoration: const InputDecoration(
-                            labelText: "Description",
-                            hintText: "Comment reproduire le bug ?",
-                          ),
-                          onSubmitted: (term) {
-                            _descriptionFocusNode.unfocus();
-                          },
+                        onSubmitted: (term) {
+                          _titleFocusNode.unfocus();
+                          FocusScope.of(context)
+                              .requestFocus(_descriptionFocusNode);
+                        },
+                      ),
+                      TextField(
+                        controller: _descriptionController,
+                        maxLines: null,
+                        focusNode: _descriptionFocusNode,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.multiline,
+                        decoration: const InputDecoration(
+                          labelText: "Description",
+                          hintText: "Comment reproduire le bug ?",
                         ),
-                      ],
-                    ),
+                        onSubmitted: (term) {
+                          _descriptionFocusNode.unfocus();
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ),

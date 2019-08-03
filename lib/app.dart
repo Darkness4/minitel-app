@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: [const Locale('fr', 'FR')],
         theme: ThemeData(
           primarySwatch: MinitelColors.PrimaryColor,
-          fontFamily: 'NotoSans',
+          fontFamily: 'Roboto',
           textTheme: MinitelTextStyles.textTheme,
         ),
         initialRoute: RoutePaths.Authentication,

@@ -28,15 +28,18 @@ class ReportTabState extends State<ReportTab> {
     return Container(
       color: Colors.red,
       child: Scrollbar(
-        child: ListView(children: <Widget>[
-          _ReportCard(
-              titleController: widget.titleController,
-              titleFocusNode: _titleFocusNode,
-              descriptionFocusNode: _descriptionFocusNode,
-              descriptionController: widget.descriptionController),
-          const _TutorialCard(),
-          const _ContactsCard(),
-        ]),
+        child: ListView(
+          padding: const EdgeInsets.all(10.0),
+          children: <Widget>[
+            _ReportCard(
+                titleController: widget.titleController,
+                titleFocusNode: _titleFocusNode,
+                descriptionFocusNode: _descriptionFocusNode,
+                descriptionController: widget.descriptionController),
+            const _TutorialCard(),
+            const _ContactsCard(),
+          ],
+        ),
       ),
     );
   }
@@ -109,44 +112,39 @@ class _ReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
+      elevation: 4,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Card(
-          elevation: 4,
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              children: <Widget>[
-                TextField(
-                  controller: _titleController,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                  focusNode: _titleFocusNode,
-                  textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(
-                    labelText: "Title",
-                    hintText: "Room number : Short description.",
-                  ),
-                  onSubmitted: (term) {
-                    _titleFocusNode.unfocus();
-                    FocusScope.of(context).requestFocus(_descriptionFocusNode);
-                  },
-                ),
-                TextField(
-                  controller: _descriptionController,
-                  maxLines: null,
-                  focusNode: _descriptionFocusNode,
-                  textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(
-                    labelText: "Description",
-                    hintText: "Describe your issue.",
-                  ),
-                  onSubmitted: (term) => _descriptionFocusNode.unfocus(),
-                ),
-              ],
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: _titleController,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              focusNode: _titleFocusNode,
+              textInputAction: TextInputAction.next,
+              decoration: const InputDecoration(
+                labelText: "Title",
+                hintText: "Room number : Short description.",
+              ),
+              onSubmitted: (term) {
+                _titleFocusNode.unfocus();
+                FocusScope.of(context).requestFocus(_descriptionFocusNode);
+              },
             ),
-          ),
+            TextField(
+              controller: _descriptionController,
+              maxLines: null,
+              focusNode: _descriptionFocusNode,
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.multiline,
+              decoration: const InputDecoration(
+                labelText: "Description",
+                hintText: "Describe your issue.",
+              ),
+              onSubmitted: (term) => _descriptionFocusNode.unfocus(),
+            ),
+          ],
         ),
       ),
     );
