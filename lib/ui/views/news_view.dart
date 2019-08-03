@@ -18,7 +18,7 @@ class NewsViewState extends State<NewsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      backgroundColor: Color(0xff087f23),
+      backgroundColor: const Color(0xff087f23),
       body: Center(
         child: Scrollbar(
           child: FutureBuilder(

@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:dscript_exec/dscript_exec.dart';
+import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -24,11 +24,11 @@ class Diagnosis {
   static String _alert;
   final GatewayAPI _gateway;
 
-  Diagnosis({@required GatewayAPI gatewayAPI}) : _gateway = gatewayAPI;
-
   Map<String, Future<String>> _report = {};
 
   final _argsPing = "-c 4 -w 5 -W 5";
+
+  Diagnosis({@required GatewayAPI gatewayAPI}) : _gateway = gatewayAPI;
 
   String get alert => _alert;
 
@@ -143,6 +143,19 @@ class Diagnosis {
       _alert = "Pas de Wifi";
   }
 
+  Future<String> _lookup(String address) async {
+    String stdout;
+    try {
+      var addresses = await InternetAddress.lookup(MyIPAdresses.stormshield);
+      for (var address in addresses) {
+        stdout = "Host: ${address.host}\nLookup: ${address.address}";
+      }
+    } catch (e, s) {
+      stdout = "Error: $e\n" "Stacktrace: $s";
+    }
+    return stdout;
+  }
+
   Future<String> _terminalCommand(String command, List<String> args) async {
     String stdout;
     // try {
@@ -154,19 +167,6 @@ class Diagnosis {
     try {
       stdout = await exec(command, args).runGetOutput();
       stdout = stdout.isEmpty ? "Nothing to show" : stdout;
-    } catch (e, s) {
-      stdout = "Error: $e\n" "Stacktrace: $s";
-    }
-    return stdout;
-  }
-
-  Future<String> _lookup(String address) async {
-    String stdout;
-    try {
-      var addresses = await InternetAddress.lookup(MyIPAdresses.stormshield);
-      for (var address in addresses) {
-        stdout = "Host: ${address.host}\nLookup: ${address.address}";
-      }
     } catch (e, s) {
       stdout = "Error: $e\n" "Stacktrace: $s";
     }

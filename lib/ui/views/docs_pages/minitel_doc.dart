@@ -12,10 +12,10 @@ class MinitelDoc extends StatelessWidget {
     return SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
-          BoxMdH("Minitel", 1),
+          const BoxMdH("Minitel", 1),
           Image.asset('assets/icon/icon.png'),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text(
               "L’asso réseau de la rez’ : si tu as besoin de matériel "
               "(câbles, ordi,...), de poser des ques-tions sur le fonctionnement "

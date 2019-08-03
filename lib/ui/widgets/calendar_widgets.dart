@@ -4,28 +4,6 @@ import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
-class MonthHeader extends StatelessWidget {
-  final String text;
-  const MonthHeader(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          text,
-          style: MinitelTextStyles.display2.apply(
-            color: Colors.white,
-            fontWeightDelta: 1,
-            fontFamily: "Roboto",
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class DayWidget extends StatelessWidget {
   final DateTime dt;
   final List<Widget> dailyEvents;
@@ -64,6 +42,28 @@ class DayWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: dailyEvents,
+      ),
+    );
+  }
+}
+
+class MonthHeader extends StatelessWidget {
+  final String text;
+  const MonthHeader(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          text,
+          style: MinitelTextStyles.display2.apply(
+            color: Colors.white,
+            fontWeightDelta: 1,
+            fontFamily: "Roboto",
+          ),
+        ),
       ),
     );
   }

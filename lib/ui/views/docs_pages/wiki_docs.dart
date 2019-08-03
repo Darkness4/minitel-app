@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/views/docs_pages/toolbox_docs.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/views/docs_pages/toolbox_docs.dart';
 import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
 import 'wiki_docs/dualboot_doc.dart';
@@ -23,7 +23,7 @@ class WikiDocs extends StatelessWidget {
       body: Scrollbar(
         child: PageView(
           controller: _controller,
-          children: <Widget>[
+          children: const <Widget>[
             ImprimanteDoc(),
             MailDoc(),
             DualBootDoc(),
@@ -39,7 +39,7 @@ class WikiDocs extends StatelessWidget {
               top: true,
               child: Container(
                 height: 90,
-                child: DrawerHeader(
+                child: const DrawerHeader(
                   child: Text(
                     "Documentation",
                     style: MinitelTextStyles.mdH1,
@@ -48,15 +48,15 @@ class WikiDocs extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text("Minitel"),
+              title: const Text("Minitel"),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pop(context);
               },
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-              title: Text("Authentification"),
+              title: const Text("Authentification"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 final _controller = PageController(
@@ -73,7 +73,7 @@ class WikiDocs extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Diagnostique"),
+              title: const Text("Diagnostique"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(
@@ -89,9 +89,9 @@ class WikiDocs extends StatelessWidget {
                 );
               },
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-              title: Text("Configuration de l'imprimante"),
+              title: const Text("Configuration de l'imprimante"),
               onTap: () {
                 Navigator.pop(context);
                 _controller.animateToPage(
@@ -102,7 +102,7 @@ class WikiDocs extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Importation des mails SoGo"),
+              title: const Text("Importation des mails SoGo"),
               onTap: () {
                 Navigator.pop(context);
                 _controller.animateToPage(
@@ -113,7 +113,7 @@ class WikiDocs extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Installer un Dual Boot"),
+              title: const Text("Installer un Dual Boot"),
               onTap: () {
                 Navigator.pop(context);
                 _controller.animateToPage(
@@ -124,7 +124,7 @@ class WikiDocs extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Jouer avec des VM"),
+              title: const Text("Jouer avec des VM"),
               onTap: () {
                 Navigator.pop(context);
                 _controller.animateToPage(

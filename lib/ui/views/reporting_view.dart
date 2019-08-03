@@ -130,12 +130,12 @@ class ReportingViewState extends State<ReportingView>
           bottom: const TabBar(
             indicatorColor: Colors.white,
             tabs: <Tab>[
-              const Tab(
-                icon: const Icon(Icons.warning),
+              Tab(
+                icon: Icon(Icons.warning),
                 text: "Report",
               ),
-              const Tab(
-                icon: const Icon(Icons.zoom_in),
+              Tab(
+                icon: Icon(Icons.zoom_in),
                 text: "Diagnosis",
               ),
             ],
@@ -147,7 +147,7 @@ class ReportingViewState extends State<ReportingView>
         "Email",
         start: 0.0,
         end: 0.5,
-        child: Icon(Icons.mail),
+        child: const Icon(Icons.mail),
         controller: _animationController,
         onPressed: () {
           var body = "---Report ${DateTime.now().toString()}---\n\n"
@@ -187,7 +187,7 @@ class ReportingViewState extends State<ReportingView>
         "Partager",
         start: 0.0,
         end: 1.0,
-        child: Icon(Icons.share),
+        child: const Icon(Icons.share),
         controller: _animationController,
         onPressed: () =>
             Share.share("---Report ${DateTime.now().toString()}---\n\n"

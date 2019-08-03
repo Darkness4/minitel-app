@@ -5,7 +5,7 @@ import 'package:package_info/package_info.dart';
 
 class AboutView extends StatelessWidget {
   final String title;
-  final _version = VersionAPI();
+  final _version = VersionAPI(); // TODO: Kick that out
   AboutView({Key key, this.title}) : super(key: key);
 
   @override
@@ -16,35 +16,34 @@ class AboutView extends StatelessWidget {
         child: Scrollbar(
           child: ListView(
             children: <Widget>[
-              ListTile(
+              const ListTile(
                 title: Text("Minitel Toolbox"),
                 subtitle: Text(
                     "Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre"),
-                onTap: () {},
               ),
-              Divider(),
+              const Divider(),
               ListTile(
-                title: Text("Développeur"),
-                subtitle: Text("Marc NGUYEN <nguyen_marc@live.fr>"),
+                title: const Text("Développeur"),
+                subtitle: const Text("Marc NGUYEN <nguyen_marc@live.fr>"),
                 onTap: LaunchURL.mailToMarcNGUYEN,
               ),
-              Divider(),
+              const Divider(),
               ListTile(
-                title: Text("Dernière version"),
-                subtitle:
-                    Text("https://github.com/Darkness4/minitel-app/releases"),
+                title: const Text("Dernière version"),
+                subtitle: const Text(
+                    "https://github.com/Darkness4/minitel-app/releases"),
                 onTap: LaunchURL.githubDarkness4Releases,
               ),
-              Divider(),
+              const Divider(),
               ListTile(
-                title: Text("Site"), // Minitel
-                subtitle: Text(""),
+                title: const Text("Site"), // Minitel
+                subtitle: const Text(""),
                 onTap: () {}, // TODO: Launch url
               ),
-              Divider(),
+              const Divider(),
               ListTile(
-                title: Text("Licence"),
-                subtitle: Text("License MIT"),
+                title: const Text("Licence"),
+                subtitle: const Text("License MIT"),
                 onTap: () async {
                   var packageInfo = await PackageInfo.fromPlatform();
                   showLicensePage(
@@ -73,9 +72,9 @@ class AboutView extends StatelessWidget {
                   );
                 },
               ),
-              Divider(),
+              const Divider(),
               ListTile(
-                title: Text("Version"),
+                title: const Text("Version"),
                 subtitle: FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
                   builder: (BuildContext context,
@@ -95,9 +94,9 @@ class AboutView extends StatelessWidget {
                 ),
                 onTap: () {},
               ),
-              Divider(),
+              const Divider(),
               ListTile(
-                title: Text("Chercher une mise à jour"),
+                title: const Text("Chercher une mise à jour"),
                 onTap: () async {
                   var latestVersion = _version.getLatestVersion();
                   var actualVersion = PackageInfo.fromPlatform();
@@ -108,19 +107,19 @@ class AboutView extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text(
+                          title: const Text(
                             "Une nouvelle version est disponible !",
                           ),
                           content: Text(
                               "La version ${ensemble[1]} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
-                              child: Text("Close"),
+                              child: const Text("Close"),
                               onPressed: () => Navigator.of(context).pop(),
                             ),
                             RaisedButton(
                               textColor: Colors.white,
-                              child: Text("Update"),
+                              child: const Text("Update"),
                               onPressed: () => _version
                                   .getLatestVersionURL()
                                   .then((url) => LaunchURL.launchURL(url)),
@@ -134,19 +133,18 @@ class AboutView extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text(
-                            "Il s'agit de la dernière version.",
-                          ),
+                          title:
+                              const Text("Il s'agit de la dernière version."),
                           content: Text(
                               "La version ${ensemble[1]} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
-                              child: Text("Close"),
+                              child: const Text("Close"),
                               onPressed: () => Navigator.of(context).pop(),
                             ),
                             RaisedButton(
                               textColor: Colors.white,
-                              child: Text("Télécharger"),
+                              child: const Text("Télécharger"),
                               onPressed: () => _version
                                   .getLatestVersionURL()
                                   .then((url) => LaunchURL.launchURL(url)),

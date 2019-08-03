@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
-import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
+import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
@@ -21,33 +21,6 @@ class PortalView extends StatefulWidget {
 }
 
 class PortalViewState extends State<PortalView> {
-  Future<void> _checkVersion(VersionAPI version, BuildContext context) async {
-    var latestVersion = version.getLatestVersion();
-    var actualVersion = PackageInfo.fromPlatform();
-    List<dynamic> ensemble = await Future.wait([actualVersion, latestVersion]);
-    if (ensemble[0].version != ensemble[1])
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: Text("Une nouvelle version est disponible !"),
-          content: Text("La version ${ensemble[1]} est la dernière version."),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Close"),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            RaisedButton(
-              textColor: Colors.white,
-              child: Text("Update"),
-              onPressed: () => version
-                  .getLatestVersionURL()
-                  .then((url) => LaunchURL.launchURL(url)),
-            )
-          ],
-        ),
-      );
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -55,7 +28,7 @@ class PortalViewState extends State<PortalView> {
       child: Scaffold(
         body: NestedScrollView(
           body: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 colors: [
@@ -84,13 +57,13 @@ class PortalViewState extends State<PortalView> {
               floating: true,
               forceElevated: true,
               bottom: const TabBar(
-                tabs: const <Tab>[
-                  const Tab(
-                    icon: const Icon(Icons.vpn_key),
+                tabs: <Tab>[
+                  Tab(
+                    icon: Icon(Icons.vpn_key),
                     text: "Login",
                   ),
-                  const Tab(
-                    icon: const Icon(Icons.apps),
+                  Tab(
+                    icon: Icon(Icons.apps),
                     text: "Apps",
                   ),
                 ],
@@ -107,5 +80,32 @@ class PortalViewState extends State<PortalView> {
   void initState() {
     _checkVersion(widget.version, context);
     super.initState();
+  }
+
+  Future<void> _checkVersion(VersionAPI version, BuildContext context) async {
+    var latestVersion = version.getLatestVersion();
+    var actualVersion = PackageInfo.fromPlatform();
+    List<dynamic> ensemble = await Future.wait([actualVersion, latestVersion]);
+    if (ensemble[0].version != ensemble[1])
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text("Une nouvelle version est disponible !"),
+          content: Text("La version ${ensemble[1]} est la dernière version."),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Close"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            RaisedButton(
+              textColor: Colors.white,
+              child: const Text("Update"),
+              onPressed: () => version
+                  .getLatestVersionURL()
+                  .then((url) => LaunchURL.launchURL(url)),
+            )
+          ],
+        ),
+      );
   }
 }

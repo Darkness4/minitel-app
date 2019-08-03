@@ -1,14 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 
 class LaunchURL {
-  static void launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   static Function mailToMarcNGUYEN =
       () => launchURL("mailto:nguyen_marc@live.fr");
   static Function githubDarkness4Releases =
@@ -19,4 +11,12 @@ class LaunchURL {
       () => launchURL("https://www.messenger.com/t/100012919189214");
   static Function mailToMinitel =
       () => launchURL("mailto: minitelismin@gmail.com");
+
+  static void launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }

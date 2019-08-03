@@ -22,8 +22,8 @@ class PortailAPI {
 
     try {
       HttpClientRequest request = await _client.getUrl(Uri.parse(
-          "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
+          "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader);
       HttpClientResponse response = await request.close();
 
       var temp =
@@ -35,15 +35,18 @@ class PortailAPI {
       var jSessionIDCampus =
           RegExp(r'JSESSIONID=([^;]*);').firstMatch(temp).group(0);
 
-      request = await _client.postUrl(Uri.parse("https://cas.emse.fr$action"));
-      request.followRedirects = false;
-      request.headers.contentType =
-          ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
       var data =
           "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
-      request.headers.contentLength = data.length;
-      request.headers.set(HttpHeaders.cookieHeader, "$jSessionIDCampus");
-      request.write(data);
+      request = await _client.postUrl(Uri.parse("https://cas.emse.fr$action"))
+        ..followRedirects = false
+        ..headers.contentType = ContentType(
+          "application",
+          "x-www-form-urlencoded",
+          charset: "utf-8",
+        )
+        ..headers.contentLength = data.length
+        ..headers.set(HttpHeaders.cookieHeader, "$jSessionIDCampus")
+        ..write(data);
       response = await request.close();
 
       temp = response.headers['set-cookie'].toString();
@@ -55,19 +58,19 @@ class PortailAPI {
       }
       var location = response.headers.value('location');
 
-      request = await _client.getUrl(Uri.parse(location));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
-      request.headers.set(HttpHeaders.cookieHeader, "$agimus");
-      request.followRedirects = false;
+      request = await _client.getUrl(Uri.parse(location))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader)
+        ..headers.set(HttpHeaders.cookieHeader, "$agimus")
+        ..followRedirects = false;
       response = await request.close();
 
       temp = response.headers['set-cookie'].toString();
       var casAuth = RegExp(r'CASAuth=([^;]*);').firstMatch(temp).group(0);
       location = response.headers.value('location');
 
-      request = await _client.getUrl(Uri.parse(location));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
-      request.headers.set(HttpHeaders.cookieHeader, "$agimus $casAuth");
+      request = await _client.getUrl(Uri.parse(location))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader)
+        ..headers.set(HttpHeaders.cookieHeader, "$agimus $casAuth");
       response = await request.close();
 
       temp = response.headers['set-cookie'].toString();
@@ -88,6 +91,18 @@ class PortailAPI {
     return status;
   }
 
+  Future<String> getSavedCookiePortail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String contents = prefs.getString('cookiePortail') ?? "";
+
+    return contents;
+  }
+
+  Future<void> saveCookiePortail(String cookie) async {
+    await SharedPreferences.getInstance()
+      ..setString('cookiePortail', cookie);
+  }
+
   Future<bool> saveCookiePortailFromLogin(
       {String username, String password}) async {
     String cookie =
@@ -98,17 +113,5 @@ class PortailAPI {
     await saveCookiePortail(cookie);
 
     return true;
-  }
-
-  Future<void> saveCookiePortail(String cookie) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('cookiePortail', cookie);
-  }
-
-  Future<String> getSavedCookiePortail() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String contents = prefs.getString('cookiePortail') ?? "";
-
-    return contents;
   }
 }

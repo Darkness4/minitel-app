@@ -70,8 +70,8 @@ class ReportingViewModel extends ChangeNotifier {
   }
 
   Future<void> _setTimeout() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(
-        'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
+    await SharedPreferences.getInstance()
+      ..setString(
+          'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
   }
 }

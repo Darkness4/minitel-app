@@ -79,7 +79,7 @@ class _ContactsCard extends StatelessWidget {
           onPressed: () => LaunchURL.mailToMinitel,
           color: Colors.lightBlue[100],
         ),
-        Text(
+        const Text(
           "G*: Contact Admin",
           style: MinitelTextStyles.mdH3,
         ),

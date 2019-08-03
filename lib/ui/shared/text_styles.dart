@@ -1,6 +1,114 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
+class BoxMdBody extends StatelessWidget {
+  final Text _text;
+  const BoxMdBody(Text text, {Key key})
+      : _text = text,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.0),
+      child: _text,
+    );
+  }
+}
+
+class BoxMdH extends StatelessWidget {
+  final String _text;
+  final int _level;
+  const BoxMdH(String text, int level, {Key key})
+      : _text = text,
+        _level = level,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    switch (_level) {
+      case 1:
+        return Container(
+          margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
+          padding: const EdgeInsets.only(bottom: 9.6),
+          child: Text(
+            _text,
+            style: MinitelTextStyles.mdH1,
+          ),
+          decoration: const BoxDecoration(
+            border: BorderDirectional(
+              bottom: BorderSide(
+                color: Color.fromRGBO(234, 236, 239, 1.0),
+              ),
+            ),
+          ),
+        );
+        break;
+
+      case 2:
+        return Container(
+          margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
+          padding: const EdgeInsets.only(bottom: 7.2),
+          child: Text(
+            _text,
+            style: MinitelTextStyles.mdH2,
+          ),
+          decoration: const BoxDecoration(
+            border: BorderDirectional(
+              bottom: BorderSide(
+                color: Color.fromRGBO(234, 236, 239, 1.0),
+              ),
+            ),
+          ),
+        );
+        break;
+
+      case 3:
+        return Container(
+          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
+          child: Text(
+            _text,
+            style: MinitelTextStyles.mdH3,
+          ),
+        );
+        break;
+
+      case 4:
+        return Container(
+          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
+          child: Text(
+            _text,
+            style: MinitelTextStyles.mdH4,
+          ),
+        );
+        break;
+
+      case 5:
+        return Container(
+          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
+          child: Text(
+            _text,
+            style: MinitelTextStyles.mdH5,
+          ),
+        );
+        break;
+
+      case 6:
+        return Container(
+          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
+          child: Text(
+            _text,
+            style: MinitelTextStyles.mdH6,
+          ),
+        );
+        break;
+
+      default:
+        return Container();
+    }
+  }
+}
+
 class MinitelTextStyles {
   // Flutter Theme
   static const body1 = TextStyle(
@@ -103,108 +211,4 @@ class MinitelTextStyles {
     subtitle: subtitle,
     subhead: subhead,
   );
-}
-
-class BoxMdBody extends StatelessWidget {
-  final Text _text;
-  const BoxMdBody(Text text, {Key key})
-      : _text = text,
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.0),
-      child: _text,
-    );
-  }
-}
-
-class BoxMdH extends StatelessWidget {
-  final String _text;
-  final int _level;
-  const BoxMdH(String text, int level, {Key key})
-      : _text = text,
-        _level = level,
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    switch (_level) {
-      case 1:
-        return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
-          padding: EdgeInsets.only(bottom: 9.6),
-          child: Text(
-            _text,
-            style: MinitelTextStyles.mdH1,
-          ),
-          decoration: BoxDecoration(
-            border: BorderDirectional(
-              bottom: BorderSide(color: Color.fromRGBO(234, 236, 239, 1.0)),
-            ),
-          ),
-        );
-        break;
-
-      case 2:
-        return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
-          padding: EdgeInsets.only(bottom: 7.2),
-          child: Text(
-            _text,
-            style: MinitelTextStyles.mdH2,
-          ),
-          decoration: BoxDecoration(
-            border: BorderDirectional(
-              bottom: BorderSide(color: Color.fromRGBO(234, 236, 239, 1.0)),
-            ),
-          ),
-        );
-        break;
-
-      case 3:
-        return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
-          child: Text(
-            _text,
-            style: MinitelTextStyles.mdH3,
-          ),
-        );
-        break;
-
-      case 4:
-        return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
-          child: Text(
-            _text,
-            style: MinitelTextStyles.mdH4,
-          ),
-        );
-        break;
-
-      case 5:
-        return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
-          child: Text(
-            _text,
-            style: MinitelTextStyles.mdH5,
-          ),
-        );
-        break;
-
-      case 6:
-        return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
-          child: Text(
-            _text,
-            style: MinitelTextStyles.mdH6,
-          ),
-        );
-        break;
-
-      default:
-        return Container();
-    }
-  }
 }

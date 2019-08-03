@@ -36,11 +36,10 @@ class WebhookAPI {
 
       try {
         HttpClientRequest request = await _client
-            .postUrl(Uri.parse(utf8.decode(base64.decode(_webhook))));
-
-        request.headers.contentType =
-            ContentType("application", "json", charset: "utf-8");
-        request.write(json.encode(data));
+            .postUrl(Uri.parse(utf8.decode(base64.decode(_webhook))))
+          ..headers.contentType =
+              ContentType("application", "json", charset: "utf-8")
+          ..write(json.encode(data));
         HttpClientResponse response = await request.close();
         status =
             await response.cast<List<int>>().transform(utf8.decoder).join();

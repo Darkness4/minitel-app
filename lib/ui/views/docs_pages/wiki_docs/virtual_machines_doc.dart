@@ -9,7 +9,7 @@ class VirtMachineDoc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
           BoxMdH("Virtual Machines", 1),

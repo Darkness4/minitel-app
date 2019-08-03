@@ -30,14 +30,16 @@ class GatewayAPI {
 
     try {
       // SessionId
-      HttpClientRequest request = await _client
-          .postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'));
-
-      request.headers.contentType =
-          ContentType("application", "x-www-form-urlencoded", charset: 'utf-8');
       var data = "uid=$uid&time=$selectedTime&pswd=$pswd";
-      request.headers.contentLength = data.length; // Needed
-      request.write(data);
+      HttpClientRequest request = await _client
+          .postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'))
+        ..headers.contentType = ContentType(
+          "application",
+          "x-www-form-urlencoded",
+          charset: 'utf-8',
+        )
+        ..headers.contentLength = data.length // Needed
+        ..write(data);
       HttpClientResponse response = await request.close();
       var sessionId = "";
       if (response.statusCode == 200) {
@@ -57,13 +59,16 @@ class GatewayAPI {
         throw Exception("HttpError: ${response.statusCode}");
 
       // Status
-      request = await _client
-          .postUrl(Uri.parse('https://$selectedUrl/auth/disclaimer.html'));
-      request.headers.contentType =
-          ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
       data = "session=$sessionId&read=accepted&action=J'accepte";
-      request.headers.contentLength = data.length;
-      request.write(data);
+      request = await _client
+          .postUrl(Uri.parse('https://$selectedUrl/auth/disclaimer.html'))
+        ..headers.contentType = ContentType(
+          "application",
+          "x-www-form-urlencoded",
+          charset: "utf-8",
+        )
+        ..headers.contentLength = data.length
+        ..write(data);
 
       response = await request.close();
       if (response.statusCode == 200) {
@@ -105,8 +110,8 @@ class GatewayAPI {
     _client.badCertificateCallback = (cert, host, port) => true;
 
     try {
-      HttpClientRequest request = await _client.getUrl(Uri.parse(url));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
+      HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader);
       HttpClientResponse response = await request.close();
       var body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
@@ -145,8 +150,8 @@ class GatewayAPI {
     RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
     try {
-      HttpClientRequest request = await _client.getUrl(Uri.parse(url));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
+      HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader);
       // print(request.method.toString());
       // print(request.headers.toString());
 

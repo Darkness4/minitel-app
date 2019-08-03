@@ -26,7 +26,7 @@ class LoginPageState extends State<LoginPage> {
   final _pswdFocusNode = FocusNode();
   final _uidController = TextEditingController();
   final _pswdController = TextEditingController();
-  final _calendarURL = CalendarUrlAPI();
+  final _calendarURLApi = CalendarUrlAPI();
   final List<String> _urlRootList = [
     '10.163.0.2',
     'fw-cgcp.emse.fr',
@@ -60,7 +60,7 @@ class LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 _StatusCard(
                   portail: widget._portail,
-                  calendarURL: _calendarURL,
+                  calendarURL: _calendarURLApi,
                   status: _status,
                 ),
                 Card(
@@ -73,7 +73,7 @@ class LoginPageState extends State<LoginPage> {
                         FittedBox(
                           child: Row(
                             children: <Widget>[
-                              Text("Nom de domaine / IP "),
+                              const Text("Nom de domaine / IP "),
                               DropdownButton<String>(
                                 value: _selectedUrl,
                                 items: _urlRootList
@@ -83,11 +83,11 @@ class LoginPageState extends State<LoginPage> {
                                           value: value,
                                         ))
                                     .toList(),
-                                onChanged: (String selectedUrl) {
+                                onChanged: (String selectedUrl) async {
                                   _selectedUrl = selectedUrl;
-                                  widget._gateway.getStatus(_selectedUrl).then(
-                                      (status) =>
-                                          setState(() => _status = status));
+                                  String status = await widget._gateway
+                                      .getStatus(_selectedUrl);
+                                  setState(() => _status = status);
                                 },
                               ),
                             ],
@@ -96,7 +96,7 @@ class LoginPageState extends State<LoginPage> {
                         FittedBox(
                           child: Row(
                             children: <Widget>[
-                              Text("Durée d\'authentification "),
+                              const Text("Durée d\'authentification "),
                               DropdownButton<String>(
                                 value: _selectedTime,
                                 items: _timeMap.keys
@@ -119,7 +119,7 @@ class LoginPageState extends State<LoginPage> {
                               TextFormField(
                                 focusNode: _uidFocusNode,
                                 controller: _uidController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: "prénom.nom",
                                   labelText: "Nom d'utilisateur",
                                 ),
@@ -133,7 +133,7 @@ class LoginPageState extends State<LoginPage> {
                                 controller: _pswdController,
                                 obscureText: true,
                                 focusNode: _pswdFocusNode,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: "Mot de passe",
                                   labelText: "Mot de passe",
                                 ),
@@ -144,7 +144,7 @@ class LoginPageState extends State<LoginPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("Se souvenir "),
+                            const Text("Se souvenir "),
                             Checkbox(
                               value: rememberMe,
                               onChanged: (value) =>
@@ -163,7 +163,8 @@ class LoginPageState extends State<LoginPage> {
                       onPressed: () async {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
-                        final snackBar = SnackBar(content: Text('Requested'));
+                        final snackBar =
+                            SnackBar(content: const Text('Requested'));
                         Scaffold.of(context).showSnackBar(snackBar);
                         widget._gateway
                             .autoLogin(
@@ -173,11 +174,12 @@ class LoginPageState extends State<LoginPage> {
                               _timeMap[_selectedTime],
                             )
                             .then((status) => setState(() => _status = status));
-                        String calendarUrl = await _calendarURL.getCalendarURL(
+                        String calendarUrl =
+                            await _calendarURLApi.getCalendarURL(
                           username: _uidController.text,
                           password: _pswdController.text,
                         );
-                        ICalendar(_calendarURL)
+                        ICalendar(_calendarURLApi)
                             .saveCalendar(calendarUrl)
                             .then((_) => setState(() {}));
                         if (rememberMe) {
@@ -199,12 +201,12 @@ class LoginPageState extends State<LoginPage> {
                       },
                       label: const Text(
                         "Se connecter",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      icon: Icon(Icons.arrow_forward),
+                      icon: const Icon(Icons.arrow_forward),
                     ),
                   ),
                 ),
@@ -232,7 +234,7 @@ class LoginPageState extends State<LoginPage> {
     _rememberLogin();
   }
 
-  _rememberLogin() async {
+  Future<void> _rememberLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _uidController.text = prefs.getString("user");
     _selectedTime = prefs.getString("time");
@@ -245,9 +247,9 @@ class LoginPageState extends State<LoginPage> {
 }
 
 class _StatusCard extends StatelessWidget {
-  final String _status;
+  final String _status; // TODO : FutureBuilder
   final PortailAPI _portail;
-  final CalendarUrlAPI _calendarURL;
+  final CalendarUrlAPI _calendarURLApi;
 
   const _StatusCard({
     Key key,
@@ -256,7 +258,7 @@ class _StatusCard extends StatelessWidget {
     @required CalendarUrlAPI calendarURL,
   })  : _status = status,
         _portail = portail,
-        _calendarURL = calendarURL,
+        _calendarURLApi = calendarURL,
         super(key: key);
 
   @override
@@ -290,7 +292,7 @@ class _StatusCard extends StatelessWidget {
                     style: const TextStyle(fontSize: 20),
                   ),
                   FutureBuilder<String>(
-                    future: _calendarURL
+                    future: _calendarURLApi
                         .savedCalendarURL, // a previously-obtained Future<String> or null
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {

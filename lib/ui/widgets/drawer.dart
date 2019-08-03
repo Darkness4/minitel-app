@@ -21,13 +21,13 @@ class MainDrawer extends StatelessWidget {
                   child: Image.asset("assets/img/logo_minitel_white.png"),
                   height: 75,
                 ),
-                Text(
+                const Text(
                   "Minitel Toolbox",
-                  style: const TextStyle(color: Colors.white, fontSize: 23),
+                  style: TextStyle(color: Colors.white, fontSize: 23),
                 ),
               ],
             ),
-            decoration: BoxDecoration(color: MinitelColors.PrimaryColor),
+            decoration: const BoxDecoration(color: MinitelColors.PrimaryColor),
           ),
           ListTile(
               title: const Text("Authentification"),
@@ -40,7 +40,7 @@ class MainDrawer extends StatelessWidget {
                   Navigator.pushReplacementNamed(
                       context, RoutePaths.Authentication);
               }),
-          Divider(),
+          const Divider(),
           ListTile(
               title: const Text("Nouveautés"),
               leading: const Icon(Icons.rss_feed),
@@ -68,13 +68,13 @@ class MainDrawer extends StatelessWidget {
           //       if (ModalRoute.of(context).settings.name != '/maps')
           //         Navigator.pushReplacementNamed(context, '/maps');
           //     }),
-          Divider(),
+          const Divider(),
           Container(
             color: MinitelColors.ReportPrimaryColor,
             child: ListTile(
-                title: Text(
+                title: const Text(
                   "Signaler Minitel",
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                 ),
                 leading: const Icon(
                   Icons.error,
@@ -93,7 +93,7 @@ class MainDrawer extends StatelessWidget {
                 }),
           ),
           ListTile(
-              title: Text("Documentation"),
+              title: const Text("Documentation"),
               leading: const Icon(Icons.description),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
@@ -102,7 +102,7 @@ class MainDrawer extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, RoutePaths.Docs);
               }),
           ListTile(
-            title: Text("A propos..."),
+            title: const Text("A propos..."),
             leading: const Icon(Icons.info),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () {
@@ -114,7 +114,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             color: Colors.lightGreen[100],
             child: ListTile(
-              title: Text("Alpha Feedback"),
+              title: const Text("Alpha Feedback"),
               leading: const Icon(Icons.chat),
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {

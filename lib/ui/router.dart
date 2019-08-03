@@ -3,14 +3,14 @@ import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:provider/provider.dart';
 
-import 'widgets/page_animation.dart';
 import 'views/about_view.dart';
 import 'views/calendar_view.dart';
 import 'views/docs_view.dart';
+import 'views/feedback_view.dart';
 import 'views/news_view.dart';
 import 'views/portal_view.dart';
 import 'views/reporting_view.dart';
-import 'views/feedback_view.dart';
+import 'widgets/page_animation.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -26,23 +26,25 @@ class Router {
       case RoutePaths.Reporting:
         return FadeRoute(
           builder: (BuildContext context) =>
-              ReportingView(title: "Signaler Minitel"),
+              const ReportingView(title: "Signaler Minitel"),
           settings: settings,
         );
       case RoutePaths.Docs:
         return FadeRoute(
           builder: (BuildContext context) =>
-              DocumentationView(title: "Documentation"),
+              const DocumentationView(title: "Documentation"),
           settings: settings,
         );
       case RoutePaths.News:
         return FadeRoute(
-          builder: (BuildContext context) => NewsView(title: "Nouveautés"),
+          builder: (BuildContext context) =>
+              const NewsView(title: "Nouveautés"),
           settings: settings,
         );
       case RoutePaths.Calendar:
         return FadeRoute(
-          builder: (BuildContext context) => CalendarView(title: "Calendrier"),
+          builder: (BuildContext context) =>
+              const CalendarView(title: "Calendrier"),
           settings: settings,
         );
       case RoutePaths.About:
@@ -54,7 +56,7 @@ class Router {
       case RoutePaths.Feedback:
         return FadeRoute(
           builder: (BuildContext context) =>
-              FeedbackView(title: "Alpha Feedback"),
+              const FeedbackView(title: "Alpha Feedback"),
           settings: settings,
         );
       default:

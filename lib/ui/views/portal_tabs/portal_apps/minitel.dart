@@ -18,7 +18,7 @@ class MinitelWebView extends StatelessWidget {
         backgroundColor: Colors.blue,
         title: const Text("Minitel Wiki"),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: WebView(
           javascriptMode: JavascriptMode.unrestricted,
           initialUrl: 'http://minitel.emse.fr/wiki/Wiki-user',

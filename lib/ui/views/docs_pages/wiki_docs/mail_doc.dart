@@ -9,7 +9,7 @@ class MailDoc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
           BoxMdH("Importation des mails Sogo", 1),

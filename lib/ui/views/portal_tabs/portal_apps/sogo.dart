@@ -18,7 +18,7 @@ class SogoWebView extends StatelessWidget {
         backgroundColor: Colors.green,
         title: const Text("Sogo"),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: WebView(
           javascriptMode: JavascriptMode.unrestricted,
           initialUrl: 'https://sogo.emse.fr/',

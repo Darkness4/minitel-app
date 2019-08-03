@@ -12,13 +12,13 @@ class LoginDoc extends StatelessWidget {
     return SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
-          BoxMdH("Authentification", 1),
+          const BoxMdH("Authentification", 1),
           InkWell(
             child: Image.asset("assets/img/network.jpg"),
             onTap: () {},
           ),
-          BoxMdH("Nom de domaine / IP", 2),
-          Text.rich(
+          const BoxMdH("Nom de domaine / IP", 2),
+          const Text.rich(
             TextSpan(
               text:
                   "Choisir entre fw-cgcp.emse.fr, 10.163.0.2 et 195.83.139.7\n",

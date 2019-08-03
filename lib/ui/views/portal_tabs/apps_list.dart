@@ -56,7 +56,7 @@ class _ImprimanteCard extends StatelessWidget {
                 size: constraint.biggest.height - 50,
                 color: Colors.blue,
               ),
-              FittedBox(
+              const FittedBox(
                 child: Text(
                   "Imprimante",
                   style: MinitelTextStyles.appTitle,

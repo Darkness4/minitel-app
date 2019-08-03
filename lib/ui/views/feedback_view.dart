@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 class FeedbackView extends StatefulWidget {
   final String title;
 
-  FeedbackView({Key key, this.title}) : super(key: key);
+  const FeedbackView({Key key, this.title}) : super(key: key);
 
   @override
   _FeedbackViewState createState() => _FeedbackViewState();
@@ -36,7 +36,7 @@ class _FeedbackViewState extends State<FeedbackView> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      backgroundColor: Color(0xff087f23),
+      backgroundColor: const Color(0xff087f23),
       body: Center(
         child: Scrollbar(
           child: ListView(
@@ -86,7 +86,7 @@ class _FeedbackViewState extends State<FeedbackView> {
               DocCard(
                 elevation: 4,
                 children: <Widget>[
-                  BoxMdH("Autres Contacts", 1),
+                  const BoxMdH("Autres Contacts", 1),
                   FlatButton(
                     textColor: Colors.blueAccent,
                     child: Text(
@@ -107,7 +107,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                     onPressed: LaunchURL.mailToMarcNGUYEN,
                     color: Colors.lightBlue[100],
                   ),
-                  Text(
+                  const Text(
                     "IRL : Marc NGUYEN, Chambre 2012",
                     style: MinitelTextStyles.body1,
                   ),
@@ -117,7 +117,7 @@ class _FeedbackViewState extends State<FeedbackView> {
           ),
         ),
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       floatingActionButton: Builder(
         builder: (BuildContext context) {
           return FloatingActionButton(

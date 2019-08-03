@@ -22,17 +22,6 @@ class _BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
   T model;
 
   @override
-  void initState() {
-    model = widget.model;
-
-    if (widget.onModelReady != null) {
-      widget.onModelReady(model);
-    }
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>(
       builder: (context) => model,
@@ -41,5 +30,16 @@ class _BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
         child: widget.child,
       ),
     );
+  }
+
+  @override
+  void initState() {
+    model = widget.model;
+
+    if (widget.onModelReady != null) {
+      widget.onModelReady(model);
+    }
+
+    super.initState();
   }
 }

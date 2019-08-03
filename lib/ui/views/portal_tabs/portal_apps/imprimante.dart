@@ -18,7 +18,7 @@ class ImprimanteWebView extends StatelessWidget {
         backgroundColor: Colors.grey,
         title: const Text("Imprimante EMSE"),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: WebView(
           javascriptMode: JavascriptMode.unrestricted,
           initialUrl: 'https://vpnssl.emse.fr/watchdoc,DanaInfo=192.168.130.2',

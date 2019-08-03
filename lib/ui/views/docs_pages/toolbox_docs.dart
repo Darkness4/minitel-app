@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/views/docs_pages/wiki_docs.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/views/docs_pages/wiki_docs.dart';
 import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
 import 'toolbox_docs/diagnose_doc.dart';
@@ -16,12 +16,12 @@ class ToolboxDocs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Toolbox Documentation"),
+        title: const Text("Toolbox Documentation"),
       ),
       body: Scrollbar(
         child: PageView(
           controller: _controller,
-          children: <Widget>[
+          children: const <Widget>[
             LoginDoc(),
             DiagnoseDoc(),
           ],
@@ -35,7 +35,7 @@ class ToolboxDocs extends StatelessWidget {
               top: true,
               child: Container(
                 height: 90,
-                child: DrawerHeader(
+                child: const DrawerHeader(
                   child: Text(
                     "Documentation",
                     style: MinitelTextStyles.mdH1,
@@ -44,15 +44,15 @@ class ToolboxDocs extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text("Minitel"),
+              title: const Text("Minitel"),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pop(context);
               },
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-              title: Text("Authentification"),
+              title: const Text("Authentification"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 _controller.animateToPage(
@@ -63,7 +63,7 @@ class ToolboxDocs extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Diagnostique"),
+              title: const Text("Diagnostique"),
               onTap: () {
                 Navigator.pop(context);
                 _controller.animateToPage(
@@ -73,9 +73,9 @@ class ToolboxDocs extends StatelessWidget {
                 );
               },
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-              title: Text("Configuration de l'imprimante"),
+              title: const Text("Configuration de l'imprimante"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(
@@ -92,7 +92,7 @@ class ToolboxDocs extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Importation des mails SoGo"),
+              title: const Text("Importation des mails SoGo"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(
@@ -109,7 +109,7 @@ class ToolboxDocs extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Installer un Dual Boot"),
+              title: const Text("Installer un Dual Boot"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(
@@ -126,7 +126,7 @@ class ToolboxDocs extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Jouer avec des VM"),
+              title: const Text("Jouer avec des VM"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(

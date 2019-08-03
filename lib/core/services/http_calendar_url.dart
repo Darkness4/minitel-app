@@ -21,10 +21,9 @@ class CalendarUrlAPI {
     );
 
     try {
-      HttpClientRequest request = await client.postUrl(Uri.parse(url));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
-      request.headers
-          .set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDCAS");
+      HttpClientRequest request = await client.postUrl(Uri.parse(url))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader)
+        ..headers.set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDCAS");
       HttpClientResponse response = await request.close();
       var body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
@@ -37,8 +36,8 @@ class CalendarUrlAPI {
   }
 
   Future<void> saveCalendarURL(String url) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('calendarURL', url);
+    await SharedPreferences.getInstance()
+      ..setString('calendarURL', url);
   }
 
   Future<String> _bypassCAS({String username, String password}) async {
@@ -48,9 +47,9 @@ class CalendarUrlAPI {
 
     try {
       // GET ICS
-      HttpClientRequest request = await client.getUrl(Uri.parse(referee));
-      request.followRedirects = false;
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
+      HttpClientRequest request = await client.getUrl(Uri.parse(referee))
+        ..followRedirects = false
+        ..headers.removeAll(HttpHeaders.contentLengthHeader);
       HttpClientResponse response = await request.close();
       var phpSessionIDreferee = response.headers.value('set-cookie');
       // print("Look for PHPSESSID $phpSessionIDreferee");
@@ -60,8 +59,8 @@ class CalendarUrlAPI {
 
       // GET CAS
       request = await client.getUrl(Uri.parse(
-          "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}"));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
+          "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}"))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader);
       response = await request.close();
 
       var lt = await response.cast<List<int>>().transform(utf8.decoder).join();
@@ -73,17 +72,25 @@ class CalendarUrlAPI {
           RegExp(r'JSESSIONID=([^;]*);').firstMatch(jSessionID).group(1);
 
       // POST CAS
-      request = await client.postUrl(Uri.parse(
-          'https://cas.emse.fr/login;jsessionid=$jSessionID?service=${Uri.encodeComponent(referee)}'));
-      request.headers.contentType =
-          ContentType("application", "x-www-form-urlencoded", charset: "utf-8");
       var data =
           "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
-      request.headers.contentLength = data.length;
-      request.headers.set(HttpHeaders.cookieHeader, "JSESSIONID=$jSessionID");
-      request.headers.set(HttpHeaders.refererHeader,
-          'https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}');
-      request.write(data);
+      request = await client.postUrl(Uri.parse(
+          'https://cas.emse.fr/login;jsessionid=$jSessionID?service=${Uri.encodeComponent(referee)}'))
+        ..headers.contentType = ContentType(
+          "application",
+          "x-www-form-urlencoded",
+          charset: "utf-8",
+        )
+        ..headers.contentLength = data.length
+        ..headers.set(
+          HttpHeaders.cookieHeader,
+          "JSESSIONID=$jSessionID",
+        )
+        ..headers.set(
+          HttpHeaders.refererHeader,
+          'https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}',
+        )
+        ..write(data);
       response = await request.close();
 
       // print("Look for location: ${response.headers}");
@@ -92,11 +99,13 @@ class CalendarUrlAPI {
       if (location == null) throw "Error : Bad login";
 
       // GET CAS
-      request = await client.getUrl(Uri.parse(location));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
-      request.followRedirects = false;
-      request.headers
-          .set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDreferee");
+      request = await client.getUrl(Uri.parse(location))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader)
+        ..followRedirects = false
+        ..headers.set(
+          HttpHeaders.cookieHeader,
+          "PHPSESSID=$phpSessionIDreferee",
+        );
       response = await request.close();
 
       var phpSessionIDCAS = response.headers.value("set-cookie");

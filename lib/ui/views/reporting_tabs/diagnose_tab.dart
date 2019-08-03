@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/core/models/diagnosis.dart';
+import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
 class DiagnoseTab extends StatelessWidget {
   final Diagnosis _diagnosis;

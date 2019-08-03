@@ -21,7 +21,7 @@ class PortailWebView extends StatelessWidget {
         backgroundColor: Colors.deepPurple,
         title: const Text("Portail"),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: WebView(
           javascriptMode: JavascriptMode.unrestricted,
           initialUrl: 'http://portail.emse.fr/',

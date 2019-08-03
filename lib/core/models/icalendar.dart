@@ -60,12 +60,12 @@ class ICalendar {
 
   /// GET the .ics from url
   Future<void> getCalendar(String url) async {
-    var client = HttpClient();
-    client.badCertificateCallback = (cert, host, port) => true;
+    var client = HttpClient()
+      ..badCertificateCallback = (cert, host, port) => true;
 
     try {
-      HttpClientRequest request = await client.getUrl(Uri.parse(url));
-      request.headers.removeAll(HttpHeaders.contentLengthHeader);
+      HttpClientRequest request = await client.getUrl(Uri.parse(url))
+        ..headers.removeAll(HttpHeaders.contentLengthHeader);
       HttpClientResponse response = await request.close();
       if (response.statusCode == 200) {
         _calendarStream = response.cast<List<int>>().transform(utf8.decoder);

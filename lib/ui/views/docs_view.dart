@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/views/docs_pages/minitel_doc.dart';
 import 'package:minitel_toolbox/ui/views/docs_pages/toolbox_docs.dart';
 import 'package:minitel_toolbox/ui/views/docs_pages/wiki_docs.dart';
-import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
@@ -20,7 +20,7 @@ class DocumentationView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              MinitelDoc(),
+              const MinitelDoc(), // TODO: wtf
             ],
           ),
         ),
@@ -34,7 +34,7 @@ class DocumentationView extends StatelessWidget {
               top: true,
               child: Container(
                 height: 90,
-                child: DrawerHeader(
+                child: const DrawerHeader(
                   child: Text(
                     "Documentation",
                     style: MinitelTextStyles.mdH1,
@@ -43,14 +43,14 @@ class DocumentationView extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text("Minitel"),
+              title: const Text("Minitel"),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-              title: Text("Authentification"),
+              title: const Text("Authentification"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 final _controller = PageController(
@@ -66,7 +66,7 @@ class DocumentationView extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Diagnostique"),
+              title: const Text("Diagnostique"),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 final _controller = PageController(
@@ -81,9 +81,9 @@ class DocumentationView extends StatelessWidget {
                 );
               },
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-              title: Text("Configuration de l'imprimante"),
+              title: const Text("Configuration de l'imprimante"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(
@@ -99,7 +99,7 @@ class DocumentationView extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Importation des mails SoGo"),
+              title: const Text("Importation des mails SoGo"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(
@@ -115,7 +115,7 @@ class DocumentationView extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Installer un Dual Boot"),
+              title: const Text("Installer un Dual Boot"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(
@@ -131,7 +131,7 @@ class DocumentationView extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("Jouer avec des VM"),
+              title: const Text("Jouer avec des VM"),
               onTap: () {
                 Navigator.pop(context);
                 final _controller = PageController(

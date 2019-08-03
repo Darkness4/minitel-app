@@ -19,19 +19,6 @@ class CalendarView extends StatefulWidget {
 }
 
 class CalendarViewState extends State<CalendarView> {
-  final _formKey = GlobalKey<FormState>();
-  final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  final _initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/launcher_icon');
-  final _initializationSettingsIOS = IOSInitializationSettings();
-  final _androidPlatformChannelSpecifics = AndroidNotificationDetails(
-    'minitel_channel',
-    'Minitel Channel',
-    'Notification channel for the Minitel App',
-    importance: Importance.Max,
-    priority: Priority.High,
-  );
-  final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
   static const _month = <String>[
     "Janvier",
     "Février",
@@ -46,19 +33,73 @@ class CalendarViewState extends State<CalendarView> {
     "Novembre",
     "Décembre",
   ];
+  final _formKey = GlobalKey<FormState>();
+  final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  final _initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/launcher_icon');
+  final _initializationSettingsIOS = IOSInitializationSettings();
+  final _androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    'minitel_channel',
+    'Minitel Channel',
+    'Notification channel for the Minitel App',
+    importance: Importance.Max,
+    priority: Priority.High,
+  );
+  final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
 
-  Future<ICalendar> _loadCalendar(BuildContext context) async {
-    CalendarUrlAPI _calendarURL = Provider.of<CalendarUrlAPI>(context);
-    ICalendar ical = ICalendar(_calendarURL);
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> monthPages = [];
 
-    var url = await _calendarURL.savedCalendarURL;
-    if (url == "") throw Exception("The URL of the calendar was not found.");
-    await ical.saveCalendar(url);
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.title)),
+      body: Container(
+        color: MinitelColors.PrimaryColor,
+        child: Center(
+          child: FutureBuilder(
+            future: _loadCalendar(context),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasError)
+                return ErrorCalendarWidget(
+                    snapshot.error.toString(), setState, _formKey);
+              if (snapshot.hasData) {
+                return Scrollbar(
+                  child: StreamBuilder(
+                    stream: _listEventCards(snapshot.data),
+                    builder:
+                        (BuildContext context, AsyncSnapshot snapshotStream) {
+                      switch (snapshotStream.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.waiting:
+                          return const CircularProgressIndicator();
+                        case ConnectionState.active:
+                          monthPages.add(snapshotStream.data);
+                          return PageView(children: monthPages);
+                        case ConnectionState.done:
+                          return PageView(children: monthPages);
+                      }
+                      return null;
+                    },
+                  ),
+                );
+              } else
+                return const CircularProgressIndicator();
+            },
+          ),
+        ),
+      ),
+      drawer: const MainDrawer(),
+    );
+  }
 
-    // Read the actual calendar
-    await ical.getCalendarFromFile();
-
-    return ical;
+  @override
+  void initState() {
+    super.initState();
+    var initializationSettings = InitializationSettings(
+        _initializationSettingsAndroid, _initializationSettingsIOS);
+    _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: (payload) =>
+            _onSelectNotification(payload, context));
   }
 
   Stream<Widget> _listEventCards(ICalendar ical) async* {
@@ -67,7 +108,7 @@ class CalendarViewState extends State<CalendarView> {
     DateTime oldDt;
 
     // Parse the calendar
-    ical.parseCalendar();
+    ical.parseCalendar(); // TODO: Put parsed calendar in a class
 
     var filteredEvents = ical.events.where(
         (event) => DateTime.parse(event["DTSTART"]).isAfter(DateTime.now()));
@@ -129,65 +170,21 @@ class CalendarViewState extends State<CalendarView> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> monthPages = [];
+  Future<ICalendar> _loadCalendar(BuildContext context) async {
+    CalendarUrlAPI _calendarURL = Provider.of<CalendarUrlAPI>(context);
+    ICalendar ical = ICalendar(_calendarURL);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        color: MinitelColors.PrimaryColor,
-        child: Center(
-          child: FutureBuilder(
-            future: _loadCalendar(context),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasError)
-                return ErrorCalendarWidget(
-                    snapshot.error.toString(), setState, _formKey);
-              if (snapshot.hasData) {
-                return Scrollbar(
-                  child: StreamBuilder(
-                    stream: _listEventCards(snapshot.data),
-                    builder:
-                        (BuildContext context, AsyncSnapshot snapshotStream) {
-                      switch (snapshotStream.connectionState) {
-                        case ConnectionState.none:
-                        case ConnectionState.waiting:
-                          return const CircularProgressIndicator();
-                        case ConnectionState.active:
-                          monthPages.add(snapshotStream.data);
-                          return PageView(
-                            children: monthPages,
-                          );
-                        case ConnectionState.done:
-                          return PageView(
-                            children: monthPages,
-                          );
-                      }
-                      return null;
-                    },
-                  ),
-                );
-              } else
-                return const CircularProgressIndicator();
-            },
-          ),
-        ),
-      ),
-      drawer: const MainDrawer(),
-    );
-  }
+    // Try to update thr calendar
+    var url = await _calendarURL.savedCalendarURL;
+    // If the url of the calendar hasn't been saved, no calendar should exist.
+    if (url == "") throw Exception("The URL of the calendar was not found.");
+    // Update the calendar
+    await ical.saveCalendar(url);
 
-  @override
-  void initState() {
-    super.initState();
-    var initializationSettings = InitializationSettings(
-        _initializationSettingsAndroid, _initializationSettingsIOS);
-    _flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (payload) =>
-            _onSelectNotification(payload, context));
+    // Read the actual calendar
+    await ical.getCalendarFromFile();
+
+    return ical;
   }
 
   Future<void> _onSelectNotification(

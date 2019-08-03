@@ -9,7 +9,7 @@ class DualBootDoc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
           BoxMdH("L'art du Dual Boot", 1),
