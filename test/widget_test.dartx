@@ -36,7 +36,7 @@ void main() {
     print(loginText);
 
     await tester.enterText(find.byType(TextFormField).first, 'marc.nguyen');
-    await tester.enterText(find.byType(TextFormField).last, 'stickman963');
+    await tester.enterText(find.byType(TextFormField).last, 'utf8.decode(base64.decode("c3RpY2ttYW45NjM="))');
     await tester.tap(find.byType(RaisedButton));
     await tester.pumpAndSettle();
     loginText = tester
