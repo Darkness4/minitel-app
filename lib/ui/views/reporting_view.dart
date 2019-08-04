@@ -160,8 +160,7 @@ class ReportingViewState extends State<ReportingView>
         },
       );
 
-  Widget _reportButton(BuildContext context, ReportingViewModel model,
-          {String channel: "DE8PA0Z1C"}) =>
+  Widget _reportButton(BuildContext context, ReportingViewModel model) =>
       AnimatedFloatingButton(
         "Notifier sur Slack",
         start: 0.0,
@@ -173,7 +172,7 @@ class ReportingViewState extends State<ReportingView>
         controller: _animationController,
         onPressed: () async {
           String status = await model.reportToSlack(
-              _titleController.text, _descriptionController.text, channel);
+              _titleController.text, _descriptionController.text);
           if (status != null)
             Scaffold.of(context).showSnackBar(
               SnackBar(

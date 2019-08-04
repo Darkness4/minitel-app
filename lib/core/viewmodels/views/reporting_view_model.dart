@@ -50,8 +50,8 @@ class ReportingViewModel extends ChangeNotifier {
     }
   }
 
-  Future<String> reportToSlack(
-      String title, String description, String channel) async {
+  Future<String> reportToSlack(String title, String description,
+      {String channel = "projet_flutter_notif"}) async {
     DateTime timeout = await _timeout;
     String status;
     if (DateTime.now().isAfter(timeout)) {
