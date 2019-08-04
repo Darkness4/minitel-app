@@ -56,10 +56,9 @@ class ReportingViewModel extends ChangeNotifier {
     String status;
     if (DateTime.now().isAfter(timeout)) {
       status = await _webhook.report(
-        "_${description}_\n\n"
-        "*Diagnosis*\n"
-        "${diagnosis.report.toString()}",
-        title: title,
+        "*$title*\n"
+        "_${description}_\n\n",
+        attachments: await diagnosis.reportAll,
         channel: channel,
       );
       if (status == "ok") _setTimeout();

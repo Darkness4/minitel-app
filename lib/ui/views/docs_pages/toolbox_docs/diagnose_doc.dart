@@ -23,7 +23,7 @@ class DiagnoseDoc extends StatelessWidget {
                 "Indique si vous avez authorisé le GPS pour déterminer le SSID (identifiant du réseau).",
                 style: MinitelTextStyles.body1,
               ),
-              const BoxMdH("ifconfig all / ip a", 2),
+              const BoxMdH("ip a", 2),
               const Text.rich(
                 TextSpan(
                     text: "Donne des informations utiles sur le matériel.\n\n"
@@ -92,7 +92,7 @@ class DiagnoseDoc extends StatelessWidget {
                   children: <TextSpan>[
                     TextSpan(
                       text:
-                          " (Voir ifconfig all ou ip a, et alertez immediatement à Minitel)\n",
+                          " (Voir ip a, et alertez immediatement à Minitel)\n",
                       style: MinitelTextStyles.mdH5,
                     ),
                     TextSpan(

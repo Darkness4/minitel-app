@@ -149,12 +149,12 @@ class ReportingViewState extends State<ReportingView>
         end: 0.5,
         child: const Icon(Icons.mail),
         controller: _animationController,
-        onPressed: () {
+        onPressed: () async {
           var body = "---Report ${DateTime.now().toString()}---\n\n"
               "Titre: ${_titleController.text}\n"
               "Description: ${_descriptionController.text}\n\n"
               "*Diagnosis*\n"
-              "${model.diagnosis.report.toString()}";
+              "${await model.diagnosis.reportAll}";
           LaunchURL.launchURL(
               "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
         },
@@ -189,11 +189,11 @@ class ReportingViewState extends State<ReportingView>
         end: 1.0,
         child: const Icon(Icons.share),
         controller: _animationController,
-        onPressed: () =>
+        onPressed: () async =>
             Share.share("---Report ${DateTime.now().toString()}---\n\n"
                 "Titre: ${_titleController.text}\n"
                 "Description: ${_descriptionController.text}\n\n"
                 "*Diagnosis*\n"
-                "${model.diagnosis.report.toString()}"),
+                "${await model.diagnosis.reportAll}"),
       );
 }

@@ -14,21 +14,34 @@ class WebhookAPI {
   /// You can use [report] like this:
   ///
   /// ```
-  /// String status = await report("Description", title: "Title");
+  /// String status = await report(
+  ///   "Text",
+  ///   attachments: {"attachment 1": "attachment content"},
+  ///   channel: "projet_flutter_notif",
+  ///   botName: "Flutter Reporter Bot",
+  /// );
   /// ```
   Future<String> report(String text,
-      {String title,
+      {Map<String, String> attachments,
       String channel: "projet_flutter_notif",
       String botName: "Flutter Reporter Bot"}) async {
     var status = "";
+    var _attachments = <Map<String, String>>[];
 
-    if (text != "" && title != "") {
-      var out = "*--Report ${DateTime.now()}--*\n"
-          "*$title*\n"
-          "$text\n";
+    if (attachments != null)
+      attachments.forEach((String key, String value) => _attachments.add({
+            "fallback": key,
+            "title": key,
+            "text": value,
+            "footer": "Slack API",
+          }));
+
+    if (text != "") {
       var data = {
-        'text': out,
+        'text': "*--Report ${DateTime.now()}--*\n"
+            "$text\n",
         'username': botName,
+        "attachments": _attachments,
         'icon_url':
             'https://raw.githubusercontent.com/dart-lang/logos/master/flutter/logo%2Btext/vertical/default.png',
         'channel': channel, // Marc : DE8PA0Z1C
