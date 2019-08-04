@@ -50,16 +50,15 @@ class ReportingViewModel extends ChangeNotifier {
     }
   }
 
-  Future<String> reportToSlack(
-      String title, String description, String channel) async {
+  Future<String> reportToSlack(String title, String description,
+      {String channel = "projet_flutter_notif"}) async {
     DateTime timeout = await _timeout;
     String status;
     if (DateTime.now().isAfter(timeout)) {
       status = await _webhook.report(
-        "_${description}_\n\n"
-        "*Diagnosis*\n"
-        "${diagnosis.report.toString()}",
-        title: title,
+        "*$title*\n"
+        "_${description}_\n\n",
+        attachments: await diagnosis.reportAll,
         channel: channel,
       );
       if (status == "ok") _setTimeout();

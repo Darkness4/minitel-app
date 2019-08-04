@@ -76,15 +76,14 @@ void main() {
     });
 
     test('Report to slack', () async {
-      var status = await _webhook.report("Unit test",
-          title: "Unit test", channel: "DE8PA0Z1C");
+      var status = await _webhook.report("Unit test", channel: "DE8PA0Z1C");
       print(status);
 
       expect(status, contains("ok"));
     });
 
     test('Not enough information report', () async {
-      var status = await _webhook.report("", title: "", channel: "DE8PA0Z1C");
+      var status = await _webhook.report("", channel: "DE8PA0Z1C");
       print(status);
 
       expect(status, contains("Not enough information."));

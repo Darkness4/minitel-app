@@ -36,13 +36,20 @@ class Diagnosis {
 
   Map<String, Future<String>> get report => _report;
 
+  Future<Map<String, String>> get reportAll async {
+    var data = Map<String, String>();
+    for (var key in DiagnosisContent()) {
+      data[key] = await _report[key];
+    }
+    return data;
+  }
+
   /// Run a report suite with a 1 minute time out.
   ///
   /// Run multiples command and store into the [report] Map.
   /// The suite is composed of :
   /// - SSID, IP scan from [Connectivity]
   /// - ip a
-  /// - ifconfig -a
   /// - Address Resolution Protocol (Busybox) -a
   /// - su -c tracerout google.com and 8.8.8.8
   /// - ping loopback, 10.163.0.5 (DHCP), 10.163.0.2 (Gateway),
@@ -71,10 +78,6 @@ class Diagnosis {
         _report[DiagnosisContent.ipAddr] = _terminalCommand(
           "ip",
           ['a'],
-        ),
-        _report[DiagnosisContent.ifconfigAll] = _terminalCommand(
-          "ifconfig",
-          ['-a'],
         ),
         _report[DiagnosisContent.arp] = _terminalCommand(
           "su",
@@ -181,7 +184,6 @@ class DiagnosisContent extends Iterable<String> {
   static const String ssid = "SSID";
   static const String ip = "IP";
   static const String ipAddr = "ip addr";
-  static const String ifconfigAll = "ifconfig all";
   static const String arp = "Address Resolution Protocol (SU + Busy)";
   static const String tracertGoogle = "Traceroute Google (Superuser)";
   static const String tracertGoogleDNS = "Traceroute Google DNS (Superuser)";
@@ -204,7 +206,6 @@ class DiagnosisContent extends Iterable<String> {
         ssid,
         ip,
         ipAddr,
-        ifconfigAll,
         arp,
         tracertGoogle,
         tracertGoogleDNS,

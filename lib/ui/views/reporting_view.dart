@@ -149,19 +149,18 @@ class ReportingViewState extends State<ReportingView>
         end: 0.5,
         child: const Icon(Icons.mail),
         controller: _animationController,
-        onPressed: () {
+        onPressed: () async {
           var body = "---Report ${DateTime.now().toString()}---\n\n"
               "Titre: ${_titleController.text}\n"
               "Description: ${_descriptionController.text}\n\n"
               "*Diagnosis*\n"
-              "${model.diagnosis.report.toString()}";
+              "${await model.diagnosis.reportAll}";
           LaunchURL.launchURL(
               "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
         },
       );
 
-  Widget _reportButton(BuildContext context, ReportingViewModel model,
-          {String channel: "DE8PA0Z1C"}) =>
+  Widget _reportButton(BuildContext context, ReportingViewModel model) =>
       AnimatedFloatingButton(
         "Notifier sur Slack",
         start: 0.0,
@@ -173,7 +172,7 @@ class ReportingViewState extends State<ReportingView>
         controller: _animationController,
         onPressed: () async {
           String status = await model.reportToSlack(
-              _titleController.text, _descriptionController.text, channel);
+              _titleController.text, _descriptionController.text);
           if (status != null)
             Scaffold.of(context).showSnackBar(
               SnackBar(
@@ -189,11 +188,11 @@ class ReportingViewState extends State<ReportingView>
         end: 1.0,
         child: const Icon(Icons.share),
         controller: _animationController,
-        onPressed: () =>
+        onPressed: () async =>
             Share.share("---Report ${DateTime.now().toString()}---\n\n"
                 "Titre: ${_titleController.text}\n"
                 "Description: ${_descriptionController.text}\n\n"
                 "*Diagnosis*\n"
-                "${model.diagnosis.report.toString()}"),
+                "${await model.diagnosis.reportAll}"),
       );
 }
