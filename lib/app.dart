@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ],
         title: "Minitel Toolbox",
         onGenerateRoute: Router.generateRoute,
-        supportedLocales: [const Locale('fr', 'FR')],
+        supportedLocales: const <Locale>[Locale('fr', 'FR')],
         theme: ThemeData(
           primarySwatch: MinitelColors.PrimaryColor,
           fontFamily: 'Roboto',

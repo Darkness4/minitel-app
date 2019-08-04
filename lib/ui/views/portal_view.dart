@@ -40,11 +40,11 @@ class PortalViewState extends State<PortalView> {
             child: TabBarView(
               children: <Widget>[
                 LoginPage(
-                  portail: Provider.of<PortailAPI>(context),
-                  gateway: Provider.of<GatewayAPI>(context),
+                  portailAPI: Provider.of<PortailAPI>(context),
+                  gatewayAPI: Provider.of<GatewayAPI>(context),
                 ),
                 AppsList(
-                  portail: Provider.of<PortailAPI>(context),
+                  portailAPI: Provider.of<PortailAPI>(context),
                 ),
               ],
             ),

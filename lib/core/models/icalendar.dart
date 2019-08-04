@@ -4,32 +4,10 @@ import 'dart:io';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:path_provider/path_provider.dart';
 
-class ICalendar {
-  Stream<String> _calendarStream;
-  String _version = "";
-  String _prodID = "";
-  String _calscale = "";
-  Timezone _timezone = Timezone();
-  List<Map<String, String>> _events = [];
-  final CalendarUrlAPI calendarURL;
-  ICalendar(this.calendarURL);
-
-  String get calscale => _calscale;
-
-  /// events[event_i]["FIELD"]
-  ///
-  /// Fields:
-  /// - DTEND
-  /// - UID
-  /// - DTSTAMP
-  /// - LOCATION
-  /// - DESCRIPTION (Participating Professors)
-  /// - SUMMARY (Name of the course)
-  /// - DTSTART
-  List<Map<String, String>> get events => _events;
-
-  /// Production ID
-  String get prodID => _prodID;
+class ParsedCalendar {
+  String version = "";
+  String prodID = "";
+  String calscale = "";
 
   /// Timezone standard and daylight
   ///
@@ -43,9 +21,31 @@ class ICalendar {
   /// - TZOFFSETFROM
   /// - RRULE
   /// - TZNAME
-  Timezone get timezone => _timezone;
+  Timezone timezone = Timezone();
 
-  String get version => _version;
+  /// events[event_i]["FIELD"]
+  ///
+  /// Fields:
+  /// - DTEND
+  /// - UID
+  /// - DTSTAMP
+  /// - LOCATION
+  /// - DESCRIPTION (Participating Professors)
+  /// - SUMMARY (Name of the course)
+  /// - DTSTART
+  List<Map<String, String>> events = [];
+}
+
+/// ICalendar model
+///
+/// Use [saveCalendar(String url)] to create/update the calendar. It needs the
+/// calendarUrlAPI to work.
+/// If the calendar has been succefully updated, uses [getCalendarFromFile] and
+/// [parseCalendar] to finally get a parsed calendar.
+class ICalendar {
+  Stream<String> _calendarStream;
+  final CalendarUrlAPI calendarUrlAPI;
+  ICalendar(this.calendarUrlAPI);
 
   Future<File> get _calendar async {
     final path = await _localPath;
@@ -59,7 +59,7 @@ class ICalendar {
   }
 
   /// GET the .ics from url
-  Future<void> getCalendar(String url) async {
+  Future<void> _getICalendar(String url) async {
     var client = HttpClient()
       ..badCertificateCallback = (cert, host, port) => true;
 
@@ -76,7 +76,7 @@ class ICalendar {
     }
   }
 
-  /// Get existing the .ics from file
+  /// Get existing the stream .ics from file
   Future<void> getCalendarFromFile() async {
     final file = await _calendar;
     if (!(await file.exists()))
@@ -86,12 +86,14 @@ class ICalendar {
     _calendarStream = file.openRead().transform(utf8.decoder);
   }
 
-  Future<void> parseCalendar() async {
+  /// Parse the ical to a json-like structure
+  Future<ParsedCalendar> parseCalendar() async {
+    ParsedCalendar parsedCalendar = ParsedCalendar();
     ICalSection mode = ICalSection.None;
     Map<String, String> vEvent = {};
 
     if (_calendarStream == null) {
-      throw "Calendar stream not found. Please use getCalendar or getCalendarFromFile (after a saveCalendar).";
+      throw "Calendar stream not found. Please use getCalendar or getICalendarFromFile (after a saveCalendar).";
     }
 
     await for (var data in _calendarStream.transform(LineSplitter())) {
@@ -103,7 +105,7 @@ class ICalendar {
         continue; // Skip BEGIN:VEVENT
       }
       if (line[0] == 'END' && line[1] == 'VEVENT') {
-        _events.add(vEvent);
+        parsedCalendar.events.add(vEvent);
         mode = ICalSection.None;
         continue; // Skip END:VEVENT
       }
@@ -137,37 +139,41 @@ class ICalendar {
           vEvent[line[0]] = line[1];
           break;
         case ICalSection.VTIMEZONE:
-          if (line[0] == "TZID") _timezone.tzid = line[1];
+          if (line[0] == "TZID") parsedCalendar.timezone.tzid = line[1];
           break;
         case ICalSection.STANDARD:
-          _timezone.standard[line[0]] = line[1];
+          parsedCalendar.timezone.standard[line[0]] = line[1];
           break;
         case ICalSection.DAYLIGHT:
-          _timezone.daylight[line[0]] = line[1];
+          parsedCalendar.timezone.daylight[line[0]] = line[1];
           break;
         case ICalSection.None:
-          if (line[0] == "VERSION") _version = line[1];
-          if (line[0] == "PRODID") _prodID = line[1];
-          if (line[0] == "CALSCALE") _calscale = line[1];
+          if (line[0] == "VERSION") parsedCalendar.version = line[1];
+          if (line[0] == "PRODID") parsedCalendar.prodID = line[1];
+          if (line[0] == "CALSCALE") parsedCalendar.calscale = line[1];
           break;
         default:
       }
     }
+    return parsedCalendar;
   }
 
+  /// Get the calendar from url and save the .ics (and the url)
   Future<void> saveCalendar(String url) async {
     final file = await _calendar;
     try {
-      await getCalendar(url);
+      await _getICalendar(url);
     } catch (e) {
       throw e;
     }
 
     var sink = file.openWrite();
-    await for (var data in _calendarStream) sink.write(data);
-    sink.close();
+    _calendarStream.listen(
+      (var data) => sink.write(data),
+      onDone: sink.close,
+    );
 
-    calendarURL.saveCalendarURL(url);
+    calendarUrlAPI.saveCalendarURL(url);
   }
 }
 

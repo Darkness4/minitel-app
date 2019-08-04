@@ -32,6 +32,7 @@ class WikiDocs extends StatelessWidget {
         ),
       ),
       endDrawer: Drawer(
+        // TODO: Drawer builder
         child: ListView(
           padding: const EdgeInsets.all(0.0),
           children: <Widget>[

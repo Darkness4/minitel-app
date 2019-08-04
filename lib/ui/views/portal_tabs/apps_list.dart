@@ -9,9 +9,9 @@ import 'portal_apps/sogo.dart';
 
 /// Fragment listing in a [GridView] multiple supported Apps.
 class AppsList extends StatelessWidget {
-  final PortailAPI _portail;
-  const AppsList({Key key, @required PortailAPI portail})
-      : _portail = portail,
+  final PortailAPI _portailAPI;
+  const AppsList({Key key, @required PortailAPI portailAPI})
+      : _portailAPI = portailAPI,
         super(key: key);
 
   @override
@@ -23,9 +23,7 @@ class AppsList extends StatelessWidget {
         crossAxisSpacing: 10,
         crossAxisCount: 2,
         children: <Widget>[
-          _PortailCard(
-            portail: _portail,
-          ),
+          _PortailCard(portailAPI: _portailAPI),
           const _SogoCard(),
           const _ImprimanteCard(),
           const _WikiMinitelCard(),
@@ -71,10 +69,10 @@ class _ImprimanteCard extends StatelessWidget {
 }
 
 class _PortailCard extends StatelessWidget {
-  final PortailAPI _portail;
+  final PortailAPI _portailAPI;
 
-  const _PortailCard({Key key, @required portail})
-      : _portail = portail,
+  const _PortailCard({Key key, @required portailAPI})
+      : _portailAPI = portailAPI,
         super(key: key);
 
   @override
@@ -84,7 +82,7 @@ class _PortailCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         onTap: () async {
-          String cookie = await _portail.getSavedCookiePortail();
+          String cookie = await _portailAPI.getSavedCookiePortail();
           print(cookie);
           Navigator.push(
             context,

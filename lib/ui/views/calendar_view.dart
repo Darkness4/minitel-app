@@ -108,9 +108,9 @@ class CalendarViewState extends State<CalendarView> {
     DateTime oldDt;
 
     // Parse the calendar
-    ical.parseCalendar(); // TODO: Put parsed calendar in a class
+    ParsedCalendar parsedCalendar = await ical.parseCalendar();
 
-    var filteredEvents = ical.events.where(
+    var filteredEvents = parsedCalendar.events.where(
         (event) => DateTime.parse(event["DTSTART"]).isAfter(DateTime.now()));
 
     // Throw away the old notifications
@@ -171,17 +171,20 @@ class CalendarViewState extends State<CalendarView> {
   }
 
   Future<ICalendar> _loadCalendar(BuildContext context) async {
-    CalendarUrlAPI _calendarURL = Provider.of<CalendarUrlAPI>(context);
-    ICalendar ical = ICalendar(_calendarURL);
+    CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
+    ICalendar ical = ICalendar(_calendarUrlAPI);
 
     // Try to update thr calendar
-    var url = await _calendarURL.savedCalendarURL;
-    // If the url of the calendar hasn't been saved, no calendar should exist.
-    if (url == "") throw Exception("The URL of the calendar was not found.");
-    // Update the calendar
-    await ical.saveCalendar(url);
+    var url = await _calendarUrlAPI.savedCalendarURL;
 
-    // Read the actual calendar
+    // Try to update calendar
+    if (url == "" || url == null) {
+      print("Cannot update calendar. Taking from cache.");
+    } else {
+      await ical.saveCalendar(url);
+    }
+
+    // Read the actual calendar (throw if not existing)
     await ical.getCalendarFromFile();
 
     return ical;

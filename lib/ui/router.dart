@@ -49,8 +49,10 @@ class Router {
         );
       case RoutePaths.About:
         return MaterialPageRoute(
-          builder: (BuildContext context) =>
-              AboutView(title: "A propos de l'application"),
+          builder: (BuildContext context) => AboutView(
+            title: "A propos de l'application",
+            versionAPI: Provider.of(context),
+          ),
           settings: settings,
         );
       case RoutePaths.Feedback:

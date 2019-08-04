@@ -5,8 +5,11 @@ import 'package:package_info/package_info.dart';
 
 class AboutView extends StatelessWidget {
   final String title;
-  final _version = VersionAPI(); // TODO: Kick that out
-  AboutView({Key key, this.title}) : super(key: key);
+  final VersionAPI _versionAPI;
+  const AboutView(
+      {Key key, @required this.title, @required VersionAPI versionAPI})
+      : _versionAPI = versionAPI,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +101,7 @@ class AboutView extends StatelessWidget {
               ListTile(
                 title: const Text("Chercher une mise à jour"),
                 onTap: () async {
-                  var latestVersion = _version.getLatestVersion();
+                  var latestVersion = _versionAPI.getLatestVersion();
                   var actualVersion = PackageInfo.fromPlatform();
                   dynamic ensemble =
                       await Future.wait([actualVersion, latestVersion]);
@@ -120,7 +123,7 @@ class AboutView extends StatelessWidget {
                             RaisedButton(
                               textColor: Colors.white,
                               child: const Text("Update"),
-                              onPressed: () => _version
+                              onPressed: () => _versionAPI
                                   .getLatestVersionURL()
                                   .then((url) => LaunchURL.launchURL(url)),
                             )
@@ -145,7 +148,7 @@ class AboutView extends StatelessWidget {
                             RaisedButton(
                               textColor: Colors.white,
                               child: const Text("Télécharger"),
-                              onPressed: () => _version
+                              onPressed: () => _versionAPI
                                   .getLatestVersionURL()
                                   .then((url) => LaunchURL.launchURL(url)),
                             )

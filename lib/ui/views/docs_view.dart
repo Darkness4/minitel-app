@@ -15,14 +15,9 @@ class DocumentationView extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Scrollbar(
+      body: const Scrollbar(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              const MinitelDoc(), // TODO: wtf
-            ],
-          ),
+          child: MinitelDoc(),
         ),
       ),
       drawer: const MainDrawer(),

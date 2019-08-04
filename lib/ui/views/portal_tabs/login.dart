@@ -8,12 +8,14 @@ import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  final PortailAPI _portail;
-  final GatewayAPI _gateway;
-  const LoginPage(
-      {Key key, @required PortailAPI portail, @required GatewayAPI gateway})
-      : _portail = portail,
-        _gateway = gateway,
+  final PortailAPI _portailAPI;
+  final GatewayAPI _gatewayAPI;
+  const LoginPage({
+    Key key,
+    @required PortailAPI portailAPI,
+    @required GatewayAPI gatewayAPI,
+  })  : _portailAPI = portailAPI,
+        _gatewayAPI = gatewayAPI,
         super(key: key);
 
   @override
@@ -42,10 +44,9 @@ class LoginPageState extends State<LoginPage> {
     '4 hours': 240,
     '(8 hours)': 480,
   };
-  var _status = "";
   var _selectedTime = '4 hours'; // Default
   var _selectedUrl = '195.83.139.7';
-  bool rememberMe = false;
+  ValueNotifier<bool> rememberMe = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +60,10 @@ class LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 _StatusCard(
-                  portail: widget._portail,
+                  portailAPI: widget._portailAPI,
                   calendarURL: _calendarURLApi,
-                  status: _status,
+                  gatewayAPI: widget._gatewayAPI,
+                  selectedUrl: _selectedUrl,
                 ),
                 Card(
                   elevation: 10.0,
@@ -83,12 +85,8 @@ class LoginPageState extends State<LoginPage> {
                                           value: value,
                                         ))
                                     .toList(),
-                                onChanged: (String selectedUrl) async {
-                                  _selectedUrl = selectedUrl;
-                                  String status = await widget._gateway
-                                      .getStatus(_selectedUrl);
-                                  setState(() => _status = status);
-                                },
+                                onChanged: (String selectedUrl) async =>
+                                    _selectedUrl = selectedUrl,
                               ),
                             ],
                           ),
@@ -145,10 +143,15 @@ class LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             const Text("Se souvenir "),
-                            Checkbox(
-                              value: rememberMe,
-                              onChanged: (value) =>
-                                  setState(() => rememberMe = value),
+                            ValueListenableBuilder<bool>(
+                              valueListenable: rememberMe,
+                              builder: (context, value, _) {
+                                return Checkbox(
+                                  value: value,
+                                  onChanged: (value) =>
+                                      rememberMe.value = value,
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -166,14 +169,12 @@ class LoginPageState extends State<LoginPage> {
                         final snackBar =
                             SnackBar(content: const Text('Requested'));
                         Scaffold.of(context).showSnackBar(snackBar);
-                        widget._gateway
-                            .autoLogin(
-                              _uidController.text,
-                              _pswdController.text,
-                              _selectedUrl,
-                              _timeMap[_selectedTime],
-                            )
-                            .then((status) => setState(() => _status = status));
+                        widget._gatewayAPI.autoLogin(
+                          _uidController.text,
+                          _pswdController.text,
+                          _selectedUrl,
+                          _timeMap[_selectedTime],
+                        );
                         String calendarUrl =
                             await _calendarURLApi.getCalendarURL(
                           username: _uidController.text,
@@ -182,17 +183,19 @@ class LoginPageState extends State<LoginPage> {
                         ICalendar(_calendarURLApi)
                             .saveCalendar(calendarUrl)
                             .then((_) => setState(() {}));
-                        if (rememberMe) {
+                        if (rememberMe.value) {
+                          prefs.setBool("rememberMe", true);
                           prefs.setString("user", _uidController.text);
                           prefs.setString("time", _selectedTime);
                           prefs.setString("pswd",
                               base64.encode(utf8.encode(_pswdController.text)));
                         } else {
+                          prefs.remove("rememberMe");
                           prefs.remove("user");
                           prefs.remove("time");
                           prefs.remove("pswd");
                         }
-                        widget._portail
+                        widget._portailAPI
                             .saveCookiePortailFromLogin(
                               username: _uidController.text,
                               password: _pswdController.text,
@@ -228,37 +231,37 @@ class LoginPageState extends State<LoginPage> {
   @override
   initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => widget._gateway
-        .getStatus(_selectedUrl)
-        .then((status) => setState(() => _status = status)));
     _rememberLogin();
   }
 
   Future<void> _rememberLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    _uidController.text = prefs.getString("user");
-    _selectedTime = prefs.getString("time");
-    if (_uidController.text != "") {
+    rememberMe.value = prefs.getBool("rememberMe") ?? false;
+    if (rememberMe.value) {
+      _uidController.text = prefs.getString("user");
+      _selectedTime = prefs.getString("time");
       _pswdController.text =
           utf8.decode(base64.decode(prefs.getString("pswd")));
-      rememberMe = true;
     }
   }
 }
 
 class _StatusCard extends StatelessWidget {
-  final String _status; // TODO : FutureBuilder
-  final PortailAPI _portail;
+  final PortailAPI _portailAPI;
   final CalendarUrlAPI _calendarURLApi;
+  final GatewayAPI _gatewayAPI;
+  final String _selectedUrl;
 
   const _StatusCard({
     Key key,
-    @required String status,
-    @required PortailAPI portail,
+    @required PortailAPI portailAPI,
     @required CalendarUrlAPI calendarURL,
-  })  : _status = status,
-        _portail = portail,
+    @required GatewayAPI gatewayAPI,
+    @required String selectedUrl,
+  })  : _portailAPI = portailAPI,
         _calendarURLApi = calendarURL,
+        _gatewayAPI = gatewayAPI,
+        _selectedUrl = selectedUrl,
         super(key: key);
 
   @override
@@ -273,22 +276,41 @@ class _StatusCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text.rich(
-                TextSpan(
-                  text: "Gateway: ",
-                  style: const TextStyle(fontSize: 24),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: _status,
-                      style: const TextStyle(fontSize: 24, color: Colors.red),
-                    ),
-                  ],
-                ),
-              ),
+              FutureBuilder<String>(
+                  future: _gatewayAPI.getStatus(_selectedUrl),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.active:
+                      case ConnectionState.waiting:
+                        return const Text(
+                          "Passerelle: ...",
+                          style: const TextStyle(fontSize: 24),
+                        );
+                      case ConnectionState.done:
+                        return Text.rich(
+                          TextSpan(
+                            text: "Passerelle: ",
+                            style: const TextStyle(fontSize: 24),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: snapshot.data,
+                                style: TextStyle(
+                                  color: snapshot.hasError
+                                      ? Colors.red
+                                      : Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                    }
+                    return null; //
+                  }),
               Row(
                 children: <Widget>[
                   const Text(
-                    "Calendar: ",
+                    "Agenda: ",
                     style: const TextStyle(fontSize: 20),
                   ),
                   FutureBuilder<String>(
@@ -302,9 +324,7 @@ class _StatusCard extends StatelessWidget {
                         case ConnectionState.waiting:
                           return const CircularProgressIndicator();
                         case ConnectionState.done:
-                          if (snapshot.hasError)
-                            return const Icon(Icons.close, color: Colors.red);
-                          else if (snapshot.data == "")
+                          if (snapshot.hasError || snapshot.data == "")
                             return const Icon(Icons.close, color: Colors.red);
                           return const Icon(Icons.done, color: Colors.green);
                       }
@@ -320,7 +340,7 @@ class _StatusCard extends StatelessWidget {
                     style: const TextStyle(fontSize: 20),
                   ),
                   FutureBuilder<String>(
-                    future: _portail.getSavedCookiePortail(),
+                    future: _portailAPI.getSavedCookiePortail(),
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
                       switch (snapshot.connectionState) {
