@@ -56,7 +56,7 @@ class CalendarViewState extends State<CalendarView> {
       body: Container(
         color: MinitelColors.PrimaryColor,
         child: Center(
-          child: FutureBuilder(
+          child: FutureBuilder<ICalendar>(
             future: _loadCalendar(context),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasError)
@@ -64,7 +64,7 @@ class CalendarViewState extends State<CalendarView> {
                     snapshot.error.toString(), setState, _formKey);
               if (snapshot.hasData) {
                 return Scrollbar(
-                  child: StreamBuilder(
+                  child: StreamBuilder<Widget>(
                     stream: _listEventCards(snapshot.data),
                     builder:
                         (BuildContext context, AsyncSnapshot snapshotStream) {

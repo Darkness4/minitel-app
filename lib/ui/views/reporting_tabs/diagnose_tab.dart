@@ -71,7 +71,7 @@ class DiagnoseTab extends StatelessWidget {
               for (String item in DiagnosisContent())
                 if (item != DiagnosisContent.ssid &&
                     item != DiagnosisContent.ip) // Ignore them
-                  FutureBuilder(
+                  FutureBuilder<String>(
                     future: _diagnosis.report[item],
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {

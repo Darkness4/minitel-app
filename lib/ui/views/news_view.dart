@@ -3,6 +3,7 @@ import 'package:minitel_toolbox/core/services/http_webfeed.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';
+import 'package:webfeed/webfeed.dart';
 
 class NewsView extends StatefulWidget {
   final String title;
@@ -14,6 +15,7 @@ class NewsView extends StatefulWidget {
 }
 
 class NewsViewState extends State<NewsView> {
+  static const url = "https://github.com/Darkness4/minitel-app/releases.atom";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,23 +23,21 @@ class NewsViewState extends State<NewsView> {
       backgroundColor: const Color(0xff087f23),
       body: Center(
         child: Scrollbar(
-          child: FutureBuilder(
-            future: _generateFeedCard(
-                "https://github.com/Darkness4/minitel-app/releases.atom"),
+          child: FutureBuilder<AtomFeed>(
+            future: Provider.of<WebFeedAPI>(context).getAtom(url),
             builder: (BuildContext context, AsyncSnapshot snapshot) =>
                 snapshot.hasData
-                    ? ListView(children: snapshot.data)
+                    ? ListView(
+                        children: <Widget>[
+                          for (AtomItem atomItem in snapshot.data.items)
+                            NewsCard(item: atomItem),
+                        ],
+                      )
                     : const CircularProgressIndicator(),
           ),
         ),
       ),
       drawer: const MainDrawer(),
     );
-  }
-
-  Future<List<Widget>> _generateFeedCard(String url) async {
-    var feed = await Provider.of<WebFeedAPI>(context).getAtom(url);
-    List<dynamic> _newsCards = feed.items;
-    return _newsCards.map((item) => NewsCard(item: item)).toList();
   }
 }

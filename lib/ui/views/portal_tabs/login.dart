@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
@@ -30,9 +31,9 @@ class LoginPageState extends State<LoginPage> {
   final _pswdController = TextEditingController();
   final _calendarURLApi = CalendarUrlAPI();
   final List<String> _urlRootList = [
-    '10.163.0.2',
-    'fw-cgcp.emse.fr',
-    '195.83.139.7',
+    MyIPAdresses.gatewayIP,
+    MyIPAdresses.stormshield,
+    MyIPAdresses.stormshieldIP,
   ];
   final Map<String, int> _timeMap = {
     '15 minutes': 15,
@@ -44,8 +45,9 @@ class LoginPageState extends State<LoginPage> {
     '4 hours': 240,
     '(8 hours)': 480,
   };
-  var _selectedTime = '4 hours'; // Default
-  var _selectedUrl = '195.83.139.7';
+  ValueNotifier<String> _selectedTime = ValueNotifier<String>('4 hours');
+  ValueNotifier<String> _selectedUrl =
+      ValueNotifier<String>(MyIPAdresses.stormshieldIP);
   ValueNotifier<bool> rememberMe = ValueNotifier<bool>(false);
 
   @override
@@ -63,7 +65,7 @@ class LoginPageState extends State<LoginPage> {
                   portailAPI: widget._portailAPI,
                   calendarURL: _calendarURLApi,
                   gatewayAPI: widget._gatewayAPI,
-                  selectedUrl: _selectedUrl,
+                  selectedUrl: _selectedUrl.value,
                 ),
                 Card(
                   elevation: 10.0,
@@ -76,17 +78,22 @@ class LoginPageState extends State<LoginPage> {
                           child: Row(
                             children: <Widget>[
                               const Text("Nom de domaine / IP "),
-                              DropdownButton<String>(
-                                value: _selectedUrl,
-                                items: _urlRootList
-                                    .map((String value) =>
+                              ValueListenableBuilder<String>(
+                                valueListenable: _selectedUrl,
+                                builder: (context, value, _) {
+                                  return DropdownButton<String>(
+                                    value: value,
+                                    items: [
+                                      for (var value in _urlRootList)
                                         DropdownMenuItem<String>(
                                           child: Text(value),
                                           value: value,
-                                        ))
-                                    .toList(),
-                                onChanged: (String selectedUrl) async =>
-                                    _selectedUrl = selectedUrl,
+                                        )
+                                    ],
+                                    onChanged: (String selectedUrl) async =>
+                                        _selectedUrl.value = selectedUrl,
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -95,17 +102,22 @@ class LoginPageState extends State<LoginPage> {
                           child: Row(
                             children: <Widget>[
                               const Text("Durée d\'authentification "),
-                              DropdownButton<String>(
-                                value: _selectedTime,
-                                items: _timeMap.keys
-                                    .map((String value) =>
+                              ValueListenableBuilder<String>(
+                                valueListenable: _selectedTime,
+                                builder: (context, value, _) {
+                                  return DropdownButton<String>(
+                                    value: _selectedTime.value,
+                                    items: [
+                                      for (var value in _timeMap.keys)
                                         DropdownMenuItem<String>(
                                           child: Text(value),
                                           value: value,
-                                        ))
-                                    .toList(),
-                                onChanged: (selectedTime) => setState(
-                                    () => _selectedTime = selectedTime),
+                                        )
+                                    ],
+                                    onChanged: (selectedTime) =>
+                                        _selectedTime.value = selectedTime,
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -172,7 +184,7 @@ class LoginPageState extends State<LoginPage> {
                         widget._gatewayAPI.autoLogin(
                           _uidController.text,
                           _pswdController.text,
-                          _selectedUrl,
+                          _selectedUrl.value,
                           _timeMap[_selectedTime],
                         );
                         String calendarUrl =
@@ -186,7 +198,7 @@ class LoginPageState extends State<LoginPage> {
                         if (rememberMe.value) {
                           prefs.setBool("rememberMe", true);
                           prefs.setString("user", _uidController.text);
-                          prefs.setString("time", _selectedTime);
+                          prefs.setString("time", _selectedTime.value);
                           prefs.setString("pswd",
                               base64.encode(utf8.encode(_pswdController.text)));
                         } else {
@@ -239,7 +251,7 @@ class LoginPageState extends State<LoginPage> {
     rememberMe.value = prefs.getBool("rememberMe") ?? false;
     if (rememberMe.value) {
       _uidController.text = prefs.getString("user");
-      _selectedTime = prefs.getString("time");
+      _selectedTime.value = prefs.getString("time");
       _pswdController.text =
           utf8.decode(base64.decode(prefs.getString("pswd")));
     }
