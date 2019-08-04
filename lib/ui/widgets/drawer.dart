@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/views/docs_pages/toolbox_docs.dart';
+import 'package:minitel_toolbox/ui/views/docs_pages/wiki_docs.dart';
+import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer();
@@ -123,6 +127,230 @@ class MainDrawer extends StatelessWidget {
                   Navigator.pushNamed(context, RoutePaths.Feedback);
               },
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DocsDrawer extends StatelessWidget {
+  final DocsPageId _docsPageId;
+  final PageController controller;
+  DocsDrawer(this._docsPageId, {Key key, this.controller}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: const EdgeInsets.all(0.0),
+        children: <Widget>[
+          SafeArea(
+            top: true,
+            child: Container(
+              height: 90,
+              child: const DrawerHeader(
+                child: Text(
+                  "Documentation",
+                  style: MinitelTextStyles.mdH1,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+              title: const Text("Minitel"),
+              onTap: () {
+                Navigator.pop(context);
+                if (_docsPageId != DocsPageId.Home) Navigator.pop(context);
+              } // Do nothing
+              ),
+          const Divider(),
+          ListTile(
+            title: const Text("Authentification"),
+            onTap: () {
+              Navigator.pop(context);
+              if (_docsPageId != DocsPageId.Toolbox) {
+                final _newController = PageController(
+                  initialPage: 0,
+                  viewportFraction: .9,
+                );
+                if (_docsPageId == DocsPageId.Home)
+                  Navigator.push(
+                    context,
+                    SlideRightRoute(
+                      widget: ToolboxDocs(controller: _newController),
+                    ),
+                  );
+                else if (_docsPageId == DocsPageId.Wiki)
+                  Navigator.pushReplacement(
+                    context,
+                    FadeRoute(
+                      builder: (_) => ToolboxDocs(controller: _newController),
+                    ),
+                  );
+              } else
+                controller.animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
+                );
+            },
+          ),
+          ListTile(
+            title: const Text("Diagnostique"),
+            onTap: () async {
+              Navigator.pop(context);
+              if (_docsPageId != DocsPageId.Toolbox) {
+                final _newController = PageController(
+                  initialPage: 1,
+                  viewportFraction: .9,
+                );
+                if (_docsPageId == DocsPageId.Home)
+                  Navigator.push(
+                    context,
+                    SlideRightRoute(
+                      widget: ToolboxDocs(controller: _newController),
+                    ),
+                  );
+                else if (_docsPageId == DocsPageId.Wiki)
+                  Navigator.pushReplacement(
+                    context,
+                    FadeRoute(
+                      builder: (_) => ToolboxDocs(controller: _newController),
+                    ),
+                  );
+              } else
+                controller.animateToPage(
+                  1,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
+                );
+            },
+          ),
+          const Divider(),
+          ListTile(
+            title: const Text("Configuration de l'imprimante"),
+            onTap: () {
+              Navigator.pop(context);
+              if (_docsPageId != DocsPageId.Wiki) {
+                final _newController = PageController(
+                  initialPage: 0,
+                  viewportFraction: .9,
+                );
+                if (_docsPageId == DocsPageId.Home)
+                  Navigator.push(
+                    context,
+                    SlideRightRoute(
+                      widget: WikiDocs(controller: _newController),
+                    ),
+                  );
+                else if (_docsPageId == DocsPageId.Toolbox)
+                  Navigator.pushReplacement(
+                    context,
+                    FadeRoute(
+                      builder: (_) => WikiDocs(controller: _newController),
+                    ),
+                  );
+              } else
+                controller.animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
+                );
+            },
+          ),
+          ListTile(
+            title: const Text("Importation des mails SoGo"),
+            onTap: () {
+              Navigator.pop(context);
+              if (_docsPageId != DocsPageId.Wiki) {
+                final _newController = PageController(
+                  initialPage: 1,
+                  viewportFraction: .9,
+                );
+                if (_docsPageId == DocsPageId.Home)
+                  Navigator.push(
+                    context,
+                    SlideRightRoute(
+                      widget: WikiDocs(controller: _newController),
+                    ),
+                  );
+                else if (_docsPageId == DocsPageId.Toolbox)
+                  Navigator.pushReplacement(
+                    context,
+                    FadeRoute(
+                      builder: (_) => WikiDocs(controller: _newController),
+                    ),
+                  );
+              } else
+                controller.animateToPage(
+                  1,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
+                );
+            },
+          ),
+          ListTile(
+            title: const Text("Installer un Dual Boot"),
+            onTap: () {
+              Navigator.pop(context);
+              if (_docsPageId != DocsPageId.Wiki) {
+                final _newController = PageController(
+                  initialPage: 2,
+                  viewportFraction: .9,
+                );
+                if (_docsPageId == DocsPageId.Home)
+                  Navigator.push(
+                    context,
+                    SlideRightRoute(
+                      widget: WikiDocs(controller: _newController),
+                    ),
+                  );
+                else if (_docsPageId == DocsPageId.Toolbox)
+                  Navigator.pushReplacement(
+                    context,
+                    FadeRoute(
+                      builder: (_) => WikiDocs(controller: _newController),
+                    ),
+                  );
+              } else
+                controller.animateToPage(
+                  2,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
+                );
+            },
+          ),
+          ListTile(
+            title: const Text("Jouer avec des VM"),
+            onTap: () {
+              Navigator.pop(context);
+              if (_docsPageId != DocsPageId.Wiki) {
+                final _newController = PageController(
+                  initialPage: 3,
+                  viewportFraction: .9,
+                );
+                if (_docsPageId == DocsPageId.Home)
+                  Navigator.push(
+                    context,
+                    SlideRightRoute(
+                      widget: WikiDocs(controller: _newController),
+                    ),
+                  );
+                else if (_docsPageId == DocsPageId.Toolbox)
+                  Navigator.pushReplacement(
+                    context,
+                    FadeRoute(
+                      builder: (_) => WikiDocs(controller: _newController),
+                    ),
+                  );
+              } else
+                controller.animateToPage(
+                  3,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastOutSlowIn,
+                );
+            },
           ),
         ],
       ),

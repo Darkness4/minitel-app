@@ -32,7 +32,7 @@ class Router {
       case RoutePaths.Docs:
         return FadeRoute(
           builder: (BuildContext context) =>
-              const DocumentationView(title: "Documentation"),
+              DocumentationView(title: "Documentation"),
           settings: settings,
         );
       case RoutePaths.News:
