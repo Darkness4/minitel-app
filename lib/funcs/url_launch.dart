@@ -10,7 +10,7 @@ class LaunchURL {
   static Function messengerMarcNGUYEN =
       () => launchURL("https://www.messenger.com/t/100012919189214");
   static Function mailToMinitel =
-      () => launchURL("mailto: minitelismin@gmail.com");
+      () => launchURL("mailto:minitelismin@gmail.com");
 
   static void launchURL(String url) async {
     if (await canLaunch(url)) {

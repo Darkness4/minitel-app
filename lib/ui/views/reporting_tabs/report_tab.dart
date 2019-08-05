@@ -70,7 +70,7 @@ class _ContactsCard extends StatelessWidget {
             "Facebook: Minitel Ismin",
             style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
-          onPressed: () => LaunchURL.messengerMarcNGUYEN,
+          onPressed: LaunchURL.messengerMarcNGUYEN,
           color: Colors.lightBlue[100],
         ),
         FlatButton(
@@ -79,7 +79,7 @@ class _ContactsCard extends StatelessWidget {
             "Mail: minitelismin@gmail.com (non recommandée)",
             style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
-          onPressed: () => LaunchURL.mailToMinitel,
+          onPressed: LaunchURL.mailToMinitel,
           color: Colors.lightBlue[100],
         ),
         const Text(
