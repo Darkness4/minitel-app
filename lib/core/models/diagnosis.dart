@@ -76,60 +76,60 @@ class Diagnosis {
 
       await Future.wait([
         _report[DiagnosisContent.ipAddr] = _terminalCommand(
-          "ip",
+          "/system/bin/ip",
           ['a'],
         ),
         _report[DiagnosisContent.arp] = _terminalCommand(
           "su",
-          ['-c', 'arp -a'],
+          ['-c', '/system/xbin/arp -a'],
         ),
         _report[DiagnosisContent.tracertGoogle] = _terminalCommand(
           "su",
-          ['-c', 'traceroute', MyIPAdresses.google],
+          ['-c', '/system/xbin/traceroute', MyIPAdresses.google],
         ),
         _report[DiagnosisContent.tracertGoogleDNS] = _terminalCommand(
           "su",
-          ['-c', 'traceroute', MyIPAdresses.googleDNSIP],
+          ['-c', '/system/xbin/traceroute', MyIPAdresses.googleDNSIP],
         ),
         _report[DiagnosisContent.pingLo] = _terminalCommand(
-          "ping",
+          "/system/bin/ping",
           [_argsPing, MyIPAdresses.localhostIP],
         ),
         _report[DiagnosisContent.pingLocal] = _terminalCommand(
-          "ping",
+          "/system/bin/ping",
           [_argsPing, MyIPAdresses.proliantIP],
         ),
         _report[DiagnosisContent.pingGate] = _terminalCommand(
-          "ping",
+          "/system/bin/ping",
           [_argsPing, MyIPAdresses.gatewayIP],
         ),
         _report[DiagnosisContent.pingDNS1] = _terminalCommand(
-          "ping",
+          "/system/bin/ping",
           [_argsPing, MyIPAdresses.emseIsminDNS1IP],
         ),
         _report[DiagnosisContent.pingDNS2] = _terminalCommand(
-          "ping",
+          "/system/bin/ping",
           [_argsPing, MyIPAdresses.emseIsminDNS2IP],
         ),
         _report[DiagnosisContent.pingDNS3] = _terminalCommand(
-          "ping",
+          "/system/bin/ping",
           [_argsPing, MyIPAdresses.googleDNSIP],
         ),
         _report[DiagnosisContent.pingDNS4] = _terminalCommand(
-          "ping",
+          "/system/bin/ping",
           [_argsPing, MyIPAdresses.cloudflareDNSIP],
         ),
         _report[DiagnosisContent.pingDNS5] = _terminalCommand(
-          "ping",
+          "/system/bin/ping",
           [_argsPing, MyIPAdresses.localDNSIP],
         ),
         _report[DiagnosisContent.nsLookupEMSEBusy] = _terminalCommand(
           "su",
-          ['-c', "nslookup ${MyIPAdresses.stormshield}"],
+          ['-c', "/system/xbin/nslookup ${MyIPAdresses.stormshield}"],
         ),
         _report[DiagnosisContent.nsLookupGoogleBusy] = _terminalCommand(
           "su",
-          ['-c', "nslookup ${MyIPAdresses.google}"],
+          ['-c', "/system/xbin/nslookup ${MyIPAdresses.google}"],
         ),
         _report[DiagnosisContent.httpPortalPublic] = _gateway
             .getStatus(MyIPAdresses.stormshieldIP)
