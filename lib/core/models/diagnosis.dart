@@ -81,15 +81,15 @@ class Diagnosis {
         ),
         _report[DiagnosisContent.arp] = _terminalCommand(
           "su",
-          ['-c', '/system/xbin/arp -a'],
+          ['-c', '/system/bin/arp -a'],
         ),
         _report[DiagnosisContent.tracertGoogle] = _terminalCommand(
           "su",
-          ['-c', '/system/xbin/traceroute', MyIPAdresses.google],
+          ['-c', '/system/bin/traceroute', MyIPAdresses.google],
         ),
         _report[DiagnosisContent.tracertGoogleDNS] = _terminalCommand(
           "su",
-          ['-c', '/system/xbin/traceroute', MyIPAdresses.googleDNSIP],
+          ['-c', '/system/bin/traceroute', MyIPAdresses.googleDNSIP],
         ),
         _report[DiagnosisContent.pingLo] = _terminalCommand(
           "/system/bin/ping",
@@ -125,11 +125,11 @@ class Diagnosis {
         ),
         _report[DiagnosisContent.nsLookupEMSEBusy] = _terminalCommand(
           "su",
-          ['-c', "/system/xbin/nslookup ${MyIPAdresses.stormshield}"],
+          ['-c', "/system/bin/nslookup ${MyIPAdresses.stormshield}"],
         ),
         _report[DiagnosisContent.nsLookupGoogleBusy] = _terminalCommand(
           "su",
-          ['-c', "/system/xbin/nslookup ${MyIPAdresses.google}"],
+          ['-c', "/system/bin/nslookup ${MyIPAdresses.google}"],
         ),
         _report[DiagnosisContent.httpPortalPublic] = _gateway
             .getStatus(MyIPAdresses.stormshieldIP)
