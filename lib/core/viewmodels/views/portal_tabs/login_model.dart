@@ -9,6 +9,7 @@ import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Mutex
 enum LoginState { Busy, Available }
 
 class LoginViewModel extends ChangeNotifier {

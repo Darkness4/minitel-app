@@ -14,14 +14,16 @@ class GatewayAPI {
   /// The [uid] and [pswd] correspond to the Username and Password.
   /// The [selectedTime] is listed on the website and is in minutes.
   ///
-  /// If connected, the response will be "[time] seconds left".
-  /// If a response is received, it will be manually decrypted using RegEx like "Bad Username or Password".
+  /// If connected, the response will be the cookie of the user.
+  /// **The cookie will be also stored in the API object !**
+  /// If a response is received, it will be manually decrypted using RegEx like
+  /// "Bad Username or Password".
   /// If no response is received, the HTTP error will be outputted.
   ///
   /// You can use [autoLogin] like this:
   ///
   /// ```
-  /// String status = await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
+  /// String cookie = await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
   /// ```
   Future<String> autoLogin(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
@@ -69,7 +71,7 @@ class GatewayAPI {
   /// Disconnect from the portal.
   ///
   /// ```
-  /// String status = await disconnectGateway("172.17.0.1") // "x seconds left"
+  /// String status = await disconnectGateway("172.17.0.1") // "You have logged out"
   /// ```
   Future<String> disconnectGateway(String selectedUrl, {String cookie}) async {
     var url =
@@ -116,6 +118,15 @@ class GatewayAPI {
   /// ```
   /// String status = await getStatus("172.17.0.1") // "x seconds left"
   /// ```
+  ///
+  /// If a cookie is available, (for example in the API), you can do this :
+  ///
+  /// ```
+  /// var _gateway = GatewayAPI();
+  /// await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
+  /// String status = await getStatus("172.17.0.1", cookie: _gateway.cookie) // "x seconds left"
+  /// ```
+  ///
   Future<String> getStatus(String selectedUrl, {String cookie}) async {
     var status = "";
     _client.badCertificateCallback = (cert, host, port) => true;
