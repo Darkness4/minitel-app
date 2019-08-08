@@ -43,7 +43,8 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
-  flutter_launcher_icons: any
+  pedantic: ^1.8.0+1
+  flutter_launcher_icons: 0.7.2+1
 
 flutter_icons:
   android: "launcher_icon" 

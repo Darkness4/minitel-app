@@ -9,6 +9,7 @@ class RoutePaths {
   static const String News = '/news';
 }
 
+/// Path of documentation
 enum DocsPageId { Home, Wiki, Toolbox }
 
 /// All the IP used in the app.

@@ -63,24 +63,22 @@ class ICalendar {
     var client = HttpClient()
       ..badCertificateCallback = (cert, host, port) => true;
 
-    try {
-      HttpClientRequest request = await client.getUrl(Uri.parse(url))
-        ..headers.removeAll(HttpHeaders.contentLengthHeader);
-      HttpClientResponse response = await request.close();
-      if (response.statusCode == 200) {
-        _calendarStream = response.cast<List<int>>().transform(utf8.decoder);
-      } else
-        throw Exception("HttpError: ${response.statusCode}");
-    } catch (e) {
-      throw e;
+    HttpClientRequest request = await client.getUrl(Uri.parse(url))
+      ..headers.removeAll(HttpHeaders.contentLengthHeader);
+    HttpClientResponse response = await request.close();
+    if (response.statusCode == 200) {
+      _calendarStream = response.cast<List<int>>().transform(utf8.decoder);
+    } else {
+      throw Exception("HttpError: ${response.statusCode}");
     }
   }
 
   /// Get existing the stream .ics from file
   Future<void> getCalendarFromFile() async {
     final file = await _calendar;
-    if (!(await file.exists()))
+    if (!(await file.exists())) {
       throw Exception("File calendar.ics do not exists");
+    }
 
     // Read the file
     _calendarStream = file.openRead().transform(utf8.decoder);
@@ -93,7 +91,8 @@ class ICalendar {
     Map<String, String> vEvent = {};
 
     if (_calendarStream == null) {
-      throw "Calendar stream not found. Please use getCalendar or getICalendarFromFile (after a saveCalendar).";
+      throw Exception(
+          "Calendar stream not found. Please use getCalendar or getICalendarFromFile (after a saveCalendar).");
     }
 
     await for (var data in _calendarStream.transform(LineSplitter())) {
@@ -161,11 +160,7 @@ class ICalendar {
   /// Get the calendar from url and save the .ics (and the url)
   Future<void> saveCalendar(String url) async {
     final file = await _calendar;
-    try {
-      await _getICalendar(url);
-    } catch (e) {
-      throw e;
-    }
+    await _getICalendar(url);
 
     var sink = file.openWrite();
     _calendarStream.listen(
@@ -173,7 +168,7 @@ class ICalendar {
       onDone: sink.close,
     );
 
-    calendarUrlAPI.saveCalendarURL(url);
+    await calendarUrlAPI.saveCalendarURL(url);
   }
 }
 

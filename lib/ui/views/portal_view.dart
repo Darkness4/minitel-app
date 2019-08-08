@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
@@ -39,10 +38,7 @@ class PortalViewState extends State<PortalView> {
             ),
             child: TabBarView(
               children: <Widget>[
-                LoginPage(
-                  portailAPI: Provider.of<PortailAPI>(context),
-                  gatewayAPI: Provider.of<GatewayAPI>(context),
-                ),
+                const LoginPage(),
                 AppsList(
                   portailAPI: Provider.of<PortailAPI>(context),
                 ),
@@ -82,12 +78,12 @@ class PortalViewState extends State<PortalView> {
     super.initState();
   }
 
-  Future<void> _checkVersion(VersionAPI version, BuildContext context) async {
+  void _checkVersion(VersionAPI version, BuildContext context) async {
     var latestVersion = version.getLatestVersion();
     var actualVersion = PackageInfo.fromPlatform();
     List<dynamic> ensemble = await Future.wait([actualVersion, latestVersion]);
-    if (ensemble[0].version != ensemble[1])
-      showDialog(
+    if (ensemble[0].version != ensemble[1]) {
+      await showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text("Une nouvelle version est disponible !"),
@@ -107,5 +103,6 @@ class PortalViewState extends State<PortalView> {
           ],
         ),
       );
+    }
   }
 }

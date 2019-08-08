@@ -88,8 +88,9 @@ class AboutView extends StatelessWidget {
                       case ConnectionState.waiting:
                         return Text('Awaiting result...');
                       case ConnectionState.done:
-                        if (packageInfo.hasError)
+                        if (packageInfo.hasError) {
                           return Text('Error: ${packageInfo.error}');
+                        }
                         return Text(packageInfo.data.version);
                     }
                     return null; // unreachable
@@ -103,10 +104,10 @@ class AboutView extends StatelessWidget {
                 onTap: () async {
                   var latestVersion = _versionAPI.getLatestVersion();
                   var actualVersion = PackageInfo.fromPlatform();
-                  dynamic ensemble =
+                  List<dynamic> ensemble =
                       await Future.wait([actualVersion, latestVersion]);
-                  if (ensemble[0].version != ensemble[1])
-                    showDialog(
+                  if (ensemble[0].version != ensemble[1]) {
+                    await showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
@@ -131,8 +132,8 @@ class AboutView extends StatelessWidget {
                         );
                       },
                     );
-                  else
-                    showDialog(
+                  } else {
+                    await showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
@@ -156,6 +157,7 @@ class AboutView extends StatelessWidget {
                         );
                       },
                     );
+                  }
                 },
               ),
               // ListTile(

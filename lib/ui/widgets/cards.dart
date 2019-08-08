@@ -17,9 +17,9 @@ class DocCard extends StatelessWidget {
 
   const DocCard(
       {@required this.children,
-      this.elevation: 4.0,
-      this.extPadding: 10.0,
-      this.intPadding: 15.0});
+      this.elevation = 4.0,
+      this.extPadding = 10.0,
+      this.intPadding = 15.0});
 
   @override
   Widget build(BuildContext context) {
@@ -106,16 +106,22 @@ class ErrorCalendarWidget extends StatelessWidget {
               onPressed: () async {
                 CalendarUrlAPI _calendarURL =
                     Provider.of<CalendarUrlAPI>(context);
-                var url = await _calendarURL.getCalendarURL(
-                  username: _uidController.text,
-                  password: _pswdController.text,
-                );
-                ICalendar(_calendarURL).saveCalendar(url);
+                try {
+                  var url = await _calendarURL.getCalendarURL(
+                    username: _uidController.text,
+                    password: _pswdController.text,
+                  );
+                  await ICalendar(_calendarURL).saveCalendar(url);
+                } on Exception catch (e) {
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(content: Text(e.toString())),
+                  );
+                }
                 parentSetState(() {});
               },
               label: const Text(
                 "Se connecter",
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -138,20 +144,21 @@ class EventCard extends StatelessWidget {
 
   Color get _cardColor {
     var upper = _event["SUMMARY"].toLowerCase();
-    if (upper.contains("examen"))
+    if (upper.contains("examen")) {
       return Colors.red[200];
-    else if (upper.contains("tp"))
+    } else if (upper.contains("tp")) {
       return Colors.orange[200];
-    else if (upper.contains("td"))
+    } else if (upper.contains("td")) {
       return Colors.green[200];
-    else if (upper.contains("tutorat"))
+    } else if (upper.contains("tutorat")) {
       return Colors.blue[200];
-    else if (upper.contains("sport") ||
+    } else if (upper.contains("sport") ||
         upper.contains("vacance") ||
-        upper.contains("férié"))
+        upper.contains("férié")) {
       return Colors.transparent;
-    else
+    } else {
       return Colors.white;
+    }
   }
 
   @override
@@ -211,7 +218,7 @@ class LogCard extends StatelessWidget {
   final String text;
   final double elevation;
 
-  const LogCard(this.text, {@required this.title, this.elevation: 3});
+  const LogCard(this.text, {@required this.title, this.elevation = 3});
 
   @override
   Widget build(context) {
@@ -263,8 +270,8 @@ class NewsCard extends StatelessWidget {
 
   const NewsCard({
     @required this.item,
-    this.elevation: 4.0,
-    this.extPadding: 10.0,
+    this.elevation = 4.0,
+    this.extPadding = 10.0,
   });
 
   @override

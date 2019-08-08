@@ -173,12 +173,13 @@ class ReportingViewState extends State<ReportingView>
         onPressed: () async {
           String status = await model.reportToSlack(
               _titleController.text, _descriptionController.text);
-          if (status != null)
+          if (status != null) {
             Scaffold.of(context).showSnackBar(
               SnackBar(
                 content: Text(status),
               ),
             );
+          }
         },
       );
 

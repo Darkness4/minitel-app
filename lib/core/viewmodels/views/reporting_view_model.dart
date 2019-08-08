@@ -34,7 +34,7 @@ class ReportingViewModel extends ChangeNotifier {
     return DateTime.parse(dateTimeout);
   }
 
-  Future<void> diagnose() async {
+  void diagnose() async {
     if (diagnosisState != ButtonState.Loading) {
       diagnosisState = ButtonState.Loading;
       notifyListeners();
@@ -68,9 +68,9 @@ class ReportingViewModel extends ChangeNotifier {
     return status;
   }
 
-  Future<void> _setTimeout() async {
-    await SharedPreferences.getInstance()
-      ..setString(
-          'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
+  void _setTimeout() async {
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
   }
 }

@@ -58,7 +58,7 @@ class Diagnosis {
   /// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
   /// If the report takes too much time, the function return any given
   /// informations after one minute.
-  Future<void> diagnose() async {
+  void diagnose() async {
     _report = Map();
 
     var connectivityResult = await Connectivity().checkConnectivity();
@@ -67,9 +67,10 @@ class Diagnosis {
       PermissionStatus permStatus = await PermissionHandler()
           .checkPermissionStatus(PermissionGroup.location);
 
-      if (permStatus != PermissionStatus.granted)
+      if (permStatus != PermissionStatus.granted) {
         await PermissionHandler()
             .requestPermissions([PermissionGroup.location]);
+      }
 
       _report[DiagnosisContent.ssid] = Connectivity().getWifiName();
       _report[DiagnosisContent.ip] = Connectivity().getWifiIP();
@@ -144,8 +145,9 @@ class Diagnosis {
         _alert = "Diagnosis has timed out !";
         return [];
       });
-    } else
+    } else {
       _alert = "Pas de Wifi";
+    }
   }
 
   Future<String> _lookup(String address) async {

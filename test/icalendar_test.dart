@@ -57,7 +57,7 @@ void main() async {
       var ical = ICalendar(_calendarUrlAPI);
       var url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
-          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url);
     });
 
@@ -70,13 +70,9 @@ void main() async {
       var ical = ICalendar(_calendarUrlAPI);
       var url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
-          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
-      if (url != null) {
-        await ical.saveCalendar(url);
-      } else {
-        print("Cannot update calendar. Taking from cache.");
-        exit(1);
-      }
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
+      await ical.saveCalendar(url);
+
       await ical.getCalendarFromFile();
       var parsedCalendar = await ical.parseCalendar();
       print(parsedCalendar.timezone.daylight.toString());
@@ -89,21 +85,27 @@ void main() async {
     test("parseCalendar from cache", () async {
       var ical = ICalendar(_calendarUrlAPI);
       ParsedCalendar parsedCalendar;
+
       // Save before the test
       var url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
-          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url);
 
       // Test
-      url = await _calendarUrlAPI.getCalendarURL(
-        username: "",
-        password: utf8.decode(base64.decode("")),
-      ); // This should fail
+      try {
+        url = await _calendarUrlAPI.getCalendarURL(
+          username: "",
+          password: utf8.decode(base64.decode("")),
+        );
+        throw "Bad login found a non-expected result";
+      } on Exception catch (e) {
+        expect(e.toString(), contains("Bad login"));
+      }
 
       if (url != null) {
         await ical.saveCalendar(url);
-        exit(1);
+        throw "A bad calendar has been saved";
       } else {
         print("Cannot update calendar. Taking from cache.");
       }

@@ -18,11 +18,14 @@ void main() {
 
   group('FAIL Http Requests Portail', () {
     test('Fail succefully to get a cookie: Bad login', () async {
-      String cookie =
-          await _portail.getPortailCookie(username: "", password: "");
-      print(cookie);
-
-      expect(cookie, contains("bad username or password"));
+      bool result;
+      try {
+        await _portail.getPortailCookie(username: "", password: "");
+        result = false;
+      } on Exception catch (e) {
+        result = e.toString().contains("bad username or password");
+      }
+      return result;
     });
 
     test('FAIL getSavedCookiePortail', () async {
@@ -32,10 +35,12 @@ void main() {
     });
 
     test('FAIL to saveCookiePortailFromLogin', () async {
-      var response =
-          await _portail.saveCookiePortailFromLogin(username: "", password: "");
-
-      expect(response, false);
+      try {
+        await _portail.saveCookiePortailFromLogin(username: "", password: "");
+        throw "saveCookiePortailFromLogin shouldn't work here";
+      } on Exception catch (e) {
+        expect(e.toString(), contains("bad username or password"));
+      }
     });
   });
 
@@ -43,7 +48,7 @@ void main() {
     test('Get succefully a cookie', () async {
       String cookie = await _portail.getPortailCookie(
           username: "marc.nguyen",
-          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       print(cookie);
 
       expect(cookie, contains("portail_ent_emse_session"));
@@ -52,7 +57,7 @@ void main() {
     test('getSavedCookiePortail', () async {
       await _portail.saveCookiePortailFromLogin(
           username: "marc.nguyen",
-          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       String cookie = await _portail.getSavedCookiePortail();
       print(cookie);
       expect(cookie, contains("portail_ent_emse_session"));
@@ -61,7 +66,7 @@ void main() {
     test('saveCookiePortailFromLogin', () async {
       var response = await _portail.saveCookiePortailFromLogin(
           username: "marc.nguyen",
-          password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")));
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
 
       expect(response, true);
     });

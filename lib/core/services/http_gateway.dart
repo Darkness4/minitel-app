@@ -49,14 +49,16 @@ class GatewayAPI {
           throw ("Error: Bad Username or Password");
         } else {
           var match = RegExp(r'"(id=([^"]*))').firstMatch(body).group(1); // Id
-          if (match is! String)
+          if (match is! String) {
             throw Exception(
                 "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
-          else
+          } else {
             sessionId = match;
+          }
         }
-      } else
+      } else {
         throw Exception("HttpError: ${response.statusCode}");
+      }
 
       // Status
       data = "session=$sessionId&read=accepted&action=J'accepte";
@@ -74,22 +76,24 @@ class GatewayAPI {
       if (response.statusCode == 200) {
         var body =
             await response.cast<List<int>>().transform(utf8.decoder).join();
-        if (body.contains('title_error'))
+        if (body.contains('title_error')) {
           throw Exception(
               "Error: SessionId is incorrect. Please check the RegEx.");
-        else {
+        } else {
           var match =
               RegExp(r'<span id="l_rtime">([^<]*)<\/span>') // Time finder.
                   .firstMatch(body)
                   .group(1);
-          if (match is! String)
+          if (match is! String) {
             throw Exception(
                 "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-          else
+          } else {
             status = '$match seconds left';
+          }
         }
-      } else
+      } else {
         throw Exception("HttpError: ${response.statusCode}");
+      }
     } catch (e) {
       status = e.toString();
     }
@@ -119,8 +123,9 @@ class GatewayAPI {
         status = body.contains('title_success')
             ? 'You have logged out'
             : "Disconnection failed.";
-      } else
+      } else {
         throw Exception("HttpError: ${response.statusCode}");
+      }
     } catch (e) {
       status = e.toString();
     }
@@ -160,17 +165,19 @@ class GatewayAPI {
           await response.cast<List<int>>().transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         if (!body.contains('l_rtime')) {
-          throw ("Not logged in");
+          throw Exception("Not logged in");
         } else {
           var match = exp.firstMatch(body).group(1);
-          if (match is! String)
+          if (match is! String) {
             throw Exception(
                 "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-          else
+          } else {
             status = '$match seconds left';
+          }
         }
-      } else
+      } else {
         throw Exception("HttpError: ${response.statusCode}");
+      }
     } catch (e) {
       status = e.toString();
     }

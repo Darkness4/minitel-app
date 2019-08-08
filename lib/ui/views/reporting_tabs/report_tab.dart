@@ -10,7 +10,7 @@ class ReportTab extends StatefulWidget {
 
   const ReportTab(
       {Key key,
-      this.channel: "projet_flutter_notif",
+      this.channel = "projet_flutter_notif",
       @required this.titleController,
       @required this.descriptionController})
       : super(key: key);

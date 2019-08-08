@@ -37,7 +37,7 @@ void main() {
     // This test only work locally.
     // test('Get status SUCCESS from 195.83.139.7', () async {
     //   await _gateway.autoLogin("marc.nguyen",
-    //       utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
+    //       utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
     //   var status2 = await _gateway.getStatus("195.83.139.7");
     //   print(status2);
 
@@ -60,7 +60,7 @@ void main() {
 
     // test('Disconnect from 195.83.139.7', () async {
     //   await autoLogin("marc.nguyen",
-    //       utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
+    //       utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
     //   var status = await disconnectGateway("195.83.139.7");
     //   print(status);
 
@@ -69,7 +69,7 @@ void main() {
 
     test('Good Username and Password to 195.83.139.7', () async {
       var status = await _gateway.autoLogin("marc.nguyen",
-          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
+          utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
       print(status);
 
       expect(status, contains("seconds"));
