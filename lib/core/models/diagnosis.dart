@@ -26,14 +26,17 @@ class Diagnosis {
   static String _alert;
   final GatewayAPI _gateway;
 
-  Map<String, Future<String>> _report = {};
+  var _report = Map<String, Future<String>>();
 
-  final _argsPing = "-c 4 -w 5 -W 5";
+  /// Ping arguments
+  static const _argsPing = "-c 4 -w 5 -W 5";
 
   Diagnosis({@required GatewayAPI gatewayAPI}) : _gateway = gatewayAPI;
 
+  /// Get the warnings from functions
   String get alert => _alert;
 
+  /// Report created through [diagnose] function following [DiagnosisContent]
   Map<String, Future<String>> get report => _report;
 
   Future<Map<String, String>> get reportAll async {
@@ -58,19 +61,25 @@ class Diagnosis {
   /// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
   /// If the report takes too much time, the function return any given
   /// informations after one minute.
-  Future<void> diagnose() async {
+  void diagnose() async {
+    // Destroy existing report
     _report = Map();
 
+    // Check if connected
     var connectivityResult = await Connectivity().checkConnectivity();
+
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
+      // Check location permission to get SSID name
       PermissionStatus permStatus = await PermissionHandler()
           .checkPermissionStatus(PermissionGroup.location);
 
-      if (permStatus != PermissionStatus.granted)
+      if (permStatus != PermissionStatus.granted) {
         await PermissionHandler()
             .requestPermissions([PermissionGroup.location]);
+      }
 
+      // Fill the report
       _report[DiagnosisContent.ssid] = Connectivity().getWifiName();
       _report[DiagnosisContent.ip] = Connectivity().getWifiIP();
 
@@ -81,15 +90,15 @@ class Diagnosis {
         ),
         _report[DiagnosisContent.arp] = _terminalCommand(
           "su",
-          ['-c', '/system/xbin/arp -a'],
+          ['-c', '/system/bin/arp -a'],
         ),
         _report[DiagnosisContent.tracertGoogle] = _terminalCommand(
           "su",
-          ['-c', '/system/xbin/traceroute', MyIPAdresses.google],
+          ['-c', '/system/bin/traceroute', MyIPAdresses.google],
         ),
         _report[DiagnosisContent.tracertGoogleDNS] = _terminalCommand(
           "su",
-          ['-c', '/system/xbin/traceroute', MyIPAdresses.googleDNSIP],
+          ['-c', '/system/bin/traceroute', MyIPAdresses.googleDNSIP],
         ),
         _report[DiagnosisContent.pingLo] = _terminalCommand(
           "/system/bin/ping",
@@ -125,57 +134,51 @@ class Diagnosis {
         ),
         _report[DiagnosisContent.nsLookupEMSEBusy] = _terminalCommand(
           "su",
-          ['-c', "/system/xbin/nslookup ${MyIPAdresses.stormshield}"],
+          ['-c', "/system/bin/nslookup ${MyIPAdresses.stormshield}"],
         ),
         _report[DiagnosisContent.nsLookupGoogleBusy] = _terminalCommand(
           "su",
-          ['-c', "/system/xbin/nslookup ${MyIPAdresses.google}"],
+          ['-c', "/system/bin/nslookup ${MyIPAdresses.google}"],
         ),
         _report[DiagnosisContent.httpPortalPublic] = _gateway
-            .getStatus(MyIPAdresses.stormshieldIP)
+            .getStatus(MyIPAdresses.stormshieldIP, cookie: _gateway.cookie)
             .then((status) => status.isEmpty ? "Nothing to show" : status),
         _report[DiagnosisContent.httpPortalGateway] = _gateway
-            .getStatus(MyIPAdresses.gatewayIP)
+            .getStatus(MyIPAdresses.gatewayIP, cookie: _gateway.cookie)
             .then((status) => status.isEmpty ? "Nothing to show" : status),
         _report[DiagnosisContent.nsLookupEMSE] =
             _lookup(MyIPAdresses.stormshield),
         _report[DiagnosisContent.nsLookupGoogle] = _lookup(MyIPAdresses.google),
       ]).timeout(const Duration(minutes: 1), onTimeout: () {
+        // Timeout warning
         _alert = "Diagnosis has timed out !";
         return [];
       });
-    } else
+    } else {
       _alert = "Pas de Wifi";
+    }
   }
 
   Future<String> _lookup(String address) async {
-    String stdout;
     try {
       var addresses = await InternetAddress.lookup(MyIPAdresses.stormshield);
+      String output = "";
       for (var address in addresses) {
-        stdout = "Host: ${address.host}\nLookup: ${address.address}";
+        output += "Host: ${address.host}\nLookup: ${address.address}\n";
       }
+      return output;
     } catch (e, s) {
-      stdout = "Error: $e\n" "Stacktrace: $s";
+      return "Error: $e\n" "Stacktrace: $s";
     }
-    return stdout;
   }
 
   Future<String> _terminalCommand(String command, List<String> args) async {
-    String stdout;
-    // try {
-    //   stdout = await exec(command, args).runGetOutput();
-    //   _report[output] = stdout.isEmpty ? "Nothing to show" : stdout;
-    // } catch (e, s) {
-    //   _report[output] = "Error: $e\n" "Stacktrace: $s";
-    // }
     try {
-      stdout = await exec(command, args).runGetOutput();
-      stdout = stdout.isEmpty ? "Nothing to show" : stdout;
+      String stdout = await exec(command, args).runGetOutput();
+      return stdout.isEmpty ? "Nothing to show" : stdout;
     } catch (e, s) {
-      stdout = "Error: $e\n" "Stacktrace: $s";
+      return "Error: $e\n" "Stacktrace: $s";
     }
-    return stdout;
   }
 }
 
@@ -202,6 +205,12 @@ class DiagnosisContent extends Iterable<String> {
   static const String httpPortalPublic = "HTTP Portal Response Public";
   static const String httpPortalGateway = "HTTP Portal Response Gateway";
 
+  /// Make able to loop through [DiagnosisContent]
+  ///
+  /// Exemple:
+  /// ```
+  /// for (String content in DiagnosisContent())
+  /// ```
   Iterator<String> get iterator => [
         ssid,
         ip,

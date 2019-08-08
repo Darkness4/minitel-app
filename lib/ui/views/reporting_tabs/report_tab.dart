@@ -10,7 +10,7 @@ class ReportTab extends StatefulWidget {
 
   const ReportTab(
       {Key key,
-      this.channel: "projet_flutter_notif",
+      this.channel = "projet_flutter_notif",
       @required this.titleController,
       @required this.descriptionController})
       : super(key: key);
@@ -70,7 +70,7 @@ class _ContactsCard extends StatelessWidget {
             "Facebook: Minitel Ismin",
             style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
-          onPressed: () => LaunchURL.messengerMarcNGUYEN,
+          onPressed: LaunchURL.messengerMarcNGUYEN,
           color: Colors.lightBlue[100],
         ),
         FlatButton(
@@ -79,7 +79,7 @@ class _ContactsCard extends StatelessWidget {
             "Mail: minitelismin@gmail.com (non recommandée)",
             style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
-          onPressed: () => LaunchURL.mailToMinitel,
+          onPressed: LaunchURL.mailToMinitel,
           color: Colors.lightBlue[100],
         ),
         const Text(

@@ -40,9 +40,10 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
-                    RoutePaths.Authentication)
+                    RoutePaths.Authentication) {
                   Navigator.pushReplacementNamed(
                       context, RoutePaths.Authentication);
+                }
               }),
           const Divider(),
           ListTile(
@@ -51,8 +52,9 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.News)
+                if (ModalRoute.of(context).settings.name != RoutePaths.News) {
                   Navigator.pushReplacementNamed(context, RoutePaths.News);
+                }
               }),
           ListTile(
               title: const Text("Agenda"),
@@ -60,8 +62,10 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.Calendar)
+                if (ModalRoute.of(context).settings.name !=
+                    RoutePaths.Calendar) {
                   Navigator.pushReplacementNamed(context, RoutePaths.Calendar);
+                }
               }),
           // ListTile(
           //     title: Text("Maps"),
@@ -91,9 +95,10 @@ class MainDrawer extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context); // Close Drawer
                   if (ModalRoute.of(context).settings.name !=
-                      RoutePaths.Reporting)
+                      RoutePaths.Reporting) {
                     Navigator.pushReplacementNamed(
                         context, RoutePaths.Reporting);
+                  }
                 }),
           ),
           ListTile(
@@ -102,8 +107,9 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.Docs)
+                if (ModalRoute.of(context).settings.name != RoutePaths.Docs) {
                   Navigator.pushReplacementNamed(context, RoutePaths.Docs);
+                }
               }),
           ListTile(
             title: const Text("A propos..."),
@@ -111,8 +117,9 @@ class MainDrawer extends StatelessWidget {
             trailing: const Icon(Icons.arrow_forward),
             onTap: () {
               Navigator.pop(context); // Close Drawer
-              if (ModalRoute.of(context).settings.name != RoutePaths.About)
+              if (ModalRoute.of(context).settings.name != RoutePaths.About) {
                 Navigator.pushNamed(context, RoutePaths.About);
+              }
             },
           ),
           Container(
@@ -123,8 +130,10 @@ class MainDrawer extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.Feedback)
+                if (ModalRoute.of(context).settings.name !=
+                    RoutePaths.Feedback) {
                   Navigator.pushNamed(context, RoutePaths.Feedback);
+                }
               },
             ),
           ),
@@ -174,26 +183,28 @@ class DocsDrawer extends StatelessWidget {
                   initialPage: 0,
                   viewportFraction: .9,
                 );
-                if (_docsPageId == DocsPageId.Home)
+                if (_docsPageId == DocsPageId.Home) {
                   Navigator.push(
                     context,
                     SlideRightRoute(
                       widget: ToolboxDocs(controller: _newController),
                     ),
                   );
-                else if (_docsPageId == DocsPageId.Wiki)
+                } else if (_docsPageId == DocsPageId.Wiki) {
                   Navigator.pushReplacement(
                     context,
                     FadeRoute(
                       builder: (_) => ToolboxDocs(controller: _newController),
                     ),
                   );
-              } else
+                }
+              } else {
                 controller.animateToPage(
                   0,
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.fastOutSlowIn,
                 );
+              }
             },
           ),
           ListTile(
@@ -205,26 +216,28 @@ class DocsDrawer extends StatelessWidget {
                   initialPage: 1,
                   viewportFraction: .9,
                 );
-                if (_docsPageId == DocsPageId.Home)
-                  Navigator.push(
+                if (_docsPageId == DocsPageId.Home) {
+                  await Navigator.push(
                     context,
                     SlideRightRoute(
                       widget: ToolboxDocs(controller: _newController),
                     ),
                   );
-                else if (_docsPageId == DocsPageId.Wiki)
-                  Navigator.pushReplacement(
+                } else if (_docsPageId == DocsPageId.Wiki) {
+                  await Navigator.pushReplacement(
                     context,
                     FadeRoute(
                       builder: (_) => ToolboxDocs(controller: _newController),
                     ),
                   );
-              } else
-                controller.animateToPage(
+                }
+              } else {
+                await controller.animateToPage(
                   1,
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.fastOutSlowIn,
                 );
+              }
             },
           ),
           const Divider(),
@@ -237,26 +250,28 @@ class DocsDrawer extends StatelessWidget {
                   initialPage: 0,
                   viewportFraction: .9,
                 );
-                if (_docsPageId == DocsPageId.Home)
+                if (_docsPageId == DocsPageId.Home) {
                   Navigator.push(
                     context,
                     SlideRightRoute(
                       widget: WikiDocs(controller: _newController),
                     ),
                   );
-                else if (_docsPageId == DocsPageId.Toolbox)
+                } else if (_docsPageId == DocsPageId.Toolbox) {
                   Navigator.pushReplacement(
                     context,
                     FadeRoute(
                       builder: (_) => WikiDocs(controller: _newController),
                     ),
                   );
-              } else
+                }
+              } else {
                 controller.animateToPage(
                   0,
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.fastOutSlowIn,
                 );
+              }
             },
           ),
           ListTile(
@@ -268,26 +283,28 @@ class DocsDrawer extends StatelessWidget {
                   initialPage: 1,
                   viewportFraction: .9,
                 );
-                if (_docsPageId == DocsPageId.Home)
+                if (_docsPageId == DocsPageId.Home) {
                   Navigator.push(
                     context,
                     SlideRightRoute(
                       widget: WikiDocs(controller: _newController),
                     ),
                   );
-                else if (_docsPageId == DocsPageId.Toolbox)
+                } else if (_docsPageId == DocsPageId.Toolbox) {
                   Navigator.pushReplacement(
                     context,
                     FadeRoute(
                       builder: (_) => WikiDocs(controller: _newController),
                     ),
                   );
-              } else
+                }
+              } else {
                 controller.animateToPage(
                   1,
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.fastOutSlowIn,
                 );
+              }
             },
           ),
           ListTile(
@@ -299,26 +316,28 @@ class DocsDrawer extends StatelessWidget {
                   initialPage: 2,
                   viewportFraction: .9,
                 );
-                if (_docsPageId == DocsPageId.Home)
+                if (_docsPageId == DocsPageId.Home) {
                   Navigator.push(
                     context,
                     SlideRightRoute(
                       widget: WikiDocs(controller: _newController),
                     ),
                   );
-                else if (_docsPageId == DocsPageId.Toolbox)
+                } else if (_docsPageId == DocsPageId.Toolbox) {
                   Navigator.pushReplacement(
                     context,
                     FadeRoute(
                       builder: (_) => WikiDocs(controller: _newController),
                     ),
                   );
-              } else
+                }
+              } else {
                 controller.animateToPage(
                   2,
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.fastOutSlowIn,
                 );
+              }
             },
           ),
           ListTile(
@@ -330,26 +349,28 @@ class DocsDrawer extends StatelessWidget {
                   initialPage: 3,
                   viewportFraction: .9,
                 );
-                if (_docsPageId == DocsPageId.Home)
+                if (_docsPageId == DocsPageId.Home) {
                   Navigator.push(
                     context,
                     SlideRightRoute(
                       widget: WikiDocs(controller: _newController),
                     ),
                   );
-                else if (_docsPageId == DocsPageId.Toolbox)
+                } else if (_docsPageId == DocsPageId.Toolbox) {
                   Navigator.pushReplacement(
                     context,
                     FadeRoute(
                       builder: (_) => WikiDocs(controller: _newController),
                     ),
                   );
-              } else
+                }
+              } else {
                 controller.animateToPage(
                   3,
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.fastOutSlowIn,
                 );
+              }
             },
           ),
         ],

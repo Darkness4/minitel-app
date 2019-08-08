@@ -7,9 +7,7 @@ import 'core/services/http_version_checker.dart';
 import 'core/services/http_webfeed.dart';
 import 'core/services/http_webhook.dart';
 
-List<SingleChildCloneableWidget> dependentServices = [];
-
-List<SingleChildCloneableWidget> independentServices = [
+List<SingleChildCloneableWidget> providers = [
   Provider.value(value: GatewayAPI()),
   Provider.value(value: PortailAPI()),
   Provider.value(value: VersionAPI()),
@@ -17,11 +15,3 @@ List<SingleChildCloneableWidget> independentServices = [
   Provider.value(value: WebFeedAPI()),
   Provider.value(value: CalendarUrlAPI()),
 ];
-
-List<SingleChildCloneableWidget> providers = [
-  ...independentServices,
-  ...dependentServices,
-  ...uiConsumableProviders
-];
-
-List<SingleChildCloneableWidget> uiConsumableProviders = [];

@@ -3,12 +3,15 @@ import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:package_info/package_info.dart';
 
+/// Page About
 class AboutView extends StatelessWidget {
   final String title;
   final VersionAPI _versionAPI;
-  const AboutView(
-      {Key key, @required this.title, @required VersionAPI versionAPI})
-      : _versionAPI = versionAPI,
+  const AboutView({
+    Key key,
+    @required this.title,
+    @required VersionAPI versionAPI,
+  })  : _versionAPI = versionAPI,
         super(key: key);
 
   @override
@@ -88,8 +91,9 @@ class AboutView extends StatelessWidget {
                       case ConnectionState.waiting:
                         return Text('Awaiting result...');
                       case ConnectionState.done:
-                        if (packageInfo.hasError)
+                        if (packageInfo.hasError) {
                           return Text('Error: ${packageInfo.error}');
+                        }
                         return Text(packageInfo.data.version);
                     }
                     return null; // unreachable
@@ -103,10 +107,10 @@ class AboutView extends StatelessWidget {
                 onTap: () async {
                   var latestVersion = _versionAPI.getLatestVersion();
                   var actualVersion = PackageInfo.fromPlatform();
-                  dynamic ensemble =
+                  List<dynamic> ensemble =
                       await Future.wait([actualVersion, latestVersion]);
-                  if (ensemble[0].version != ensemble[1])
-                    showDialog(
+                  if (ensemble[0].version != ensemble[1]) {
+                    await showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
@@ -131,8 +135,8 @@ class AboutView extends StatelessWidget {
                         );
                       },
                     );
-                  else
-                    showDialog(
+                  } else {
+                    await showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
@@ -156,6 +160,7 @@ class AboutView extends StatelessWidget {
                         );
                       },
                     );
+                  }
                 },
               ),
               // ListTile(

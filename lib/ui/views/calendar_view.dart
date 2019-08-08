@@ -59,9 +59,10 @@ class CalendarViewState extends State<CalendarView> {
           child: FutureBuilder<ICalendar>(
             future: _loadCalendar(context),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasError)
+              if (snapshot.hasError) {
                 return ErrorCalendarWidget(
                     snapshot.error.toString(), setState, _formKey);
+              }
               if (snapshot.hasData) {
                 return Scrollbar(
                   child: StreamBuilder<Widget>(
@@ -82,8 +83,9 @@ class CalendarViewState extends State<CalendarView> {
                     },
                   ),
                 );
-              } else
+              } else {
                 return const CircularProgressIndicator();
+              }
             },
           ),
         ),
@@ -127,7 +129,7 @@ class CalendarViewState extends State<CalendarView> {
 
         id++;
 
-        _scheduleNotification(
+        await _scheduleNotification(
           id: id,
           title: event["SUMMARY"],
           description: "${event["LOCATION"]}\n"
@@ -147,8 +149,9 @@ class CalendarViewState extends State<CalendarView> {
 
       // New Month
       if (dt.month != oldDt?.month) {
-        if (monthlyWidgets != null)
+        if (monthlyWidgets != null) {
           yield MonthPage(oldDt.month, monthlyWidgets);
+        }
         oldDt = dt;
 
         monthlyWidgets = [
@@ -158,8 +161,9 @@ class CalendarViewState extends State<CalendarView> {
 
       // New Day
       if (dt.day != oldDt?.day) {
-        if (dailyEvents.isNotEmpty)
+        if (dailyEvents.isNotEmpty) {
           monthlyWidgets.add(DayWidget(dt, dailyEvents));
+        }
 
         oldDt = dt;
         dailyEvents = []; // Clear Events
@@ -193,7 +197,7 @@ class CalendarViewState extends State<CalendarView> {
   Future<void> _onSelectNotification(
       String payload, BuildContext context) async {
     List<String> output = payload.split(';');
-    showDialog(
+    await showDialog(
       context: context,
       builder: (_) => AlertDialog(
         title: Text("${output[0]}"),
@@ -207,8 +211,8 @@ class CalendarViewState extends State<CalendarView> {
       @required String description,
       @required int id,
       @required DateTime scheduledNotificationDateTime,
-      String payload: "Title;Description"}) async {
-    _flutterLocalNotificationsPlugin.schedule(
+      String payload = "Title;Description"}) async {
+    await _flutterLocalNotificationsPlugin.schedule(
       id,
       title,
       description,

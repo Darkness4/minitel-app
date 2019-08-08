@@ -34,15 +34,17 @@ void main() {
     });
 
     // This test does not work because we are not using cookies.
-    // This test only work locally.
-    // test('Get status SUCCESS from 195.83.139.7', () async {
-    //   await _gateway.autoLogin("marc.nguyen",
-    //       utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
-    //   var status2 = await _gateway.getStatus("195.83.139.7");
-    //   print(status2);
+    test('Get status SUCCESS from 195.83.139.7', () async {
+      var cookie = await _gateway.autoLogin("marc.nguyen",
+          utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
+      var statusFromReturn =
+          await _gateway.getStatus("195.83.139.7", cookie: cookie);
+      var statusFromApi =
+          await _gateway.getStatus("195.83.139.7", cookie: _gateway.cookie);
 
-    //   expect(status2.contains("seconds"), true);
-    // });
+      expect(statusFromApi, contains("seconds"));
+      expect(statusFromReturn, contains("seconds"));
+    });
 
     test('Get status intentionaly from google.fr to get error', () async {
       var status = await _gateway.getStatus("www.google.fr");
@@ -58,21 +60,22 @@ void main() {
       expect(status, contains("HttpError"));
     });
 
-    // test('Disconnect from 195.83.139.7', () async {
-    //   await autoLogin("marc.nguyen",
-    //       utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
-    //   var status = await disconnectGateway("195.83.139.7");
-    //   print(status);
+    test('Disconnect from 195.83.139.7', () async {
+      var cookie = await _gateway.autoLogin("marc.nguyen",
+          utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
+      var status =
+          await _gateway.disconnectGateway("195.83.139.7", cookie: cookie);
+      print(status);
 
-    //   expect(status.contains("You have logged out"), true);
-    // });
+      expect(status.contains("You have logged out"), true);
+    });
 
     test('Good Username and Password to 195.83.139.7', () async {
       var status = await _gateway.autoLogin("marc.nguyen",
-          utf8.decode(base64.decode("c3RpY2ttYW45NjM=")), "195.83.139.7", 240);
+          utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
       print(status);
 
-      expect(status, contains("seconds"));
+      expect(status, contains("NETASQ_USER"));
     });
 
     test('Report to slack', () async {

@@ -7,7 +7,7 @@ description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un W
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 0.2.2
+version: 0.2.3
 
 environment:
   sdk: ">=2.3.0 <3.0.0"
@@ -43,7 +43,8 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
-  flutter_launcher_icons: any
+  pedantic: ^1.8.0+1
+  flutter_launcher_icons: 0.7.2+1
 
 flutter_icons:
   android: "launcher_icon" 

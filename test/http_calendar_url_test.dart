@@ -21,11 +21,15 @@ void main() async {
     });
 
     test("getCalendarURL: bad credentials", () async {
-      String output = await _calendarURL.getCalendarURL(
-        username: "",
-        password: "",
-      );
-      expect(output, equals(null));
+      try {
+        await _calendarURL.getCalendarURL(
+          username: "",
+          password: "",
+        );
+        throw "getCalendarURL shouldn't work here";
+      } on Exception catch (e) {
+        expect(e.toString(), contains("Bad login"));
+      }
     });
   });
 
@@ -55,7 +59,7 @@ void main() async {
     test("getCalendarURL", () async {
       String output = await _calendarURL.getCalendarURL(
         username: "marc.nguyen",
-        password: utf8.decode(base64.decode("c3RpY2ttYW45NjM=")),
+        password: utf8.decode(base64.decode("b3BzdGU5NjM=")),
       );
       expect(output, equals(RegExp(r'https(.*)\.ics').stringMatch(output)));
     });

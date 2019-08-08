@@ -84,7 +84,7 @@ class _PortailCard extends StatelessWidget {
         onTap: () async {
           String cookie = await _portailAPI.getSavedCookiePortail();
           print(cookie);
-          Navigator.push(
+          await Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => PortailWebView(cookie: cookie)),

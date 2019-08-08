@@ -20,6 +20,7 @@ class ReportingViewModel extends ChangeNotifier {
   final ValueNotifier<double> percentageDiagnoseProgress =
       ValueNotifier<double>(0.0);
 
+  /// State of diagnosis
   ButtonState diagnosisState = ButtonState.None;
 
   ReportingViewModel({
@@ -34,26 +35,38 @@ class ReportingViewModel extends ChangeNotifier {
     return DateTime.parse(dateTimeout);
   }
 
-  Future<void> diagnose() async {
+  /// Initiate diagnosis
+  void diagnose() async {
     if (diagnosisState != ButtonState.Loading) {
+      // Lock
       diagnosisState = ButtonState.Loading;
       notifyListeners();
+
+      // Animate button
       Timer timer = Timer.periodic(
         const Duration(seconds: 1),
         (Timer t) => percentageDiagnoseProgress.value += 1 / 60,
       );
+
+      // Diagnose
       await diagnosis.diagnose();
+
+      // Kill timer
       timer.cancel();
       percentageDiagnoseProgress.value = 0.0;
+
+      // Unlock
       diagnosisState = ButtonState.Done;
       notifyListeners();
     }
   }
 
+  /// Send to slack
   Future<String> reportToSlack(String title, String description,
       {String channel = "projet_flutter_notif"}) async {
     DateTime timeout = await _timeout;
     String status;
+
     if (DateTime.now().isAfter(timeout)) {
       status = await _webhook.report(
         "*$title*\n"
@@ -68,9 +81,10 @@ class ReportingViewModel extends ChangeNotifier {
     return status;
   }
 
-  Future<void> _setTimeout() async {
-    await SharedPreferences.getInstance()
-      ..setString(
-          'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
+  /// SetTimeout to not abuse [reportToSlack]
+  void _setTimeout() async {
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
   }
 }

@@ -19,7 +19,7 @@ class MailDoc extends StatelessWidget {
           Card(
             elevation: 4,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.0),
               child: Text("""Email : ton mail
 Mot de passe : ton mot de passe école
 

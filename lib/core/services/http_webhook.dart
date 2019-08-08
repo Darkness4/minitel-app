@@ -23,18 +23,19 @@ class WebhookAPI {
   /// ```
   Future<String> report(String text,
       {Map<String, String> attachments,
-      String channel: "projet_flutter_notif",
-      String botName: "Flutter Reporter Bot"}) async {
+      String channel = "projet_flutter_notif",
+      String botName = "Flutter Reporter Bot"}) async {
     var status = "";
     var _attachments = <Map<String, String>>[];
 
-    if (attachments != null)
+    if (attachments != null) {
       attachments.forEach((String key, String value) => _attachments.add({
             "fallback": key,
             "title": key,
             "text": value,
             "footer": "Slack API",
           }));
+    }
 
     if (text != "") {
       var data = {

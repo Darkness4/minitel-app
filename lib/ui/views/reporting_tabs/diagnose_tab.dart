@@ -36,33 +36,22 @@ class DiagnoseTab extends StatelessWidget {
                   child: FutureBuilder<String>(
                     future: _diagnosis.report[DiagnosisContent.ssid],
                     builder: (context, ssidSnapshot) {
-                      if (ssidSnapshot.hasData)
-                        return FutureBuilder<String>(
-                          future: _diagnosis.report[DiagnosisContent.ip],
-                          builder: (context, ipSnapshot) {
-                            if (ipSnapshot.hasData)
-                              return Text(
-                                "${DiagnosisContent.ssid}: ${ssidSnapshot.data}, ${DiagnosisContent.ip}: ${ipSnapshot.data}",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              );
-                            return Text(
-                              "${DiagnosisContent.ssid}: ${ssidSnapshot.data}, ${DiagnosisContent.ip}: ",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            );
-                          },
-                        );
-                      return Text(
-                        "${DiagnosisContent.ssid}: , ${DiagnosisContent.ip}: ",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                      return FutureBuilder<String>(
+                        future: _diagnosis.report[DiagnosisContent.ip],
+                        builder: (context, ipSnapshot) {
+                          String output = "${DiagnosisContent.ssid}: ";
+                          output +=
+                              ssidSnapshot.hasData ? ssidSnapshot.data : "";
+                          output += ", ${DiagnosisContent.ip}: ";
+                          output += ipSnapshot.hasData ? ipSnapshot.data : "";
+                          return Text(
+                            output,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
@@ -88,12 +77,14 @@ class DiagnoseTab extends StatelessWidget {
                             title: item,
                           );
                         case ConnectionState.done:
-                          if (snapshot.hasError)
+                          if (snapshot.hasError) {
                             return Text('${snapshot.error}');
-                          return LogCard(
-                            snapshot.data,
-                            title: item,
-                          );
+                          } else {
+                            return LogCard(
+                              snapshot.data,
+                              title: item,
+                            );
+                          }
                       }
                       return null; // unreachable
                     },

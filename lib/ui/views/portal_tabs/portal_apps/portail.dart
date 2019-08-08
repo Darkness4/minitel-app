@@ -4,7 +4,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 class PortailWebView extends StatelessWidget {
   final String cookie;
 
-  const PortailWebView({Key key, this.cookie: ""}) : super(key: key);
+  const PortailWebView({Key key, this.cookie = ""}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

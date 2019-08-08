@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
+/// Markdown-style body
 class BoxMdBody extends StatelessWidget {
   final Text _text;
   const BoxMdBody(Text text, {Key key})
@@ -16,6 +17,7 @@ class BoxMdBody extends StatelessWidget {
   }
 }
 
+/// Markdown-style header
 class BoxMdH extends StatelessWidget {
   final String _text;
   final int _level;
@@ -109,6 +111,7 @@ class BoxMdH extends StatelessWidget {
   }
 }
 
+/// Main Text Styles of the app
 class MinitelTextStyles {
   // Flutter Theme
   static const body1 = TextStyle(
