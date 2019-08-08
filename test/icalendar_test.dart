@@ -82,15 +82,16 @@ void main() async {
       expect(parsedCalendar.timezone.tzid, equals("Europe/Paris"));
     });
 
-    test("parseCalendar from cache", () async {
+    test("", () async {
       var ical = ICalendar(_calendarUrlAPI);
       ParsedCalendar parsedCalendar;
+      String url;
 
       // Save before the test
-      var url = await _calendarUrlAPI.getCalendarURL(
+      var url0 = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
-      await ical.saveCalendar(url);
+      await ical.saveCalendar(url0);
 
       // Test
       try {
