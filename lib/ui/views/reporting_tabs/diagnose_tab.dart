@@ -34,39 +34,24 @@ class DiagnoseTab extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: FutureBuilder<String>(
-                    // TODO: Fix bullshit
                     future: _diagnosis.report[DiagnosisContent.ssid],
                     builder: (context, ssidSnapshot) {
-                      if (ssidSnapshot.hasData) {
-                        return FutureBuilder<String>(
-                          future: _diagnosis.report[DiagnosisContent.ip],
-                          builder: (context, ipSnapshot) {
-                            if (ipSnapshot.hasData) {
-                              return Text(
-                                "${DiagnosisContent.ssid}: ${ssidSnapshot.data}, ${DiagnosisContent.ip}: ${ipSnapshot.data}",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              );
-                            } else {
-                              return Text(
-                                "${DiagnosisContent.ssid}: ${ssidSnapshot.data}, ${DiagnosisContent.ip}: ",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              );
-                            }
-                          },
-                        );
-                      }
-                      return Text(
-                        "${DiagnosisContent.ssid}: , ${DiagnosisContent.ip}: ",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                      return FutureBuilder<String>(
+                        future: _diagnosis.report[DiagnosisContent.ip],
+                        builder: (context, ipSnapshot) {
+                          String output = "${DiagnosisContent.ssid}: ";
+                          output +=
+                              ssidSnapshot.hasData ? ssidSnapshot.data : "";
+                          output += ", ${DiagnosisContent.ip}: ";
+                          output += ipSnapshot.hasData ? ipSnapshot.data : "";
+                          return Text(
+                            output,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          );
+                        },
                       );
                     },
                   ),

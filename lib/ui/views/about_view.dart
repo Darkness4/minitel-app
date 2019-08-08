@@ -3,12 +3,15 @@ import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:package_info/package_info.dart';
 
+/// Page About
 class AboutView extends StatelessWidget {
   final String title;
   final VersionAPI _versionAPI;
-  const AboutView(
-      {Key key, @required this.title, @required VersionAPI versionAPI})
-      : _versionAPI = versionAPI,
+  const AboutView({
+    Key key,
+    @required this.title,
+    @required VersionAPI versionAPI,
+  })  : _versionAPI = versionAPI,
         super(key: key);
 
   @override
