@@ -206,7 +206,7 @@ class LoginPageState extends State<LoginPage> {
 
 class _StatusCard extends StatelessWidget {
   final PortailAPI _portailAPI;
-  final CalendarUrlAPI _calendarURLApi;
+  final CalendarUrlAPI _calendarUrlAPI;
   final GatewayAPI _gatewayAPI;
   final String _selectedUrl;
 
@@ -217,7 +217,7 @@ class _StatusCard extends StatelessWidget {
     @required GatewayAPI gatewayAPI,
     @required String selectedUrl,
   })  : _portailAPI = portailAPI,
-        _calendarURLApi = calendarURL,
+        _calendarUrlAPI = calendarURL,
         _gatewayAPI = gatewayAPI,
         _selectedUrl = selectedUrl,
         super(key: key);
@@ -233,7 +233,10 @@ class _StatusCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             FutureBuilder<String>(
-                future: _gatewayAPI.getStatus(_selectedUrl),
+                future: _gatewayAPI.getStatus(
+                  _selectedUrl,
+                  cookie: _gatewayAPI.cookie,
+                ),
                 builder: (context, snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
@@ -270,7 +273,7 @@ class _StatusCard extends StatelessWidget {
                   style: TextStyle(fontSize: 20),
                 ),
                 FutureBuilder<String>(
-                  future: _calendarURLApi
+                  future: _calendarUrlAPI
                       .savedCalendarURL, // a previously-obtained Future<String> or null
                   builder:
                       (BuildContext context, AsyncSnapshot<String> snapshot) {

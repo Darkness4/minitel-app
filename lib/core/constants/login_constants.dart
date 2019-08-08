@@ -1,11 +1,14 @@
 import 'app_constants.dart';
 
 class LoginConstants {
+  /// Choose between these url to log in through the gateway
   static const List<String> urlRootList = [
     MyIPAdresses.gatewayIP,
     MyIPAdresses.stormshield,
     MyIPAdresses.stormshieldIP,
   ];
+
+  /// Stormshield time limit
   static const Map<String, int> timeMap = {
     '15 minutes': 15,
     '30 minutes': 30,

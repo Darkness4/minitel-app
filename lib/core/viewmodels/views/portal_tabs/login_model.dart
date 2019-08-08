@@ -19,6 +19,8 @@ class LoginViewModel extends ChangeNotifier {
   final ValueNotifier<String> selectedUrl;
   final ValueNotifier<bool> rememberMe;
 
+  String cookie;
+
   LoginState loginState = LoginState.Available;
 
   LoginViewModel({
@@ -56,15 +58,19 @@ class LoginViewModel extends ChangeNotifier {
     Scaffold.of(context).showSnackBar(
       SnackBar(content: Text('Requested')),
     );
+
+    // Lock
     loginState = LoginState.Busy;
     notifyListeners();
 
-    await gatewayAPI.autoLogin(
+    // Login
+    cookie = await gatewayAPI.autoLogin(
       uid,
       pswd,
       selectedUrl.value,
-      LoginConstants.timeMap[selectedTime],
+      LoginConstants.timeMap[selectedTime.value],
     );
+    // Calendar
     try {
       String calendarUrl = await calendarUrlAPI.getCalendarURL(
         username: uid,
@@ -77,6 +83,7 @@ class LoginViewModel extends ChangeNotifier {
         SnackBar(content: Text(e.toString())),
       );
     }
+    // Portail
     try {
       await portailAPI.saveCookiePortailFromLogin(
         username: uid,
@@ -87,6 +94,8 @@ class LoginViewModel extends ChangeNotifier {
         SnackBar(content: Text(e.toString())),
       );
     }
+
+    // Unlock
     loginState = LoginState.Available;
     notifyListeners();
   }

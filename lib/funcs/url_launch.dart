@@ -1,5 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 
+/// Url Launcher
 class LaunchURL {
   static Function mailToMarcNGUYEN =
       () => launchURL("mailto:nguyen_marc@live.fr");
@@ -12,6 +13,7 @@ class LaunchURL {
   static Function mailToMinitel =
       () => launchURL("mailto:minitelismin@gmail.com");
 
+  /// Launche the given url
   static void launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);

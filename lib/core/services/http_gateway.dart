@@ -3,7 +3,8 @@ import 'dart:io';
 
 /// This class handle the connections through stormshield, aka the gateway.
 class GatewayAPI {
-  var _client = HttpClient();
+  final _client = HttpClient();
+  String cookie;
 
   /// Connect to the portal.
   ///
@@ -38,58 +39,21 @@ class GatewayAPI {
           "x-www-form-urlencoded",
           charset: 'utf-8',
         )
+        ..headers.set(HttpHeaders.cookieHeader, "lang=us; disclaimer=1;")
         ..headers.contentLength = data.length // Needed
         ..write(data);
       HttpClientResponse response = await request.close();
-      var sessionId = "";
       if (response.statusCode == 200) {
         var body =
             await response.cast<List<int>>().transform(utf8.decoder).join();
         if (body.contains('title_error')) {
           throw ("Error: Bad Username or Password");
         } else {
-          var match = RegExp(r'"(id=([^"]*))').firstMatch(body).group(1); // Id
-          if (match is! String) {
-            throw Exception(
-                "Error: SessionId doesn't exist. Please check if the RegEx is updated.");
-          } else {
-            sessionId = match;
-          }
-        }
-      } else {
-        throw Exception("HttpError: ${response.statusCode}");
-      }
-
-      // Status
-      data = "session=$sessionId&read=accepted&action=J'accepte";
-      request = await _client
-          .postUrl(Uri.parse('https://$selectedUrl/auth/disclaimer.html'))
-        ..headers.contentType = ContentType(
-          "application",
-          "x-www-form-urlencoded",
-          charset: "utf-8",
-        )
-        ..headers.contentLength = data.length
-        ..write(data);
-
-      response = await request.close();
-      if (response.statusCode == 200) {
-        var body =
-            await response.cast<List<int>>().transform(utf8.decoder).join();
-        if (body.contains('title_error')) {
-          throw Exception(
-              "Error: SessionId is incorrect. Please check the RegEx.");
-        } else {
-          var match =
-              RegExp(r'<span id="l_rtime">([^<]*)<\/span>') // Time finder.
-                  .firstMatch(body)
-                  .group(1);
-          if (match is! String) {
-            throw Exception(
-                "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-          } else {
-            status = '$match seconds left';
-          }
+          var temp = response.headers['set-cookie'].toString();
+          var netasq_user =
+              RegExp(r'NETASQ_USER=([^;]*);').firstMatch(temp).group(0);
+          status = netasq_user;
+          cookie = netasq_user;
         }
       } else {
         throw Exception("HttpError: ${response.statusCode}");
@@ -98,6 +62,7 @@ class GatewayAPI {
       status = e.toString();
     }
 
+    print(status);
     return status;
   }
 
@@ -106,15 +71,18 @@ class GatewayAPI {
   /// ```
   /// String status = await disconnectGateway("172.17.0.1") // "x seconds left"
   /// ```
-  Future<String> disconnectGateway(String selectedUrl) async {
+  Future<String> disconnectGateway(String selectedUrl, {String cookie}) async {
     var url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     var status = "";
+    var _cookie = "lang=us; ";
+    _cookie += cookie ?? "";
 
     _client.badCertificateCallback = (cert, host, port) => true;
 
     try {
       HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+        ..headers.set(HttpHeaders.cookieHeader, _cookie)
         ..headers.removeAll(HttpHeaders.contentLengthHeader);
       HttpClientResponse response = await request.close();
       var body =
@@ -148,17 +116,18 @@ class GatewayAPI {
   /// ```
   /// String status = await getStatus("172.17.0.1") // "x seconds left"
   /// ```
-  Future<String> getStatus(String selectedUrl) async {
+  Future<String> getStatus(String selectedUrl, {String cookie}) async {
     var status = "";
     _client.badCertificateCallback = (cert, host, port) => true;
     var url = 'https://$selectedUrl/auth/login.html';
     RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
     try {
+      var _cookie = "lang=us; ";
+      _cookie += cookie ?? "";
       HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+        ..headers.set(HttpHeaders.cookieHeader, _cookie)
         ..headers.removeAll(HttpHeaders.contentLengthHeader);
-      // print(request.method.toString());
-      // print(request.headers.toString());
 
       HttpClientResponse response = await request.close();
       var body =
