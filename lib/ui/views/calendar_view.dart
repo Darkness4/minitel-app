@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
@@ -46,11 +49,10 @@ class CalendarViewState extends State<CalendarView> {
     priority: Priority.High,
   );
   final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  List<Widget> _monthPages = [];
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> monthPages = [];
-
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: Container(
@@ -73,10 +75,11 @@ class CalendarViewState extends State<CalendarView> {
                         case ConnectionState.waiting:
                           return const CircularProgressIndicator();
                         case ConnectionState.active:
-                          monthPages.add(snapshotStream.data);
-                          return PageView(children: monthPages);
+                          _monthPages.add(snapshotStream.data);
+                          break;
                         case ConnectionState.done:
-                          return PageView(children: monthPages);
+                          _monthPages.add(snapshotStream.data);
+                          return PageView(children: _monthPages);
                       }
                       return null;
                     },
@@ -117,59 +120,73 @@ class CalendarViewState extends State<CalendarView> {
     // Throw away the old notifications
     await _flutterLocalNotificationsPlugin.cancelAll();
 
-    for (var event in filteredEvents) {
-      int id = 0;
-      DateTime dt = DateTime.parse(event["DTSTART"]);
+    if (filteredEvents == null || filteredEvents.isEmpty) {
+      yield Center(
+        child: Text(
+          Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w300,
+            fontSize: 24.0,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      );
+    } else {
+      for (var event in filteredEvents) {
+        int id = 0;
+        DateTime dt = DateTime.parse(event["DTSTART"]);
 
-      // Notification System
-      if (dt.isBefore(DateTime.now().add(const Duration(days: 14)))) {
-        var dtstart = DateFormat.Hm().format(dt);
-        var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
+        // Notification System
+        if (dt.isBefore(DateTime.now().add(const Duration(days: 14)))) {
+          var dtstart = DateFormat.Hm().format(dt);
+          var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
 
-        id++;
+          id++;
 
-        await _scheduleNotification(
-          id: id,
-          title: event["SUMMARY"],
-          description: "${event["LOCATION"]}\n"
-              "$dtstart"
-              " - "
-              "$dtend",
-          scheduledNotificationDateTime:
-              dt.subtract(const Duration(minutes: 10)),
-          payload: "${event["SUMMARY"]};"
-              "${event["DESCRIPTION"]}\n"
-              "${event["LOCATION"]}\n"
-              "$dtstart"
-              " - "
-              "$dtend",
-        );
-      }
-
-      // New Month
-      if (dt.month != oldDt?.month) {
-        if (monthlyWidgets != null) {
-          yield MonthPage(oldDt.month, monthlyWidgets);
-        }
-        oldDt = dt;
-
-        monthlyWidgets = [
-          MonthHeader("${_month[dt.month - 1]}"),
-        ];
-      }
-
-      // New Day
-      if (dt.day != oldDt?.day) {
-        if (dailyEvents.isNotEmpty) {
-          monthlyWidgets.add(DayWidget(dt, dailyEvents));
+          await _scheduleNotification(
+            id: id,
+            title: event["SUMMARY"],
+            description: "${event["LOCATION"]}\n"
+                "$dtstart"
+                " - "
+                "$dtend",
+            scheduledNotificationDateTime:
+                dt.subtract(const Duration(minutes: 10)),
+            payload: "${event["SUMMARY"]};"
+                "${event["DESCRIPTION"]}\n"
+                "${event["LOCATION"]}\n"
+                "$dtstart"
+                " - "
+                "$dtend",
+          );
         }
 
-        oldDt = dt;
-        dailyEvents = []; // Clear Events
-      }
+        // New Month
+        if (dt.month != oldDt?.month) {
+          if (monthlyWidgets != null) {
+            yield MonthPage(oldDt.month, monthlyWidgets);
+          }
+          oldDt = dt;
 
-      // Event Card
-      dailyEvents.add(EventCard(event));
+          monthlyWidgets = [
+            MonthHeader("${_month[dt.month - 1]}"),
+          ];
+        }
+
+        // New Day
+        if (dt.day != oldDt?.day) {
+          if (dailyEvents.isNotEmpty) {
+            monthlyWidgets.add(DayWidget(dt, dailyEvents));
+          }
+
+          oldDt = dt;
+          dailyEvents = []; // Clear Events
+        }
+
+        // Event Card
+        dailyEvents.add(EventCard(event));
+      }
     }
   }
 
