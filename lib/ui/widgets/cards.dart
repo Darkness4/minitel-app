@@ -4,7 +4,7 @@ import 'package:html/parser.dart' show parseFragment;
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
-import 'package:minitel_toolbox/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:provider/provider.dart';
