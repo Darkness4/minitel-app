@@ -51,7 +51,7 @@ build-test:
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - flutter packages get
-    - flutter build apk --release
+    - flutter build apk ---target-platform android-arm --split-per-abi -release
   except:
   - master
   - develop

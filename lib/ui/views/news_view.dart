@@ -32,7 +32,7 @@ class NewsView extends StatelessWidget {
               bottom: const TabBar(
                 tabs: <Tab>[
                   Tab(
-                    icon: ImageIcon(AssetImage("assets/icon/f_logo.png.png")),
+                    icon: ImageIcon(AssetImage("assets/icon/f_logo.png")),
                     text: "Facebook",
                   ),
                   Tab(
