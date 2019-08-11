@@ -83,8 +83,7 @@ class AboutView extends StatelessWidget {
                 title: const Text("Version"),
                 subtitle: FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<PackageInfo> packageInfo) {
+                  builder: (BuildContext context, packageInfo) {
                     switch (packageInfo.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:

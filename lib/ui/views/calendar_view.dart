@@ -58,7 +58,7 @@ class CalendarViewState extends State<CalendarView> {
         child: Center(
           child: FutureBuilder<ICalendar>(
             future: _loadCalendar(context),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
+            builder: (BuildContext context, snapshot) {
               if (snapshot.hasError) {
                 return ErrorCalendarWidget(
                     snapshot.error.toString(), setState, _formKey);
@@ -67,8 +67,7 @@ class CalendarViewState extends State<CalendarView> {
                 return Scrollbar(
                   child: StreamBuilder<Widget>(
                     stream: _listEventCards(snapshot.data),
-                    builder:
-                        (BuildContext context, AsyncSnapshot snapshotStream) {
+                    builder: (BuildContext context, snapshotStream) {
                       switch (snapshotStream.connectionState) {
                         case ConnectionState.none:
                         case ConnectionState.waiting:

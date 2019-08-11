@@ -86,7 +86,7 @@ void main() {
       );
       print(status);
 
-      expect(status, contains("ok"));
+      expect(status, equals(''));
     });
 
     test('Not enough information report', () async {
