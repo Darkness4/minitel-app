@@ -1,3 +1,4 @@
+/// Post generated from Facebook Graph API
 class Post {
   String message;
   String id;

@@ -1,5 +1,6 @@
 import 'post.dart';
 
+/// Facebook User feed generated from Fracebook 4.0 Graph API
 class Feed {
   List<Post> posts;
   String nextUrl;
