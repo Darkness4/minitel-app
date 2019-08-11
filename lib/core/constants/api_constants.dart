@@ -21,6 +21,8 @@ import 'dart:convert';
 /// ```
 ///
 /// Please, see more in the .gitlab.yml file.
+///
+/// Also, for secutiry reason, DO NOT ADD ANY UNIT TEST USING THIS FILE.
 class ApiConstants {
   /// Slack incomming webhook endpoint
   static const _webhook = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple

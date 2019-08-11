@@ -3,17 +3,16 @@ import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 
 void main() {
   final _version = VersionAPI();
-  test('Get latest release version', () async {
+  test('Get latest release', () async {
     var version = await _version.getLatestVersion();
-    print(version);
+    print(version.toJson());
 
-    expect(version, contains('.'));
-  });
-
-  test('Get latest release URL', () async {
-    var url = await _version.getLatestVersionURL();
-    print(url);
-
-    expect(url, contains('https'));
+    expect(version.createdAt != null, true);
+    expect(version.htmlUrl != null, true);
+    expect(version.id != null, true);
+    expect(version.name != null, true);
+    expect(version.publishedAt != null, true);
+    expect(version.tagName != null, true);
+    expect(version.url != null, true);
   });
 }
