@@ -13,7 +13,7 @@ class FacebookAPI {
 
   Future<Feed> getFeed() async {
     HttpClientRequest request = await _client.getUrl(Uri.parse(
-        "https://graph.facebook.com/v4.0/me/feed?fields=full_picture,message,created_time&access_token=${ApiConstants.facebookApi}"));
+        "https://graph.facebook.com/v4.0/me/feed?fields=full_picture,permalink_url,message,created_time&access_token=${ApiConstants.facebookApi}"));
     HttpClientResponse response = await request.close();
 
     var body = await response.cast<List<int>>().transform(utf8.decoder).join();

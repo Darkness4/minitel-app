@@ -18,7 +18,7 @@ class NewsView extends StatelessWidget {
         body: NestedScrollView(
           body: TabBarView(
             children: <Widget>[
-              const FacebookTab(), // TODO: Facebook
+              const FacebookTab(),
               const GithubTab(),
             ],
           ),

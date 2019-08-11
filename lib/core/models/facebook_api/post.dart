@@ -2,6 +2,7 @@ class Post {
   String message;
   String id;
   String pictureUrl;
+  String permalinkUrl;
   DateTime createdTime;
 
   Post({
@@ -9,13 +10,15 @@ class Post {
     this.id,
     this.pictureUrl,
     this.createdTime,
+    this.permalinkUrl,
   });
 
   Post.fromJson(Map<String, dynamic> json) {
     message = json["message"] ?? "";
-    id = json["id"] ?? "";
+    id = json["id"];
     pictureUrl = json["full_picture"] ?? "";
     createdTime = DateTime.parse(json["created_time"]);
+    permalinkUrl = json["permalink_url"];
   }
 
   Map<String, dynamic> toJson() {

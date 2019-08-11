@@ -19,6 +19,7 @@ class GithubTab extends StatelessWidget {
           future: Provider.of<WebFeedAPI>(context).getAtom(url),
           builder: (BuildContext context, snapshot) => snapshot.hasData
               ? ListView(
+                  padding: const EdgeInsets.all(10.0),
                   children: <Widget>[
                     for (AtomItem atomItem in snapshot.data.items)
                       NewsCard(item: atomItem),
