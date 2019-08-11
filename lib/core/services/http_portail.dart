@@ -84,6 +84,7 @@ class PortailAPI {
     return status;
   }
 
+  /// Get the Portail cookie from SharedPrefs
   Future<String> getSavedCookiePortail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String contents = prefs.getString('cookiePortail') ?? "";
@@ -91,11 +92,13 @@ class PortailAPI {
     return contents;
   }
 
+  /// Save the cookie in a SharedPrefs
   void saveCookiePortail(String cookie) async {
     var prefs = await SharedPreferences.getInstance();
     await prefs.setString('cookiePortail', cookie);
   }
 
+  /// Save the cookie gotten through CAS Authentication in a SharedPrefs
   Future<bool> saveCookiePortailFromLogin(
       {String username, String password}) async {
     String cookie =

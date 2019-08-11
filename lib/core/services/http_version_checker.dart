@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-/// HTTP Requests for github API
+/// HTTP Requests for github API // TODO: Convert to a similar API
 class VersionAPI {
   final _client = HttpClient();
 
+  /// Get the latest version of the app from Github Source
   Future<String> get _latestVersionAPI async {
     var status = "";
 
@@ -20,6 +21,7 @@ class VersionAPI {
     return status;
   }
 
+  /// Get the tag name from Github source.
   Future<String> getLatestVersion() async {
     var jsonString = await _latestVersionAPI;
     Map<String, dynamic> latestVersionJson = jsonDecode(jsonString);
@@ -27,6 +29,7 @@ class VersionAPI {
     return latestVersionJson["tag_name"];
   }
 
+  /// Get the url from Github source.
   Future<String> getLatestVersionURL() async {
     var jsonString = await _latestVersionAPI;
     Map<String, dynamic> latestVersionJson = jsonDecode(jsonString);

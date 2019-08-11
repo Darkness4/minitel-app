@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:minitel_toolbox/core/constants/api_constants.dart';
 
+/// Slack Incomming Webhook API
 class WebhookAPI {
   final _client = HttpClient();
 

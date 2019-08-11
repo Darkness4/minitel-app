@@ -4,8 +4,9 @@ import 'dart:io';
 import 'package:minitel_toolbox/core/constants/api_constants.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/feed.dart';
 
+/// Facebook Graph API 4.0
 class FacebookAPI {
-  var _client = HttpClient();
+  final _client = HttpClient();
 
   /// Get the url to HTTP GET the profile picture
   String getProfilePicture() {

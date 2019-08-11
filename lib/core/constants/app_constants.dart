@@ -48,6 +48,9 @@ class MyIPAdresses {
   static const String stormshield = "fw-cgcp.emse.fr";
 }
 
+/// Some texts constants
+///
+/// This will probably be used if the app get intl.
 class Texts {
   static const List<String> agendaVide = [
     "Ben alors ? On n'a pas cours ?",
