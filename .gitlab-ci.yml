@@ -42,11 +42,14 @@ pages:
 build-test:
   stage: test
   script:
+    - apt install -y sed
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
     - echo "keyAlias=${ALIAS}" >> android/key.properties
     - echo "storeFile=keystore.jks" >> android/key.properties
+    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+    - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - flutter packages get
     - flutter build apk --release
   except:
