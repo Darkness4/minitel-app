@@ -78,3 +78,4 @@ key.properties
 ios/Flutter/flutter_export_environment.sh
 
 **/secrets.*
+api_constants.dart
