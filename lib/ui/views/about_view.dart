@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
-import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:package_info/package_info.dart';
 
 /// Page About
@@ -83,8 +83,7 @@ class AboutView extends StatelessWidget {
                 title: const Text("Version"),
                 subtitle: FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<PackageInfo> packageInfo) {
+                  builder: (BuildContext context, packageInfo) {
                     switch (packageInfo.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:

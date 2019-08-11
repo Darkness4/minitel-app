@@ -62,8 +62,7 @@ class DiagnoseTab extends StatelessWidget {
                     item != DiagnosisContent.ip) // Ignore them
                   FutureBuilder<String>(
                     future: _diagnosis.report[item],
-                    builder:
-                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    builder: (BuildContext context, snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
                           return LogCard(

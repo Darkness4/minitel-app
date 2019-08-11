@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
-import 'package:minitel_toolbox/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/widgets/buttons.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
