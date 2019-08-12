@@ -12,15 +12,15 @@ import 'portal_tabs/login.dart';
 
 class PortalView extends StatefulWidget {
   final String title;
-  final VersionAPI version;
 
-  const PortalView({Key key, this.title, @required this.version})
-      : super(key: key);
+  const PortalView({Key key, this.title}) : super(key: key);
 
   PortalViewState createState() => PortalViewState();
 }
 
 class PortalViewState extends State<PortalView> {
+  bool _hasTriggeredOnce = false;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -74,14 +74,17 @@ class PortalViewState extends State<PortalView> {
   }
 
   @override
-  void initState() {
-    _checkVersion(widget.version, context);
-    super.initState();
+  void didChangeDependencies() {
+    if (!_hasTriggeredOnce) {
+      _checkVersion(context);
+      _hasTriggeredOnce = true;
+    }
+    super.didChangeDependencies();
   }
 
-  void _checkVersion(VersionAPI version, BuildContext context) async {
+  void _checkVersion(BuildContext context) async {
     var packageInfo = PackageInfo.fromPlatform();
-    var versionAPI = version.getLatestVersion();
+    var versionAPI = Provider.of<VersionAPI>(context).getLatestVersion();
     PackageInfo actualRelease = await packageInfo;
     LatestRelease latestRelease = await versionAPI;
     if (actualRelease.version != latestRelease.tagName) {

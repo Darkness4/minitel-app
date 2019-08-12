@@ -3,17 +3,15 @@ import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/github_api.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 
 /// Page About
 class AboutView extends StatelessWidget {
   final String title;
-  final VersionAPI _versionAPI;
   const AboutView({
     Key key,
     @required this.title,
-    @required VersionAPI versionAPI,
-  })  : _versionAPI = versionAPI,
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +104,8 @@ class AboutView extends StatelessWidget {
                 title: const Text("Chercher une mise à jour"),
                 onTap: () async {
                   var packageInfo = PackageInfo.fromPlatform();
-                  var versionAPI = _versionAPI.getLatestVersion();
+                  var versionAPI =
+                      Provider.of<VersionAPI>(context).getLatestVersion();
                   PackageInfo actualRelease = await packageInfo;
                   LatestRelease latestRelease = await versionAPI;
                   if (actualRelease.version != latestRelease.tagName) {

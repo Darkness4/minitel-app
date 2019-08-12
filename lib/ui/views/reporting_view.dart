@@ -30,7 +30,7 @@ class ReportingViewState extends State<ReportingView>
   Widget build(BuildContext context) {
     return BaseWidget<ReportingViewModel>(
       model: ReportingViewModel(
-        webhook: Provider.of(context),
+        webhookAPI: Provider.of(context),
         gatewayAPI: Provider.of(context),
       ),
       child: ReportTab(
