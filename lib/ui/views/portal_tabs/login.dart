@@ -275,8 +275,7 @@ class _StatusCard extends StatelessWidget {
                 FutureBuilder<String>(
                   future: _calendarUrlAPI
                       .savedCalendarURL, // a previously-obtained Future<String> or null
-                  builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  builder: (BuildContext context, snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:
@@ -301,8 +300,7 @@ class _StatusCard extends StatelessWidget {
                 ),
                 FutureBuilder<String>(
                   future: _portailAPI.getSavedCookiePortail(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  builder: (BuildContext context, snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:

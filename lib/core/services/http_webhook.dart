@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-class WebhookAPI {
-  static const String _webhook =
-      "aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDlTNFhMQzhHL0JHV1NHS1lKVS94RTFzQzdJNEc0MWdDMnNMYXlSZENkM1U=";
+import 'package:minitel_toolbox/core/constants/api_constants.dart';
 
+/// Slack Incomming Webhook API
+class WebhookAPI {
   final _client = HttpClient();
 
   /// Report data to the Slack of Minitel
@@ -49,8 +49,8 @@ class WebhookAPI {
       };
 
       try {
-        HttpClientRequest request = await _client
-            .postUrl(Uri.parse(utf8.decode(base64.decode(_webhook))))
+        HttpClientRequest request = await _client.postUrl(Uri.parse(
+            "https://hooks.slack.com/services/${ApiConstants.webhook}"))
           ..headers.contentType =
               ContentType("application", "json", charset: "utf-8")
           ..write(json.encode(data));

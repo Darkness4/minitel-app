@@ -3,8 +3,11 @@ import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Calendar Url "API"
 class CalendarUrlAPI {
   final _client = HttpClient();
+
+  /// Get from SharedPrefs the url to get the ical
   Future<String> get savedCalendarURL async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String contents = prefs.getString('calendarURL') ?? "";
@@ -12,6 +15,7 @@ class CalendarUrlAPI {
     return contents;
   }
 
+  /// Get from EMSE the url to get the ical
   Future<String> getCalendarURL({String username, String password}) async {
     var status = "";
     var phpSessionIDCAS = await _bypassCAS(
@@ -36,11 +40,13 @@ class CalendarUrlAPI {
     return status;
   }
 
+  /// Save the url to get the ical in a SharedPrefs
   Future<void> saveCalendarURL(String url) async {
     var prefs = await SharedPreferences.getInstance();
     await prefs.setString('calendarURL', url);
   }
 
+  /// Login through EMSE CAS Authentication
   Future<String> _bypassCAS({String username, String password}) async {
     var referee = "https://portail.emse.fr/ics/";
 

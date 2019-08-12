@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/models/github_api.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
-import 'package:minitel_toolbox/funcs/url_launch.dart';
 import 'package:package_info/package_info.dart';
 
 /// Page About
@@ -83,8 +84,7 @@ class AboutView extends StatelessWidget {
                 title: const Text("Version"),
                 subtitle: FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<PackageInfo> packageInfo) {
+                  builder: (BuildContext context, packageInfo) {
                     switch (packageInfo.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:
@@ -105,11 +105,11 @@ class AboutView extends StatelessWidget {
               ListTile(
                 title: const Text("Chercher une mise à jour"),
                 onTap: () async {
-                  var latestVersion = _versionAPI.getLatestVersion();
-                  var actualVersion = PackageInfo.fromPlatform();
-                  List<dynamic> ensemble =
-                      await Future.wait([actualVersion, latestVersion]);
-                  if (ensemble[0].version != ensemble[1]) {
+                  var packageInfo = PackageInfo.fromPlatform();
+                  var versionAPI = _versionAPI.getLatestVersion();
+                  PackageInfo actualRelease = await packageInfo;
+                  LatestRelease latestRelease = await versionAPI;
+                  if (actualRelease.version != latestRelease.tagName) {
                     await showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -118,7 +118,7 @@ class AboutView extends StatelessWidget {
                             "Une nouvelle version est disponible !",
                           ),
                           content: Text(
-                              "La version ${ensemble[1]} est la dernière version."),
+                              "La version ${latestRelease.tagName} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
                               child: const Text("Close"),
@@ -127,9 +127,8 @@ class AboutView extends StatelessWidget {
                             RaisedButton(
                               textColor: Colors.white,
                               child: const Text("Update"),
-                              onPressed: () => _versionAPI
-                                  .getLatestVersionURL()
-                                  .then((url) => LaunchURL.launchURL(url)),
+                              onPressed: () =>
+                                  LaunchURL.launchURL(latestRelease.htmlUrl),
                             )
                           ],
                         );
@@ -143,7 +142,7 @@ class AboutView extends StatelessWidget {
                           title:
                               const Text("Il s'agit de la dernière version."),
                           content: Text(
-                              "La version ${ensemble[1]} est la dernière version."),
+                              "La version ${latestRelease.tagName} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
                               child: const Text("Close"),
@@ -152,9 +151,8 @@ class AboutView extends StatelessWidget {
                             RaisedButton(
                               textColor: Colors.white,
                               child: const Text("Télécharger"),
-                              onPressed: () => _versionAPI
-                                  .getLatestVersionURL()
-                                  .then((url) => LaunchURL.launchURL(url)),
+                              onPressed: () =>
+                                  LaunchURL.launchURL(latestRelease.htmlUrl),
                             )
                           ],
                         );

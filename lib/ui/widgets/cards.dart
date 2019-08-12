@@ -4,7 +4,7 @@ import 'package:html/parser.dart' show parseFragment;
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
-import 'package:minitel_toolbox/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:provider/provider.dart';
@@ -12,14 +12,13 @@ import 'package:provider/provider.dart';
 class DocCard extends StatelessWidget {
   final List<Widget> children;
   final double elevation;
-  final double extPadding;
   final double intPadding;
 
-  const DocCard(
-      {@required this.children,
-      this.elevation = 4.0,
-      this.extPadding = 10.0,
-      this.intPadding = 15.0});
+  const DocCard({
+    @required this.children,
+    this.elevation = 4.0,
+    this.intPadding = 15.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -266,134 +265,135 @@ class LogCard extends StatelessWidget {
 class NewsCard extends StatelessWidget {
   final dynamic item;
   final double elevation;
-  final double extPadding;
 
   const NewsCard({
     @required this.item,
     this.elevation = 4.0,
-    this.extPadding = 10.0,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(extPadding),
-      child: Card(
-        elevation: elevation,
-        child: InkWell(
-          onTap: () => LaunchURL.launchURL(
-              item.links.map((link) => link.href).toList().first),
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Image.network(
-                        item.media.thumbnails.first.url
-                            .toString()
-                            .replaceAll("?s=30", "?s=90"),
-                        fit: BoxFit.cover,
-                        height: 60,
-                        width: 60,
-                      ),
+    return Card(
+      elevation: elevation,
+      child: InkWell(
+        onTap: () => LaunchURL.launchURL(
+            item.links.map((link) => link.href).toList().first),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Image.network(
+                      item.media.thumbnails.first.url
+                          .toString()
+                          .replaceAll("?s=30", "?s=90"),
+                      fit: BoxFit.cover,
+                      height: 60,
+                      width: 60,
                     ),
-                    Flexible(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            item.title.trim(),
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline
-                                .copyWith(height: 1),
-                          ),
-                          Text(
-                            (item.authors)
-                                .map((author) => author.name)
-                                .toList()
-                                .join(" "),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      stops: [0.0, 0.1, 1.0],
-                      colors: [
-                        Colors.black,
-                        Color(item.id.hashCode ~/ 100 + 0xFF000000),
-                        Colors.deepPurpleAccent,
+                  ),
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          item.title.trim(),
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline
+                              .copyWith(height: 1),
+                        ),
+                        Text(
+                          (item.authors)
+                              .map((author) => author.name)
+                              .toList()
+                              .join(" "),
+                        ),
                       ],
                     ),
                   ),
-                  height: 100,
-                  child: Center(
-                    child: Text(
-                      "Version v${item.id.substring(41)}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .display1
-                          .apply(color: Colors.white),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        parseFragment(item.content).text,
-                        overflow: TextOverflow.fade,
-                        maxLines: 10,
-                      ),
-                      Text("\nSee More...",
-                          style: TextStyle(
-                              color: Colors.blue, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.0, 0.1, 1.0],
+                    colors: [
+                      Colors.black,
+                      Color(item.id.hashCode ~/ 100 + 0xFF000000),
+                      Colors.deepPurpleAccent,
                     ],
                   ),
                 ),
+                height: 100,
+                child: Center(
+                  child: Text(
+                    "Version v${item.id.substring(41)}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .display1
+                        .apply(color: Colors.white),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20.0),
+                child: Text(
+                  parseFragment(item.content).text,
+                  overflow: TextOverflow.fade,
+                  maxLines: 10,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: FlatButton(
+                    textColor: Colors.blue,
+                    child: Text(
+                      "See More...",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () => LaunchURL.launchURL(
+                        item.links.map((link) => link.href).toList().first),
+                  ),
+                ),
+              )
 
-                // Paragraph(
-                //   item.summary != null ? item.summary : "",
-                //   style: TextStyle(
-                //     color: Colors.white,
-                //   ),
-                // ),
-                // Paragraph(item.content.toString()),
-                // Paragraph(item.published.toString()),
-                // Paragraph(item.source.toString()),
-                // Paragraph(
-                //   item.links.map((link) => link.href).toList().join(""),
-                //   style: TextStyle(
-                //     color: Colors.white,
-                //   ),
-                // ),
-                // Paragraph(item.categories.map((category) => category.lavel).toList().join(" ")),
-                // Paragraph((item.contributors).map((contributor) => contributor.name).toList().join(" ")),
-                // Paragraph(item.rights.toString()),
-                // Paragraph(item.media.toString()),
+              // Paragraph(
+              //   item.summary != null ? item.summary : "",
+              //   style: TextStyle(
+              //     color: Colors.white,
+              //   ),
+              // ),
+              // Paragraph(item.content.toString()),
+              // Paragraph(item.published.toString()),
+              // Paragraph(item.source.toString()),
+              // Paragraph(
+              //   item.links.map((link) => link.href).toList().join(""),
+              //   style: TextStyle(
+              //     color: Colors.white,
+              //   ),
+              // ),
+              // Paragraph(item.categories.map((category) => category.lavel).toList().join(" ")),
+              // Paragraph((item.contributors).map((contributor) => contributor.name).toList().join(" ")),
+              // Paragraph(item.rights.toString()),
+              // Paragraph(item.media.toString()),
 
-                // Text(item.updated,
-                //     style: TextStyle(
-                //       fontStyle: FontStyle.italic,
-                //       color: Colors.white,
-                //     )),
-              ],
-            ),
+              // Text(item.updated,
+              //     style: TextStyle(
+              //       fontStyle: FontStyle.italic,
+              //       color: Colors.white,
+              //     )),
+            ],
           ),
         ),
       ),

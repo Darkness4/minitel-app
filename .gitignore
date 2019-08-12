@@ -76,3 +76,5 @@ key.properties
 # Coveralls
 .coveralls.yml
 ios/Flutter/flutter_export_environment.sh
+
+**/secrets.*

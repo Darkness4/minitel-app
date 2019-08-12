@@ -3,12 +3,10 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_webfeed.dart';
-import 'package:minitel_toolbox/core/services/http_webhook.dart';
 
 void main() {
   final _gateway = GatewayAPI();
   final _webfeed = WebFeedAPI();
-  final _webhook = WebhookAPI();
 
   group('Http Requests', () {
     test('Bad Username or Password to 195.83.139.7', () async {
@@ -76,27 +74,6 @@ void main() {
       print(status);
 
       expect(status, contains("NETASQ_USER"));
-    });
-
-    test('Report to slack', () async {
-      var status = await _webhook.report(
-        "Unit test",
-        attachments: {"test": "test"},
-        channel: "DE8PA0Z1C",
-      );
-      print(status);
-
-      expect(status, contains("ok"));
-    });
-
-    test('Not enough information report', () async {
-      var status = await _webhook.report(
-        "",
-        channel: "DE8PA0Z1C",
-      );
-      print(status);
-
-      expect(status, contains("Not enough information."));
     });
 
     test('Get Atom from Github', () async {

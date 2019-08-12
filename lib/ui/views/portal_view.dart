@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/models/github_api.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
-import 'package:minitel_toolbox/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
@@ -79,15 +80,17 @@ class PortalViewState extends State<PortalView> {
   }
 
   void _checkVersion(VersionAPI version, BuildContext context) async {
-    var latestVersion = version.getLatestVersion();
-    var actualVersion = PackageInfo.fromPlatform();
-    List<dynamic> ensemble = await Future.wait([actualVersion, latestVersion]);
-    if (ensemble[0].version != ensemble[1]) {
+    var packageInfo = PackageInfo.fromPlatform();
+    var versionAPI = version.getLatestVersion();
+    PackageInfo actualRelease = await packageInfo;
+    LatestRelease latestRelease = await versionAPI;
+    if (actualRelease.version != latestRelease.tagName) {
       await showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text("Une nouvelle version est disponible !"),
-          content: Text("La version ${ensemble[1]} est la dernière version."),
+          content: Text(
+              "La version ${latestRelease.tagName} est la dernière version."),
           actions: <Widget>[
             FlatButton(
               child: Text("Close"),
@@ -96,9 +99,7 @@ class PortalViewState extends State<PortalView> {
             RaisedButton(
               textColor: Colors.white,
               child: const Text("Update"),
-              onPressed: () => version
-                  .getLatestVersionURL()
-                  .then((url) => LaunchURL.launchURL(url)),
+              onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
             )
           ],
         ),
