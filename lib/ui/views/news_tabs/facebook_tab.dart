@@ -13,11 +13,13 @@ class FacebookTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var pictureUrl = Provider.of<FacebookAPI>(context).getProfilePicture();
+    final _facebookAPI = Provider.of<FacebookAPI>(context);
+    final pictureUrl = _facebookAPI.getProfilePicture();
+
     return Center(
       child: Scrollbar(
         child: FutureBuilder<Feed>(
-          future: Provider.of<FacebookAPI>(context).getFeed(),
+          future: _facebookAPI.getFeed(),
           builder: (context, feedSnapshot) {
             switch (feedSnapshot.connectionState) {
               case ConnectionState.none:

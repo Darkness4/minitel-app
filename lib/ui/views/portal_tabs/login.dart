@@ -7,7 +7,7 @@ import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
-import 'package:minitel_toolbox/ui/views/base_widget.dart';
+import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -83,9 +83,6 @@ class LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(20.0),
         children: <Widget>[
           _StatusCard(
-            portailAPI: model.portailAPI,
-            calendarURL: model.calendarUrlAPI,
-            gatewayAPI: model.gatewayAPI,
             selectedUrl: model.selectedUrl.value,
           ),
           Card(
@@ -173,7 +170,7 @@ class LoginPageState extends State<LoginPage> {
                       _uidController.text,
                       _pswdController.text,
                     ),
-                    label: Text(
+                    label: const Text(
                       "Se connecter",
                       style: TextStyle(
                         color: Colors.white,
@@ -214,25 +211,20 @@ class LoginPageState extends State<LoginPage> {
 }
 
 class _StatusCard extends StatelessWidget {
-  final PortailAPI _portailAPI;
-  final CalendarUrlAPI _calendarUrlAPI;
-  final GatewayAPI _gatewayAPI;
   final String _selectedUrl;
 
   const _StatusCard({
     Key key,
-    @required PortailAPI portailAPI,
-    @required CalendarUrlAPI calendarURL,
-    @required GatewayAPI gatewayAPI,
     @required String selectedUrl,
-  })  : _portailAPI = portailAPI,
-        _calendarUrlAPI = calendarURL,
-        _gatewayAPI = gatewayAPI,
-        _selectedUrl = selectedUrl,
+  })  : _selectedUrl = selectedUrl,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _gatewayAPI = Provider.of<GatewayAPI>(context);
+    final _portailAPI = Provider.of<PortailAPI>(context);
+    final _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
+
     return Card(
       elevation: 10.0,
       child: Padding(
@@ -251,26 +243,19 @@ class _StatusCard extends StatelessWidget {
                     case ConnectionState.none:
                     case ConnectionState.active:
                     case ConnectionState.waiting:
-                      return const Text(
-                        "Passerelle: ...",
-                        style: TextStyle(fontSize: 24),
+                      return const Center(
+                        child: LinearProgressIndicator(),
                       );
                     case ConnectionState.done:
-                      return Text.rich(
-                        TextSpan(
-                          text: "Passerelle: ",
-                          style: const TextStyle(fontSize: 24),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: snapshot.data,
-                              style: TextStyle(
-                                color: snapshot.hasError
-                                    ? Colors.red
-                                    : Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
+                      return Text(
+                        snapshot.data,
+                        style: TextStyle(
+                            color: (snapshot.hasError ||
+                                    !snapshot.data.contains("second"))
+                                ? Colors.red
+                                : Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
                       );
                   }
                   return null; //

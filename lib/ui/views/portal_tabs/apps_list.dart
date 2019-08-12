@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 
 import 'portal_apps/imprimante.dart';
@@ -9,10 +8,7 @@ import 'portal_apps/sogo.dart';
 
 /// Fragment listing in a [GridView] multiple supported Apps.
 class AppsList extends StatelessWidget {
-  final PortailAPI _portailAPI;
-  const AppsList({Key key, @required PortailAPI portailAPI})
-      : _portailAPI = portailAPI,
-        super(key: key);
+  const AppsList({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +19,7 @@ class AppsList extends StatelessWidget {
         crossAxisSpacing: 10,
         crossAxisCount: 2,
         children: <Widget>[
-          _PortailCard(portailAPI: _portailAPI),
+          const _PortailCard(),
           const _SogoCard(),
           const _ImprimanteCard(),
           const _WikiMinitelCard(),
@@ -69,11 +65,7 @@ class _ImprimanteCard extends StatelessWidget {
 }
 
 class _PortailCard extends StatelessWidget {
-  final PortailAPI _portailAPI;
-
-  const _PortailCard({Key key, @required portailAPI})
-      : _portailAPI = portailAPI,
-        super(key: key);
+  const _PortailCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +74,9 @@ class _PortailCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         onTap: () async {
-          String cookie = await _portailAPI.getSavedCookiePortail();
-          print(cookie);
           await Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => PortailWebView(cookie: cookie)),
+            MaterialPageRoute(builder: (context) => const PortailWebView()),
           );
         },
         child: Column(

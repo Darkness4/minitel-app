@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 
 import 'views/about_view.dart';
-import 'views/calendar_view.dart';
+import 'views/agenda_view.dart';
 import 'views/docs_view.dart';
 import 'views/feedback_view.dart';
 import 'views/news_view.dart';
@@ -15,44 +15,37 @@ class Router {
     switch (settings.name) {
       case RoutePaths.Authentication:
         return FadeRoute(
-          builder: (BuildContext context) =>
-              const PortalView(title: "Authentification"),
+          builder: (_) => const PortalView(title: "Authentification"),
           settings: settings,
         );
       case RoutePaths.Reporting:
         return FadeRoute(
-          builder: (BuildContext context) =>
-              const ReportingView(title: "Signaler Minitel"),
+          builder: (_) => const ReportingView(title: "Signaler Minitel"),
           settings: settings,
         );
       case RoutePaths.Docs:
         return FadeRoute(
-          builder: (BuildContext context) =>
-              const DocumentationView(title: "Documentation"),
+          builder: (_) => const DocumentationView(title: "Documentation"),
           settings: settings,
         );
       case RoutePaths.News:
         return FadeRoute(
-          builder: (BuildContext context) =>
-              const NewsView(title: "Nouveautés"),
+          builder: (_) => const NewsView(title: "Nouveautés"),
           settings: settings,
         );
-      case RoutePaths.Calendar:
+      case RoutePaths.Agenda:
         return FadeRoute(
-          builder: (BuildContext context) =>
-              const CalendarView(title: "Calendrier"),
+          builder: (_) => const AgendaView(title: "Agenda"),
           settings: settings,
         );
       case RoutePaths.About:
         return MaterialPageRoute(
-          builder: (BuildContext context) =>
-              const AboutView(title: "A propos de l'application"),
+          builder: (_) => const AboutView(title: "A propos de l'application"),
           settings: settings,
         );
       case RoutePaths.Feedback:
         return FadeRoute(
-          builder: (BuildContext context) =>
-              const FeedbackView(title: "Alpha Feedback"),
+          builder: (_) => const FeedbackView(title: "Alpha Feedback"),
           settings: settings,
         );
       default:

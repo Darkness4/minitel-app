@@ -7,26 +7,11 @@ import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
-import 'package:minitel_toolbox/ui/shared/app_colors.dart';
-import 'package:minitel_toolbox/ui/widgets/calendar_widgets.dart';
+import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
-import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 
-import 'calendar_pages/notification_settings_page.dart';
-
-class CalendarView extends StatefulWidget {
-  final String title;
-
-  const CalendarView({Key key, this.title}) : super(key: key);
-
-  @override
-  CalendarViewState createState() => CalendarViewState();
-}
-
-enum MenuTest { Var0, Var1 }
-
-class CalendarViewState extends State<CalendarView> {
+class AgendaViewModel extends ChangeNotifier {
   static const _month = <String>[
     "Janvier",
     "Février",
@@ -41,11 +26,6 @@ class CalendarViewState extends State<CalendarView> {
     "Novembre",
     "Décembre",
   ];
-  final _formKey = GlobalKey<FormState>();
-  final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  final _initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/launcher_icon');
-  final _initializationSettingsIOS = IOSInitializationSettings();
   final _androidPlatformChannelSpecifics = AndroidNotificationDetails(
     'minitel_channel',
     'Minitel Channel',
@@ -55,81 +35,16 @@ class CalendarViewState extends State<CalendarView> {
     enableVibration: true,
   );
   final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
-  final _notificationSettings = NotificationSettings();
-  List<Widget> _monthPages = [];
+  final notificationSettings = NotificationSettings();
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => NotificationSettingsPage(
-                  notificationSettings: _notificationSettings,
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        color: MinitelColors.PrimaryColor,
-        child: FutureBuilder<ICalendar>(
-          future: _loadCalendar(context),
-          builder: (BuildContext context, snapshot) {
-            if (snapshot.hasError) {
-              return ErrorCalendarWidget(
-                snapshot.error.toString(),
-                setState,
-                _formKey,
-              );
-            }
-            if (snapshot.hasData) {
-              return Scrollbar(
-                child: StreamBuilder<Widget>(
-                  stream: _listEventCards(snapshot.data),
-                  builder: (BuildContext context, snapshotStream) {
-                    switch (snapshotStream.connectionState) {
-                      case ConnectionState.none:
-                      case ConnectionState.waiting:
-                        return const CircularProgressIndicator();
-                      case ConnectionState.active:
-                        _monthPages.add(snapshotStream.data);
-                        break;
-                      case ConnectionState.done:
-                        _monthPages.add(snapshotStream.data);
-                        return PageView(children: _monthPages);
-                    }
-                    return null;
-                  },
-                ),
-              );
-            } else {
-              return const CircularProgressIndicator();
-            }
-          },
-        ),
-      ),
-      drawer: const MainDrawer(),
-    );
-  }
+  List<Widget> monthPages = [];
 
-  @override
-  void initState() {
-    super.initState();
-    var initializationSettings = InitializationSettings(
-        _initializationSettingsAndroid, _initializationSettingsIOS);
-    _flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (payload) =>
-            _onSelectNotification(payload, context));
-  }
+  AgendaViewModel({
+    @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
+  }) : _flutterLocalNotificationsPlugin = flutterLocalNotificationsPlugin;
 
-  Stream<Widget> _listEventCards(ICalendar ical) async* {
+  Stream<Widget> listEventCards(ICalendar ical) async* {
     List<Widget> monthlyWidgets;
     List<Widget> dailyEvents = [];
     DateTime oldDt;
@@ -161,7 +76,7 @@ class CalendarViewState extends State<CalendarView> {
         DateTime dt = DateTime.parse(event["DTSTART"]);
 
         // Notification System
-        if (dt.isBefore(DateTime.now().add(_notificationSettings.range))) {
+        if (dt.isBefore(DateTime.now().add(notificationSettings.range))) {
           var dtstart = DateFormat.Hm().format(dt);
           var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
 
@@ -175,7 +90,7 @@ class CalendarViewState extends State<CalendarView> {
                 " - "
                 "$dtend",
             scheduledNotificationDateTime:
-                dt.subtract(_notificationSettings.early),
+                dt.subtract(notificationSettings.early),
             payload: "${event["SUMMARY"]};"
                 "${event["DESCRIPTION"]}\n"
                 "${event["LOCATION"]}\n"
@@ -213,7 +128,7 @@ class CalendarViewState extends State<CalendarView> {
     }
   }
 
-  Future<ICalendar> _loadCalendar(BuildContext context) async {
+  Future<ICalendar> loadCalendar(BuildContext context) async {
     CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
     ICalendar ical = ICalendar(_calendarUrlAPI);
 
@@ -231,18 +146,6 @@ class CalendarViewState extends State<CalendarView> {
     await ical.getCalendarFromFile();
 
     return ical;
-  }
-
-  Future<void> _onSelectNotification(
-      String payload, BuildContext context) async {
-    List<String> output = payload.split(';');
-    await showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text("${output[0]}"),
-        content: Text("${output.length < 2 ? "null" : output[1]}"),
-      ),
-    );
   }
 
   Future<void> _scheduleNotification(

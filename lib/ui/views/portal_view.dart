@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/models/github_api.dart';
-import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
@@ -40,9 +39,7 @@ class PortalViewState extends State<PortalView> {
             child: TabBarView(
               children: <Widget>[
                 const LoginPage(),
-                AppsList(
-                  portailAPI: Provider.of<PortailAPI>(context),
-                ),
+                const AppsList(),
               ],
             ),
           ),

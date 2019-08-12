@@ -59,9 +59,8 @@ class MainDrawer extends StatelessWidget {
               leading: const Icon(Icons.calendar_today),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name !=
-                    RoutePaths.Calendar) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.Calendar);
+                if (ModalRoute.of(context).settings.name != RoutePaths.Agenda) {
+                  Navigator.pushReplacementNamed(context, RoutePaths.Agenda);
                 }
               }),
           // ListTile(
@@ -177,7 +176,7 @@ class DocsDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     SlideRightRoute(
-                      widget: ToolboxDocs(controller: _newController),
+                      builder: (_) => ToolboxDocs(controller: _newController),
                     ),
                   );
                 } else if (_docsPageId == DocsPageId.Wiki) {
@@ -210,7 +209,7 @@ class DocsDrawer extends StatelessWidget {
                   await Navigator.push(
                     context,
                     SlideRightRoute(
-                      widget: ToolboxDocs(controller: _newController),
+                      builder: (_) => ToolboxDocs(controller: _newController),
                     ),
                   );
                 } else if (_docsPageId == DocsPageId.Wiki) {
@@ -244,7 +243,7 @@ class DocsDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     SlideRightRoute(
-                      widget: WikiDocs(controller: _newController),
+                      builder: (_) => WikiDocs(controller: _newController),
                     ),
                   );
                 } else if (_docsPageId == DocsPageId.Toolbox) {
@@ -277,7 +276,7 @@ class DocsDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     SlideRightRoute(
-                      widget: WikiDocs(controller: _newController),
+                      builder: (_) => WikiDocs(controller: _newController),
                     ),
                   );
                 } else if (_docsPageId == DocsPageId.Toolbox) {
@@ -310,7 +309,7 @@ class DocsDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     SlideRightRoute(
-                      widget: WikiDocs(controller: _newController),
+                      builder: (_) => WikiDocs(controller: _newController),
                     ),
                   );
                 } else if (_docsPageId == DocsPageId.Toolbox) {
@@ -343,7 +342,7 @@ class DocsDrawer extends StatelessWidget {
                   Navigator.push(
                     context,
                     SlideRightRoute(
-                      widget: WikiDocs(controller: _newController),
+                      builder: (_) => WikiDocs(controller: _newController),
                     ),
                   );
                 } else if (_docsPageId == DocsPageId.Toolbox) {

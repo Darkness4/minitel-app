@@ -19,6 +19,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: ^0.15.8
   connectivity: 0.4.3+7  # Flutter Team
   dscript_exec: ^2.0.1  # Ravi Teja Gudapti
   share: 0.6.2+1  # Flutter Team

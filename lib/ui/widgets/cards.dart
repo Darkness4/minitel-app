@@ -366,33 +366,7 @@ class NewsCard extends StatelessWidget {
                         item.links.map((link) => link.href).toList().first),
                   ),
                 ),
-              )
-
-              // Paragraph(
-              //   item.summary != null ? item.summary : "",
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //   ),
-              // ),
-              // Paragraph(item.content.toString()),
-              // Paragraph(item.published.toString()),
-              // Paragraph(item.source.toString()),
-              // Paragraph(
-              //   item.links.map((link) => link.href).toList().join(""),
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //   ),
-              // ),
-              // Paragraph(item.categories.map((category) => category.lavel).toList().join(" ")),
-              // Paragraph((item.contributors).map((contributor) => contributor.name).toList().join(" ")),
-              // Paragraph(item.rights.toString()),
-              // Paragraph(item.media.toString()),
-
-              // Text(item.updated,
-              //     style: TextStyle(
-              //       fontStyle: FontStyle.italic,
-              //       color: Colors.white,
-              //     )),
+              ),
             ],
           ),
         ),
