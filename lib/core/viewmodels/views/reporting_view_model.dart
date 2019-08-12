@@ -14,7 +14,7 @@ class ReportingViewModel extends ChangeNotifier {
   final Diagnosis diagnosis;
 
   /// Webhook API called for hadling Slack communications
-  final WebhookAPI _webhook;
+  final WebhookAPI _webhookAPI;
 
   /// Percentage of completion of the circle
   final ValueNotifier<double> percentageDiagnoseProgress =
@@ -24,9 +24,9 @@ class ReportingViewModel extends ChangeNotifier {
   ButtonState diagnosisState = ButtonState.None;
 
   ReportingViewModel({
-    @required WebhookAPI webhook,
+    @required WebhookAPI webhookAPI,
     @required GatewayAPI gatewayAPI,
-  })  : _webhook = webhook,
+  })  : _webhookAPI = webhookAPI,
         diagnosis = Diagnosis(gatewayAPI: gatewayAPI);
 
   Future<DateTime> get _timeout async {
@@ -68,7 +68,7 @@ class ReportingViewModel extends ChangeNotifier {
     String status;
 
     if (DateTime.now().isAfter(timeout)) {
-      status = await _webhook.report(
+      status = await _webhookAPI.report(
         "*$title*\n"
         "_${description}_\n\n",
         attachments: await diagnosis.reportAll,

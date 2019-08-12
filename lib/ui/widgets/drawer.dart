@@ -36,7 +36,6 @@ class MainDrawer extends StatelessWidget {
           ListTile(
               title: const Text("Authentification"),
               leading: const Icon(Icons.apps),
-              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
@@ -49,7 +48,6 @@ class MainDrawer extends StatelessWidget {
           ListTile(
               title: const Text("Nouveautés"),
               leading: const Icon(Icons.rss_feed),
-              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.News) {
@@ -59,7 +57,6 @@ class MainDrawer extends StatelessWidget {
           ListTile(
               title: const Text("Agenda"),
               leading: const Icon(Icons.calendar_today),
-              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
@@ -70,7 +67,7 @@ class MainDrawer extends StatelessWidget {
           // ListTile(
           //     title: Text("Maps"),
           //     leading: const Icon(Icons.map),
-          //     trailing: const Icon(Icons.arrow_forward),
+          //
           //     onTap: () {
           //       Navigator.pop(context); // Close Drawer
           //       if (ModalRoute.of(context).settings.name != '/maps')
@@ -88,10 +85,6 @@ class MainDrawer extends StatelessWidget {
                   Icons.error,
                   color: Colors.white,
                 ),
-                trailing: const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                ),
                 onTap: () {
                   Navigator.pop(context); // Close Drawer
                   if (ModalRoute.of(context).settings.name !=
@@ -104,7 +97,6 @@ class MainDrawer extends StatelessWidget {
           ListTile(
               title: const Text("Documentation"),
               leading: const Icon(Icons.description),
-              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.Docs) {
@@ -112,9 +104,8 @@ class MainDrawer extends StatelessWidget {
                 }
               }),
           ListTile(
-            title: const Text("A propos..."),
+            title: const Text("À propos de Minitel Toolbox"),
             leading: const Icon(Icons.info),
-            trailing: const Icon(Icons.arrow_forward),
             onTap: () {
               Navigator.pop(context); // Close Drawer
               if (ModalRoute.of(context).settings.name != RoutePaths.About) {
@@ -127,7 +118,6 @@ class MainDrawer extends StatelessWidget {
             child: ListTile(
               title: const Text("Alpha Feedback"),
               leading: const Icon(Icons.chat),
-              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=

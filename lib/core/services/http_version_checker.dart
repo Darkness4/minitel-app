@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:minitel_toolbox/core/models/github_api.dart';
 
-/// HTTP Requests for github API // TODO: Convert to a similar API
+/// HTTP Requests for github API
 class VersionAPI {
   final _client = HttpClient();
 

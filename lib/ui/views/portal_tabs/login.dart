@@ -46,25 +46,34 @@ class LoginPageState extends State<LoginPage> {
         key: _formKey,
         child: Column(
           children: <Widget>[
-            TextFormField(
-              focusNode: _uidFocusNode,
-              controller: _uidController,
-              decoration: const InputDecoration(
-                hintText: "prénom.nom",
-                labelText: "Nom d'utilisateur",
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: TextFormField(
+                focusNode: _uidFocusNode,
+                controller: _uidController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.person),
+                  hintText: "prenom.nom",
+                  labelText: "Nom d'utilisateur",
+                ),
+                onEditingComplete: () {
+                  _uidFocusNode.unfocus();
+                  FocusScope.of(context).requestFocus(_pswdFocusNode);
+                },
               ),
-              onEditingComplete: () {
-                _uidFocusNode.unfocus();
-                FocusScope.of(context).requestFocus(_pswdFocusNode);
-              },
             ),
-            TextFormField(
-              controller: _pswdController,
-              obscureText: true,
-              focusNode: _pswdFocusNode,
-              decoration: const InputDecoration(
-                hintText: "Mot de passe",
-                labelText: "Mot de passe",
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: TextFormField(
+                controller: _pswdController,
+                obscureText: true,
+                focusNode: _pswdFocusNode,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.vpn_key),
+                  labelText: "Mot de passe",
+                ),
               ),
             ),
           ],

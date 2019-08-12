@@ -5,12 +5,15 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
+import 'package:minitel_toolbox/core/models/notifications.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/widgets/calendar_widgets.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';
+
+import 'calendar_pages/notification_settings_page.dart';
 
 class CalendarView extends StatefulWidget {
   final String title;
@@ -20,6 +23,8 @@ class CalendarView extends StatefulWidget {
   @override
   CalendarViewState createState() => CalendarViewState();
 }
+
+enum MenuTest { Var0, Var1 }
 
 class CalendarViewState extends State<CalendarView> {
   static const _month = <String>[
@@ -47,49 +52,67 @@ class CalendarViewState extends State<CalendarView> {
     'Notification channel for the Minitel App',
     importance: Importance.Max,
     priority: Priority.High,
+    enableVibration: true,
   );
   final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  final _notificationSettings = NotificationSettings();
   List<Widget> _monthPages = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => NotificationSettingsPage(
+                  notificationSettings: _notificationSettings,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
       body: Container(
+        alignment: Alignment.center,
         color: MinitelColors.PrimaryColor,
-        child: Center(
-          child: FutureBuilder<ICalendar>(
-            future: _loadCalendar(context),
-            builder: (BuildContext context, snapshot) {
-              if (snapshot.hasError) {
-                return ErrorCalendarWidget(
-                    snapshot.error.toString(), setState, _formKey);
-              }
-              if (snapshot.hasData) {
-                return Scrollbar(
-                  child: StreamBuilder<Widget>(
-                    stream: _listEventCards(snapshot.data),
-                    builder: (BuildContext context, snapshotStream) {
-                      switch (snapshotStream.connectionState) {
-                        case ConnectionState.none:
-                        case ConnectionState.waiting:
-                          return const CircularProgressIndicator();
-                        case ConnectionState.active:
-                          _monthPages.add(snapshotStream.data);
-                          break;
-                        case ConnectionState.done:
-                          _monthPages.add(snapshotStream.data);
-                          return PageView(children: _monthPages);
-                      }
-                      return null;
-                    },
-                  ),
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
-          ),
+        child: FutureBuilder<ICalendar>(
+          future: _loadCalendar(context),
+          builder: (BuildContext context, snapshot) {
+            if (snapshot.hasError) {
+              return ErrorCalendarWidget(
+                snapshot.error.toString(),
+                setState,
+                _formKey,
+              );
+            }
+            if (snapshot.hasData) {
+              return Scrollbar(
+                child: StreamBuilder<Widget>(
+                  stream: _listEventCards(snapshot.data),
+                  builder: (BuildContext context, snapshotStream) {
+                    switch (snapshotStream.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return const CircularProgressIndicator();
+                      case ConnectionState.active:
+                        _monthPages.add(snapshotStream.data);
+                        break;
+                      case ConnectionState.done:
+                        _monthPages.add(snapshotStream.data);
+                        return PageView(children: _monthPages);
+                    }
+                    return null;
+                  },
+                ),
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
         ),
       ),
       drawer: const MainDrawer(),
@@ -138,7 +161,7 @@ class CalendarViewState extends State<CalendarView> {
         DateTime dt = DateTime.parse(event["DTSTART"]);
 
         // Notification System
-        if (dt.isBefore(DateTime.now().add(const Duration(days: 14)))) {
+        if (dt.isBefore(DateTime.now().add(_notificationSettings.range))) {
           var dtstart = DateFormat.Hm().format(dt);
           var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
 
@@ -152,7 +175,7 @@ class CalendarViewState extends State<CalendarView> {
                 " - "
                 "$dtend",
             scheduledNotificationDateTime:
-                dt.subtract(const Duration(minutes: 10)),
+                dt.subtract(_notificationSettings.early),
             payload: "${event["SUMMARY"]};"
                 "${event["DESCRIPTION"]}\n"
                 "${event["LOCATION"]}\n"

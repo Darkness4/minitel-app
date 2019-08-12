@@ -18,18 +18,38 @@ class FacebookTab extends StatelessWidget {
       child: Scrollbar(
         child: FutureBuilder<Feed>(
           future: Provider.of<FacebookAPI>(context).getFeed(),
-          builder: (context, feedSnapshot) => feedSnapshot.hasData
-              ? ListView(
-                  padding: const EdgeInsets.all(10.0),
-                  children: <Widget>[
-                    for (Post post in feedSnapshot.data.posts)
-                      FacebookCard(
-                        post: post,
-                        pictureUrl: pictureUrl,
-                      ),
-                  ],
-                )
-              : const CircularProgressIndicator(),
+          builder: (context, feedSnapshot) {
+            switch (feedSnapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.active:
+              case ConnectionState.waiting:
+                return const CircularProgressIndicator();
+              case ConnectionState.done:
+                if (feedSnapshot.hasError) {
+                  return const Icon(
+                    Icons.error,
+                    color: Colors.white,
+                    size: 40.0,
+                  );
+                } else {
+                  return ListView(
+                    padding: const EdgeInsets.all(10.0),
+                    children: <Widget>[
+                      for (Post post in feedSnapshot.data.posts)
+                        FacebookCard(
+                          post: post,
+                          pictureUrl: pictureUrl,
+                        ),
+                    ],
+                  );
+                }
+            }
+            return const Icon(
+              Icons.error,
+              color: Colors.white,
+              size: 40.0,
+            );
+          },
         ),
       ),
     );
@@ -110,9 +130,7 @@ class FacebookCard extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: FlatButton(
                   textColor: Colors.blue,
-                  child: Text(
-                    "Voir sur Facebook ..."
-                  ),
+                  child: Text("Voir sur Facebook ..."),
                   onPressed: () => LaunchURL.launchURL(post.permalinkUrl),
                 ),
               ),

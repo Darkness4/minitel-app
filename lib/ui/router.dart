@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/services/http_version_checker.dart';
-import 'package:provider/provider.dart';
 
 import 'views/about_view.dart';
 import 'views/calendar_view.dart';
@@ -17,10 +15,8 @@ class Router {
     switch (settings.name) {
       case RoutePaths.Authentication:
         return FadeRoute(
-          builder: (BuildContext context) => PortalView(
-            title: "Authentification",
-            version: Provider.of<VersionAPI>(context),
-          ),
+          builder: (BuildContext context) =>
+              const PortalView(title: "Authentification"),
           settings: settings,
         );
       case RoutePaths.Reporting:
@@ -32,7 +28,7 @@ class Router {
       case RoutePaths.Docs:
         return FadeRoute(
           builder: (BuildContext context) =>
-              DocumentationView(title: "Documentation"),
+              const DocumentationView(title: "Documentation"),
           settings: settings,
         );
       case RoutePaths.News:
@@ -49,10 +45,8 @@ class Router {
         );
       case RoutePaths.About:
         return MaterialPageRoute(
-          builder: (BuildContext context) => AboutView(
-            title: "A propos de l'application",
-            versionAPI: Provider.of(context),
-          ),
+          builder: (BuildContext context) =>
+              const AboutView(title: "A propos de l'application"),
           settings: settings,
         );
       case RoutePaths.Feedback:
