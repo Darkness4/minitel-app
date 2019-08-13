@@ -49,6 +49,7 @@ class LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextFormField(
+                key: Key('login/uidTextField'),
                 focusNode: _uidFocusNode,
                 controller: _uidController,
                 decoration: const InputDecoration(
@@ -66,6 +67,7 @@ class LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextFormField(
+                key: Key('login/pswdTextField'),
                 controller: _pswdController,
                 obscureText: true,
                 focusNode: _pswdFocusNode,
@@ -100,6 +102,7 @@ class LoginPageState extends State<LoginPage> {
                           valueListenable: model.selectedUrl,
                           builder: (context, value, _) {
                             return DropdownButton<String>(
+                              key: Key('login/nameServerDropdownButton'),
                               value: value,
                               items: [
                                 for (var value in LoginConstants.urlRootList)
@@ -124,6 +127,7 @@ class LoginPageState extends State<LoginPage> {
                           valueListenable: model.selectedTime,
                           builder: (context, value, _) {
                             return DropdownButton<String>(
+                              key: Key('login/timeDropdownButton'),
                               value: model.selectedTime.value,
                               items: [
                                 for (var value in LoginConstants.timeMap.keys)
@@ -149,6 +153,7 @@ class LoginPageState extends State<LoginPage> {
                         valueListenable: model.rememberMe,
                         builder: (context, value, _) {
                           return Checkbox(
+                            key: Key('login/rememberMeButton'),
                             value: value,
                             onChanged: (value) =>
                                 model.rememberMe.value = value,
@@ -165,6 +170,7 @@ class LoginPageState extends State<LoginPage> {
             child: model.loginState == LoginState.Busy
                 ? const CircularProgressIndicator()
                 : FloatingActionButton.extended(
+                    key: Key('login/connect'),
                     onPressed: () => model.login(
                       context,
                       _uidController.text,
@@ -249,6 +255,7 @@ class _StatusCard extends StatelessWidget {
                     case ConnectionState.done:
                       return Text(
                         snapshot.data,
+                        key: Key('login/gatewayText'),
                         style: TextStyle(
                             color: (snapshot.hasError ||
                                     !snapshot.data.contains("second"))
@@ -277,9 +284,17 @@ class _StatusCard extends StatelessWidget {
                         return const CircularProgressIndicator();
                       case ConnectionState.done:
                         if (snapshot.hasError || snapshot.data == "") {
-                          return const Icon(Icons.close, color: Colors.red);
+                          return const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                            key: Key('login/agendaFailure'),
+                          );
                         }
-                        return const Icon(Icons.done, color: Colors.green);
+                        return const Icon(
+                          Icons.done,
+                          color: Colors.green,
+                          key: Key('login/agendaSuccess'),
+                        );
                     }
                     return null; // unreachable
                   },
@@ -302,9 +317,17 @@ class _StatusCard extends StatelessWidget {
                         return const CircularProgressIndicator();
                       case ConnectionState.done:
                         if (snapshot.hasError || snapshot.data == "") {
-                          return const Icon(Icons.close, color: Colors.red);
+                          return const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                            key: Key('login/agendaFailure'),
+                          );
                         } else {
-                          return const Icon(Icons.done, color: Colors.green);
+                          return const Icon(
+                            Icons.done,
+                            color: Colors.green,
+                            key: Key('login/agendaSuccess'),
+                          );
                         }
                     }
                     return null; // unreachable

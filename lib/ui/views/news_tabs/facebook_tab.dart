@@ -25,7 +25,9 @@ class FacebookTab extends StatelessWidget {
               case ConnectionState.none:
               case ConnectionState.active:
               case ConnectionState.waiting:
-                return const CircularProgressIndicator();
+                return const CircularProgressIndicator(
+                  key: Key('facebook_tab/loading'),
+                );
               case ConnectionState.done:
                 if (feedSnapshot.hasError) {
                   return const Icon(

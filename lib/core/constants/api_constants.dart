@@ -28,7 +28,8 @@ class ApiConstants {
   static const _webhook = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
 
   /// Facebook api key
-  static const _facebookApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
+  static const _facebookApi =
+      "RUFBa3VpS3dkd3JvQkFDbFRHUmI5b2FERUlITzlFOGVWOUQzOWhZaFpDVUhCWTZ3VGk4WFVKZ0JGM1dsRlpCVEdzU2FuOUtoSnIyMFpBd2xQbGhQaHQ1eVRJdjVwTUhaQlAzV1Rxd1ZsOEZWNDlLTW52RHZTVXFBREhSVGtBUjBPckoxZENjWHBaQzh3eTV5TXZJZmdNdmRSNXpaQ3pxTnhLM1RCQjNGMEtQMWdaRFpE"; // ZXhlbXBsZQ== = exemple
 
   /// Slack incomming webhook endpoint
   static String get webhook => utf8.decode(base64.decode(_webhook));

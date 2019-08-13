@@ -7,7 +7,7 @@ import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 
-import 'calendar_pages/notification_settings_page.dart';
+import 'agenda_pages/notification_settings_page.dart';
 
 class AgendaView extends StatefulWidget {
   final String title;
@@ -54,7 +54,7 @@ class AgendaViewState extends State<AgendaView> {
               future: model.loadCalendar(context),
               builder: (BuildContext context, snapshot) {
                 if (snapshot.hasError) {
-                  return ErrorCalendarWidget(
+                  return ErrorAgendaWidget(
                     snapshot.error.toString(),
                     setState,
                     _formKey,

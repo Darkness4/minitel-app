@@ -53,11 +53,17 @@ class PortalViewState extends State<PortalView> {
               bottom: const TabBar(
                 tabs: <Tab>[
                   Tab(
-                    icon: Icon(Icons.vpn_key),
+                    icon: Icon(
+                      Icons.vpn_key,
+                      key: Key('portal_view/loginTab'),
+                    ),
                     text: "Login",
                   ),
                   Tab(
-                    icon: Icon(Icons.apps),
+                    icon: Icon(
+                      Icons.apps,
+                      key: Key('portal_view/apps_tab'),
+                    ),
                     text: "Apps",
                   ),
                 ],
@@ -93,6 +99,7 @@ class PortalViewState extends State<PortalView> {
               "La version ${latestRelease.tagName} est la dernière version."),
           actions: <Widget>[
             FlatButton(
+              key: Key('portal_view/closeUpdateButton'),
               child: Text("Close"),
               onPressed: () => Navigator.of(context).pop(),
             ),

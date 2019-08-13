@@ -99,7 +99,10 @@ class ReportingViewState extends State<ReportingView>
     Widget child;
     switch (model.diagnosisState) {
       case ButtonState.None:
-        child = const Icon(Icons.zoom_in);
+        child = const Icon(
+          Icons.zoom_in,
+          key: Key('reporting_view/diagnose'),
+        );
         break;
       case ButtonState.Loading:
         child = ValueListenableBuilder<double>(
@@ -112,7 +115,10 @@ class ReportingViewState extends State<ReportingView>
         break;
       case ButtonState.Done:
         if (_animationController.isDismissed) _animationController.forward();
-        child = const Icon(Icons.done);
+        child = const Icon(
+          Icons.done,
+          key: Key('reporting_view/diagnose_done'),
+        );
         break;
     }
     return child;
@@ -131,11 +137,17 @@ class ReportingViewState extends State<ReportingView>
             indicatorColor: Colors.white,
             tabs: <Tab>[
               Tab(
-                icon: Icon(Icons.warning),
+                icon: Icon(
+                  Icons.warning,
+                  key: Key('reporting_view/reporting_tab'),
+                ),
                 text: "Report",
               ),
               Tab(
-                icon: Icon(Icons.zoom_in),
+                icon: Icon(
+                  Icons.zoom_in,
+                  key: Key('reporting_view/diagnosis_tab'),
+                ),
                 text: "Diagnosis",
               ),
             ],
