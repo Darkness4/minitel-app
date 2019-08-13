@@ -5,7 +5,6 @@ import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 /// This stores all diagnosis results.
 ///
@@ -51,7 +50,7 @@ class Diagnosis {
   ///
   /// Run multiples command and store into the [report] Map.
   /// The suite is composed of :
-  /// - SSID, IP scan from [Connectivity]
+  /// - IP scan from [Connectivity]
   /// - ip a
   /// - Address Resolution Protocol (Busybox) -a
   /// - su -c tracerout google.com and 8.8.8.8
@@ -70,17 +69,7 @@ class Diagnosis {
 
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      // Check location permission to get SSID name
-      PermissionStatus permStatus = await PermissionHandler()
-          .checkPermissionStatus(PermissionGroup.location);
-
-      if (permStatus != PermissionStatus.granted) {
-        await PermissionHandler()
-            .requestPermissions([PermissionGroup.location]);
-      }
-
       // Fill the report
-      _report[DiagnosisContent.ssid] = Connectivity().getWifiName();
       _report[DiagnosisContent.ip] = Connectivity().getWifiIP();
 
       await Future.wait([
@@ -184,7 +173,6 @@ class Diagnosis {
 
 /// Content of the report after a diagnosis.
 class DiagnosisContent extends Iterable<String> {
-  static const String ssid = "SSID";
   static const String ip = "IP";
   static const String ipAddr = "ip addr";
   static const String arp = "Address Resolution Protocol (SU + Busy)";
@@ -212,7 +200,6 @@ class DiagnosisContent extends Iterable<String> {
   /// for (String content in DiagnosisContent())
   /// ```
   Iterator<String> get iterator => [
-        ssid,
         ip,
         ipAddr,
         arp,

@@ -18,11 +18,6 @@ class DiagnoseDoc extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const BoxMdH("Diagnostique", 1),
-              const BoxMdH("Permission Location", 2),
-              const Text(
-                "Indique si vous avez authorisé le GPS pour déterminer le SSID (identifiant du réseau).",
-                style: MinitelTextStyles.body1,
-              ),
               const BoxMdH("ip a", 2),
               const Text.rich(
                 TextSpan(

@@ -34,24 +34,16 @@ class DiagnoseTab extends StatelessWidget {
                 label: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: FutureBuilder<String>(
-                    future: _diagnosis.report[DiagnosisContent.ssid],
-                    builder: (context, ssidSnapshot) {
-                      return FutureBuilder<String>(
-                        future: _diagnosis.report[DiagnosisContent.ip],
-                        builder: (context, ipSnapshot) {
-                          String output = "${DiagnosisContent.ssid}: ";
-                          output +=
-                              ssidSnapshot.hasData ? ssidSnapshot.data : "";
-                          output += ", ${DiagnosisContent.ip}: ";
-                          output += ipSnapshot.hasData ? ipSnapshot.data : "";
-                          return Text(
-                            output,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          );
-                        },
+                    future: _diagnosis.report[DiagnosisContent.ip],
+                    builder: (context, ipSnapshot) {
+                      String output = "${DiagnosisContent.ip}: ";
+                      output += ipSnapshot.hasData ? ipSnapshot.data : "";
+                      return Text(
+                        output,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       );
                     },
                   ),
@@ -59,8 +51,7 @@ class DiagnoseTab extends StatelessWidget {
               ),
             ),
             for (String item in DiagnosisContent())
-              if (item != DiagnosisContent.ssid &&
-                  item != DiagnosisContent.ip) // Ignore them
+              if (item != DiagnosisContent.ip) // Ignore them
                 FutureBuilder<String>(
                   future: _diagnosis.report[item],
                   builder: (BuildContext context, snapshot) {

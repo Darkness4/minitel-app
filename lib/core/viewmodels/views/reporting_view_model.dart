@@ -48,6 +48,9 @@ class ReportingViewModel extends ChangeNotifier {
         (Timer t) => percentageDiagnoseProgress.value += 1 / 60,
       );
 
+      // Refersh ONE second after launching diagnose
+      Future.delayed(const Duration(seconds: 1), notifyListeners);
+
       // Diagnose
       await diagnosis.diagnose();
 
