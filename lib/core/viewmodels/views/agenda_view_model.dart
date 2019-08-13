@@ -139,6 +139,7 @@ class AgendaViewModel extends ChangeNotifier {
     if (url == "" || url == null) {
       print("Cannot update calendar. Taking from cache.");
     } else {
+      print("Updating calendar.");
       await ical.saveCalendar(url);
     }
 
