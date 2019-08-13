@@ -94,13 +94,13 @@ void main() {
       });
 
       test('Screenshot diagnosis', () async {
-        await driver.tap(reportingFAB);
         await driver.tap(reportingTab);
+        await driver.tap(reportingFAB);
         await driver.waitFor(reportingFABDone,
-            timeout: const Duration(seconds: 90));
+            timeout: const Duration(minutes: 2));
 
         await takeScreenshot(driver, ScreenshotsPaths.diagnosis);
-      }, timeout: const Timeout(Duration(minutes: 2)));
+      }, timeout: const Timeout(Duration(minutes: 3)));
 
       test('Screenshot docs', () async {
         await driver.tap(drawer);
