@@ -62,7 +62,7 @@ class AgendaViewState extends State<AgendaView> {
                 }
                 if (snapshot.hasData) {
                   return Scrollbar(
-                    child: StreamBuilder<Widget>(
+                    child: StreamBuilder<List<Widget>>(
                       stream: model.listEventCards(snapshot.data),
                       builder: (BuildContext context, snapshotStream) {
                         switch (snapshotStream.connectionState) {
@@ -70,10 +70,7 @@ class AgendaViewState extends State<AgendaView> {
                           case ConnectionState.waiting:
                             return const CircularProgressIndicator();
                           case ConnectionState.active:
-                            model.monthPages.add(snapshotStream.data);
-                            break;
                           case ConnectionState.done:
-                            model.monthPages.add(snapshotStream.data);
                             return PageView(children: model.monthPages);
                         }
                         return null;

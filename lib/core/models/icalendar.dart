@@ -31,6 +31,7 @@ class ICalendar {
   /// Get existing the stream .ics from file
   Future<void> getCalendarFromFile() async {
     final file = await _calendar;
+
     if (!(await file.exists())) {
       throw Exception("File calendar.ics do not exists");
     }
