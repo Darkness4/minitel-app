@@ -11,12 +11,12 @@ void main() {
 
     // Navigation
     final drawer = find.byTooltip('Ouvrir le menu de navigation');
-    final authenticationRoute = find.byValueKey('drawer/authentication');
+    // final authenticationRoute = find.byValueKey('drawer/authentication');
     final newsRoute = find.byValueKey('drawer/news');
     final agendaRoute = find.byValueKey('drawer/agenda');
     final reportingRoute = find.byValueKey('drawer/reporting');
     final docsRoute = find.byValueKey('drawer/docs');
-    final aboutRoute = find.byValueKey('drawer/about');
+    // final aboutRoute = find.byValueKey('drawer/about');
 
     // Precise widget
     final closeUpdateButton = find.byValueKey('portal_view/closeUpdateButton');
@@ -166,12 +166,12 @@ Future<void> takeScreenshot(FlutterDriver driver, String path) async {
 }
 
 class ScreenshotsPaths {
-  static const login = "screenshots/login.png";
-  static const apps = "screenshots/apps.png";
-  static const news = "screenshots/news.png";
-  static const agenda = "screenshots/agenda.png";
-  static const reporting = "screenshots/reporting.png";
-  static const diagnosis = "screenshots/diagnosis.png";
-  static const docs = "screenshots/docs.png";
-  static const sogo = "screenshots/sogo.png";
+  static const login = "test_driver/screenshots/login.png";
+  static const apps = "test_driver/screenshots/apps.png";
+  static const news = "test_driver/screenshots/news.png";
+  static const agenda = "test_driver/screenshots/agenda.png";
+  static const reporting = "test_driver/screenshots/reporting.png";
+  static const diagnosis = "test_driver/screenshots/diagnosis.png";
+  static const docs = "test_driver/screenshots/docs.png";
+  static const sogo = "test_driver/screenshots/sogo.png";
 }
