@@ -6,14 +6,13 @@ import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
-import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Mutex
 enum LoginState { Busy, Available }
 
 class LoginViewModel extends ChangeNotifier {
-  final PortailAPI portailAPI;
+  // final PortailAPI portailAPI;
   final GatewayAPI gatewayAPI;
   final CalendarUrlAPI calendarUrlAPI;
   final ValueNotifier<String> selectedTime;
@@ -26,7 +25,7 @@ class LoginViewModel extends ChangeNotifier {
   LoginState loginState = LoginState.Available;
 
   LoginViewModel({
-    @required this.portailAPI,
+    // @required this.portailAPI,
     @required this.gatewayAPI,
     @required this.calendarUrlAPI,
     @required this.selectedTime,
@@ -88,17 +87,17 @@ class LoginViewModel extends ChangeNotifier {
         SnackBar(content: Text(e.toString())),
       );
     }
-    // Portail
-    try {
-      await portailAPI.saveCookiePortailFromLogin(
-        username: uid,
-        password: pswd,
-      );
-    } on Exception catch (e) {
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
-    }
+    // // Portail
+    // try {
+    //   await portailAPI.saveCookiePortailFromLogin(
+    //     username: uid,
+    //     password: pswd,
+    //   );
+    // } on Exception catch (e) {
+    //   Scaffold.of(context).showSnackBar(
+    //     SnackBar(content: Text(e.toString())),
+    //   );
+    // }
 
     // Unlock
     loginState = LoginState.Available;

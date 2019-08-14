@@ -5,8 +5,10 @@ import 'dart:io';
 class PortailAPI {
   final _client = HttpClient();
   String _cookie;
+  var _catchedCookies = <String, List<String>>{};
 
   String get cookie => _cookie;
+  Map<String, List<String>> get catchedCookies => _catchedCookies;
 
   /// Récupère le cookie pour se connecter à Portail EMSE
   ///
@@ -49,6 +51,7 @@ class PortailAPI {
     response = await request.close();
 
     temp = response.headers['set-cookie'].toString();
+    _catchedCookies["cas.emse.fr"] = response.headers['set-cookie'].toList();
     String agimus;
     try {
       agimus = RegExp(r'AGIMUS=([^;]*);').firstMatch(temp).group(0);
@@ -64,6 +67,8 @@ class PortailAPI {
     response = await request.close();
 
     temp = response.headers['set-cookie'].toString();
+    _catchedCookies["portail.emse.fr"] =
+        response.headers['set-cookie'].toList();
     var casAuth = RegExp(r'CASAuth=([^;]*);').firstMatch(temp).group(0);
     location = response.headers.value('location');
 
@@ -73,6 +78,8 @@ class PortailAPI {
     response = await request.close();
 
     temp = response.headers['set-cookie'].toString();
+    _catchedCookies["portail.emse.fr2"] =
+        response.headers['set-cookie'].toList();
     var laravelToken =
         RegExp(r'laravel_token=([^;]*);').firstMatch(temp).group(0);
     var xsrfToken = RegExp(r'XSRF-TOKEN=([^;]*);').firstMatch(temp).group(0);
@@ -80,6 +87,9 @@ class PortailAPI {
         RegExp(r'portail_ent_emse_session=([^;]*);').firstMatch(temp).group(0);
 
     status = "$agimus $casAuth $xsrfToken $laravelToken $portailEntEmseSession";
+    // _catchedCookies.forEach((key, val) {
+    //   print("[$key] Catched cookies $val");
+    // });
 
     return status;
   }

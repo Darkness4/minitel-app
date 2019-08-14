@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:minitel_toolbox/ui/widgets/app_lists_widgets.dart';
 
-class PortailWebView extends StatelessWidget {
+class PortailWebView extends StatefulWidget {
   const PortailWebView({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+  _PortailWebViewState createState() => _PortailWebViewState();
+}
+
+class _PortailWebViewState extends State<PortailWebView> {
+  // Function onWebViewCreated =
+  //     (WebViewController _controller, BuildContext context) {
+  //   final _portailAPI = Provider.of<PortailAPI>(context);
+
+  //   // _portailAPI.catchedCookies["cas.emse.fr"]?.forEach((var cookie) {
+  //   //   print("Set cookie : document.cookie = \"${cookie};\"");
+  //   //   _controller.evaluateJavascript('document.cookie = "${cookie};"');
+  //   // });
+  //   // _portailAPI.catchedCookies["portail.emse.fr"].forEach((var cookie) {
+  //   //   print("Set cookie : document.cookie = \"${cookie};\"");
+  //   //   _controller.evaluateJavascript('document.cookie = "${cookie};"');
+  //   // });
+  //   // _portailAPI.catchedCookies["portail.emse.fr2"].forEach((var cookie) {
+  //   //   print("Set cookie : document.cookie = \"${cookie};\"");
+  //   //   _controller.evaluateJavascript('document.cookie = "${cookie};"');
+  //   // });
+  //   _controller.loadUrl('https://portail.emse.fr/',
+  //       headers: {'cookie': _portailAPI.cookie});
+  // };
+
+  @override
+  Widget build(BuildContext context) => ScaffoldWebView(
         backgroundColor: Colors.deepPurple,
         title: const Text("Portail"),
-      ),
-      body: const SafeArea(
-        child: WebView(
-          javascriptMode: JavascriptMode.unrestricted,
-          initialUrl: 'http://portail.emse.fr/',
-        ),
-      ),
-    );
-  }
+        initialUrl: 'https://portail.emse.fr/',
+      );
 }

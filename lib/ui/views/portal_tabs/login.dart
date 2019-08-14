@@ -5,7 +5,6 @@ import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
-import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +35,7 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BaseWidget<LoginViewModel>(
       model: LoginViewModel(
-        portailAPI: Provider.of<PortailAPI>(context),
+        // portailAPI: Provider.of<PortailAPI>(context),
         calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
         gatewayAPI: Provider.of<GatewayAPI>(context),
         rememberMe: _rememberMe,
@@ -258,7 +257,7 @@ class _StatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _gatewayAPI = Provider.of<GatewayAPI>(context);
-    final _portailAPI = Provider.of<PortailAPI>(context);
+    // final _portailAPI = Provider.of<PortailAPI>(context);
     final _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
 
     return Card(
@@ -331,25 +330,25 @@ class _StatusCard extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: <Widget>[
-                const Text(
-                  "Portail: ",
-                  style: TextStyle(fontSize: 20),
-                ),
-                _portailAPI.cookie == null
-                    ? const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                        key: Key('login/agendaFailure'),
-                      )
-                    : const Icon(
-                        Icons.done,
-                        color: Colors.green,
-                        key: Key('login/agendaSuccess'),
-                      )
-              ],
-            ),
+            // Row(
+            //   children: <Widget>[
+            //     const Text(
+            //       "Portail: ",
+            //       style: TextStyle(fontSize: 20),
+            //     ),
+            //     _portailAPI.cookie == null
+            //         ? const Icon(
+            //             Icons.close,
+            //             color: Colors.red,
+            //             key: Key('login/agendaFailure'),
+            //           )
+            //         : const Icon(
+            //             Icons.done,
+            //             color: Colors.green,
+            //             key: Key('login/agendaSuccess'),
+            //           )
+            //   ],
+            // ),
           ],
         ),
       ),
