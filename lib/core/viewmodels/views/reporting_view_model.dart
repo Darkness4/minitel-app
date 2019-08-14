@@ -66,7 +66,7 @@ class ReportingViewModel extends ChangeNotifier {
 
   /// Send to slack
   Future<String> reportToSlack(String title, String description,
-      {String channel = "projet_flutter_notif"}) async {
+      {String channel = "minitel_toolbox_notifications"}) async {
     DateTime timeout = await _timeout;
     String status;
 
