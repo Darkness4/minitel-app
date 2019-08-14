@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
-import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
 class DayWidget extends StatelessWidget {
@@ -58,11 +57,10 @@ class MonthHeader extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Text(
           text,
-          style: MinitelTextStyles.display2.apply(
-            color: Colors.white,
-            fontWeightDelta: 1,
-            fontFamily: "Roboto",
-          ),
+          style: Theme.of(context).textTheme.display2.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ),
     );

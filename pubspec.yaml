@@ -26,7 +26,6 @@ dependencies:
   webfeed: 0.4.2  # Wito Chandra
   url_launcher: ^5.1.2  # Flutter Team
   # google_maps_flutter: ^0.5.20+2  # Flutter Team
-  permission_handler: ^3.2.2  # Baseflow
   shared_preferences: 0.5.3+4  # Flutter Team
   webview_flutter: 0.3.11+2  # Flutter Team
   path_provider: ^1.2.0  # Flutter Team

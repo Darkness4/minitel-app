@@ -9,14 +9,16 @@
 
 ## Screenshots
 
+
 ![Login Screenshot](./docs/screenshots/login.png)
 ![Apps Screenshot](./docs/screenshots/apps.png)
 ![Sogo Screenshot](./docs/screenshots/sogo.png)
-![Diagnose Screenshot](./docs/screenshots/diagnose.png)
+![Diagnose Screenshot](./docs/screenshots/diagnosis.png)
 ![Reporting Screenshot](./docs/screenshots/reporting.png)
-![Documentation Screenshot](./docs/screenshots/documentation.png)
+![Documentation Screenshot](./docs/screenshots/docs.png)
 ![News Screenshot](./docs/screenshots/news.png)
-![Calendar Screenshot](./docs/screenshots/calendar.png)
+![Agenda Screenshot](./docs/screenshots/agenda.png)
+
 
 ## Features
 

@@ -44,13 +44,18 @@ class AgendaViewModel extends ChangeNotifier {
     @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
   }) : _flutterLocalNotificationsPlugin = flutterLocalNotificationsPlugin;
 
-  Stream<Widget> listEventCards(ICalendar ical) async* {
+  Stream<List<Widget>> listEventCards(ICalendar ical) async* {
     List<Widget> monthlyWidgets;
     List<Widget> dailyEvents = [];
+    monthPages = [];
     DateTime oldDt;
 
     // Parse the calendar
     ParsedCalendar parsedCalendar = await ical.parseCalendar();
+
+    parsedCalendar.events.sort((event1, event2) =>
+        (DateTime.parse(event1["DTSTART"])
+            .compareTo(DateTime.parse(event2["DTSTART"]))));
 
     var filteredEvents = parsedCalendar.events.where(
         (event) => DateTime.parse(event["DTSTART"]).isAfter(DateTime.now()));
@@ -59,21 +64,24 @@ class AgendaViewModel extends ChangeNotifier {
     await _flutterLocalNotificationsPlugin.cancelAll();
 
     if (filteredEvents == null || filteredEvents.isEmpty) {
-      yield Center(
-        child: Text(
-          Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w300,
-            fontSize: 24.0,
+      yield [
+        Center(
+          child: Text(
+            Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
+              fontSize: 24.0,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
-        ),
-      );
+        )
+      ];
     } else {
+      DateTime dt;
       for (var event in filteredEvents) {
         int id = 0;
-        DateTime dt = DateTime.parse(event["DTSTART"]);
+        dt = DateTime.parse(event["DTSTART"]);
 
         // Notification System
         if (dt.isBefore(DateTime.now().add(notificationSettings.range))) {
@@ -102,18 +110,23 @@ class AgendaViewModel extends ChangeNotifier {
 
         // New Month
         if (dt.month != oldDt?.month) {
-          if (monthlyWidgets != null) {
-            yield MonthPage(oldDt.month, monthlyWidgets);
+          // Return the last month
+          if (dailyEvents.isNotEmpty && monthlyWidgets != null) {
+            monthlyWidgets.add(DayWidget(dt, dailyEvents));
+            monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
+            yield monthPages;
           }
           oldDt = dt;
 
           monthlyWidgets = [
             MonthHeader("${_month[dt.month - 1]}"),
           ];
+          dailyEvents = [];
         }
 
         // New Day
         if (dt.day != oldDt?.day) {
+          // Return the last day
           if (dailyEvents.isNotEmpty) {
             monthlyWidgets.add(DayWidget(dt, dailyEvents));
           }
@@ -124,6 +137,13 @@ class AgendaViewModel extends ChangeNotifier {
 
         // Event Card
         dailyEvents.add(EventCard(event));
+      }
+
+      // Return the last day
+      if (dailyEvents.isNotEmpty && monthlyWidgets != null) {
+        monthlyWidgets.add(DayWidget(dt, dailyEvents));
+        monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
+        yield monthPages;
       }
     }
   }
@@ -139,6 +159,7 @@ class AgendaViewModel extends ChangeNotifier {
     if (url == "" || url == null) {
       print("Cannot update calendar. Taking from cache.");
     } else {
+      print("Updating calendar.");
       await ical.saveCalendar(url);
     }
 

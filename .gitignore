@@ -78,3 +78,5 @@ key.properties
 ios/Flutter/flutter_export_environment.sh
 
 **/secrets.*
+
+**/test_driver/screenshots/*

@@ -42,8 +42,8 @@ class AboutView extends StatelessWidget {
               const Divider(),
               ListTile(
                 title: const Text("Site"), // Minitel
-                subtitle: const Text(""),
-                onTap: () {}, // TODO: Launch url
+                subtitle: const Text("minitel.emse.fr"),
+                onTap: LaunchURL.minitelWebsite,
               ),
               const Divider(),
               ListTile(

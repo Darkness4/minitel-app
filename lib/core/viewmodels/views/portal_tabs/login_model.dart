@@ -19,6 +19,7 @@ class LoginViewModel extends ChangeNotifier {
   final ValueNotifier<String> selectedTime;
   final ValueNotifier<String> selectedUrl;
   final ValueNotifier<bool> rememberMe;
+  final ValueNotifier<bool> autoLogin;
 
   String cookie;
 
@@ -31,6 +32,7 @@ class LoginViewModel extends ChangeNotifier {
     @required this.selectedTime,
     @required this.selectedUrl,
     @required this.rememberMe,
+    @required this.autoLogin,
   });
 
   Future<void> login(BuildContext context, String uid, String pswd) async {
@@ -39,6 +41,7 @@ class LoginViewModel extends ChangeNotifier {
     if (rememberMe.value) {
       await Future.wait([
         prefs.setBool("rememberMe", true),
+        prefs.setBool("autoLogin", autoLogin.value),
         prefs.setString("user", uid),
         prefs.setString("time", selectedTime.value),
         prefs.setString(
@@ -49,6 +52,7 @@ class LoginViewModel extends ChangeNotifier {
     } else {
       await Future.wait([
         prefs.remove("rememberMe"),
+        prefs.remove("autoLogin"),
         prefs.remove("user"),
         prefs.remove("time"),
         prefs.remove("pswd"),

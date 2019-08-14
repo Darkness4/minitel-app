@@ -7,7 +7,7 @@ import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 
-import 'calendar_pages/notification_settings_page.dart';
+import 'agenda_pages/notification_settings_page.dart';
 
 class AgendaView extends StatefulWidget {
   final String title;
@@ -54,7 +54,7 @@ class AgendaViewState extends State<AgendaView> {
               future: model.loadCalendar(context),
               builder: (BuildContext context, snapshot) {
                 if (snapshot.hasError) {
-                  return ErrorCalendarWidget(
+                  return ErrorAgendaWidget(
                     snapshot.error.toString(),
                     setState,
                     _formKey,
@@ -62,7 +62,7 @@ class AgendaViewState extends State<AgendaView> {
                 }
                 if (snapshot.hasData) {
                   return Scrollbar(
-                    child: StreamBuilder<Widget>(
+                    child: StreamBuilder<List<Widget>>(
                       stream: model.listEventCards(snapshot.data),
                       builder: (BuildContext context, snapshotStream) {
                         switch (snapshotStream.connectionState) {
@@ -70,10 +70,7 @@ class AgendaViewState extends State<AgendaView> {
                           case ConnectionState.waiting:
                             return const CircularProgressIndicator();
                           case ConnectionState.active:
-                            model.monthPages.add(snapshotStream.data);
-                            break;
                           case ConnectionState.done:
-                            model.monthPages.add(snapshotStream.data);
                             return PageView(children: model.monthPages);
                         }
                         return null;
