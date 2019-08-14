@@ -25,12 +25,12 @@ dependencies:
   share: 0.6.2+1  # Flutter Team
   webfeed: 0.4.2  # Wito Chandra
   url_launcher: ^5.1.2  # Flutter Team
-  # google_maps_flutter: ^0.5.20+2  # Flutter Team
+  # google_maps_flutter: ^0.5.20+3  # Flutter Team
   shared_preferences: 0.5.3+4  # Flutter Team
-  webview_flutter: 0.3.11+2  # Flutter Team
+  webview_flutter: 0.3.11+3  # Flutter Team
   path_provider: ^1.2.0  # Flutter Team
   sticky_headers: 0.1.8  # Flutter Community
-  flutter_local_notifications: 0.8.1  # Michael Bui
+  flutter_local_notifications: 0.8.1+1  # Michael Bui
   html: 0.14.0+2  # Dart Team
   package_info: 0.4.0+6  # Flutter Team
   device_info: 0.4.0+2  # Flutter Team
