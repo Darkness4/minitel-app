@@ -24,13 +24,13 @@ unit-tests:
 
 pages:
   stage: deploy
+  image: ruby:latest
   dependencies:
     - unit-tests
   script:
-    - pub global activate coveralls
-    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - gem install coveralls-lcov
     - "echo \"repo_token: ${COVERALLS_TOKEN}\" > .coveralls.yml"
-    - coveralls ./coverage/lcov.info
+    - coveralls-lcov ./coverage/lcov.info
     - mv coverage/ public/
   artifacts:
     paths:
