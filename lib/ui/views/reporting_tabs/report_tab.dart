@@ -4,13 +4,11 @@ import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
 class ReportTab extends StatefulWidget {
-  final String channel;
   final TextEditingController titleController;
   final TextEditingController descriptionController;
 
   const ReportTab(
       {Key key,
-      this.channel = "projet_flutter_notif",
       @required this.titleController,
       @required this.descriptionController})
       : super(key: key);
@@ -176,7 +174,7 @@ class _TutorialCard extends StatelessWidget {
           style: MinitelTextStyles.mdH3,
         )),
         BoxMdBody(Text(
-          "3. Remplissez votre rapport.",
+          "3. Remplissez votre rapport. N'oubliez pas un moyen de communication (chambre, mail, messenger ...)",
           style: MinitelTextStyles.mdH3,
         )),
         BoxMdBody(Text(

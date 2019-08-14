@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ScaffoldWebView extends StatefulWidget {
@@ -28,13 +29,23 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
         backgroundColor: widget.backgroundColor,
         title: widget.title,
         elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.public),
+            onPressed: () async =>
+                LaunchURL.launchURL(await _controller.currentUrl()),
+            tooltip: "Ouvrir dans un navigateur",
+          )
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
+        color: widget.backgroundColor,
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             IconButton(
+              color: Colors.white,
               icon: Icon(Icons.arrow_back),
               onPressed: () async {
                 if (await _controller.canGoBack()) {
@@ -43,12 +54,14 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
               },
             ),
             IconButton(
+              color: Colors.white,
               icon: Icon(Icons.refresh),
               onPressed: () async {
                 await _controller.reload();
               },
             ),
             IconButton(
+              color: Colors.white,
               icon: Icon(Icons.arrow_forward),
               onPressed: () async {
                 if (await _controller.canGoForward()) {

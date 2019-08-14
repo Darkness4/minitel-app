@@ -166,7 +166,7 @@ class _FeedbackViewState extends State<FeedbackView> {
     await Provider.of<WebhookAPI>(ctxt).report(
       "*Minitel App v${packageInfo.version} : ${_titleController.text}*\n"
       ">$description\n\n",
-      botName: "Flutter Alpha Feedback Bot",
+      botName: "Flutter Beta Feedback Bot",
     );
 
     Scaffold.of(ctxt).showSnackBar(

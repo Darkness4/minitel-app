@@ -20,7 +20,7 @@ class MailDoc extends StatelessWidget {
             elevation: 4,
             child: Padding(
               padding: EdgeInsets.all(20.0),
-              child: Text("""Email : ton mail
+              child: Text("""Email : prenom.nom@etu.emse.fr
 Mot de passe : ton mot de passe école
 
 Serveur entrant : IMAP
@@ -28,14 +28,14 @@ Nom d'hote : messel.emse.fr
 Port : 993
 Sécurité : ssl/tls
 Méthode d'authentification : mot de passe normal
-Identifiant : prenom.nom (/!\\ sans le @etu.emse.fr)
+Identifiant : prenom.nom (⚠️ sans le @etu.emse.fr)
 
 Serveur sortant :
 Nom d'hôte : messel.emse.fr
 Port : 465
 Sécurité : ssl/tls
 Méthode d'authentification : mot de passe normal
-Identifiant : prenom.nom (/!\\ sans le @etu.emse.fr)"""),
+Identifiant : prenom.nom (⚠️ sans le @etu.emse.fr)"""),
             ),
           ),
         ],

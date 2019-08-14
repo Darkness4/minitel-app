@@ -9,7 +9,8 @@ import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
 class DocsDrawer extends StatelessWidget {
   final DocsPageId _docsPageId;
   final PageController controller;
-  DocsDrawer(this._docsPageId, {Key key, this.controller}) : super(key: key);
+  const DocsDrawer(this._docsPageId, {Key key, this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -441,7 +442,7 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             child: ListTile(
-              title: const Text("Alpha Feedback"),
+              title: const Text("Beta Feedback"),
               leading: const Icon(Icons.chat),
               selected: currentRoutePaths == RoutePaths.Feedback,
               onTap: () {

@@ -45,7 +45,7 @@ class Router {
         );
       case RoutePaths.Feedback:
         return FadeRoute(
-          builder: (_) => const FeedbackView(title: "Alpha Feedback"),
+          builder: (_) => const FeedbackView(title: "Beta Feedback"),
           settings: settings,
         );
       default:

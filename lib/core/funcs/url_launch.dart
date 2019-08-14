@@ -14,6 +14,9 @@ class LaunchURL {
       () => launchURL("mailto:minitelismin@gmail.com");
   static Function minitelWebsite = () => launchURL("https://minitel.emse.fr/");
 
+  static Function dualBootTutorial = () => LaunchURL.launchURL(
+      "https://docs.google.com/document/d/1VvgkIRjPEQ6O8Usyt30cRhIRVOyR4a7SYPGuNX2ORvU/edit?usp=sharing");
+
   /// Launche the given url
   static void launchURL(String url) async {
     if (await canLaunch(url)) {
