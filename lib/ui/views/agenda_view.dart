@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/agenda_view_model.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
@@ -71,7 +72,7 @@ class AgendaViewState extends State<AgendaView> {
                             return const CircularProgressIndicator();
                           case ConnectionState.active:
                           case ConnectionState.done:
-                            return PageView(children: model.monthPages);
+                            return PageView(children: snapshotStream.data);
                         }
                         return null;
                       },
@@ -83,7 +84,9 @@ class AgendaViewState extends State<AgendaView> {
               },
             ),
           ),
-          drawer: const MainDrawer(),
+          drawer: const MainDrawer(
+            currentRoutePaths: RoutePaths.Agenda,
+          ),
         );
       },
     );

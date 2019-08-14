@@ -243,7 +243,8 @@ class DocsDrawer extends StatelessWidget {
 }
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer();
+  final String currentRoutePaths;
+  const MainDrawer({@required this.currentRoutePaths});
 
   @override
   Widget build(BuildContext context) {
@@ -269,39 +270,79 @@ class MainDrawer extends StatelessWidget {
             ),
             decoration: const BoxDecoration(color: MinitelColors.PrimaryColor),
           ),
-          ListTile(
-              title: const Text("Authentification"),
-              key: Key('drawer/authentication'),
-              leading: const Icon(Icons.apps),
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name !=
-                    RoutePaths.Authentication) {
-                  Navigator.pushReplacementNamed(
-                      context, RoutePaths.Authentication);
-                }
-              }),
+          Container(
+            margin: const EdgeInsets.only(right: 8.0),
+            decoration: BoxDecoration(
+              color: currentRoutePaths == RoutePaths.Authentication
+                  ? MinitelColors.DrawerSelectedColor
+                  : Colors.transparent,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
+            child: ListTile(
+                title: const Text("Authentification"),
+                key: const Key('drawer/authentication'),
+                leading: const Icon(Icons.apps),
+                selected: currentRoutePaths == RoutePaths.Authentication,
+                onTap: () {
+                  Navigator.pop(context); // Close Drawer
+                  if (ModalRoute.of(context).settings.name !=
+                      RoutePaths.Authentication) {
+                    Navigator.pushReplacementNamed(
+                        context, RoutePaths.Authentication);
+                  }
+                }),
+          ),
           const Divider(),
-          ListTile(
-              title: const Text("Nouveautés"),
-              key: Key('drawer/news'),
-              leading: const Icon(Icons.rss_feed),
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.News) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.News);
-                }
-              }),
-          ListTile(
-              title: const Text("Agenda"),
-              leading: const Icon(Icons.calendar_today),
-              key: Key('drawer/agenda'),
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.Agenda) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.Agenda);
-                }
-              }),
+          Container(
+            margin: const EdgeInsets.only(right: 8.0),
+            decoration: BoxDecoration(
+              color: currentRoutePaths == RoutePaths.News
+                  ? MinitelColors.DrawerSelectedColor
+                  : Colors.transparent,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
+            child: ListTile(
+                title: const Text("Nouveautés"),
+                key: const Key('drawer/news'),
+                leading: const Icon(Icons.rss_feed),
+                selected: currentRoutePaths == RoutePaths.News,
+                onTap: () {
+                  Navigator.pop(context); // Close Drawer
+                  if (ModalRoute.of(context).settings.name != RoutePaths.News) {
+                    Navigator.pushReplacementNamed(context, RoutePaths.News);
+                  }
+                }),
+          ),
+          Container(
+            margin: const EdgeInsets.only(right: 8.0),
+            decoration: BoxDecoration(
+              color: currentRoutePaths == RoutePaths.Agenda
+                  ? MinitelColors.DrawerSelectedColor
+                  : Colors.transparent,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
+            child: ListTile(
+                title: const Text("Agenda"),
+                leading: const Icon(Icons.calendar_today),
+                key: const Key('drawer/agenda'),
+                selected: currentRoutePaths == RoutePaths.Agenda,
+                onTap: () {
+                  Navigator.pop(context); // Close Drawer
+                  if (ModalRoute.of(context).settings.name !=
+                      RoutePaths.Agenda) {
+                    Navigator.pushReplacementNamed(context, RoutePaths.Agenda);
+                  }
+                }),
+          ),
           // ListTile(
           //     title: Text("Maps"),
           //     leading: const Icon(Icons.map),
@@ -313,13 +354,21 @@ class MainDrawer extends StatelessWidget {
           //     }),
           const Divider(),
           Container(
-            color: MinitelColors.ReportPrimaryColor,
+            margin: const EdgeInsets.only(right: 8.0),
+            decoration: BoxDecoration(
+              color: MinitelColors.ReportPrimaryColor,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
             child: ListTile(
                 title: const Text(
                   "Signaler Minitel",
                   style: TextStyle(color: Colors.white),
                 ),
-                key: Key('drawer/reporting'),
+                selected: currentRoutePaths == RoutePaths.Reporting,
+                key: const Key('drawer/reporting'),
                 leading: const Icon(
                   Icons.error,
                   color: Colors.white,
@@ -333,32 +382,68 @@ class MainDrawer extends StatelessWidget {
                   }
                 }),
           ),
-          ListTile(
-              title: const Text("Documentation"),
-              leading: const Icon(Icons.description),
-              key: Key('drawer/docs'),
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.Docs) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.Docs);
-                }
-              }),
-          ListTile(
-            title: const Text("À propos de Minitel Toolbox"),
-            leading: const Icon(Icons.info),
-            key: Key('drawer/about'),
-            onTap: () {
-              Navigator.pop(context); // Close Drawer
-              if (ModalRoute.of(context).settings.name != RoutePaths.About) {
-                Navigator.pushNamed(context, RoutePaths.About);
-              }
-            },
+          Container(
+            margin: const EdgeInsets.only(right: 8.0),
+            decoration: BoxDecoration(
+              color: currentRoutePaths == RoutePaths.Docs
+                  ? MinitelColors.DrawerSelectedColor
+                  : Colors.transparent,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
+            child: ListTile(
+                title: const Text("Documentation"),
+                leading: const Icon(Icons.description),
+                key: const Key('drawer/docs'),
+                selected: currentRoutePaths == RoutePaths.Docs,
+                onTap: () {
+                  Navigator.pop(context); // Close Drawer
+                  if (ModalRoute.of(context).settings.name != RoutePaths.Docs) {
+                    Navigator.pushReplacementNamed(context, RoutePaths.Docs);
+                  }
+                }),
           ),
           Container(
-            color: Colors.lightGreen[100],
+            margin: const EdgeInsets.only(right: 8.0),
+            decoration: BoxDecoration(
+              color: currentRoutePaths == RoutePaths.About
+                  ? MinitelColors.DrawerSelectedColor
+                  : Colors.transparent,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
+            child: ListTile(
+              title: const Text("À propos de Minitel Toolbox"),
+              leading: const Icon(Icons.info),
+              key: const Key('drawer/about'),
+              selected: currentRoutePaths == RoutePaths.About,
+              onTap: () {
+                Navigator.pop(context); // Close Drawer
+                if (ModalRoute.of(context).settings.name != RoutePaths.About) {
+                  Navigator.pushNamed(context, RoutePaths.About);
+                }
+              },
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(right: 8.0),
+            decoration: BoxDecoration(
+              color: currentRoutePaths == RoutePaths.Feedback
+                  ? MinitelColors.DrawerSelectedColor
+                  : Colors.transparent,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(40.0),
+                topRight: Radius.circular(40.0),
+              ),
+            ),
             child: ListTile(
               title: const Text("Alpha Feedback"),
               leading: const Icon(Icons.chat),
+              selected: currentRoutePaths == RoutePaths.Feedback,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=

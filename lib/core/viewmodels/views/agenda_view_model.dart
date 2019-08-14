@@ -64,7 +64,7 @@ class AgendaViewModel extends ChangeNotifier {
     await _flutterLocalNotificationsPlugin.cancelAll();
 
     if (filteredEvents == null || filteredEvents.isEmpty) {
-      yield [
+      yield <Widget>[
         Center(
           child: Text(
             Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],

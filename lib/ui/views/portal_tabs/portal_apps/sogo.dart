@@ -10,6 +10,7 @@ class SogoWebView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: const Text("Sogo"),
+        elevation: 0.0,
       ),
       body: const SafeArea(
         child: WebView(

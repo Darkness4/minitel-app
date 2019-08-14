@@ -38,7 +38,7 @@ class _ImprimanteCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        key: Key('app_lists/imprimante'),
+        key: const Key('app_lists/imprimante'),
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => ImprimanteWebView()),
@@ -74,7 +74,7 @@ class _PortailCard extends StatelessWidget {
       color: Colors.white,
       elevation: 4,
       child: InkWell(
-        key: Key('app_lists/portail'),
+        key: const Key('app_lists/portail'),
         onTap: () async {
           await Navigator.push(
             context,
@@ -111,7 +111,7 @@ class _SogoCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        key: Key('app_lists/sogo'),
+        key: const Key('app_lists/sogo'),
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => SogoWebView()),
@@ -130,7 +130,7 @@ class _WikiMinitelCard extends StatelessWidget {
     return Card(
       elevation: 4,
       child: InkWell(
-        key: Key('app_lists/wiki_minitel'),
+        key: const Key('app_lists/wiki_minitel'),
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => MinitelWebView()),

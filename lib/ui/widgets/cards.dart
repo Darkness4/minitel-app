@@ -71,7 +71,7 @@ class ErrorAgendaWidget extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    key: Key('agenda_view/uid'),
+                    key: const Key('agenda_view/uid'),
                     focusNode: _uidFocusNode,
                     controller: _uidController,
                     decoration: InputDecoration(
@@ -84,7 +84,7 @@ class ErrorAgendaWidget extends StatelessWidget {
                     },
                   ),
                   TextFormField(
-                    key: Key('agenda_view/pswd'),
+                    key: const Key('agenda_view/pswd'),
                     controller: _pswdController,
                     obscureText: true,
                     focusNode: _pswdFocusNode,
@@ -102,7 +102,7 @@ class ErrorAgendaWidget extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Center(
             child: FloatingActionButton.extended(
-              key: Key('agenda_view/connect'),
+              key: const Key('agenda_view/connect'),
               backgroundColor: Colors.red,
               elevation: 10.0,
               onPressed: () async {

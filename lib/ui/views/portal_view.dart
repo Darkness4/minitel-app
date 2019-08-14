@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/github_api.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
@@ -71,7 +74,9 @@ class PortalViewState extends State<PortalView> {
             ),
           ],
         ),
-        drawer: const MainDrawer(),
+        drawer: const MainDrawer(
+          currentRoutePaths: RoutePaths.Authentication,
+        ),
       ),
     );
   }
@@ -86,31 +91,35 @@ class PortalViewState extends State<PortalView> {
   }
 
   void _checkVersion(BuildContext context) async {
-    var packageInfo = PackageInfo.fromPlatform();
-    var versionAPI = Provider.of<VersionAPI>(context).getLatestVersion();
-    PackageInfo actualRelease = await packageInfo;
-    LatestRelease latestRelease = await versionAPI;
-    if (actualRelease.version != latestRelease.tagName) {
-      await showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text("Une nouvelle version est disponible !"),
-          content: Text(
-              "La version ${latestRelease.tagName} est la dernière version."),
-          actions: <Widget>[
-            FlatButton(
-              key: Key('portal_view/closeUpdateButton'),
-              child: Text("Close"),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            RaisedButton(
-              textColor: Colors.white,
-              child: const Text("Update"),
-              onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
-            )
-          ],
-        ),
-      );
+    try {
+      var packageInfo = PackageInfo.fromPlatform();
+      var versionAPI = Provider.of<VersionAPI>(context).getLatestVersion();
+      PackageInfo actualRelease = await packageInfo;
+      LatestRelease latestRelease = await versionAPI;
+      if (actualRelease.version != latestRelease.tagName) {
+        await showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text("Une nouvelle version est disponible !"),
+            content: Text(
+                "La version ${latestRelease.tagName} est la dernière version."),
+            actions: <Widget>[
+              FlatButton(
+                key: const Key('portal_view/closeUpdateButton'),
+                child: Text("Close"),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              RaisedButton(
+                textColor: Colors.white,
+                child: const Text("Update"),
+                onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
+              )
+            ],
+          ),
+        );
+      }
+    } on SocketException {
+      print("Cannot connect to Github to check version");
     }
   }
 }

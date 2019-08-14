@@ -52,7 +52,7 @@ class LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextFormField(
-                key: Key('login/uidTextField'),
+                key: const Key('login/uidTextField'),
                 focusNode: _uidFocusNode,
                 controller: _uidController,
                 decoration: const InputDecoration(
@@ -70,7 +70,7 @@ class LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextFormField(
-                key: Key('login/pswdTextField'),
+                key: const Key('login/pswdTextField'),
                 controller: _pswdController,
                 obscureText: true,
                 focusNode: _pswdFocusNode,
@@ -106,7 +106,8 @@ class LoginPageState extends State<LoginPage> {
                             valueListenable: model.selectedUrl,
                             builder: (context, value, _) {
                               return DropdownButton<String>(
-                                key: Key('login/nameServerDropdownButton'),
+                                key:
+                                    const Key('login/nameServerDropdownButton'),
                                 value: value,
                                 items: [
                                   for (var value in LoginConstants.urlRootList)
@@ -131,7 +132,7 @@ class LoginPageState extends State<LoginPage> {
                             valueListenable: model.selectedTime,
                             builder: (context, value, _) {
                               return DropdownButton<String>(
-                                key: Key('login/timeDropdownButton'),
+                                key: const Key('login/timeDropdownButton'),
                                 value: model.selectedTime.value,
                                 items: [
                                   for (var value in LoginConstants.timeMap.keys)
@@ -157,7 +158,7 @@ class LoginPageState extends State<LoginPage> {
                           valueListenable: model.rememberMe,
                           builder: (context, value, _) {
                             return Checkbox(
-                              key: Key('login/rememberMeButton'),
+                              key: const Key('login/rememberMeButton'),
                               value: value,
                               onChanged: (value) {
                                 if (!value) {
@@ -178,7 +179,7 @@ class LoginPageState extends State<LoginPage> {
                           valueListenable: model.autoLogin,
                           builder: (context, value, _) {
                             return Checkbox(
-                              key: Key('login/autoLoginButton'),
+                              key: const Key('login/autoLoginButton'),
                               value: value,
                               onChanged: (value) {
                                 if (value) {
@@ -199,7 +200,7 @@ class LoginPageState extends State<LoginPage> {
               child: model.loginState == LoginState.Busy
                   ? const CircularProgressIndicator()
                   : FloatingActionButton.extended(
-                      key: Key('login/connect'),
+                      key: const Key('login/connect'),
                       onPressed: () => model.login(
                         context,
                         _uidController.text,
@@ -284,7 +285,7 @@ class _StatusCard extends StatelessWidget {
                     case ConnectionState.done:
                       return Text(
                         snapshot.data,
-                        key: Key('login/gatewayText'),
+                        key: const Key('login/gatewayText'),
                         style: TextStyle(
                             color: (snapshot.hasError ||
                                     !snapshot.data.contains("second"))
