@@ -39,7 +39,7 @@ class MyIPAdresses {
   static const String cloudflareDNSIP = "1.1.1.1";
 
   /// Local DNS IP
-  static const String localDNSIP = "192.168.0.6";
+  static const String localDNSIP = "10.163.0.6";
 
   /// Stormshield IP
   static const String stormshieldIP = "195.83.139.7";
