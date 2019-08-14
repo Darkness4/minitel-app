@@ -35,7 +35,7 @@ class DocCard extends StatelessWidget {
   }
 }
 
-class ErrorCalendarWidget extends StatelessWidget {
+class ErrorAgendaWidget extends StatelessWidget {
   final _uidController = TextEditingController();
   final _pswdController = TextEditingController();
   final _uidFocusNode = FocusNode();
@@ -44,7 +44,7 @@ class ErrorCalendarWidget extends StatelessWidget {
   final String error;
   final Function parentSetState;
 
-  ErrorCalendarWidget(this.error, this.parentSetState, this._formKey);
+  ErrorAgendaWidget(this.error, this.parentSetState, this._formKey);
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +71,7 @@ class ErrorCalendarWidget extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    key: const Key('agenda_view/uid'),
                     focusNode: _uidFocusNode,
                     controller: _uidController,
                     decoration: InputDecoration(
@@ -83,6 +84,7 @@ class ErrorCalendarWidget extends StatelessWidget {
                     },
                   ),
                   TextFormField(
+                    key: const Key('agenda_view/pswd'),
                     controller: _pswdController,
                     obscureText: true,
                     focusNode: _pswdFocusNode,
@@ -100,6 +102,7 @@ class ErrorCalendarWidget extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Center(
             child: FloatingActionButton.extended(
+              key: const Key('agenda_view/connect'),
               backgroundColor: Colors.red,
               elevation: 10.0,
               onPressed: () async {
@@ -366,33 +369,7 @@ class NewsCard extends StatelessWidget {
                         item.links.map((link) => link.href).toList().first),
                   ),
                 ),
-              )
-
-              // Paragraph(
-              //   item.summary != null ? item.summary : "",
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //   ),
-              // ),
-              // Paragraph(item.content.toString()),
-              // Paragraph(item.published.toString()),
-              // Paragraph(item.source.toString()),
-              // Paragraph(
-              //   item.links.map((link) => link.href).toList().join(""),
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //   ),
-              // ),
-              // Paragraph(item.categories.map((category) => category.lavel).toList().join(" ")),
-              // Paragraph((item.contributors).map((contributor) => contributor.name).toList().join(" ")),
-              // Paragraph(item.rights.toString()),
-              // Paragraph(item.media.toString()),
-
-              // Text(item.updated,
-              //     style: TextStyle(
-              //       fontStyle: FontStyle.italic,
-              //       color: Colors.white,
-              //     )),
+              ),
             ],
           ),
         ),

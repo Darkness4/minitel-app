@@ -31,9 +31,14 @@ class ICalendar {
   /// Get existing the stream .ics from file
   Future<void> getCalendarFromFile() async {
     final file = await _calendar;
+
     if (!(await file.exists())) {
       throw Exception("File calendar.ics do not exists");
     }
+
+    // Use this line of code to inject a template.ics
+    // await file
+    //     .writeAsString(await rootBundle.loadString('assets/template.ics'));
 
     // Read the file
     _calendarStream = file.openRead().transform(utf8.decoder);

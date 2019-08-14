@@ -2,6 +2,7 @@ import 'dart:io' show Platform;
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/services/http_webhook.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
@@ -115,7 +116,9 @@ class _FeedbackViewState extends State<FeedbackView> {
           ),
         ),
       ),
-      drawer: const MainDrawer(),
+      drawer: const MainDrawer(
+        currentRoutePaths: RoutePaths.Feedback,
+      ),
       floatingActionButton: Builder(
         builder: (BuildContext context) {
           return FloatingActionButton(

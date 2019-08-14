@@ -5,7 +5,7 @@ import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 
 class DocumentationView extends StatelessWidget {
   final String title;
-  DocumentationView({Key key, this.title}) : super(key: key);
+  const DocumentationView({Key key, this.title}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,9 @@ class DocumentationView extends StatelessWidget {
           child: MinitelDoc(),
         ),
       ),
-      drawer: const MainDrawer(),
+      drawer: const MainDrawer(
+        currentRoutePaths: RoutePaths.Docs,
+      ),
       endDrawer: DocsDrawer(DocsPageId.Home),
     );
   }

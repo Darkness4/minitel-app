@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 
 import 'news_tabs/facebook_tab.dart';
@@ -44,7 +45,9 @@ class NewsView extends StatelessWidget {
             ),
           ],
         ),
-        drawer: const MainDrawer(),
+        drawer: const MainDrawer(
+          currentRoutePaths: RoutePaths.News,
+        ),
       ),
     );
   }

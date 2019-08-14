@@ -6,13 +6,6 @@ class MinitelWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return WebviewScaffold(
-    //   appBar: AppBar(
-    // backgroundColor: Colors.blue,
-    // title: const Text("Minitel Wiki"),
-    //   ),
-    //   url: 'http://minitel.emse.fr/wiki/Wiki-user',
-    // );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,

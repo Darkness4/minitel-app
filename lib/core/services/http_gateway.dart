@@ -152,7 +152,7 @@ class GatewayAPI {
             throw Exception(
                 "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
           } else {
-            status = '$match seconds left';
+            status = '$match secondes restantes';
           }
         }
       } else {

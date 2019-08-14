@@ -6,17 +6,11 @@ class SogoWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return WebviewScaffold(
-    //   appBar: AppBar(
-    // backgroundColor: Colors.green,
-    // title: const Text("Sogo"),
-    //   ),
-    //   url: 'https://sogo.emse.fr/',
-    // );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: const Text("Sogo"),
+        elevation: 0.0,
       ),
       body: const SafeArea(
         child: WebView(

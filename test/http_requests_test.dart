@@ -40,8 +40,8 @@ void main() {
       var statusFromApi =
           await _gateway.getStatus("195.83.139.7", cookie: _gateway.cookie);
 
-      expect(statusFromApi, contains("seconds"));
-      expect(statusFromReturn, contains("seconds"));
+      expect(statusFromApi, contains("second"));
+      expect(statusFromReturn, contains("second"));
     });
 
     test('Get status intentionaly from google.fr to get error', () async {

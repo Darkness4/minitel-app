@@ -1,10 +1,3 @@
-image: darkness4/flutter-builder:latest
-
-variables:
-before_script:
-  - flutter channel master
-  - flutter upgrade
-
 stages:
   - test
   - build
@@ -12,36 +5,58 @@ stages:
 
 unit-tests:
   stage: test
-  script:
+  image: darkness4/flutter-builder:latest
+
+  before_script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter packages get
     - apt update
     - apt install -y lcov
-    - flutter packages get
+
+  script:
     - flutter test --coverage
+
+  after_script:
     - genhtml -o coverage coverage/lcov.info
+
   artifacts:
     paths:
     - coverage/
 
 pages:
   stage: deploy
+  image: ruby:latest
   dependencies:
     - unit-tests
-  script:
-    - pub global activate coveralls
-    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+  before_script:
+    - gem install coveralls-lcov
     - "echo \"repo_token: ${COVERALLS_TOKEN}\" > .coveralls.yml"
-    - coveralls ./coverage/lcov.info
+
+  script:
+    - coveralls-lcov ./coverage/lcov.info
+
+  after_script:
     - mv coverage/ public/
+
   artifacts:
     paths:
       - public
+
   only:
   - master
   - develop
 
 build-test:
   stage: test
-  script:
+  image: darkness4/flutter-builder:latest
+
+  before_script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter packages get
+    - apt update
     - apt install -y sed
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
@@ -50,8 +65,10 @@ build-test:
     - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-    - flutter packages get
+
+  script:
     - flutter build apk --target-platform android-arm --split-per-abi
+
   except:
   - master
   - develop
@@ -59,7 +76,13 @@ build-test:
 
 build:
   stage: build
-  script:
+  image: darkness4/flutter-builder:latest
+  
+  before_script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter packages get
+    - apt update
     - apt install -y sed
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
@@ -68,15 +91,20 @@ build:
     - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-    - flutter packages get
+
+  script:
     - flutter build apk --target-platform android-arm,android-arm64 --split-per-abi
+
+  after_script:
     - mv build/app/outputs/apk/release/app-armeabi-v7a-release.apk minitel-toolbox-armeabi-v7a.apk
     - mv build/app/outputs/apk/release/app-arm64-v8a-release.apk minitel-toolbox-arm64-v8a.apk
+
   artifacts:
     paths:
       - minitel-toolbox-armeabi-v7a.apk
       - minitel-toolbox-arm64-v8a.apk
     expire_in: 1 week
+
   only:
     - master
     - develop

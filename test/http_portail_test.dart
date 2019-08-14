@@ -29,9 +29,9 @@ void main() {
     });
 
     test('FAIL getSavedCookiePortail', () async {
-      String cookie = await _portail.getSavedCookiePortail();
+      String cookie = await _portail.cookie;
       print(cookie);
-      expect(cookie == "", true);
+      expect(cookie == null, true);
     });
 
     test('FAIL to saveCookiePortailFromLogin', () async {
@@ -47,8 +47,9 @@ void main() {
   group('Http Requests Portail', () {
     test('Get succefully a cookie', () async {
       String cookie = await _portail.getPortailCookie(
-          username: "marc.nguyen",
-          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
+        username: "marc.nguyen",
+        password: utf8.decode(base64.decode("b3BzdGU5NjM=")),
+      );
       print(cookie);
 
       expect(cookie, contains("portail_ent_emse_session"));
@@ -58,17 +59,9 @@ void main() {
       await _portail.saveCookiePortailFromLogin(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
-      String cookie = await _portail.getSavedCookiePortail();
+      String cookie = _portail.cookie;
       print(cookie);
       expect(cookie, contains("portail_ent_emse_session"));
-    });
-
-    test('saveCookiePortailFromLogin', () async {
-      var response = await _portail.saveCookiePortailFromLogin(
-          username: "marc.nguyen",
-          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
-
-      expect(response, true);
     });
   });
 }

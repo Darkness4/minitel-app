@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/github_api.dart';
-import 'package:minitel_toolbox/core/services/http_portail.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
@@ -12,15 +14,15 @@ import 'portal_tabs/login.dart';
 
 class PortalView extends StatefulWidget {
   final String title;
-  final VersionAPI version;
 
-  const PortalView({Key key, this.title, @required this.version})
-      : super(key: key);
+  const PortalView({Key key, this.title}) : super(key: key);
 
   PortalViewState createState() => PortalViewState();
 }
 
 class PortalViewState extends State<PortalView> {
+  bool _hasTriggeredOnce = false;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -40,9 +42,7 @@ class PortalViewState extends State<PortalView> {
             child: TabBarView(
               children: <Widget>[
                 const LoginPage(),
-                AppsList(
-                  portailAPI: Provider.of<PortailAPI>(context),
-                ),
+                const AppsList(),
               ],
             ),
           ),
@@ -56,11 +56,17 @@ class PortalViewState extends State<PortalView> {
               bottom: const TabBar(
                 tabs: <Tab>[
                   Tab(
-                    icon: Icon(Icons.vpn_key),
+                    icon: Icon(
+                      Icons.vpn_key,
+                      key: Key('portal_view/loginTab'),
+                    ),
                     text: "Login",
                   ),
                   Tab(
-                    icon: Icon(Icons.apps),
+                    icon: Icon(
+                      Icons.apps,
+                      key: Key('portal_view/apps_tab'),
+                    ),
                     text: "Apps",
                   ),
                 ],
@@ -68,42 +74,52 @@ class PortalViewState extends State<PortalView> {
             ),
           ],
         ),
-        drawer: const MainDrawer(),
+        drawer: const MainDrawer(
+          currentRoutePaths: RoutePaths.Authentication,
+        ),
       ),
     );
   }
 
   @override
-  void initState() {
-    _checkVersion(widget.version, context);
-    super.initState();
+  void didChangeDependencies() {
+    if (!_hasTriggeredOnce) {
+      _checkVersion(context);
+      _hasTriggeredOnce = true;
+    }
+    super.didChangeDependencies();
   }
 
-  void _checkVersion(VersionAPI version, BuildContext context) async {
-    var packageInfo = PackageInfo.fromPlatform();
-    var versionAPI = version.getLatestVersion();
-    PackageInfo actualRelease = await packageInfo;
-    LatestRelease latestRelease = await versionAPI;
-    if (actualRelease.version != latestRelease.tagName) {
-      await showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text("Une nouvelle version est disponible !"),
-          content: Text(
-              "La version ${latestRelease.tagName} est la dernière version."),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Close"),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            RaisedButton(
-              textColor: Colors.white,
-              child: const Text("Update"),
-              onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
-            )
-          ],
-        ),
-      );
+  void _checkVersion(BuildContext context) async {
+    try {
+      var packageInfo = PackageInfo.fromPlatform();
+      var versionAPI = Provider.of<VersionAPI>(context).getLatestVersion();
+      PackageInfo actualRelease = await packageInfo;
+      LatestRelease latestRelease = await versionAPI;
+      if (actualRelease.version != latestRelease.tagName) {
+        await showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text("Une nouvelle version est disponible !"),
+            content: Text(
+                "La version ${latestRelease.tagName} est la dernière version."),
+            actions: <Widget>[
+              FlatButton(
+                key: const Key('portal_view/closeUpdateButton'),
+                child: Text("Close"),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              RaisedButton(
+                textColor: Colors.white,
+                child: const Text("Update"),
+                onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
+              )
+            ],
+          ),
+        );
+      }
+    } on SocketException {
+      print("Cannot connect to Github to check version");
     }
   }
 }

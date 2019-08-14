@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 /// HTTP requests handler for EMSE Portal
 class PortailAPI {
   final _client = HttpClient();
+  String _cookie;
+
+  String get cookie => _cookie;
 
   /// Récupère le cookie pour se connecter à Portail EMSE
   ///
@@ -51,8 +52,7 @@ class PortailAPI {
     String agimus;
     try {
       agimus = RegExp(r'AGIMUS=([^;]*);').firstMatch(temp).group(0);
-    } on NoSuchMethodError catch (e) {
-      print(e.toString());
+    } on NoSuchMethodError {
       throw Exception("AGIMUS not found. Maybe bad username or password.");
     }
     var location = response.headers.value('location');
@@ -84,30 +84,16 @@ class PortailAPI {
     return status;
   }
 
-  /// Get the Portail cookie from SharedPrefs
-  Future<String> getSavedCookiePortail() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String contents = prefs.getString('cookiePortail') ?? "";
-
-    return contents;
-  }
-
-  /// Save the cookie in a SharedPrefs
-  void saveCookiePortail(String cookie) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setString('cookiePortail', cookie);
-  }
-
   /// Save the cookie gotten through CAS Authentication in a SharedPrefs
-  Future<bool> saveCookiePortailFromLogin(
+  Future<void> saveCookiePortailFromLogin(
       {String username, String password}) async {
-    String cookie =
-        await getPortailCookie(username: username, password: password);
-
-    if (cookie.contains("bad username or password")) return false;
-
-    await saveCookiePortail(cookie);
-
-    return true;
+    try {
+      String cookie =
+          await getPortailCookie(username: username, password: password);
+      _cookie = cookie;
+    } on Exception {
+      _cookie = null;
+      rethrow;
+    }
   }
 }

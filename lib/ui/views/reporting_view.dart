@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/buttons.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
-import 'base_widget.dart';
 import 'reporting_tabs/diagnose_tab.dart';
 import 'reporting_tabs/report_tab.dart';
 
@@ -30,7 +31,7 @@ class ReportingViewState extends State<ReportingView>
   Widget build(BuildContext context) {
     return BaseWidget<ReportingViewModel>(
       model: ReportingViewModel(
-        webhook: Provider.of(context),
+        webhookAPI: Provider.of(context),
         gatewayAPI: Provider.of(context),
       ),
       child: ReportTab(
@@ -49,7 +50,9 @@ class ReportingViewState extends State<ReportingView>
               ],
             ),
           ),
-          drawer: const MainDrawer(),
+          drawer: const MainDrawer(
+            currentRoutePaths: RoutePaths.Reporting,
+          ),
           floatingActionButton: Builder(
             builder: (context) => Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -99,7 +102,10 @@ class ReportingViewState extends State<ReportingView>
     Widget child;
     switch (model.diagnosisState) {
       case ButtonState.None:
-        child = const Icon(Icons.zoom_in);
+        child = const Icon(
+          Icons.zoom_in,
+          key: Key('reporting_view/diagnose'),
+        );
         break;
       case ButtonState.Loading:
         child = ValueListenableBuilder<double>(
@@ -112,7 +118,10 @@ class ReportingViewState extends State<ReportingView>
         break;
       case ButtonState.Done:
         if (_animationController.isDismissed) _animationController.forward();
-        child = const Icon(Icons.done);
+        child = const Icon(
+          Icons.done,
+          key: Key('reporting_view/diagnose_done'),
+        );
         break;
     }
     return child;
@@ -131,11 +140,17 @@ class ReportingViewState extends State<ReportingView>
             indicatorColor: Colors.white,
             tabs: <Tab>[
               Tab(
-                icon: Icon(Icons.warning),
+                icon: Icon(
+                  Icons.warning,
+                  key: Key('reporting_view/reporting_tab'),
+                ),
                 text: "Report",
               ),
               Tab(
-                icon: Icon(Icons.zoom_in),
+                icon: Icon(
+                  Icons.zoom_in,
+                  key: Key('reporting_view/diagnosis_tab'),
+                ),
                 text: "Diagnosis",
               ),
             ],

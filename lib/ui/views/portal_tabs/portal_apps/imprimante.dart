@@ -6,13 +6,6 @@ class ImprimanteWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return WebviewScaffold(
-    //   appBar: AppBar(
-    //     backgroundColor: Colors.grey,
-    //     title: const Text("Imprimante EMSE"),
-    //   ),
-    //   url: 'https://vpnssl.emse.fr/watchdoc,DanaInfo=192.168.130.2',
-    // );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
