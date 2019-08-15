@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
@@ -10,17 +11,21 @@ void main() {
 
   group('Http Requests', () {
     test('Bad Username or Password to 195.83.139.7', () async {
-      var status = await _gateway.autoLogin("", "", "195.83.139.7", 480);
-      print(status);
-
-      expect(status, "Error: Bad Username or Password");
+      try {
+        await _gateway.autoLogin("", "", "195.83.139.7", 480);
+        throw "autoLogin did not throw";
+      } catch (e) {
+        expect(e.toString(), contains("Error: Bad Username or Password"));
+      }
     });
 
     test('Bad Username and Password to google.fr to get HttpError', () async {
-      var status = await _gateway.autoLogin("", "", "google.fr", 0);
-      print(status);
-
-      expect(status, contains("HttpError"));
+      try {
+        await _gateway.autoLogin("", "", "google.fr", 0);
+        throw "autoLogin did not throw";
+      } catch (e) {
+        expect(e.toString(), contains("HttpError"));
+      }
     });
 
     test('Get status Not logged in from 195.83.139.7', () async {
@@ -31,7 +36,6 @@ void main() {
       expect(status, contains("Not logged in"));
     });
 
-    // This test does not work because we are not using cookies.
     test('Get status SUCCESS from 195.83.139.7', () async {
       var cookie = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
@@ -69,11 +73,11 @@ void main() {
     });
 
     test('Good Username and Password to 195.83.139.7', () async {
-      var status = await _gateway.autoLogin("marc.nguyen",
+      Cookie status = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
       print(status);
 
-      expect(status, contains("NETASQ_USER"));
+      expect(status.name, equals("NETASQ_USER"));
     });
 
     test('Get Atom from Github', () async {

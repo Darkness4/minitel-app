@@ -21,10 +21,10 @@ class Feed {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['data'] = this.posts.map((Post post) => post.toJson());
+    data['data'] = posts.map((Post post) => post.toJson()).toList();
     data['paging'] = Map<String, dynamic>();
-    data["paging"]["next"] = this.nextUrl;
-    data["paging"]["previous"] = this.nextUrl;
+    data["paging"]["next"] = nextUrl;
+    data["paging"]["previous"] = prevUrl;
     return data;
   }
 }

@@ -6,6 +6,7 @@ import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,7 @@ class LoginPageState extends State<LoginPage> {
         portailAPI: Provider.of<PortailAPI>(context),
         calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
         gatewayAPI: Provider.of<GatewayAPI>(context),
+        iCalendar: Provider.of<ICalendar>(context),
         rememberMe: _rememberMe,
         selectedTime: _selectedTime,
         selectedUrl: _selectedUrl,

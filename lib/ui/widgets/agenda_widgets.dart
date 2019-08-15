@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:minitel_toolbox/core/models/icalendar.dart';
+import 'package:minitel_toolbox/core/models/icalendar/event.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:provider/provider.dart';
@@ -45,52 +46,6 @@ class DayWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: dailyEvents,
-      ),
-    );
-  }
-}
-
-class MonthHeader extends StatelessWidget {
-  final String text;
-  const MonthHeader(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.display2.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-      ),
-    );
-  }
-}
-
-class MonthPage extends StatelessWidget {
-  final int _month;
-  final List<Widget> _monthlyWidgets;
-
-  const MonthPage(this._month, this._monthlyWidgets, {Key key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          color: MinitelColors.MonthColorPalette[_month],
-          elevation: 4,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: _monthlyWidgets,
-          ),
-        ),
       ),
     );
   }
@@ -169,12 +124,13 @@ class ErrorAgendaWidget extends StatelessWidget {
               onPressed: () async {
                 CalendarUrlAPI _calendarURL =
                     Provider.of<CalendarUrlAPI>(context);
+                ICalendar ical = Provider.of<ICalendar>(context);
                 try {
                   var url = await _calendarURL.getCalendarURL(
                     username: _uidController.text,
                     password: _pswdController.text,
                   );
-                  await ICalendar().saveCalendar(url, _calendarURL);
+                  await ical.saveCalendar(url, _calendarURL);
                 } on Exception catch (e) {
                   Scaffold.of(context).showSnackBar(
                     SnackBar(content: Text(e.toString())),
@@ -199,14 +155,14 @@ class ErrorAgendaWidget extends StatelessWidget {
 }
 
 class EventCard extends StatelessWidget {
-  final Map<String, String> _event;
+  final Event _event;
 
-  const EventCard(Map<String, String> event, {Key key})
+  const EventCard(Event event, {Key key})
       : _event = event,
         super(key: key);
 
   Color get _cardColor {
-    var upper = _event["SUMMARY"].toLowerCase();
+    var upper = _event.summary.toLowerCase();
     if (upper.contains("examen")) {
       return Colors.red[200];
     } else if (upper.contains("tp")) {
@@ -230,9 +186,9 @@ class EventCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Card(
         color: _cardColor,
-        elevation: (_event["SUMMARY"].toLowerCase().contains("sport") ||
-                _event["SUMMARY"].toLowerCase().contains("vacance") ||
-                _event["SUMMARY"].toLowerCase().contains("férié"))
+        elevation: (_event.summary.toLowerCase().contains("sport") ||
+                _event.summary.toLowerCase().contains("vacance") ||
+                _event.summary.toLowerCase().contains("férié"))
             ? 0
             : 4,
         child: Container(
@@ -240,17 +196,17 @@ class EventCard extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text(
-                _event["SUMMARY"],
+                _event.summary,
                 style: const TextStyle(fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               Text(
-                _event["DESCRIPTION"],
+                _event.description,
                 style: const TextStyle(height: 1.4),
                 textAlign: TextAlign.center,
               ),
               Text(
-                "${_event["LOCATION"] != "" ? '➡' : ''} ${_event["LOCATION"]} ",
+                "${_event.location != "" ? '➡' : ''} ${_event.location} ",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.red,
@@ -259,9 +215,9 @@ class EventCard extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Text(
-                "${DateFormat.Hm().format(DateTime.parse(_event["DTSTART"]))}"
+                "${DateFormat.Hm().format(_event.dtstart)}"
                 " - "
-                "${DateFormat.Hm().format(DateTime.parse(_event["DTEND"]))}",
+                "${DateFormat.Hm().format(_event.dtend)}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -269,6 +225,52 @@ class EventCard extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MonthHeader extends StatelessWidget {
+  final String text;
+  const MonthHeader(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.display2.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+      ),
+    );
+  }
+}
+
+class MonthPage extends StatelessWidget {
+  final int _month;
+  final List<Widget> _monthlyWidgets;
+
+  const MonthPage(this._month, this._monthlyWidgets, {Key key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          color: MinitelColors.MonthColorPalette[_month],
+          elevation: 4,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: _monthlyWidgets,
           ),
         ),
       ),

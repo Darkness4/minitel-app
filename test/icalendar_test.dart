@@ -1,10 +1,11 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
-import 'package:minitel_toolbox/core/models/icalendar.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -24,21 +25,12 @@ void main() async {
   SharedPreferences.setMockInitialValues({});
 
   group('Must FAIL', () {
-    test("getCalendarFromFile: Not Existing", () async {
+    test("getParsedCalendarFromFile: Not Existing", () async {
       try {
-        await ICalendar().getCalendarFromFile();
+        await ICalendar().getParsedCalendarFromFile();
         throw "Fail to fail";
       } catch (e) {
         expect(e.toString(), contains("File calendar.ics do not exists"));
-      }
-    });
-
-    test("parseCalendar: Not Existing", () async {
-      try {
-        await ICalendar().parseCalendar();
-        throw "Fail to fail";
-      } catch (e) {
-        expect(e.toString(), contains("Calendar stream not found"));
       }
     });
     test("saveCalendar: Wrong URL", () async {
@@ -61,9 +53,13 @@ void main() async {
       await ical.saveCalendar(url, _calendarUrlAPI);
     });
 
-    test("getCalendarFromFile", () async {
+    test("getParsedCalendarFromFile", () async {
       var ical = ICalendar();
-      await ical.getCalendarFromFile();
+      var url = await _calendarUrlAPI.getCalendarURL(
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
+      await ical.saveCalendar(url, _calendarUrlAPI);
+      await ical.getParsedCalendarFromFile();
     });
 
     test("parseCalendar from Login", () async {
@@ -73,16 +69,14 @@ void main() async {
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url, _calendarUrlAPI);
 
-      await ical.getCalendarFromFile();
-      var parsedCalendar = await ical.parseCalendar();
-      print(parsedCalendar.timezone.daylight.toString());
-      print(parsedCalendar.events[0]["DTSTART"]);
-      print(parsedCalendar.events[0].length);
-      print(parsedCalendar.events.length);
+      var parsedCalendar = await ical.getParsedCalendarFromFile();
+      expect(parsedCalendar.timezone.daylight.toString(), isNotNull);
+      expect(parsedCalendar.events[0].dtstart, isNotNull);
+      expect(parsedCalendar.events.length, isNotNull);
       expect(parsedCalendar.timezone.tzid, equals("Europe/Paris"));
     });
 
-    test("", () async {
+    test("parseCalendar from Cache", () async {
       var ical = ICalendar();
       ParsedCalendar parsedCalendar;
       String url;
@@ -112,13 +106,34 @@ void main() async {
       }
 
       var ical2 = ICalendar();
-      await ical2.getCalendarFromFile();
-      parsedCalendar = await ical2.parseCalendar();
-      print(parsedCalendar.events.length);
-      print(parsedCalendar.timezone.daylight.toString());
-      print(parsedCalendar.events[0]["DTSTART"]);
-      print(parsedCalendar.events[0].length);
+      parsedCalendar = await ical2.getParsedCalendarFromFile();
+      expect(parsedCalendar.events.length, isNotNull);
+      expect(parsedCalendar.timezone.daylight.toString(), isNotNull);
+      expect(parsedCalendar.events[0].dtstart, isNotNull);
       expect(parsedCalendar.timezone.tzid, equals("Europe/Paris"));
+    });
+
+    test("parseCalendar export to Json", () async {
+      var ical = ICalendar();
+      var url = await _calendarUrlAPI.getCalendarURL(
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
+      await ical.saveCalendar(url, _calendarUrlAPI);
+
+      var parsedCalendar = await ical.getParsedCalendarFromFile();
+      print(parsedCalendar.toJson());
+    });
+
+    test("parseCalendar import to Json", () async {
+      var ical = ICalendar();
+      var url = await _calendarUrlAPI.getCalendarURL(
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
+      await ical.saveCalendar(url, _calendarUrlAPI);
+
+      var parsedCalendar = await ical.getParsedCalendarFromFile();
+      var parsedCalendar2 = ParsedCalendar.fromJson(parsedCalendar.toJson());
+      expect(parsedCalendar2.toJson(), equals(parsedCalendar.toJson()));
     });
   });
 }

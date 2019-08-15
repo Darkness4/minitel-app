@@ -3,10 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
-import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Mutex
@@ -16,6 +16,7 @@ class LoginViewModel extends ChangeNotifier {
   final PortailAPI portailAPI;
   final GatewayAPI gatewayAPI;
   final CalendarUrlAPI calendarUrlAPI;
+  final ICalendar iCalendar;
   final ValueNotifier<String> selectedTime;
   final ValueNotifier<String> selectedUrl;
   final ValueNotifier<bool> rememberMe;
@@ -28,6 +29,7 @@ class LoginViewModel extends ChangeNotifier {
     @required this.gatewayAPI,
     @required this.calendarUrlAPI,
     @required this.selectedTime,
+    @required this.iCalendar,
     @required this.selectedUrl,
     @required this.rememberMe,
     @required this.autoLogin,
@@ -79,7 +81,7 @@ class LoginViewModel extends ChangeNotifier {
         username: uid,
         password: pswd,
       );
-      await ICalendar().saveCalendar(calendarUrl, calendarUrlAPI);
+      await iCalendar.saveCalendar(calendarUrl, calendarUrlAPI);
       notifyListeners();
     } on Exception catch (e) {
       Scaffold.of(context).showSnackBar(
