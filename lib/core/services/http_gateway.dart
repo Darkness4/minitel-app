@@ -4,7 +4,7 @@ import 'dart:io';
 /// This class handle the connections through stormshield, aka the gateway.
 class GatewayAPI {
   final _client = HttpClient();
-  String cookie;
+  Cookie cookie;
 
   /// Connect to the portal.
   ///
@@ -25,47 +25,38 @@ class GatewayAPI {
   /// ```
   /// String cookie = await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
   /// ```
-  Future<String> autoLogin(
+  Future<Cookie> autoLogin(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
-    var status = "";
-
     _client.badCertificateCallback = (cert, host, port) => true;
 
-    try {
-      // SessionId
-      var data = "uid=$uid&time=$selectedTime&pswd=$pswd";
-      HttpClientRequest request = await _client
-          .postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'))
-        ..headers.contentType = ContentType(
-          "application",
-          "x-www-form-urlencoded",
-          charset: 'utf-8',
-        )
-        ..headers.set(HttpHeaders.cookieHeader, "lang=us; disclaimer=1;")
-        ..headers.contentLength = data.length // Needed
-        ..write(data);
-      HttpClientResponse response = await request.close();
-      if (response.statusCode == 200) {
-        var body =
-            await response.cast<List<int>>().transform(utf8.decoder).join();
-        if (body.contains('title_error')) {
-          throw ("Error: Bad Username or Password");
-        } else {
-          var temp = response.headers['set-cookie'].toString();
-          var netasq_user =
-              RegExp(r'NETASQ_USER=([^;]*);').firstMatch(temp).group(0);
-          status = netasq_user;
-          cookie = netasq_user;
-        }
+    // SessionId
+    var data = "uid=$uid&time=$selectedTime&pswd=$pswd";
+    HttpClientRequest request =
+        await _client.postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'))
+          ..headers.contentType = ContentType(
+            "application",
+            "x-www-form-urlencoded",
+            charset: 'utf-8',
+          )
+          ..headers.set(HttpHeaders.cookieHeader, "lang=us; disclaimer=1;")
+          ..headers.contentLength = data.length // Needed
+          ..write(data);
+    HttpClientResponse response = await request.close();
+    if (response.statusCode == 200) {
+      var body =
+          await response.cast<List<int>>().transform(utf8.decoder).join();
+      if (body.contains('title_error')) {
+        throw ("Error: Bad Username or Password");
       } else {
-        throw Exception("HttpError: ${response.statusCode}");
+        Cookie netasq_user = response.cookies
+            .firstWhere((cookie) => cookie.name == "NETASQ_USER");
+        cookie = netasq_user;
       }
-    } catch (e) {
-      status = e.toString();
+    } else {
+      throw Exception("HttpError: ${response.statusCode}");
     }
 
-    print(status);
-    return status;
+    return cookie;
   }
 
   /// Disconnect from the portal.
@@ -73,19 +64,20 @@ class GatewayAPI {
   /// ```
   /// String status = await disconnectGateway("172.17.0.1") // "You have logged out"
   /// ```
-  Future<String> disconnectGateway(String selectedUrl, {String cookie}) async {
+  Future<String> disconnectGateway(String selectedUrl, {Cookie cookie}) async {
     var url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     var status = "";
-    var _cookie = "lang=us; ";
-    _cookie += cookie ?? "";
 
     _client.badCertificateCallback = (cert, host, port) => true;
 
     try {
       HttpClientRequest request = await _client.getUrl(Uri.parse(url))
-        ..headers.set(HttpHeaders.cookieHeader, _cookie)
         ..headers.removeAll(HttpHeaders.contentLengthHeader);
+      if (cookie != null) {
+        request.cookies.add(cookie);
+      }
+
       HttpClientResponse response = await request.close();
       var body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
@@ -127,18 +119,19 @@ class GatewayAPI {
   /// String status = await getStatus("172.17.0.1", cookie: _gateway.cookie) // "x seconds left"
   /// ```
   ///
-  Future<String> getStatus(String selectedUrl, {String cookie}) async {
+  Future<String> getStatus(String selectedUrl, {Cookie cookie}) async {
     var status = "";
     _client.badCertificateCallback = (cert, host, port) => true;
     var url = 'https://$selectedUrl/auth/login.html';
     RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
     try {
-      var _cookie = "lang=us; ";
-      _cookie += cookie ?? "";
       HttpClientRequest request = await _client.getUrl(Uri.parse(url))
-        ..headers.set(HttpHeaders.cookieHeader, _cookie)
         ..headers.removeAll(HttpHeaders.contentLengthHeader);
+
+      if (cookie != null) {
+        request.cookies.add(cookie);
+      }
 
       HttpClientResponse response = await request.close();
       var body =

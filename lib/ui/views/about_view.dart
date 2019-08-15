@@ -23,8 +23,9 @@ class AboutView extends StatelessWidget {
             children: <Widget>[
               const ListTile(
                 title: Text("Minitel Toolbox"),
+                isThreeLine: true,
                 subtitle: Text(
-                    "Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre"),
+                    "Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre."),
               ),
               const Divider(),
               ListTile(
@@ -77,6 +78,15 @@ class AboutView extends StatelessWidget {
                   );
                 },
               ),
+              ListTile(
+                title: const Text("Politique de confidentalité"),
+                subtitle: Text(
+                  "Aucune donnée est partagée et stockée à votre insu. Les données collectées sont celles que vous nous fournissez (diagnostique et feedback) et ne sont jamais sauvegardées. ",
+                  textAlign: TextAlign.justify,
+                ),
+                isThreeLine: true,
+                onTap: () {}, // TODO: Faire un don (stripe ?, Paypal ? InApp ?)
+              ),
               const Divider(),
               ListTile(
                 title: const Text("Version"),
@@ -99,7 +109,6 @@ class AboutView extends StatelessWidget {
                 ),
                 onTap: () {},
               ),
-              const Divider(),
               ListTile(
                 title: const Text("Chercher une mise à jour"),
                 onTap: () async {
@@ -161,7 +170,7 @@ class AboutView extends StatelessWidget {
                 },
               ),
               // ListTile(
-              //   title: Text("Faire un don"),
+              //   title: const Text("Faire un don"),
               //   onTap: () {}, // TODO: Faire un don (stripe ?, Paypal ? InApp ?)
               // ),
             ],

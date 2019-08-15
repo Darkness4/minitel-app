@@ -150,7 +150,7 @@ class AgendaViewModel extends ChangeNotifier {
 
   Future<ICalendar> loadCalendar(BuildContext context) async {
     CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
-    ICalendar ical = ICalendar(_calendarUrlAPI);
+    ICalendar ical = ICalendar();
 
     // Try to update thr calendar
     var url = await _calendarUrlAPI.savedCalendarURL;
@@ -160,7 +160,7 @@ class AgendaViewModel extends ChangeNotifier {
       print("Cannot update calendar. Taking from cache.");
     } else {
       print("Updating calendar.");
-      await ical.saveCalendar(url);
+      await ical.saveCalendar(url, _calendarUrlAPI);
     }
 
     // Read the actual calendar (throw if not existing)

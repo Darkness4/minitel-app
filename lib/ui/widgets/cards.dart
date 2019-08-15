@@ -113,7 +113,7 @@ class ErrorAgendaWidget extends StatelessWidget {
                     username: _uidController.text,
                     password: _pswdController.text,
                   );
-                  await ICalendar(_calendarURL).saveCalendar(url);
+                  await ICalendar().saveCalendar(url, _calendarURL);
                 } on Exception catch (e) {
                   Scaffold.of(context).showSnackBar(
                     SnackBar(content: Text(e.toString())),

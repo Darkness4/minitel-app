@@ -24,13 +24,16 @@ class CalendarUrlAPI {
     );
 
     try {
-      HttpClientRequest request = await _client
-          .postUrl(Uri.parse("https://portail.emse.fr/ics/"))
-        ..headers.removeAll(HttpHeaders.contentLengthHeader)
-        ..headers.set(HttpHeaders.cookieHeader, "PHPSESSID=$phpSessionIDCAS");
+      HttpClientRequest request =
+          await _client.postUrl(Uri.parse("https://portail.emse.fr/ics/"))
+            ..headers.removeAll(HttpHeaders.contentLengthHeader)
+            ..cookies.add(phpSessionIDCAS);
       HttpClientResponse response = await request.close();
-      var body =
-          await response.cast<List<int>>().transform(utf8.decoder).join();
+      var body = await response
+          .cast<List<int>>()
+          .transform(utf8.decoder)
+          .transform(LineSplitter())
+          .firstWhere((line) => line.contains(RegExp(r'https(.*)\.ics')));
       status = RegExp(r'https(.*)\.ics').stringMatch(body);
     } catch (e) {
       status = e.toString();
@@ -47,7 +50,7 @@ class CalendarUrlAPI {
   }
 
   /// Login through EMSE CAS Authentication
-  Future<String> _bypassCAS({String username, String password}) async {
+  Future<Cookie> _bypassCAS({String username, String password}) async {
     var referee = "https://portail.emse.fr/ics/";
 
     // GET ICS
@@ -55,10 +58,8 @@ class CalendarUrlAPI {
       ..followRedirects = false
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
-    var phpSessionIDreferee = response.headers.value('set-cookie');
-    // print("Look for PHPSESSID $phpSessionIDreferee");
-    phpSessionIDreferee =
-        RegExp(r'PHPSESSID=([^;]*);').firstMatch(phpSessionIDreferee).group(1);
+    Cookie phpSessionIDreferee =
+        response.cookies.firstWhere((cookie) => cookie.name == "PHPSESSID");
 
     // GET CAS
     request = await _client.getUrl(Uri.parse(
@@ -66,28 +67,29 @@ class CalendarUrlAPI {
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     response = await request.close();
 
-    var lt = await response.cast<List<int>>().transform(utf8.decoder).join();
+    var lt = await response
+        .cast<List<int>>()
+        .transform(utf8.decoder)
+        .transform(LineSplitter())
+        .firstWhere(
+            (line) => line.contains(RegExp(r'name="lt" value="([^"]*)"')));
     lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(lt).group(1);
 
-    var jSessionID = response.headers.value('set-cookie');
-    // print("Look for JSESSIONID $jSessionID");
-    jSessionID = RegExp(r'JSESSIONID=([^;]*);').firstMatch(jSessionID).group(1);
+    Cookie jSessionID =
+        response.cookies.firstWhere((cookie) => cookie.name == "JSESSIONID");
 
     // POST CAS
     var data =
         "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
     request = await _client.postUrl(Uri.parse(
-        'https://cas.emse.fr/login;jsessionid=$jSessionID?service=${Uri.encodeComponent(referee)}'))
+        'https://cas.emse.fr/login;jsessionid=${jSessionID.value}?service=${Uri.encodeComponent(referee)}'))
       ..headers.contentType = ContentType(
         "application",
         "x-www-form-urlencoded",
         charset: "utf-8",
       )
       ..headers.contentLength = data.length
-      ..headers.set(
-        HttpHeaders.cookieHeader,
-        "JSESSIONID=$jSessionID",
-      )
+      ..cookies.add(jSessionID)
       ..headers.set(
         HttpHeaders.refererHeader,
         'https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}',
@@ -103,15 +105,11 @@ class CalendarUrlAPI {
     request = await _client.getUrl(Uri.parse(location))
       ..headers.removeAll(HttpHeaders.contentLengthHeader)
       ..followRedirects = false
-      ..headers.set(
-        HttpHeaders.cookieHeader,
-        "PHPSESSID=$phpSessionIDreferee",
-      );
+      ..cookies.add(phpSessionIDreferee);
     response = await request.close();
 
-    var phpSessionIDCAS = response.headers.value("set-cookie");
-    phpSessionIDCAS =
-        RegExp(r'PHPSESSID=([^;]*);').firstMatch(phpSessionIDCAS).group(1);
+    Cookie phpSessionIDCAS =
+        response.cookies.firstWhere((cookie) => cookie.name == "PHPSESSID");
 
     // Cookie
     return phpSessionIDCAS;

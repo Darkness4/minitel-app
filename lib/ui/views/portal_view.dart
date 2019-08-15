@@ -29,8 +29,8 @@ class PortalViewState extends State<PortalView> {
       length: 2,
       child: Scaffold(
         body: NestedScrollView(
-          body: Container(
-            decoration: const BoxDecoration(
+          body: const DecoratedBox(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 colors: [
@@ -41,8 +41,8 @@ class PortalViewState extends State<PortalView> {
             ),
             child: TabBarView(
               children: <Widget>[
-                const LoginPage(),
-                const AppsList(),
+                LoginPage(),
+                AppsList(),
               ],
             ),
           ),

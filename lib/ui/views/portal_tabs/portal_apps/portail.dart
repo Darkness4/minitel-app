@@ -11,7 +11,6 @@ class PortailWebView extends StatefulWidget {
 class _PortailWebViewState extends State<PortailWebView> {
   // Function onWebViewCreated =
   //     (WebViewController _controller, BuildContext context) {
-  //   final _portailAPI = Provider.of<PortailAPI>(context);
 
   //   // _portailAPI.catchedCookies["cas.emse.fr"]?.forEach((var cookie) {
   //   //   print("Set cookie : document.cookie = \"${cookie};\"");
@@ -30,9 +29,13 @@ class _PortailWebViewState extends State<PortailWebView> {
   // };
 
   @override
-  Widget build(BuildContext context) => ScaffoldWebView(
-        backgroundColor: Colors.deepPurple,
-        title: const Text("Portail"),
-        initialUrl: 'https://portail.emse.fr/',
-      );
+  Widget build(BuildContext context) {
+    // final _portailAPI = Provider.of<PortailAPI>(context);
+    // WebView.platform.setCookies(_portailAPI.catchedCookies);
+    return ScaffoldWebView(
+      backgroundColor: Colors.deepPurple,
+      title: const Text("Portail"),
+      initialUrl: 'https://portail.emse.fr/',
+    );
+  }
 }

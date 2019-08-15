@@ -11,10 +11,6 @@ import 'package:path_provider/path_provider.dart';
 /// If the calendar has been succefully updated, uses [getCalendarFromFile] and
 /// [parseCalendar] to finally get a parsed calendar.
 class ICalendar {
-  final CalendarUrlAPI calendarUrlAPI;
-
-  ICalendar(this.calendarUrlAPI);
-
   Stream<String> _calendarStream;
 
   Future<File> get _calendar async {
@@ -118,7 +114,7 @@ class ICalendar {
   }
 
   /// Get the calendar from url and save the .ics (and the url)
-  Future<void> saveCalendar(String url) async {
+  Future<void> saveCalendar(String url, CalendarUrlAPI calendarUrlAPI) async {
     final file = await _calendar;
     await _getICalendar(url);
 
