@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <application android:name="io.flutter.app.FlutterApplication" android:label="Minitel Toolbox" android:icon="@mipmap/launcher_icon" android:usesCleartextTraffic="true">
+    <application android:name="io.flutter.app.FlutterApplication" android:label="Minitel Toolbox" android:icon="@mipmap/launcher_icon">
 
         <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
             <intent-filter>
