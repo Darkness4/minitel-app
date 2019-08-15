@@ -86,7 +86,7 @@ class AboutView extends StatelessWidget {
                   textAlign: TextAlign.justify,
                 ),
                 isThreeLine: true,
-                onTap: () {}, // TODO: Faire un don (stripe ?, Paypal ? InApp ?)
+                onTap: () {},
               ),
               const Divider(),
               ListTile(

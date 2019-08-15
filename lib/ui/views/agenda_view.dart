@@ -4,8 +4,8 @@ import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/agenda_view_model.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 
 import 'agenda_pages/notification_settings_page.dart';

@@ -8,7 +8,6 @@ import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:provider/provider.dart';
 
 class AgendaViewModel extends ChangeNotifier {

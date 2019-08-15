@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/docs_widgets.dart';
 
 class ImprimanteDoc extends StatelessWidget {
   const ImprimanteDoc({

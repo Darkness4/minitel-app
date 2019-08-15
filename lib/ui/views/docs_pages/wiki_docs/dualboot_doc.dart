@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/docs_widgets.dart';
 
 class DualBootDoc extends StatelessWidget {
   const DualBootDoc({
