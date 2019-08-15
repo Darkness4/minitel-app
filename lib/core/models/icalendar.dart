@@ -42,74 +42,9 @@ class ICalendar {
 
   /// Parse the ical to a json-like structure
   Future<ParsedCalendar> parseCalendar() async {
-    ParsedCalendar parsedCalendar = ParsedCalendar();
-    ICalSection mode = ICalSection.None;
-    Map<String, String> vEvent = {};
+    ParsedCalendar parsedCalendar =
+        ParsedCalendar.fromICalendarStream(_calendarStream);
 
-    if (_calendarStream == null) {
-      throw Exception(
-          "Calendar stream not found. Please use getCalendar or getICalendarFromFile (after a saveCalendar).");
-    }
-
-    await for (var data in _calendarStream.transform(LineSplitter())) {
-      var line = data.trim().split(":");
-      // Inside a VEVENT
-      if (line[0] == 'BEGIN' && line[1] == 'VEVENT') {
-        vEvent = {};
-        mode = ICalSection.VEVENT;
-        continue; // Skip BEGIN:VEVENT
-      }
-      if (line[0] == 'END' && line[1] == 'VEVENT') {
-        parsedCalendar.events.add(vEvent);
-        mode = ICalSection.None;
-        continue; // Skip END:VEVENT
-      }
-      if (line[0] == 'BEGIN' && line[1] == 'VTIMEZONE') {
-        mode = ICalSection.VTIMEZONE;
-        continue; // Skip BEGIN:VTIMEZONE
-      }
-      if (line[0] == 'END' && line[1] == 'VTIMEZONE') {
-        mode = ICalSection.None;
-        continue; // Skip END:VTIMEZONE
-      }
-      if (line[0] == 'BEGIN' && line[1] == 'STANDARD') {
-        mode = ICalSection.STANDARD;
-        continue; // Skip BEGIN:STANDARD
-      }
-      if (line[0] == 'END' && line[1] == 'STANDARD') {
-        mode = ICalSection.VTIMEZONE;
-        continue; // Skip END:STANDARD
-      }
-      if (line[0] == 'BEGIN' && line[1] == 'DAYLIGHT') {
-        mode = ICalSection.DAYLIGHT;
-        continue; // Skip BEGIN:DAYLIGHT
-      }
-      if (line[0] == 'END' && line[1] == 'DAYLIGHT') {
-        mode = ICalSection.VTIMEZONE;
-        continue; // Skip END:DAYLIGHT
-      }
-
-      switch (mode) {
-        case ICalSection.VEVENT:
-          vEvent[line[0]] = line[1];
-          break;
-        case ICalSection.VTIMEZONE:
-          if (line[0] == "TZID") parsedCalendar.timezone.tzid = line[1];
-          break;
-        case ICalSection.STANDARD:
-          parsedCalendar.timezone.standard[line[0]] = line[1];
-          break;
-        case ICalSection.DAYLIGHT:
-          parsedCalendar.timezone.daylight[line[0]] = line[1];
-          break;
-        case ICalSection.None:
-          if (line[0] == "VERSION") parsedCalendar.version = line[1];
-          if (line[0] == "PRODID") parsedCalendar.prodID = line[1];
-          if (line[0] == "CALSCALE") parsedCalendar.calscale = line[1];
-          break;
-        default:
-      }
-    }
     return parsedCalendar;
   }
 
@@ -177,6 +112,75 @@ class ParsedCalendar {
   /// - SUMMARY (Name of the course)
   /// - DTSTART
   List<Map<String, String>> events = [];
+
+  ParsedCalendar.fromICalendarStream(Stream<String> calendarStream) {
+    ICalSection mode = ICalSection.None;
+    Map<String, String> vEvent = {};
+
+    if (calendarStream == null) {
+      throw Exception(
+          "Calendar stream not found. Please use getCalendar or getICalendarFromFile (after a saveCalendar).");
+    }
+
+    calendarStream.transform(LineSplitter()).forEach((data) {
+      var line = data.trim().split(":");
+      // Inside a VEVENT
+      if (line[0] == 'BEGIN' && line[1] == 'VEVENT') {
+        vEvent = {};
+        mode = ICalSection.VEVENT;
+        return; // Skip BEGIN:VEVENT
+      }
+      if (line[0] == 'END' && line[1] == 'VEVENT') {
+        events.add(vEvent);
+        mode = ICalSection.None;
+        return; // Skip END:VEVENT
+      }
+      if (line[0] == 'BEGIN' && line[1] == 'VTIMEZONE') {
+        mode = ICalSection.VTIMEZONE;
+        return; // Skip BEGIN:VTIMEZONE
+      }
+      if (line[0] == 'END' && line[1] == 'VTIMEZONE') {
+        mode = ICalSection.None;
+        return; // Skip END:VTIMEZONE
+      }
+      if (line[0] == 'BEGIN' && line[1] == 'STANDARD') {
+        mode = ICalSection.STANDARD;
+        return; // Skip BEGIN:STANDARD
+      }
+      if (line[0] == 'END' && line[1] == 'STANDARD') {
+        mode = ICalSection.VTIMEZONE;
+        return; // Skip END:STANDARD
+      }
+      if (line[0] == 'BEGIN' && line[1] == 'DAYLIGHT') {
+        mode = ICalSection.DAYLIGHT;
+        return; // Skip BEGIN:DAYLIGHT
+      }
+      if (line[0] == 'END' && line[1] == 'DAYLIGHT') {
+        mode = ICalSection.VTIMEZONE;
+        return; // Skip END:DAYLIGHT
+      }
+
+      switch (mode) {
+        case ICalSection.VEVENT:
+          vEvent[line[0]] = line[1];
+          break;
+        case ICalSection.VTIMEZONE:
+          if (line[0] == "TZID") timezone.tzid = line[1];
+          break;
+        case ICalSection.STANDARD:
+          timezone.standard[line[0]] = line[1];
+          break;
+        case ICalSection.DAYLIGHT:
+          timezone.daylight[line[0]] = line[1];
+          break;
+        case ICalSection.None:
+          if (line[0] == "VERSION") version = line[1];
+          if (line[0] == "PRODID") prodID = line[1];
+          if (line[0] == "CALSCALE") calscale = line[1];
+          break;
+      }
+    });
+  }
 }
 
 /// Timezone field from icalendar
