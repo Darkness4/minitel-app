@@ -25,11 +25,7 @@
 - Authentication
 - Apps
   - Sogo Mail
-  - Campus EMSE
-  - Prométhée
-  - Logiciel Education
-  - Gitlab EMSE
-  - Annuaire
+  - Portail EMSE
   - Imprimante
   - Wiki Minitel
 - News
