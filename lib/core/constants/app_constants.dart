@@ -1,12 +1,16 @@
-/// Named Path of each Routes
-class RoutePaths {
-  static const String Authentication = '/';
-  static const String Reporting = '/reporting';
-  static const String Docs = '/docs';
-  static const String Agenda = '/agenda';
-  static const String About = '/about';
-  static const String Feedback = 'feedback';
-  static const String News = '/news';
+class AssetPaths {
+  static const String TemplateICS = 'assets/template.ics';
+  static const String LogoMinitelWhite = 'assets/img/logo_minitel_white.png';
+  static const String LogoMinitel = 'assets/img/logo_minitel.png';
+  static const String Icon = 'assets/icon/icon.png';
+  static const String DocNetwork = 'assets/img/network.jpg';
+  static const String DocLecteurReseau = 'assets/img/Lecteur-reseau.png';
+  static const String DocImprimanteLinux = 'assets/img/Linux.png';
+  static const String Slack = 'assets/img/Slack_Mark_Monochrome_White.png';
+  static const String Facebook = 'assets/icon/f_logo.png';
+  static const String Github = 'assets/icon/GitHub-Mark.png';
+  static const String EMSE = 'assets/img/logo_emse.png';
+  static const String Sogo = 'assets/img/mail.png';
 }
 
 /// Path of documentation
@@ -48,20 +52,13 @@ class MyIPAdresses {
   static const String stormshield = "fw-cgcp.emse.fr";
 }
 
-/// Some texts constants
-///
-/// This will probably be used if the app get intl.
-class Texts {
-  static const List<String> agendaVide = [
-    "Ben alors ? On n'a pas cours ?",
-    "Ça sent le barbecue....",
-    "Libeeeeertééé !",
-    "Chatteux va !",
-    "Passe plus de temps avec la famille !\n(au lieu de regarder les prochains cours)",
-    "L'application compte plus de 10 000 lignes de codes...\n\n(avec 30 000 additions et 20 000 délétions)",
-    "L'application est développé avec Flutter et avec ❤️",
-    "Minitel gère !",
-    "Freeeeeeedom !",
-    "The sad panda sit alone.",
-  ];
+/// Named Path of each Routes
+class RoutePaths {
+  static const String Authentication = '/';
+  static const String Reporting = '/reporting';
+  static const String Docs = '/docs';
+  static const String Agenda = '/agenda';
+  static const String About = '/about';
+  static const String Feedback = 'feedback';
+  static const String News = '/news';
 }

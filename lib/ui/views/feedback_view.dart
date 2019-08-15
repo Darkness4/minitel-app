@@ -122,7 +122,10 @@ class _FeedbackViewState extends State<FeedbackView> {
       floatingActionButton: Builder(
         builder: (BuildContext context) {
           return FloatingActionButton(
-            child: Image.asset("assets/img/Slack_Mark_Monochrome_White.png"),
+            child: ImageIcon(
+              AssetImage(AssetPaths.Slack),
+              size: 75.0,
+            ),
             onPressed: () => _send(context),
           );
         },

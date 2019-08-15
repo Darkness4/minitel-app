@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 
@@ -14,14 +15,14 @@ class ImprimanteDoc extends StatelessWidget {
         children: <Widget>[
           const BoxMdH("Configurer l'imprimante", 1),
           const BoxMdH("Windows", 2),
-          Image.asset("assets/img/Lecteur-reseau.png"),
+          Image.asset(AssetPaths.DocLecteurReseau),
           const Text(
             """    -  Ouvrir \\\\192.168.130.2 avec l'explorer Windows
     -  Mettre prenom.nom et mot de passe (testez également EMSE2000\\prenom.nom)
     -  Double-cliquer sur \"imprimantes-gpc\"""",
           ),
           const BoxMdH("Ubuntu", 2),
-          Image.asset("assets/img/Linux.png"),
+          Image.asset(AssetPaths.DocImprimanteLinux),
           const Text(
             """    -  Ajoutez smb://192.168.130.2/imprimantes-gcp aux imprimantes réseaux
     -  Pilote: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd""",

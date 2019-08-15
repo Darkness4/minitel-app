@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 
 import 'portal_apps/imprimante.dart';
@@ -85,7 +86,7 @@ class _PortailCard extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: Image.asset(
-                'assets/img/logo_emse.png',
+                AssetPaths.EMSE,
                 fit: BoxFit.scaleDown,
               ),
             ),
@@ -116,7 +117,7 @@ class _SogoCard extends StatelessWidget {
           context,
           MaterialPageRoute(builder: (context) => SogoWebView()),
         ),
-        child: Image.asset('assets/img/mail.png'),
+        child: Image.asset(AssetPaths.Sogo),
       ),
     );
   }
@@ -139,7 +140,7 @@ class _WikiMinitelCard extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: Image.asset(
-                'assets/img/logo_minitel.png',
+                AssetPaths.LogoMinitel,
                 fit: BoxFit.scaleDown,
               ),
             ),

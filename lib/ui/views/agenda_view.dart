@@ -33,6 +33,7 @@ class AgendaViewState extends State<AgendaView> {
           flutterLocalNotificationsPlugin: _flutterLocalNotificationsPlugin),
       builder: (context, model, _) {
         return Scaffold(
+          backgroundColor: MinitelColors.PrimaryColor,
           appBar: AppBar(
             title: Text(widget.title),
             actions: <Widget>[
@@ -48,9 +49,7 @@ class AgendaViewState extends State<AgendaView> {
               )
             ],
           ),
-          body: Container(
-            alignment: Alignment.center,
-            color: MinitelColors.PrimaryColor,
+          body: Center(
             child: FutureBuilder<ICalendar>(
               future: model.loadCalendar(context),
               builder: (BuildContext context, snapshot) {

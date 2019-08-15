@@ -34,7 +34,7 @@ class ICalendar {
 
     // Use this line of code to inject a template.ics
     // await file
-    //     .writeAsString(await rootBundle.loadString('assets/template.ics'));
+    //     .writeAsString(await rootBundle.loadString(AssetsPaths.TemplateICS));
 
     // Read the file
     _calendarStream = file.openRead().transform(utf8.decoder);

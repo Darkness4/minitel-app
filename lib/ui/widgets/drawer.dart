@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/constants/texts_constants.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/shared/drawer_styles.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/views/docs_pages/toolbox_docs.dart';
 import 'package:minitel_toolbox/ui/views/docs_pages/wiki_docs.dart';
@@ -260,7 +262,7 @@ class MainDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 SizedBox(
-                  child: Image.asset("assets/img/logo_minitel_white.png"),
+                  child: Image.asset(AssetPaths.LogoMinitelWhite),
                   height: 75,
                 ),
                 const Text(
@@ -272,18 +274,15 @@ class MainDrawer extends StatelessWidget {
             decoration: const BoxDecoration(color: MinitelColors.PrimaryColor),
           ),
           Container(
-            margin: const EdgeInsets.only(right: 8.0),
+            margin: DrawerStyle.HightlightMargin,
             decoration: BoxDecoration(
               color: currentRoutePaths == RoutePaths.Authentication
                   ? MinitelColors.DrawerSelectedColor
                   : Colors.transparent,
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+              borderRadius: DrawerStyle.RoundedBorder,
             ),
             child: ListTile(
-                title: const Text("Authentification"),
+                title: const Text(Titles.Authentication),
                 key: const Key('drawer/authentication'),
                 leading: const Icon(Icons.apps),
                 selected: currentRoutePaths == RoutePaths.Authentication,
@@ -298,18 +297,15 @@ class MainDrawer extends StatelessWidget {
           ),
           const Divider(),
           Container(
-            margin: const EdgeInsets.only(right: 8.0),
+            margin: DrawerStyle.HightlightMargin,
             decoration: BoxDecoration(
               color: currentRoutePaths == RoutePaths.News
                   ? MinitelColors.DrawerSelectedColor
                   : Colors.transparent,
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+              borderRadius: DrawerStyle.RoundedBorder,
             ),
             child: ListTile(
-                title: const Text("Nouveautés"),
+                title: const Text(Titles.News),
                 key: const Key('drawer/news'),
                 leading: const Icon(Icons.rss_feed),
                 selected: currentRoutePaths == RoutePaths.News,
@@ -321,18 +317,15 @@ class MainDrawer extends StatelessWidget {
                 }),
           ),
           Container(
-            margin: const EdgeInsets.only(right: 8.0),
+            margin: DrawerStyle.HightlightMargin,
             decoration: BoxDecoration(
               color: currentRoutePaths == RoutePaths.Agenda
                   ? MinitelColors.DrawerSelectedColor
                   : Colors.transparent,
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+              borderRadius: DrawerStyle.RoundedBorder,
             ),
             child: ListTile(
-                title: const Text("Agenda"),
+                title: const Text(Titles.Agenda),
                 leading: const Icon(Icons.calendar_today),
                 key: const Key('drawer/agenda'),
                 selected: currentRoutePaths == RoutePaths.Agenda,
@@ -344,28 +337,16 @@ class MainDrawer extends StatelessWidget {
                   }
                 }),
           ),
-          // ListTile(
-          //     title: Text("Maps"),
-          //     leading: const Icon(Icons.map),
-          //
-          //     onTap: () {
-          //       Navigator.pop(context); // Close Drawer
-          //       if (ModalRoute.of(context).settings.name != '/maps')
-          //         Navigator.pushReplacementNamed(context, '/maps');
-          //     }),
           const Divider(),
           Container(
-            margin: const EdgeInsets.only(right: 8.0),
+            margin: DrawerStyle.HightlightMargin,
             decoration: BoxDecoration(
               color: MinitelColors.ReportPrimaryColor,
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+              borderRadius: DrawerStyle.RoundedBorder,
             ),
             child: ListTile(
                 title: const Text(
-                  "Signaler Minitel",
+                  Titles.Reporting,
                   style: TextStyle(color: Colors.white),
                 ),
                 selected: currentRoutePaths == RoutePaths.Reporting,
@@ -384,18 +365,15 @@ class MainDrawer extends StatelessWidget {
                 }),
           ),
           Container(
-            margin: const EdgeInsets.only(right: 8.0),
+            margin: DrawerStyle.HightlightMargin,
             decoration: BoxDecoration(
               color: currentRoutePaths == RoutePaths.Docs
                   ? MinitelColors.DrawerSelectedColor
                   : Colors.transparent,
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+              borderRadius: DrawerStyle.RoundedBorder,
             ),
             child: ListTile(
-                title: const Text("Documentation"),
+                title: const Text(Titles.Docs),
                 leading: const Icon(Icons.description),
                 key: const Key('drawer/docs'),
                 selected: currentRoutePaths == RoutePaths.Docs,
@@ -407,18 +385,15 @@ class MainDrawer extends StatelessWidget {
                 }),
           ),
           Container(
-            margin: const EdgeInsets.only(right: 8.0),
+            margin: DrawerStyle.HightlightMargin,
             decoration: BoxDecoration(
               color: currentRoutePaths == RoutePaths.About
                   ? MinitelColors.DrawerSelectedColor
                   : Colors.transparent,
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+              borderRadius: DrawerStyle.RoundedBorder,
             ),
             child: ListTile(
-              title: const Text("À propos de Minitel Toolbox"),
+              title: const Text(Titles.About),
               leading: const Icon(Icons.info),
               key: const Key('drawer/about'),
               selected: currentRoutePaths == RoutePaths.About,
@@ -431,18 +406,15 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(right: 8.0),
+            margin: DrawerStyle.HightlightMargin,
             decoration: BoxDecoration(
               color: currentRoutePaths == RoutePaths.Feedback
                   ? MinitelColors.DrawerSelectedColor
                   : Colors.transparent,
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(40.0),
-                topRight: Radius.circular(40.0),
-              ),
+              borderRadius: DrawerStyle.RoundedBorder,
             ),
             child: ListTile(
-              title: const Text("Beta Feedback"),
+              title: const Text(Titles.Feedback),
               leading: const Icon(Icons.chat),
               selected: currentRoutePaths == RoutePaths.Feedback,
               onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/constants/texts_constants.dart';
 
 import 'views/about_view.dart';
 import 'views/agenda_view.dart';
@@ -15,37 +16,37 @@ class Router {
     switch (settings.name) {
       case RoutePaths.Authentication:
         return FadeRoute(
-          builder: (_) => const PortalView(title: "Authentification"),
+          builder: (_) => const PortalView(title: Titles.Authentication),
           settings: settings,
         );
       case RoutePaths.Reporting:
         return FadeRoute(
-          builder: (_) => const ReportingView(title: "Signaler Minitel"),
+          builder: (_) => const ReportingView(title: Titles.Reporting),
           settings: settings,
         );
       case RoutePaths.Docs:
         return FadeRoute(
-          builder: (_) => const DocumentationView(title: "Documentation"),
+          builder: (_) => const DocumentationView(title: Titles.Docs),
           settings: settings,
         );
       case RoutePaths.News:
         return FadeRoute(
-          builder: (_) => const NewsView(title: "Nouveautés"),
+          builder: (_) => const NewsView(title: Titles.News),
           settings: settings,
         );
       case RoutePaths.Agenda:
         return FadeRoute(
-          builder: (_) => const AgendaView(title: "Agenda"),
+          builder: (_) => const AgendaView(title: Titles.Agenda),
           settings: settings,
         );
       case RoutePaths.About:
         return MaterialPageRoute(
-          builder: (_) => const AboutView(title: "A propos de l'application"),
+          builder: (_) => const AboutView(title: Titles.About),
           settings: settings,
         );
       case RoutePaths.Feedback:
         return FadeRoute(
-          builder: (_) => const FeedbackView(title: "Beta Feedback"),
+          builder: (_) => const FeedbackView(title: Titles.Feedback),
           settings: settings,
         );
       default:

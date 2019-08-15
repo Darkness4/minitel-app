@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/github_api.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
@@ -55,7 +56,7 @@ class AboutView extends StatelessWidget {
                   showLicensePage(
                     context: context,
                     applicationIcon: ImageIcon(
-                      AssetImage('assets/icon/icon.png'),
+                      AssetImage(AssetPaths.Icon),
                     ),
                     applicationLegalese: "MIT License\n\n"
                         "Copyright (c) 2019 NGUYEN Marc\n\n"
