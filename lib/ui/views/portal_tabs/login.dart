@@ -54,7 +54,7 @@ class LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextFormField(
-                key: const Key('login/uidTextField'),
+                key: const Key('login/uid'),
                 focusNode: _uidFocusNode,
                 controller: _uidController,
                 decoration: const InputDecoration(
@@ -72,7 +72,7 @@ class LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextFormField(
-                key: const Key('login/pswdTextField'),
+                key: const Key('login/pswd'),
                 controller: _pswdController,
                 obscureText: true,
                 focusNode: _pswdFocusNode,
@@ -108,8 +108,7 @@ class LoginPageState extends State<LoginPage> {
                             valueListenable: model.selectedUrl,
                             builder: (context, value, _) {
                               return DropdownButton<String>(
-                                key:
-                                    const Key('login/nameServerDropdownButton'),
+                                key: const Key('login/name_server'),
                                 value: value,
                                 items: [
                                   for (var value in LoginConstants.urlRootList)
@@ -134,7 +133,7 @@ class LoginPageState extends State<LoginPage> {
                             valueListenable: model.selectedTime,
                             builder: (context, value, _) {
                               return DropdownButton<String>(
-                                key: const Key('login/timeDropdownButton'),
+                                key: const Key('login/time'),
                                 value: model.selectedTime.value,
                                 items: [
                                   for (var value in LoginConstants.timeMap.keys)
@@ -160,7 +159,7 @@ class LoginPageState extends State<LoginPage> {
                           valueListenable: model.rememberMe,
                           builder: (context, value, _) {
                             return Checkbox(
-                              key: const Key('login/rememberMeButton'),
+                              key: const Key('login/remember_me'),
                               value: value,
                               onChanged: (value) {
                                 if (!value) {
@@ -181,7 +180,7 @@ class LoginPageState extends State<LoginPage> {
                           valueListenable: model.autoLogin,
                           builder: (context, value, _) {
                             return Checkbox(
-                              key: const Key('login/autoLoginButton'),
+                              key: const Key('login/auto_login'),
                               value: value,
                               onChanged: (value) {
                                 if (value) {
@@ -287,7 +286,7 @@ class _StatusCard extends StatelessWidget {
                     case ConnectionState.done:
                       return Text(
                         snapshot.data,
-                        key: const Key('login/gatewayText'),
+                        key: const Key('login/gateway_text'),
                         style: TextStyle(
                             color: (snapshot.hasError ||
                                     !snapshot.data.contains("second"))
@@ -319,13 +318,12 @@ class _StatusCard extends StatelessWidget {
                           return const Icon(
                             Icons.close,
                             color: Colors.red,
-                            key: Key('login/agendaFailure'),
                           );
                         }
                         return const Icon(
                           Icons.done,
                           color: Colors.green,
-                          key: Key('login/agendaSuccess'),
+                          key: Key('login/agenda_success'),
                         );
                     }
                     return null; // unreachable
@@ -343,12 +341,11 @@ class _StatusCard extends StatelessWidget {
                     ? const Icon(
                         Icons.close,
                         color: Colors.red,
-                        key: Key('login/agendaFailure'),
                       )
                     : const Icon(
                         Icons.done,
                         color: Colors.green,
-                        key: Key('login/agendaSuccess'),
+                        key: Key('login/portail_success'),
                       )
               ],
             ),

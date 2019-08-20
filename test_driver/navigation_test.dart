@@ -5,33 +5,13 @@ import 'dart:io';
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
+import 'finders.dart';
+
 void main() {
   group('Minitel Toolbox', () {
     FlutterDriver driver;
 
-    // Navigation
-    final drawer = find.byTooltip('Ouvrir le menu de navigation');
-    // final authenticationRoute = find.byValueKey('drawer/authentication');
-    final newsRoute = find.byValueKey('drawer/news');
-    final agendaRoute = find.byValueKey('drawer/agenda');
-    final reportingRoute = find.byValueKey('drawer/reporting');
-    final docsRoute = find.byValueKey('drawer/docs');
-    // final aboutRoute = find.byValueKey('drawer/about');
-
-    // Precise widget
-    final closeUpdateButton = find.byValueKey('portal_view/closeUpdateButton');
-    final appsTab = find.byValueKey('portal_view/apps_tab');
-    final sogo = find.byValueKey('app_lists/sogo');
-
-    final newsLoading = find.byValueKey('facebook_tab/loading');
-
-    final agendaUid = find.byValueKey('agenda_view/uid');
-    final agendaPswd = find.byValueKey('agenda_view/pswd');
-    final agendaConnect = find.byValueKey('agenda_view/connect');
-
-    final reportingTab = find.byValueKey('reporting_view/diagnosis_tab');
-    final reportingFAB = find.byValueKey('reporting_view/diagnose');
-    final reportingFABDone = find.byValueKey('reporting_view/diagnose_done');
+    var minitelFinders = MinitelFinders();
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
@@ -52,59 +32,59 @@ void main() {
 
     group('Automated screenshot', () {
       test('Screenshot login', () async {
-        await driver.waitFor(closeUpdateButton);
-        await driver.tap(closeUpdateButton);
+        await driver.waitFor(minitelFinders.closeUpdateButton);
+        await driver.tap(minitelFinders.closeUpdateButton);
         await takeScreenshot(driver, ScreenshotsPaths.login);
       });
 
       test('Screenshot apps', () async {
-        await driver.tap(appsTab);
+        await driver.tap(minitelFinders.appsTab);
         await takeScreenshot(driver, ScreenshotsPaths.apps);
       });
 
       test('Screenshot sogo', () async {
-        await driver.tap(sogo);
+        await driver.tap(minitelFinders.sogo);
         await Future.delayed(const Duration(seconds: 5));
         await takeScreenshot(driver, ScreenshotsPaths.sogo);
         await driver.tap(find.byTooltip('Retour'));
       });
 
       test('Screenshot news', () async {
-        await driver.tap(drawer);
-        await driver.tap(newsRoute);
-        await driver.waitForAbsent(newsLoading);
+        await driver.tap(minitelFinders.drawer);
+        await driver.tap(minitelFinders.newsRoute);
+        await driver.waitForAbsent(minitelFinders.newsLoading);
         await takeScreenshot(driver, ScreenshotsPaths.news);
       });
 
       test('Screenshot agenda', () async {
-        await driver.tap(drawer);
-        await driver.tap(agendaRoute);
-        await driver.tap(agendaUid);
+        await driver.tap(minitelFinders.drawer);
+        await driver.tap(minitelFinders.agendaRoute);
+        await driver.tap(minitelFinders.agendaUid);
         await driver.enterText("marc.nguyen");
-        await driver.tap(agendaPswd);
+        await driver.tap(minitelFinders.agendaPswd);
         await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
-        await driver.tap(agendaConnect);
+        await driver.tap(minitelFinders.agendaConnect);
         await takeScreenshot(driver, ScreenshotsPaths.agenda);
       });
 
       test('Screenshot reporting', () async {
-        await driver.tap(drawer);
-        await driver.tap(reportingRoute);
+        await driver.tap(minitelFinders.drawer);
+        await driver.tap(minitelFinders.reportingRoute);
         await takeScreenshot(driver, ScreenshotsPaths.reporting);
       });
 
       test('Screenshot diagnosis', () async {
-        await driver.tap(reportingTab);
-        await driver.tap(reportingFAB);
-        await driver.waitFor(reportingFABDone,
+        await driver.tap(minitelFinders.diagnosisTab);
+        await driver.tap(minitelFinders.reportingFAB);
+        await driver.waitFor(minitelFinders.reportingFABDone,
             timeout: const Duration(minutes: 2));
 
         await takeScreenshot(driver, ScreenshotsPaths.diagnosis);
       }, timeout: const Timeout(Duration(minutes: 3)));
 
       test('Screenshot docs', () async {
-        await driver.tap(drawer);
-        await driver.tap(docsRoute);
+        await driver.tap(minitelFinders.drawer);
+        await driver.tap(minitelFinders.docsRoute);
         await takeScreenshot(driver, ScreenshotsPaths.docs);
       });
     });
@@ -112,7 +92,6 @@ void main() {
 
   // TODO List
   // Authentication
-  // - Screenshot this
   // - Domain Name Dropmenu
   // --- Value Change
   // --- Login test (public should work)
@@ -121,36 +100,27 @@ void main() {
   // --- Login test (check if second superior)
   // - TextFields
   // - Login button
-  // - TabView to App
   // - App push
-  //
-  // Drawer test
   //
   // News
   // - Github
-  // - Screenshot this
-  // - Facebook (shouldn't work)
+  // - Facebook
   //
   // Agenda
-  // - Screenshot this
   // - Notifications parameters
   // - Textfields
   // - Save test
   //
   // Reporting
-  // - Screenshot this
   // - Textfields
   // - Diagnose test
   // - All send test
-  // - TabView
   // - Test texts log
   //
   // Documentation
-  // - Screenshot this
   // - Drawer
   // - Images
   // - All send test
-  // - TabView
   // - Test texts log
   // - Navigation test
   //
