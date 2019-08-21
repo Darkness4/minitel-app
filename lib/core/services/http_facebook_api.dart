@@ -10,7 +10,7 @@ class FacebookAPI {
 
   /// Get the url to HTTP GET the profile picture
   String getProfilePicture() {
-    return "https://graph.facebook.com/v4.0/me/picture?access_token=${ApiConstants.facebookApi}";
+    return "https://graph.facebook.com/v4.0/${ApiConstants.facebookProfileId}/picture?type=large";
   }
 
   /// Get a Feed from Facebook Graph API
