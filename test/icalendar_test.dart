@@ -78,12 +78,12 @@ Future<void> main() async {
     });
 
     test("parseCalendar from Cache", () async {
-      final ical = ICalendar();
+      final ICalendar ical = ICalendar();
       ParsedCalendar parsedCalendar;
       String url;
 
       // Save before the test
-      final url0 = await _calendarUrlAPI.getCalendarURL(
+      final String url0 = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url0, _calendarUrlAPI);
@@ -106,7 +106,7 @@ Future<void> main() async {
         print("Cannot update calendar. Taking from cache.");
       }
 
-      final ical2 = ICalendar();
+      final ICalendar ical2 = ICalendar();
       parsedCalendar = await ical2.getParsedCalendarFromFile();
       expect(parsedCalendar.events.length, isNotNull);
       expect(parsedCalendar.timezone.daylight.toString(), isNotNull);
@@ -115,25 +115,28 @@ Future<void> main() async {
     });
 
     test("parseCalendar export to Json", () async {
-      final ical = ICalendar();
-      final url = await _calendarUrlAPI.getCalendarURL(
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url, _calendarUrlAPI);
 
-      final parsedCalendar = await ical.getParsedCalendarFromFile();
+      final ParsedCalendar parsedCalendar =
+          await ical.getParsedCalendarFromFile();
       print(parsedCalendar.toJson());
     });
 
     test("parseCalendar import to Json", () async {
-      final ical = ICalendar();
-      final url = await _calendarUrlAPI.getCalendarURL(
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url, _calendarUrlAPI);
 
-      final parsedCalendar = await ical.getParsedCalendarFromFile();
-      final parsedCalendar2 = ParsedCalendar.fromJson(parsedCalendar.toJson());
+      final ParsedCalendar parsedCalendar =
+          await ical.getParsedCalendarFromFile();
+      final ParsedCalendar parsedCalendar2 =
+          ParsedCalendar.fromJson(parsedCalendar.toJson());
       expect(parsedCalendar2.toJson(), equals(parsedCalendar.toJson()));
     });
   });
