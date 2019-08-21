@@ -36,18 +36,41 @@ void main() {
     });
 
     group('Documentation Section', () {
-      test('Drawer Minitel to Minitel', () async {});
+      test('Drawer Minitel to Minitel', () async {
+        await driver.tap(minitelFinders.drawer);
+        await driver.tap(minitelFinders.toDocsHome);
+      });
 
-      test('Drawer Minitel to Authentification', () async {});
+      test('Drawer Minitel to Authentification', () async {
+        await driver.tap(minitelFinders.drawer);
+        await driver.tap(minitelFinders.toDocsAuthentification);
+      });
 
-      test('PageView Scroll to Diagnostique', () async {});
+      test('PageView Scroll to Diagnostique', () async {
+        await driver.scrollUntilVisible(
+          minitelFinders.toolboxPages,
+          minitelFinders.diagnosePage,
+          dxScroll: -500.0,
+        );
+      });
 
-      test(
-          'Drawer Diagnostique to Configuration de l\'imprimante', () async {});
+      test('Drawer Diagnostique to Configuration de l\'imprimante', () async {
+        await driver.tap(minitelFinders.drawer);
+        await driver.tap(minitelFinders.toDocsImprimante);
+      });
 
-      test('PageView Scroll to Jouer avec des VM', () async {});
+      test('PageView Scroll to Jouer avec des VM', () async {
+        await driver.scrollUntilVisible(
+          minitelFinders.wikiPages,
+          minitelFinders.vmPage,
+          dxScroll: -500.0,
+        );
+      });
 
-      test('Close Documentations', () async {});
+      test('Close Documentations', () async {
+        await driver.tap(minitelFinders.goBack);
+        await driver.tap(minitelFinders.goBack);
+      });
     });
   });
 }

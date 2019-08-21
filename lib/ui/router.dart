@@ -25,7 +25,7 @@ class Router {
           settings: settings,
         );
       case RoutePaths.Docs:
-        return FadeRoute<dynamic>(
+        return SlideRightRoute<dynamic>(
           builder: (_) => const DocumentationView(title: Titles.Docs),
           settings: settings,
         );

@@ -130,6 +130,7 @@ void main() {
 }
 
 Future<void> takeScreenshot(FlutterDriver driver, String path) async {
+  await driver.waitUntilNoTransientCallbacks();
   final List<int> pixels = await driver.screenshot();
   final File file = File(path);
   await file.writeAsBytes(pixels);

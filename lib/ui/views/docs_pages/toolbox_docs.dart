@@ -19,10 +19,11 @@ class ToolboxDocs extends StatelessWidget {
       ),
       body: Scrollbar(
         child: PageView(
+          key: const Key('toolbox_docs/pages'),
           controller: _controller,
           children: const <Widget>[
-            LoginDoc(),
-            DiagnoseDoc(),
+            LoginDoc(key: Key('toolbox_docs/login')),
+            DiagnoseDoc(key: Key('toolbox_docs/diagnose')),
           ],
         ),
       ),

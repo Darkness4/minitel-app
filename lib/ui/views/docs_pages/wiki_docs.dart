@@ -21,12 +21,13 @@ class WikiDocs extends StatelessWidget {
       ),
       body: Scrollbar(
         child: PageView(
+          key: const Key('wiki_docs/pages'),
           controller: _controller,
           children: const <Widget>[
-            ImprimanteDoc(),
-            MailDoc(),
-            DualBootDoc(),
-            VirtMachineDoc(),
+            ImprimanteDoc(key: Key('wiki_docs/imprimante')),
+            MailDoc(key: Key('wiki_docs/mail')),
+            DualBootDoc(key: Key('wiki_docs/dualboot')),
+            VirtMachineDoc(key: Key('wiki_docs/vm')),
           ],
         ),
       ),

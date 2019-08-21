@@ -18,7 +18,7 @@ class DocumentationView extends StatelessWidget {
           child: MinitelDoc(),
         ),
       ),
-      drawer: const MainDrawer(currentRoutePaths: RoutePaths.Docs),
+      // drawer: const MainDrawer(currentRoutePaths: RoutePaths.Docs),
       endDrawer: const DocsDrawer(DocsPageId.Home),
     );
   }

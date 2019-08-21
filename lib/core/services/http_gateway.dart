@@ -141,7 +141,7 @@ class GatewayAPI {
           await response.cast<List<int>>().transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         if (!body.contains('l_rtime')) {
-          throw Exception('Not logged in');
+          status = 'Not logged in';
         } else {
           final String match = exp.firstMatch(body).group(1);
           if (match is! String) {

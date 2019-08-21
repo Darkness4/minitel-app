@@ -37,6 +37,7 @@ class DocsDrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: const Text("Minitel"),
+              key: const Key('drawer/minitel'),
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Home) {
@@ -55,6 +56,7 @@ class DocsDrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: const Text("Authentification"),
+              key: const Key('drawer/authentification'),
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Toolbox) {
@@ -96,6 +98,7 @@ class DocsDrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: const Text("Diagnostique"),
+              key: const Key('drawer/diagnostique'),
               onTap: () async {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Toolbox) {
@@ -138,6 +141,7 @@ class DocsDrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: const Text("Configuration de l'imprimante"),
+              key: const Key('drawer/imprimante'),
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Wiki) {
@@ -179,6 +183,7 @@ class DocsDrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: const Text("Importation des mails SoGo"),
+              key: const Key('drawer/sogo'),
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Wiki) {
@@ -220,6 +225,7 @@ class DocsDrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: const Text("Installer un Dual Boot"),
+              key: const Key('drawer/dualboot'),
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Wiki) {
@@ -261,6 +267,7 @@ class DocsDrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: const Text("Jouer avec des VM"),
+              key: const Key('drawer/vm'),
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Wiki) {
@@ -436,7 +443,7 @@ class MainDrawer extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context); // Close Drawer
                   if (ModalRoute.of(context).settings.name != RoutePaths.Docs) {
-                    Navigator.pushReplacementNamed(context, RoutePaths.Docs);
+                    Navigator.pushNamed(context, RoutePaths.Docs);
                   }
                 }),
           ),

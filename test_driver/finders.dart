@@ -2,15 +2,8 @@ import 'package:flutter_driver/flutter_driver.dart';
 
 class MinitelFinders {
   // Navigation
-  // final drawer = find.byTooltip('Ouvrir le menu de navigation');
-  final SerializableFinder drawer = find.descendant(
-    of: find.byType('NavigationToolbar'),
-    matching: find.byType('IconButton'),
-  );
-  final SerializableFinder endDrawer = find.descendant(
-    of: find.byType('NavigationToolbar'),
-    matching: find.byType('IconButton'),
-  );
+  final SerializableFinder drawer =
+      find.byTooltip('Ouvrir le menu de navigation');
   final SerializableFinder authenticationRoute =
       find.byValueKey('drawer/authentication');
   final SerializableFinder newsRoute = find.byValueKey('drawer/news');
@@ -83,4 +76,26 @@ class MinitelFinders {
   final SerializableFinder reportDescription =
       find.byValueKey('report_tab/description');
   final SerializableFinder diagnosisList = find.byValueKey('diagnose_tab/list');
+
+  // Docs
+  final SerializableFinder toDocsHome = find.byValueKey('drawer/minitel');
+  final SerializableFinder toDocsAuthentification =
+      find.byValueKey('drawer/authentification');
+  final SerializableFinder toDocsDiagnostique =
+      find.byValueKey('drawer/diagnostique');
+  final SerializableFinder toDocsImprimante =
+      find.byValueKey('drawer/imprimante');
+  final SerializableFinder toDocsSogo = find.byValueKey('drawer/sogo');
+  final SerializableFinder toDocsDualBoot = find.byValueKey('drawer/dualboot');
+  final SerializableFinder toDocsVM = find.byValueKey('drawer/vm');
+  final SerializableFinder toolboxPages = find.byValueKey('toolbox_docs/pages');
+  final SerializableFinder wikiPages = find.byValueKey('wiki_docs/pages');
+  final SerializableFinder loginPage = find.byValueKey('toolbox_docs/login');
+  final SerializableFinder diagnosePage =
+      find.byValueKey('toolbox_docs/diagnose');
+  final SerializableFinder mailPage = find.byValueKey('wiki_docs/mail');
+  final SerializableFinder dualbootPage = find.byValueKey('wiki_docs/dualboot');
+  final SerializableFinder imprimantePage =
+      find.byValueKey('wiki_docs/imprimante');
+  final SerializableFinder vmPage = find.byValueKey('wiki_docs/vm');
 }

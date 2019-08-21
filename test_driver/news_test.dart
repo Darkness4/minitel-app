@@ -37,6 +37,8 @@ void main() {
 
     group('News Section', () {
       test('Scroll Vertically in Facebook', () async {
+        await driver.waitUntilNoTransientCallbacks();
+        await Future<dynamic>.delayed(const Duration(seconds: 3));
         await driver.waitFor(minitelFinders.facebookList);
         await driver.scrollUntilVisible(
           minitelFinders.facebookList,
@@ -54,6 +56,7 @@ void main() {
       });
 
       test('Scroll Vertically in Github', () async {
+        await driver.waitUntilNoTransientCallbacks();
         await driver.waitFor(minitelFinders.githubList);
         await driver.scrollUntilVisible(
           minitelFinders.githubList,
