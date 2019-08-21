@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: Router.generateRoute,
         supportedLocales: const <Locale>[Locale('fr', 'FR')],
         theme: ThemeData(
+          brightness: Brightness.light,
           primarySwatch: MinitelColors.PrimaryColor,
           fontFamily: 'Roboto',
           textTheme: MinitelTextStyles.textTheme,

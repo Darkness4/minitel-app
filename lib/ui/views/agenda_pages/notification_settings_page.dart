@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
-import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
 class NotificationSettingsPage extends StatefulWidget {
   final NotificationSettings notificationSettings;
@@ -87,8 +86,8 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
             ),
             Builder(
               builder: (context) => RaisedButton(
-                color: MinitelColors.PrimaryColor,
-                textColor: Colors.white,
+                color: Theme.of(context).primaryColor,
+                colorBrightness: Brightness.dark,
                 child: Text("Sauvegarder"),
                 onPressed: () async {
                   widget.notificationSettings.early =

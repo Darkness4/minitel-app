@@ -17,6 +17,7 @@ class NewsView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: const Color(0xff087f23),
         body: NestedScrollView(
+          key: const Key('news_view/tabs'),
           body: const TabBarView(
             children: <Widget>[
               FacebookTab(),
@@ -33,11 +34,17 @@ class NewsView extends StatelessWidget {
               bottom: const TabBar(
                 tabs: <Tab>[
                   Tab(
-                    icon: ImageIcon(AssetImage(AssetPaths.Facebook)),
+                    icon: ImageIcon(
+                      AssetImage(AssetPaths.Facebook),
+                      key: Key('news_view/facebook_tab'),
+                    ),
                     text: "Facebook",
                   ),
                   Tab(
-                    icon: ImageIcon(AssetImage(AssetPaths.Github)),
+                    icon: ImageIcon(
+                      AssetImage(AssetPaths.Github),
+                      key: Key('news_view/github_tab'),
+                    ),
                     text: "Github",
                   ),
                 ],

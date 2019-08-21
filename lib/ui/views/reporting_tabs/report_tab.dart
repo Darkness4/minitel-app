@@ -117,6 +117,7 @@ class _ReportCard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             TextField(
+              key: const Key('report_tab/title'),
               controller: _titleController,
               style: const TextStyle(fontWeight: FontWeight.bold),
               focusNode: _titleFocusNode,
@@ -131,6 +132,7 @@ class _ReportCard extends StatelessWidget {
               },
             ),
             TextField(
+              key: const Key('report_tab/description'),
               controller: _descriptionController,
               maxLines: null,
               focusNode: _descriptionFocusNode,

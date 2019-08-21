@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
 class AnimatedFloatingButton extends StatelessWidget {
   final String text;
@@ -41,7 +40,7 @@ class AnimatedFloatingButton extends StatelessWidget {
           ),
           FloatingActionButton(
             heroTag: null,
-            backgroundColor: MinitelColors.ReportPrimaryColor,
+            backgroundColor: Theme.of(context).primaryColor,
             child: child,
             mini: true,
             onPressed: onPressed,

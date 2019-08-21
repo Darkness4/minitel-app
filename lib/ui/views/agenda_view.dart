@@ -5,7 +5,6 @@ import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/agenda_view_model.dart';
-import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
@@ -38,7 +37,7 @@ class AgendaViewState extends State<AgendaView> {
           flutterLocalNotificationsPlugin: _flutterLocalNotificationsPlugin),
       builder: (context, model, _) {
         return Scaffold(
-          backgroundColor: MinitelColors.PrimaryColor,
+          backgroundColor: Theme.of(context).primaryColor,
           appBar: AppBar(
             title: Text(widget.title),
             actions: <Widget>[

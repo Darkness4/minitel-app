@@ -42,6 +42,7 @@ class ReportingViewState extends State<ReportingView>
         length: 2,
         child: Scaffold(
           body: NestedScrollView(
+            key: const Key('reporting_view/tabs'),
             headerSliverBuilder: _headerSliverBuilder,
             body: TabBarView(
               children: <Widget>[
@@ -183,6 +184,7 @@ class ReportingViewState extends State<ReportingView>
         child: const ImageIcon(
           AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
           size: 100.0,
+          key: Key('reporting_view/slack'),
         ),
         controller: _animationController,
         onPressed: () async {

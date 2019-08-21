@@ -134,7 +134,8 @@ class AboutView extends StatelessWidget {
                               onPressed: () => Navigator.of(context).pop(),
                             ),
                             RaisedButton(
-                              textColor: Colors.white,
+                              colorBrightness: Brightness.dark,
+                              color: Theme.of(context).primaryColor,
                               child: const Text("Update"),
                               onPressed: () =>
                                   LaunchURL.launchURL(latestRelease.htmlUrl),
@@ -158,7 +159,7 @@ class AboutView extends StatelessWidget {
                               onPressed: () => Navigator.of(context).pop(),
                             ),
                             RaisedButton(
-                              textColor: Colors.white,
+                              colorBrightness: Brightness.dark,
                               child: const Text("Télécharger"),
                               onPressed: () =>
                                   LaunchURL.launchURL(latestRelease.htmlUrl),

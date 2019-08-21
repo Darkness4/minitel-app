@@ -46,6 +46,7 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
           children: <Widget>[
             IconButton(
               color: Colors.white,
+              tooltip: "Revenir en arrière",
               icon: Icon(Icons.arrow_back),
               onPressed: () async {
                 if (await _controller.canGoBack()) {
@@ -56,12 +57,14 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
             IconButton(
               color: Colors.white,
               icon: Icon(Icons.refresh),
+              tooltip: "Actualiser",
               onPressed: () async {
                 await _controller.reload();
               },
             ),
             IconButton(
               color: Colors.white,
+              tooltip: "Aller en avant",
               icon: Icon(Icons.arrow_forward),
               onPressed: () async {
                 if (await _controller.canGoForward()) {

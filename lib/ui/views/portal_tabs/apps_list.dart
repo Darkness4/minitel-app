@@ -72,7 +72,6 @@ class _PortailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
       elevation: 4,
       child: InkWell(
         key: const Key('app_lists/portail'),

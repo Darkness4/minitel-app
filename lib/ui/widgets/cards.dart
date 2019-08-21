@@ -9,7 +9,8 @@ class LogCard extends StatelessWidget {
   final String text;
   final double elevation;
 
-  const LogCard(this.text, {@required this.title, this.elevation = 3});
+  const LogCard(this.text, {Key key, @required this.title, this.elevation = 3})
+      : super(key: key);
 
   @override
   Widget build(context) {
@@ -59,9 +60,10 @@ class NewsCard extends StatelessWidget {
   final double elevation;
 
   const NewsCard({
+    Key key,
     @required this.item,
     this.elevation = 4.0,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -18,12 +18,14 @@ class GithubTab extends StatelessWidget {
         child: FutureBuilder<AtomFeed>(
           future: Provider.of<WebFeedAPI>(context).getAtom(url),
           builder: (BuildContext context, snapshot) => snapshot.hasData
-              ? ListView(
+              ? ListView.builder(
                   padding: const EdgeInsets.all(10.0),
-                  children: <Widget>[
-                    for (AtomItem atomItem in snapshot.data.items)
-                      NewsCard(item: atomItem),
-                  ],
+                  key: const Key('github_tab/list'),
+                  itemCount: snapshot.data.items.length,
+                  itemBuilder: (context, index) => NewsCard(
+                    item: snapshot.data.items[index],
+                    key: Key('github_tab/gh_item_$index'),
+                  ),
                 )
               : const CircularProgressIndicator(),
         ),

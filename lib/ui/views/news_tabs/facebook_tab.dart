@@ -14,7 +14,12 @@ class FacebookTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _facebookAPI = Provider.of<FacebookAPI>(context);
-    final pictureUrl = _facebookAPI.getProfilePicture();
+    final _picture = Image.network(
+      _facebookAPI.getProfilePicture(),
+      fit: BoxFit.cover,
+      height: 50,
+      width: 50,
+    );
 
     return Center(
       child: Scrollbar(
@@ -36,15 +41,15 @@ class FacebookTab extends StatelessWidget {
                     size: 40.0,
                   );
                 } else {
-                  return ListView(
+                  return ListView.builder(
                     padding: const EdgeInsets.all(10.0),
-                    children: <Widget>[
-                      for (Post post in feedSnapshot.data.posts)
-                        FacebookCard(
-                          post: post,
-                          pictureUrl: pictureUrl,
-                        ),
-                    ],
+                    key: const Key('facebook_tab/list'),
+                    itemCount: feedSnapshot.data.posts.length,
+                    itemBuilder: (context, index) => FacebookCard(
+                      post: feedSnapshot.data.posts[index],
+                      picture: _picture,
+                      key: Key('facebook_tab/fb_item_$index'),
+                    ),
                   );
                 }
             }
@@ -64,11 +69,11 @@ class FacebookCard extends StatelessWidget {
   const FacebookCard({
     Key key,
     @required this.post,
-    @required this.pictureUrl,
+    @required this.picture,
   }) : super(key: key);
 
   final Post post;
-  final String pictureUrl;
+  final Widget picture;
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +90,7 @@ class FacebookCard extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Image.network(
-                      pictureUrl,
-                      fit: BoxFit.cover,
-                      height: 50,
-                      width: 50,
-                    ),
+                    child: picture,
                   ),
                   Flexible(
                     child: Column(

@@ -29,6 +29,7 @@ class PortalViewState extends State<PortalView> {
       length: 2,
       child: Scaffold(
         body: NestedScrollView(
+          key: const Key('portail_view/tabs'),
           body: const DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -110,7 +111,8 @@ class PortalViewState extends State<PortalView> {
                 onPressed: () => Navigator.of(context).pop(),
               ),
               RaisedButton(
-                textColor: Colors.white,
+                colorBrightness: Brightness.dark,
+                color: Theme.of(context).primaryColor,
                 child: const Text("Update"),
                 onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
               )
