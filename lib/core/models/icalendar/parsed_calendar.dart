@@ -14,6 +14,15 @@ class ParsedCalendar {
 
   ParsedCalendar();
 
+  ParsedCalendar.fromJson(Map<String, dynamic> json) {
+    version = json['VERSION'];
+    prodID = json['PRODID'];
+    calscale = json['CALSCALE'];
+    var data = List<Map<String, dynamic>>.from(json["VEVENT"]);
+    events = data.map((event) => Event.fromJson(event)).toList();
+    timezone = Timezone.fromJson(json['VTIMEZONE']);
+  }
+
   void set(String key, String value) {
     switch (key) {
       case "VERSION":
@@ -38,14 +47,5 @@ class ParsedCalendar {
     json['VEVENT'] = events.map((event) => event.toJson()).toList();
     json['VTIMEZONE'] = timezone.toJson();
     return json;
-  }
-
-  ParsedCalendar.fromJson(Map<String, dynamic> json) {
-    version = json['VERSION'];
-    prodID = json['PRODID'];
-    calscale = json['CALSCALE'];
-    var data = List<Map<String, dynamic>>.from(json["VEVENT"]);
-    events = data.map((event) => Event.fromJson(event)).toList();
-    timezone = Timezone.fromJson(json['VTIMEZONE']);
   }
 }

@@ -23,12 +23,13 @@ import 'package:minitel_toolbox/core/services/http_gateway.dart';
 /// The data is generated asynchronously. The process times out after one minute.
 class Diagnosis {
   static String _alert;
-  final GatewayAPI _gateway;
-
-  var _report = Map<String, Future<String>>();
 
   /// Ping arguments
   static const _argsPing = "-c 4 -w 5 -W 5";
+
+  final GatewayAPI _gateway;
+
+  var _report = Map<String, Future<String>>();
 
   Diagnosis({@required GatewayAPI gatewayAPI}) : _gateway = gatewayAPI;
 

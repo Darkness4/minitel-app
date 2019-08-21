@@ -13,27 +13,6 @@ class DiagnoseTab extends StatelessWidget {
   })  : _diagnosis = diagnosis,
         super(key: key);
 
-  String _reportData(AsyncSnapshot<String> snapshot) {
-    String output;
-    switch (snapshot.connectionState) {
-      case ConnectionState.none:
-        output = '';
-        break;
-      case ConnectionState.active:
-      case ConnectionState.waiting:
-        output = '...';
-        break;
-      case ConnectionState.done:
-        if (snapshot.hasError) {
-          output = '${snapshot.error}';
-        } else {
-          output = snapshot.data;
-        }
-        break;
-    }
-    return output;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -87,5 +66,26 @@ class DiagnoseTab extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _reportData(AsyncSnapshot<String> snapshot) {
+    String output;
+    switch (snapshot.connectionState) {
+      case ConnectionState.none:
+        output = '';
+        break;
+      case ConnectionState.active:
+      case ConnectionState.waiting:
+        output = '...';
+        break;
+      case ConnectionState.done:
+        if (snapshot.hasError) {
+          output = '${snapshot.error}';
+        } else {
+          output = snapshot.data;
+        }
+        break;
+    }
+    return output;
   }
 }

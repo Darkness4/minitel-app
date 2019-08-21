@@ -7,8 +7,8 @@ class PortailAPI {
   List<Cookie> _cookie;
   var _catchedCookies = <Cookie>[];
 
-  List<Cookie> get cookie => _cookie;
   List<Cookie> get catchedCookies => _catchedCookies;
+  List<Cookie> get cookie => _cookie;
 
   /// Récupère le cookie pour se connecter à Portail EMSE
   ///

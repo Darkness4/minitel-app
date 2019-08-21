@@ -17,26 +17,6 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
   final TextEditingController _earlyController = TextEditingController();
 
   @override
-  void dispose() {
-    _rangeController.dispose();
-    _earlyController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    _initStateAsync();
-    super.initState();
-  }
-
-  Future<void> _initStateAsync() async {
-    await widget.notificationSettings.loadSavedSettings();
-    _rangeController.text = widget.notificationSettings.range.inDays.toString();
-    _earlyController.text =
-        widget.notificationSettings.early.inMinutes.toString();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -105,5 +85,25 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _rangeController.dispose();
+    _earlyController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _initStateAsync();
+    super.initState();
+  }
+
+  Future<void> _initStateAsync() async {
+    await widget.notificationSettings.loadSavedSettings();
+    _rangeController.text = widget.notificationSettings.range.inDays.toString();
+    _earlyController.text =
+        widget.notificationSettings.early.inMinutes.toString();
   }
 }

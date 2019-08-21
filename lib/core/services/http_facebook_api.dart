@@ -8,11 +8,6 @@ import 'package:minitel_toolbox/core/models/facebook_api/feed.dart';
 class FacebookAPI {
   final _client = HttpClient();
 
-  /// Get the url to HTTP GET the profile picture
-  String getProfilePicture() {
-    return "https://graph.facebook.com/v4.0/${ApiConstants.facebookProfileId}/picture?type=large";
-  }
-
   /// Get a Feed from Facebook Graph API
   Future<Feed> getFeed() async {
     HttpClientRequest request = await _client.getUrl(Uri.parse(
@@ -22,5 +17,10 @@ class FacebookAPI {
     var body = await response.cast<List<int>>().transform(utf8.decoder).join();
 
     return Feed.fromJson(json.decode(body));
+  }
+
+  /// Get the url to HTTP GET the profile picture
+  String getProfilePicture() {
+    return "https://graph.facebook.com/v4.0/${ApiConstants.facebookProfileId}/picture?type=large";
   }
 }

@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:webfeed/webfeed.dart';
 
 class GithubTab extends StatelessWidget {
+  static const url = "https://github.com/Darkness4/minitel-app/releases.atom";
+
   const GithubTab({
     Key key,
   }) : super(key: key);
-
-  static const url = "https://github.com/Darkness4/minitel-app/releases.atom";
 
   @override
   Widget build(BuildContext context) {

@@ -11,8 +11,6 @@ import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
 
 class AgendaViewModel extends ChangeNotifier {
-  final CalendarUrlAPI calendarUrlAPI;
-  final ICalendar iCalendar;
   static const _month = <String>[
     "Janvier",
     "Février",
@@ -27,6 +25,8 @@ class AgendaViewModel extends ChangeNotifier {
     "Novembre",
     "Décembre",
   ];
+  final CalendarUrlAPI calendarUrlAPI;
+  final ICalendar iCalendar;
   final _androidPlatformChannelSpecifics = AndroidNotificationDetails(
     'minitel_channel',
     'Minitel Channel',

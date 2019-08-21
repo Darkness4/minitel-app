@@ -31,9 +31,9 @@ class ApiConstants {
   static const _facebookApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
   static const facebookProfileId = "100012919189214"; // Public
 
-  /// Slack incomming webhook endpoint
-  static String get webhook => utf8.decode(base64.decode(_webhook));
-
   /// Facebook api key
   static String get facebookApi => utf8.decode(base64.decode(_facebookApi));
+
+  /// Slack incomming webhook endpoint
+  static String get webhook => utf8.decode(base64.decode(_webhook));
 }
