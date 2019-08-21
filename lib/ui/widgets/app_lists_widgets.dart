@@ -7,13 +7,13 @@ class ScaffoldWebView extends StatefulWidget {
   final Color backgroundColor;
   final String initialUrl;
   final Function(WebViewController, BuildContext) onWebViewCreated;
-  const ScaffoldWebView(
-      {Key key,
-      @required this.title,
-      @required this.backgroundColor,
-      @required this.initialUrl,
-      this.onWebViewCreated})
-      : super(key: key);
+  const ScaffoldWebView({
+    @required this.title,
+    @required this.backgroundColor,
+    @required this.initialUrl,
+    Key key,
+    this.onWebViewCreated,
+  }) : super(key: key);
 
   @override
   _ScaffoldWebViewState createState() => _ScaffoldWebViewState();
@@ -65,7 +65,7 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
             IconButton(
               color: Colors.white,
               tooltip: "Aller en avant",
-              icon: Icon(Icons.arrow_forward),
+              icon: const Icon(Icons.arrow_forward),
               onPressed: () async {
                 if (await _controller.canGoForward()) {
                   await _controller.goForward();

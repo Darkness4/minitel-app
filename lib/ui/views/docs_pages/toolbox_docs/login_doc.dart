@@ -15,8 +15,8 @@ class LoginDoc extends StatelessWidget {
         children: <Widget>[
           const BoxMdH("Authentification", 1),
           InkWell(
-            child: Image.asset(AssetPaths.DocNetwork),
             onTap: () {},
+            child: Image.asset(AssetPaths.DocNetwork),
           ),
           const BoxMdH("Nom de domaine / IP", 2),
           const Text.rich(

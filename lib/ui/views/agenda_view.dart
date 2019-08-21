@@ -25,8 +25,8 @@ class AgendaViewState extends State<AgendaView> {
   final _formKey = GlobalKey<FormState>();
   final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   final _initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/launcher_icon');
-  final _initializationSettingsIOS = IOSInitializationSettings();
+      const AndroidInitializationSettings('@mipmap/launcher_icon');
+  final _initializationSettingsIOS = const IOSInitializationSettings();
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +95,7 @@ class AgendaViewState extends State<AgendaView> {
     );
   }
 
+  @override
   void initState() {
     super.initState();
     final initializationSettings = InitializationSettings(
@@ -106,7 +107,7 @@ class AgendaViewState extends State<AgendaView> {
 
   Future<void> _onSelectNotification(
       String payload, BuildContext context) async {
-    List<String> output = payload.split(';');
+    final List<String> output = payload.split(';');
     await showDialog(
       context: context,
       builder: (_) => AlertDialog(

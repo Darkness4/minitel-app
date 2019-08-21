@@ -17,6 +17,7 @@ class PortalView extends StatefulWidget {
 
   const PortalView({Key key, this.title}) : super(key: key);
 
+  @override
   PortalViewState createState() => PortalViewState();
 }
 
@@ -91,12 +92,12 @@ class PortalViewState extends State<PortalView> {
     super.didChangeDependencies();
   }
 
-  void _checkVersion(BuildContext context) async {
+  Future<void> _checkVersion(BuildContext context) async {
     try {
-      var packageInfo = PackageInfo.fromPlatform();
-      var versionAPI = Provider.of<VersionAPI>(context).getLatestVersion();
-      PackageInfo actualRelease = await packageInfo;
-      LatestRelease latestRelease = await versionAPI;
+      final packageInfo = PackageInfo.fromPlatform();
+      final versionAPI = Provider.of<VersionAPI>(context).getLatestVersion();
+      final PackageInfo actualRelease = await packageInfo;
+      final LatestRelease latestRelease = await versionAPI;
       if (actualRelease.version != latestRelease.tagName) {
         await showDialog(
           context: context,
@@ -107,14 +108,14 @@ class PortalViewState extends State<PortalView> {
             actions: <Widget>[
               FlatButton(
                 key: const Key('portal_view/close_update'),
-                child: Text("Close"),
                 onPressed: () => Navigator.of(context).pop(),
+                child: const Text("Close"),
               ),
               RaisedButton(
                 colorBrightness: Brightness.dark,
                 color: Theme.of(context).primaryColor,
-                child: const Text("Update"),
                 onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
+                child: const Text("Update"),
               )
             ],
           ),

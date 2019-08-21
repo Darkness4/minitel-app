@@ -9,11 +9,15 @@ class LogCard extends StatelessWidget {
   final String text;
   final double elevation;
 
-  const LogCard(this.text, {Key key, @required this.title, this.elevation = 3})
-      : super(key: key);
+  const LogCard(
+    this.text, {
+    @required this.title,
+    Key key,
+    this.elevation = 3,
+  }) : super(key: key);
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
       child: Card(
@@ -35,6 +39,10 @@ class LogCard extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4.0),
+                color: MinitelColors.TerminalBgColor,
+              ),
               child: Text(
                 text,
                 style: const TextStyle(
@@ -42,10 +50,6 @@ class LogCard extends StatelessWidget {
                   fontFamily: "RobotoMono",
                   color: MinitelColors.TerminalFgColor,
                 ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.0),
-                color: MinitelColors.TerminalBgColor,
               ),
             ),
           ],
@@ -60,8 +64,8 @@ class NewsCard extends StatelessWidget {
   final double elevation;
 
   const NewsCard({
-    Key key,
     @required this.item,
+    Key key,
     this.elevation = 4.0,
   }) : super(key: key);
 
@@ -139,7 +143,7 @@ class NewsCard extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.all(20.0),
+                margin: const EdgeInsets.all(20.0),
                 child: Text(
                   parseFragment(item.content).text,
                   overflow: TextOverflow.fade,
@@ -152,12 +156,12 @@ class NewsCard extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: FlatButton(
                     textColor: Colors.blue,
-                    child: Text(
+                    onPressed: () => LaunchURL.launchURL(
+                        item.links.map((link) => link.href).toList().first),
+                    child: const Text(
                       "See More...",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    onPressed: () => LaunchURL.launchURL(
-                        item.links.map((link) => link.href).toList().first),
                   ),
                 ),
               ),

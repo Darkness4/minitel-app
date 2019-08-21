@@ -88,23 +88,23 @@ class _FeedbackViewState extends State<FeedbackView> {
                   const BoxMdH("Autres Contacts", 1),
                   FlatButton(
                     textColor: Colors.blueAccent,
+                    onPressed: LaunchURL.githubDarkness4Issues,
+                    color: Colors.lightBlue[100],
                     child: Text(
                       "Github Issues",
                       style: MinitelTextStyles.mdH2
                           .apply(color: Colors.blueAccent),
                     ),
-                    onPressed: LaunchURL.githubDarkness4Issues,
-                    color: Colors.lightBlue[100],
                   ),
                   FlatButton(
                     textColor: Colors.blueAccent,
+                    onPressed: LaunchURL.mailToMarcNGUYEN,
+                    color: Colors.lightBlue[100],
                     child: Text(
                       "Mail : marc_nguyen@live.fr",
                       style: MinitelTextStyles.mdH4
                           .apply(color: Colors.blueAccent),
                     ),
-                    onPressed: LaunchURL.mailToMarcNGUYEN,
-                    color: Colors.lightBlue[100],
                   ),
                   const Text(
                     "IRL : Marc NGUYEN, Chambre 2012",
@@ -122,11 +122,11 @@ class _FeedbackViewState extends State<FeedbackView> {
       floatingActionButton: Builder(
         builder: (BuildContext context) {
           return FloatingActionButton(
-            child: ImageIcon(
+            onPressed: () => _send(context),
+            child: const ImageIcon(
               AssetImage(AssetPaths.Slack),
               size: 75.0,
             ),
-            onPressed: () => _send(context),
           );
         },
       ),
@@ -151,8 +151,8 @@ class _FeedbackViewState extends State<FeedbackView> {
     _descriptionController = TextEditingController();
   }
 
-  void _send(BuildContext ctxt) async {
-    var packageInfo = await PackageInfo.fromPlatform();
+  Future<void> _send(BuildContext ctxt) async {
+    final packageInfo = await PackageInfo.fromPlatform();
     var description =
         "${_descriptionController.text.replaceAll(RegExp(r'\n'), '\n>')}\n\n";
     IosDeviceInfo iosInfo;
@@ -173,7 +173,7 @@ class _FeedbackViewState extends State<FeedbackView> {
     );
 
     Scaffold.of(ctxt).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text("Envoyé !"),
       ),
     );

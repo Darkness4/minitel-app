@@ -7,6 +7,7 @@ class DocumentationView extends StatelessWidget {
   final String title;
   const DocumentationView({Key key, this.title}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

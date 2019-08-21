@@ -5,7 +5,7 @@ import 'dart:io';
 class PortailAPI {
   final _client = HttpClient();
   List<Cookie> _cookie;
-  var _catchedCookies = <Cookie>[];
+  final _catchedCookies = <Cookie>[];
 
   List<Cookie> get catchedCookies => _catchedCookies;
   List<Cookie> get cookie => _cookie;
@@ -24,14 +24,15 @@ class PortailAPI {
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
 
-    var temp = await response.cast<List<int>>().transform(utf8.decoder).join();
-    var lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
-    var action = RegExp(r'action="([^"]*)"').firstMatch(temp).group(1);
+    final temp =
+        await response.cast<List<int>>().transform(utf8.decoder).join();
+    final lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
+    final action = RegExp(r'action="([^"]*)"').firstMatch(temp).group(1);
 
-    Cookie jSessionIDCampus =
+    final Cookie jSessionIDCampus =
         response.cookies.firstWhere((cookie) => cookie.name == "JSESSIONID");
 
-    var data =
+    final data =
         "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
     request = await _client.postUrl(Uri.parse("https://cas.emse.fr$action"))
       ..followRedirects = false
@@ -50,7 +51,7 @@ class PortailAPI {
     Cookie agimus;
     try {
       agimus = response.cookies.firstWhere((cookie) => cookie.name == "AGIMUS");
-    } on NoSuchMethodError {
+    } on Exception {
       throw Exception("AGIMUS not found. Maybe bad username or password.");
     }
     var location = response.headers.value('location');
@@ -62,7 +63,7 @@ class PortailAPI {
     response = await request.close();
 
     _catchedCookies.addAll(response.cookies);
-    Cookie casAuth =
+    final Cookie casAuth =
         response.cookies.firstWhere((cookie) => cookie.name == "CASAuth");
     location = response.headers.value('location');
 
@@ -73,11 +74,11 @@ class PortailAPI {
     response = await request.close();
 
     _catchedCookies.addAll(response.cookies);
-    Cookie laravelToken =
+    final Cookie laravelToken =
         response.cookies.firstWhere((cookie) => cookie.name == "laravel_token");
-    Cookie xsrfToken =
+    final Cookie xsrfToken =
         response.cookies.firstWhere((cookie) => cookie.name == "XSRF-TOKEN");
-    Cookie portailEntEmseSession = response.cookies
+    final Cookie portailEntEmseSession = response.cookies
         .firstWhere((cookie) => cookie.name == "portail_ent_emse_session");
 
     // _catchedCookies.forEach((cookie) {
@@ -98,7 +99,7 @@ class PortailAPI {
   Future<void> saveCookiePortailFromLogin(
       {String username, String password}) async {
     try {
-      List<Cookie> cookies =
+      final List<Cookie> cookies =
           await getPortailCookie(username: username, password: password);
       _cookie = cookies;
     } on Exception {

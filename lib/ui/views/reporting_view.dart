@@ -28,15 +28,12 @@ class ReportingViewState extends State<ReportingView>
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     return BaseWidget<ReportingViewModel>(
       model: ReportingViewModel(
         webhookAPI: Provider.of(context),
         gatewayAPI: Provider.of(context),
-      ),
-      child: ReportTab(
-        titleController: _titleController,
-        descriptionController: _descriptionController,
       ),
       builder: (context, model, child) => DefaultTabController(
         length: 2,
@@ -68,6 +65,10 @@ class ReportingViewState extends State<ReportingView>
           ),
         ),
       ),
+      child: ReportTab(
+        titleController: _titleController,
+        descriptionController: _descriptionController,
+      ),
     );
   }
 
@@ -93,7 +94,7 @@ class ReportingViewState extends State<ReportingView>
             : Colors.blue,
         onPressed: () async {
           if (!_animationController.isDismissed) _animationController.reverse();
-          model.diagnose();
+          await model.diagnose();
           setState(() {});
         },
         child: _diagnosisIcon(model),
@@ -163,17 +164,17 @@ class ReportingViewState extends State<ReportingView>
         "Email",
         start: 0.0,
         end: 0.5,
-        child: const Icon(Icons.mail),
         controller: _animationController,
         onPressed: () async {
-          var body = "---Report ${DateTime.now().toString()}---\n\n"
+          final body = "---Report ${DateTime.now().toString()}---\n\n"
               "Titre: ${_titleController.text}\n"
               "Description: ${_descriptionController.text}\n\n"
               "*Diagnosis*\n"
               "${await model.diagnosis.reportAll}";
-          LaunchURL.launchURL(
+          await LaunchURL.launchURL(
               "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
         },
+        child: const Icon(Icons.mail),
       );
 
   Widget _reportButton(BuildContext context, ReportingViewModel model) =>
@@ -181,14 +182,9 @@ class ReportingViewState extends State<ReportingView>
         "Notifier sur Slack",
         start: 0.0,
         end: 0.25,
-        child: const ImageIcon(
-          AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
-          size: 100.0,
-          key: Key('reporting_view/slack'),
-        ),
         controller: _animationController,
         onPressed: () async {
-          String status = await model.reportToSlack(
+          final status = await model.reportToSlack(
               _titleController.text, _descriptionController.text);
           if (status != null) {
             Scaffold.of(context).showSnackBar(
@@ -198,13 +194,17 @@ class ReportingViewState extends State<ReportingView>
             );
           }
         },
+        child: const ImageIcon(
+          AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
+          size: 100.0,
+          key: Key('reporting_view/slack'),
+        ),
       );
 
   Widget _shareButton(ReportingViewModel model) => AnimatedFloatingButton(
         "Partager",
         start: 0.0,
         end: 1.0,
-        child: const Icon(Icons.share),
         controller: _animationController,
         onPressed: () async =>
             Share.share("---Report ${DateTime.now().toString()}---\n\n"
@@ -212,5 +212,6 @@ class ReportingViewState extends State<ReportingView>
                 "Description: ${_descriptionController.text}\n\n"
                 "*Diagnosis*\n"
                 "${await model.diagnosis.reportAll}"),
+        child: const Icon(Icons.share),
       );
 }

@@ -11,7 +11,7 @@ void main() {
   group('Minitel Toolbox', () {
     FlutterDriver driver;
 
-    var minitelFinders = MinitelFinders();
+    final minitelFinders = MinitelFinders();
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
@@ -26,7 +26,7 @@ void main() {
     });
 
     test('Check flutter driver health', () async {
-      Health health = await driver.checkHealth();
+      final Health health = await driver.checkHealth();
       print(health.status);
       expect(health.status, equals(HealthStatus.ok));
     });

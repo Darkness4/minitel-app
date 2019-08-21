@@ -13,7 +13,7 @@ class Timezone {
   }
 
   Map<String, dynamic> toJson() {
-    var json = <String, dynamic>{};
+    final json = <String, dynamic>{};
     json['TZID'] = tzid;
     json['DAYLIGHT'] = daylight.toJson();
     json['STANDARD'] = standard.toJson();
@@ -61,7 +61,7 @@ class TimezoneDescription {
   }
 
   Map<String, dynamic> toJson() {
-    var json = <String, dynamic>{};
+    final json = <String, dynamic>{};
     json["DTSTART"] = dtstart.toIso8601String();
     json["TZOFFSETTO"] = tzOffsetTo;
     json["TZOFFSETFROM"] = tzOffsetFrom;

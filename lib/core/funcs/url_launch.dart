@@ -18,7 +18,7 @@ class LaunchURL {
       "https://docs.google.com/document/d/1VvgkIRjPEQ6O8Usyt30cRhIRVOyR4a7SYPGuNX2ORvU/edit?usp=sharing");
 
   /// Launche the given url
-  static void launchURL(String url) async {
+  static Future<void> launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {

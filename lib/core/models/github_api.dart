@@ -32,7 +32,7 @@ class LatestRelease {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final data = <String, dynamic>{};
     data['url'] = url;
     data['html_url'] = htmlUrl;
     data['id'] = id;

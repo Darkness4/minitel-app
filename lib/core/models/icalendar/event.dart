@@ -18,7 +18,7 @@ class Event {
   }
 
   Map<String, dynamic> toJson() {
-    var json = <String, dynamic>{};
+    final json = <String, dynamic>{};
     json["DTEND"] = dtend.toIso8601String();
     json["UID"] = uid;
     json["DTSTAMP"] = dtstamp.toIso8601String();

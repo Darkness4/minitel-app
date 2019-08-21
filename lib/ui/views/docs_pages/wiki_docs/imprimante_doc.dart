@@ -49,7 +49,7 @@ class ImprimanteDoc extends StatelessWidget {
               "    -  Type SMB, addresse smb://192.168.130.2/imprimantes-gcp\n"
               "    -  Utilisez le fichier PPD : https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd\n"
               "    -  Configurez la suite et ça devrait-être ok"),
-          BoxMdH("Code PUK", 2),
+          const BoxMdH("Code PUK", 2),
           const Text("Utilisez l'application de Minitel > Apps > Imprimante"),
         ],
       ),

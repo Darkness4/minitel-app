@@ -37,7 +37,7 @@ class LoginViewModel extends ChangeNotifier {
 
   Future<void> login(BuildContext context, String uid, String pswd) async {
     // Remember me
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (rememberMe.value) {
       await Future.wait([
         prefs.setBool("rememberMe", true),
@@ -61,7 +61,7 @@ class LoginViewModel extends ChangeNotifier {
 
     // Notification
     Scaffold.of(context).showSnackBar(
-      SnackBar(content: Text('Requested')),
+      const SnackBar(content: Text('Requested')),
     );
 
     // Lock
@@ -77,7 +77,7 @@ class LoginViewModel extends ChangeNotifier {
     );
     // Calendar
     try {
-      String calendarUrl = await calendarUrlAPI.getCalendarURL(
+      final String calendarUrl = await calendarUrlAPI.getCalendarURL(
         username: uid,
         password: pswd,
       );

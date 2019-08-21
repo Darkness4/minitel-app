@@ -21,8 +21,8 @@ class DualBootDoc extends StatelessWidget {
           ),
           Center(
             child: RaisedButton(
-              child: const Text("Full Tutorial Dual Boot"),
               onPressed: LaunchURL.dualBootTutorial,
+              child: const Text("Full Tutorial Dual Boot"),
             ),
           ),
           const Text.rich(

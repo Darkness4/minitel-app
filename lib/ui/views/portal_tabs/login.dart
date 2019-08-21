@@ -47,45 +47,6 @@ class LoginPageState extends State<LoginPage> {
         autoLogin: _autoLogin,
       ),
       onModelReady: (model) => _rememberLogin(context, model),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: TextFormField(
-                key: const Key('login/uid'),
-                focusNode: _uidFocusNode,
-                controller: _uidController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.person),
-                  hintText: "prenom.nom",
-                  labelText: "Nom d'utilisateur",
-                ),
-                onEditingComplete: () {
-                  _uidFocusNode.unfocus();
-                  FocusScope.of(context).requestFocus(_pswdFocusNode);
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: TextFormField(
-                key: const Key('login/pswd'),
-                controller: _pswdController,
-                obscureText: true,
-                focusNode: _pswdFocusNode,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.vpn_key),
-                  labelText: "Mot de passe",
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
       builder: (context, model, Widget loginForm) {
         return ListView(
           padding: const EdgeInsets.all(20.0),
@@ -113,8 +74,8 @@ class LoginPageState extends State<LoginPage> {
                                 items: [
                                   for (var value in LoginConstants.urlRootList)
                                     DropdownMenuItem<String>(
-                                      child: Text(value),
                                       value: value,
+                                      child: Text(value),
                                     )
                                 ],
                                 onChanged: (String selectedUrl) async =>
@@ -138,8 +99,8 @@ class LoginPageState extends State<LoginPage> {
                                 items: [
                                   for (var value in LoginConstants.timeMap.keys)
                                     DropdownMenuItem<String>(
-                                      child: Text(value),
                                       value: value,
+                                      child: Text(value),
                                     ),
                                 ],
                                 onChanged: (selectedTime) =>
@@ -220,11 +181,50 @@ class LoginPageState extends State<LoginPage> {
           ],
         );
       },
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: TextFormField(
+                key: const Key('login/uid'),
+                focusNode: _uidFocusNode,
+                controller: _uidController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.person),
+                  hintText: "prenom.nom",
+                  labelText: "Nom d'utilisateur",
+                ),
+                onEditingComplete: () {
+                  _uidFocusNode.unfocus();
+                  FocusScope.of(context).requestFocus(_pswdFocusNode);
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: TextFormField(
+                key: const Key('login/pswd'),
+                controller: _pswdController,
+                obscureText: true,
+                focusNode: _pswdFocusNode,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.vpn_key),
+                  labelText: "Mot de passe",
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   @override
-  dispose() {
+  void dispose() {
     _uidController.dispose();
     _pswdController.dispose();
     super.dispose();
@@ -232,7 +232,7 @@ class LoginPageState extends State<LoginPage> {
 
   Future<void> _rememberLogin(
       BuildContext context, LoginViewModel model) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     _rememberMe.value = prefs.getBool("rememberMe") ?? false;
     if (_rememberMe.value) {
       _uidController.text = prefs.getString("user");
@@ -251,8 +251,8 @@ class _StatusCard extends StatelessWidget {
   final String _selectedUrl;
 
   const _StatusCard({
-    Key key,
     @required String selectedUrl,
+    Key key,
   })  : _selectedUrl = selectedUrl,
         super(key: key);
 
@@ -337,16 +337,17 @@ class _StatusCard extends StatelessWidget {
                   "Portail: ",
                   style: TextStyle(fontSize: 20),
                 ),
-                _portailAPI.cookie == null
-                    ? const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      )
-                    : const Icon(
-                        Icons.done,
-                        color: Colors.green,
-                        key: Key('login/portail_success'),
-                      )
+                if (_portailAPI.cookie == null)
+                  const Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  )
+                else
+                  const Icon(
+                    Icons.done,
+                    color: Colors.green,
+                    key: Key('login/portail_success'),
+                  )
               ],
             ),
           ],

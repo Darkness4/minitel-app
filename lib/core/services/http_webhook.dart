@@ -26,7 +26,7 @@ class WebhookAPI {
       String channel = "projet_flutter_notif",
       String botName = "Flutter Reporter Bot"}) async {
     var status = "";
-    var _attachments = <Map<String, String>>[];
+    final _attachments = <Map<String, String>>[];
 
     if (attachments != null) {
       attachments.forEach((String key, String value) => _attachments.add({
@@ -38,7 +38,7 @@ class WebhookAPI {
     }
 
     if (text != "") {
-      var data = {
+      final data = {
         'text': "*--Report ${DateTime.now()}--*\n"
             "$text\n",
         'username': botName,
@@ -49,12 +49,12 @@ class WebhookAPI {
       };
 
       try {
-        HttpClientRequest request = await _client.postUrl(Uri.parse(
+        final HttpClientRequest request = await _client.postUrl(Uri.parse(
             "https://hooks.slack.com/services/${ApiConstants.webhook}"))
           ..headers.contentType =
               ContentType("application", "json", charset: "utf-8")
           ..write(json.encode(data));
-        HttpClientResponse response = await request.close();
+        final HttpClientResponse response = await request.close();
         status =
             await response.cast<List<int>>().transform(utf8.decoder).join();
       } catch (e) {

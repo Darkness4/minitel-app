@@ -56,7 +56,7 @@ class ErrorAgendaWidget extends StatelessWidget {
   final _pswdController = TextEditingController();
   final _uidFocusNode = FocusNode();
   final _pswdFocusNode = FocusNode();
-  final _formKey;
+  final GlobalKey<FormState> _formKey;
   final String error;
   final Function parentSetState;
 
@@ -90,7 +90,7 @@ class ErrorAgendaWidget extends StatelessWidget {
                     key: const Key('agenda_view/uid'),
                     focusNode: _uidFocusNode,
                     controller: _uidController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "prénom.nom",
                       labelText: "Nom d'utilisateur",
                     ),
@@ -104,7 +104,7 @@ class ErrorAgendaWidget extends StatelessWidget {
                     controller: _pswdController,
                     obscureText: true,
                     focusNode: _pswdFocusNode,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Mot de passe",
                       labelText: "Mot de passe",
                     ),
@@ -122,11 +122,10 @@ class ErrorAgendaWidget extends StatelessWidget {
               backgroundColor: Colors.red,
               elevation: 10.0,
               onPressed: () async {
-                CalendarUrlAPI _calendarURL =
-                    Provider.of<CalendarUrlAPI>(context);
-                ICalendar ical = Provider.of<ICalendar>(context);
+                final _calendarURL = Provider.of<CalendarUrlAPI>(context);
+                final ical = Provider.of<ICalendar>(context);
                 try {
-                  var url = await _calendarURL.getCalendarURL(
+                  final url = await _calendarURL.getCalendarURL(
                     username: _uidController.text,
                     password: _pswdController.text,
                   );
@@ -145,7 +144,7 @@ class ErrorAgendaWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              icon: Icon(Icons.arrow_forward),
+              icon: const Icon(Icons.arrow_forward),
             ),
           ),
         ),
@@ -162,7 +161,7 @@ class EventCard extends StatelessWidget {
         super(key: key);
 
   Color get _cardColor {
-    var upper = _event.summary.toLowerCase();
+    final upper = _event.summary.toLowerCase();
     if (upper.contains("examen")) {
       return Colors.red[200];
     } else if (upper.contains("tp")) {

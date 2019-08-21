@@ -7,7 +7,7 @@ import 'toolbox_docs/login_doc.dart';
 
 class ToolboxDocs extends StatelessWidget {
   final PageController _controller;
-  ToolboxDocs({Key key, PageController controller})
+  const ToolboxDocs({Key key, PageController controller})
       : _controller = controller,
         super(key: key);
 

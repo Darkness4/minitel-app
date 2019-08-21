@@ -41,6 +41,7 @@ class DiagnosisContent extends Iterable<String> {
   /// ```
   /// for (String content in DiagnosisContent())
   /// ```
+  @override
   Iterator<String> get iterator => [
         ip,
         ipAddr,

@@ -36,14 +36,14 @@ class ReportingViewModel extends ChangeNotifier {
   }
 
   /// Initiate diagnosis
-  void diagnose() async {
+  Future<void> diagnose() async {
     if (diagnosisState != ButtonState.Loading) {
       // Lock
       diagnosisState = ButtonState.Loading;
       notifyListeners();
 
       // Animate button
-      Timer timer = Timer.periodic(
+      final Timer timer = Timer.periodic(
         const Duration(seconds: 1),
         (Timer t) => percentageDiagnoseProgress.value += 1 / 60,
       );
@@ -67,7 +67,7 @@ class ReportingViewModel extends ChangeNotifier {
   /// Send to slack
   Future<String> reportToSlack(String title, String description,
       {String channel = "minitel_toolbox_notifications"}) async {
-    DateTime timeout = await _timeout;
+    final DateTime timeout = await _timeout;
     String status;
 
     if (DateTime.now().isAfter(timeout)) {
@@ -77,7 +77,7 @@ class ReportingViewModel extends ChangeNotifier {
         attachments: await diagnosis.reportAll,
         channel: channel,
       );
-      if (status == "ok") _setTimeout();
+      if (status == "ok") await _setTimeout();
     } else {
       status = "Wait until ${timeout.hour}:${timeout.minute}";
     }
@@ -85,8 +85,8 @@ class ReportingViewModel extends ChangeNotifier {
   }
 
   /// SetTimeout to not abuse [reportToSlack]
-  void _setTimeout() async {
-    var prefs = await SharedPreferences.getInstance();
+  Future<void> _setTimeout() async {
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setString(
         'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
   }

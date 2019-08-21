@@ -11,9 +11,9 @@ class FacebookCard extends StatelessWidget {
 
   final Widget picture;
   const FacebookCard({
-    Key key,
     @required this.post,
     @required this.picture,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -75,8 +75,8 @@ class FacebookCard extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: FlatButton(
                   textColor: Colors.blue,
-                  child: Text("Voir sur Facebook ..."),
                   onPressed: () => LaunchURL.launchURL(post.permalinkUrl),
+                  child: const Text("Voir sur Facebook ..."),
                 ),
               ),
             ),

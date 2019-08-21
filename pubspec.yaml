@@ -19,7 +19,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: 0.15.8  # Dart Team
   connectivity: 0.4.3+7  # Flutter Team
   dscript_exec: ^2.0.1  # Ravi Teja Gudapti
   share: 0.6.2+1  # Flutter Team
@@ -32,7 +31,7 @@ dependencies:
   flutter_local_notifications: 0.8.2  # Michael Bui
   package_info: 0.4.0+6  # Flutter Team
   device_info: 0.4.0+2  # Flutter Team
-  provider: ^3.0.0+1
+  provider: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -40,7 +39,7 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
-  pedantic: ^1.8.0+1
+  extra_pedantic: ^1.0.0
   flutter_launcher_icons: 0.7.2+1
 
 flutter_icons:

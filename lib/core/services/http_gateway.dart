@@ -30,8 +30,8 @@ class GatewayAPI {
     _client.badCertificateCallback = (cert, host, port) => true;
 
     // SessionId
-    var data = "uid=$uid&time=$selectedTime&pswd=$pswd";
-    HttpClientRequest request =
+    final data = "uid=$uid&time=$selectedTime&pswd=$pswd";
+    final HttpClientRequest request =
         await _client.postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'))
           ..headers.contentType = ContentType(
             "application",
@@ -41,14 +41,14 @@ class GatewayAPI {
           ..headers.set(HttpHeaders.cookieHeader, "lang=us; disclaimer=1;")
           ..headers.contentLength = data.length // Needed
           ..write(data);
-    HttpClientResponse response = await request.close();
+    final HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      var body =
+      final body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
       if (body.contains('title_error')) {
-        throw ("Error: Bad Username or Password");
+        throw Exception('Bad Username or Password');
       } else {
-        Cookie netasq_user = response.cookies
+        final Cookie netasq_user = response.cookies
             .firstWhere((cookie) => cookie.name == "NETASQ_USER");
         cookie = netasq_user;
       }
@@ -65,21 +65,21 @@ class GatewayAPI {
   /// String status = await disconnectGateway("172.17.0.1") // "You have logged out"
   /// ```
   Future<String> disconnectGateway(String selectedUrl, {Cookie cookie}) async {
-    var url =
+    final url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     var status = "";
 
     _client.badCertificateCallback = (cert, host, port) => true;
 
     try {
-      HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+      final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
         ..headers.removeAll(HttpHeaders.contentLengthHeader);
       if (cookie != null) {
         request.cookies.add(cookie);
       }
 
-      HttpClientResponse response = await request.close();
-      var body =
+      final HttpClientResponse response = await request.close();
+      final body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         status = body.contains('title_success')
@@ -122,25 +122,25 @@ class GatewayAPI {
   Future<String> getStatus(String selectedUrl, {Cookie cookie}) async {
     var status = "";
     _client.badCertificateCallback = (cert, host, port) => true;
-    var url = 'https://$selectedUrl/auth/login.html';
-    RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
+    final url = 'https://$selectedUrl/auth/login.html';
+    final RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
     try {
-      HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+      final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
         ..headers.removeAll(HttpHeaders.contentLengthHeader);
 
       if (cookie != null) {
         request.cookies.add(cookie);
       }
 
-      HttpClientResponse response = await request.close();
-      var body =
+      final HttpClientResponse response = await request.close();
+      final body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         if (!body.contains('l_rtime')) {
-          throw "Not logged in";
+          throw Exception('Not logged in');
         } else {
-          var match = exp.firstMatch(body).group(1);
+          final match = exp.firstMatch(body).group(1);
           if (match is! String) {
             throw Exception(
                 "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");

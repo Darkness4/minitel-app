@@ -3,66 +3,84 @@ import 'package:flutter_driver/flutter_driver.dart';
 class MinitelFinders {
   // Navigation
   // final drawer = find.byTooltip('Ouvrir le menu de navigation');
-  final drawer = find.descendant(
+  final SerializableFinder drawer = find.descendant(
     of: find.byType('NavigationToolbar'),
     matching: find.byType('IconButton'),
   );
-  final endDrawer = find.descendant(
+  final SerializableFinder endDrawer = find.descendant(
     of: find.byType('NavigationToolbar'),
     matching: find.byType('IconButton'),
   );
-  final authenticationRoute = find.byValueKey('drawer/authentication');
-  final newsRoute = find.byValueKey('drawer/news');
-  final agendaRoute = find.byValueKey('drawer/agenda');
-  final reportingRoute = find.byValueKey('drawer/reporting');
-  final docsRoute = find.byValueKey('drawer/docs');
-  final aboutRoute = find.byValueKey('drawer/about');
+  final SerializableFinder authenticationRoute =
+      find.byValueKey('drawer/authentication');
+  final SerializableFinder newsRoute = find.byValueKey('drawer/news');
+  final SerializableFinder agendaRoute = find.byValueKey('drawer/agenda');
+  final SerializableFinder reportingRoute = find.byValueKey('drawer/reporting');
+  final SerializableFinder docsRoute = find.byValueKey('drawer/docs');
+  final SerializableFinder aboutRoute = find.byValueKey('drawer/about');
 
-  final goBack = find.byTooltip('Retour');
+  final SerializableFinder goBack = find.byTooltip('Retour');
 
   // Authentication
-  final closeUpdateButton = find.byValueKey('portal_view/close_update');
-  final portalTabs = find.byValueKey('portal_view/tabs');
-  final appsTab = find.byValueKey('portal_view/apps_tab');
-  final loginTab = find.byValueKey('portal_view/login_tab');
+  final SerializableFinder closeUpdateButton =
+      find.byValueKey('portal_view/close_update');
+  final SerializableFinder portalTabs = find.byValueKey('portal_view/tabs');
+  final SerializableFinder appsTab = find.byValueKey('portal_view/apps_tab');
+  final SerializableFinder loginTab = find.byValueKey('portal_view/login_tab');
 
-  final timeDropdown = find.byValueKey('login/time');
-  final nameServerDropdown = find.byValueKey('login/name_server');
-  final uidLoginTextField = find.byValueKey('login/uid');
-  final pswdLoginTextField = find.byValueKey('login/pswd');
-  final rememberMeButton = find.byValueKey('login/remember_me');
-  final autoLoginButton = find.byValueKey('login/auto_login');
-  final loginButton = find.byValueKey('login/connect');
-  final gatewayText = find.byValueKey('login/gateway_text');
-  final agendaSuccess = find.byValueKey('login/agenda_success');
-  final portailSuccess = find.byValueKey('login/portail_success');
+  final SerializableFinder timeDropdown = find.byValueKey('login/time');
+  final SerializableFinder nameServerDropdown =
+      find.byValueKey('login/name_server');
+  final SerializableFinder uidLoginTextField = find.byValueKey('login/uid');
+  final SerializableFinder pswdLoginTextField = find.byValueKey('login/pswd');
+  final SerializableFinder rememberMeButton =
+      find.byValueKey('login/remember_me');
+  final SerializableFinder autoLoginButton =
+      find.byValueKey('login/auto_login');
+  final SerializableFinder loginButton = find.byValueKey('login/connect');
+  final SerializableFinder gatewayText = find.byValueKey('login/gateway_text');
+  final SerializableFinder agendaSuccess =
+      find.byValueKey('login/agenda_success');
+  final SerializableFinder portailSuccess =
+      find.byValueKey('login/portail_success');
 
-  final sogo = find.byValueKey('app_lists/sogo');
-  final portail = find.byValueKey('app_lists/portail');
-  final imprimante = find.byValueKey('app_lists/imprimante');
-  final wikiMinitel = find.byValueKey('app_lists/wiki_minitel');
+  final SerializableFinder sogo = find.byValueKey('app_lists/sogo');
+  final SerializableFinder portail = find.byValueKey('app_lists/portail');
+  final SerializableFinder imprimante = find.byValueKey('app_lists/imprimante');
+  final SerializableFinder wikiMinitel =
+      find.byValueKey('app_lists/wiki_minitel');
 
   // News
-  final newsTabs = find.byValueKey('news_view/tabs');
-  final newsLoading = find.byValueKey('facebook_tab/loading');
-  final facebookTab = find.byValueKey('news_view/facebook_tab');
-  final githubTab = find.byValueKey('news_view/github_tab');
-  final facebookList = find.byValueKey('facebook_tab/list');
-  final githubList = find.byValueKey('github_tab/list');
+  final SerializableFinder newsTabs = find.byValueKey('news_view/tabs');
+  final SerializableFinder newsLoading =
+      find.byValueKey('facebook_tab/loading');
+  final SerializableFinder facebookTab =
+      find.byValueKey('news_view/facebook_tab');
+  final SerializableFinder githubTab = find.byValueKey('news_view/github_tab');
+  final SerializableFinder facebookList = find.byValueKey('facebook_tab/list');
+  final SerializableFinder githubList = find.byValueKey('github_tab/list');
 
   // Agenda Error Widget
-  final agendaUid = find.byValueKey('agenda_view/uid');
-  final agendaPswd = find.byValueKey('agenda_view/pswd');
-  final agendaConnect = find.byValueKey('agenda_view/connect');
+  final SerializableFinder agendaUid = find.byValueKey('agenda_view/uid');
+  final SerializableFinder agendaPswd = find.byValueKey('agenda_view/pswd');
+  final SerializableFinder agendaConnect =
+      find.byValueKey('agenda_view/connect');
 
   // Reporting
-  final reportingTabs = find.byValueKey('reporting_view/tabs');
-  final diagnosisTab = find.byValueKey('reporting_view/diagnosis_tab');
-  final reportingTab = find.byValueKey('reporting_view/reporting_tab');
-  final reportingFAB = find.byValueKey('reporting_view/diagnose');
-  final reportingFABDone = find.byValueKey('reporting_view/diagnose_done');
-  final sendToSlack = find.byValueKey('reporting_view/slack');
-  final reportTitle = find.byValueKey('report_tab/title');
-  final reportDescription = find.byValueKey('report_tab/description');
-  final diagnosisList = find.byValueKey('diagnose_tab/list');
+  final SerializableFinder reportingTabs =
+      find.byValueKey('reporting_view/tabs');
+  final SerializableFinder diagnosisTab =
+      find.byValueKey('reporting_view/diagnosis_tab');
+  final SerializableFinder reportingTab =
+      find.byValueKey('reporting_view/reporting_tab');
+  final SerializableFinder reportingFAB =
+      find.byValueKey('reporting_view/diagnose');
+  final SerializableFinder reportingFABDone =
+      find.byValueKey('reporting_view/diagnose_done');
+  final SerializableFinder sendToSlack =
+      find.byValueKey('reporting_view/slack');
+  final SerializableFinder reportTitle = find.byValueKey('report_tab/title');
+  final SerializableFinder reportDescription =
+      find.byValueKey('report_tab/description');
+  final SerializableFinder diagnosisList = find.byValueKey('diagnose_tab/list');
 }

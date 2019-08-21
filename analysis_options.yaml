@@ -1,8 +1,10 @@
-include: package:pedantic/analysis_options.yaml
+include: package:extra_pedantic/analysis_options.yaml
+# include: package:pedantic/analysis_options.yaml
 
 linter:
   rules:
     - camel_case_types
+    - curly_braces_in_flow_control_structures
 
 analyzer:
 #   exclude:

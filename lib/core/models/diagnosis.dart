@@ -29,7 +29,7 @@ class Diagnosis {
 
   final GatewayAPI _gateway;
 
-  var _report = Map<String, Future<String>>();
+  var _report = <String, Future<String>>{};
 
   Diagnosis({@required GatewayAPI gatewayAPI}) : _gateway = gatewayAPI;
 
@@ -40,8 +40,8 @@ class Diagnosis {
   Map<String, Future<String>> get report => _report;
 
   Future<Map<String, String>> get reportAll async {
-    var data = Map<String, String>();
-    for (var key in DiagnosisContent()) {
+    final data = <String, String>{};
+    for (final key in DiagnosisContent()) {
       data[key] = await _report[key];
     }
     return data;
@@ -61,12 +61,12 @@ class Diagnosis {
   /// - nslookup google.com and fw-cgcp.emse.fr (with and without Busybox).
   /// If the report takes too much time, the function return any given
   /// informations after one minute.
-  void diagnose() async {
+  Future<void> diagnose() async {
     // Destroy existing report
-    _report = Map();
+    _report = <String, Future<String>>{};
 
     // Check if connected
-    var connectivityResult = await Connectivity().checkConnectivity();
+    final connectivityResult = await Connectivity().checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
@@ -151,12 +151,12 @@ class Diagnosis {
 
   Future<String> _lookup(String address) async {
     try {
-      var addresses = await InternetAddress.lookup(MyIPAdresses.stormshield);
-      String output = "";
-      for (var address in addresses) {
-        output += "Host: ${address.host}\nLookup: ${address.address}\n";
+      final addresses = await InternetAddress.lookup(MyIPAdresses.stormshield);
+      final output = StringBuffer();
+      for (final address in addresses) {
+        output.write("Host: ${address.host}\nLookup: ${address.address}\n");
       }
-      return output;
+      return output.toString();
     } catch (e, s) {
       return "Error: $e\n" "Stacktrace: $s";
     }
@@ -164,7 +164,7 @@ class Diagnosis {
 
   Future<String> _terminalCommand(String command, List<String> args) async {
     try {
-      String stdout = await exec(command, args).runGetOutput();
+      final stdout = await exec(command, args).runGetOutput();
       return stdout.isEmpty ? "Nothing to show" : stdout;
     } catch (e, s) {
       return "Error: $e\n" "Stacktrace: $s";

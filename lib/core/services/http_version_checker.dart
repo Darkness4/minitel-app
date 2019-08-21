@@ -9,11 +9,11 @@ class VersionAPI {
 
   /// Get the latest version of the app from Github Source
   Future<LatestRelease> getLatestVersion() async {
-    HttpClientRequest request = await _client.getUrl(Uri.parse(
+    final HttpClientRequest request = await _client.getUrl(Uri.parse(
         "https://api.github.com/repos/Darkness4/minitel-app/releases/latest"));
-    HttpClientResponse response = await request.close();
+    final HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      var data =
+      final data =
           await response.cast<List<int>>().transform(utf8.decoder).join();
       return LatestRelease.fromJson(json.decode(data));
     } else {

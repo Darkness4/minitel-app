@@ -11,7 +11,7 @@ class BoxMdBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.0),
+      margin: const EdgeInsets.only(bottom: 16.0),
       child: _text,
     );
   }
@@ -33,16 +33,16 @@ class BoxMdH extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
           padding: const EdgeInsets.only(bottom: 9.6),
-          child: Text(
-            _text,
-            style: MinitelTextStyles.mdH1,
-          ),
           decoration: const BoxDecoration(
             border: BorderDirectional(
               bottom: BorderSide(
                 color: Color.fromRGBO(234, 236, 239, 1.0),
               ),
             ),
+          ),
+          child: Text(
+            _text,
+            style: MinitelTextStyles.mdH1,
           ),
         );
         break;
@@ -51,10 +51,6 @@ class BoxMdH extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
           padding: const EdgeInsets.only(bottom: 7.2),
-          child: Text(
-            _text,
-            style: MinitelTextStyles.mdH2,
-          ),
           decoration: const BoxDecoration(
             border: BorderDirectional(
               bottom: BorderSide(
@@ -62,12 +58,16 @@ class BoxMdH extends StatelessWidget {
               ),
             ),
           ),
+          child: Text(
+            _text,
+            style: MinitelTextStyles.mdH2,
+          ),
         );
         break;
 
       case 3:
         return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
+          margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
           child: Text(
             _text,
             style: MinitelTextStyles.mdH3,
@@ -77,7 +77,7 @@ class BoxMdH extends StatelessWidget {
 
       case 4:
         return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
+          margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
           child: Text(
             _text,
             style: MinitelTextStyles.mdH4,
@@ -87,7 +87,7 @@ class BoxMdH extends StatelessWidget {
 
       case 5:
         return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
+          margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
           child: Text(
             _text,
             style: MinitelTextStyles.mdH5,
@@ -97,7 +97,7 @@ class BoxMdH extends StatelessWidget {
 
       case 6:
         return Container(
-          margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
+          margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
           child: Text(
             _text,
             style: MinitelTextStyles.mdH6,

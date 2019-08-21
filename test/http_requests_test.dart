@@ -13,16 +13,16 @@ void main() {
     test('Bad Username or Password to 195.83.139.7', () async {
       try {
         await _gateway.autoLogin("", "", "195.83.139.7", 480);
-        throw "autoLogin did not throw";
+        throw Exception("autoLogin did not throw");
       } catch (e) {
-        expect(e.toString(), contains("Error: Bad Username or Password"));
+        expect(e.toString(), contains("Bad Username or Password"));
       }
     });
 
     test('Bad Username and Password to google.fr to get HttpError', () async {
       try {
         await _gateway.autoLogin("", "", "google.fr", 0);
-        throw "autoLogin did not throw";
+        throw Exception("autoLogin did not throw");
       } catch (e) {
         expect(e.toString(), contains("HttpError"));
       }
@@ -30,18 +30,18 @@ void main() {
 
     test('Get status Not logged in from 195.83.139.7', () async {
       await _gateway.disconnectGateway("195.83.139.7");
-      var status = await _gateway.getStatus("195.83.139.7");
+      final status = await _gateway.getStatus("195.83.139.7");
       print(status);
 
       expect(status, contains("Not logged in"));
     });
 
     test('Get status SUCCESS from 195.83.139.7', () async {
-      var cookie = await _gateway.autoLogin("marc.nguyen",
+      final cookie = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
-      var statusFromReturn =
+      final statusFromReturn =
           await _gateway.getStatus("195.83.139.7", cookie: cookie);
-      var statusFromApi =
+      final statusFromApi =
           await _gateway.getStatus("195.83.139.7", cookie: _gateway.cookie);
 
       expect(statusFromApi, contains("second"));
@@ -49,23 +49,23 @@ void main() {
     });
 
     test('Get status intentionaly from google.fr to get error', () async {
-      var status = await _gateway.getStatus("www.google.fr");
+      final status = await _gateway.getStatus("www.google.fr");
       print(status);
 
       expect(status, contains("HttpError"));
     });
 
     test('Disconnect intentionaly from google.fr to get error', () async {
-      var status = await _gateway.disconnectGateway("www.google.fr");
+      final status = await _gateway.disconnectGateway("www.google.fr");
       print(status);
 
       expect(status, contains("HttpError"));
     });
 
     test('Disconnect from 195.83.139.7', () async {
-      var cookie = await _gateway.autoLogin("marc.nguyen",
+      final cookie = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
-      var status =
+      final status =
           await _gateway.disconnectGateway("195.83.139.7", cookie: cookie);
       print(status);
 
@@ -73,7 +73,7 @@ void main() {
     });
 
     test('Good Username and Password to 195.83.139.7', () async {
-      Cookie status = await _gateway.autoLogin("marc.nguyen",
+      final Cookie status = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
       print(status);
 
@@ -81,7 +81,7 @@ void main() {
     });
 
     test('Get Atom from Github', () async {
-      var status = await _webfeed.getAtom(
+      final status = await _webfeed.getAtom(
           "https://github.com/Darkness4/minitel-app/commits/develop.atom");
       print(status.toString());
 
@@ -89,7 +89,7 @@ void main() {
     });
 
     test('Get Rss from Github', () async {
-      var status = await _webfeed.getRss("https://blog.jetbrains.com/feed/");
+      final status = await _webfeed.getRss("https://blog.jetbrains.com/feed/");
       print(status.toString());
 
       expect(status.title, contains("JetBrains Blog"));

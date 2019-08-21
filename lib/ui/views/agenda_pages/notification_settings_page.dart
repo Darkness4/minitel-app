@@ -20,7 +20,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Paramètres de notifications"),
+        title: const Text("Paramètres de notifications"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -30,7 +30,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text("Notifier "),
+                const Text("Notifier "),
                 Expanded(
                   child: TextField(
                     inputFormatters: [
@@ -43,12 +43,12 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                     controller: _earlyController,
                   ),
                 ),
-                Text(" minutes avant le cours."),
+                const Text(" minutes avant le cours."),
               ],
             ),
             Row(
               children: <Widget>[
-                Text("Notifier les cours des "),
+                const Text("Notifier les cours des "),
                 Expanded(
                   child: TextField(
                     inputFormatters: [
@@ -61,24 +61,24 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                     controller: _rangeController,
                   ),
                 ),
-                Text(" prochains jours."),
+                const Text(" prochains jours."),
               ],
             ),
             Builder(
               builder: (context) => RaisedButton(
                 color: Theme.of(context).primaryColor,
                 colorBrightness: Brightness.dark,
-                child: Text("Sauvegarder"),
                 onPressed: () async {
                   widget.notificationSettings.early =
                       Duration(minutes: int.parse(_earlyController.text));
                   widget.notificationSettings.range =
                       Duration(days: int.parse(_rangeController.text));
                   await widget.notificationSettings.saveSettings();
-                  Scaffold.of(context).showSnackBar(SnackBar(
+                  Scaffold.of(context).showSnackBar(const SnackBar(
                     content: Text("Success."),
                   ));
                 },
+                child: const Text("Sauvegarder"),
               ),
             ),
           ],

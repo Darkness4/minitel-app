@@ -308,14 +308,15 @@ class MainDrawer extends StatelessWidget {
         padding: const EdgeInsets.all(0.0),
         children: <Widget>[
           DrawerHeader(
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             child: Flex(
               direction: Axis.vertical,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 SizedBox(
-                  child: Image.asset(AssetPaths.LogoMinitelWhite),
                   height: 75,
+                  child: Image.asset(AssetPaths.LogoMinitelWhite),
                 ),
                 const Text(
                   "Minitel Toolbox",
@@ -323,7 +324,6 @@ class MainDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
           ),
           Container(
             margin: DrawerStyle.HightlightMarginRight,

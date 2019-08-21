@@ -36,7 +36,7 @@ class AgendaViewModel extends ChangeNotifier {
     enableVibration: true,
   );
   final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
-  final notificationSettings = NotificationSettings();
+  final NotificationSettings notificationSettings = NotificationSettings();
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
   List<Widget> monthPages = [];
@@ -54,9 +54,9 @@ class AgendaViewModel extends ChangeNotifier {
     DateTime oldDt;
 
     parsedCalendar.events
-        .sort((event1, event2) => (event1.dtstart.compareTo(event2.dtstart)));
+        .sort((event1, event2) => event1.dtstart.compareTo(event2.dtstart));
 
-    var filteredEvents = parsedCalendar.events
+    final filteredEvents = parsedCalendar.events
         .where((event) => event.dtstart.isAfter(DateTime.now()));
 
     // Throw away the old notifications
@@ -78,14 +78,14 @@ class AgendaViewModel extends ChangeNotifier {
       ];
     } else {
       DateTime dt;
-      for (var event in filteredEvents) {
+      for (final event in filteredEvents) {
         int id = 0;
         dt = event.dtstart;
 
         // Notification System
         if (dt.isBefore(DateTime.now().add(notificationSettings.range))) {
-          var dtstart = DateFormat.Hm().format(dt);
-          var dtend = DateFormat.Hm().format(event.dtend);
+          final dtstart = DateFormat.Hm().format(dt);
+          final dtend = DateFormat.Hm().format(event.dtend);
 
           id++;
 
@@ -149,7 +149,7 @@ class AgendaViewModel extends ChangeNotifier {
 
   Future<ParsedCalendar> loadCalendar(BuildContext context) async {
     // Try to update thr calendar
-    var url = await calendarUrlAPI.savedCalendarURL;
+    final url = await calendarUrlAPI.savedCalendarURL;
 
     // Try to update calendar
     if (url == "" || url == null) {

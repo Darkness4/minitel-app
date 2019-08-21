@@ -42,7 +42,7 @@ class _ImprimanteCard extends StatelessWidget {
         key: const Key('app_lists/imprimante'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ImprimanteWebView()),
+          MaterialPageRoute(builder: (context) => const ImprimanteWebView()),
         ),
         child: LayoutBuilder(
           builder: (context, constraint) => Column(
@@ -89,7 +89,7 @@ class _PortailCard extends StatelessWidget {
                 fit: BoxFit.scaleDown,
               ),
             ),
-            FittedBox(
+            const FittedBox(
               child: Text(
                 "Portail",
                 style: MinitelTextStyles.appTitle,
@@ -114,7 +114,7 @@ class _SogoCard extends StatelessWidget {
         key: const Key('app_lists/sogo'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SogoWebView()),
+          MaterialPageRoute(builder: (context) => const SogoWebView()),
         ),
         child: Image.asset(AssetPaths.Sogo),
       ),
@@ -133,7 +133,7 @@ class _WikiMinitelCard extends StatelessWidget {
         key: const Key('app_lists/wiki_minitel'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MinitelWebView()),
+          MaterialPageRoute(builder: (context) => const MinitelWebView()),
         ),
         child: Column(
           children: <Widget>[
@@ -143,7 +143,7 @@ class _WikiMinitelCard extends StatelessWidget {
                 fit: BoxFit.scaleDown,
               ),
             ),
-            FittedBox(
+            const FittedBox(
               child: Text(
                 "Wiki",
                 style: MinitelTextStyles.appTitle,

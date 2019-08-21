@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 class AboutView extends StatelessWidget {
   final String title;
   const AboutView({
-    Key key,
     @required this.title,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -52,10 +52,10 @@ class AboutView extends StatelessWidget {
                 title: const Text("Licence"),
                 subtitle: const Text("License MIT"),
                 onTap: () async {
-                  var packageInfo = await PackageInfo.fromPlatform();
+                  final packageInfo = await PackageInfo.fromPlatform();
                   showLicensePage(
                     context: context,
-                    applicationIcon: ImageIcon(
+                    applicationIcon: const ImageIcon(
                       AssetImage(AssetPaths.Icon),
                     ),
                     applicationLegalese: "MIT License\n\n"
@@ -81,7 +81,7 @@ class AboutView extends StatelessWidget {
               ),
               ListTile(
                 title: const Text("Politique de confidentalité"),
-                subtitle: Text(
+                subtitle: const Text(
                   "Aucune donnée est partagée et stockée à votre insu. Les données collectées sont celles que vous nous fournissez (diagnostique et feedback) et ne sont jamais sauvegardées. ",
                   textAlign: TextAlign.justify,
                 ),
@@ -98,7 +98,7 @@ class AboutView extends StatelessWidget {
                       case ConnectionState.none:
                       case ConnectionState.active:
                       case ConnectionState.waiting:
-                        return Text('Awaiting result...');
+                        return const Text('Awaiting result...');
                       case ConnectionState.done:
                         if (packageInfo.hasError) {
                           return Text('Error: ${packageInfo.error}');
@@ -113,11 +113,11 @@ class AboutView extends StatelessWidget {
               ListTile(
                 title: const Text("Chercher une mise à jour"),
                 onTap: () async {
-                  var packageInfo = PackageInfo.fromPlatform();
-                  var versionAPI =
+                  final packageInfo = PackageInfo.fromPlatform();
+                  final versionAPI =
                       Provider.of<VersionAPI>(context).getLatestVersion();
-                  PackageInfo actualRelease = await packageInfo;
-                  LatestRelease latestRelease = await versionAPI;
+                  final PackageInfo actualRelease = await packageInfo;
+                  final LatestRelease latestRelease = await versionAPI;
                   if (actualRelease.version != latestRelease.tagName) {
                     await showDialog(
                       context: context,
@@ -130,15 +130,15 @@ class AboutView extends StatelessWidget {
                               "La version ${latestRelease.tagName} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
-                              child: const Text("Close"),
                               onPressed: () => Navigator.of(context).pop(),
+                              child: const Text("Close"),
                             ),
                             RaisedButton(
                               colorBrightness: Brightness.dark,
                               color: Theme.of(context).primaryColor,
-                              child: const Text("Update"),
                               onPressed: () =>
                                   LaunchURL.launchURL(latestRelease.htmlUrl),
+                              child: const Text("Update"),
                             )
                           ],
                         );
@@ -155,14 +155,14 @@ class AboutView extends StatelessWidget {
                               "La version ${latestRelease.tagName} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
-                              child: const Text("Close"),
                               onPressed: () => Navigator.of(context).pop(),
+                              child: const Text("Close"),
                             ),
                             RaisedButton(
                               colorBrightness: Brightness.dark,
-                              child: const Text("Télécharger"),
                               onPressed: () =>
                                   LaunchURL.launchURL(latestRelease.htmlUrl),
+                              child: const Text("Télécharger"),
                             )
                           ],
                         );

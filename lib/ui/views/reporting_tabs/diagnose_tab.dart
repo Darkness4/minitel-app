@@ -8,8 +8,8 @@ class DiagnoseTab extends StatelessWidget {
   final Diagnosis _diagnosis;
 
   const DiagnoseTab({
-    Key key,
     @required Diagnosis diagnosis,
+    Key key,
   })  : _diagnosis = diagnosis,
         super(key: key);
 
