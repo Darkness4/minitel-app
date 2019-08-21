@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'finders.dart';
 
 void main() {
-  group('Minitel Toolbox', () async {
+  group('Minitel Toolbox', () {
     FlutterDriver driver;
 
     var minitelFinders = MinitelFinders();
@@ -24,20 +24,47 @@ void main() {
     test('Check flutter driver health', () async {
       Health health = await driver.checkHealth();
       print(health.status);
+      expect(health.status, equals(HealthStatus.ok));
     });
 
-    await driver.waitFor(minitelFinders.closeUpdateButton);
-    await driver.tap(minitelFinders.closeUpdateButton);
-    await driver.tap(minitelFinders.drawer);
-    await driver.tap(minitelFinders.newsRoute);
-    await driver.waitForAbsent(minitelFinders.newsLoading);
+    test('Move to News section', () async {
+      await driver.waitFor(minitelFinders.closeUpdateButton);
+      await driver.tap(minitelFinders.closeUpdateButton);
+      await driver.tap(minitelFinders.drawer);
+      await driver.tap(minitelFinders.newsRoute);
+      await driver.waitForAbsent(minitelFinders.newsLoading);
+    });
 
-    group('News Section', () async {
-      test('Scroll Vertically in Facebook', () async {});
+    group('News Section', () {
+      test('Scroll Vertically in Facebook', () async {
+        await driver.waitFor(minitelFinders.facebookList);
+        await driver.scrollUntilVisible(
+          minitelFinders.facebookList,
+          find.byValueKey('facebook_tab/fb_item_2'),
+          dyScroll: -500.0,
+        );
+      });
 
-      test('PageView Scroll to Github', () async {});
+      test('PageView Scroll to Github', () async {
+        await driver.scrollUntilVisible(
+          minitelFinders.newsTabs,
+          minitelFinders.githubList,
+          dxScroll: -500.0,
+        );
+      });
 
-      test('Scroll Vertically in Github', () async {});
+      test('Scroll Vertically in Github', () async {
+        await driver.waitFor(minitelFinders.githubList);
+        await driver.scrollUntilVisible(
+          minitelFinders.githubList,
+          find.byValueKey('github_tab/gh_item_4'),
+          dyScroll: -500.0,
+        );
+      });
+
+      test('PageView Go to Facebook', () async {
+        await driver.tap(minitelFinders.facebookTab);
+      });
     });
   });
 }

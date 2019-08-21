@@ -28,6 +28,7 @@ void main() {
     test('Check flutter driver health', () async {
       Health health = await driver.checkHealth();
       print(health.status);
+      expect(health.status, equals(HealthStatus.ok));
     });
 
     group('Automated screenshot', () {
@@ -46,7 +47,7 @@ void main() {
         await driver.tap(minitelFinders.sogo);
         await Future.delayed(const Duration(seconds: 5));
         await takeScreenshot(driver, ScreenshotsPaths.sogo);
-        await driver.tap(find.byTooltip('Retour'));
+        await driver.tap(minitelFinders.goBack);
       });
 
       test('Screenshot news', () async {

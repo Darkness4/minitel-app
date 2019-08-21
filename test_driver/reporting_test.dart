@@ -1,10 +1,11 @@
 import 'package:flutter_driver/flutter_driver.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:test/test.dart';
 
 import 'finders.dart';
 
 void main() {
-  group('Minitel Toolbox', () async {
+  group('Minitel Toolbox', () {
     FlutterDriver driver;
 
     var minitelFinders = MinitelFinders();
@@ -24,23 +25,52 @@ void main() {
     test('Check flutter driver health', () async {
       Health health = await driver.checkHealth();
       print(health.status);
+      expect(health.status, equals(HealthStatus.ok));
     });
 
-    await driver.waitFor(minitelFinders.closeUpdateButton);
-    await driver.tap(minitelFinders.closeUpdateButton);
-    await driver.tap(minitelFinders.drawer);
-    await driver.tap(minitelFinders.reportingRoute);
-
-    group('Reporting Section', () async {
-      test('Fill report', () async {});
-
-      test('Start Diagnose', () async {});
-
-      test('PageView Scroll to Diagnosis', () async {});
-
-      test('PageView Scroll vertically', () async {});
-
-      test('Send to Slack', () async {});
+    test('Go to Reporting', () async {
+      await driver.waitFor(minitelFinders.closeUpdateButton);
+      await driver.tap(minitelFinders.closeUpdateButton);
+      await driver.tap(minitelFinders.drawer);
+      await driver.tap(minitelFinders.reportingRoute);
     });
+
+    group('Reporting Section', () {
+      test('Start Diagnose', () async {
+        await driver.tap(minitelFinders.reportingFAB);
+      });
+
+      test('Fill report', () async {
+        await driver.tap(minitelFinders.reportTitle);
+        await driver.enterText('Integration Test');
+        await driver.tap(minitelFinders.reportDescription);
+        await driver.enterText('Integration Test');
+      });
+
+      test('PageView Scroll to Diagnosis', () async {
+        await driver.scrollUntilVisible(
+          minitelFinders.reportingTabs,
+          minitelFinders.diagnosisList,
+          dxScroll: -500.0,
+        );
+      });
+
+      test('PageView Scroll vertically', () async {
+        await driver.scrollUntilVisible(
+          minitelFinders.diagnosisList,
+          find.byValueKey('diagnose_tab/${DiagnosisContent.httpPortalGateway}'),
+          dyScroll: -500.0,
+        );
+      }, timeout: const Timeout(Duration(minutes: 1)));
+
+      test('PageView Go to Report', () async {
+        await driver.tap(minitelFinders.reportingTab);
+      });
+
+      test('Send to Slack', () async {
+        await driver.waitFor(minitelFinders.reportingFABDone);
+        await driver.tap(minitelFinders.sendToSlack);
+      }, timeout: const Timeout(Duration(minutes: 2)));
+    }, timeout: const Timeout(Duration(minutes: 2)));
   });
 }

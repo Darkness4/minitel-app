@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter_driver/flutter_driver.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart'
+    show MyIPAdresses;
 import 'package:test/test.dart';
 
 import 'finders.dart';
 
 void main() {
-  group('Minitel Toolbox', () async {
+  group('Minitel Toolbox', () {
     FlutterDriver driver;
 
     var minitelFinders = MinitelFinders();
@@ -24,33 +28,89 @@ void main() {
     test('Check flutter driver health', () async {
       Health health = await driver.checkHealth();
       print(health.status);
+      expect(health.status, equals(HealthStatus.ok));
     });
 
-    await driver.waitFor(minitelFinders.closeUpdateButton);
-    await driver.tap(minitelFinders.closeUpdateButton);
+    group('Authentication Section', () {
+      test('Close Update', () async {
+        await driver.waitFor(minitelFinders.closeUpdateButton);
+        await driver.tap(minitelFinders.closeUpdateButton);
+      });
 
-    group('Authentication Section', () async {
-      test('Dropdown IP', () async {});
+      test('Dropdown Nameserver', () async {
+        await driver.tap(minitelFinders.nameServerDropdown);
+        await driver.tap(find.text(MyIPAdresses.stormshieldIP));
+      });
 
-      test('Dropdown Time', () async {});
+      test('Dropdown Time', () async {
+        await driver.tap(minitelFinders.timeDropdown);
+        await driver.tap(find.text('15 minutes'));
+      });
 
-      test('Login', () async {});
+      test('TextFields', () async {
+        await driver.tap(minitelFinders.uidLoginTextField);
+        await driver.enterText("marc.nguyen");
+        await driver.tap(minitelFinders.pswdLoginTextField);
+        await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
+      });
 
-      test('Remember Me', () async {});
+      test('Remember Me', () async {
+        await driver.tap(minitelFinders.rememberMeButton);
+      });
 
-      test('Login Automatically', () async {});
+      test('Login Automatically', () async {
+        await driver.tap(minitelFinders.autoLoginButton);
+      });
 
-      test('Login', () async {});
+      test('Login', () async {
+        await driver.tap(minitelFinders.loginButton);
+        await Future.delayed(const Duration(seconds: 5));
+        var output = await driver.getText(minitelFinders.gatewayText);
+        await driver.waitFor(minitelFinders.agendaSuccess);
+        await driver.waitFor(minitelFinders.portailSuccess);
+
+        expect(output, contains('second'));
+      });
     });
 
-    group('Apps Section', () async {
-      test('Portail', () async {});
+    group('Apps Section', () {
+      test('Move to Apps Tab', () async {
+        await driver.tap(minitelFinders.appsTab);
+      });
 
-      test('Sogo', () async {});
+      test('Portail', () async {
+        await driver.tap(minitelFinders.portail);
+        await Future.delayed(const Duration(seconds: 2));
+        await driver.tap(minitelFinders.goBack);
+      });
 
-      test('Imprimante', () async {});
+      test('Sogo', () async {
+        await driver.tap(minitelFinders.sogo);
+        await Future.delayed(const Duration(seconds: 2));
+        await driver.tap(minitelFinders.goBack);
+      });
 
-      test('Wiki', () async {});
+      test('Imprimante', () async {
+        await driver.tap(minitelFinders.imprimante);
+        await Future.delayed(const Duration(seconds: 2));
+        await driver.tap(minitelFinders.goBack);
+      });
+
+      test('Wiki', () async {
+        await driver.tap(minitelFinders.wikiMinitel);
+        await Future.delayed(const Duration(seconds: 2));
+        await driver.tap(minitelFinders.goBack);
+      });
+
+      test('Go to Login', () async {
+        await driver.tap(minitelFinders.loginTab);
+        await Future.delayed(const Duration(seconds: 5));
+        var output = await driver.getText(minitelFinders.gatewayText);
+        await driver.waitFor(minitelFinders.agendaSuccess);
+        await driver.waitFor(minitelFinders.portailSuccess);
+
+        expect(output, contains('second'));
+      });
     });
   });
 }

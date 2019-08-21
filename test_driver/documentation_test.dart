@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'finders.dart';
 
 void main() {
-  group('Minitel Toolbox', () async {
+  group('Minitel Toolbox', () {
     FlutterDriver driver;
 
     var minitelFinders = MinitelFinders();
@@ -24,14 +24,18 @@ void main() {
     test('Check flutter driver health', () async {
       Health health = await driver.checkHealth();
       print(health.status);
+      expect(health.status, equals(HealthStatus.ok));
     });
 
-    await driver.waitFor(minitelFinders.closeUpdateButton);
-    await driver.tap(minitelFinders.closeUpdateButton);
-    await driver.tap(minitelFinders.drawer);
-    await driver.tap(minitelFinders.docsRoute);
+    test('Move to Documentation Section', () async {
+      await driver.waitFor(minitelFinders.closeUpdateButton);
+      await driver.tap(minitelFinders.closeUpdateButton);
+      await driver.tap(minitelFinders.drawer);
 
-    group('Documentation Section', () async {
+      await driver.tap(minitelFinders.docsRoute);
+    });
+
+    group('Documentation Section', () {
       test('Drawer Minitel to Minitel', () async {});
 
       test('Drawer Minitel to Authentification', () async {});
