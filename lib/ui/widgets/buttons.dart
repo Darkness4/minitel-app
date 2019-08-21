@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
 class AnimatedFloatingButton extends StatelessWidget {
   final String text;
@@ -20,15 +21,15 @@ class AnimatedFloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: CurvedAnimation(
-        parent: controller,
-        curve: Interval(start, end, curve: Curves.easeOut),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Card(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        ScaleTransition(
+          scale: CurvedAnimation(
+            parent: controller,
+            curve: Interval(start, end, curve: Curves.easeOut),
+          ),
+          child: Card(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -38,15 +39,22 @@ class AnimatedFloatingButton extends StatelessWidget {
             ),
             elevation: 4,
           ),
-          FloatingActionButton(
+        ),
+        ScaleTransition(
+          scale: CurvedAnimation(
+            parent: controller,
+            curve: Interval(start, end, curve: Curves.easeOut),
+          ),
+          child: FloatingActionButton(
             heroTag: null,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: MinitelColors.ReportPrimaryColor,
             child: child,
             mini: true,
+            tooltip: text,
             onPressed: onPressed,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
