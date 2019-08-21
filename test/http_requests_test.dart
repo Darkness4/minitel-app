@@ -4,10 +4,12 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_webfeed.dart';
+import 'package:webfeed/domain/atom_feed.dart';
+import 'package:webfeed/domain/rss_feed.dart';
 
 void main() {
-  final _gateway = GatewayAPI();
-  final _webfeed = WebFeedAPI();
+  final GatewayAPI _gateway = GatewayAPI();
+  final WebFeedAPI _webfeed = WebFeedAPI();
 
   group('Http Requests', () {
     test('Bad Username or Password to 195.83.139.7', () async {
@@ -30,18 +32,18 @@ void main() {
 
     test('Get status Not logged in from 195.83.139.7', () async {
       await _gateway.disconnectGateway("195.83.139.7");
-      final status = await _gateway.getStatus("195.83.139.7");
+      final String status = await _gateway.getStatus("195.83.139.7");
       print(status);
 
       expect(status, contains("Not logged in"));
     });
 
     test('Get status SUCCESS from 195.83.139.7', () async {
-      final cookie = await _gateway.autoLogin("marc.nguyen",
+      final Cookie cookie = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
-      final statusFromReturn =
+      final String statusFromReturn =
           await _gateway.getStatus("195.83.139.7", cookie: cookie);
-      final statusFromApi =
+      final String statusFromApi =
           await _gateway.getStatus("195.83.139.7", cookie: _gateway.cookie);
 
       expect(statusFromApi, contains("second"));
@@ -49,23 +51,23 @@ void main() {
     });
 
     test('Get status intentionaly from google.fr to get error', () async {
-      final status = await _gateway.getStatus("www.google.fr");
+      final String status = await _gateway.getStatus("www.google.fr");
       print(status);
 
       expect(status, contains("HttpError"));
     });
 
     test('Disconnect intentionaly from google.fr to get error', () async {
-      final status = await _gateway.disconnectGateway("www.google.fr");
+      final String status = await _gateway.disconnectGateway("www.google.fr");
       print(status);
 
       expect(status, contains("HttpError"));
     });
 
     test('Disconnect from 195.83.139.7', () async {
-      final cookie = await _gateway.autoLogin("marc.nguyen",
+      final Cookie cookie = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
-      final status =
+      final String status =
           await _gateway.disconnectGateway("195.83.139.7", cookie: cookie);
       print(status);
 
@@ -81,7 +83,7 @@ void main() {
     });
 
     test('Get Atom from Github', () async {
-      final status = await _webfeed.getAtom(
+      final AtomFeed status = await _webfeed.getAtom(
           "https://github.com/Darkness4/minitel-app/commits/develop.atom");
       print(status.toString());
 
@@ -89,7 +91,8 @@ void main() {
     });
 
     test('Get Rss from Github', () async {
-      final status = await _webfeed.getRss("https://blog.jetbrains.com/feed/");
+      final RssFeed status =
+          await _webfeed.getRss("https://blog.jetbrains.com/feed/");
       print(status.toString());
 
       expect(status.title, contains("JetBrains Blog"));

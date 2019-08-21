@@ -23,7 +23,7 @@ class Post {
   }
 
   Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
     data['id'] = id;
     data['full_picture'] = pictureUrl;

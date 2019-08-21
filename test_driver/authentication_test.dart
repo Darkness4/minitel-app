@@ -11,7 +11,7 @@ void main() {
   group('Minitel Toolbox', () {
     FlutterDriver driver;
 
-    final minitelFinders = MinitelFinders();
+    final MinitelFinders minitelFinders = MinitelFinders();
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
@@ -64,8 +64,8 @@ void main() {
 
       test('Login', () async {
         await driver.tap(minitelFinders.loginButton);
-        await Future.delayed(const Duration(seconds: 5));
-        final output = await driver.getText(minitelFinders.gatewayText);
+        await Future<dynamic>.delayed(const Duration(seconds: 5));
+        final String output = await driver.getText(minitelFinders.gatewayText);
         await driver.waitFor(minitelFinders.agendaSuccess);
         await driver.waitFor(minitelFinders.portailSuccess);
 
@@ -80,32 +80,32 @@ void main() {
 
       test('Portail', () async {
         await driver.tap(minitelFinders.portail);
-        await Future.delayed(const Duration(seconds: 2));
+        await Future<dynamic>.delayed(const Duration(seconds: 2));
         await driver.tap(minitelFinders.goBack);
       });
 
       test('Sogo', () async {
         await driver.tap(minitelFinders.sogo);
-        await Future.delayed(const Duration(seconds: 2));
+        await Future<dynamic>.delayed(const Duration(seconds: 2));
         await driver.tap(minitelFinders.goBack);
       });
 
       test('Imprimante', () async {
         await driver.tap(minitelFinders.imprimante);
-        await Future.delayed(const Duration(seconds: 2));
+        await Future<dynamic>.delayed(const Duration(seconds: 2));
         await driver.tap(minitelFinders.goBack);
       });
 
       test('Wiki', () async {
         await driver.tap(minitelFinders.wikiMinitel);
-        await Future.delayed(const Duration(seconds: 2));
+        await Future<dynamic>.delayed(const Duration(seconds: 2));
         await driver.tap(minitelFinders.goBack);
       });
 
       test('Go to Login', () async {
         await driver.tap(minitelFinders.loginTab);
-        await Future.delayed(const Duration(seconds: 5));
-        final output = await driver.getText(minitelFinders.gatewayText);
+        await Future<dynamic>.delayed(const Duration(seconds: 5));
+        final String output = await driver.getText(minitelFinders.gatewayText);
         await driver.waitFor(minitelFinders.agendaSuccess);
         await driver.waitFor(minitelFinders.portailSuccess);
 

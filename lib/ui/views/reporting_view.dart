@@ -35,7 +35,8 @@ class ReportingViewState extends State<ReportingView>
         webhookAPI: Provider.of(context),
         gatewayAPI: Provider.of(context),
       ),
-      builder: (context, model, child) => DefaultTabController(
+      builder: (BuildContext context, ReportingViewModel model, Widget child) =>
+          DefaultTabController(
         length: 2,
         child: Scaffold(
           body: NestedScrollView(
@@ -52,7 +53,7 @@ class ReportingViewState extends State<ReportingView>
             currentRoutePaths: RoutePaths.Reporting,
           ),
           floatingActionButton: Builder(
-            builder: (context) => Column(
+            builder: (BuildContext context) => Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
@@ -93,7 +94,9 @@ class ReportingViewState extends State<ReportingView>
             ? Colors.green
             : Colors.blue,
         onPressed: () async {
-          if (!_animationController.isDismissed) _animationController.reverse();
+          if (!_animationController.isDismissed) {
+            _animationController.reverse();
+          }
           await model.diagnose();
           setState(() {});
         },
@@ -112,14 +115,17 @@ class ReportingViewState extends State<ReportingView>
       case ButtonState.Loading:
         child = ValueListenableBuilder<double>(
           valueListenable: model.percentageDiagnoseProgress,
-          builder: (context, value, _) => CircularProgressIndicator(
+          builder: (BuildContext context, double value, _) =>
+              CircularProgressIndicator(
             value: value,
             valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
           ),
         );
         break;
       case ButtonState.Done:
-        if (_animationController.isDismissed) _animationController.forward();
+        if (_animationController.isDismissed) {
+          _animationController.forward();
+        }
         child = const Icon(
           Icons.done,
           key: Key('reporting_view/diagnose_done'),
@@ -166,7 +172,7 @@ class ReportingViewState extends State<ReportingView>
         end: 0.5,
         controller: _animationController,
         onPressed: () async {
-          final body = "---Report ${DateTime.now().toString()}---\n\n"
+          final String body = "---Report ${DateTime.now().toString()}---\n\n"
               "Titre: ${_titleController.text}\n"
               "Description: ${_descriptionController.text}\n\n"
               "*Diagnosis*\n"
@@ -184,7 +190,7 @@ class ReportingViewState extends State<ReportingView>
         end: 0.25,
         controller: _animationController,
         onPressed: () async {
-          final status = await model.reportToSlack(
+          final String status = await model.reportToSlack(
               _titleController.text, _descriptionController.text);
           if (status != null) {
             Scaffold.of(context).showSnackBar(

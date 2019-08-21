@@ -52,7 +52,8 @@ class AboutView extends StatelessWidget {
                 title: const Text("Licence"),
                 subtitle: const Text("License MIT"),
                 onTap: () async {
-                  final packageInfo = await PackageInfo.fromPlatform();
+                  final PackageInfo packageInfo =
+                      await PackageInfo.fromPlatform();
                   showLicensePage(
                     context: context,
                     applicationIcon: const ImageIcon(
@@ -93,7 +94,8 @@ class AboutView extends StatelessWidget {
                 title: const Text("Version"),
                 subtitle: FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
-                  builder: (BuildContext context, packageInfo) {
+                  builder: (BuildContext context,
+                      AsyncSnapshot<PackageInfo> packageInfo) {
                     switch (packageInfo.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:
@@ -113,8 +115,9 @@ class AboutView extends StatelessWidget {
               ListTile(
                 title: const Text("Chercher une mise à jour"),
                 onTap: () async {
-                  final packageInfo = PackageInfo.fromPlatform();
-                  final versionAPI =
+                  final Future<PackageInfo> packageInfo =
+                      PackageInfo.fromPlatform();
+                  final Future<LatestRelease> versionAPI =
                       Provider.of<VersionAPI>(context).getLatestVersion();
                   final PackageInfo actualRelease = await packageInfo;
                   final LatestRelease latestRelease = await versionAPI;

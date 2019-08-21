@@ -15,42 +15,42 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutePaths.Authentication:
-        return FadeRoute(
+        return FadeRoute<dynamic>(
           builder: (_) => const PortalView(title: Titles.Authentication),
           settings: settings,
         );
       case RoutePaths.Reporting:
-        return FadeRoute(
+        return FadeRoute<dynamic>(
           builder: (_) => const ReportingView(title: Titles.Reporting),
           settings: settings,
         );
       case RoutePaths.Docs:
-        return FadeRoute(
+        return FadeRoute<dynamic>(
           builder: (_) => const DocumentationView(title: Titles.Docs),
           settings: settings,
         );
       case RoutePaths.News:
-        return FadeRoute(
+        return FadeRoute<dynamic>(
           builder: (_) => const NewsView(title: Titles.News),
           settings: settings,
         );
       case RoutePaths.Agenda:
-        return FadeRoute(
+        return FadeRoute<dynamic>(
           builder: (_) => const AgendaView(title: Titles.Agenda),
           settings: settings,
         );
       case RoutePaths.About:
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
           builder: (_) => const AboutView(title: Titles.About),
           settings: settings,
         );
       case RoutePaths.Feedback:
-        return FadeRoute(
+        return FadeRoute<dynamic>(
           builder: (_) => const FeedbackView(title: Titles.Feedback),
           settings: settings,
         );
       default:
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
           builder: (_) => Scaffold(
             body: Center(
               child: Text('No route defined for ${settings.name}'),

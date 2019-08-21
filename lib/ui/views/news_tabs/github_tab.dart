@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:webfeed/webfeed.dart';
 
 class GithubTab extends StatelessWidget {
-  static const url = "https://github.com/Darkness4/minitel-app/releases.atom";
+  static const String url =
+      "https://github.com/Darkness4/minitel-app/releases.atom";
 
   const GithubTab({
     Key key,
@@ -17,17 +18,19 @@ class GithubTab extends StatelessWidget {
       child: Scrollbar(
         child: FutureBuilder<AtomFeed>(
           future: Provider.of<WebFeedAPI>(context).getAtom(url),
-          builder: (BuildContext context, snapshot) => snapshot.hasData
-              ? ListView.builder(
-                  padding: const EdgeInsets.all(10.0),
-                  key: const Key('github_tab/list'),
-                  itemCount: snapshot.data.items.length,
-                  itemBuilder: (context, index) => NewsCard(
-                    item: snapshot.data.items[index],
-                    key: Key('github_tab/gh_item_$index'),
-                  ),
-                )
-              : const CircularProgressIndicator(),
+          builder: (BuildContext context, AsyncSnapshot<AtomFeed> snapshot) =>
+              snapshot.hasData
+                  ? ListView.builder(
+                      padding: const EdgeInsets.all(10.0),
+                      key: const Key('github_tab/list'),
+                      itemCount: snapshot.data.items.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          NewsCard(
+                        item: snapshot.data.items[index],
+                        key: Key('github_tab/gh_item_$index'),
+                      ),
+                    )
+                  : const CircularProgressIndicator(),
         ),
       ),
     );

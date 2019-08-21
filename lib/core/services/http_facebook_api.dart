@@ -6,7 +6,7 @@ import 'package:minitel_toolbox/core/models/facebook_api/feed.dart';
 
 /// Facebook Graph API 4.0
 class FacebookAPI {
-  final _client = HttpClient();
+  final HttpClient _client = HttpClient();
 
   /// Get a Feed from Facebook Graph API
   Future<Feed> getFeed() async {
@@ -14,7 +14,8 @@ class FacebookAPI {
         "https://graph.facebook.com/v4.0/me/feed?fields=full_picture,permalink_url,message,created_time&access_token=${ApiConstants.facebookApi}"));
     final HttpClientResponse response = await request.close();
 
-    final body = await response.cast<List<int>>().transform(utf8.decoder).join();
+    final String body =
+        await response.cast<List<int>>().transform(utf8.decoder).join();
 
     return Feed.fromJson(json.decode(body));
   }

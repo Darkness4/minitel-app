@@ -10,8 +10,8 @@ class NotificationSettings {
 
   Future<void> loadSavedSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final earlyMinutes = prefs.getInt("early");
-    final rangeDays = prefs.getInt("range");
+    final int earlyMinutes = prefs.getInt("early");
+    final int rangeDays = prefs.getInt("range");
 
     if (earlyMinutes != null && rangeDays != null) {
       // If has data
@@ -25,7 +25,7 @@ class NotificationSettings {
 
   Future<void> saveSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await Future.wait([
+    await Future.wait(<Future<bool>>[
       prefs.setInt("early", early.inMinutes),
       prefs.setInt("range", range.inDays),
     ]);

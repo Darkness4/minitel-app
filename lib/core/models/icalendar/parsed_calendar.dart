@@ -18,8 +18,11 @@ class ParsedCalendar {
     version = json['VERSION'];
     prodID = json['PRODID'];
     calscale = json['CALSCALE'];
-    final data = List<Map<String, dynamic>>.from(json["VEVENT"]);
-    events = data.map((event) => Event.fromJson(event)).toList();
+    final List<Map<String, dynamic>> data =
+        List<Map<String, dynamic>>.from(json["VEVENT"]);
+    events = data
+        .map((Map<String, dynamic> event) => Event.fromJson(event))
+        .toList();
     timezone = Timezone.fromJson(json['VTIMEZONE']);
   }
 
@@ -40,11 +43,11 @@ class ParsedCalendar {
   }
 
   Map<String, dynamic> toJson() {
-    final json = <String, dynamic>{};
+    final Map<String, dynamic> json = <String, dynamic>{};
     json['VERSION'] = version;
     json['PRODID'] = prodID;
     json['CALSCALE'] = calscale;
-    json['VEVENT'] = events.map((event) => event.toJson()).toList();
+    json['VEVENT'] = events.map((Event event) => event.toJson()).toList();
     json['VTIMEZONE'] = timezone.toJson();
     return json;
   }

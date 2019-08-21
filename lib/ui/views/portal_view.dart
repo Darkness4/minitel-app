@@ -35,7 +35,7 @@ class PortalViewState extends State<PortalView> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
-                colors: [
+                colors: <Color>[
                   Color(0xff80e27e),
                   Color(0xff087f23),
                 ],
@@ -94,8 +94,9 @@ class PortalViewState extends State<PortalView> {
 
   Future<void> _checkVersion(BuildContext context) async {
     try {
-      final packageInfo = PackageInfo.fromPlatform();
-      final versionAPI = Provider.of<VersionAPI>(context).getLatestVersion();
+      final Future<PackageInfo> packageInfo = PackageInfo.fromPlatform();
+      final Future<LatestRelease> versionAPI =
+          Provider.of<VersionAPI>(context).getLatestVersion();
       final PackageInfo actualRelease = await packageInfo;
       final LatestRelease latestRelease = await versionAPI;
       if (actualRelease.version != latestRelease.tagName) {

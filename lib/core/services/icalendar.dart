@@ -14,22 +14,22 @@ import 'package:path_provider/path_provider.dart';
 /// [parseCalendar] to finally get a parsed calendar.
 class ICalendar {
   Future<File> get _calendar async {
-    final path = await _localPath;
+    final String path = await _localPath;
     return File('$path/calendar.ics');
   }
 
   Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
+    final Directory directory = await getApplicationDocumentsDirectory();
 
     return directory.path;
   }
 
   /// Get existing the stream .ics from file
   Future<ParsedCalendar> getParsedCalendarFromFile() async {
-    final file = await _calendar;
-    final parsedCalendar = ParsedCalendar();
-    var mode = ICalSection.None;
-    var vEvent = <String, String>{};
+    final File file = await _calendar;
+    final ParsedCalendar parsedCalendar = ParsedCalendar();
+    ICalSection mode = ICalSection.None;
+    Map<String, String> vEvent = <String, String>{};
 
     if (!file.existsSync()) {
       throw Exception("File calendar.ics do not exists");
@@ -40,12 +40,13 @@ class ICalendar {
     //     .writeAsString(await rootBundle.loadString(AssetsPaths.TemplateICS));
 
     // Read the file
-    final calendarStream = file.openRead().transform(utf8.decoder);
+    final Stream<String> calendarStream =
+        file.openRead().transform(utf8.decoder);
 
-    final lines = calendarStream.transform(const LineSplitter());
+    final Stream<String> lines = calendarStream.transform(const LineSplitter());
 
-    await for (final data in lines) {
-      final line = data.trim().split(":");
+    await for (final String data in lines) {
+      final List<String> line = data.trim().split(":");
       // Inside a VEVENT
       if (line[0] == 'BEGIN' && line[1] == 'VEVENT') {
         vEvent = <String, String>{};
@@ -88,7 +89,9 @@ class ICalendar {
             vEvent[line[0]] = line[1];
             break;
           case ICalSection.VTIMEZONE:
-            if (line[0] == "TZID") parsedCalendar.timezone.tzid = line[1];
+            if (line[0] == "TZID") {
+              parsedCalendar.timezone.tzid = line[1];
+            }
             break;
           case ICalSection.STANDARD:
             parsedCalendar.timezone.standard.set(line[0], line[1]);
@@ -108,12 +111,12 @@ class ICalendar {
 
   /// Get the calendar from url and save the .ics (and the url)
   Future<void> saveCalendar(String url, CalendarUrlAPI calendarUrlAPI) async {
-    final file = await _calendar;
+    final File file = await _calendar;
 
-    final sink = file.openWrite();
-    final stream = await _getICalendar(url);
+    final IOSink sink = file.openWrite();
+    final Stream<String> stream = await _getICalendar(url);
     stream.listen(
-      (var data) => sink.write(data),
+      (String data) => sink.write(data),
       onDone: sink.close,
     );
 
@@ -122,8 +125,9 @@ class ICalendar {
 
   /// GET the .ics from url
   Future<Stream<String>> _getICalendar(String url) async {
-    final client = HttpClient()
-      ..badCertificateCallback = (cert, host, port) => true;
+    final HttpClient client = HttpClient()
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
 
     final HttpClientRequest request = await client.getUrl(Uri.parse(url))
       ..headers.removeAll(HttpHeaders.contentLengthHeader);

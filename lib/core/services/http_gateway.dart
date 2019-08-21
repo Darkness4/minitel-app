@@ -3,7 +3,7 @@ import 'dart:io';
 
 /// This class handle the connections through stormshield, aka the gateway.
 class GatewayAPI {
-  final _client = HttpClient();
+  final HttpClient _client = HttpClient();
   Cookie cookie;
 
   /// Connect to the portal.
@@ -27,10 +27,11 @@ class GatewayAPI {
   /// ```
   Future<Cookie> autoLogin(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
-    _client.badCertificateCallback = (cert, host, port) => true;
+    _client.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
 
     // SessionId
-    final data = "uid=$uid&time=$selectedTime&pswd=$pswd";
+    final String data = "uid=$uid&time=$selectedTime&pswd=$pswd";
     final HttpClientRequest request =
         await _client.postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'))
           ..headers.contentType = ContentType(
@@ -43,13 +44,13 @@ class GatewayAPI {
           ..write(data);
     final HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      final body =
+      final String body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
       if (body.contains('title_error')) {
         throw Exception('Bad Username or Password');
       } else {
         final Cookie netasq_user = response.cookies
-            .firstWhere((cookie) => cookie.name == "NETASQ_USER");
+            .firstWhere((Cookie cookie) => cookie.name == "NETASQ_USER");
         cookie = netasq_user;
       }
     } else {
@@ -65,11 +66,12 @@ class GatewayAPI {
   /// String status = await disconnectGateway("172.17.0.1") // "You have logged out"
   /// ```
   Future<String> disconnectGateway(String selectedUrl, {Cookie cookie}) async {
-    final url =
+    final String url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
-    var status = "";
+    String status = "";
 
-    _client.badCertificateCallback = (cert, host, port) => true;
+    _client.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
 
     try {
       final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
@@ -79,7 +81,7 @@ class GatewayAPI {
       }
 
       final HttpClientResponse response = await request.close();
-      final body =
+      final String body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         status = body.contains('title_success')
@@ -120,9 +122,10 @@ class GatewayAPI {
   /// ```
   ///
   Future<String> getStatus(String selectedUrl, {Cookie cookie}) async {
-    var status = "";
-    _client.badCertificateCallback = (cert, host, port) => true;
-    final url = 'https://$selectedUrl/auth/login.html';
+    String status = "";
+    _client.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final String url = 'https://$selectedUrl/auth/login.html';
     final RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
     try {
@@ -134,13 +137,13 @@ class GatewayAPI {
       }
 
       final HttpClientResponse response = await request.close();
-      final body =
+      final String body =
           await response.cast<List<int>>().transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         if (!body.contains('l_rtime')) {
           throw Exception('Not logged in');
         } else {
-          final match = exp.firstMatch(body).group(1);
+          final String match = exp.firstMatch(body).group(1);
           if (match is! String) {
             throw Exception(
                 "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");

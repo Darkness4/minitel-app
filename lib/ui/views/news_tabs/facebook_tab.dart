@@ -98,8 +98,8 @@ class FacebookTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _facebookAPI = Provider.of<FacebookAPI>(context);
-    final _picture = Image.network(
+    final FacebookAPI _facebookAPI = Provider.of<FacebookAPI>(context);
+    final Image _picture = Image.network(
       _facebookAPI.getProfilePicture(),
       fit: BoxFit.cover,
       height: 50,
@@ -110,7 +110,7 @@ class FacebookTab extends StatelessWidget {
       child: Scrollbar(
         child: FutureBuilder<Feed>(
           future: _facebookAPI.getFeed(),
-          builder: (context, feedSnapshot) {
+          builder: (BuildContext context, AsyncSnapshot<Feed> feedSnapshot) {
             switch (feedSnapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.active:
@@ -130,7 +130,8 @@ class FacebookTab extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     key: const Key('facebook_tab/list'),
                     itemCount: feedSnapshot.data.posts.length,
-                    itemBuilder: (context, index) => FacebookCard(
+                    itemBuilder: (BuildContext context, int index) =>
+                        FacebookCard(
                       post: feedSnapshot.data.posts[index],
                       picture: _picture,
                       key: Key('facebook_tab/fb_item_$index'),

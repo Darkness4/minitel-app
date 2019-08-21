@@ -25,11 +25,11 @@ import 'dart:convert';
 /// Also, for secutiry reason, DO NOT ADD ANY UNIT TEST USING THIS FILE.
 class ApiConstants {
   /// Slack incomming webhook endpoint
-  static const _webhook = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
+  static const String _webhook = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
 
   /// Facebook api key
-  static const _facebookApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
-  static const facebookProfileId = "100012919189214"; // Public
+  static const String _facebookApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
+  static const String facebookProfileId = "100012919189214"; // Public
 
   /// Facebook api key
   static String get facebookApi => utf8.decode(base64.decode(_facebookApi));

@@ -22,11 +22,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _uidFocusNode = FocusNode();
-  final _pswdFocusNode = FocusNode();
-  final _uidController = TextEditingController();
-  final _pswdController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FocusNode _uidFocusNode = FocusNode();
+  final FocusNode _pswdFocusNode = FocusNode();
+  final TextEditingController _uidController = TextEditingController();
+  final TextEditingController _pswdController = TextEditingController();
   final ValueNotifier<String> _selectedTime = ValueNotifier<String>('4 hours');
   final ValueNotifier<String> _selectedUrl =
       ValueNotifier<String>(MyIPAdresses.stormshieldIP);
@@ -46,8 +46,8 @@ class LoginPageState extends State<LoginPage> {
         selectedUrl: _selectedUrl,
         autoLogin: _autoLogin,
       ),
-      onModelReady: (model) => _rememberLogin(context, model),
-      builder: (context, model, Widget loginForm) {
+      onModelReady: (LoginViewModel model) => _rememberLogin(context, model),
+      builder: (BuildContext context, LoginViewModel model, Widget loginForm) {
         return ListView(
           padding: const EdgeInsets.all(20.0),
           children: <Widget>[
@@ -67,12 +67,13 @@ class LoginPageState extends State<LoginPage> {
                           const Text("Nom de domaine / IP "),
                           ValueListenableBuilder<String>(
                             valueListenable: model.selectedUrl,
-                            builder: (context, value, _) {
+                            builder: (BuildContext context, String value, _) {
                               return DropdownButton<String>(
                                 key: const Key('login/name_server'),
                                 value: value,
-                                items: [
-                                  for (var value in LoginConstants.urlRootList)
+                                items: <DropdownMenuItem<String>>[
+                                  for (String value
+                                      in LoginConstants.urlRootList)
                                     DropdownMenuItem<String>(
                                       value: value,
                                       child: Text(value),
@@ -92,18 +93,19 @@ class LoginPageState extends State<LoginPage> {
                           const Text("Durée d\'authentification "),
                           ValueListenableBuilder<String>(
                             valueListenable: model.selectedTime,
-                            builder: (context, value, _) {
+                            builder: (BuildContext context, String value, _) {
                               return DropdownButton<String>(
                                 key: const Key('login/time'),
                                 value: model.selectedTime.value,
-                                items: [
-                                  for (var value in LoginConstants.timeMap.keys)
+                                items: <DropdownMenuItem<String>>[
+                                  for (String value
+                                      in LoginConstants.timeMap.keys)
                                     DropdownMenuItem<String>(
                                       value: value,
                                       child: Text(value),
                                     ),
                                 ],
-                                onChanged: (selectedTime) =>
+                                onChanged: (String selectedTime) =>
                                     model.selectedTime.value = selectedTime,
                               );
                             },
@@ -118,11 +120,11 @@ class LoginPageState extends State<LoginPage> {
                         const Text("Se souvenir "),
                         ValueListenableBuilder<bool>(
                           valueListenable: model.rememberMe,
-                          builder: (context, value, _) {
+                          builder: (BuildContext context, bool value, _) {
                             return Checkbox(
                               key: const Key('login/remember_me'),
                               value: value,
-                              onChanged: (value) {
+                              onChanged: (bool value) {
                                 if (!value) {
                                   model.autoLogin.value = false;
                                 }
@@ -139,11 +141,11 @@ class LoginPageState extends State<LoginPage> {
                         const Text("Se connecter automatiquement"),
                         ValueListenableBuilder<bool>(
                           valueListenable: model.autoLogin,
-                          builder: (context, value, _) {
+                          builder: (BuildContext context, bool value, _) {
                             return Checkbox(
                               key: const Key('login/auto_login'),
                               value: value,
-                              onChanged: (value) {
+                              onChanged: (bool value) {
                                 if (value) {
                                   model.rememberMe.value = true;
                                 }
@@ -258,9 +260,9 @@ class _StatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _gatewayAPI = Provider.of<GatewayAPI>(context);
-    final _portailAPI = Provider.of<PortailAPI>(context);
-    final _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
+    final GatewayAPI _gatewayAPI = Provider.of<GatewayAPI>(context);
+    final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
+    final CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
 
     return Card(
       elevation: 10.0,
@@ -275,7 +277,8 @@ class _StatusCard extends StatelessWidget {
                   _selectedUrl,
                   cookie: _gatewayAPI.cookie,
                 ),
-                builder: (context, snapshot) {
+                builder:
+                    (BuildContext context, AsyncSnapshot<String> snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
                     case ConnectionState.active:
@@ -307,7 +310,8 @@ class _StatusCard extends StatelessWidget {
                 FutureBuilder<String>(
                   future: _calendarUrlAPI
                       .savedCalendarURL, // a previously-obtained Future<String> or null
-                  builder: (BuildContext context, snapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:

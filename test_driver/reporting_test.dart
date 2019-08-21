@@ -8,7 +8,7 @@ void main() {
   group('Minitel Toolbox', () {
     FlutterDriver driver;
 
-    final minitelFinders = MinitelFinders();
+    final MinitelFinders minitelFinders = MinitelFinders();
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {

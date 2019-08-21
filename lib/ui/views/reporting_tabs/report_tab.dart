@@ -126,7 +126,7 @@ class _ReportCard extends StatelessWidget {
                 labelText: "Title",
                 hintText: "Room number : Short description.",
               ),
-              onSubmitted: (term) {
+              onSubmitted: (String term) {
                 _titleFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_descriptionFocusNode);
               },
@@ -142,7 +142,7 @@ class _ReportCard extends StatelessWidget {
                 labelText: "Description",
                 hintText: "Describe your issue.",
               ),
-              onSubmitted: (term) => _descriptionFocusNode.unfocus(),
+              onSubmitted: (String term) => _descriptionFocusNode.unfocus(),
             ),
           ],
         ),

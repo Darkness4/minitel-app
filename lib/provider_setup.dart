@@ -9,13 +9,13 @@ import 'core/services/http_webfeed.dart';
 import 'core/services/http_webhook.dart';
 import 'core/services/icalendar.dart';
 
-List<SingleChildCloneableWidget> providers = [
-  Provider.value(value: GatewayAPI()),
-  Provider.value(value: PortailAPI()),
-  Provider.value(value: VersionAPI()),
-  Provider.value(value: WebhookAPI()),
-  Provider.value(value: WebFeedAPI()),
-  Provider.value(value: CalendarUrlAPI()),
-  Provider.value(value: FacebookAPI()),
-  Provider.value(value: ICalendar())
+List<SingleChildCloneableWidget> providers = <Provider<dynamic>>[
+  Provider<GatewayAPI>.value(value: GatewayAPI()),
+  Provider<PortailAPI>.value(value: PortailAPI()),
+  Provider<VersionAPI>.value(value: VersionAPI()),
+  Provider<WebhookAPI>.value(value: WebhookAPI()),
+  Provider<WebFeedAPI>.value(value: WebFeedAPI()),
+  Provider<CalendarUrlAPI>.value(value: CalendarUrlAPI()),
+  Provider<FacebookAPI>.value(value: FacebookAPI()),
+  Provider<ICalendar>.value(value: ICalendar())
 ];

@@ -7,11 +7,14 @@ class FadeRoute<T> extends MaterialPageRoute<T> {
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    if (settings.isInitialRoute) return child;
-    return FadeTransition(
-      opacity: animation,
-      child: child,
-    );
+    if (settings.isInitialRoute) {
+      return child;
+    } else {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    }
   }
 }
 
@@ -22,18 +25,21 @@ class SlideRightRoute<T> extends MaterialPageRoute<T> {
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    if (settings.isInitialRoute) return child;
-    return SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(1.0, 0.0),
-        end: Offset.zero,
-      ).animate(
-        CurvedAnimation(
-          parent: animation,
-          curve: Curves.fastOutSlowIn,
+    if (settings.isInitialRoute) {
+      return child;
+    } else {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(1.0, 0.0),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(
+            parent: animation,
+            curve: Curves.fastOutSlowIn,
+          ),
         ),
-      ),
-      child: child,
-    );
+        child: child,
+      );
+    }
   }
 }

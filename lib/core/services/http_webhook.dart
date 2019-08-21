@@ -5,7 +5,7 @@ import 'package:minitel_toolbox/core/constants/api_constants.dart';
 
 /// Slack Incomming Webhook API
 class WebhookAPI {
-  final _client = HttpClient();
+  final HttpClient _client = HttpClient();
 
   /// Report data to the Slack of Minitel
   ///
@@ -25,20 +25,21 @@ class WebhookAPI {
       {Map<String, String> attachments,
       String channel = "projet_flutter_notif",
       String botName = "Flutter Reporter Bot"}) async {
-    var status = "";
-    final _attachments = <Map<String, String>>[];
+    String status = "";
+    final List<Map<String, String>> _attachments = <Map<String, String>>[];
 
     if (attachments != null) {
-      attachments.forEach((String key, String value) => _attachments.add({
-            "fallback": key,
-            "title": key,
-            "text": value,
-            "footer": "Slack API",
-          }));
+      attachments.forEach(
+          (String key, String value) => _attachments.add(<String, String>{
+                "fallback": key,
+                "title": key,
+                "text": value,
+                "footer": "Slack API",
+              }));
     }
 
     if (text != "") {
-      final data = {
+      final Map<String, dynamic> data = <String, dynamic>{
         'text': "*--Report ${DateTime.now()}--*\n"
             "$text\n",
         'username': botName,

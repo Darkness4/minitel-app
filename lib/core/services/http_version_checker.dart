@@ -5,7 +5,7 @@ import 'package:minitel_toolbox/core/models/github_api.dart';
 
 /// HTTP Requests for github API
 class VersionAPI {
-  final _client = HttpClient();
+  final HttpClient _client = HttpClient();
 
   /// Get the latest version of the app from Github Source
   Future<LatestRelease> getLatestVersion() async {
@@ -13,7 +13,7 @@ class VersionAPI {
         "https://api.github.com/repos/Darkness4/minitel-app/releases/latest"));
     final HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      final data =
+      final String data =
           await response.cast<List<int>>().transform(utf8.decoder).join();
       return LatestRelease.fromJson(json.decode(data));
     } else {

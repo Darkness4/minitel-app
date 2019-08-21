@@ -75,7 +75,7 @@ class NewsCard extends StatelessWidget {
       elevation: elevation,
       child: InkWell(
         onTap: () => LaunchURL.launchURL(
-            item.links.map((link) => link.href).toList().first),
+            item.links.map((dynamic link) => link.href).toList().first),
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -109,7 +109,7 @@ class NewsCard extends StatelessWidget {
                         ),
                         Text(
                           (item.authors)
-                              .map((author) => author.name)
+                              .map((dynamic author) => author.name)
                               .toList()
                               .join(" "),
                         ),
@@ -123,8 +123,8 @@ class NewsCard extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
-                    stops: [0.0, 0.1, 1.0],
-                    colors: [
+                    stops: <double>[0.0, 0.1, 1.0],
+                    colors: <Color>[
                       Colors.black,
                       Color(item.id.hashCode ~/ 100 + 0xFF000000),
                       Colors.deepPurpleAccent,
@@ -156,8 +156,10 @@ class NewsCard extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: FlatButton(
                     textColor: Colors.blue,
-                    onPressed: () => LaunchURL.launchURL(
-                        item.links.map((link) => link.href).toList().first),
+                    onPressed: () => LaunchURL.launchURL(item.links
+                        .map((dynamic link) => link.href)
+                        .toList()
+                        .first),
                     child: const Text(
                       "See More...",
                       style: TextStyle(fontWeight: FontWeight.bold),

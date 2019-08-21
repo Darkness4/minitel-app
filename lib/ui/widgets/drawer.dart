@@ -39,7 +39,9 @@ class DocsDrawer extends StatelessWidget {
               title: const Text("Minitel"),
               onTap: () {
                 Navigator.pop(context);
-                if (_docsPageId != DocsPageId.Home) Navigator.pop(context);
+                if (_docsPageId != DocsPageId.Home) {
+                  Navigator.pop(context);
+                }
               }, // Do nothing
             ),
           ),
@@ -56,21 +58,21 @@ class DocsDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Toolbox) {
-                  final _newController = PageController(
+                  final PageController _newController = PageController(
                     initialPage: 0,
                     viewportFraction: .9,
                   );
                   if (_docsPageId == DocsPageId.Home) {
                     Navigator.push(
                       context,
-                      SlideRightRoute(
+                      SlideRightRoute<dynamic>(
                         builder: (_) => ToolboxDocs(controller: _newController),
                       ),
                     );
                   } else if (_docsPageId == DocsPageId.Wiki) {
                     Navigator.pushReplacement(
                       context,
-                      FadeRoute(
+                      FadeRoute<dynamic>(
                         builder: (_) => ToolboxDocs(controller: _newController),
                       ),
                     );
@@ -97,21 +99,21 @@ class DocsDrawer extends StatelessWidget {
               onTap: () async {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Toolbox) {
-                  final _newController = PageController(
+                  final PageController _newController = PageController(
                     initialPage: 1,
                     viewportFraction: .9,
                   );
                   if (_docsPageId == DocsPageId.Home) {
                     await Navigator.push(
                       context,
-                      SlideRightRoute(
+                      SlideRightRoute<dynamic>(
                         builder: (_) => ToolboxDocs(controller: _newController),
                       ),
                     );
                   } else if (_docsPageId == DocsPageId.Wiki) {
                     await Navigator.pushReplacement(
                       context,
-                      FadeRoute(
+                      FadeRoute<dynamic>(
                         builder: (_) => ToolboxDocs(controller: _newController),
                       ),
                     );
@@ -139,21 +141,21 @@ class DocsDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Wiki) {
-                  final _newController = PageController(
+                  final PageController _newController = PageController(
                     initialPage: 0,
                     viewportFraction: .9,
                   );
                   if (_docsPageId == DocsPageId.Home) {
                     Navigator.push(
                       context,
-                      SlideRightRoute(
+                      SlideRightRoute<dynamic>(
                         builder: (_) => WikiDocs(controller: _newController),
                       ),
                     );
                   } else if (_docsPageId == DocsPageId.Toolbox) {
                     Navigator.pushReplacement(
                       context,
-                      FadeRoute(
+                      FadeRoute<dynamic>(
                         builder: (_) => WikiDocs(controller: _newController),
                       ),
                     );
@@ -180,21 +182,21 @@ class DocsDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Wiki) {
-                  final _newController = PageController(
+                  final PageController _newController = PageController(
                     initialPage: 1,
                     viewportFraction: .9,
                   );
                   if (_docsPageId == DocsPageId.Home) {
                     Navigator.push(
                       context,
-                      SlideRightRoute(
+                      SlideRightRoute<dynamic>(
                         builder: (_) => WikiDocs(controller: _newController),
                       ),
                     );
                   } else if (_docsPageId == DocsPageId.Toolbox) {
                     Navigator.pushReplacement(
                       context,
-                      FadeRoute(
+                      FadeRoute<dynamic>(
                         builder: (_) => WikiDocs(controller: _newController),
                       ),
                     );
@@ -221,21 +223,21 @@ class DocsDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Wiki) {
-                  final _newController = PageController(
+                  final PageController _newController = PageController(
                     initialPage: 2,
                     viewportFraction: .9,
                   );
                   if (_docsPageId == DocsPageId.Home) {
                     Navigator.push(
                       context,
-                      SlideRightRoute(
+                      SlideRightRoute<dynamic>(
                         builder: (_) => WikiDocs(controller: _newController),
                       ),
                     );
                   } else if (_docsPageId == DocsPageId.Toolbox) {
                     Navigator.pushReplacement(
                       context,
-                      FadeRoute(
+                      FadeRoute<dynamic>(
                         builder: (_) => WikiDocs(controller: _newController),
                       ),
                     );
@@ -262,21 +264,21 @@ class DocsDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 if (_docsPageId != DocsPageId.Wiki) {
-                  final _newController = PageController(
+                  final PageController _newController = PageController(
                     initialPage: 3,
                     viewportFraction: .9,
                   );
                   if (_docsPageId == DocsPageId.Home) {
                     Navigator.push(
                       context,
-                      SlideRightRoute(
+                      SlideRightRoute<dynamic>(
                         builder: (_) => WikiDocs(controller: _newController),
                       ),
                     );
                   } else if (_docsPageId == DocsPageId.Toolbox) {
                     Navigator.pushReplacement(
                       context,
-                      FadeRoute(
+                      FadeRoute<dynamic>(
                         builder: (_) => WikiDocs(controller: _newController),
                       ),
                     );

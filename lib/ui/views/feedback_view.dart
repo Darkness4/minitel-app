@@ -58,7 +58,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                           labelText: "Titre",
                           hintText: "Ex. : La page X est lente.",
                         ),
-                        onSubmitted: (term) {
+                        onSubmitted: (String term) {
                           _titleFocusNode.unfocus();
                           FocusScope.of(context)
                               .requestFocus(_descriptionFocusNode);
@@ -74,7 +74,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                           labelText: "Description",
                           hintText: "Comment reproduire le bug ?",
                         ),
-                        onSubmitted: (term) {
+                        onSubmitted: (String term) {
                           _descriptionFocusNode.unfocus();
                         },
                       ),
@@ -152,8 +152,8 @@ class _FeedbackViewState extends State<FeedbackView> {
   }
 
   Future<void> _send(BuildContext ctxt) async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    var description =
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String description =
         "${_descriptionController.text.replaceAll(RegExp(r'\n'), '\n>')}\n\n";
     IosDeviceInfo iosInfo;
     AndroidDeviceInfo androidInfo;

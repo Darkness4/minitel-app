@@ -11,7 +11,7 @@ void main() {
   group('Minitel Toolbox', () {
     FlutterDriver driver;
 
-    final minitelFinders = MinitelFinders();
+    final MinitelFinders minitelFinders = MinitelFinders();
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
@@ -45,7 +45,7 @@ void main() {
 
       test('Screenshot sogo', () async {
         await driver.tap(minitelFinders.sogo);
-        await Future.delayed(const Duration(seconds: 5));
+        await Future<dynamic>.delayed(const Duration(seconds: 5));
         await takeScreenshot(driver, ScreenshotsPaths.sogo);
         await driver.tap(minitelFinders.goBack);
       });
@@ -137,12 +137,12 @@ Future<void> takeScreenshot(FlutterDriver driver, String path) async {
 }
 
 class ScreenshotsPaths {
-  static const login = "test_driver/screenshots/login.png";
-  static const apps = "test_driver/screenshots/apps.png";
-  static const news = "test_driver/screenshots/news.png";
-  static const agenda = "test_driver/screenshots/agenda.png";
-  static const reporting = "test_driver/screenshots/reporting.png";
-  static const diagnosis = "test_driver/screenshots/diagnosis.png";
-  static const docs = "test_driver/screenshots/docs.png";
-  static const sogo = "test_driver/screenshots/sogo.png";
+  static const String login = "test_driver/screenshots/login.png";
+  static const String apps = "test_driver/screenshots/apps.png";
+  static const String news = "test_driver/screenshots/news.png";
+  static const String agenda = "test_driver/screenshots/agenda.png";
+  static const String reporting = "test_driver/screenshots/reporting.png";
+  static const String diagnosis = "test_driver/screenshots/diagnosis.png";
+  static const String docs = "test_driver/screenshots/docs.png";
+  static const String sogo = "test_driver/screenshots/sogo.png";
 }

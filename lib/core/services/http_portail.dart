@@ -3,9 +3,9 @@ import 'dart:io';
 
 /// HTTP requests handler for EMSE Portal
 class PortailAPI {
-  final _client = HttpClient();
+  final HttpClient _client = HttpClient();
   List<Cookie> _cookie;
-  final _catchedCookies = <Cookie>[];
+  final List<Cookie> _catchedCookies = <Cookie>[];
 
   List<Cookie> get catchedCookies => _catchedCookies;
   List<Cookie> get cookie => _cookie;
@@ -24,15 +24,16 @@ class PortailAPI {
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
 
-    final temp =
+    final String temp =
         await response.cast<List<int>>().transform(utf8.decoder).join();
-    final lt = RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
-    final action = RegExp(r'action="([^"]*)"').firstMatch(temp).group(1);
+    final String lt =
+        RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
+    final String action = RegExp(r'action="([^"]*)"').firstMatch(temp).group(1);
 
-    final Cookie jSessionIDCampus =
-        response.cookies.firstWhere((cookie) => cookie.name == "JSESSIONID");
+    final Cookie jSessionIDCampus = response.cookies
+        .firstWhere((Cookie cookie) => cookie.name == "JSESSIONID");
 
-    final data =
+    final String data =
         "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
     request = await _client.postUrl(Uri.parse("https://cas.emse.fr$action"))
       ..followRedirects = false
@@ -50,11 +51,12 @@ class PortailAPI {
 
     Cookie agimus;
     try {
-      agimus = response.cookies.firstWhere((cookie) => cookie.name == "AGIMUS");
+      agimus = response.cookies
+          .firstWhere((Cookie cookie) => cookie.name == "AGIMUS");
     } on Exception {
       throw Exception("AGIMUS not found. Maybe bad username or password.");
     }
-    var location = response.headers.value('location');
+    String location = response.headers.value('location');
 
     request = await _client.getUrl(Uri.parse(location))
       ..headers.removeAll(HttpHeaders.contentLengthHeader)
@@ -63,8 +65,8 @@ class PortailAPI {
     response = await request.close();
 
     _catchedCookies.addAll(response.cookies);
-    final Cookie casAuth =
-        response.cookies.firstWhere((cookie) => cookie.name == "CASAuth");
+    final Cookie casAuth = response.cookies
+        .firstWhere((Cookie cookie) => cookie.name == "CASAuth");
     location = response.headers.value('location');
 
     request = await _client.getUrl(Uri.parse(location))
@@ -74,12 +76,12 @@ class PortailAPI {
     response = await request.close();
 
     _catchedCookies.addAll(response.cookies);
-    final Cookie laravelToken =
-        response.cookies.firstWhere((cookie) => cookie.name == "laravel_token");
-    final Cookie xsrfToken =
-        response.cookies.firstWhere((cookie) => cookie.name == "XSRF-TOKEN");
-    final Cookie portailEntEmseSession = response.cookies
-        .firstWhere((cookie) => cookie.name == "portail_ent_emse_session");
+    final Cookie laravelToken = response.cookies
+        .firstWhere((Cookie cookie) => cookie.name == "laravel_token");
+    final Cookie xsrfToken = response.cookies
+        .firstWhere((Cookie cookie) => cookie.name == "XSRF-TOKEN");
+    final Cookie portailEntEmseSession = response.cookies.firstWhere(
+        (Cookie cookie) => cookie.name == "portail_ent_emse_session");
 
     // _catchedCookies.forEach((cookie) {
     //   print("${cookie.domain}, "
@@ -92,7 +94,13 @@ class PortailAPI {
     //       "${cookie.value}, ");
     // });
 
-    return [agimus, casAuth, laravelToken, xsrfToken, portailEntEmseSession];
+    return <Cookie>[
+      agimus,
+      casAuth,
+      laravelToken,
+      xsrfToken,
+      portailEntEmseSession
+    ];
   }
 
   /// Save the cookie gotten through CAS Authentication

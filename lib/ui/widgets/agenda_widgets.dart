@@ -52,10 +52,10 @@ class DayWidget extends StatelessWidget {
 }
 
 class ErrorAgendaWidget extends StatelessWidget {
-  final _uidController = TextEditingController();
-  final _pswdController = TextEditingController();
-  final _uidFocusNode = FocusNode();
-  final _pswdFocusNode = FocusNode();
+  final TextEditingController _uidController = TextEditingController();
+  final TextEditingController _pswdController = TextEditingController();
+  final FocusNode _uidFocusNode = FocusNode();
+  final FocusNode _pswdFocusNode = FocusNode();
   final GlobalKey<FormState> _formKey;
   final String error;
   final Function parentSetState;
@@ -122,10 +122,11 @@ class ErrorAgendaWidget extends StatelessWidget {
               backgroundColor: Colors.red,
               elevation: 10.0,
               onPressed: () async {
-                final _calendarURL = Provider.of<CalendarUrlAPI>(context);
-                final ical = Provider.of<ICalendar>(context);
+                final CalendarUrlAPI _calendarURL =
+                    Provider.of<CalendarUrlAPI>(context);
+                final ICalendar ical = Provider.of<ICalendar>(context);
                 try {
-                  final url = await _calendarURL.getCalendarURL(
+                  final String url = await _calendarURL.getCalendarURL(
                     username: _uidController.text,
                     password: _pswdController.text,
                   );
@@ -161,7 +162,7 @@ class EventCard extends StatelessWidget {
         super(key: key);
 
   Color get _cardColor {
-    final upper = _event.summary.toLowerCase();
+    final String upper = _event.summary.toLowerCase();
     if (upper.contains("examen")) {
       return Colors.red[200];
     } else if (upper.contains("tp")) {

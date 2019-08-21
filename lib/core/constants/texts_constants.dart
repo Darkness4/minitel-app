@@ -2,7 +2,7 @@
 ///
 /// This will probably be used if the app get intl.
 class Texts {
-  static const List<String> agendaVide = [
+  static const List<String> agendaVide = <String>[
     "Ben alors ? On n'a pas cours ?",
     "Ça sent le barbecue....",
     "Libeeeeertééé !",

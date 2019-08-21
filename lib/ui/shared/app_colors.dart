@@ -16,7 +16,7 @@ class MinitelColors {
   static Color DrawerSelectedColorGrey = Colors.grey[300];
 
   /// Attribuated color to each month
-  static const Map<int, Color> MonthColorPalette = {
+  static const Map<int, Color> MonthColorPalette = <int, Color>{
     DateTime.january: Colors.red,
     DateTime.february: Colors.pink,
     DateTime.march: Colors.purple,

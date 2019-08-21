@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/constants/texts_constants.dart';
+import 'package:minitel_toolbox/core/models/icalendar/event.dart';
 import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
@@ -11,7 +12,7 @@ import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
 
 class AgendaViewModel extends ChangeNotifier {
-  static const _month = <String>[
+  static const List<String> _month = <String>[
     "Janvier",
     "Février",
     "Mars",
@@ -27,7 +28,8 @@ class AgendaViewModel extends ChangeNotifier {
   ];
   final CalendarUrlAPI calendarUrlAPI;
   final ICalendar iCalendar;
-  final _androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  final AndroidNotificationDetails _androidPlatformChannelSpecifics =
+      AndroidNotificationDetails(
     'minitel_channel',
     'Minitel Channel',
     'Notification channel for the Minitel App',
@@ -35,11 +37,12 @@ class AgendaViewModel extends ChangeNotifier {
     priority: Priority.High,
     enableVibration: true,
   );
-  final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  final IOSNotificationDetails _iOSPlatformChannelSpecifics =
+      IOSNotificationDetails();
   final NotificationSettings notificationSettings = NotificationSettings();
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
-  List<Widget> monthPages = [];
+  List<Widget> monthPages = <Widget>[];
 
   AgendaViewModel({
     @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
@@ -49,15 +52,15 @@ class AgendaViewModel extends ChangeNotifier {
 
   Stream<List<Widget>> listEventCards(ParsedCalendar parsedCalendar) async* {
     List<Widget> monthlyWidgets;
-    List<Widget> dailyEvents = [];
-    monthPages = [];
+    List<Widget> dailyEvents = <Widget>[];
+    monthPages = <Widget>[];
     DateTime oldDt;
 
-    parsedCalendar.events
-        .sort((event1, event2) => event1.dtstart.compareTo(event2.dtstart));
+    parsedCalendar.events.sort((Event event1, Event event2) =>
+        event1.dtstart.compareTo(event2.dtstart));
 
-    final filteredEvents = parsedCalendar.events
-        .where((event) => event.dtstart.isAfter(DateTime.now()));
+    final Iterable<Event> filteredEvents = parsedCalendar.events
+        .where((Event event) => event.dtstart.isAfter(DateTime.now()));
 
     // Throw away the old notifications
     await _flutterLocalNotificationsPlugin.cancelAll();
@@ -78,14 +81,14 @@ class AgendaViewModel extends ChangeNotifier {
       ];
     } else {
       DateTime dt;
-      for (final event in filteredEvents) {
+      for (final Event event in filteredEvents) {
         int id = 0;
         dt = event.dtstart;
 
         // Notification System
         if (dt.isBefore(DateTime.now().add(notificationSettings.range))) {
-          final dtstart = DateFormat.Hm().format(dt);
-          final dtend = DateFormat.Hm().format(event.dtend);
+          final String dtstart = DateFormat.Hm().format(dt);
+          final String dtend = DateFormat.Hm().format(event.dtend);
 
           id++;
 
@@ -117,10 +120,10 @@ class AgendaViewModel extends ChangeNotifier {
           }
           oldDt = dt;
 
-          monthlyWidgets = [
+          monthlyWidgets = <Widget>[
             MonthHeader("${_month[dt.month - 1]}"),
           ];
-          dailyEvents = [];
+          dailyEvents = <Widget>[];
         }
 
         // New Day
@@ -131,7 +134,7 @@ class AgendaViewModel extends ChangeNotifier {
           }
 
           oldDt = dt;
-          dailyEvents = []; // Clear Events
+          dailyEvents = <Widget>[]; // Clear Events
         }
 
         // Event Card
@@ -149,7 +152,7 @@ class AgendaViewModel extends ChangeNotifier {
 
   Future<ParsedCalendar> loadCalendar(BuildContext context) async {
     // Try to update thr calendar
-    final url = await calendarUrlAPI.savedCalendarURL;
+    final String url = await calendarUrlAPI.savedCalendarURL;
 
     // Try to update calendar
     if (url == "" || url == null) {

@@ -25,11 +25,11 @@ class Diagnosis {
   static String _alert;
 
   /// Ping arguments
-  static const _argsPing = "-c 4 -w 5 -W 5";
+  static const String _argsPing = "-c 4 -w 5 -W 5";
 
   final GatewayAPI _gateway;
 
-  var _report = <String, Future<String>>{};
+  Map<String, Future<String>> _report = <String, Future<String>>{};
 
   Diagnosis({@required GatewayAPI gatewayAPI}) : _gateway = gatewayAPI;
 
@@ -40,8 +40,8 @@ class Diagnosis {
   Map<String, Future<String>> get report => _report;
 
   Future<Map<String, String>> get reportAll async {
-    final data = <String, String>{};
-    for (final key in DiagnosisContent()) {
+    final Map<String, String> data = <String, String>{};
+    for (final String key in DiagnosisContent()) {
       data[key] = await _report[key];
     }
     return data;
@@ -66,83 +66,86 @@ class Diagnosis {
     _report = <String, Future<String>>{};
 
     // Check if connected
-    final connectivityResult = await Connectivity().checkConnectivity();
+    final ConnectivityResult connectivityResult =
+        await Connectivity().checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       // Fill the report
       _report[DiagnosisContent.ip] = Connectivity().getWifiIP();
 
-      await Future.wait([
+      await Future.wait(<Future<dynamic>>[
         _report[DiagnosisContent.ipAddr] = _terminalCommand(
           "/system/bin/ip",
-          ['a'],
+          <String>['a'],
         ),
         _report[DiagnosisContent.arp] = _terminalCommand(
           "su",
-          ['-c', '/system/bin/arp -a'],
+          <String>['-c', '/system/bin/arp -a'],
         ),
         _report[DiagnosisContent.tracertGoogle] = _terminalCommand(
           "su",
-          ['-c', '/system/bin/traceroute', MyIPAdresses.google],
+          <String>['-c', '/system/bin/traceroute', MyIPAdresses.google],
         ),
         _report[DiagnosisContent.tracertGoogleDNS] = _terminalCommand(
           "su",
-          ['-c', '/system/bin/traceroute', MyIPAdresses.googleDNSIP],
+          <String>['-c', '/system/bin/traceroute', MyIPAdresses.googleDNSIP],
         ),
         _report[DiagnosisContent.pingLo] = _terminalCommand(
           "/system/bin/ping",
-          [_argsPing, MyIPAdresses.localhostIP],
+          <String>[_argsPing, MyIPAdresses.localhostIP],
         ),
         _report[DiagnosisContent.pingLocal] = _terminalCommand(
           "/system/bin/ping",
-          [_argsPing, MyIPAdresses.proliantIP],
+          <String>[_argsPing, MyIPAdresses.proliantIP],
         ),
         _report[DiagnosisContent.pingGate] = _terminalCommand(
           "/system/bin/ping",
-          [_argsPing, MyIPAdresses.gatewayIP],
+          <String>[_argsPing, MyIPAdresses.gatewayIP],
         ),
         _report[DiagnosisContent.pingDNS1] = _terminalCommand(
           "/system/bin/ping",
-          [_argsPing, MyIPAdresses.emseIsminDNS1IP],
+          <String>[_argsPing, MyIPAdresses.emseIsminDNS1IP],
         ),
         _report[DiagnosisContent.pingDNS2] = _terminalCommand(
           "/system/bin/ping",
-          [_argsPing, MyIPAdresses.emseIsminDNS2IP],
+          <String>[_argsPing, MyIPAdresses.emseIsminDNS2IP],
         ),
         _report[DiagnosisContent.pingDNS3] = _terminalCommand(
           "/system/bin/ping",
-          [_argsPing, MyIPAdresses.googleDNSIP],
+          <String>[_argsPing, MyIPAdresses.googleDNSIP],
         ),
         _report[DiagnosisContent.pingDNS4] = _terminalCommand(
           "/system/bin/ping",
-          [_argsPing, MyIPAdresses.cloudflareDNSIP],
+          <String>[_argsPing, MyIPAdresses.cloudflareDNSIP],
         ),
         _report[DiagnosisContent.pingDNS5] = _terminalCommand(
           "/system/bin/ping",
-          [_argsPing, MyIPAdresses.localDNSIP],
+          <String>[_argsPing, MyIPAdresses.localDNSIP],
         ),
         _report[DiagnosisContent.nsLookupEMSEBusy] = _terminalCommand(
           "su",
-          ['-c', "/system/bin/nslookup ${MyIPAdresses.stormshield}"],
+          <String>['-c', "/system/bin/nslookup ${MyIPAdresses.stormshield}"],
         ),
         _report[DiagnosisContent.nsLookupGoogleBusy] = _terminalCommand(
           "su",
-          ['-c', "/system/bin/nslookup ${MyIPAdresses.google}"],
+          <String>['-c', "/system/bin/nslookup ${MyIPAdresses.google}"],
         ),
         _report[DiagnosisContent.httpPortalPublic] = _gateway
             .getStatus(MyIPAdresses.stormshieldIP, cookie: _gateway.cookie)
-            .then((status) => status.isEmpty ? "Nothing to show" : status),
+            .then(
+                (String status) => status.isEmpty ? "Nothing to show" : status),
         _report[DiagnosisContent.httpPortalGateway] = _gateway
             .getStatus(MyIPAdresses.gatewayIP, cookie: _gateway.cookie)
-            .then((status) => status.isEmpty ? "Nothing to show" : status),
+            .then(
+                (String status) => status.isEmpty ? "Nothing to show" : status),
         _report[DiagnosisContent.nsLookupEMSE] =
             _lookup(MyIPAdresses.stormshield),
         _report[DiagnosisContent.nsLookupGoogle] = _lookup(MyIPAdresses.google),
       ]).timeout(const Duration(minutes: 1), onTimeout: () {
         // Timeout warning
         _alert = "Diagnosis has timed out !";
-        return [];
+        return <dynamic>[];
       });
     } else {
       _alert = "Pas de Wifi";
@@ -151,9 +154,10 @@ class Diagnosis {
 
   Future<String> _lookup(String address) async {
     try {
-      final addresses = await InternetAddress.lookup(MyIPAdresses.stormshield);
-      final output = StringBuffer();
-      for (final address in addresses) {
+      final List<InternetAddress> addresses =
+          await InternetAddress.lookup(MyIPAdresses.stormshield);
+      final StringBuffer output = StringBuffer();
+      for (final InternetAddress address in addresses) {
         output.write("Host: ${address.host}\nLookup: ${address.address}\n");
       }
       return output.toString();
@@ -164,7 +168,7 @@ class Diagnosis {
 
   Future<String> _terminalCommand(String command, List<String> args) async {
     try {
-      final stdout = await exec(command, args).runGetOutput();
+      final String stdout = await exec(command, args).runGetOutput();
       return stdout.isEmpty ? "Nothing to show" : stdout;
     } catch (e, s) {
       return "Error: $e\n" "Stacktrace: $s";

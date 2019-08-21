@@ -33,7 +33,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                 const Text("Notifier "),
                 Expanded(
                   child: TextField(
-                    inputFormatters: [
+                    inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                       BlacklistingTextInputFormatter.singleLineFormatter,
@@ -51,7 +51,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                 const Text("Notifier les cours des "),
                 Expanded(
                   child: TextField(
-                    inputFormatters: [
+                    inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                       BlacklistingTextInputFormatter.singleLineFormatter,
@@ -65,7 +65,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
               ],
             ),
             Builder(
-              builder: (context) => RaisedButton(
+              builder: (BuildContext context) => RaisedButton(
                 color: Theme.of(context).primaryColor,
                 colorBrightness: Brightness.dark,
                 onPressed: () async {

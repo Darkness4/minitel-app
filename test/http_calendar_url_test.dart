@@ -43,13 +43,13 @@ Future<void> main() async {
       return null;
     });
     test("saveCalendarURL", () async {
-      const url =
+      const String url =
           "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";
       await _calendarURL.saveCalendarURL(url);
     });
 
     test("savedCalendarURL not existing", () async {
-      const url =
+      const String url =
           "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";
       await _calendarURL.saveCalendarURL(url);
       final String output = await _calendarURL.savedCalendarURL;

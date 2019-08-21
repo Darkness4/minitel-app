@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   final CalendarUrlAPI _calendarUrlAPI = CalendarUrlAPI();
   setUpAll(() async {
-    final directory = await Directory.systemTemp.createTemp();
+    final Directory directory = await Directory.systemTemp.createTemp();
 
     const MethodChannel('plugins.flutter.io/path_provider')
         .setMockMethodCallHandler((MethodCall methodCall) async {
@@ -22,7 +22,7 @@ Future<void> main() async {
     });
   });
 
-  SharedPreferences.setMockInitialValues({});
+  SharedPreferences.setMockInitialValues(<String, dynamic>{});
 
   group('Must FAIL', () {
     test("getParsedCalendarFromFile: Not Existing", () async {
@@ -46,16 +46,16 @@ Future<void> main() async {
 
   group("Must WORK", () {
     test("saveCalendar", () async {
-      final ical = ICalendar();
-      final url = await _calendarUrlAPI.getCalendarURL(
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url, _calendarUrlAPI);
     });
 
     test("getParsedCalendarFromFile", () async {
-      final ical = ICalendar();
-      final url = await _calendarUrlAPI.getCalendarURL(
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url, _calendarUrlAPI);
@@ -63,13 +63,14 @@ Future<void> main() async {
     });
 
     test("parseCalendar from Login", () async {
-      final ical = ICalendar();
-      final url = await _calendarUrlAPI.getCalendarURL(
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
       await ical.saveCalendar(url, _calendarUrlAPI);
 
-      final parsedCalendar = await ical.getParsedCalendarFromFile();
+      final ParsedCalendar parsedCalendar =
+          await ical.getParsedCalendarFromFile();
       expect(parsedCalendar.timezone.daylight.toString(), isNotNull);
       expect(parsedCalendar.events[0].dtstart, isNotNull);
       expect(parsedCalendar.events.length, isNotNull);

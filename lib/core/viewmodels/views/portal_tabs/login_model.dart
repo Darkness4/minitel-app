@@ -39,7 +39,7 @@ class LoginViewModel extends ChangeNotifier {
     // Remember me
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (rememberMe.value) {
-      await Future.wait([
+      await Future.wait<bool>(<Future<bool>>[
         prefs.setBool("rememberMe", true),
         prefs.setBool("autoLogin", autoLogin.value),
         prefs.setString("user", uid),
@@ -50,7 +50,7 @@ class LoginViewModel extends ChangeNotifier {
         ),
       ]);
     } else {
-      await Future.wait([
+      await Future.wait<bool>(<Future<bool>>[
         prefs.remove("rememberMe"),
         prefs.remove("autoLogin"),
         prefs.remove("user"),

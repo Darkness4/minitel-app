@@ -42,10 +42,10 @@ class _ImprimanteCard extends StatelessWidget {
         key: const Key('app_lists/imprimante'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const ImprimanteWebView()),
+          MaterialPageRoute<dynamic>(builder: (_) => const ImprimanteWebView()),
         ),
         child: LayoutBuilder(
-          builder: (context, constraint) => Column(
+          builder: (_, BoxConstraints constraint) => Column(
             children: <Widget>[
               Icon(
                 Icons.print,
@@ -78,7 +78,7 @@ class _PortailCard extends StatelessWidget {
         onTap: () async {
           await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PortailWebView()),
+            MaterialPageRoute<dynamic>(builder: (_) => const PortailWebView()),
           );
         },
         child: Column(
@@ -114,7 +114,7 @@ class _SogoCard extends StatelessWidget {
         key: const Key('app_lists/sogo'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const SogoWebView()),
+          MaterialPageRoute<dynamic>(builder: (_) => const SogoWebView()),
         ),
         child: Image.asset(AssetPaths.Sogo),
       ),
@@ -133,7 +133,7 @@ class _WikiMinitelCard extends StatelessWidget {
         key: const Key('app_lists/wiki_minitel'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const MinitelWebView()),
+          MaterialPageRoute<dynamic>(builder: (_) => const MinitelWebView()),
         ),
         child: Column(
           children: <Widget>[

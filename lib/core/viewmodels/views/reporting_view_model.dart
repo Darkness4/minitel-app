@@ -30,8 +30,9 @@ class ReportingViewModel extends ChangeNotifier {
         diagnosis = Diagnosis(gatewayAPI: gatewayAPI);
 
   Future<DateTime> get _timeout async {
-    final prefs = await SharedPreferences.getInstance();
-    final dateTimeout = prefs.getString('timeout') ?? "0000-00-00 00:00:00.000";
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String dateTimeout =
+        prefs.getString('timeout') ?? "0000-00-00 00:00:00.000";
     return DateTime.parse(dateTimeout);
   }
 
@@ -49,7 +50,7 @@ class ReportingViewModel extends ChangeNotifier {
       );
 
       // Refersh ONE second after launching diagnose
-      Future.delayed(const Duration(seconds: 1), notifyListeners);
+      Future<void>.delayed(const Duration(seconds: 1), notifyListeners);
 
       // Diagnose
       await diagnosis.diagnose();
@@ -77,7 +78,9 @@ class ReportingViewModel extends ChangeNotifier {
         attachments: await diagnosis.reportAll,
         channel: channel,
       );
-      if (status == "ok") await _setTimeout();
+      if (status == "ok") {
+        await _setTimeout();
+      }
     } else {
       status = "Wait until ${timeout.hour}:${timeout.minute}";
     }
@@ -86,7 +89,7 @@ class ReportingViewModel extends ChangeNotifier {
 
   /// SetTimeout to not abuse [reportToSlack]
   Future<void> _setTimeout() async {
-    final prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(
         'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
   }

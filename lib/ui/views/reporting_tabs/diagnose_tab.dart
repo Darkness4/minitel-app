@@ -37,7 +37,8 @@ class DiagnoseTab extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: FutureBuilder<String>(
                     future: _diagnosis.report[DiagnosisContent.ip],
-                    builder: (context, ipSnapshot) {
+                    builder: (BuildContext context,
+                        AsyncSnapshot<String> ipSnapshot) {
                       String output = "${DiagnosisContent.ip}: ";
                       output += ipSnapshot.hasData ? ipSnapshot.data : "";
                       return Text(
@@ -56,7 +57,9 @@ class DiagnoseTab extends StatelessWidget {
               if (item != DiagnosisContent.ip) // Ignore them
                 FutureBuilder<String>(
                   future: _diagnosis.report[item],
-                  builder: (BuildContext context, snapshot) => LogCard(
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) =>
+                          LogCard(
                     _reportData(snapshot),
                     title: item,
                     key: Key('diagnose_tab/$item'),
