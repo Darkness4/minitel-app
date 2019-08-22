@@ -5,7 +5,7 @@ author: Nguyen Marc <nguyen_marc@live.fr>
 version: 0.5.0
 
 environment:
-  sdk: ">=2.4.0 <3.0.0"
+  sdk: ">=2.5.0 <3.0.0"
 
 # Use ^version only if the package are stable
 # ^1.2.0 means >=1.2.0 <2.0.0
