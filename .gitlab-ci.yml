@@ -62,7 +62,7 @@ documentation_test:
   script:
     - flutter drive --target=test_driver/app.dart --driver=test_driver/documentation_test.dart --build
 
-  ater_script:
+  after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
 
 authentication_test:
@@ -116,7 +116,7 @@ reporting_test:
   script:
     - flutter drive --target=test_driver/app.dart --driver=test_driver/reporting_test.dart --build
 
-  ater_script:
+  after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
 
 pages:
