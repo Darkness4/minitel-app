@@ -1,6 +1,6 @@
 #!/bin/sh
 SCRIPTPATH=$(dirname "$(realpath "$0")")
-sdkmanager "system-images;android-28;default;x86"
+sdkmanager "emulator" "system-images;android-28;default;x86"
 yes | sdkmanager --licenses
 sdkmanager --update
 yes | sdkmanager --licenses
