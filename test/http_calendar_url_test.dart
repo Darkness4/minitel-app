@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 
-Future<void> main() async {
+void main() {
   final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
+
   group("Must FAIL", () {
     // Mock out the MethodChannel for the path_provider plugin
     const MethodChannel('plugins.flutter.io/shared_preferences')
@@ -15,6 +16,7 @@ Future<void> main() async {
       }
       return null;
     });
+
     test("savedCalendarURL: not existing", () async {
       final String output = await _calendarURL.savedCalendarURL;
       expect(output, equals(""));
