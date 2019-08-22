@@ -37,6 +37,9 @@ navigation_test:
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
 
+  tags:
+    - android
+
   artifacts:
     paths:
     - test_driver/screenshots/
@@ -47,6 +50,11 @@ documentation_test:
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
@@ -57,12 +65,20 @@ documentation_test:
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
 
+  tags:
+    - android
+
 authentication_test:
   stage: integration-tests
   image: darkness4/flutter-builder:latest
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
@@ -73,12 +89,20 @@ authentication_test:
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
 
+  tags:
+    - android
+
 news_test:
   stage: integration-tests
   image: darkness4/flutter-builder:latest
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
@@ -89,12 +113,20 @@ news_test:
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
 
+  tags:
+    - android
+
 reporting_test:
   stage: integration-tests
   image: darkness4/flutter-builder:latest
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
@@ -104,6 +136,9 @@ reporting_test:
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
+
+  tags:
+    - android
 
 pages:
   stage: deploy
