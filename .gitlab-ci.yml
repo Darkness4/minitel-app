@@ -32,7 +32,7 @@ navigation_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/navigation_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/navigation_test.dart
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -60,7 +60,7 @@ documentation_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/documentation_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/documentation_test.dart
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -84,7 +84,7 @@ authentication_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/authentication_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/authentication_test.dart
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -108,7 +108,7 @@ news_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/news_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/news_test.dart
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -132,7 +132,7 @@ reporting_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/reporting_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/reporting_test.dart
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator

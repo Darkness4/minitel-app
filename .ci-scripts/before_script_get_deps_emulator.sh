@@ -12,3 +12,4 @@ yes | sdkmanager --licenses
 echo no | avdmanager create avd --force -n test -k "system-images;android-28;default;x86" --abi "x86" --device "Galaxy Nexus" 
 yes | sdkmanager --licenses
 sdkmanager --list | sed -e '/Available Packages/q'
+flutter doctor -v
