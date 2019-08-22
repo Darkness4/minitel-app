@@ -6,7 +6,7 @@ stages:
 
 unit-tests:
   stage: test
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_coverage.sh
@@ -23,7 +23,7 @@ unit-tests:
 
 navigation_test:
   stage: integration-tests
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
@@ -46,7 +46,7 @@ navigation_test:
 
 documentation_test:
   stage: integration-tests
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
@@ -70,7 +70,7 @@ documentation_test:
 
 authentication_test:
   stage: integration-tests
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
@@ -94,7 +94,7 @@ authentication_test:
 
 news_test:
   stage: integration-tests
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
@@ -118,7 +118,7 @@ news_test:
 
 reporting_test:
   stage: integration-tests
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
@@ -166,7 +166,7 @@ pages:
 
 build-test:
   stage: test
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
@@ -188,7 +188,7 @@ build-test:
 
 build:
   stage: build
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
   
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
