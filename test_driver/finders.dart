@@ -21,6 +21,8 @@ class MinitelFinders {
   final SerializableFinder appsTab = find.byValueKey('portal_view/apps_tab');
   final SerializableFinder loginTab = find.byValueKey('portal_view/login_tab');
 
+  final SerializableFinder loginList = find.byValueKey('login/list');
+  final SerializableFinder appsList = find.byValueKey('apps_list/list');
   final SerializableFinder timeDropdown = find.byValueKey('login/time');
   final SerializableFinder nameServerDropdown =
       find.byValueKey('login/name_server');

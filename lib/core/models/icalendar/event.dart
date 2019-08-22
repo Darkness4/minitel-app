@@ -1,20 +1,32 @@
 class Event {
-  DateTime dtend;
-  String uid;
-  DateTime dtstamp;
-  String location;
-  String description;
-  String summary;
-  DateTime dtstart;
+  final DateTime dtend;
+  final String uid;
+  final DateTime dtstamp;
+  final String location;
+  final String description;
+  final String summary;
+  final DateTime dtstart;
 
-  Event.fromJson(Map<String, dynamic> json) {
-    dtend = DateTime.parse(json["DTEND"]);
-    uid = json["UID"];
-    dtstamp = DateTime.parse(json["DTSTAMP"]);
-    location = json["LOCATION"];
-    description = json["DESCRIPTION"];
-    summary = json["SUMMARY"];
-    dtstart = DateTime.parse(json["DTSTART"]);
+  Event({
+    this.dtend,
+    this.uid,
+    this.dtstamp,
+    this.location,
+    this.description,
+    this.summary,
+    this.dtstart,
+  });
+
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return Event(
+      dtend: DateTime.parse(json["DTEND"]),
+      uid: json["UID"],
+      dtstamp: DateTime.parse(json["DTSTAMP"]),
+      location: json["LOCATION"],
+      description: json["DESCRIPTION"],
+      summary: json["SUMMARY"],
+      dtstart: DateTime.parse(json["DTSTART"]),
+    );
   }
 
   Map<String, dynamic> toJson() {

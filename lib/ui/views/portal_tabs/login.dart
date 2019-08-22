@@ -49,6 +49,7 @@ class LoginPageState extends State<LoginPage> {
       onModelReady: (LoginViewModel model) => _rememberLogin(context, model),
       builder: (BuildContext context, LoginViewModel model, Widget loginForm) {
         return ListView(
+          key: const Key('login/list'),
           padding: const EdgeInsets.all(20.0),
           children: <Widget>[
             _StatusCard(

@@ -55,6 +55,11 @@ void main() {
       });
 
       test('Remember Me', () async {
+        await driver.scrollUntilVisible(
+          minitelFinders.loginList,
+          minitelFinders.autoLoginButton,
+          dyScroll: -200.0,
+        );
         await driver.tap(minitelFinders.rememberMeButton);
       });
 
@@ -76,6 +81,11 @@ void main() {
     group('Apps Section', () {
       test('Move to Apps Tab', () async {
         await driver.tap(minitelFinders.appsTab);
+        await driver.scrollUntilVisible(
+          minitelFinders.appsList,
+          minitelFinders.portail,
+          dyScroll: 200.0,
+        );
       });
 
       test('Portail', () async {

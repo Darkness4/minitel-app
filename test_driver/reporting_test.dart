@@ -61,7 +61,7 @@ void main() {
           find.byValueKey('diagnose_tab/${DiagnosisContent.httpPortalGateway}'),
           dyScroll: -500.0,
         );
-      }, timeout: const Timeout(Duration(minutes: 1)));
+      }, timeout: const Timeout(Duration(minutes: 5)));
 
       test('PageView Go to Report', () async {
         await driver.tap(minitelFinders.reportingTab);
@@ -72,5 +72,5 @@ void main() {
         await driver.tap(minitelFinders.sendToSlack);
       }, timeout: const Timeout(Duration(minutes: 2)));
     }, timeout: const Timeout(Duration(minutes: 2)));
-  });
+  }, timeout: const Timeout(Duration(minutes: 5)));
 }

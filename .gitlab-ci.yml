@@ -1,5 +1,6 @@
 stages:
   - test
+  - integration-tests
   - build
   - deploy
 
@@ -23,6 +24,100 @@ unit-tests:
   artifacts:
     paths:
     - coverage/
+
+navigation_test:
+  stage: integration-tests
+  image: darkness4/flutter-builder:latest
+
+  before_script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter packages get
+    - sudo apt update
+    - sudo apt install -y bash
+    - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+  script:
+    - flutter drive --target=test_driver/app.dart --driver=test_driver/navigation_test.dart --build
+
+  after_script:
+    - /bin/bash ./.ci-scripts/stop-emulator
+
+  artifacts:
+    paths:
+    - test_driver/screenshots/
+
+documentation_test:
+  stage: integration-tests
+  image: darkness4/flutter-builder:latest
+
+  before_script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter packages get
+    - sudo apt update
+    - sudo apt install -y bash
+    - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+  script:
+    - flutter drive --target=test_driver/app.dart --driver=test_driver/documentation_test.dart --build
+
+  ater_script:
+    - /bin/bash ./.ci-scripts/stop-emulator
+
+authentication_test:
+  stage: integration-tests
+  image: darkness4/flutter-builder:latest
+
+  before_script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter packages get
+    - sudo apt update
+    - sudo apt install -y bash
+    - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+  script:
+    - flutter drive --target=test_driver/app.dart --driver=test_driver/authentication_test.dart --build
+
+  after_script:
+    - /bin/bash ./.ci-scripts/stop-emulator
+
+news_test:
+  stage: integration-tests
+  image: darkness4/flutter-builder:latest
+
+  before_script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter packages get
+    - sudo apt update
+    - sudo apt install -y bash
+    - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+  script:
+    - flutter drive --target=test_driver/app.dart --driver=test_driver/news_test.dart --build
+
+  after_script:
+    - /bin/bash ./.ci-scripts/stop-emulator
+
+reporting_test:
+  stage: integration-tests
+  image: darkness4/flutter-builder:latest
+
+  before_script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter packages get
+    - sudo apt update
+    - sudo apt install -y bash
+    - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+  script:
+    - flutter drive --target=test_driver/app.dart --driver=test_driver/reporting_test.dart --build
+
+  ater_script:
+    - /bin/bash ./.ci-scripts/stop-emulator
 
 pages:
   stage: deploy

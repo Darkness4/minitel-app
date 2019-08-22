@@ -15,6 +15,7 @@ class AppsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scrollbar(
       child: GridView.count(
+        key: const Key('apps_list/list'),
         padding: const EdgeInsets.all(10),
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,

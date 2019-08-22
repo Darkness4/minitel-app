@@ -2,9 +2,9 @@ import 'post.dart';
 
 /// Facebook User feed generated from Fracebook 4.0 Graph API
 class Feed {
-  List<Post> posts;
-  String nextUrl;
-  String prevUrl;
+  final List<Post> posts;
+  final String nextUrl;
+  final String prevUrl;
 
   Feed({
     this.posts,
@@ -12,13 +12,15 @@ class Feed {
     this.prevUrl,
   });
 
-  Feed.fromJson(Map<String, dynamic> json) {
+  factory Feed.fromJson(Map<String, dynamic> json) {
     final List<Map<String, dynamic>> data =
         List<Map<String, dynamic>>.from(json["data"]);
-    posts =
-        data.map((Map<String, dynamic> post) => Post.fromJson(post)).toList();
-    nextUrl = json["paging"]["next"];
-    prevUrl = json["paging"]["previous"];
+    return Feed(
+      posts:
+          data.map((Map<String, dynamic> post) => Post.fromJson(post)).toList(),
+      nextUrl: json["paging"]["next"],
+      prevUrl: json["paging"]["previous"],
+    );
   }
 
   Map<String, dynamic> toJson() {
