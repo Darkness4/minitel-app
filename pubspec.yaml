@@ -1,16 +1,11 @@
 name: minitel_toolbox
 description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre
-
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# Read more about versioning at semver.org.
+homepage: https://github.com/Darkness4/minitel-app
+author: Nguyen Marc <nguyen_marc@live.fr>
 version: 0.5.0
 
 environment:
-  sdk: ">=2.3.0 <3.0.0"
+  sdk: ">=2.4.0 <3.0.0"
 
 # Use ^version only if the package are stable
 # ^1.2.0 means >=1.2.0 <2.0.0

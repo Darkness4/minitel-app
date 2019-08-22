@@ -9,11 +9,7 @@ unit-tests:
   image: darkness4/flutter-builder:latest
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - apt update
-    - apt install -y lcov
+    - /bin/sh ./.ci-scripts/before_script_get_deps_coverage.sh
 
   script:
     - flutter test --coverage
@@ -30,13 +26,9 @@ navigation_test:
   image: darkness4/flutter-builder:latest
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - sudo apt update
-    - sudo apt install -y bash sed
-    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-    - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+    - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+    - /bin/sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+    - /bin/sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
@@ -54,11 +46,7 @@ documentation_test:
   image: darkness4/flutter-builder:latest
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - sudo apt update
-    - sudo apt install -y bash sed
+    - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
@@ -74,11 +62,7 @@ authentication_test:
   image: darkness4/flutter-builder:latest
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - sudo apt update
-    - sudo apt install -y bash sed
+    - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
@@ -94,11 +78,7 @@ news_test:
   image: darkness4/flutter-builder:latest
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - sudo apt update
-    - sudo apt install -y bash sed
+    - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
@@ -114,11 +94,7 @@ reporting_test:
   image: darkness4/flutter-builder:latest
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - sudo apt update
-    - sudo apt install -y bash sed
+    - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
@@ -158,11 +134,7 @@ build-test:
   image: darkness4/flutter-builder:latest
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - apt update
-    - apt install -y sed
+    - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
@@ -184,11 +156,7 @@ build:
   image: darkness4/flutter-builder:latest
   
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - apt update
-    - apt install -y sed
+    - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties

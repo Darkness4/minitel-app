@@ -1,26 +1,31 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/icalendar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   final CalendarUrlAPI _calendarUrlAPI = CalendarUrlAPI();
-  setUpAll(() async {
-    final Directory directory = await Directory.systemTemp.createTemp();
+  final Directory directory = Directory.systemTemp.createTempSync();
 
-    const MethodChannel('plugins.flutter.io/path_provider')
-        .setMockMethodCallHandler((MethodCall methodCall) async {
-      if (methodCall.method == 'getApplicationDocumentsDirectory') {
-        return directory.path;
-      }
-      return null;
-    });
-    SharedPreferences.setMockInitialValues(<String, dynamic>{});
+  const MethodChannel('plugins.flutter.io/path_provider')
+      .setMockMethodCallHandler((MethodCall methodCall) async {
+    if (methodCall.method == 'getApplicationDocumentsDirectory') {
+      return directory.path;
+    }
+    return null;
+  });
+  const MethodChannel('plugins.flutter.io/shared_preferences')
+      .setMockMethodCallHandler((MethodCall methodCall) async {
+    if (methodCall.method == 'getAll') {
+      return <String, dynamic>{}; // set initial values here if desired
+    }
+    return null;
   });
 
   group('Must FAIL', () {

@@ -70,6 +70,7 @@ void main() {
       test('Send to Slack', () async {
         await driver.waitFor(minitelFinders.reportingFABDone);
         await driver.tap(minitelFinders.sendToSlack);
+        await driver.waitFor(find.text('ok'));
       }, timeout: const Timeout(Duration(minutes: 2)));
     }, timeout: const Timeout(Duration(minutes: 2)));
   }, timeout: const Timeout(Duration(minutes: 5)));

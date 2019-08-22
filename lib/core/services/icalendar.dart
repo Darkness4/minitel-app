@@ -125,12 +125,9 @@ class ICalendar {
 
   /// GET the .ics from url
   Future<Stream<String>> _getICalendar(String url) async {
-    final HttpClient client = HttpClient()
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+    final HttpClient client = HttpClient();
 
-    final HttpClientRequest request = await client.getUrl(Uri.parse(url))
-      ..headers.removeAll(HttpHeaders.contentLengthHeader);
+    final HttpClientRequest request = await client.getUrl(Uri.parse(url));
     final HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
       return response.cast<List<int>>().transform(utf8.decoder);

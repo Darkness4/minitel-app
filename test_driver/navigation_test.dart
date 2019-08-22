@@ -53,7 +53,7 @@ void main() {
       test('Screenshot news', () async {
         await driver.tap(minitelFinders.drawer);
         await driver.tap(minitelFinders.newsRoute);
-        await driver.waitForAbsent(minitelFinders.newsLoading);
+        await Future<dynamic>.delayed(const Duration(seconds: 5));
         await takeScreenshot(driver, ScreenshotsPaths.news);
       });
 
@@ -65,6 +65,7 @@ void main() {
         await driver.tap(minitelFinders.agendaPswd);
         await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
         await driver.tap(minitelFinders.agendaConnect);
+        print("Trying to login");
         await takeScreenshot(driver, ScreenshotsPaths.agenda);
       });
 
