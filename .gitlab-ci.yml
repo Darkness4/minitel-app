@@ -12,7 +12,7 @@ unit-tests:
     - /bin/sh ./.ci-scripts/before_script_get_deps_coverage.sh
 
   script:
-    - flutter test --coverage
+    - flutter test --verbose --coverage
 
   after_script:
     - genhtml -o coverage coverage/lcov.info
@@ -32,7 +32,7 @@ navigation_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --target=test_driver/app.dart --driver=test_driver/navigation_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/navigation_test.dart --build
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -60,7 +60,7 @@ documentation_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --target=test_driver/app.dart --driver=test_driver/documentation_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/documentation_test.dart --build
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -84,7 +84,7 @@ authentication_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --target=test_driver/app.dart --driver=test_driver/authentication_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/authentication_test.dart --build
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -108,7 +108,7 @@ news_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --target=test_driver/app.dart --driver=test_driver/news_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/news_test.dart --build
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -132,7 +132,7 @@ reporting_test:
     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
   script:
-    - flutter drive --target=test_driver/app.dart --driver=test_driver/reporting_test.dart --build
+    - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/reporting_test.dart --build
 
   after_script:
     - /bin/bash ./.ci-scripts/stop-emulator
@@ -179,7 +179,7 @@ build-test:
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
 
   script:
-    - flutter build apk --target-platform android-arm --split-per-abi
+    - flutter build apk --verbose --target-platform android-arm --split-per-abi
 
   except:
   - master
@@ -201,7 +201,7 @@ build:
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
 
   script:
-    - flutter build apk --target-platform android-arm,android-arm64 --split-per-abi
+    - flutter build apk --verbose --target-platform android-arm,android-arm64 --split-per-abi
 
   after_script:
     - mv build/app/outputs/apk/release/app-armeabi-v7a-release.apk minitel-toolbox-armeabi-v7a.apk
