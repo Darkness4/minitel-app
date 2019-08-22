@@ -1,21 +1,18 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
 
+  setUpAll(() async {
+    SharedPreferences.setMockInitialValues(<String, dynamic>{});
+  });
+
   group("Must FAIL", () {
     // Mock out the MethodChannel for the path_provider plugin
-    const MethodChannel('plugins.flutter.io/shared_preferences')
-        .setMockMethodCallHandler((MethodCall methodCall) async {
-      if (methodCall.method == 'getAll') {
-        return <String, dynamic>{}; // set initial values here if desired
-      }
-      return null;
-    });
 
     test("savedCalendarURL: not existing", () async {
       final String output = await _calendarURL.savedCalendarURL;
@@ -36,14 +33,6 @@ void main() {
   });
 
   group("Must WORK", () {
-    // Mock out the MethodChannel for the path_provider plugin
-    const MethodChannel('plugins.flutter.io/shared_preferences')
-        .setMockMethodCallHandler((MethodCall methodCall) async {
-      if (methodCall.method == 'getAll') {
-        return <String, dynamic>{}; // set initial values here if desired
-      }
-      return null;
-    });
     test("saveCalendarURL", () async {
       const String url =
           "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";

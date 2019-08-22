@@ -20,9 +20,8 @@ void main() {
       }
       return null;
     });
+    SharedPreferences.setMockInitialValues(<String, dynamic>{});
   });
-
-  SharedPreferences.setMockInitialValues(<String, dynamic>{});
 
   group('Must FAIL', () {
     test("getParsedCalendarFromFile: Not Existing", () async {
