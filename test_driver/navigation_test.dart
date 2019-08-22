@@ -91,43 +91,6 @@ void main() {
       });
     });
   });
-
-  // TODO List
-  // Authentication
-  // - Domain Name Dropmenu
-  // --- Value Change
-  // --- Login test (public should work)
-  // - Time Dropmenu
-  // --- Value Change
-  // --- Login test (check if second superior)
-  // - TextFields
-  // - Login button
-  // - App push
-  //
-  // News
-  // - Github
-  // - Facebook
-  //
-  // Agenda
-  // - Notifications parameters
-  // - Textfields
-  // - Save test
-  //
-  // Reporting
-  // - Textfields
-  // - Diagnose test
-  // - All send test
-  // - Test texts log
-  //
-  // Documentation
-  // - Drawer
-  // - Images
-  // - All send test
-  // - Test texts log
-  // - Navigation test
-  //
-  // About
-  // - Test launcher
 }
 
 Future<void> takeScreenshot(FlutterDriver driver, String path) async {
