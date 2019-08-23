@@ -30,7 +30,6 @@ class CalendarUrlAPI {
             ..cookies.add(phpSessionIDCAS);
       final HttpClientResponse response = await request.close();
       final String body = await response
-          .cast<List<int>>()
           .transform(utf8.decoder)
           .transform(const LineSplitter())
           .firstWhere(
@@ -69,7 +68,6 @@ class CalendarUrlAPI {
     response = await request.close();
 
     String lt = await response
-        .cast<List<int>>()
         .transform(utf8.decoder)
         .transform(const LineSplitter())
         .firstWhere((String line) =>

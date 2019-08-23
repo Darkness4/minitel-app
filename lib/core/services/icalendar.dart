@@ -130,7 +130,7 @@ class ICalendar {
     final HttpClientRequest request = await client.getUrl(Uri.parse(url));
     final HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      return response.cast<List<int>>().transform(utf8.decoder);
+      return response.transform(utf8.decoder);
     } else {
       throw Exception("HttpError: ${response.statusCode}");
     }

@@ -44,8 +44,7 @@ class GatewayAPI {
           ..write(data);
     final HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      final String body =
-          await response.cast<List<int>>().transform(utf8.decoder).join();
+      final String body = await response.transform(utf8.decoder).join();
       if (body.contains('title_error')) {
         throw Exception('Bad Username or Password');
       } else {
@@ -81,8 +80,7 @@ class GatewayAPI {
       }
 
       final HttpClientResponse response = await request.close();
-      final String body =
-          await response.cast<List<int>>().transform(utf8.decoder).join();
+      final String body = await response.transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         status = body.contains('title_success')
             ? 'You have logged out'
@@ -137,8 +135,7 @@ class GatewayAPI {
       }
 
       final HttpClientResponse response = await request.close();
-      final String body =
-          await response.cast<List<int>>().transform(utf8.decoder).join();
+      final String body = await response.transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         if (!body.contains('l_rtime')) {
           status = 'Not logged in';

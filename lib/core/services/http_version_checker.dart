@@ -13,8 +13,7 @@ class VersionAPI {
         "https://api.github.com/repos/Darkness4/minitel-app/releases/latest"));
     final HttpClientResponse response = await request.close();
     if (response.statusCode == 200) {
-      final String data =
-          await response.cast<List<int>>().transform(utf8.decoder).join();
+      final String data = await response.transform(utf8.decoder).join();
       return LatestRelease.fromJson(json.decode(data));
     } else {
       throw Exception(response.statusCode.toString());

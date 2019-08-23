@@ -56,8 +56,7 @@ class WebhookAPI {
               ContentType("application", "json", charset: "utf-8")
           ..write(json.encode(data));
         final HttpClientResponse response = await request.close();
-        status =
-            await response.cast<List<int>>().transform(utf8.decoder).join();
+        status = await response.transform(utf8.decoder).join();
       } catch (e) {
         status = e.toString();
       }

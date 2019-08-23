@@ -24,8 +24,7 @@ class PortailAPI {
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
 
-    final String temp =
-        await response.cast<List<int>>().transform(utf8.decoder).join();
+    final String temp = await response.transform(utf8.decoder).join();
     final String lt =
         RegExp(r'name="lt" value="([^"]*)"').firstMatch(temp).group(1);
     final String action = RegExp(r'action="([^"]*)"').firstMatch(temp).group(1);

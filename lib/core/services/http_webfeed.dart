@@ -11,8 +11,7 @@ class WebFeedAPI {
   Future<AtomFeed> getAtom(String atomUrl) async {
     final HttpClientRequest request = await _client.getUrl(Uri.parse(atomUrl));
     final HttpClientResponse response = await request.close();
-    final String status =
-        await response.cast<List<int>>().transform(utf8.decoder).join();
+    final String status = await response.transform(utf8.decoder).join();
     return AtomFeed.parse(status);
   }
 
@@ -20,8 +19,7 @@ class WebFeedAPI {
   Future<RssFeed> getRss(String rssUrl) async {
     final HttpClientRequest request = await _client.getUrl(Uri.parse(rssUrl));
     final HttpClientResponse response = await request.close();
-    final String status =
-        await response.cast<List<int>>().transform(utf8.decoder).join();
+    final String status = await response.transform(utf8.decoder).join();
     return RssFeed.parse(status);
   }
 }

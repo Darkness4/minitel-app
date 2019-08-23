@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:dscript_exec/dscript_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
@@ -168,7 +167,8 @@ class Diagnosis {
 
   Future<String> _terminalCommand(String command, List<String> args) async {
     try {
-      final String stdout = await exec(command, args).runGetOutput();
+      final ProcessResult result = await Process.run(command, args);
+      final String stdout = result.stdout;
       return stdout.isEmpty ? "Nothing to show" : stdout;
     } catch (e, s) {
       return "Error: $e\n" "Stacktrace: $s";
