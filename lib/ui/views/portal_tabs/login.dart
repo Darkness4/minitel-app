@@ -6,6 +6,7 @@ import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:provider/provider.dart';
@@ -21,11 +22,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _uidFocusNode = FocusNode();
-  final _pswdFocusNode = FocusNode();
-  final _uidController = TextEditingController();
-  final _pswdController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FocusNode _uidFocusNode = FocusNode();
+  final FocusNode _pswdFocusNode = FocusNode();
+  final TextEditingController _uidController = TextEditingController();
+  final TextEditingController _pswdController = TextEditingController();
   final ValueNotifier<String> _selectedTime = ValueNotifier<String>('4 hours');
   final ValueNotifier<String> _selectedUrl =
       ValueNotifier<String>(MyIPAdresses.stormshieldIP);
@@ -39,53 +40,16 @@ class LoginPageState extends State<LoginPage> {
         portailAPI: Provider.of<PortailAPI>(context),
         calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
         gatewayAPI: Provider.of<GatewayAPI>(context),
+        iCalendar: Provider.of<ICalendar>(context),
         rememberMe: _rememberMe,
         selectedTime: _selectedTime,
         selectedUrl: _selectedUrl,
         autoLogin: _autoLogin,
       ),
-      onModelReady: (model) => _rememberLogin(context, model),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: TextFormField(
-                key: const Key('login/uidTextField'),
-                focusNode: _uidFocusNode,
-                controller: _uidController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.person),
-                  hintText: "prenom.nom",
-                  labelText: "Nom d'utilisateur",
-                ),
-                onEditingComplete: () {
-                  _uidFocusNode.unfocus();
-                  FocusScope.of(context).requestFocus(_pswdFocusNode);
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: TextFormField(
-                key: const Key('login/pswdTextField'),
-                controller: _pswdController,
-                obscureText: true,
-                focusNode: _pswdFocusNode,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.vpn_key),
-                  labelText: "Mot de passe",
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      builder: (context, model, Widget loginForm) {
+      onModelReady: (LoginViewModel model) => _rememberLogin(context, model),
+      builder: (BuildContext context, LoginViewModel model, Widget loginForm) {
         return ListView(
+          key: const Key('login/list'),
           padding: const EdgeInsets.all(20.0),
           children: <Widget>[
             _StatusCard(
@@ -104,16 +68,16 @@ class LoginPageState extends State<LoginPage> {
                           const Text("Nom de domaine / IP "),
                           ValueListenableBuilder<String>(
                             valueListenable: model.selectedUrl,
-                            builder: (context, value, _) {
+                            builder: (BuildContext context, String value, _) {
                               return DropdownButton<String>(
-                                key:
-                                    const Key('login/nameServerDropdownButton'),
+                                key: const Key('login/name_server'),
                                 value: value,
-                                items: [
-                                  for (var value in LoginConstants.urlRootList)
+                                items: <DropdownMenuItem<String>>[
+                                  for (String value
+                                      in LoginConstants.urlRootList)
                                     DropdownMenuItem<String>(
-                                      child: Text(value),
                                       value: value,
+                                      child: Text(value),
                                     )
                                 ],
                                 onChanged: (String selectedUrl) async =>
@@ -130,18 +94,19 @@ class LoginPageState extends State<LoginPage> {
                           const Text("Durée d\'authentification "),
                           ValueListenableBuilder<String>(
                             valueListenable: model.selectedTime,
-                            builder: (context, value, _) {
+                            builder: (BuildContext context, String value, _) {
                               return DropdownButton<String>(
-                                key: const Key('login/timeDropdownButton'),
+                                key: const Key('login/time'),
                                 value: model.selectedTime.value,
-                                items: [
-                                  for (var value in LoginConstants.timeMap.keys)
+                                items: <DropdownMenuItem<String>>[
+                                  for (String value
+                                      in LoginConstants.timeMap.keys)
                                     DropdownMenuItem<String>(
-                                      child: Text(value),
                                       value: value,
+                                      child: Text(value),
                                     ),
                                 ],
-                                onChanged: (selectedTime) =>
+                                onChanged: (String selectedTime) =>
                                     model.selectedTime.value = selectedTime,
                               );
                             },
@@ -156,11 +121,11 @@ class LoginPageState extends State<LoginPage> {
                         const Text("Se souvenir "),
                         ValueListenableBuilder<bool>(
                           valueListenable: model.rememberMe,
-                          builder: (context, value, _) {
+                          builder: (BuildContext context, bool value, _) {
                             return Checkbox(
-                              key: const Key('login/rememberMeButton'),
+                              key: const Key('login/remember_me'),
                               value: value,
-                              onChanged: (value) {
+                              onChanged: (bool value) {
                                 if (!value) {
                                   model.autoLogin.value = false;
                                 }
@@ -177,11 +142,11 @@ class LoginPageState extends State<LoginPage> {
                         const Text("Se connecter automatiquement"),
                         ValueListenableBuilder<bool>(
                           valueListenable: model.autoLogin,
-                          builder: (context, value, _) {
+                          builder: (BuildContext context, bool value, _) {
                             return Checkbox(
-                              key: const Key('login/autoLoginButton'),
+                              key: const Key('login/auto_login'),
                               value: value,
-                              onChanged: (value) {
+                              onChanged: (bool value) {
                                 if (value) {
                                   model.rememberMe.value = true;
                                 }
@@ -219,11 +184,50 @@ class LoginPageState extends State<LoginPage> {
           ],
         );
       },
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: TextFormField(
+                key: const Key('login/uid'),
+                focusNode: _uidFocusNode,
+                controller: _uidController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.person),
+                  hintText: "prenom.nom",
+                  labelText: "Nom d'utilisateur",
+                ),
+                onEditingComplete: () {
+                  _uidFocusNode.unfocus();
+                  FocusScope.of(context).requestFocus(_pswdFocusNode);
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: TextFormField(
+                key: const Key('login/pswd'),
+                controller: _pswdController,
+                obscureText: true,
+                focusNode: _pswdFocusNode,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.vpn_key),
+                  labelText: "Mot de passe",
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   @override
-  dispose() {
+  void dispose() {
     _uidController.dispose();
     _pswdController.dispose();
     super.dispose();
@@ -231,7 +235,7 @@ class LoginPageState extends State<LoginPage> {
 
   Future<void> _rememberLogin(
       BuildContext context, LoginViewModel model) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     _rememberMe.value = prefs.getBool("rememberMe") ?? false;
     if (_rememberMe.value) {
       _uidController.text = prefs.getString("user");
@@ -250,16 +254,16 @@ class _StatusCard extends StatelessWidget {
   final String _selectedUrl;
 
   const _StatusCard({
-    Key key,
     @required String selectedUrl,
+    Key key,
   })  : _selectedUrl = selectedUrl,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _gatewayAPI = Provider.of<GatewayAPI>(context);
-    final _portailAPI = Provider.of<PortailAPI>(context);
-    final _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
+    final GatewayAPI _gatewayAPI = Provider.of<GatewayAPI>(context);
+    final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
+    final CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
 
     return Card(
       elevation: 10.0,
@@ -274,7 +278,8 @@ class _StatusCard extends StatelessWidget {
                   _selectedUrl,
                   cookie: _gatewayAPI.cookie,
                 ),
-                builder: (context, snapshot) {
+                builder:
+                    (BuildContext context, AsyncSnapshot<String> snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
                     case ConnectionState.active:
@@ -285,7 +290,7 @@ class _StatusCard extends StatelessWidget {
                     case ConnectionState.done:
                       return Text(
                         snapshot.data,
-                        key: const Key('login/gatewayText'),
+                        key: const Key('login/gateway_text'),
                         style: TextStyle(
                             color: (snapshot.hasError ||
                                     !snapshot.data.contains("second"))
@@ -306,7 +311,8 @@ class _StatusCard extends StatelessWidget {
                 FutureBuilder<String>(
                   future: _calendarUrlAPI
                       .savedCalendarURL, // a previously-obtained Future<String> or null
-                  builder: (BuildContext context, snapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:
@@ -317,13 +323,12 @@ class _StatusCard extends StatelessWidget {
                           return const Icon(
                             Icons.close,
                             color: Colors.red,
-                            key: Key('login/agendaFailure'),
                           );
                         }
                         return const Icon(
                           Icons.done,
                           color: Colors.green,
-                          key: Key('login/agendaSuccess'),
+                          key: Key('login/agenda_success'),
                         );
                     }
                     return null; // unreachable
@@ -337,17 +342,17 @@ class _StatusCard extends StatelessWidget {
                   "Portail: ",
                   style: TextStyle(fontSize: 20),
                 ),
-                _portailAPI.cookie == null
-                    ? const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                        key: Key('login/agendaFailure'),
-                      )
-                    : const Icon(
-                        Icons.done,
-                        color: Colors.green,
-                        key: Key('login/agendaSuccess'),
-                      )
+                if (_portailAPI.cookie == null)
+                  const Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  )
+                else
+                  const Icon(
+                    Icons.done,
+                    color: Colors.green,
+                    key: Key('login/portail_success'),
+                  )
               ],
             ),
           ],

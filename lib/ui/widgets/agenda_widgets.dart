@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:minitel_toolbox/core/models/icalendar/event.dart';
+import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
 class DayWidget extends StatelessWidget {
@@ -41,6 +46,187 @@ class DayWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: dailyEvents,
+      ),
+    );
+  }
+}
+
+class ErrorAgendaWidget extends StatelessWidget {
+  final TextEditingController _uidController = TextEditingController();
+  final TextEditingController _pswdController = TextEditingController();
+  final FocusNode _uidFocusNode = FocusNode();
+  final FocusNode _pswdFocusNode = FocusNode();
+  final GlobalKey<FormState> _formKey;
+  final String error;
+  final Function parentSetState;
+
+  ErrorAgendaWidget(this.error, this.parentSetState, this._formKey);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        Card(
+          elevation: 4,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                error.toString(),
+                style: MinitelTextStyles.error,
+              ),
+            ),
+          ),
+        ),
+        Card(
+          elevation: 4,
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    key: const Key('agenda_view/uid'),
+                    focusNode: _uidFocusNode,
+                    controller: _uidController,
+                    decoration: const InputDecoration(
+                      hintText: "prénom.nom",
+                      labelText: "Nom d'utilisateur",
+                    ),
+                    onEditingComplete: () {
+                      _uidFocusNode.unfocus();
+                      FocusScope.of(context).requestFocus(_pswdFocusNode);
+                    },
+                  ),
+                  TextFormField(
+                    key: const Key('agenda_view/pswd'),
+                    controller: _pswdController,
+                    obscureText: true,
+                    focusNode: _pswdFocusNode,
+                    decoration: const InputDecoration(
+                      hintText: "Mot de passe",
+                      labelText: "Mot de passe",
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: FloatingActionButton.extended(
+              key: const Key('agenda_view/connect'),
+              backgroundColor: Colors.red,
+              elevation: 10.0,
+              onPressed: () async {
+                final CalendarUrlAPI _calendarURL =
+                    Provider.of<CalendarUrlAPI>(context);
+                final ICalendar ical = Provider.of<ICalendar>(context);
+                try {
+                  final String url = await _calendarURL.getCalendarURL(
+                    username: _uidController.text,
+                    password: _pswdController.text,
+                  );
+                  await ical.saveCalendar(url, _calendarURL);
+                } on Exception catch (e) {
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(content: Text(e.toString())),
+                  );
+                }
+                parentSetState(() {});
+              },
+              label: const Text(
+                "Se connecter",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              icon: const Icon(Icons.arrow_forward),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class EventCard extends StatelessWidget {
+  final Event _event;
+
+  const EventCard(Event event, {Key key})
+      : _event = event,
+        super(key: key);
+
+  Color get _cardColor {
+    final String upper = _event.summary.toLowerCase();
+    if (upper.contains("examen")) {
+      return Colors.red[200];
+    } else if (upper.contains("tp")) {
+      return Colors.orange[200];
+    } else if (upper.contains("td")) {
+      return Colors.green[200];
+    } else if (upper.contains("tutorat")) {
+      return Colors.blue[200];
+    } else if (upper.contains("sport") ||
+        upper.contains("vacance") ||
+        upper.contains("férié")) {
+      return Colors.transparent;
+    } else {
+      return Colors.white;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Card(
+        color: _cardColor,
+        elevation: (_event.summary.toLowerCase().contains("sport") ||
+                _event.summary.toLowerCase().contains("vacance") ||
+                _event.summary.toLowerCase().contains("férié"))
+            ? 0
+            : 4,
+        child: Container(
+          padding: const EdgeInsets.all(4.0),
+          child: Column(
+            children: <Widget>[
+              Text(
+                _event.summary,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                _event.description,
+                style: const TextStyle(height: 1.4),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "${_event.location != "" ? '➡' : ''} ${_event.location} ",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "${DateFormat.Hm().format(_event.dtstart)}"
+                " - "
+                "${DateFormat.Hm().format(_event.dtend)}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

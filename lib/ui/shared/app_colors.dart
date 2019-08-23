@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// Color palette of the app
 class MinitelColors {
   static const Color PrimaryColor = Colors.green;
+  static const Color AccentColor = Colors.greenAccent;
   static const Color FontColor = Colors.black87;
 
   static const Color TerminalHeaderColor = Colors.lightBlue;
@@ -12,9 +13,10 @@ class MinitelColors {
   static const Color ReportPrimaryColor = Colors.red;
 
   static Color DrawerSelectedColor = Colors.green[100];
+  static Color DrawerSelectedColorGrey = Colors.grey[300];
 
   /// Attribuated color to each month
-  static const Map<int, Color> MonthColorPalette = {
+  static const Map<int, Color> MonthColorPalette = <int, Color>{
     DateTime.january: Colors.red,
     DateTime.february: Colors.pink,
     DateTime.march: Colors.purple,

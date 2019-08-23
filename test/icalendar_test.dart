@@ -1,51 +1,47 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
-import 'package:minitel_toolbox/core/models/icalendar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 
-void main() async {
-  final _calendarUrlAPI = CalendarUrlAPI();
-  setUpAll(() async {
-    final directory = await Directory.systemTemp.createTemp();
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  final CalendarUrlAPI _calendarUrlAPI = CalendarUrlAPI();
+  final Directory directory = Directory.systemTemp.createTempSync();
 
-    const MethodChannel('plugins.flutter.io/path_provider')
-        .setMockMethodCallHandler((MethodCall methodCall) async {
-      if (methodCall.method == 'getApplicationDocumentsDirectory') {
-        return directory.path;
-      }
-      return null;
-    });
+  const MethodChannel('plugins.flutter.io/path_provider')
+      .setMockMethodCallHandler((MethodCall methodCall) async {
+    if (methodCall.method == 'getApplicationDocumentsDirectory') {
+      return directory.path;
+    }
+    return null;
+  });
+  const MethodChannel('plugins.flutter.io/shared_preferences')
+      .setMockMethodCallHandler((MethodCall methodCall) async {
+    if (methodCall.method == 'getAll') {
+      return <String, dynamic>{}; // set initial values here if desired
+    }
+    return null;
   });
 
-  SharedPreferences.setMockInitialValues({});
-
   group('Must FAIL', () {
-    test("getCalendarFromFile: Not Existing", () async {
+    test("getParsedCalendarFromFile: Not Existing", () async {
       try {
-        await ICalendar(_calendarUrlAPI).getCalendarFromFile();
-        throw "Fail to fail";
+        await ICalendar().getParsedCalendarFromFile();
+        throw Exception("Fail to fail");
       } catch (e) {
         expect(e.toString(), contains("File calendar.ics do not exists"));
       }
     });
-
-    test("parseCalendar: Not Existing", () async {
-      try {
-        await ICalendar(_calendarUrlAPI).parseCalendar();
-        throw "Fail to fail";
-      } catch (e) {
-        expect(e.toString(), contains("Calendar stream not found"));
-      }
-    });
     test("saveCalendar: Wrong URL", () async {
       try {
-        await ICalendar(_calendarUrlAPI)
-            .saveCalendar("https://portail.emse.fr/ics/1.ics");
-        throw "Fail to fail";
+        await ICalendar()
+            .saveCalendar("https://portail.emse.fr/ics/1.ics", _calendarUrlAPI);
+        throw Exception("Fail to fail");
       } catch (e) {
         expect(e.toString(), isNot(contains("Fail to fail")));
       }
@@ -54,44 +50,47 @@ void main() async {
 
   group("Must WORK", () {
     test("saveCalendar", () async {
-      var ical = ICalendar(_calendarUrlAPI);
-      var url = await _calendarUrlAPI.getCalendarURL(
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
-      await ical.saveCalendar(url);
+      await ical.saveCalendar(url, _calendarUrlAPI);
     });
 
-    test("getCalendarFromFile", () async {
-      var ical = ICalendar(_calendarUrlAPI);
-      await ical.getCalendarFromFile();
+    test("getParsedCalendarFromFile", () async {
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
+      await ical.saveCalendar(url, _calendarUrlAPI);
+      await ical.getParsedCalendarFromFile();
     });
 
     test("parseCalendar from Login", () async {
-      var ical = ICalendar(_calendarUrlAPI);
-      var url = await _calendarUrlAPI.getCalendarURL(
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
-      await ical.saveCalendar(url);
+      await ical.saveCalendar(url, _calendarUrlAPI);
 
-      await ical.getCalendarFromFile();
-      var parsedCalendar = await ical.parseCalendar();
-      print(parsedCalendar.timezone.daylight.toString());
-      print(parsedCalendar.events[0]["DTSTART"]);
-      print(parsedCalendar.events[0].length);
-      print(parsedCalendar.events.length);
+      final ParsedCalendar parsedCalendar =
+          await ical.getParsedCalendarFromFile();
+      expect(parsedCalendar.timezone.daylight.toString(), isNotNull);
+      expect(parsedCalendar.events[0].dtstart, isNotNull);
+      expect(parsedCalendar.events.length, isNotNull);
       expect(parsedCalendar.timezone.tzid, equals("Europe/Paris"));
     });
 
-    test("", () async {
-      var ical = ICalendar(_calendarUrlAPI);
+    test("parseCalendar from Cache", () async {
+      final ICalendar ical = ICalendar();
       ParsedCalendar parsedCalendar;
       String url;
 
       // Save before the test
-      var url0 = await _calendarUrlAPI.getCalendarURL(
+      final String url0 = await _calendarUrlAPI.getCalendarURL(
           username: "marc.nguyen",
           password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
-      await ical.saveCalendar(url0);
+      await ical.saveCalendar(url0, _calendarUrlAPI);
 
       // Test
       try {
@@ -99,26 +98,50 @@ void main() async {
           username: "",
           password: utf8.decode(base64.decode("")),
         );
-        throw "Bad login found a non-expected result";
+        throw Exception("Found a non-expected result");
       } on Exception catch (e) {
         expect(e.toString(), contains("Bad login"));
       }
 
       if (url != null) {
-        await ical.saveCalendar(url);
-        throw "A bad calendar has been saved";
+        await ical.saveCalendar(url, _calendarUrlAPI);
+        throw Exception("A bad calendar has been saved");
       } else {
         print("Cannot update calendar. Taking from cache.");
       }
 
-      var ical2 = ICalendar(_calendarUrlAPI);
-      await ical2.getCalendarFromFile();
-      parsedCalendar = await ical2.parseCalendar();
-      print(parsedCalendar.events.length);
-      print(parsedCalendar.timezone.daylight.toString());
-      print(parsedCalendar.events[0]["DTSTART"]);
-      print(parsedCalendar.events[0].length);
+      final ICalendar ical2 = ICalendar();
+      parsedCalendar = await ical2.getParsedCalendarFromFile();
+      expect(parsedCalendar.events.length, isNotNull);
+      expect(parsedCalendar.timezone.daylight.toString(), isNotNull);
+      expect(parsedCalendar.events[0].dtstart, isNotNull);
       expect(parsedCalendar.timezone.tzid, equals("Europe/Paris"));
+    });
+
+    test("parseCalendar export to Json", () async {
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
+      await ical.saveCalendar(url, _calendarUrlAPI);
+
+      final ParsedCalendar parsedCalendar =
+          await ical.getParsedCalendarFromFile();
+      print(parsedCalendar.toJson());
+    });
+
+    test("parseCalendar import to Json", () async {
+      final ICalendar ical = ICalendar();
+      final String url = await _calendarUrlAPI.getCalendarURL(
+          username: "marc.nguyen",
+          password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
+      await ical.saveCalendar(url, _calendarUrlAPI);
+
+      final ParsedCalendar parsedCalendar =
+          await ical.getParsedCalendarFromFile();
+      final ParsedCalendar parsedCalendar2 =
+          ParsedCalendar.fromJson(parsedCalendar.toJson());
+      expect(parsedCalendar2.toJson(), equals(parsedCalendar.toJson()));
     });
   });
 }

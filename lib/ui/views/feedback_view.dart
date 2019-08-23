@@ -3,10 +3,10 @@ import 'dart:io' show Platform;
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/services/http_webhook.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/services/http_webhook.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/docs_widgets.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
@@ -58,7 +58,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                           labelText: "Titre",
                           hintText: "Ex. : La page X est lente.",
                         ),
-                        onSubmitted: (term) {
+                        onSubmitted: (String term) {
                           _titleFocusNode.unfocus();
                           FocusScope.of(context)
                               .requestFocus(_descriptionFocusNode);
@@ -74,7 +74,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                           labelText: "Description",
                           hintText: "Comment reproduire le bug ?",
                         ),
-                        onSubmitted: (term) {
+                        onSubmitted: (String term) {
                           _descriptionFocusNode.unfocus();
                         },
                       ),
@@ -88,23 +88,23 @@ class _FeedbackViewState extends State<FeedbackView> {
                   const BoxMdH("Autres Contacts", 1),
                   FlatButton(
                     textColor: Colors.blueAccent,
+                    onPressed: LaunchURL.githubDarkness4Issues,
+                    color: Colors.lightBlue[100],
                     child: Text(
                       "Github Issues",
                       style: MinitelTextStyles.mdH2
                           .apply(color: Colors.blueAccent),
                     ),
-                    onPressed: LaunchURL.githubDarkness4Issues,
-                    color: Colors.lightBlue[100],
                   ),
                   FlatButton(
                     textColor: Colors.blueAccent,
+                    onPressed: LaunchURL.mailToMarcNGUYEN,
+                    color: Colors.lightBlue[100],
                     child: Text(
                       "Mail : marc_nguyen@live.fr",
                       style: MinitelTextStyles.mdH4
                           .apply(color: Colors.blueAccent),
                     ),
-                    onPressed: LaunchURL.mailToMarcNGUYEN,
-                    color: Colors.lightBlue[100],
                   ),
                   const Text(
                     "IRL : Marc NGUYEN, Chambre 2012",
@@ -122,8 +122,11 @@ class _FeedbackViewState extends State<FeedbackView> {
       floatingActionButton: Builder(
         builder: (BuildContext context) {
           return FloatingActionButton(
-            child: Image.asset("assets/img/Slack_Mark_Monochrome_White.png"),
             onPressed: () => _send(context),
+            child: const ImageIcon(
+              AssetImage(AssetPaths.Slack),
+              size: 75.0,
+            ),
           );
         },
       ),
@@ -148,9 +151,9 @@ class _FeedbackViewState extends State<FeedbackView> {
     _descriptionController = TextEditingController();
   }
 
-  void _send(BuildContext ctxt) async {
-    var packageInfo = await PackageInfo.fromPlatform();
-    var description =
+  Future<void> _send(BuildContext ctxt) async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String description =
         "${_descriptionController.text.replaceAll(RegExp(r'\n'), '\n>')}\n\n";
     IosDeviceInfo iosInfo;
     AndroidDeviceInfo androidInfo;
@@ -166,11 +169,11 @@ class _FeedbackViewState extends State<FeedbackView> {
     await Provider.of<WebhookAPI>(ctxt).report(
       "*Minitel App v${packageInfo.version} : ${_titleController.text}*\n"
       ">$description\n\n",
-      botName: "Flutter Alpha Feedback Bot",
+      botName: "Flutter Beta Feedback Bot",
     );
 
     Scaffold.of(ctxt).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text("Envoyé !"),
       ),
     );

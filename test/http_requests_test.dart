@@ -1,43 +1,49 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_webfeed.dart';
+import 'package:webfeed/domain/atom_feed.dart';
+import 'package:webfeed/domain/rss_feed.dart';
 
 void main() {
-  final _gateway = GatewayAPI();
-  final _webfeed = WebFeedAPI();
+  final GatewayAPI _gateway = GatewayAPI();
+  final WebFeedAPI _webfeed = WebFeedAPI();
 
   group('Http Requests', () {
     test('Bad Username or Password to 195.83.139.7', () async {
-      var status = await _gateway.autoLogin("", "", "195.83.139.7", 480);
-      print(status);
-
-      expect(status, "Error: Bad Username or Password");
+      try {
+        await _gateway.autoLogin("", "", "195.83.139.7", 480);
+        throw Exception("autoLogin did not throw");
+      } catch (e) {
+        expect(e.toString(), contains("Bad Username or Password"));
+      }
     });
 
     test('Bad Username and Password to google.fr to get HttpError', () async {
-      var status = await _gateway.autoLogin("", "", "google.fr", 0);
-      print(status);
-
-      expect(status, contains("HttpError"));
+      try {
+        await _gateway.autoLogin("", "", "google.fr", 0);
+        throw Exception("autoLogin did not throw");
+      } catch (e) {
+        expect(e.toString(), contains("HttpError"));
+      }
     });
 
     test('Get status Not logged in from 195.83.139.7', () async {
       await _gateway.disconnectGateway("195.83.139.7");
-      var status = await _gateway.getStatus("195.83.139.7");
+      final String status = await _gateway.getStatus("195.83.139.7");
       print(status);
 
       expect(status, contains("Not logged in"));
     });
 
-    // This test does not work because we are not using cookies.
     test('Get status SUCCESS from 195.83.139.7', () async {
-      var cookie = await _gateway.autoLogin("marc.nguyen",
+      final Cookie cookie = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
-      var statusFromReturn =
+      final String statusFromReturn =
           await _gateway.getStatus("195.83.139.7", cookie: cookie);
-      var statusFromApi =
+      final String statusFromApi =
           await _gateway.getStatus("195.83.139.7", cookie: _gateway.cookie);
 
       expect(statusFromApi, contains("second"));
@@ -45,23 +51,23 @@ void main() {
     });
 
     test('Get status intentionaly from google.fr to get error', () async {
-      var status = await _gateway.getStatus("www.google.fr");
+      final String status = await _gateway.getStatus("www.google.fr");
       print(status);
 
       expect(status, contains("HttpError"));
     });
 
     test('Disconnect intentionaly from google.fr to get error', () async {
-      var status = await _gateway.disconnectGateway("www.google.fr");
+      final String status = await _gateway.disconnectGateway("www.google.fr");
       print(status);
 
       expect(status, contains("HttpError"));
     });
 
     test('Disconnect from 195.83.139.7', () async {
-      var cookie = await _gateway.autoLogin("marc.nguyen",
+      final Cookie cookie = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
-      var status =
+      final String status =
           await _gateway.disconnectGateway("195.83.139.7", cookie: cookie);
       print(status);
 
@@ -69,15 +75,15 @@ void main() {
     });
 
     test('Good Username and Password to 195.83.139.7', () async {
-      var status = await _gateway.autoLogin("marc.nguyen",
+      final Cookie status = await _gateway.autoLogin("marc.nguyen",
           utf8.decode(base64.decode("b3BzdGU5NjM=")), "195.83.139.7", 240);
       print(status);
 
-      expect(status, contains("NETASQ_USER"));
+      expect(status.name, equals("NETASQ_USER"));
     });
 
     test('Get Atom from Github', () async {
-      var status = await _webfeed.getAtom(
+      final AtomFeed status = await _webfeed.getAtom(
           "https://github.com/Darkness4/minitel-app/commits/develop.atom");
       print(status.toString());
 
@@ -85,7 +91,8 @@ void main() {
     });
 
     test('Get Rss from Github', () async {
-      var status = await _webfeed.getRss("https://blog.jetbrains.com/feed/");
+      final RssFeed status =
+          await _webfeed.getRss("https://blog.jetbrains.com/feed/");
       print(status.toString());
 
       expect(status.title, contains("JetBrains Blog"));

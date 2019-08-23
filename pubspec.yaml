@@ -1,16 +1,12 @@
 name: minitel_toolbox
 description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre
-
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# Read more about versioning at semver.org.
-version: 0.4.0
+repository: https://github.com/Darkness4/minitel-app
+issue_tracker: https://github.com/Darkness4/minitel-app/issues
+author: Nguyen Marc <nguyen_marc@live.fr>
+version: 0.5.0
 
 environment:
-  sdk: ">=2.3.0 <3.0.0"
+  sdk: ">=2.5.0 <3.0.0"
 
 # Use ^version only if the package are stable
 # ^1.2.0 means >=1.2.0 <2.0.0
@@ -19,23 +15,22 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.15.8
-  connectivity: 0.4.3+7  # Flutter Team
-  dscript_exec: ^2.0.1  # Ravi Teja Gudapti
-  share: 0.6.2+1  # Flutter Team
-  webfeed: 0.4.2  # Wito Chandra
+  webview_flutter:
+    git: 
+      url: git://github.com/Darkness4/plugins.git
+      ref: cookie
+      path: packages/webview_flutter
+  connectivity: ^0.4.3+7  # Flutter Team
+  share: ^0.6.2+1  # Flutter Team
+  webfeed: ^0.4.2  # Wito Chandra
   url_launcher: ^5.1.2  # Flutter Team
-  # google_maps_flutter: ^0.5.20+3  # Flutter Team
-  shared_preferences: 0.5.3+4  # Flutter Team
-  webview_flutter: 0.3.11+3  # Flutter Team
+  shared_preferences: ^0.5.3+4  # Flutter Team
   path_provider: ^1.2.0  # Flutter Team
-  sticky_headers: 0.1.8  # Flutter Community
-  flutter_local_notifications: 0.8.1+1  # Michael Bui
-  html: 0.14.0+2  # Dart Team
-  package_info: 0.4.0+6  # Flutter Team
-  device_info: 0.4.0+2  # Flutter Team
-  provider: ^3.0.0+1
-  # font_awesome_flutter: ^8.5.0  # Brian Egan
+  sticky_headers: ^0.1.8  # Flutter Community
+  flutter_local_notifications: ^0.8.2  # Michael Bui
+  package_info: ^0.4.0+6  # Flutter Team
+  device_info: ^0.4.0+2  # Flutter Team
+  provider: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -43,7 +38,7 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
-  pedantic: ^1.8.0+1
+  extra_pedantic: ^1.0.0
   flutter_launcher_icons: 0.7.2+1
 
 flutter_icons:
@@ -51,6 +46,7 @@ flutter_icons:
   ios: true
   image_path: "assets/icon/icon.png"
   adaptive_icon_background: "#43a047"
+  adaptive_icon_foreground: "assets/icon/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

@@ -7,7 +7,7 @@ import 'toolbox_docs/login_doc.dart';
 
 class ToolboxDocs extends StatelessWidget {
   final PageController _controller;
-  ToolboxDocs({Key key, PageController controller})
+  const ToolboxDocs({Key key, PageController controller})
       : _controller = controller,
         super(key: key);
 
@@ -19,10 +19,11 @@ class ToolboxDocs extends StatelessWidget {
       ),
       body: Scrollbar(
         child: PageView(
+          key: const Key('toolbox_docs/pages'),
           controller: _controller,
           children: const <Widget>[
-            LoginDoc(),
-            DiagnoseDoc(),
+            LoginDoc(key: Key('toolbox_docs/login')),
+            DiagnoseDoc(key: Key('toolbox_docs/diagnose')),
           ],
         ),
       ),

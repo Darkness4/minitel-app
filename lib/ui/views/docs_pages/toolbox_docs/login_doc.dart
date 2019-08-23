@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/docs_widgets.dart';
 
 class LoginDoc extends StatelessWidget {
   const LoginDoc({
@@ -14,8 +15,8 @@ class LoginDoc extends StatelessWidget {
         children: <Widget>[
           const BoxMdH("Authentification", 1),
           InkWell(
-            child: Image.asset("assets/img/network.jpg"),
             onTap: () {},
+            child: Image.asset(AssetPaths.DocNetwork),
           ),
           const BoxMdH("Nom de domaine / IP", 2),
           const Text.rich(

@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/github_api.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
-import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +17,7 @@ class PortalView extends StatefulWidget {
 
   const PortalView({Key key, this.title}) : super(key: key);
 
+  @override
   PortalViewState createState() => PortalViewState();
 }
 
@@ -29,11 +30,12 @@ class PortalViewState extends State<PortalView> {
       length: 2,
       child: Scaffold(
         body: NestedScrollView(
-          body: Container(
-            decoration: const BoxDecoration(
+          key: const Key('portail_view/tabs'),
+          body: const DecoratedBox(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
-                colors: [
+                colors: <Color>[
                   Color(0xff80e27e),
                   Color(0xff087f23),
                 ],
@@ -41,8 +43,8 @@ class PortalViewState extends State<PortalView> {
             ),
             child: TabBarView(
               children: <Widget>[
-                const LoginPage(),
-                const AppsList(),
+                LoginPage(),
+                AppsList(),
               ],
             ),
           ),
@@ -58,7 +60,7 @@ class PortalViewState extends State<PortalView> {
                   Tab(
                     icon: Icon(
                       Icons.vpn_key,
-                      key: Key('portal_view/loginTab'),
+                      key: Key('portal_view/login_tab'),
                     ),
                     text: "Login",
                   ),
@@ -90,12 +92,13 @@ class PortalViewState extends State<PortalView> {
     super.didChangeDependencies();
   }
 
-  void _checkVersion(BuildContext context) async {
+  Future<void> _checkVersion(BuildContext context) async {
     try {
-      var packageInfo = PackageInfo.fromPlatform();
-      var versionAPI = Provider.of<VersionAPI>(context).getLatestVersion();
-      PackageInfo actualRelease = await packageInfo;
-      LatestRelease latestRelease = await versionAPI;
+      final Future<PackageInfo> packageInfo = PackageInfo.fromPlatform();
+      final Future<LatestRelease> versionAPI =
+          Provider.of<VersionAPI>(context).getLatestVersion();
+      final PackageInfo actualRelease = await packageInfo;
+      final LatestRelease latestRelease = await versionAPI;
       if (actualRelease.version != latestRelease.tagName) {
         await showDialog(
           context: context,
@@ -105,14 +108,15 @@ class PortalViewState extends State<PortalView> {
                 "La version ${latestRelease.tagName} est la dernière version."),
             actions: <Widget>[
               FlatButton(
-                key: const Key('portal_view/closeUpdateButton'),
-                child: Text("Close"),
+                key: const Key('portal_view/close_update'),
                 onPressed: () => Navigator.of(context).pop(),
+                child: const Text("Close"),
               ),
               RaisedButton(
-                textColor: Colors.white,
-                child: const Text("Update"),
+                colorBrightness: Brightness.dark,
+                color: Theme.of(context).primaryColor,
                 onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
+                child: const Text("Update"),
               )
             ],
           ),

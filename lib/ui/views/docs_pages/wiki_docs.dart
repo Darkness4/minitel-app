@@ -9,7 +9,7 @@ import 'wiki_docs/virtual_machines_doc.dart';
 
 class WikiDocs extends StatelessWidget {
   final PageController _controller;
-  WikiDocs({Key key, PageController controller})
+  const WikiDocs({Key key, PageController controller})
       : _controller = controller,
         super(key: key);
 
@@ -17,16 +17,17 @@ class WikiDocs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Wiki Documentation"),
+        title: const Text("Wiki Documentation"),
       ),
       body: Scrollbar(
         child: PageView(
+          key: const Key('wiki_docs/pages'),
           controller: _controller,
           children: const <Widget>[
-            ImprimanteDoc(),
-            MailDoc(),
-            DualBootDoc(),
-            VirtMachineDoc(),
+            ImprimanteDoc(key: Key('wiki_docs/imprimante')),
+            MailDoc(key: Key('wiki_docs/mail')),
+            DualBootDoc(key: Key('wiki_docs/dualboot')),
+            VirtMachineDoc(key: Key('wiki_docs/vm')),
           ],
         ),
       ),

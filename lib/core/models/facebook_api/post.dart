@@ -1,10 +1,10 @@
 /// Post generated from Facebook Graph API
 class Post {
-  String message;
-  String id;
-  String pictureUrl;
-  String permalinkUrl;
-  DateTime createdTime;
+  final String message;
+  final String id;
+  final String pictureUrl;
+  final String permalinkUrl;
+  final DateTime createdTime;
 
   Post({
     this.message,
@@ -14,16 +14,18 @@ class Post {
     this.permalinkUrl,
   });
 
-  Post.fromJson(Map<String, dynamic> json) {
-    message = json["message"] ?? "";
-    id = json["id"];
-    pictureUrl = json["full_picture"] ?? "";
-    createdTime = DateTime.parse(json["created_time"]);
-    permalinkUrl = json["permalink_url"];
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      message: json["message"] ?? "",
+      id: json["id"],
+      pictureUrl: json["full_picture"] ?? "",
+      createdTime: DateTime.parse(json["created_time"]),
+      permalinkUrl: json["permalink_url"],
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
     data['id'] = id;
     data['full_picture'] = pictureUrl;

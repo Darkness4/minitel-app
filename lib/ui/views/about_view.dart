@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/github_api.dart';
 import 'package:minitel_toolbox/core/services/http_version_checker.dart';
@@ -9,8 +10,8 @@ import 'package:provider/provider.dart';
 class AboutView extends StatelessWidget {
   final String title;
   const AboutView({
-    Key key,
     @required this.title,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -23,8 +24,9 @@ class AboutView extends StatelessWidget {
             children: <Widget>[
               const ListTile(
                 title: Text("Minitel Toolbox"),
+                isThreeLine: true,
                 subtitle: Text(
-                    "Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre"),
+                    "Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre."),
               ),
               const Divider(),
               ListTile(
@@ -50,11 +52,12 @@ class AboutView extends StatelessWidget {
                 title: const Text("Licence"),
                 subtitle: const Text("License MIT"),
                 onTap: () async {
-                  var packageInfo = await PackageInfo.fromPlatform();
+                  final PackageInfo packageInfo =
+                      await PackageInfo.fromPlatform();
                   showLicensePage(
                     context: context,
-                    applicationIcon: ImageIcon(
-                      AssetImage('assets/icon/icon.png'),
+                    applicationIcon: const ImageIcon(
+                      AssetImage(AssetPaths.Icon),
                     ),
                     applicationLegalese: "MIT License\n\n"
                         "Copyright (c) 2019 NGUYEN Marc\n\n"
@@ -77,17 +80,27 @@ class AboutView extends StatelessWidget {
                   );
                 },
               ),
+              ListTile(
+                title: const Text("Politique de confidentalité"),
+                subtitle: const Text(
+                  "Aucune donnée est partagée et stockée à votre insu. Les données collectées sont celles que vous nous fournissez (diagnostique et feedback) et ne sont jamais sauvegardées. ",
+                  textAlign: TextAlign.justify,
+                ),
+                isThreeLine: true,
+                onTap: () {},
+              ),
               const Divider(),
               ListTile(
                 title: const Text("Version"),
                 subtitle: FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
-                  builder: (BuildContext context, packageInfo) {
+                  builder: (BuildContext context,
+                      AsyncSnapshot<PackageInfo> packageInfo) {
                     switch (packageInfo.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:
                       case ConnectionState.waiting:
-                        return Text('Awaiting result...');
+                        return const Text('Awaiting result...');
                       case ConnectionState.done:
                         if (packageInfo.hasError) {
                           return Text('Error: ${packageInfo.error}');
@@ -99,15 +112,15 @@ class AboutView extends StatelessWidget {
                 ),
                 onTap: () {},
               ),
-              const Divider(),
               ListTile(
                 title: const Text("Chercher une mise à jour"),
                 onTap: () async {
-                  var packageInfo = PackageInfo.fromPlatform();
-                  var versionAPI =
+                  final Future<PackageInfo> packageInfo =
+                      PackageInfo.fromPlatform();
+                  final Future<LatestRelease> versionAPI =
                       Provider.of<VersionAPI>(context).getLatestVersion();
-                  PackageInfo actualRelease = await packageInfo;
-                  LatestRelease latestRelease = await versionAPI;
+                  final PackageInfo actualRelease = await packageInfo;
+                  final LatestRelease latestRelease = await versionAPI;
                   if (actualRelease.version != latestRelease.tagName) {
                     await showDialog(
                       context: context,
@@ -120,14 +133,15 @@ class AboutView extends StatelessWidget {
                               "La version ${latestRelease.tagName} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
-                              child: const Text("Close"),
                               onPressed: () => Navigator.of(context).pop(),
+                              child: const Text("Close"),
                             ),
                             RaisedButton(
-                              textColor: Colors.white,
-                              child: const Text("Update"),
+                              colorBrightness: Brightness.dark,
+                              color: Theme.of(context).primaryColor,
                               onPressed: () =>
                                   LaunchURL.launchURL(latestRelease.htmlUrl),
+                              child: const Text("Update"),
                             )
                           ],
                         );
@@ -144,14 +158,14 @@ class AboutView extends StatelessWidget {
                               "La version ${latestRelease.tagName} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
-                              child: const Text("Close"),
                               onPressed: () => Navigator.of(context).pop(),
+                              child: const Text("Close"),
                             ),
                             RaisedButton(
-                              textColor: Colors.white,
-                              child: const Text("Télécharger"),
+                              colorBrightness: Brightness.dark,
                               onPressed: () =>
                                   LaunchURL.launchURL(latestRelease.htmlUrl),
+                              child: const Text("Télécharger"),
                             )
                           ],
                         );
@@ -161,7 +175,7 @@ class AboutView extends StatelessWidget {
                 },
               ),
               // ListTile(
-              //   title: Text("Faire un don"),
+              //   title: const Text("Faire un don"),
               //   onTap: () {}, // TODO: Faire un don (stripe ?, Paypal ? InApp ?)
               // ),
             ],

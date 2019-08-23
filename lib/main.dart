@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: providers_setup.providers,
       child: MaterialApp(
-        localizationsDelegates: const [
+        localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: Router.generateRoute,
         supportedLocales: const <Locale>[Locale('fr', 'FR')],
         theme: ThemeData(
+          brightness: Brightness.light,
           primarySwatch: MinitelColors.PrimaryColor,
           fontFamily: 'Roboto',
           textTheme: MinitelTextStyles.textTheme,

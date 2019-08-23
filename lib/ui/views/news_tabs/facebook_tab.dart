@@ -1,74 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/feed.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/post.dart';
 import 'package:minitel_toolbox/core/services/http_facebook_api.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
-
-class FacebookTab extends StatelessWidget {
-  const FacebookTab({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final _facebookAPI = Provider.of<FacebookAPI>(context);
-    final pictureUrl = _facebookAPI.getProfilePicture();
-
-    return Center(
-      child: Scrollbar(
-        child: FutureBuilder<Feed>(
-          future: _facebookAPI.getFeed(),
-          builder: (context, feedSnapshot) {
-            switch (feedSnapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.active:
-              case ConnectionState.waiting:
-                return const CircularProgressIndicator(
-                  key: Key('facebook_tab/loading'),
-                );
-              case ConnectionState.done:
-                if (feedSnapshot.hasError) {
-                  return const Icon(
-                    Icons.error,
-                    color: Colors.white,
-                    size: 40.0,
-                  );
-                } else {
-                  return ListView(
-                    padding: const EdgeInsets.all(10.0),
-                    children: <Widget>[
-                      for (Post post in feedSnapshot.data.posts)
-                        FacebookCard(
-                          post: post,
-                          pictureUrl: pictureUrl,
-                        ),
-                    ],
-                  );
-                }
-            }
-            return const Icon(
-              Icons.error,
-              color: Colors.white,
-              size: 40.0,
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
 
 class FacebookCard extends StatelessWidget {
-  const FacebookCard({
-    Key key,
-    @required this.post,
-    @required this.pictureUrl,
-  }) : super(key: key);
-
   final Post post;
-  final String pictureUrl;
+
+  final Widget picture;
+  const FacebookCard({
+    @required this.post,
+    @required this.picture,
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +31,7 @@ class FacebookCard extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Image.network(
-                      pictureUrl,
-                      fit: BoxFit.cover,
-                      height: 50,
-                      width: 50,
-                    ),
+                    child: picture,
                   ),
                   Flexible(
                     child: Column(
@@ -134,8 +75,8 @@ class FacebookCard extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: FlatButton(
                   textColor: Colors.blue,
-                  child: Text("Voir sur Facebook ..."),
                   onPressed: () => LaunchURL.launchURL(post.permalinkUrl),
+                  child: const Text("Voir sur Facebook ..."),
                 ),
               ),
             ),
@@ -144,6 +85,66 @@ class FacebookCard extends StatelessWidget {
               style: TextStyle(fontSize: 5, color: Colors.grey),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class FacebookTab extends StatelessWidget {
+  const FacebookTab({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final FacebookAPI _facebookAPI = Provider.of<FacebookAPI>(context);
+    final Image _picture = Image.network(
+      _facebookAPI.getProfilePicture(),
+      fit: BoxFit.cover,
+      height: 50,
+      width: 50,
+    );
+
+    return Center(
+      child: Scrollbar(
+        child: FutureBuilder<Feed>(
+          future: _facebookAPI.getFeed(),
+          builder: (BuildContext context, AsyncSnapshot<Feed> feedSnapshot) {
+            switch (feedSnapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.active:
+              case ConnectionState.waiting:
+                return const CircularProgressIndicator(
+                  key: Key('facebook_tab/loading'),
+                );
+              case ConnectionState.done:
+                if (feedSnapshot.hasError) {
+                  return const Icon(
+                    Icons.error,
+                    color: Colors.white,
+                    size: 40.0,
+                  );
+                } else {
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(10.0),
+                    key: const Key('facebook_tab/list'),
+                    itemCount: feedSnapshot.data.posts.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        FacebookCard(
+                      post: feedSnapshot.data.posts[index],
+                      picture: _picture,
+                      key: Key('facebook_tab/fb_item_$index'),
+                    ),
+                  );
+                }
+            }
+            return const Icon(
+              Icons.error,
+              color: Colors.white,
+              size: 40.0,
+            );
+          },
         ),
       ),
     );

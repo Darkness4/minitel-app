@@ -21,16 +21,6 @@ class LatestRelease {
   /// Date of publication
   DateTime publishedAt;
 
-  LatestRelease({
-    this.url,
-    this.htmlUrl,
-    this.id,
-    this.tagName,
-    this.name,
-    this.createdAt,
-    this.publishedAt,
-  });
-
   LatestRelease.fromJson(Map<String, dynamic> json) {
     url = json['url'];
     htmlUrl = json['html_url'];
@@ -42,7 +32,7 @@ class LatestRelease {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['url'] = url;
     data['html_url'] = htmlUrl;
     data['id'] = id;

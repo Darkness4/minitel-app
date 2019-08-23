@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/buttons.dart';
@@ -28,20 +28,19 @@ class ReportingViewState extends State<ReportingView>
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     return BaseWidget<ReportingViewModel>(
       model: ReportingViewModel(
         webhookAPI: Provider.of(context),
         gatewayAPI: Provider.of(context),
       ),
-      child: ReportTab(
-        titleController: _titleController,
-        descriptionController: _descriptionController,
-      ),
-      builder: (context, model, child) => DefaultTabController(
+      builder: (BuildContext context, ReportingViewModel model, Widget child) =>
+          DefaultTabController(
         length: 2,
         child: Scaffold(
           body: NestedScrollView(
+            key: const Key('reporting_view/tabs'),
             headerSliverBuilder: _headerSliverBuilder,
             body: TabBarView(
               children: <Widget>[
@@ -54,7 +53,7 @@ class ReportingViewState extends State<ReportingView>
             currentRoutePaths: RoutePaths.Reporting,
           ),
           floatingActionButton: Builder(
-            builder: (context) => Column(
+            builder: (BuildContext context) => Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
@@ -66,6 +65,10 @@ class ReportingViewState extends State<ReportingView>
             ),
           ),
         ),
+      ),
+      child: ReportTab(
+        titleController: _titleController,
+        descriptionController: _descriptionController,
       ),
     );
   }
@@ -91,8 +94,10 @@ class ReportingViewState extends State<ReportingView>
             ? Colors.green
             : Colors.blue,
         onPressed: () async {
-          if (!_animationController.isDismissed) _animationController.reverse();
-          model.diagnose();
+          if (!_animationController.isDismissed) {
+            _animationController.reverse();
+          }
+          await model.diagnose();
           setState(() {});
         },
         child: _diagnosisIcon(model),
@@ -110,14 +115,17 @@ class ReportingViewState extends State<ReportingView>
       case ButtonState.Loading:
         child = ValueListenableBuilder<double>(
           valueListenable: model.percentageDiagnoseProgress,
-          builder: (context, value, _) => CircularProgressIndicator(
+          builder: (BuildContext context, double value, _) =>
+              CircularProgressIndicator(
             value: value,
             valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
           ),
         );
         break;
       case ButtonState.Done:
-        if (_animationController.isDismissed) _animationController.forward();
+        if (_animationController.isDismissed) {
+          _animationController.forward();
+        }
         child = const Icon(
           Icons.done,
           key: Key('reporting_view/diagnose_done'),
@@ -162,17 +170,17 @@ class ReportingViewState extends State<ReportingView>
         "Email",
         start: 0.0,
         end: 0.5,
-        child: const Icon(Icons.mail),
         controller: _animationController,
         onPressed: () async {
-          var body = "---Report ${DateTime.now().toString()}---\n\n"
+          final String body = "---Report ${DateTime.now().toString()}---\n\n"
               "Titre: ${_titleController.text}\n"
               "Description: ${_descriptionController.text}\n\n"
               "*Diagnosis*\n"
               "${await model.diagnosis.reportAll}";
-          LaunchURL.launchURL(
+          await LaunchURL.launchURL(
               "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
         },
+        child: const Icon(Icons.mail),
       );
 
   Widget _reportButton(BuildContext context, ReportingViewModel model) =>
@@ -180,13 +188,9 @@ class ReportingViewState extends State<ReportingView>
         "Notifier sur Slack",
         start: 0.0,
         end: 0.25,
-        child: const ImageIcon(
-          AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
-          size: 100.0,
-        ),
         controller: _animationController,
         onPressed: () async {
-          String status = await model.reportToSlack(
+          final String status = await model.reportToSlack(
               _titleController.text, _descriptionController.text);
           if (status != null) {
             Scaffold.of(context).showSnackBar(
@@ -196,13 +200,17 @@ class ReportingViewState extends State<ReportingView>
             );
           }
         },
+        child: const ImageIcon(
+          AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
+          size: 100.0,
+          key: Key('reporting_view/slack'),
+        ),
       );
 
   Widget _shareButton(ReportingViewModel model) => AnimatedFloatingButton(
         "Partager",
         start: 0.0,
         end: 1.0,
-        child: const Icon(Icons.share),
         controller: _animationController,
         onPressed: () async =>
             Share.share("---Report ${DateTime.now().toString()}---\n\n"
@@ -210,5 +218,6 @@ class ReportingViewState extends State<ReportingView>
                 "Description: ${_descriptionController.text}\n\n"
                 "*Diagnosis*\n"
                 "${await model.diagnosis.reportAll}"),
+        child: const Icon(Icons.share),
       );
 }

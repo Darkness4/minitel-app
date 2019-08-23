@@ -11,25 +11,26 @@ class AnimatedFloatingButton extends StatelessWidget {
 
   const AnimatedFloatingButton(
     this.text, {
-    Key key,
-    this.start = 0.0,
-    this.end = 1.0,
     @required this.controller,
     @required this.child,
     @required this.onPressed,
+    Key key,
+    this.start = 0.0,
+    this.end = 1.0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: CurvedAnimation(
-        parent: controller,
-        curve: Interval(start, end, curve: Curves.easeOut),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Card(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        ScaleTransition(
+          scale: CurvedAnimation(
+            parent: controller,
+            curve: Interval(start, end, curve: Curves.easeOut),
+          ),
+          child: Card(
+            elevation: 4,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -37,17 +38,23 @@ class AnimatedFloatingButton extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            elevation: 4,
           ),
-          FloatingActionButton(
+        ),
+        ScaleTransition(
+          scale: CurvedAnimation(
+            parent: controller,
+            curve: Interval(start, end, curve: Curves.easeOut),
+          ),
+          child: FloatingActionButton(
             heroTag: null,
             backgroundColor: MinitelColors.ReportPrimaryColor,
-            child: child,
             mini: true,
+            tooltip: text,
             onPressed: onPressed,
+            child: child,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/constants/texts_constants.dart';
 
 import 'views/about_view.dart';
 import 'views/agenda_view.dart';
@@ -14,42 +15,42 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutePaths.Authentication:
-        return FadeRoute(
-          builder: (_) => const PortalView(title: "Authentification"),
+        return FadeRoute<dynamic>(
+          builder: (_) => const PortalView(title: Titles.Authentication),
           settings: settings,
         );
       case RoutePaths.Reporting:
-        return FadeRoute(
-          builder: (_) => const ReportingView(title: "Signaler Minitel"),
+        return FadeRoute<dynamic>(
+          builder: (_) => const ReportingView(title: Titles.Reporting),
           settings: settings,
         );
       case RoutePaths.Docs:
-        return FadeRoute(
-          builder: (_) => const DocumentationView(title: "Documentation"),
+        return SlideRightRoute<dynamic>(
+          builder: (_) => const DocumentationView(title: Titles.Docs),
           settings: settings,
         );
       case RoutePaths.News:
-        return FadeRoute(
-          builder: (_) => const NewsView(title: "Nouveautés"),
+        return FadeRoute<dynamic>(
+          builder: (_) => const NewsView(title: Titles.News),
           settings: settings,
         );
       case RoutePaths.Agenda:
-        return FadeRoute(
-          builder: (_) => const AgendaView(title: "Agenda"),
+        return FadeRoute<dynamic>(
+          builder: (_) => const AgendaView(title: Titles.Agenda),
           settings: settings,
         );
       case RoutePaths.About:
-        return MaterialPageRoute(
-          builder: (_) => const AboutView(title: "A propos de l'application"),
+        return MaterialPageRoute<dynamic>(
+          builder: (_) => const AboutView(title: Titles.About),
           settings: settings,
         );
       case RoutePaths.Feedback:
-        return FadeRoute(
-          builder: (_) => const FeedbackView(title: "Alpha Feedback"),
+        return FadeRoute<dynamic>(
+          builder: (_) => const FeedbackView(title: Titles.Feedback),
           settings: settings,
         );
       default:
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
           builder: (_) => Scaffold(
             body: Center(
               child: Text('No route defined for ${settings.name}'),

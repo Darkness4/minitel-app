@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 
 import 'portal_apps/imprimante.dart';
@@ -14,6 +15,7 @@ class AppsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scrollbar(
       child: GridView.count(
+        key: const Key('apps_list/list'),
         padding: const EdgeInsets.all(10),
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
@@ -41,10 +43,10 @@ class _ImprimanteCard extends StatelessWidget {
         key: const Key('app_lists/imprimante'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ImprimanteWebView()),
+          MaterialPageRoute<dynamic>(builder: (_) => const ImprimanteWebView()),
         ),
         child: LayoutBuilder(
-          builder: (context, constraint) => Column(
+          builder: (_, BoxConstraints constraint) => Column(
             children: <Widget>[
               Icon(
                 Icons.print,
@@ -71,25 +73,24 @@ class _PortailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
       elevation: 4,
       child: InkWell(
         key: const Key('app_lists/portail'),
         onTap: () async {
           await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PortailWebView()),
+            MaterialPageRoute<dynamic>(builder: (_) => const PortailWebView()),
           );
         },
         child: Column(
           children: <Widget>[
             Flexible(
               child: Image.asset(
-                'assets/img/logo_emse.png',
+                AssetPaths.EMSE,
                 fit: BoxFit.scaleDown,
               ),
             ),
-            FittedBox(
+            const FittedBox(
               child: Text(
                 "Portail",
                 style: MinitelTextStyles.appTitle,
@@ -114,9 +115,9 @@ class _SogoCard extends StatelessWidget {
         key: const Key('app_lists/sogo'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SogoWebView()),
+          MaterialPageRoute<dynamic>(builder: (_) => const SogoWebView()),
         ),
-        child: Image.asset('assets/img/mail.png'),
+        child: Image.asset(AssetPaths.Sogo),
       ),
     );
   }
@@ -133,17 +134,17 @@ class _WikiMinitelCard extends StatelessWidget {
         key: const Key('app_lists/wiki_minitel'),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MinitelWebView()),
+          MaterialPageRoute<dynamic>(builder: (_) => const MinitelWebView()),
         ),
         child: Column(
           children: <Widget>[
             Flexible(
               child: Image.asset(
-                'assets/img/logo_minitel.png',
+                AssetPaths.LogoMinitel,
                 fit: BoxFit.scaleDown,
               ),
             ),
-            FittedBox(
+            const FittedBox(
               child: Text(
                 "Wiki",
                 style: MinitelTextStyles.appTitle,

@@ -7,6 +7,7 @@ class DocumentationView extends StatelessWidget {
   final String title;
   const DocumentationView({Key key, this.title}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -17,10 +18,8 @@ class DocumentationView extends StatelessWidget {
           child: MinitelDoc(),
         ),
       ),
-      drawer: const MainDrawer(
-        currentRoutePaths: RoutePaths.Docs,
-      ),
-      endDrawer: DocsDrawer(DocsPageId.Home),
+      // drawer: const MainDrawer(currentRoutePaths: RoutePaths.Docs),
+      endDrawer: const DocsDrawer(DocsPageId.Home),
     );
   }
 }

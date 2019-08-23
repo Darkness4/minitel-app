@@ -1,21 +1,18 @@
 stages:
   - test
+  # - integration-tests
   - build
   - deploy
 
 unit-tests:
   stage: test
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - apt update
-    - apt install -y lcov
+    - /bin/sh ./.ci-scripts/before_script_get_deps_coverage.sh
 
   script:
-    - flutter test --coverage
+    - flutter test --verbose --coverage
 
   after_script:
     - genhtml -o coverage coverage/lcov.info
@@ -23,6 +20,125 @@ unit-tests:
   artifacts:
     paths:
     - coverage/
+
+# navigation_test:
+#   stage: integration-tests
+#   image: darkness4/flutter-builder:28
+
+#   before_script:
+#     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+#     - /bin/sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - /bin/sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+#   script:
+#     - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/navigation_test.dart
+
+#   after_script:
+#     - /bin/bash ./.ci-scripts/stop-emulator
+
+#   tags:
+#     - android
+
+#   artifacts:
+#     paths:
+#     - test_driver/screenshots/
+
+# documentation_test:
+#   stage: integration-tests
+#   image: darkness4/flutter-builder:28
+
+#   before_script:
+#     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+#     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+#     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+#     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+#     - echo "keyAlias=${ALIAS}" >> android/key.properties
+#     - echo "storeFile=keystore.jks" >> android/key.properties
+#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+#   script:
+#     - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/documentation_test.dart
+
+#   after_script:
+#     - /bin/bash ./.ci-scripts/stop-emulator
+
+#   tags:
+#     - android
+
+# authentication_test:
+#   stage: integration-tests
+#   image: darkness4/flutter-builder:28
+
+#   before_script:
+#     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+#     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+#     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+#     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+#     - echo "keyAlias=${ALIAS}" >> android/key.properties
+#     - echo "storeFile=keystore.jks" >> android/key.properties
+#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+#   script:
+#     - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/authentication_test.dart
+
+#   after_script:
+#     - /bin/bash ./.ci-scripts/stop-emulator
+
+#   tags:
+#     - android
+
+# news_test:
+#   stage: integration-tests
+#   image: darkness4/flutter-builder:28
+
+#   before_script:
+#     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+#     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+#     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+#     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+#     - echo "keyAlias=${ALIAS}" >> android/key.properties
+#     - echo "storeFile=keystore.jks" >> android/key.properties
+#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+#   script:
+#     - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/news_test.dart
+
+#   after_script:
+#     - /bin/bash ./.ci-scripts/stop-emulator
+
+#   tags:
+#     - android
+
+# reporting_test:
+#   stage: integration-tests
+#   image: darkness4/flutter-builder:28
+
+#   before_script:
+#     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
+#     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+#     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+#     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+#     - echo "keyAlias=${ALIAS}" >> android/key.properties
+#     - echo "storeFile=keystore.jks" >> android/key.properties
+#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
+
+#   script:
+#     - flutter drive --verbose --target=test_driver/app.dart --driver=test_driver/reporting_test.dart
+
+#   after_script:
+#     - /bin/bash ./.ci-scripts/stop-emulator
+
+#   tags:
+#     - android
 
 pages:
   stage: deploy
@@ -50,14 +166,10 @@ pages:
 
 build-test:
   stage: test
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
 
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - apt update
-    - apt install -y sed
+    - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
@@ -67,7 +179,7 @@ build-test:
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
 
   script:
-    - flutter build apk --target-platform android-arm --split-per-abi
+    - flutter build apk --verbose --target-platform android-arm --split-per-abi
 
   except:
   - master
@@ -76,14 +188,10 @@ build-test:
 
 build:
   stage: build
-  image: darkness4/flutter-builder:latest
+  image: darkness4/flutter-builder:28
   
   before_script:
-    - flutter channel master
-    - flutter upgrade
-    - flutter packages get
-    - apt update
-    - apt install -y sed
+    - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
     - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
@@ -93,7 +201,7 @@ build:
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
 
   script:
-    - flutter build apk --target-platform android-arm,android-arm64 --split-per-abi
+    - flutter build apk --verbose --target-platform android-arm,android-arm64 --split-per-abi
 
   after_script:
     - mv build/app/outputs/apk/release/app-armeabi-v7a-release.apk minitel-toolbox-armeabi-v7a.apk

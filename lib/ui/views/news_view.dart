@@ -17,10 +17,11 @@ class NewsView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: const Color(0xff087f23),
         body: NestedScrollView(
-          body: TabBarView(
+          key: const Key('news_view/tabs'),
+          body: const TabBarView(
             children: <Widget>[
-              const FacebookTab(),
-              const GithubTab(),
+              FacebookTab(),
+              GithubTab(),
             ],
           ),
           headerSliverBuilder:
@@ -33,11 +34,17 @@ class NewsView extends StatelessWidget {
               bottom: const TabBar(
                 tabs: <Tab>[
                   Tab(
-                    icon: ImageIcon(AssetImage("assets/icon/f_logo.png")),
+                    icon: ImageIcon(
+                      AssetImage(AssetPaths.Facebook),
+                      key: Key('news_view/facebook_tab'),
+                    ),
                     text: "Facebook",
                   ),
                   Tab(
-                    icon: ImageIcon(AssetImage("assets/icon/GitHub-Mark.png")),
+                    icon: ImageIcon(
+                      AssetImage(AssetPaths.Github),
+                      key: Key('news_view/github_tab'),
+                    ),
                     text: "Github",
                   ),
                 ],

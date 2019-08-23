@@ -3,10 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
-import 'package:minitel_toolbox/core/models/icalendar.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_portail.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Mutex
@@ -16,12 +16,11 @@ class LoginViewModel extends ChangeNotifier {
   final PortailAPI portailAPI;
   final GatewayAPI gatewayAPI;
   final CalendarUrlAPI calendarUrlAPI;
+  final ICalendar iCalendar;
   final ValueNotifier<String> selectedTime;
   final ValueNotifier<String> selectedUrl;
   final ValueNotifier<bool> rememberMe;
   final ValueNotifier<bool> autoLogin;
-
-  String cookie;
 
   LoginState loginState = LoginState.Available;
 
@@ -30,6 +29,7 @@ class LoginViewModel extends ChangeNotifier {
     @required this.gatewayAPI,
     @required this.calendarUrlAPI,
     @required this.selectedTime,
+    @required this.iCalendar,
     @required this.selectedUrl,
     @required this.rememberMe,
     @required this.autoLogin,
@@ -37,9 +37,9 @@ class LoginViewModel extends ChangeNotifier {
 
   Future<void> login(BuildContext context, String uid, String pswd) async {
     // Remember me
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (rememberMe.value) {
-      await Future.wait([
+      await Future.wait<bool>(<Future<bool>>[
         prefs.setBool("rememberMe", true),
         prefs.setBool("autoLogin", autoLogin.value),
         prefs.setString("user", uid),
@@ -50,7 +50,7 @@ class LoginViewModel extends ChangeNotifier {
         ),
       ]);
     } else {
-      await Future.wait([
+      await Future.wait<bool>(<Future<bool>>[
         prefs.remove("rememberMe"),
         prefs.remove("autoLogin"),
         prefs.remove("user"),
@@ -61,7 +61,7 @@ class LoginViewModel extends ChangeNotifier {
 
     // Notification
     Scaffold.of(context).showSnackBar(
-      SnackBar(content: Text('Requested')),
+      const SnackBar(content: Text('Requested')),
     );
 
     // Lock
@@ -69,7 +69,7 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
 
     // Login
-    cookie = await gatewayAPI.autoLogin(
+    await gatewayAPI.autoLogin(
       uid,
       pswd,
       selectedUrl.value,
@@ -77,11 +77,11 @@ class LoginViewModel extends ChangeNotifier {
     );
     // Calendar
     try {
-      String calendarUrl = await calendarUrlAPI.getCalendarURL(
+      final String calendarUrl = await calendarUrlAPI.getCalendarURL(
         username: uid,
         password: pswd,
       );
-      await ICalendar(calendarUrlAPI).saveCalendar(calendarUrl);
+      await iCalendar.saveCalendar(calendarUrl, calendarUrlAPI);
       notifyListeners();
     } on Exception catch (e) {
       Scaffold.of(context).showSnackBar(

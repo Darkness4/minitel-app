@@ -7,7 +7,7 @@ class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
   final Widget child;
   final Function(T) onModelReady;
 
-  BaseWidget({
+  const BaseWidget({
     Key key,
     this.builder,
     this.model,
@@ -15,6 +15,7 @@ class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
     this.onModelReady,
   }) : super(key: key);
 
+  @override
   _BaseWidgetState<T> createState() => _BaseWidgetState<T>();
 }
 
@@ -24,7 +25,7 @@ class _BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>(
-      builder: (context) => model,
+      builder: (BuildContext context) => model,
       child: Consumer<T>(
         builder: widget.builder,
         child: widget.child,

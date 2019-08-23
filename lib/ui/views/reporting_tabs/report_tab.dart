@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/docs_widgets.dart';
 
 class ReportTab extends StatefulWidget {
-  final String channel;
   final TextEditingController titleController;
   final TextEditingController descriptionController;
 
-  const ReportTab(
-      {Key key,
-      this.channel = "projet_flutter_notif",
-      @required this.titleController,
-      @required this.descriptionController})
-      : super(key: key);
+  const ReportTab({
+    @required this.titleController,
+    @required this.descriptionController,
+    Key key,
+  }) : super(key: key);
 
   @override
   ReportTabState createState() => ReportTabState();
@@ -63,24 +61,24 @@ class _ContactsCard extends StatelessWidget {
     return DocCard(
       elevation: 4,
       children: <Widget>[
-        BoxMdH("Contacts", 1),
+        const BoxMdH("Contacts", 1),
         FlatButton(
           textColor: Colors.blueAccent,
+          onPressed: LaunchURL.messengerMarcNGUYEN,
+          color: Colors.lightBlue[100],
           child: Text(
             "Facebook: Minitel Ismin",
             style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
-          onPressed: LaunchURL.messengerMarcNGUYEN,
-          color: Colors.lightBlue[100],
         ),
         FlatButton(
           textColor: Colors.blueAccent,
+          onPressed: LaunchURL.mailToMinitel,
+          color: Colors.lightBlue[100],
           child: Text(
             "Mail: minitelismin@gmail.com (non recommandée)",
             style: MinitelTextStyles.mdH3.apply(color: Colors.blueAccent),
           ),
-          onPressed: LaunchURL.mailToMinitel,
-          color: Colors.lightBlue[100],
         ),
         const Text(
           "G*: Contact Admin",
@@ -99,11 +97,11 @@ class _ReportCard extends StatelessWidget {
   final TextEditingController _descriptionController;
 
   const _ReportCard({
-    Key key,
     @required TextEditingController titleController,
     @required FocusNode titleFocusNode,
     @required FocusNode descriptionFocusNode,
     @required TextEditingController descriptionController,
+    Key key,
   })  : _titleController = titleController,
         _titleFocusNode = titleFocusNode,
         _descriptionFocusNode = descriptionFocusNode,
@@ -119,6 +117,7 @@ class _ReportCard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             TextField(
+              key: const Key('report_tab/title'),
               controller: _titleController,
               style: const TextStyle(fontWeight: FontWeight.bold),
               focusNode: _titleFocusNode,
@@ -127,12 +126,13 @@ class _ReportCard extends StatelessWidget {
                 labelText: "Title",
                 hintText: "Room number : Short description.",
               ),
-              onSubmitted: (term) {
+              onSubmitted: (String term) {
                 _titleFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_descriptionFocusNode);
               },
             ),
             TextField(
+              key: const Key('report_tab/description'),
               controller: _descriptionController,
               maxLines: null,
               focusNode: _descriptionFocusNode,
@@ -142,7 +142,7 @@ class _ReportCard extends StatelessWidget {
                 labelText: "Description",
                 hintText: "Describe your issue.",
               ),
-              onSubmitted: (term) => _descriptionFocusNode.unfocus(),
+              onSubmitted: (String term) => _descriptionFocusNode.unfocus(),
             ),
           ],
         ),
@@ -159,7 +159,7 @@ class _TutorialCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DocCard(
+    return const DocCard(
       elevation: 4,
       children: <Widget>[
         BoxMdH("Comment signaler sans internet ?", 1),
@@ -176,7 +176,7 @@ class _TutorialCard extends StatelessWidget {
           style: MinitelTextStyles.mdH3,
         )),
         BoxMdBody(Text(
-          "3. Remplissez votre rapport.",
+          "3. Remplissez votre rapport. N'oubliez pas un moyen de communication (chambre, mail, messenger ...)",
           style: MinitelTextStyles.mdH3,
         )),
         BoxMdBody(Text(

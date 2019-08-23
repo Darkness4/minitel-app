@@ -3,16 +3,16 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
-import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/models/icalendar.dart';
+import 'package:minitel_toolbox/core/constants/texts_constants.dart';
+import 'package:minitel_toolbox/core/models/icalendar/event.dart';
+import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
 import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/icalendar.dart';
 import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
-import 'package:provider/provider.dart';
 
 class AgendaViewModel extends ChangeNotifier {
-  static const _month = <String>[
+  static const List<String> _month = <String>[
     "Janvier",
     "Février",
     "Mars",
@@ -26,7 +26,10 @@ class AgendaViewModel extends ChangeNotifier {
     "Novembre",
     "Décembre",
   ];
-  final _androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  final CalendarUrlAPI calendarUrlAPI;
+  final ICalendar iCalendar;
+  final AndroidNotificationDetails _androidPlatformChannelSpecifics =
+      AndroidNotificationDetails(
     'minitel_channel',
     'Minitel Channel',
     'Notification channel for the Minitel App',
@@ -34,31 +37,30 @@ class AgendaViewModel extends ChangeNotifier {
     priority: Priority.High,
     enableVibration: true,
   );
-  final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
-  final notificationSettings = NotificationSettings();
+  final IOSNotificationDetails _iOSPlatformChannelSpecifics =
+      IOSNotificationDetails();
+  final NotificationSettings notificationSettings = NotificationSettings();
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
-  List<Widget> monthPages = [];
+  List<Widget> monthPages = <Widget>[];
 
   AgendaViewModel({
     @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
+    @required this.iCalendar,
+    @required this.calendarUrlAPI,
   }) : _flutterLocalNotificationsPlugin = flutterLocalNotificationsPlugin;
 
-  Stream<List<Widget>> listEventCards(ICalendar ical) async* {
+  Stream<List<Widget>> listEventCards(ParsedCalendar parsedCalendar) async* {
     List<Widget> monthlyWidgets;
-    List<Widget> dailyEvents = [];
-    monthPages = [];
+    List<Widget> dailyEvents = <Widget>[];
+    monthPages = <Widget>[];
     DateTime oldDt;
 
-    // Parse the calendar
-    ParsedCalendar parsedCalendar = await ical.parseCalendar();
+    parsedCalendar.events.sort((Event event1, Event event2) =>
+        event1.dtstart.compareTo(event2.dtstart));
 
-    parsedCalendar.events.sort((event1, event2) =>
-        (DateTime.parse(event1["DTSTART"])
-            .compareTo(DateTime.parse(event2["DTSTART"]))));
-
-    var filteredEvents = parsedCalendar.events.where(
-        (event) => DateTime.parse(event["DTSTART"]).isAfter(DateTime.now()));
+    final Iterable<Event> filteredEvents = parsedCalendar.events
+        .where((Event event) => event.dtstart.isAfter(DateTime.now()));
 
     // Throw away the old notifications
     await _flutterLocalNotificationsPlugin.cancelAll();
@@ -79,29 +81,29 @@ class AgendaViewModel extends ChangeNotifier {
       ];
     } else {
       DateTime dt;
-      for (var event in filteredEvents) {
+      for (final Event event in filteredEvents) {
         int id = 0;
-        dt = DateTime.parse(event["DTSTART"]);
+        dt = event.dtstart;
 
         // Notification System
         if (dt.isBefore(DateTime.now().add(notificationSettings.range))) {
-          var dtstart = DateFormat.Hm().format(dt);
-          var dtend = DateFormat.Hm().format(DateTime.parse(event["DTEND"]));
+          final String dtstart = DateFormat.Hm().format(dt);
+          final String dtend = DateFormat.Hm().format(event.dtend);
 
           id++;
 
           await _scheduleNotification(
             id: id,
-            title: event["SUMMARY"],
-            description: "${event["LOCATION"]}\n"
+            title: event.summary,
+            description: "${event.location}\n"
                 "$dtstart"
                 " - "
                 "$dtend",
             scheduledNotificationDateTime:
                 dt.subtract(notificationSettings.early),
-            payload: "${event["SUMMARY"]};"
-                "${event["DESCRIPTION"]}\n"
-                "${event["LOCATION"]}\n"
+            payload: "${event.summary};"
+                "${event.description}\n"
+                "${event.location}\n"
                 "$dtstart"
                 " - "
                 "$dtend",
@@ -118,10 +120,10 @@ class AgendaViewModel extends ChangeNotifier {
           }
           oldDt = dt;
 
-          monthlyWidgets = [
+          monthlyWidgets = <Widget>[
             MonthHeader("${_month[dt.month - 1]}"),
           ];
-          dailyEvents = [];
+          dailyEvents = <Widget>[];
         }
 
         // New Day
@@ -132,7 +134,7 @@ class AgendaViewModel extends ChangeNotifier {
           }
 
           oldDt = dt;
-          dailyEvents = []; // Clear Events
+          dailyEvents = <Widget>[]; // Clear Events
         }
 
         // Event Card
@@ -148,25 +150,20 @@ class AgendaViewModel extends ChangeNotifier {
     }
   }
 
-  Future<ICalendar> loadCalendar(BuildContext context) async {
-    CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
-    ICalendar ical = ICalendar(_calendarUrlAPI);
-
+  Future<ParsedCalendar> loadCalendar(BuildContext context) async {
     // Try to update thr calendar
-    var url = await _calendarUrlAPI.savedCalendarURL;
+    final String url = await calendarUrlAPI.savedCalendarURL;
 
     // Try to update calendar
     if (url == "" || url == null) {
       print("Cannot update calendar. Taking from cache.");
     } else {
       print("Updating calendar.");
-      await ical.saveCalendar(url);
+      await iCalendar.saveCalendar(url, calendarUrlAPI);
     }
 
     // Read the actual calendar (throw if not existing)
-    await ical.getCalendarFromFile();
-
-    return ical;
+    return iCalendar.getParsedCalendarFromFile();
   }
 
   Future<void> _scheduleNotification(
