@@ -20,7 +20,12 @@ class _PortailWebViewState extends State<PortailWebView> {
   Widget build(BuildContext context) {
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
     for (final Cookie cookie in _portailAPI.catchedCookies) {
-      cookieManager.setCookie('https://portail.emse.fr/', cookie.toString());
+      if (cookie.name == "AGIMUS") {
+        cookieManager.setCookie('emse.fr', cookie.toString());
+      } else {
+        cookieManager.setCookie('portail.emse.fr', cookie.toString());
+        cookieManager.setCookie('cas.emse.fr', cookie.toString());
+      }
     }
     return ScaffoldWebView(
       backgroundColor: Colors.deepPurple,
