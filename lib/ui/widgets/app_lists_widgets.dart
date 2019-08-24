@@ -24,67 +24,72 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: widget.backgroundColor,
-        title: widget.title,
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.public),
-            onPressed: () async =>
-                LaunchURL.launchURL(await _controller.currentUrl()),
-            tooltip: "Ouvrir dans un navigateur",
-          )
-        ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: widget.backgroundColor,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
+    return WillPopScope(
+      onWillPop: () async {
+        if (await _controller.canGoBack()) {
+          await _controller.goBack();
+          return false;
+        } else {
+          return true;
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: widget.backgroundColor,
+          title: widget.title,
+          elevation: 0.0,
+          actions: <Widget>[
             IconButton(
-              color: Colors.white,
-              tooltip: "Revenir en arrière",
-              icon: Icon(Icons.arrow_back),
-              onPressed: () async {
-                if (await _controller.canGoBack()) {
-                  await _controller.goBack();
-                }
-              },
-            ),
-            IconButton(
-              color: Colors.white,
-              icon: Icon(Icons.refresh),
-              tooltip: "Actualiser",
-              onPressed: () async {
-                await _controller.reload();
-              },
-            ),
-            IconButton(
-              color: Colors.white,
-              tooltip: "Aller en avant",
-              icon: const Icon(Icons.arrow_forward),
-              onPressed: () async {
-                if (await _controller.canGoForward()) {
-                  await _controller.goForward();
-                }
-              },
-            ),
+              icon: Icon(Icons.public),
+              onPressed: () async =>
+                  LaunchURL.launchURL(await _controller.currentUrl()),
+              tooltip: "Ouvrir dans un navigateur",
+            )
           ],
         ),
-      ),
-      body: SafeArea(
-        child: WebView(
-          javascriptMode: JavascriptMode.unrestricted,
-          initialUrl: widget.initialUrl,
-          onWebViewCreated: (WebViewController wvc) {
-            _controller = wvc;
-            if (widget.onWebViewCreated != null) {
-              widget.onWebViewCreated(wvc, context);
-            }
-          },
+        bottomNavigationBar: BottomAppBar(
+          color: widget.backgroundColor,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Spacer(),
+              Expanded(
+                child: IconButton(
+                  color: Colors.white,
+                  icon: Icon(Icons.refresh),
+                  tooltip: "Actualiser",
+                  onPressed: () async {
+                    await _controller.reload();
+                  },
+                ),
+              ),
+              Expanded(
+                child: IconButton(
+                  color: Colors.white,
+                  tooltip: "Aller en avant",
+                  icon: const Icon(Icons.arrow_forward),
+                  onPressed: () async {
+                    if (await _controller.canGoForward()) {
+                      await _controller.goForward();
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: SafeArea(
+          child: WebView(
+            javascriptMode: JavascriptMode.unrestricted,
+            initialUrl: widget.initialUrl,
+            onWebViewCreated: (WebViewController wvc) {
+              _controller = wvc;
+              if (widget.onWebViewCreated != null) {
+                widget.onWebViewCreated(wvc, context);
+              }
+            },
+          ),
         ),
       ),
     );
