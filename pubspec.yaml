@@ -3,10 +3,11 @@ description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un W
 repository: https://github.com/Darkness4/minitel-app
 issue_tracker: https://github.com/Darkness4/minitel-app/issues
 author: Nguyen Marc <nguyen_marc@live.fr>
-version: 0.5.1
+version: 0.5.2
 
 environment:
-  sdk: ">=2.5.0 <3.0.0"
+  sdk: ^2.5.0
+  flutter: ^1.9.2
 
 # Use ^version only if the package are stable
 # ^1.2.0 means >=1.2.0 <2.0.0
