@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/docs_widgets.dart';
 
-class ReportTab extends StatefulWidget {
-  final TextEditingController titleController;
-  final TextEditingController descriptionController;
+class ReportTab extends StatelessWidget {
+  final ReportingViewModel model;
 
   const ReportTab({
-    @required this.titleController,
-    @required this.descriptionController,
+    @required this.model,
     Key key,
   }) : super(key: key);
-
-  @override
-  ReportTabState createState() => ReportTabState();
-}
-
-class ReportTabState extends State<ReportTab> {
-  final FocusNode _titleFocusNode = FocusNode();
-  final FocusNode _descriptionFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -29,24 +21,13 @@ class ReportTabState extends State<ReportTab> {
         child: ListView(
           padding: const EdgeInsets.all(10.0),
           children: <Widget>[
-            _ReportCard(
-                titleController: widget.titleController,
-                titleFocusNode: _titleFocusNode,
-                descriptionFocusNode: _descriptionFocusNode,
-                descriptionController: widget.descriptionController),
+            _ReportCard(model: model),
             const _TutorialCard(),
             const _ContactsCard(),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _descriptionFocusNode.dispose();
-    _titleFocusNode.dispose();
-    super.dispose();
   }
 }
 
@@ -91,22 +72,12 @@ class _ContactsCard extends StatelessWidget {
 
 /// This is the form needed to be filled.
 class _ReportCard extends StatelessWidget {
-  final TextEditingController _titleController;
-  final FocusNode _titleFocusNode;
-  final FocusNode _descriptionFocusNode;
-  final TextEditingController _descriptionController;
+  final ReportingViewModel model;
 
   const _ReportCard({
-    @required TextEditingController titleController,
-    @required FocusNode titleFocusNode,
-    @required FocusNode descriptionFocusNode,
-    @required TextEditingController descriptionController,
+    @required this.model,
     Key key,
-  })  : _titleController = titleController,
-        _titleFocusNode = titleFocusNode,
-        _descriptionFocusNode = descriptionFocusNode,
-        _descriptionController = descriptionController,
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,37 +85,112 @@ class _ReportCard extends StatelessWidget {
       elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(15),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              key: const Key('report_tab/title'),
-              controller: _titleController,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              focusNode: _titleFocusNode,
-              textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                labelText: "Title",
-                hintText: "Room number : Short description.",
+        child: Form(
+          key: model.formKey,
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextFormField(
+                      key: const Key('report_tab/room'),
+                      controller: model.roomController,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      focusNode: model.roomFocusNode,
+                      textInputAction: TextInputAction.next,
+                      inputFormatters: <TextInputFormatter>[
+                        WhitelistingTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(4),
+                      ],
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: "Chambre",
+                        hintText: "Numero de chambre",
+                      ),
+                      autovalidate: true,
+                      onFieldSubmitted: (String term) {
+                        model.roomFocusNode.unfocus();
+                        FocusScope.of(context)
+                            .requestFocus(model.nameFocusNode);
+                      },
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return 'Ne doit pas être vide';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: TextFormField(
+                      key: const Key('report_tab/name'),
+                      controller: model.nameController,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      focusNode: model.nameFocusNode,
+                      textInputAction: TextInputAction.next,
+                      decoration: const InputDecoration(
+                        labelText: "Identité",
+                        hintText: "Nom Prénom",
+                      ),
+                      autovalidate: true,
+                      onFieldSubmitted: (String term) {
+                        model.nameFocusNode.unfocus();
+                        FocusScope.of(context)
+                            .requestFocus(model.titleFocusNode);
+                      },
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return 'Ne doit pas être vide';
+                        } else if (!value.contains(' ')) {
+                          return 'Nom ET Prénom';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
               ),
-              onSubmitted: (String term) {
-                _titleFocusNode.unfocus();
-                FocusScope.of(context).requestFocus(_descriptionFocusNode);
-              },
-            ),
-            TextField(
-              key: const Key('report_tab/description'),
-              controller: _descriptionController,
-              maxLines: null,
-              focusNode: _descriptionFocusNode,
-              textInputAction: TextInputAction.done,
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(
-                labelText: "Description",
-                hintText: "Describe your issue.",
+              TextFormField(
+                key: const Key('report_tab/title'),
+                controller: model.titleController,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+                focusNode: model.titleFocusNode,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
+                  labelText: "Titre",
+                  hintText: "J'ai plus internet !",
+                ),
+                onFieldSubmitted: (String term) {
+                  model.titleFocusNode.unfocus();
+                  FocusScope.of(context)
+                      .requestFocus(model.descriptionFocusNode);
+                },
+                autovalidate: true,
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Ne doit pas être vide';
+                  }
+                  return null;
+                },
               ),
-              onSubmitted: (String term) => _descriptionFocusNode.unfocus(),
-            ),
-          ],
+              const Divider(),
+              TextFormField(
+                key: const Key('report_tab/description'),
+                controller: model.descriptionController,
+                maxLines: null,
+                focusNode: model.descriptionFocusNode,
+                textInputAction: TextInputAction.newline,
+                keyboardType: TextInputType.multiline,
+                maxLength: 500,
+                decoration: const InputDecoration(
+                  labelText: "Description",
+                  hintText: "Décrit ton problème !",
+                ),
+                onFieldSubmitted: (String term) =>
+                    model.descriptionFocusNode.unfocus(),
+              ),
+            ],
+          ),
         ),
       ),
     );

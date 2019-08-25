@@ -151,10 +151,10 @@ class Diagnosis {
     }
   }
 
-  Future<String> _lookup(String address) async {
+  Future<String> _lookup(String target) async {
     try {
       final List<InternetAddress> addresses =
-          await InternetAddress.lookup(MyIPAdresses.stormshield);
+          await InternetAddress.lookup(target);
       final StringBuffer output = StringBuffer();
       for (final InternetAddress address in addresses) {
         output.write("Host: ${address.host}\nLookup: ${address.address}\n");
@@ -171,7 +171,7 @@ class Diagnosis {
       final String stdout = result.stdout;
       return stdout.isEmpty ? "Nothing to show" : stdout;
     } catch (e, s) {
-      return "Error: $e\n" "Stacktrace: $s";
+      return "Error: $e";
     }
   }
 }

@@ -42,7 +42,7 @@ class AgendaViewModel extends ChangeNotifier {
   final NotificationSettings notificationSettings = NotificationSettings();
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
-  List<Widget> monthPages = <Widget>[];
+  final List<Widget> monthPages = <Widget>[];
 
   AgendaViewModel({
     @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
@@ -51,9 +51,9 @@ class AgendaViewModel extends ChangeNotifier {
   }) : _flutterLocalNotificationsPlugin = flutterLocalNotificationsPlugin;
 
   Stream<List<Widget>> listEventCards(ParsedCalendar parsedCalendar) async* {
-    List<Widget> monthlyWidgets;
-    List<Widget> dailyEvents = <Widget>[];
-    monthPages = <Widget>[];
+    final List<Widget> monthlyWidgets = <Widget>[];
+    final List<Widget> dailyEvents = <Widget>[];
+    monthPages.clear();
     DateTime oldDt;
 
     parsedCalendar.events.sort((Event event1, Event event2) =>
@@ -120,10 +120,9 @@ class AgendaViewModel extends ChangeNotifier {
           }
           oldDt = dt;
 
-          monthlyWidgets = <Widget>[
-            MonthHeader("${_month[dt.month - 1]}"),
-          ];
-          dailyEvents = <Widget>[];
+          monthlyWidgets.clear();
+          monthlyWidgets.add(MonthHeader("${_month[dt.month - 1]}"));
+          dailyEvents.clear();
         }
 
         // New Day
@@ -134,7 +133,7 @@ class AgendaViewModel extends ChangeNotifier {
           }
 
           oldDt = dt;
-          dailyEvents = <Widget>[]; // Clear Events
+          dailyEvents.clear(); // Clear Events
         }
 
         // Event Card

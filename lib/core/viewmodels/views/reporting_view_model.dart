@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/diagnosis.dart';
 import 'package:minitel_toolbox/core/services/http_gateway.dart';
 import 'package:minitel_toolbox/core/services/http_webhook.dart';
+import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ButtonState { None, Loading, Done }
@@ -22,6 +24,18 @@ class ReportingViewModel extends ChangeNotifier {
 
   /// State of diagnosis
   ButtonState diagnosisState = ButtonState.None;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController roomController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+
+  final FocusNode titleFocusNode = FocusNode();
+  final FocusNode descriptionFocusNode = FocusNode();
+  final FocusNode roomFocusNode = FocusNode();
+  final FocusNode nameFocusNode = FocusNode();
 
   ReportingViewModel({
     @required WebhookAPI webhookAPI,
@@ -66,25 +80,54 @@ class ReportingViewModel extends ChangeNotifier {
   }
 
   /// Send to slack
-  Future<String> reportToSlack(String title, String description,
+  Future<String> reportToSlack(
       {String channel = "minitel_toolbox_notifications"}) async {
     final DateTime timeout = await _timeout;
     String status;
 
-    if (DateTime.now().isAfter(timeout)) {
-      status = await _webhookAPI.report(
-        "*$title*\n"
-        "_${description}_\n\n",
-        attachments: await diagnosis.reportAll,
-        channel: channel,
-      );
-      if (status == "ok") {
-        await _setTimeout();
+    if (formKey.currentState.validate()) {
+      if (DateTime.now().isAfter(timeout)) {
+        status = await _webhookAPI.report(
+          "*Chambre ${roomController.text}*\n"
+          "*ID : ${nameController.text}*\n"
+          "*${titleController.text}*\n"
+          "_${descriptionController.text}_\n\n",
+          attachments: await diagnosis.reportAll,
+          channel: channel,
+        );
+        if (status == "ok") {
+          await _setTimeout();
+        }
+      } else {
+        status = "Wait until ${timeout.hour}:${timeout.minute}";
       }
-    } else {
-      status = "Wait until ${timeout.hour}:${timeout.minute}";
     }
     return status;
+  }
+
+  Future<void> reportToShare() async {
+    if (formKey.currentState.validate()) {
+      final String body = "---Report ${DateTime.now().toString()}---\n\n"
+          "Chambre: ${roomController.text}\n"
+          "ID: ${nameController.text}\n"
+          "Titre: ${titleController.text}\n"
+          "Description: ${descriptionController.text}\n\n"
+          "*Diagnosis*\n"
+          "${await diagnosis.reportAll}";
+      await Share.share(body);
+    }
+  }
+
+  Future<void> reportToMail() async {
+    final String body = "---Report ${DateTime.now().toString()}---\n\n"
+        "Chambre: ${roomController.text}\n"
+        "ID: ${nameController.text}\n"
+        "Titre: ${titleController.text}\n"
+        "Description: ${descriptionController.text}\n\n"
+        "*Diagnosis*\n"
+        "${await diagnosis.reportAll}";
+    await LaunchURL.launchURL(
+        "mailto:minitelismin@gmail.com?subject=${titleController.text}&body=$body");
   }
 
   /// SetTimeout to not abuse [reportToSlack]

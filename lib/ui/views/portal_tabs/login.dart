@@ -342,7 +342,7 @@ class _StatusCard extends StatelessWidget {
                   "Portail: ",
                   style: TextStyle(fontSize: 20),
                 ),
-                if (_portailAPI.cookie == null)
+                if (_portailAPI.cookies.isEmpty)
                   const Icon(
                     Icons.close,
                     color: Colors.red,

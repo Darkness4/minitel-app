@@ -25,8 +25,6 @@ class ReportingView extends StatefulWidget {
 class ReportingViewState extends State<ReportingView>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +33,7 @@ class ReportingViewState extends State<ReportingView>
         webhookAPI: Provider.of(context),
         gatewayAPI: Provider.of(context),
       ),
-      builder: (BuildContext context, ReportingViewModel model, Widget child) =>
+      builder: (BuildContext context, ReportingViewModel model, _) =>
           DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -44,7 +42,7 @@ class ReportingViewState extends State<ReportingView>
             headerSliverBuilder: _headerSliverBuilder,
             body: TabBarView(
               children: <Widget>[
-                child,
+                ReportTab(model: model),
                 DiagnoseTab(diagnosis: model.diagnosis),
               ],
             ),
@@ -66,17 +64,11 @@ class ReportingViewState extends State<ReportingView>
           ),
         ),
       ),
-      child: ReportTab(
-        titleController: _titleController,
-        descriptionController: _descriptionController,
-      ),
     );
   }
 
   @override
   void dispose() {
-    _titleController.dispose();
-    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -171,15 +163,7 @@ class ReportingViewState extends State<ReportingView>
         start: 0.0,
         end: 0.5,
         controller: _animationController,
-        onPressed: () async {
-          final String body = "---Report ${DateTime.now().toString()}---\n\n"
-              "Titre: ${_titleController.text}\n"
-              "Description: ${_descriptionController.text}\n\n"
-              "*Diagnosis*\n"
-              "${await model.diagnosis.reportAll}";
-          await LaunchURL.launchURL(
-              "mailto:minitelismin@gmail.com?subject=${_titleController.text}&body=$body");
-        },
+        onPressed: model.reportToMail,
         child: const Icon(Icons.mail),
       );
 
@@ -190,8 +174,7 @@ class ReportingViewState extends State<ReportingView>
         end: 0.25,
         controller: _animationController,
         onPressed: () async {
-          final String status = await model.reportToSlack(
-              _titleController.text, _descriptionController.text);
+          final String status = await model.reportToSlack();
           if (status != null) {
             Scaffold.of(context).showSnackBar(
               SnackBar(
@@ -212,12 +195,7 @@ class ReportingViewState extends State<ReportingView>
         start: 0.0,
         end: 1.0,
         controller: _animationController,
-        onPressed: () async =>
-            Share.share("---Report ${DateTime.now().toString()}---\n\n"
-                "Titre: ${_titleController.text}\n"
-                "Description: ${_descriptionController.text}\n\n"
-                "*Diagnosis*\n"
-                "${await model.diagnosis.reportAll}"),
+        onPressed: model.reportToShare,
         child: const Icon(Icons.share),
       );
 }
