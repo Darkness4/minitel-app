@@ -4,11 +4,8 @@ import 'dart:io';
 /// HTTP requests handler for EMSE Portal
 class PortailAPI {
   final HttpClient _client = HttpClient();
-  List<Cookie> _cookie;
-  final List<Cookie> _catchedCookies = <Cookie>[];
-
-  List<Cookie> get catchedCookies => _catchedCookies;
-  List<Cookie> get cookie => _cookie;
+  final List<Cookie> _cookies = <Cookie>[];
+  List<Cookie> get cookies => _cookies;
 
   /// Récupère le cookie pour se connecter à Portail EMSE
   ///
@@ -23,6 +20,7 @@ class PortailAPI {
         "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"))
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
+    _cookies.clear();
 
     final String temp = await response.transform(utf8.decoder).join();
     final String lt =
@@ -46,7 +44,7 @@ class PortailAPI {
       ..write(data);
     response = await request.close();
 
-    _catchedCookies.addAll(response.cookies);
+    _cookies.addAll(response.cookies);
 
     Cookie agimus;
     try {
@@ -63,7 +61,7 @@ class PortailAPI {
       ..followRedirects = false;
     response = await request.close();
 
-    _catchedCookies.addAll(response.cookies);
+    _cookies.addAll(response.cookies);
     final Cookie casAuth = response.cookies
         .firstWhere((Cookie cookie) => cookie.name == "CASAuth");
     location = response.headers.value('location');
@@ -74,7 +72,7 @@ class PortailAPI {
       ..cookies.add(casAuth);
     response = await request.close();
 
-    _catchedCookies.addAll(response.cookies);
+    _cookies.addAll(response.cookies);
     final Cookie laravelToken = response.cookies
         .firstWhere((Cookie cookie) => cookie.name == "laravel_token");
     final Cookie xsrfToken = response.cookies
@@ -103,14 +101,14 @@ class PortailAPI {
   }
 
   /// Save the cookie gotten through CAS Authentication
-  Future<void> saveCookiePortailFromLogin(
+  Future<List<Cookie>> saveCookiePortailFromLogin(
       {String username, String password}) async {
     try {
       final List<Cookie> cookies =
           await getPortailCookie(username: username, password: password);
-      _cookie = cookies;
+      return cookies;
     } on Exception {
-      _cookie = null;
+      _cookies.clear();
       rethrow;
     }
   }

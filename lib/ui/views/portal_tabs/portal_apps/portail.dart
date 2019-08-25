@@ -19,7 +19,7 @@ class _PortailWebViewState extends State<PortailWebView> {
   @override
   Widget build(BuildContext context) {
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
-    for (final Cookie cookie in _portailAPI.catchedCookies) {
+    for (final Cookie cookie in _portailAPI.cookies) {
       if (cookie.name == "AGIMUS") {
         cookieManager.setCookie('emse.fr', cookie.toString());
       } else {
