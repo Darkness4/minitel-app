@@ -77,6 +77,8 @@ class MinitelFinders {
   final SerializableFinder reportTitle = find.byValueKey('report_tab/title');
   final SerializableFinder reportDescription =
       find.byValueKey('report_tab/description');
+  final SerializableFinder reportName = find.byValueKey('report_tab/name');
+  final SerializableFinder reportRoom = find.byValueKey('report_tab/room');
   final SerializableFinder diagnosisList = find.byValueKey('diagnose_tab/list');
 
   // Docs

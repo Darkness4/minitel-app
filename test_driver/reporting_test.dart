@@ -41,10 +41,14 @@ void main() {
       });
 
       test('Fill report', () async {
+        await driver.tap(minitelFinders.reportName);
+        await driver.enterText('Integration Test');
+        await driver.tap(minitelFinders.reportRoom);
+        await driver.enterText('6666');
         await driver.tap(minitelFinders.reportTitle);
-        await driver.enterText('Integration Test');
+        await driver.enterText('Integration Test Title');
         await driver.tap(minitelFinders.reportDescription);
-        await driver.enterText('Integration Test');
+        await driver.enterText('Integration Test Description');
       });
 
       test('PageView Scroll to Diagnosis', () async {
