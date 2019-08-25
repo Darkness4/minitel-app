@@ -30,12 +30,12 @@ void main() {
       }
     });
 
-    test('Get status Not logged in from 195.83.139.7', () async {
+    test('Get status Non connecté in from 195.83.139.7', () async {
       await _gateway.disconnectGateway("195.83.139.7");
       final String status = await _gateway.getStatus("195.83.139.7");
       print(status);
 
-      expect(status, contains("Not logged in"));
+      expect(status, contains("Non connecté"));
     });
 
     test('Get status SUCCESS from 195.83.139.7', () async {

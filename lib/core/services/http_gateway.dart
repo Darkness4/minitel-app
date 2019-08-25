@@ -102,7 +102,7 @@ class GatewayAPI {
   /// Be also aware, if the local gateway can forward to the server (195.83.139.7).
   ///
   /// If connected, the response will be "[time] seconds left".
-  /// If not, the response will be "Not logged in"
+  /// If not, the response will be "Non connecté"
   /// If no response is received, the HTTP error will be outputted.
   ///
   /// You can use [getStatus] like this:
@@ -138,7 +138,7 @@ class GatewayAPI {
       final String body = await response.transform(utf8.decoder).join();
       if (response.statusCode == 200) {
         if (!body.contains('l_rtime')) {
-          status = 'Not logged in';
+          status = 'Non connecté';
         } else {
           final String match = exp.firstMatch(body).group(1);
           if (match is! String) {
