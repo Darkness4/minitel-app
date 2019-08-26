@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 /// This class handle the connections through stormshield, aka the gateway.
-class GatewayAPI {
+class StormshieldAPI {
   final HttpClient _client = HttpClient();
   Cookie cookie;
 

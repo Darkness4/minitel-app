@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/api_constants.dart';
 import 'package:minitel_toolbox/core/models/github/release.dart';
 import 'package:minitel_toolbox/core/services/github_api.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:provider/provider.dart';
 
 class GithubTab extends StatelessWidget {
-  static const String repo = "Darkness4/minitel-app";
-
   const GithubTab({
     Key key,
   }) : super(key: key);
@@ -16,7 +15,8 @@ class GithubTab extends StatelessWidget {
     return Center(
       child: Scrollbar(
         child: FutureBuilder<List<GithubRelease>>(
-          future: Provider.of<GithubAPI>(context).fetchReleases(repo),
+          future: Provider.of<GithubAPI>(context)
+              .fetchReleases(ApiConstants.githubRepo),
           builder: (BuildContext context,
                   AsyncSnapshot<List<GithubRelease>> snapshot) =>
               snapshot.hasData

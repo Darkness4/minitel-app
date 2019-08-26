@@ -39,7 +39,7 @@ class LoginPageState extends State<LoginPage> {
       model: LoginViewModel(
         portailAPI: Provider.of<PortailAPI>(context),
         calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
-        gatewayAPI: Provider.of<GatewayAPI>(context),
+        stormshieldAPI: Provider.of<StormshieldAPI>(context),
         iCalendar: Provider.of<ICalendar>(context),
         rememberMe: _rememberMe,
         selectedTime: _selectedTime,
@@ -261,7 +261,7 @@ class _StatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GatewayAPI _gatewayAPI = Provider.of<GatewayAPI>(context);
+    final StormshieldAPI _gatewayAPI = Provider.of<StormshieldAPI>(context);
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
     final CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
 

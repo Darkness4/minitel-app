@@ -43,4 +43,10 @@ class _BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
 
     super.initState();
   }
+
+  @override
+  void dispose() {
+    widget.model.dispose();
+    super.dispose();
+  }
 }

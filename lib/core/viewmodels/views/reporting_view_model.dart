@@ -39,9 +39,9 @@ class ReportingViewModel extends ChangeNotifier {
 
   ReportingViewModel({
     @required WebhookAPI webhookAPI,
-    @required GatewayAPI gatewayAPI,
+    @required StormshieldAPI stormshieldAPI,
   })  : _webhookAPI = webhookAPI,
-        diagnosis = Diagnosis(gatewayAPI: gatewayAPI);
+        diagnosis = Diagnosis(stormshieldAPI: stormshieldAPI);
 
   Future<DateTime> get _timeout async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

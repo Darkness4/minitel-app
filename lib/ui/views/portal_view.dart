@@ -5,6 +5,7 @@ import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/github/release.dart';
 import 'package:minitel_toolbox/core/services/github_api.dart';
+import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class PortalView extends StatefulWidget {
 }
 
 class PortalViewState extends State<PortalView> {
+  final PortailAPI _portailAPI = PortailAPI();
   bool _hasTriggeredOnce = false;
 
   @override
@@ -31,8 +33,8 @@ class PortalViewState extends State<PortalView> {
       child: Scaffold(
         body: NestedScrollView(
           key: const Key('portail_view/tabs'),
-          body: const DecoratedBox(
-            decoration: BoxDecoration(
+          body: DecoratedBox(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 colors: <Color>[
@@ -41,11 +43,14 @@ class PortalViewState extends State<PortalView> {
                 ],
               ),
             ),
-            child: TabBarView(
-              children: <Widget>[
-                LoginPage(),
-                AppsList(),
-              ],
+            child: Provider<PortailAPI>.value(
+              value: _portailAPI,
+              child: TabBarView(
+                children: const <Widget>[
+                  LoginPage(),
+                  AppsList(),
+                ],
+              ),
             ),
           ),
           headerSliverBuilder:
