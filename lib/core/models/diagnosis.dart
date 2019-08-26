@@ -170,7 +170,7 @@ class Diagnosis {
       final ProcessResult result = await Process.run(command, args);
       final String stdout = result.stdout;
       return stdout.isEmpty ? "Nothing to show" : stdout;
-    } catch (e, s) {
+    } catch (e) {
       return "Error: $e";
     }
   }

@@ -6,7 +6,7 @@ class Feed {
   final String nextUrl;
   final String prevUrl;
 
-  Feed({
+  const Feed({
     this.posts,
     this.nextUrl,
     this.prevUrl,

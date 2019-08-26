@@ -1,15 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/buttons.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';
-import 'package:share/share.dart';
-
 import 'reporting_tabs/diagnose_tab.dart';
 import 'reporting_tabs/report_tab.dart';
 

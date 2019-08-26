@@ -6,7 +6,7 @@ class Post {
   final String permalinkUrl;
   final DateTime createdTime;
 
-  Post({
+  const Post({
     this.message,
     this.id,
     this.pictureUrl,
