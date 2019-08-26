@@ -11,10 +11,28 @@ void main() {
     expect(releases.first.html_url, contains("Darkness4/minitel-app"));
   });
 
+  test('FAIL Get all releases from Github', () async {
+    try {
+      await _githubAPI.fetchReleases("");
+      throw Exception('Unexpected Result');
+    } catch (e) {
+      expect(e.toString(), contains("Failed to"));
+    }
+  });
+
   test('Get latest release from Github', () async {
     final GithubRelease release =
         await _githubAPI.fetchLatestRelease("Darkness4/minitel-app");
 
     expect(release.html_url, contains("Darkness4/minitel-app"));
+  });
+
+  test('FAIL Get latest release from Github', () async {
+    try {
+      await _githubAPI.fetchLatestRelease("");
+      throw Exception('Unexpected Result');
+    } catch (e) {
+      expect(e.toString(), contains("Failed to"));
+    }
   });
 }

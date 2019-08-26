@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
-import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
-import 'package:minitel_toolbox/core/services/icalendar.dart';
+import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
+import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

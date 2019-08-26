@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/feed.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/post.dart';
-import 'package:minitel_toolbox/core/services/http_facebook_api.dart';
+import 'package:minitel_toolbox/core/services/facebook_api.dart';
 import 'package:provider/provider.dart';
 
 class FacebookCard extends StatelessWidget {

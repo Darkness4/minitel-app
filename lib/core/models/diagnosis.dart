@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/services/http_gateway.dart';
+import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 
 /// This stores all diagnosis results.
 ///

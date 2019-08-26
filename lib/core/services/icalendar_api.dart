@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:minitel_toolbox/core/models/icalendar/event.dart';
 import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
-import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
+import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// ICalendar model

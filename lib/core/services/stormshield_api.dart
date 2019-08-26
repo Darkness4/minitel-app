@@ -141,12 +141,7 @@ class GatewayAPI {
           status = 'Non connecté';
         } else {
           final String match = exp.firstMatch(body).group(1);
-          if (match is! String) {
-            throw Exception(
-                "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-          } else {
-            status = '$match secondes restantes';
-          }
+          status = '$match secondes restantes';
         }
       } else {
         throw Exception("HttpError: ${response.statusCode}");

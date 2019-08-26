@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:minitel_toolbox/core/services/http_gateway.dart';
+import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 
 void main() {
   final GatewayAPI _gatewayAPI = GatewayAPI();
