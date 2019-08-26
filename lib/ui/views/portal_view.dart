@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/funcs/url_launch.dart';
-import 'package:minitel_toolbox/core/models/github/release.dart';
-import 'package:minitel_toolbox/core/services/github_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
+import 'package:minitel_toolbox/ui/shared/shared_funcs.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
-import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 import 'portal_tabs/apps_list.dart';
@@ -91,42 +86,9 @@ class PortalViewState extends State<PortalView> {
   @override
   void didChangeDependencies() {
     if (!_hasTriggeredOnce) {
-      _checkVersion(context);
+      checkLatestVersion(context);
       _hasTriggeredOnce = true;
     }
     super.didChangeDependencies();
-  }
-
-  Future<void> _checkVersion(BuildContext context) async {
-    try {
-      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      final GithubRelease githubRelease = await Provider.of<GithubAPI>(context)
-          .fetchLatestRelease('Darkness4/minitel-app');
-      if (packageInfo.version != githubRelease.tag_name) {
-        await showDialog(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: const Text("Une nouvelle version est disponible !"),
-            content: Text(
-                "La version ${githubRelease.tag_name} est la dernière version."),
-            actions: <Widget>[
-              FlatButton(
-                key: const Key('portal_view/close_update'),
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text("Close"),
-              ),
-              RaisedButton(
-                colorBrightness: Brightness.dark,
-                color: Theme.of(context).primaryColor,
-                onPressed: () => LaunchURL.launchURL(githubRelease.html_url),
-                child: const Text("Update"),
-              )
-            ],
-          ),
-        );
-      }
-    } on SocketException {
-      print("Cannot connect to Github to check version");
-    }
   }
 }

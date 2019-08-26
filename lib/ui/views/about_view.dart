@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
-import 'package:minitel_toolbox/core/models/github/release.dart';
-import 'package:minitel_toolbox/core/services/github_api.dart';
+import 'package:minitel_toolbox/ui/shared/shared_funcs.dart';
 import 'package:package_info/package_info.dart';
-import 'package:provider/provider.dart';
 
 /// Page About
 class AboutView extends StatelessWidget {
@@ -114,65 +112,7 @@ class AboutView extends StatelessWidget {
               ),
               ListTile(
                 title: const Text("Chercher une mise à jour"),
-                onTap: () async {
-                  final PackageInfo packageInfo =
-                      await PackageInfo.fromPlatform();
-                  final GithubRelease githubRelease =
-                      await Provider.of<GithubAPI>(context)
-                          .fetchLatestRelease('Darkness4/minitel-app');
-                  if (packageInfo.version != githubRelease.tag_name) {
-                    await showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text(
-                            "Une nouvelle version est disponible !",
-                          ),
-                          content: Text(
-                              "La version ${githubRelease.tag_name} est la dernière version."),
-                          actions: <Widget>[
-                            FlatButton(
-                              onPressed: () => Navigator.of(context).pop(),
-                              child: const Text("Close"),
-                            ),
-                            RaisedButton(
-                              colorBrightness: Brightness.dark,
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () =>
-                                  LaunchURL.launchURL(githubRelease.html_url),
-                              child: const Text("Télécharger"),
-                            )
-                          ],
-                        );
-                      },
-                    );
-                  } else {
-                    await showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title:
-                              const Text("Il s'agit de la dernière version."),
-                          content: Text(
-                              "La version ${githubRelease.tag_name} est la dernière version."),
-                          actions: <Widget>[
-                            FlatButton(
-                              onPressed: () => Navigator.of(context).pop(),
-                              child: const Text("Close"),
-                            ),
-                            RaisedButton(
-                              colorBrightness: Brightness.dark,
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () =>
-                                  LaunchURL.launchURL(githubRelease.html_url),
-                              child: const Text("Télécharger"),
-                            )
-                          ],
-                        );
-                      },
-                    );
-                  }
-                },
+                onTap: () => checkLatestVersion(context),
               ),
               // ListTile(
               //   title: const Text("Faire un don"),
