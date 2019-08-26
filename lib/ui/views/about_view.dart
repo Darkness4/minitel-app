@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
-import 'package:minitel_toolbox/core/models/github_api.dart';
-import 'package:minitel_toolbox/core/services/http_version_checker.dart';
+import 'package:minitel_toolbox/core/models/github/release.dart';
+import 'package:minitel_toolbox/core/services/github_api.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
@@ -115,13 +115,12 @@ class AboutView extends StatelessWidget {
               ListTile(
                 title: const Text("Chercher une mise à jour"),
                 onTap: () async {
-                  final Future<PackageInfo> packageInfo =
-                      PackageInfo.fromPlatform();
-                  final Future<LatestRelease> versionAPI =
-                      Provider.of<VersionAPI>(context).getLatestVersion();
-                  final PackageInfo actualRelease = await packageInfo;
-                  final LatestRelease latestRelease = await versionAPI;
-                  if (actualRelease.version != latestRelease.tagName) {
+                  final PackageInfo packageInfo =
+                      await PackageInfo.fromPlatform();
+                  final GithubRelease githubRelease =
+                      await Provider.of<GithubAPI>(context)
+                          .fetchLatestRelease('Darkness4/minitel-app');
+                  if (packageInfo.version != githubRelease.tag_name) {
                     await showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -130,7 +129,7 @@ class AboutView extends StatelessWidget {
                             "Une nouvelle version est disponible !",
                           ),
                           content: Text(
-                              "La version ${latestRelease.tagName} est la dernière version."),
+                              "La version ${githubRelease.tag_name} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
                               onPressed: () => Navigator.of(context).pop(),
@@ -140,8 +139,8 @@ class AboutView extends StatelessWidget {
                               colorBrightness: Brightness.dark,
                               color: Theme.of(context).primaryColor,
                               onPressed: () =>
-                                  LaunchURL.launchURL(latestRelease.htmlUrl),
-                              child: const Text("Update"),
+                                  LaunchURL.launchURL(githubRelease.html_url),
+                              child: const Text("Télécharger"),
                             )
                           ],
                         );
@@ -155,7 +154,7 @@ class AboutView extends StatelessWidget {
                           title:
                               const Text("Il s'agit de la dernière version."),
                           content: Text(
-                              "La version ${latestRelease.tagName} est la dernière version."),
+                              "La version ${githubRelease.tag_name} est la dernière version."),
                           actions: <Widget>[
                             FlatButton(
                               onPressed: () => Navigator.of(context).pop(),
@@ -163,8 +162,9 @@ class AboutView extends StatelessWidget {
                             ),
                             RaisedButton(
                               colorBrightness: Brightness.dark,
+                              color: Theme.of(context).primaryColor,
                               onPressed: () =>
-                                  LaunchURL.launchURL(latestRelease.htmlUrl),
+                                  LaunchURL.launchURL(githubRelease.html_url),
                               child: const Text("Télécharger"),
                             )
                           ],

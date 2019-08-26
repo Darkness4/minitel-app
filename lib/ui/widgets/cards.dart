@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:html/parser.dart' show parseFragment;
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
+import 'package:minitel_toolbox/core/models/github/release.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
 class LogCard extends StatelessWidget {
@@ -59,12 +59,12 @@ class LogCard extends StatelessWidget {
   }
 }
 
-class NewsCard extends StatelessWidget {
-  final dynamic item;
+class GithubCard extends StatelessWidget {
+  final GithubRelease release;
   final double elevation;
 
-  const NewsCard({
-    @required this.item,
+  const GithubCard({
+    @required this.release,
     Key key,
     this.elevation = 4.0,
   }) : super(key: key);
@@ -74,8 +74,7 @@ class NewsCard extends StatelessWidget {
     return Card(
       elevation: elevation,
       child: InkWell(
-        onTap: () => LaunchURL.launchURL(
-            item.links.map((dynamic link) => link.href).toList().first),
+        onTap: () => LaunchURL.launchURL(release.html_url),
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,9 +85,7 @@ class NewsCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Image.network(
-                      item.media.thumbnails.first.url
-                          .toString()
-                          .replaceAll("?s=30", "?s=90"),
+                      release.author.avatar_url,
                       fit: BoxFit.cover,
                       height: 60,
                       width: 60,
@@ -100,19 +97,14 @@ class NewsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          item.title.trim(),
+                          release.name,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context)
                               .textTheme
                               .headline
                               .copyWith(height: 1),
                         ),
-                        Text(
-                          (item.authors)
-                              .map((dynamic author) => author.name)
-                              .toList()
-                              .join(" "),
-                        ),
+                        Text(release.author.login),
                       ],
                     ),
                   ),
@@ -126,7 +118,7 @@ class NewsCard extends StatelessWidget {
                     stops: <double>[0.0, 0.1, 1.0],
                     colors: <Color>[
                       Colors.black,
-                      Color(item.id.hashCode ~/ 100 + 0xFF000000),
+                      Color(release.id ~/ 100 + 0xFF000000),
                       Colors.deepPurpleAccent,
                     ],
                   ),
@@ -134,7 +126,7 @@ class NewsCard extends StatelessWidget {
                 height: 100,
                 child: Center(
                   child: Text(
-                    "Version v${item.id.substring(41)}",
+                    "Version v${release.tag_name}",
                     style: Theme.of(context)
                         .textTheme
                         .display1
@@ -145,7 +137,7 @@ class NewsCard extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.all(20.0),
                 child: Text(
-                  parseFragment(item.content).text,
+                  release.body,
                   overflow: TextOverflow.fade,
                   maxLines: 10,
                 ),
@@ -156,10 +148,7 @@ class NewsCard extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: FlatButton(
                     textColor: Colors.blue,
-                    onPressed: () => LaunchURL.launchURL(item.links
-                        .map((dynamic link) => link.href)
-                        .toList()
-                        .first),
+                    onPressed: () => LaunchURL.launchURL(release.html_url),
                     child: const Text(
                       "See More...",
                       style: TextStyle(fontWeight: FontWeight.bold),
