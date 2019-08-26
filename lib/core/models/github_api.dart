@@ -1,38 +1,57 @@
+import 'package:flutter/foundation.dart';
+
 /// Latest Release of an app generated from Github API
 class LatestRelease {
   /// Url to the api of the release
-  String url;
+  final String url;
 
   /// Url output
-  String htmlUrl;
+  final String htmlUrl;
 
   /// Identificator
-  int id;
+  final int id;
 
   /// Git tag name
-  String tagName;
+  final String tagName;
 
   /// Github release name
-  String name;
+  final String name;
 
   /// Date of creation
-  DateTime createdAt;
+  final DateTime createdAt;
 
   /// Date of publication
-  DateTime publishedAt;
+  final DateTime publishedAt;
 
-  LatestRelease.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-    htmlUrl = json['html_url'];
-    id = json['id'];
-    tagName = json['tag_name'];
-    name = json['name'];
-    createdAt = DateTime.parse(json['created_at']);
-    publishedAt = DateTime.parse(json['published_at']);
+  final String body;
+
+  const LatestRelease({
+    @required this.url,
+    @required this.htmlUrl,
+    @required this.id,
+    @required this.tagName,
+    @required this.name,
+    @required this.createdAt,
+    @required this.publishedAt,
+    @required this.body,
+  });
+
+  factory LatestRelease.fromJson(Map<String, dynamic> json) {
+    return LatestRelease(
+      body: json['body'],
+      url: json['url'],
+      htmlUrl: json['html_url'],
+      id: json['id'],
+      tagName: json['tag_name'],
+      name: json['name'],
+      createdAt: DateTime.parse(json['created_at']),
+      publishedAt: DateTime.parse(json['published_at']),
+    );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['body'] = body;
     data['url'] = url;
     data['html_url'] = htmlUrl;
     data['id'] = id;
