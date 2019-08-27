@@ -86,7 +86,7 @@ class PortalViewState extends State<PortalView> {
   @override
   void didChangeDependencies() {
     if (!_hasTriggeredOnce) {
-      checkLatestVersion(context);
+      checkLatestVersion(context, doNotShowIfNoUpdate: true);
       _hasTriggeredOnce = true;
     }
     super.didChangeDependencies();

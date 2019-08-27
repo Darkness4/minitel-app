@@ -3,7 +3,7 @@ description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un W
 repository: https://github.com/Darkness4/minitel-app
 issue_tracker: https://github.com/Darkness4/minitel-app/issues
 author: Nguyen Marc <nguyen_marc@live.fr>
-version: 0.6.0
+version: 0.6.1
 
 environment:
   sdk: ^2.5.0
