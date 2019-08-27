@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/services/http_gateway.dart';
+import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 
 /// This stores all diagnosis results.
 ///
@@ -26,11 +26,12 @@ class Diagnosis {
   /// Ping arguments
   static const String _argsPing = "-c 4 -w 5 -W 5";
 
-  final GatewayAPI _gateway;
+  final StormshieldAPI _stormshieldAPI;
 
   Map<String, Future<String>> _report = <String, Future<String>>{};
 
-  Diagnosis({@required GatewayAPI gatewayAPI}) : _gateway = gatewayAPI;
+  Diagnosis({@required StormshieldAPI stormshieldAPI})
+      : _stormshieldAPI = stormshieldAPI;
 
   /// Get the warnings from functions
   String get alert => _alert;
@@ -130,12 +131,13 @@ class Diagnosis {
           "su",
           <String>['-c', "/system/bin/nslookup ${MyIPAdresses.google}"],
         ),
-        _report[DiagnosisContent.httpPortalPublic] = _gateway
-            .getStatus(MyIPAdresses.stormshieldIP, cookie: _gateway.cookie)
+        _report[DiagnosisContent.httpPortalPublic] = _stormshieldAPI
+            .getStatus(MyIPAdresses.stormshieldIP,
+                cookie: _stormshieldAPI.cookie)
             .then(
                 (String status) => status.isEmpty ? "Nothing to show" : status),
-        _report[DiagnosisContent.httpPortalGateway] = _gateway
-            .getStatus(MyIPAdresses.gatewayIP, cookie: _gateway.cookie)
+        _report[DiagnosisContent.httpPortalGateway] = _stormshieldAPI
+            .getStatus(MyIPAdresses.gatewayIP, cookie: _stormshieldAPI.cookie)
             .then(
                 (String status) => status.isEmpty ? "Nothing to show" : status),
         _report[DiagnosisContent.nsLookupEMSE] =
@@ -170,7 +172,7 @@ class Diagnosis {
       final ProcessResult result = await Process.run(command, args);
       final String stdout = result.stdout;
       return stdout.isEmpty ? "Nothing to show" : stdout;
-    } catch (e, s) {
+    } catch (e) {
       return "Error: $e";
     }
   }

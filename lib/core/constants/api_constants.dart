@@ -31,6 +31,8 @@ class ApiConstants {
   static const String _facebookApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
   static const String facebookProfileId = "100012919189214"; // Public
 
+  static const String githubRepo = "Darkness4/minitel-app";
+
   /// Facebook api key
   static String get facebookApi => utf8.decode(base64.decode(_facebookApi));
 

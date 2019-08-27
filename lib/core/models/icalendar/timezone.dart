@@ -55,8 +55,6 @@ class TimezoneDescription {
       case "TZNAME":
         tzName = value;
         break;
-      default:
-        print("Invalid key: $key");
     }
   }
 

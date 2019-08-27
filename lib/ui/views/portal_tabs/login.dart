@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
-import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
-import 'package:minitel_toolbox/core/services/http_gateway.dart';
-import 'package:minitel_toolbox/core/services/http_portail.dart';
-import 'package:minitel_toolbox/core/services/icalendar.dart';
+import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
+import 'package:minitel_toolbox/core/services/stormshield_api.dart';
+import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
+import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +39,7 @@ class LoginPageState extends State<LoginPage> {
       model: LoginViewModel(
         portailAPI: Provider.of<PortailAPI>(context),
         calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
-        gatewayAPI: Provider.of<GatewayAPI>(context),
+        stormshieldAPI: Provider.of<StormshieldAPI>(context),
         iCalendar: Provider.of<ICalendar>(context),
         rememberMe: _rememberMe,
         selectedTime: _selectedTime,
@@ -261,7 +261,7 @@ class _StatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GatewayAPI _gatewayAPI = Provider.of<GatewayAPI>(context);
+    final StormshieldAPI _gatewayAPI = Provider.of<StormshieldAPI>(context);
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
     final CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
 

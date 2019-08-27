@@ -14,7 +14,7 @@ class PortailAPI {
   /// ```
   /// List<Cookie> cookies = await getPortailCookie(username: "prenom.nom", password: "motdepasse")
   /// ```
-  Future<List<Cookie>> getPortailCookie(
+  Future<List<Cookie>> _getPortailCookie(
       {String username, String password}) async {
     HttpClientRequest request = await _client.getUrl(Uri.parse(
         "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"))
@@ -46,13 +46,14 @@ class PortailAPI {
 
     _cookies.addAll(response.cookies);
 
-    Cookie agimus;
-    try {
-      agimus = response.cookies
-          .firstWhere((Cookie cookie) => cookie.name == "AGIMUS");
-    } on Exception {
+    if (!response.cookies
+        .map((Cookie cookie) => cookie.name)
+        .contains('AGIMUS')) {
       throw Exception("AGIMUS not found. Maybe bad username or password.");
     }
+
+    final Cookie agimus =
+        response.cookies.firstWhere((Cookie cookie) => cookie.name == "AGIMUS");
     String location = response.headers.value('location');
 
     request = await _client.getUrl(Uri.parse(location))
@@ -105,7 +106,7 @@ class PortailAPI {
       {String username, String password}) async {
     try {
       final List<Cookie> cookies =
-          await getPortailCookie(username: username, password: password);
+          await _getPortailCookie(username: username, password: password);
       return cookies;
     } on Exception {
       _cookies.clear();

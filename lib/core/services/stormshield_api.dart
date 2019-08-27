@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 /// This class handle the connections through stormshield, aka the gateway.
-class GatewayAPI {
-  final HttpClient _client = HttpClient();
+class StormshieldAPI {
+  final HttpClient _client = HttpClient()
+    ..badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+
   Cookie cookie;
 
   /// Connect to the portal.
@@ -27,9 +30,6 @@ class GatewayAPI {
   /// ```
   Future<Cookie> autoLogin(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
-    _client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
-
     // SessionId
     final String data = "uid=$uid&time=$selectedTime&pswd=$pswd";
     final HttpClientRequest request =
@@ -68,9 +68,6 @@ class GatewayAPI {
     final String url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     String status = "";
-
-    _client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
 
     try {
       final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
@@ -121,8 +118,7 @@ class GatewayAPI {
   ///
   Future<String> getStatus(String selectedUrl, {Cookie cookie}) async {
     String status = "";
-    _client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
+
     final String url = 'https://$selectedUrl/auth/login.html';
     final RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
@@ -141,12 +137,7 @@ class GatewayAPI {
           status = 'Non connecté';
         } else {
           final String match = exp.firstMatch(body).group(1);
-          if (match is! String) {
-            throw Exception(
-                "Error: l_rtime doesn't exist. Please check if the RegEx is updated.");
-          } else {
-            status = '$match secondes restantes';
-          }
+          status = '$match secondes restantes';
         }
       } else {
         throw Exception("HttpError: ${response.statusCode}");

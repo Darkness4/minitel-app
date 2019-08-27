@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/diagnosis.dart';
-import 'package:minitel_toolbox/core/services/http_gateway.dart';
-import 'package:minitel_toolbox/core/services/http_webhook.dart';
+import 'package:minitel_toolbox/core/services/stormshield_api.dart';
+import 'package:minitel_toolbox/core/services/webhook_api.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,9 +39,9 @@ class ReportingViewModel extends ChangeNotifier {
 
   ReportingViewModel({
     @required WebhookAPI webhookAPI,
-    @required GatewayAPI gatewayAPI,
+    @required StormshieldAPI stormshieldAPI,
   })  : _webhookAPI = webhookAPI,
-        diagnosis = Diagnosis(gatewayAPI: gatewayAPI);
+        diagnosis = Diagnosis(stormshieldAPI: stormshieldAPI);
 
   Future<DateTime> get _timeout async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

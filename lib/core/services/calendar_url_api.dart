@@ -17,30 +17,22 @@ class CalendarUrlAPI {
 
   /// Get from EMSE the url to get the ical
   Future<String> getCalendarURL({String username, String password}) async {
-    String status = "";
     final Cookie phpSessionIDCAS = await _bypassCAS(
       username: username,
       password: password,
     );
 
-    try {
-      final HttpClientRequest request =
-          await _client.postUrl(Uri.parse("https://portail.emse.fr/ics/"))
-            ..headers.removeAll(HttpHeaders.contentLengthHeader)
-            ..cookies.add(phpSessionIDCAS);
-      final HttpClientResponse response = await request.close();
-      final String body = await response
-          .transform(utf8.decoder)
-          .transform(const LineSplitter())
-          .firstWhere(
-              (String line) => line.contains(RegExp(r'https(.*)\.ics')));
-      status = RegExp(r'https(.*)\.ics').stringMatch(body);
-    } catch (e) {
-      status = e.toString();
-      print(status);
-    }
+    final HttpClientRequest request =
+        await _client.postUrl(Uri.parse("https://portail.emse.fr/ics/"))
+          ..headers.removeAll(HttpHeaders.contentLengthHeader)
+          ..cookies.add(phpSessionIDCAS);
+    final HttpClientResponse response = await request.close();
+    final String body = await response
+        .transform(utf8.decoder)
+        .transform(const LineSplitter())
+        .firstWhere((String line) => line.contains(RegExp(r'https(.*)\.ics')));
 
-    return status;
+    return RegExp(r'https(.*)\.ics').stringMatch(body);
   }
 
   /// Save the url to get the ical in a SharedPrefs
@@ -58,6 +50,11 @@ class CalendarUrlAPI {
       ..followRedirects = false
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
+
+    if (response.statusCode != 200) {
+      throw Exception(
+          "HTTP Error: ${response.statusCode}, probably a Bad login");
+    }
     final Cookie phpSessionIDreferee = response.cookies
         .firstWhere((Cookie cookie) => cookie.name == "PHPSESSID");
 
@@ -96,11 +93,7 @@ class CalendarUrlAPI {
       ..write(data);
     response = await request.close();
 
-    final String location = response.headers.value('location');
-    // print("Location: $location");
-    if (location == null) {
-      throw Exception("Error : Bad login");
-    }
+    final String location = response.headers.value(HttpHeaders.locationHeader);
 
     // GET CAS
     request = await _client.getUrl(Uri.parse(location))

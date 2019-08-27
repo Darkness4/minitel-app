@@ -1,12 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/funcs/url_launch.dart';
-import 'package:minitel_toolbox/core/models/github_api.dart';
-import 'package:minitel_toolbox/core/services/http_version_checker.dart';
+import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
+import 'package:minitel_toolbox/ui/shared/shared_funcs.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
-import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 import 'portal_tabs/apps_list.dart';
@@ -22,6 +18,7 @@ class PortalView extends StatefulWidget {
 }
 
 class PortalViewState extends State<PortalView> {
+  final PortailAPI _portailAPI = PortailAPI();
   bool _hasTriggeredOnce = false;
 
   @override
@@ -31,8 +28,8 @@ class PortalViewState extends State<PortalView> {
       child: Scaffold(
         body: NestedScrollView(
           key: const Key('portail_view/tabs'),
-          body: const DecoratedBox(
-            decoration: BoxDecoration(
+          body: DecoratedBox(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 colors: <Color>[
@@ -41,11 +38,14 @@ class PortalViewState extends State<PortalView> {
                 ],
               ),
             ),
-            child: TabBarView(
-              children: <Widget>[
-                LoginPage(),
-                AppsList(),
-              ],
+            child: Provider<PortailAPI>.value(
+              value: _portailAPI,
+              child: TabBarView(
+                children: const <Widget>[
+                  LoginPage(),
+                  AppsList(),
+                ],
+              ),
             ),
           ),
           headerSliverBuilder:
@@ -86,44 +86,9 @@ class PortalViewState extends State<PortalView> {
   @override
   void didChangeDependencies() {
     if (!_hasTriggeredOnce) {
-      _checkVersion(context);
+      checkLatestVersion(context);
       _hasTriggeredOnce = true;
     }
     super.didChangeDependencies();
-  }
-
-  Future<void> _checkVersion(BuildContext context) async {
-    try {
-      final Future<PackageInfo> packageInfo = PackageInfo.fromPlatform();
-      final Future<LatestRelease> versionAPI =
-          Provider.of<VersionAPI>(context).getLatestVersion();
-      final PackageInfo actualRelease = await packageInfo;
-      final LatestRelease latestRelease = await versionAPI;
-      if (actualRelease.version != latestRelease.tagName) {
-        await showDialog(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: const Text("Une nouvelle version est disponible !"),
-            content: Text(
-                "La version ${latestRelease.tagName} est la dernière version."),
-            actions: <Widget>[
-              FlatButton(
-                key: const Key('portal_view/close_update'),
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text("Close"),
-              ),
-              RaisedButton(
-                colorBrightness: Brightness.dark,
-                color: Theme.of(context).primaryColor,
-                onPressed: () => LaunchURL.launchURL(latestRelease.htmlUrl),
-                child: const Text("Update"),
-              )
-            ],
-          ),
-        );
-      }
-    } on SocketException {
-      print("Cannot connect to Github to check version");
-    }
   }
 }

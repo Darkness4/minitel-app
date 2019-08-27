@@ -7,7 +7,7 @@ class Event {
   final String summary;
   final DateTime dtstart;
 
-  Event({
+  const Event({
     this.dtend,
     this.uid,
     this.dtstamp,

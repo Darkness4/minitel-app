@@ -3,7 +3,7 @@ description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un W
 repository: https://github.com/Darkness4/minitel-app
 issue_tracker: https://github.com/Darkness4/minitel-app/issues
 author: Nguyen Marc <nguyen_marc@live.fr>
-version: 0.5.2
+version: 0.6.0
 
 environment:
   sdk: ^2.5.0
@@ -23,7 +23,6 @@ dependencies:
       path: packages/webview_flutter
   connectivity: ^0.4.3+7  # Flutter Team
   share: ^0.6.2+1  # Flutter Team
-  webfeed: ^0.4.2  # Wito Chandra
   url_launcher: ^5.1.2  # Flutter Team
   shared_preferences: ^0.5.3+4  # Flutter Team
   path_provider: ^1.2.0  # Flutter Team
@@ -39,8 +38,10 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
+  mockito: ^4.1.0
   extra_pedantic: ^1.0.0
   flutter_launcher_icons: 0.7.2+1
+
 
 flutter_icons:
   android: "launcher_icon" 

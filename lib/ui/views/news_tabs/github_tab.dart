@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/core/services/http_webfeed.dart';
+import 'package:minitel_toolbox/core/constants/api_constants.dart';
+import 'package:minitel_toolbox/core/models/github/release.dart';
+import 'package:minitel_toolbox/core/services/github_api.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
 import 'package:provider/provider.dart';
-import 'package:webfeed/webfeed.dart';
 
 class GithubTab extends StatelessWidget {
-  static const String url =
-      "https://github.com/Darkness4/minitel-app/releases.atom";
-
   const GithubTab({
     Key key,
   }) : super(key: key);
@@ -16,17 +14,19 @@ class GithubTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Scrollbar(
-        child: FutureBuilder<AtomFeed>(
-          future: Provider.of<WebFeedAPI>(context).getAtom(url),
-          builder: (BuildContext context, AsyncSnapshot<AtomFeed> snapshot) =>
+        child: FutureBuilder<List<GithubRelease>>(
+          future: Provider.of<GithubAPI>(context)
+              .fetchReleases(ApiConstants.githubRepo),
+          builder: (BuildContext context,
+                  AsyncSnapshot<List<GithubRelease>> snapshot) =>
               snapshot.hasData
                   ? ListView.builder(
                       padding: const EdgeInsets.all(10.0),
                       key: const Key('github_tab/list'),
-                      itemCount: snapshot.data.items.length,
+                      itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) =>
-                          NewsCard(
-                        item: snapshot.data.items[index],
+                          GithubCard(
+                        release: snapshot.data[index],
                         key: Key('github_tab/gh_item_$index'),
                       ),
                     )

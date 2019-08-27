@@ -3,8 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/feed.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/post.dart';
-import 'package:minitel_toolbox/core/services/http_facebook_api.dart';
-import 'package:provider/provider.dart';
+import 'package:minitel_toolbox/core/services/facebook_api.dart';
 
 class FacebookCard extends StatelessWidget {
   final Post post;
@@ -92,13 +91,14 @@ class FacebookCard extends StatelessWidget {
 }
 
 class FacebookTab extends StatelessWidget {
-  const FacebookTab({
+  final FacebookAPI _facebookAPI = FacebookAPI();
+
+  FacebookTab({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final FacebookAPI _facebookAPI = Provider.of<FacebookAPI>(context);
     final Image _picture = Image.network(
       _facebookAPI.getProfilePicture(),
       fit: BoxFit.cover,

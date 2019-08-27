@@ -3,10 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
-import 'package:minitel_toolbox/core/services/http_calendar_url.dart';
-import 'package:minitel_toolbox/core/services/http_gateway.dart';
-import 'package:minitel_toolbox/core/services/http_portail.dart';
-import 'package:minitel_toolbox/core/services/icalendar.dart';
+import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
+import 'package:minitel_toolbox/core/services/stormshield_api.dart';
+import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
+import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Mutex
@@ -14,7 +14,7 @@ enum LoginState { Busy, Available }
 
 class LoginViewModel extends ChangeNotifier {
   final PortailAPI portailAPI;
-  final GatewayAPI gatewayAPI;
+  final StormshieldAPI stormshieldAPI;
   final CalendarUrlAPI calendarUrlAPI;
   final ICalendar iCalendar;
   final ValueNotifier<String> selectedTime;
@@ -26,7 +26,7 @@ class LoginViewModel extends ChangeNotifier {
 
   LoginViewModel({
     @required this.portailAPI,
-    @required this.gatewayAPI,
+    @required this.stormshieldAPI,
     @required this.calendarUrlAPI,
     @required this.selectedTime,
     @required this.iCalendar,
@@ -69,7 +69,7 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
 
     // Login
-    await gatewayAPI.autoLogin(
+    await stormshieldAPI.autoLogin(
       uid,
       pswd,
       selectedUrl.value,
