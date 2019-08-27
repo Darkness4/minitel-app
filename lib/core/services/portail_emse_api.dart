@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 /// HTTP requests handler for EMSE Portal
 class PortailAPI {
-  final HttpClient _client = HttpClient();
+  @visibleForTesting
+  final HttpClient client = HttpClient();
   final List<Cookie> _cookies = <Cookie>[];
   List<Cookie> get cookies => _cookies;
 
@@ -16,7 +19,7 @@ class PortailAPI {
   /// ```
   Future<List<Cookie>> _getPortailCookie(
       {String username, String password}) async {
-    HttpClientRequest request = await _client.getUrl(Uri.parse(
+    HttpClientRequest request = await client.getUrl(Uri.parse(
         "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"))
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
@@ -32,7 +35,7 @@ class PortailAPI {
 
     final String data =
         "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
-    request = await _client.postUrl(Uri.parse("https://cas.emse.fr$action"))
+    request = await client.postUrl(Uri.parse("https://cas.emse.fr$action"))
       ..followRedirects = false
       ..headers.contentType = ContentType(
         "application",
@@ -58,7 +61,7 @@ class PortailAPI {
     }
     String location = response.headers.value('location');
 
-    request = await _client.getUrl(Uri.parse(location))
+    request = await client.getUrl(Uri.parse(location))
       ..headers.removeAll(HttpHeaders.contentLengthHeader)
       ..cookies.add(agimus)
       ..followRedirects = false;
@@ -69,7 +72,7 @@ class PortailAPI {
         .firstWhere((Cookie cookie) => cookie.name == "CASAuth");
     location = response.headers.value('location');
 
-    request = await _client.getUrl(Uri.parse(location))
+    request = await client.getUrl(Uri.parse(location))
       ..headers.removeAll(HttpHeaders.contentLengthHeader)
       ..cookies.add(agimus)
       ..cookies.add(casAuth);

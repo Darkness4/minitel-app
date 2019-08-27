@@ -4,22 +4,13 @@ import 'dart:typed_data';
 
 import 'package:mockito/mockito.dart';
 
-class TestHttpOverrides extends HttpOverrides {
-  TestHttpOverrides(this.data);
-
-  final Map<Uri, Uint8List> data;
-
-  @override
-  HttpClient createHttpClient(SecurityContext context) =>
-      createMockHttpClient(context, data);
-}
-
 // Returns a mock HTTP client that responds with an image to all requests.
-MockHttpClient createMockHttpClient(
-    SecurityContext _, Map<Uri, Uint8List> data) {
+MockHttpClient createMockHttpClient(SecurityContext _, Map<Uri, Uint8List> data,
+    {List<Cookie> cookies, Map<String, String> customHeaders}) {
   final MockHttpClient client = MockHttpClient();
   final MockHttpClientRequest request = MockHttpClientRequest();
-  final MockHttpClientResponse response = MockHttpClientResponse(data);
+  final MockHttpClientResponse response =
+      MockHttpClientResponse(data, customHeaders: customHeaders);
   final MockHttpHeaders headers = MockHttpHeaders();
 
   throwOnMissingStub(client);
@@ -31,16 +22,21 @@ MockHttpClient createMockHttpClient(
     response.requestedUrl = invocation.positionalArguments[0];
     return Future<HttpClientRequest>.value(request);
   });
+  when<dynamic>(client.postUrl(captureAny)).thenAnswer((Invocation invocation) {
+    response.requestedUrl = invocation.positionalArguments[0];
+    return Future<HttpClientRequest>.value(request);
+  });
 
-  when(request.headers).thenAnswer((_) => headers);
+  when(request.cookies).thenAnswer((_) => cookies);
+  when(response.cookies).thenAnswer((_) => cookies);
 
   when(request.close())
       .thenAnswer((_) => Future<HttpClientResponse>.value(response));
 
+  when(request.headers).thenAnswer((_) => headers);
+
   when(response.contentLength)
       .thenAnswer((_) => data[response.requestedUrl].length);
-
-  when(response.statusCode).thenReturn(HttpStatus.ok);
 
   when(
     response.listen(
@@ -69,12 +65,33 @@ MockHttpClient createMockHttpClient(
 
 class MockHttpClient extends Mock implements HttpClient {}
 
-class MockHttpClientRequest extends Mock implements HttpClientRequest {}
+class MockHttpClientRequest extends Mock implements HttpClientRequest {
+  @override
+  bool followRedirects;
+
+  @override
+  void write(Object obj) {}
+}
 
 class MockHttpClientResponse extends Mock implements HttpClientResponse {
-  MockHttpClientResponse(this.data);
   final Map<Uri, Uint8List> data;
+  final Map<String, String> customHeaders;
   Uri requestedUrl;
+
+  MockHttpClientResponse(this.data, {this.customHeaders});
+
+  @override
+  HttpHeaders get headers {
+    final HttpHeaders mockHttpHeaders = MockHttpHeaders();
+    if (customHeaders != null && customHeaders.isNotEmpty) {
+      customHeaders.forEach(
+          (String key, String value) => mockHttpHeaders.set(key, value));
+    }
+    return mockHttpHeaders;
+  }
+
+  @override
+  int statusCode = HttpStatus.ok;
 
   @override
   Future<S> fold<S>(S initialValue, S Function(S, Uint8List) combine) =>
@@ -87,4 +104,20 @@ class MockHttpClientResponse extends Mock implements HttpClientResponse {
           .transform<S>(streamTransformer);
 }
 
-class MockHttpHeaders extends Mock implements HttpHeaders {}
+class MockHttpHeaders extends Mock implements HttpHeaders {
+  Map<String, Object> headers = <String, Object>{};
+  @override
+  void removeAll(String _) {}
+
+  @override
+  ContentType contentType;
+
+  @override
+  int contentLength;
+
+  @override
+  void set(String name, Object value) => headers[name] = value;
+
+  @override
+  List<String> operator [](String name) => <String>[headers[name]];
+}

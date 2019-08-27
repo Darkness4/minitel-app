@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 /// This class handle the connections through stormshield, aka the gateway.
 class StormshieldAPI {
-  final HttpClient _client = HttpClient();
+  @visibleForTesting
+  final HttpClient client = HttpClient();
   Cookie cookie;
 
   /// Connect to the portal.
@@ -27,13 +30,13 @@ class StormshieldAPI {
   /// ```
   Future<Cookie> autoLogin(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
-    _client.badCertificateCallback =
+    client.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
 
     // SessionId
     final String data = "uid=$uid&time=$selectedTime&pswd=$pswd";
     final HttpClientRequest request =
-        await _client.postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'))
+        await client.postUrl(Uri.parse('https://$selectedUrl/auth/plain.html'))
           ..headers.contentType = ContentType(
             "application",
             "x-www-form-urlencoded",
@@ -69,11 +72,11 @@ class StormshieldAPI {
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     String status = "";
 
-    _client.badCertificateCallback =
+    client.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
 
     try {
-      final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+      final HttpClientRequest request = await client.getUrl(Uri.parse(url))
         ..headers.removeAll(HttpHeaders.contentLengthHeader);
       if (cookie != null) {
         request.cookies.add(cookie);
@@ -121,13 +124,13 @@ class StormshieldAPI {
   ///
   Future<String> getStatus(String selectedUrl, {Cookie cookie}) async {
     String status = "";
-    _client.badCertificateCallback =
+    client.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
     final String url = 'https://$selectedUrl/auth/login.html';
     final RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
     try {
-      final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+      final HttpClientRequest request = await client.getUrl(Uri.parse(url))
         ..headers.removeAll(HttpHeaders.contentLengthHeader);
 
       if (cookie != null) {
