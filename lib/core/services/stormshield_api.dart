@@ -3,7 +3,10 @@ import 'dart:io';
 
 /// This class handle the connections through stormshield, aka the gateway.
 class StormshieldAPI {
-  final HttpClient _client = HttpClient();
+  final HttpClient _client = HttpClient()
+    ..badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+
   Cookie cookie;
 
   /// Connect to the portal.
@@ -27,9 +30,6 @@ class StormshieldAPI {
   /// ```
   Future<Cookie> autoLogin(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
-    _client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
-
     // SessionId
     final String data = "uid=$uid&time=$selectedTime&pswd=$pswd";
     final HttpClientRequest request =
@@ -68,9 +68,6 @@ class StormshieldAPI {
     final String url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     String status = "";
-
-    _client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
 
     try {
       final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
@@ -121,8 +118,7 @@ class StormshieldAPI {
   ///
   Future<String> getStatus(String selectedUrl, {Cookie cookie}) async {
     String status = "";
-    _client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
+
     final String url = 'https://$selectedUrl/auth/login.html';
     final RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 

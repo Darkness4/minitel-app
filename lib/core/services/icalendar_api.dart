@@ -115,10 +115,9 @@ class ICalendar {
 
     final IOSink sink = file.openWrite();
     final Stream<String> stream = await _getICalendar(url);
-    stream.listen(
-      (String data) => sink.write(data),
-      onDone: sink.close,
-    );
+
+    await stream.forEach(sink.write);
+    await sink.close();
 
     await calendarUrlAPI.saveCalendarURL(url);
   }

@@ -46,16 +46,14 @@ class PortailAPI {
 
     _cookies.addAll(response.cookies);
 
-    Cookie agimus;
-    try {
-      if (response.cookies.isEmpty) {
-        throw Exception();
-      }
-      agimus = response.cookies
-          .firstWhere((Cookie cookie) => cookie.name == "AGIMUS");
-    } catch (_) {
+    if (!response.cookies
+        .map((Cookie cookie) => cookie.name)
+        .contains('AGIMUS')) {
       throw Exception("AGIMUS not found. Maybe bad username or password.");
     }
+
+    final Cookie agimus =
+        response.cookies.firstWhere((Cookie cookie) => cookie.name == "AGIMUS");
     String location = response.headers.value('location');
 
     request = await _client.getUrl(Uri.parse(location))

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -13,6 +12,8 @@ import 'template.ics.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  final Uint8List encodedICalendar = CalendarTemplate.iCalendarTemplate;
+
   const String url =
       "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";
   final CalendarUrlAPI _calendarUrlAPI = CalendarUrlAPI();
@@ -63,7 +64,7 @@ void main() {
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
           <Uri, Uint8List>{
-            Uri.parse(url): utf8.encode(iCalendarTemplate),
+            Uri.parse(url): encodedICalendar,
           },
         ),
       );
@@ -80,7 +81,7 @@ void main() {
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
           <Uri, Uint8List>{
-            Uri.parse(url): utf8.encode(iCalendarTemplate),
+            Uri.parse(url): encodedICalendar,
           },
         ),
       );
@@ -103,77 +104,72 @@ void main() {
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
           <Uri, Uint8List>{
-            Uri.parse(url): utf8.encode(iCalendarTemplate),
+            Uri.parse(url): encodedICalendar,
           },
         ),
       );
     });
 
     test("parseCalendar from Cache", () async {
-      final ICalendar ical = ICalendar();
-      ParsedCalendar parsedCalendar;
-
       // Save before the test
       await HttpOverrides.runZoned(
         () async {
+          final ICalendar ical = ICalendar();
           await ical.saveCalendar(url, _calendarUrlAPI);
+          final ICalendar ical2 = ICalendar();
+          final ParsedCalendar parsedCalendar =
+              await ical2.getParsedCalendarFromFile();
+          print('parsedCalendar.events.length ${parsedCalendar.events.length}');
+          expect(parsedCalendar.events.length, isNotNull);
+          expect(parsedCalendar.timezone.daylight.toString(), isNotNull);
+          expect(parsedCalendar.events[0].dtstart, isNotNull);
+          expect(parsedCalendar.timezone.tzid, equals("Europe/Paris"));
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
           <Uri, Uint8List>{
-            Uri.parse(url): utf8.encode(iCalendarTemplate),
+            Uri.parse(url): encodedICalendar,
           },
         ),
       );
-
-      final ICalendar ical2 = ICalendar();
-      parsedCalendar = await ical2.getParsedCalendarFromFile();
-      expect(parsedCalendar.events.length, isNotNull);
-      expect(parsedCalendar.timezone.daylight.toString(), isNotNull);
-      expect(parsedCalendar.events[0].dtstart, isNotNull);
-      expect(parsedCalendar.timezone.tzid, equals("Europe/Paris"));
     });
 
     test("parseCalendar export to Json", () async {
-      final ICalendar ical = ICalendar();
-
       await HttpOverrides.runZoned(
         () async {
+          final ICalendar ical = ICalendar();
           await ical.saveCalendar(url, _calendarUrlAPI);
+          final ParsedCalendar parsedCalendar =
+              await ical.getParsedCalendarFromFile();
+          print(parsedCalendar.toJson());
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
           <Uri, Uint8List>{
-            Uri.parse(url): utf8.encode(iCalendarTemplate),
+            Uri.parse(url): encodedICalendar,
           },
         ),
       );
-
-      final ParsedCalendar parsedCalendar =
-          await ical.getParsedCalendarFromFile();
-      print(parsedCalendar.toJson());
     });
 
     test("parseCalendar import to Json", () async {
-      final ICalendar ical = ICalendar();
-
       await HttpOverrides.runZoned(
         () async {
+          final ICalendar ical = ICalendar();
           await ical.saveCalendar(url, _calendarUrlAPI);
+          final ParsedCalendar parsedCalendar =
+              await ical.getParsedCalendarFromFile();
+          final ParsedCalendar parsedCalendar2 =
+              ParsedCalendar.fromJson(parsedCalendar.toJson());
+          expect(parsedCalendar2.toJson(), equals(parsedCalendar.toJson()));
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
           <Uri, Uint8List>{
-            Uri.parse(url): utf8.encode(iCalendarTemplate),
+            Uri.parse(url): encodedICalendar,
           },
         ),
       );
-
-      final ParsedCalendar parsedCalendar =
-          await ical.getParsedCalendarFromFile();
-      final ParsedCalendar parsedCalendar2 =
-          ParsedCalendar.fromJson(parsedCalendar.toJson());
-      expect(parsedCalendar2.toJson(), equals(parsedCalendar.toJson()));
     });
   });
 }
