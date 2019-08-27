@@ -93,11 +93,7 @@ class CalendarUrlAPI {
       ..write(data);
     response = await request.close();
 
-    final String location = response.headers[HttpHeaders.locationHeader].first;
-    // print("Location: $location");
-    if (location == null) {
-      throw Exception("Error : Bad login");
-    }
+    final String location = response.headers.value(HttpHeaders.locationHeader);
 
     // GET CAS
     request = await _client.getUrl(Uri.parse(location))
