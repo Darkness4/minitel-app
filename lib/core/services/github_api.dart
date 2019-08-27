@@ -1,14 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:minitel_toolbox/core/models/github/release.dart';
 
 class GithubAPI {
-  final HttpClient _client = HttpClient();
+  @visibleForTesting
+  final HttpClient client = HttpClient();
 
   /// [repo] = author/repo
   Future<List<GithubRelease>> fetchReleases(String repo) async {
-    final HttpClientRequest request = await _client
+    final HttpClientRequest request = await client
         .getUrl(Uri.parse('https://api.github.com/repos/$repo/releases'));
     final HttpClientResponse response = await request.close();
 
@@ -27,7 +29,7 @@ class GithubAPI {
 
   /// [repo] = author/repo
   Future<GithubRelease> fetchLatestRelease(String repo) async {
-    final HttpClientRequest request = await _client.getUrl(
+    final HttpClientRequest request = await client.getUrl(
         Uri.parse('https://api.github.com/repos/$repo/releases/latest'));
     final HttpClientResponse response = await request.close();
 
