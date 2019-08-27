@@ -9,8 +9,8 @@ MockHttpClient createMockHttpClient(SecurityContext _, Map<Uri, Uint8List> data,
     {List<Cookie> cookies, Map<String, String> customHeaders}) {
   final MockHttpClient client = MockHttpClient();
   final MockHttpClientRequest request = MockHttpClientRequest();
-  final MockHttpClientResponse response =
-      MockHttpClientResponse(data, customHeaders: customHeaders);
+  final MockHttpClientResponse response = MockHttpClientResponse(data,
+      customHeaders: customHeaders, customCookies: cookies);
   final MockHttpHeaders headers = MockHttpHeaders();
 
   throwOnMissingStub(client);
@@ -28,7 +28,6 @@ MockHttpClient createMockHttpClient(SecurityContext _, Map<Uri, Uint8List> data,
   });
 
   when(request.cookies).thenAnswer((_) => cookies);
-  when(response.cookies).thenAnswer((_) => cookies);
 
   when(request.close())
       .thenAnswer((_) => Future<HttpClientResponse>.value(response));
@@ -63,7 +62,11 @@ MockHttpClient createMockHttpClient(SecurityContext _, Map<Uri, Uint8List> data,
   return client;
 }
 
-class MockHttpClient extends Mock implements HttpClient {}
+class MockHttpClient extends Mock implements HttpClient {
+  @override
+  set badCertificateCallback(
+      bool Function(X509Certificate cert, String host, int port) callback) {}
+}
 
 class MockHttpClientRequest extends Mock implements HttpClientRequest {
   @override
@@ -76,9 +79,13 @@ class MockHttpClientRequest extends Mock implements HttpClientRequest {
 class MockHttpClientResponse extends Mock implements HttpClientResponse {
   final Map<Uri, Uint8List> data;
   final Map<String, String> customHeaders;
+  List<Cookie> customCookies = <Cookie>[];
   Uri requestedUrl;
 
-  MockHttpClientResponse(this.data, {this.customHeaders});
+  MockHttpClientResponse(this.data, {this.customHeaders, this.customCookies});
+
+  @override
+  List<Cookie> get cookies => customCookies;
 
   @override
   HttpHeaders get headers {
@@ -117,6 +124,9 @@ class MockHttpHeaders extends Mock implements HttpHeaders {
 
   @override
   void set(String name, Object value) => headers[name] = value;
+
+  @override
+  String value(String name) => headers[name];
 
   @override
   List<String> operator [](String name) => <String>[headers[name]];

@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Calendar Url "API"
 class CalendarUrlAPI {
-  @visibleForTesting
-  final HttpClient client = HttpClient();
+  final HttpClient _client = HttpClient();
 
   /// Get from SharedPrefs the url to get the ical
   Future<String> get savedCalendarURL async {
@@ -27,7 +25,7 @@ class CalendarUrlAPI {
 
     try {
       final HttpClientRequest request =
-          await client.postUrl(Uri.parse("https://portail.emse.fr/ics/"))
+          await _client.postUrl(Uri.parse("https://portail.emse.fr/ics/"))
             ..headers.removeAll(HttpHeaders.contentLengthHeader)
             ..cookies.add(phpSessionIDCAS);
       final HttpClientResponse response = await request.close();
@@ -56,7 +54,7 @@ class CalendarUrlAPI {
     const String referee = "https://portail.emse.fr/ics/";
 
     // GET ICS
-    HttpClientRequest request = await client.getUrl(Uri.parse(referee))
+    HttpClientRequest request = await _client.getUrl(Uri.parse(referee))
       ..followRedirects = false
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
@@ -69,7 +67,7 @@ class CalendarUrlAPI {
         .firstWhere((Cookie cookie) => cookie.name == "PHPSESSID");
 
     // GET CAS
-    request = await client.getUrl(Uri.parse(
+    request = await _client.getUrl(Uri.parse(
         "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}"))
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     response = await request.close();
@@ -87,7 +85,7 @@ class CalendarUrlAPI {
     // POST CAS
     final String data =
         "username=$username&password=$password&lt=$lt&execution=e1s1&_eventId=submit";
-    request = await client.postUrl(Uri.parse(
+    request = await _client.postUrl(Uri.parse(
         'https://cas.emse.fr/login;jsessionid=${jSessionID.value}?service=${Uri.encodeComponent(referee)}'))
       ..headers.contentType = ContentType(
         "application",
@@ -110,7 +108,7 @@ class CalendarUrlAPI {
     }
 
     // GET CAS
-    request = await client.getUrl(Uri.parse(location))
+    request = await _client.getUrl(Uri.parse(location))
       ..headers.removeAll(HttpHeaders.contentLengthHeader)
       ..followRedirects = false
       ..cookies.add(phpSessionIDreferee);

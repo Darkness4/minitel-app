@@ -80,9 +80,8 @@ void main() {
                 utf8.encode('name="lt" value="value2"'),
             Uri.parse(
                     "https://cas.emse.fr/login;jsessionid=?service=${Uri.encodeComponent(referee)}"):
-                utf8.encode('value3'),
-            Uri.parse("https//cas.emse.fr/customendpoint"):
-                utf8.encode('value4'),
+                utf8.encode(''),
+            Uri.parse("https//cas.emse.fr/customendpoint"): utf8.encode(''),
           },
           cookies: <Cookie>[
             Cookie("PHPSESSID", ""),
