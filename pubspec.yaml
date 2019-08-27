@@ -1,13 +1,15 @@
 name: minitel_toolbox
 description: Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre
+homepage: https://github.com/Darkness4/minitel-app
 repository: https://github.com/Darkness4/minitel-app
+documentation: https://github.com/Darkness4/minitel-app/wiki
 issue_tracker: https://github.com/Darkness4/minitel-app/issues
 author: Nguyen Marc <nguyen_marc@live.fr>
-version: 0.6.1
+version: 0.6.1+1
 
 environment:
-  sdk: ^2.5.0
-  flutter: ^1.9.2
+  sdk: ^2.4.0
+  flutter: ^1.7.8
 
 # Use ^version only if the package are stable
 # ^1.2.0 means >=1.2.0 <2.0.0
@@ -19,7 +21,7 @@ dependencies:
   webview_flutter:
     git: 
       url: git://github.com/Darkness4/plugins.git
-      ref: cookie
+      ref: d38e7f429f03a57bcf01f79916dbe192714a9702
       path: packages/webview_flutter
   connectivity: ^0.4.3+7  # Flutter Team
   share: ^0.6.2+1  # Flutter Team
@@ -30,7 +32,7 @@ dependencies:
   flutter_local_notifications: ^0.8.2  # Michael Bui
   package_info: ^0.4.0+6  # Flutter Team
   device_info: ^0.4.0+2  # Flutter Team
-  provider: ^3.1.0
+  provider: ^3.1.0  # Remi Rousselet and Flutter Team
 
 dev_dependencies:
   flutter_test:
@@ -42,7 +44,6 @@ dev_dependencies:
   extra_pedantic: ^1.0.0
   flutter_launcher_icons: 0.7.2+1
 
-
 flutter_icons:
   android: "launcher_icon" 
   ios: true
@@ -50,10 +51,6 @@ flutter_icons:
   adaptive_icon_background: "#43a047"
   adaptive_icon_foreground: "assets/icon/icon.png"
 
-# For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
   assets:
     - assets/img/
@@ -63,34 +60,3 @@ flutter:
       fonts:
         - asset: assets/fonts/RobotoMono-Regular.ttf
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.io/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.io/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.io/custom-fonts/#from-packages
