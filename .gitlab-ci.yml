@@ -6,7 +6,7 @@ stages:
 
 unit-tests:
   stage: test
-  image: darkness4/flutter-builder:28-master
+  image: darkness4/flutter-builder:28
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_coverage.sh
@@ -166,7 +166,7 @@ pages:
 
 build-test:
   stage: test
-  image: darkness4/flutter-builder:28
+  image: darkness4/flutter-builder:28-stable
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
@@ -188,7 +188,7 @@ build-test:
 
 build:
   stage: build
-  image: darkness4/flutter-builder:28
+  image: darkness4/flutter-builder:28-stable
   
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
