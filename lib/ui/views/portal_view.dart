@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
+import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
+import 'package:minitel_toolbox/core/services/stormshield_api.dart';
+import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
 import 'package:minitel_toolbox/ui/shared/shared_funcs.dart';
+import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +23,6 @@ class PortalView extends StatefulWidget {
 }
 
 class PortalViewState extends State<PortalView> {
-  final PortailAPI _portailAPI = PortailAPI();
   bool _hasTriggeredOnce = false;
 
   @override
@@ -38,12 +42,22 @@ class PortalViewState extends State<PortalView> {
                 ],
               ),
             ),
-            child: Provider<PortailAPI>.value(
-              value: _portailAPI,
-              child: TabBarView(
-                children: const <Widget>[
-                  LoginPage(),
-                  AppsList(),
+            child: BaseWidget<LoginViewModel>(
+              model: LoginViewModel(
+                portailAPI: Provider.of<PortailAPI>(context),
+                calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
+                stormshieldAPI: Provider.of<StormshieldAPI>(context),
+                iCalendar: Provider.of<ICalendarAPI>(context),
+              ),
+              onModelReady: (LoginViewModel model) =>
+                  model.rememberLogin(context),
+              builder: (BuildContext context, LoginViewModel model, _) =>
+                  TabBarView(
+                children: <Widget>[
+                  LoginPage(
+                    model: model,
+                  ),
+                  const AppsList(),
                 ],
               ),
             ),

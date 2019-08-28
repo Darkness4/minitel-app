@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'core/services/calendar_url_api.dart';
 import 'core/services/github_api.dart';
 import 'core/services/icalendar_api.dart';
+import 'core/services/portail_emse_api.dart';
 import 'core/services/stormshield_api.dart';
 import 'core/services/webhook_api.dart';
 
@@ -16,5 +17,7 @@ List<SingleChildCloneableWidget> providers = <Provider<dynamic>>[
   // GithubAPI used in login, agenda_view and agenda_widgets
   Provider<CalendarUrlAPI>.value(value: CalendarUrlAPI()),
   // ICalendar used in login, agenda_view and agenda_widgets
-  Provider<ICalendar>.value(value: ICalendar())
+  Provider<ICalendarAPI>.value(value: ICalendarAPI()),
+  // PortailAPI used in portail webview and portail
+  Provider<PortailAPI>.value(value: PortailAPI()),
 ];

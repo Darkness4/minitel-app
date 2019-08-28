@@ -67,11 +67,6 @@ class ReportingViewState extends State<ReportingView>
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void initState() {
     _animationController = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin
@@ -162,7 +157,7 @@ class ReportingViewState extends State<ReportingView>
         start: 0.0,
         end: 0.5,
         controller: _animationController,
-        onPressed: model.reportToMail,
+        onPressed: () async => model.reportTo(ReportTarget.Mail),
         child: const Icon(Icons.mail),
       );
 
@@ -172,16 +167,8 @@ class ReportingViewState extends State<ReportingView>
         start: 0.0,
         end: 0.25,
         controller: _animationController,
-        onPressed: () async {
-          final String status = await model.reportToSlack();
-          if (status != null) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(
-                content: Text(status),
-              ),
-            );
-          }
-        },
+        onPressed: () async =>
+            model.reportTo(ReportTarget.Slack, context: context),
         child: const ImageIcon(
           AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
           size: 100.0,
@@ -194,7 +181,7 @@ class ReportingViewState extends State<ReportingView>
         start: 0.0,
         end: 1.0,
         controller: _animationController,
-        onPressed: model.reportToShare,
+        onPressed: () async => model.reportTo(ReportTarget.Share),
         child: const Icon(Icons.share),
       );
 }

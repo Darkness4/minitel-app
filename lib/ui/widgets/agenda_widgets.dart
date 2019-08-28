@@ -24,19 +24,19 @@ class DayWidget extends StatelessWidget {
           child: Material(
             elevation: stuckAmount * 10,
             color: Color.lerp(
-                Colors.transparent,
-                MinitelColors.MonthColorPalette[dt.month].withOpacity(0.9),
-                stuckAmount),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Text(
-                  "${DateFormat.MMMMEEEEd("fr_FR").format(dt)}",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline
-                      .apply(color: Colors.white),
-                ),
+              Colors.transparent,
+              MinitelColors.MonthColorPalette[dt.month].withOpacity(0.9),
+              stuckAmount,
+            ),
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                "${DateFormat.MMMMEEEEd("fr_FR").format(dt)}",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline
+                    .apply(color: Colors.white),
               ),
             ),
           ),
@@ -56,11 +56,10 @@ class ErrorAgendaWidget extends StatelessWidget {
   final TextEditingController _pswdController = TextEditingController();
   final FocusNode _uidFocusNode = FocusNode();
   final FocusNode _pswdFocusNode = FocusNode();
-  final GlobalKey<FormState> _formKey;
   final String error;
   final Function parentSetState;
 
-  ErrorAgendaWidget(this.error, this.parentSetState, this._formKey);
+  ErrorAgendaWidget(this.error, this.parentSetState);
 
   @override
   Widget build(BuildContext context) {
@@ -68,22 +67,20 @@ class ErrorAgendaWidget extends StatelessWidget {
       children: <Widget>[
         Card(
           elevation: 4,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                error.toString(),
-                style: MinitelTextStyles.error,
-              ),
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              error.toString(),
+              style: MinitelTextStyles.error,
             ),
           ),
         ),
         Card(
           elevation: 4,
-          child: Container(
+          child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Form(
-              key: _formKey,
               child: Column(
                 children: <Widget>[
                   TextFormField(
@@ -114,39 +111,38 @@ class ErrorAgendaWidget extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
+        Container(
+          alignment: Alignment.center,
           padding: const EdgeInsets.all(20.0),
-          child: Center(
-            child: FloatingActionButton.extended(
-              key: const Key('agenda_view/connect'),
-              backgroundColor: Colors.red,
-              elevation: 10.0,
-              onPressed: () async {
-                final CalendarUrlAPI _calendarURL =
-                    Provider.of<CalendarUrlAPI>(context);
-                final ICalendar ical = Provider.of<ICalendar>(context);
-                try {
-                  final String url = await _calendarURL.getCalendarURL(
-                    username: _uidController.text,
-                    password: _pswdController.text,
-                  );
-                  await ical.saveCalendar(url, _calendarURL);
-                } on Exception catch (e) {
-                  Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text(e.toString())),
-                  );
-                }
-                parentSetState(() {});
-              },
-              label: const Text(
-                "Se connecter",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+          child: FloatingActionButton.extended(
+            key: const Key('agenda_view/connect'),
+            backgroundColor: Colors.red,
+            elevation: 10.0,
+            onPressed: () async {
+              final CalendarUrlAPI _calendarURL =
+                  Provider.of<CalendarUrlAPI>(context);
+              final ICalendarAPI ical = Provider.of<ICalendarAPI>(context);
+              try {
+                final String url = await _calendarURL.getCalendarURL(
+                  username: _uidController.text,
+                  password: _pswdController.text,
+                );
+                await ical.saveCalendar(url, _calendarURL);
+              } on Exception catch (e) {
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(content: Text(e.toString())),
+                );
+              }
+              parentSetState();
+            },
+            label: const Text(
+              "Se connecter",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
-              icon: const Icon(Icons.arrow_forward),
             ),
+            icon: const Icon(Icons.arrow_forward),
           ),
         ),
       ],

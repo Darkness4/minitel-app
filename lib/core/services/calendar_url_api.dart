@@ -45,24 +45,15 @@ class CalendarUrlAPI {
   Future<Cookie> _bypassCAS({String username, String password}) async {
     const String referee = "https://portail.emse.fr/ics/";
 
-    // GET ICS
-    HttpClientRequest request = await _client.getUrl(Uri.parse(referee))
-      ..followRedirects = false
+    // GET CAS
+    HttpClientRequest request = await _client.getUrl(Uri.parse(
+        "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}"))
       ..headers.removeAll(HttpHeaders.contentLengthHeader);
     HttpClientResponse response = await request.close();
 
     if (response.statusCode != 200) {
-      throw Exception(
-          "HTTP Error: ${response.statusCode}, probably a Bad login");
+      throw Exception('HTTP Error: ${response.statusCode}');
     }
-    final Cookie phpSessionIDreferee = response.cookies
-        .firstWhere((Cookie cookie) => cookie.name == "PHPSESSID");
-
-    // GET CAS
-    request = await _client.getUrl(Uri.parse(
-        "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}"))
-      ..headers.removeAll(HttpHeaders.contentLengthHeader);
-    response = await request.close();
 
     String lt = await response
         .transform(utf8.decoder)
@@ -95,11 +86,14 @@ class CalendarUrlAPI {
 
     final String location = response.headers.value(HttpHeaders.locationHeader);
 
+    if (location == null) {
+      throw Exception('Location was not found, probably a Bad login');
+    }
+
     // GET CAS
     request = await _client.getUrl(Uri.parse(location))
       ..headers.removeAll(HttpHeaders.contentLengthHeader)
-      ..followRedirects = false
-      ..cookies.add(phpSessionIDreferee);
+      ..followRedirects = false;
     response = await request.close();
 
     final Cookie phpSessionIDCAS = response.cookies

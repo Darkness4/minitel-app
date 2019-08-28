@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
@@ -12,36 +11,25 @@ import 'package:provider/provider.dart';
 
 import 'agenda_pages/notification_settings_page.dart';
 
-class AgendaView extends StatefulWidget {
+class AgendaView extends StatelessWidget {
   final String title;
 
   const AgendaView({Key key, this.title}) : super(key: key);
 
   @override
-  AgendaViewState createState() => AgendaViewState();
-}
-
-class AgendaViewState extends State<AgendaView> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  final AndroidInitializationSettings _initializationSettingsAndroid =
-      const AndroidInitializationSettings('@mipmap/launcher_icon');
-  final IOSInitializationSettings _initializationSettingsIOS =
-      const IOSInitializationSettings();
-
   @override
   Widget build(BuildContext context) {
     return BaseWidget<AgendaViewModel>(
+      onModelReady: (AgendaViewModel model) => model.onModelReady(context),
       model: AgendaViewModel(
-          calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
-          iCalendar: Provider.of<ICalendar>(context),
-          flutterLocalNotificationsPlugin: _flutterLocalNotificationsPlugin),
+        calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
+        iCalendar: Provider.of<ICalendarAPI>(context),
+      ),
       builder: (BuildContext context, AgendaViewModel model, _) {
         return Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
           appBar: AppBar(
-            title: Text(widget.title),
+            title: Text(title),
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.settings),
@@ -56,6 +44,7 @@ class AgendaViewState extends State<AgendaView> {
             ],
           ),
           body: Center(
+            // Load the calendar
             child: FutureBuilder<ParsedCalendar>(
               future: model.loadCalendar(context),
               builder: (BuildContext context,
@@ -63,12 +52,12 @@ class AgendaViewState extends State<AgendaView> {
                 if (snapshot.hasError) {
                   return ErrorAgendaWidget(
                     snapshot.error.toString(),
-                    setState,
-                    _formKey,
+                    model.refresh,
                   );
                 }
                 if (snapshot.hasData) {
                   return Scrollbar(
+                    // Then parse the calendar et generate the pages
                     child: StreamBuilder<List<Widget>>(
                       stream: model.listEventCards(snapshot.data),
                       builder: (BuildContext context,
@@ -96,29 +85,6 @@ class AgendaViewState extends State<AgendaView> {
           ),
         );
       },
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
-            _initializationSettingsAndroid, _initializationSettingsIOS);
-    _flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (String payload) =>
-            _onSelectNotification(payload, context));
-  }
-
-  Future<void> _onSelectNotification(
-      String payload, BuildContext context) async {
-    final List<String> output = payload.split(';');
-    await showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text("${output[0]}"),
-        content: Text("${output.length < 2 ? "null" : output[1]}"),
-      ),
     );
   }
 }

@@ -5,20 +5,6 @@ class Timezone {
   TimezoneDescription standard = TimezoneDescription();
 
   Timezone();
-
-  Timezone.fromJson(Map<String, dynamic> json) {
-    tzid = json['TZID'];
-    daylight = TimezoneDescription.fromJson(json['DAYLIGHT']);
-    standard = TimezoneDescription.fromJson(json['STANDARD']);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> json = <String, dynamic>{};
-    json['TZID'] = tzid;
-    json['DAYLIGHT'] = daylight.toJson();
-    json['STANDARD'] = standard.toJson();
-    return json;
-  }
 }
 
 class TimezoneDescription {
@@ -29,14 +15,6 @@ class TimezoneDescription {
   String tzName;
 
   TimezoneDescription();
-
-  TimezoneDescription.fromJson(Map<String, dynamic> json) {
-    dtstart = DateTime.parse(json["DTSTART"]);
-    tzOffsetTo = json["TZOFFSETTO"];
-    tzOffsetFrom = json["TZOFFSETFROM"];
-    rRule = json["RRULE"];
-    tzName = json["TZNAME"];
-  }
 
   void set(String key, String value) {
     switch (key) {
@@ -56,16 +34,5 @@ class TimezoneDescription {
         tzName = value;
         break;
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> json = <String, dynamic>{};
-    json["DTSTART"] = dtstart.toIso8601String();
-    json["TZOFFSETTO"] = tzOffsetTo;
-    json["TZOFFSETFROM"] = tzOffsetFrom;
-    json["RRULE"] = rRule;
-    json["TZNAME"] = tzName;
-
-    return json;
   }
 }

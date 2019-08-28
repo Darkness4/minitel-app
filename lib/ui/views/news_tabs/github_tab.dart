@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/api_constants.dart';
 import 'package:minitel_toolbox/core/models/github/release.dart';
 import 'package:minitel_toolbox/core/services/github_api.dart';
-import 'package:minitel_toolbox/ui/widgets/cards.dart';
+import 'package:minitel_toolbox/ui/widgets/github_widgets.dart';
 import 'package:provider/provider.dart';
 
 class GithubTab extends StatelessWidget {

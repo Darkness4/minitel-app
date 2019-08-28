@@ -226,7 +226,7 @@ class _TutorialCard extends StatelessWidget {
           style: MinitelTextStyles.mdH3,
         )),
         BoxMdBody(Text(
-          "Exemple : \nTitre: 2012, pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c\'est ok.",
+          "Exemple : \nTitre: Pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c\'est ok.",
           style: MinitelTextStyles.body1,
         )),
         BoxMdBody(Text(
