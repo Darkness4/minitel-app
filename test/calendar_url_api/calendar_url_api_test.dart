@@ -10,6 +10,7 @@ import '../mock_http_client.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  const String referee = "https://portail.emse.fr/ics/";
 
   const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler((MethodCall methodCall) async {
@@ -26,7 +27,7 @@ void main() {
       expect(output, equals(""));
     });
 
-    test("getCalendarURL: bad credentials", () async {
+    test("getCalendarURL: No wifi", () async {
       final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
       try {
         await _calendarURL.getCalendarURL(
@@ -35,8 +36,41 @@ void main() {
         );
         throw Exception("getCalendarURL shouldn't work here");
       } on Exception catch (e) {
-        expect(e.toString(), contains("Bad login"));
+        expect(e.toString(), contains("HTTP Error"));
       }
+    });
+
+    test("getCalendarURL: bad credentials", () async {
+      await HttpOverrides.runZoned(
+        () async {
+          final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
+          try {
+            await _calendarURL.getCalendarURL(
+              username: "",
+              password: "",
+            );
+            throw Exception("getCalendarURL shouldn't work here");
+          } on Exception catch (e) {
+            expect(e.toString(), contains("Bad login"));
+          }
+        },
+        createHttpClient: (SecurityContext context) => createMockHttpClient(
+          context,
+          <Uri, Uint8List>{
+            Uri.parse(referee): utf8.encode('https://thisisafake.ics'),
+            Uri.parse(
+                    "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}"):
+                utf8.encode('name="lt" value="value2"'),
+            Uri.parse(
+                    "https://cas.emse.fr/login;jsessionid=?service=${Uri.encodeComponent(referee)}"):
+                utf8.encode(''),
+            Uri.parse("https//cas.emse.fr/customendpoint"): utf8.encode(''),
+          },
+          cookies: <Cookie>[
+            Cookie("JSESSIONID", ""), // Dependent with 3rd url (jsessionid="")
+          ],
+        ),
+      );
     });
   });
 
@@ -59,8 +93,6 @@ void main() {
     });
 
     test("getCalendarURL", () async {
-      const String referee = "https://portail.emse.fr/ics/";
-
       await HttpOverrides.runZoned(
         () async {
           final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
@@ -86,7 +118,6 @@ void main() {
           cookies: <Cookie>[
             Cookie("PHPSESSID", ""),
             Cookie("JSESSIONID", ""), // Dependent with 3rd url (jsessionid="")
-            Cookie("PHPSESSID", ""),
           ],
           customHeaders: <String, String>{
             HttpHeaders.locationHeader: 'https//cas.emse.fr/customendpoint'

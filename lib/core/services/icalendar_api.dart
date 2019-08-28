@@ -12,7 +12,7 @@ import 'package:path_provider/path_provider.dart';
 /// calendarUrlAPI to work.
 /// If the calendar has been succefully updated, uses [getCalendarFromFile] and
 /// [parseCalendar] to finally get a parsed calendar.
-class ICalendar {
+class ICalendarAPI {
   Future<File> get _calendar async {
     final String path = await _localPath;
     return File('$path/calendar.ics');
@@ -54,7 +54,7 @@ class ICalendar {
         continue; // Skip BEGIN:VEVENT
       }
       if (line[0] == 'END' && line[1] == 'VEVENT') {
-        parsedCalendar.events.add(Event.fromJson(vEvent));
+        parsedCalendar.events.add(Event.fromMap(vEvent));
         mode = ICalSection.None;
         continue; // Skip END:VEVENT
       }

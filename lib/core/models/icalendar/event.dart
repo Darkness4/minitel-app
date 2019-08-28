@@ -17,7 +17,7 @@ class Event {
     this.dtstart,
   });
 
-  factory Event.fromJson(Map<String, dynamic> json) {
+  factory Event.fromMap(Map<String, dynamic> json) {
     return Event(
       dtend: DateTime.parse(json["DTEND"]),
       uid: json["UID"],
@@ -27,18 +27,5 @@ class Event {
       summary: json["SUMMARY"],
       dtstart: DateTime.parse(json["DTSTART"]),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> json = <String, dynamic>{};
-    json["DTEND"] = dtend.toIso8601String();
-    json["UID"] = uid;
-    json["DTSTAMP"] = dtstamp.toIso8601String();
-    json["LOCATION"] = location;
-    json["DESCRIPTION"] = description;
-    json["SUMMARY"] = summary;
-    json["DTSTART"] = dtstart.toIso8601String();
-
-    return json;
   }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
@@ -16,11 +17,16 @@ class LoginViewModel extends ChangeNotifier {
   final PortailAPI portailAPI;
   final StormshieldAPI stormshieldAPI;
   final CalendarUrlAPI calendarUrlAPI;
-  final ICalendar iCalendar;
-  final ValueNotifier<String> selectedTime;
-  final ValueNotifier<String> selectedUrl;
-  final ValueNotifier<bool> rememberMe;
-  final ValueNotifier<bool> autoLogin;
+  final ICalendarAPI iCalendar;
+  final ValueNotifier<String> selectedTime = ValueNotifier<String>('4 hours');
+  final ValueNotifier<String> selectedUrl =
+      ValueNotifier<String>(MyIPAdresses.stormshieldIP);
+  final ValueNotifier<bool> rememberMe = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> autoLogin = ValueNotifier<bool>(false);
+  final FocusNode uidFocusNode = FocusNode();
+  final FocusNode pswdFocusNode = FocusNode();
+  final TextEditingController uidController = TextEditingController();
+  final TextEditingController pswdController = TextEditingController();
 
   LoginState loginState = LoginState.Available;
 
@@ -28,11 +34,7 @@ class LoginViewModel extends ChangeNotifier {
     @required this.portailAPI,
     @required this.stormshieldAPI,
     @required this.calendarUrlAPI,
-    @required this.selectedTime,
     @required this.iCalendar,
-    @required this.selectedUrl,
-    @required this.rememberMe,
-    @required this.autoLogin,
   });
 
   Future<void> login(BuildContext context, String uid, String pswd) async {
@@ -69,12 +71,20 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
 
     // Login
-    await stormshieldAPI.autoLogin(
-      uid,
-      pswd,
-      selectedUrl.value,
-      LoginConstants.timeMap[selectedTime.value],
-    );
+    try {
+      await stormshieldAPI.autoLogin(
+        uid,
+        pswd,
+        selectedUrl.value,
+        LoginConstants.timeMap[selectedTime.value],
+      );
+      notifyListeners();
+    } on Exception catch (e) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    }
+
     // Calendar
     try {
       final String calendarUrl = await calendarUrlAPI.getCalendarURL(
@@ -103,5 +113,20 @@ class LoginViewModel extends ChangeNotifier {
     // Unlock
     loginState = LoginState.Available;
     notifyListeners();
+  }
+
+  /// Load saved data and remember login if it was true
+  Future<void> rememberLogin(BuildContext context) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    rememberMe.value = prefs.getBool("rememberMe") ?? false;
+    if (rememberMe.value) {
+      uidController.text = prefs.getString("user");
+      selectedTime.value = prefs.getString("time");
+      pswdController.text = utf8.decode(base64.decode(prefs.getString("pswd")));
+      autoLogin.value = prefs.getBool("autoLogin") ?? false;
+    }
+    if (autoLogin.value) {
+      await login(context, uidController.text, pswdController.text);
+    }
   }
 }

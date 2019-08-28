@@ -67,11 +67,6 @@ class ReportingViewState extends State<ReportingView>
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void initState() {
     _animationController = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin

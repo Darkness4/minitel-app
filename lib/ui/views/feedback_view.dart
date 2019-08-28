@@ -21,14 +21,10 @@ class FeedbackView extends StatefulWidget {
 }
 
 class _FeedbackViewState extends State<FeedbackView> {
-  TextEditingController _titleController;
-
-  FocusNode _titleFocusNode;
-
-  FocusNode _descriptionFocusNode;
-
-  TextEditingController _descriptionController;
-
+  final TextEditingController _titleController = TextEditingController();
+  final FocusNode _titleFocusNode = FocusNode();
+  final FocusNode _descriptionFocusNode = FocusNode();
+  final TextEditingController _descriptionController = TextEditingController();
   final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
   @override
@@ -142,15 +138,7 @@ class _FeedbackViewState extends State<FeedbackView> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _titleController = TextEditingController();
-    _titleFocusNode = FocusNode();
-    _descriptionFocusNode = FocusNode();
-    _descriptionController = TextEditingController();
-  }
-
+  /// Send to slack, feedback infos
   Future<void> _send(BuildContext ctxt) async {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String description =

@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
@@ -10,28 +7,11 @@ import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({
     Key key,
   }) : super(key: key);
-
-  @override
-  LoginPageState createState() => LoginPageState();
-}
-
-class LoginPageState extends State<LoginPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FocusNode _uidFocusNode = FocusNode();
-  final FocusNode _pswdFocusNode = FocusNode();
-  final TextEditingController _uidController = TextEditingController();
-  final TextEditingController _pswdController = TextEditingController();
-  final ValueNotifier<String> _selectedTime = ValueNotifier<String>('4 hours');
-  final ValueNotifier<String> _selectedUrl =
-      ValueNotifier<String>(MyIPAdresses.stormshieldIP);
-  final ValueNotifier<bool> _rememberMe = ValueNotifier<bool>(false);
-  final ValueNotifier<bool> _autoLogin = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +20,10 @@ class LoginPageState extends State<LoginPage> {
         portailAPI: Provider.of<PortailAPI>(context),
         calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
         stormshieldAPI: Provider.of<StormshieldAPI>(context),
-        iCalendar: Provider.of<ICalendar>(context),
-        rememberMe: _rememberMe,
-        selectedTime: _selectedTime,
-        selectedUrl: _selectedUrl,
-        autoLogin: _autoLogin,
+        iCalendar: Provider.of<ICalendarAPI>(context),
       ),
-      onModelReady: (LoginViewModel model) => _rememberLogin(context, model),
-      builder: (BuildContext context, LoginViewModel model, Widget loginForm) {
+      onModelReady: (LoginViewModel model) => model.rememberLogin(context),
+      builder: (BuildContext context, LoginViewModel model, Widget _) {
         return ListView(
           key: const Key('login/list'),
           padding: const EdgeInsets.all(20.0),
@@ -114,7 +90,45 @@ class LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                    loginForm,
+                    Form(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              key: const Key('login/uid'),
+                              focusNode: model.uidFocusNode,
+                              controller: model.uidController,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                prefixIcon: Icon(Icons.person),
+                                hintText: "prenom.nom",
+                                labelText: "Nom d'utilisateur",
+                              ),
+                              onEditingComplete: () {
+                                model.uidFocusNode.unfocus();
+                                FocusScope.of(context)
+                                    .requestFocus(model.pswdFocusNode);
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              key: const Key('login/pswd'),
+                              controller: model.pswdController,
+                              obscureText: true,
+                              focusNode: model.pswdFocusNode,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                prefixIcon: Icon(Icons.vpn_key),
+                                labelText: "Mot de passe",
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -168,8 +182,8 @@ class LoginPageState extends State<LoginPage> {
                       key: const Key('login/connect'),
                       onPressed: () => model.login(
                         context,
-                        _uidController.text,
-                        _pswdController.text,
+                        model.uidController.text,
+                        model.pswdController.text,
                       ),
                       label: const Text(
                         "Se connecter",
@@ -184,69 +198,7 @@ class LoginPageState extends State<LoginPage> {
           ],
         );
       },
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: TextFormField(
-                key: const Key('login/uid'),
-                focusNode: _uidFocusNode,
-                controller: _uidController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.person),
-                  hintText: "prenom.nom",
-                  labelText: "Nom d'utilisateur",
-                ),
-                onEditingComplete: () {
-                  _uidFocusNode.unfocus();
-                  FocusScope.of(context).requestFocus(_pswdFocusNode);
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: TextFormField(
-                key: const Key('login/pswd'),
-                controller: _pswdController,
-                obscureText: true,
-                focusNode: _pswdFocusNode,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.vpn_key),
-                  labelText: "Mot de passe",
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
-  }
-
-  @override
-  void dispose() {
-    _uidController.dispose();
-    _pswdController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _rememberLogin(
-      BuildContext context, LoginViewModel model) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    _rememberMe.value = prefs.getBool("rememberMe") ?? false;
-    if (_rememberMe.value) {
-      _uidController.text = prefs.getString("user");
-      _selectedTime.value = prefs.getString("time");
-      _pswdController.text =
-          utf8.decode(base64.decode(prefs.getString("pswd")));
-      _autoLogin.value = prefs.getBool("autoLogin") ?? false;
-    }
-    if (_autoLogin.value) {
-      await model.login(context, _uidController.text, _pswdController.text);
-    }
   }
 }
 

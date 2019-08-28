@@ -22,13 +22,4 @@ class Feed {
       prevUrl: json["paging"]["previous"],
     );
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['data'] = posts.map((Post post) => post.toJson()).toList();
-    data['paging'] = <String, dynamic>{};
-    data["paging"]["next"] = nextUrl;
-    data["paging"]["previous"] = prevUrl;
-    return data;
-  }
 }

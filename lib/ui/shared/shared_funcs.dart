@@ -37,7 +37,7 @@ Future<void> checkLatestVersion(BuildContext context,
                             ? 300
                             : githubRelease.body.length) +
                     (githubRelease.body.length > 300 ? '...' : ''),
-                style: TextStyle(color: Colors.black87, fontSize: 11.0),
+                style: const TextStyle(color: Colors.black87, fontSize: 11.0),
               ),
             ),
             actions: <Widget>[

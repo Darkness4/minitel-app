@@ -20,7 +20,7 @@ class NewsView extends StatelessWidget {
           key: const Key('news_view/tabs'),
           body: TabBarView(
             children: <Widget>[
-              FacebookTab(),
+              const FacebookTab(),
               const GithubTab(),
             ],
           ),

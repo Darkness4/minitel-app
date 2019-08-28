@@ -26,8 +26,17 @@ class AgendaViewModel extends ChangeNotifier {
     "Novembre",
     "Décembre",
   ];
+
   final CalendarUrlAPI calendarUrlAPI;
-  final ICalendar iCalendar;
+  final ICalendarAPI iCalendar;
+
+  // Notification related
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  final AndroidInitializationSettings _initializationSettingsAndroid =
+      const AndroidInitializationSettings('@mipmap/launcher_icon');
+  final IOSInitializationSettings _initializationSettingsIOS =
+      const IOSInitializationSettings();
   final AndroidNotificationDetails _androidPlatformChannelSpecifics =
       AndroidNotificationDetails(
     'minitel_channel',
@@ -39,21 +48,29 @@ class AgendaViewModel extends ChangeNotifier {
   );
   final IOSNotificationDetails _iOSPlatformChannelSpecifics =
       IOSNotificationDetails();
-  final NotificationSettings notificationSettings = NotificationSettings();
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
-
-  final List<Widget> monthPages = <Widget>[];
+  final NotificationSettings _notificationSettings = NotificationSettings();
 
   AgendaViewModel({
-    @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
     @required this.iCalendar,
     @required this.calendarUrlAPI,
-  }) : _flutterLocalNotificationsPlugin = flutterLocalNotificationsPlugin;
+  });
 
+  NotificationSettings get notificationSettings => _notificationSettings;
+
+  /// Generate a stream of Page. Each page (= month) with events.
+  ///
+  /// The [parsedCalendar.events] are sorted first. Then each new event fill
+  /// a day ([dailyEvents]). If the new event is a new day, the old
+  /// [dailyEvents] is added to the [monthlyWidgets]. If the new event is a new
+  /// month, the old [monthlyWidgets] is added to the [monthPages], and this
+  /// new page is immediatly streamed to assure a reactive behavior.
+  ///
+  /// At the very end, the last widgets are returned.
   Stream<List<Widget>> listEventCards(ParsedCalendar parsedCalendar) async* {
     final List<Widget> monthlyWidgets = <Widget>[];
     final List<Widget> dailyEvents = <Widget>[];
-    monthPages.clear();
+    final List<Widget> monthPages = <Widget>[];
+
     DateTime oldDt;
 
     parsedCalendar.events.sort((Event event1, Event event2) =>
@@ -86,7 +103,7 @@ class AgendaViewModel extends ChangeNotifier {
         dt = event.dtstart;
 
         // Notification System
-        if (dt.isBefore(DateTime.now().add(notificationSettings.range))) {
+        if (dt.isBefore(DateTime.now().add(_notificationSettings.range))) {
           final String dtstart = DateFormat.Hm().format(dt);
           final String dtend = DateFormat.Hm().format(event.dtend);
 
@@ -100,7 +117,7 @@ class AgendaViewModel extends ChangeNotifier {
                 " - "
                 "$dtend",
             scheduledNotificationDateTime:
-                dt.subtract(notificationSettings.early),
+                dt.subtract(_notificationSettings.early),
             payload: "${event.summary};"
                 "${event.description}\n"
                 "${event.location}\n"
@@ -149,6 +166,7 @@ class AgendaViewModel extends ChangeNotifier {
     }
   }
 
+  /// Save/update a calendar and parse it.
   Future<ParsedCalendar> loadCalendar(BuildContext context) async {
     // Try to update thr calendar
     final String url = await calendarUrlAPI.savedCalendarURL;
@@ -165,6 +183,30 @@ class AgendaViewModel extends ChangeNotifier {
     return iCalendar.getParsedCalendarFromFile();
   }
 
+  /// Initialize the notification system
+  void onModelReady(BuildContext context) {
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+            _initializationSettingsAndroid, _initializationSettingsIOS);
+    _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: (String payload) =>
+            _onSelectNotification(payload, context));
+  }
+
+  /// Action when a notification is triggered and selected
+  Future<void> _onSelectNotification(
+      String payload, BuildContext context) async {
+    final List<String> output = payload.split(';');
+    await showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text("${output[0]}"),
+        content: Text("${output.length < 2 ? "null" : output[1]}"),
+      ),
+    );
+  }
+
+  /// Schedule a notification
   Future<void> _scheduleNotification(
       {@required String title,
       @required String description,
@@ -180,5 +222,9 @@ class AgendaViewModel extends ChangeNotifier {
           _androidPlatformChannelSpecifics, _iOSPlatformChannelSpecifics),
       payload: payload,
     );
+  }
+
+  void refresh() {
+    notifyListeners();
   }
 }

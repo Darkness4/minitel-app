@@ -23,13 +23,4 @@ class Post {
       permalinkUrl: json["permalink_url"],
     );
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['message'] = message;
-    data['id'] = id;
-    data['full_picture'] = pictureUrl;
-    data['created_time'] = createdTime.toIso8601String();
-    return data;
-  }
 }

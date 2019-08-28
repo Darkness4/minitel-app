@@ -7,8 +7,8 @@ import 'package:minitel_toolbox/core/services/facebook_api.dart';
 
 class FacebookCard extends StatelessWidget {
   final Post post;
-
   final Widget picture;
+
   const FacebookCard({
     @required this.post,
     @required this.picture,
@@ -91,14 +91,13 @@ class FacebookCard extends StatelessWidget {
 }
 
 class FacebookTab extends StatelessWidget {
-  final FacebookAPI _facebookAPI = FacebookAPI();
-
-  FacebookTab({
+  const FacebookTab({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final FacebookAPI _facebookAPI = FacebookAPI();
     final Image _picture = Image.network(
       _facebookAPI.getProfilePicture(),
       fit: BoxFit.cover,

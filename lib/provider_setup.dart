@@ -16,5 +16,5 @@ List<SingleChildCloneableWidget> providers = <Provider<dynamic>>[
   // GithubAPI used in login, agenda_view and agenda_widgets
   Provider<CalendarUrlAPI>.value(value: CalendarUrlAPI()),
   // ICalendar used in login, agenda_view and agenda_widgets
-  Provider<ICalendar>.value(value: ICalendar())
+  Provider<ICalendarAPI>.value(value: ICalendarAPI())
 ];
