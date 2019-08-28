@@ -67,8 +67,8 @@ class AgendaViewModel extends ChangeNotifier {
   ///
   /// At the very end, the last widgets are returned.
   Stream<List<Widget>> listEventCards(ParsedCalendar parsedCalendar) async* {
-    final List<Widget> monthlyWidgets = <Widget>[];
-    final List<Widget> dailyEvents = <Widget>[];
+    List<Widget> monthlyWidgets = <Widget>[];
+    List<Widget> dailyEvents = <Widget>[];
     final List<Widget> monthPages = <Widget>[];
 
     DateTime oldDt;
@@ -84,17 +84,15 @@ class AgendaViewModel extends ChangeNotifier {
 
     if (filteredEvents == null || filteredEvents.isEmpty) {
       yield <Widget>[
-        Center(
-          child: Text(
-            Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w300,
-              fontSize: 24.0,
-            ),
-            textAlign: TextAlign.center,
+        Text(
+          Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w300,
+            fontSize: 24.0,
           ),
-        )
+          textAlign: TextAlign.center,
+        ),
       ];
     } else {
       DateTime dt;
@@ -137,9 +135,9 @@ class AgendaViewModel extends ChangeNotifier {
           }
           oldDt = dt;
 
-          monthlyWidgets.clear();
+          monthlyWidgets = <Widget>[];
           monthlyWidgets.add(MonthHeader("${_month[dt.month - 1]}"));
-          dailyEvents.clear();
+          dailyEvents = <Widget>[];
         }
 
         // New Day
@@ -150,7 +148,7 @@ class AgendaViewModel extends ChangeNotifier {
           }
 
           oldDt = dt;
-          dailyEvents.clear(); // Clear Events
+          dailyEvents = <Widget>[]; // Clear Events
         }
 
         // Event Card

@@ -29,7 +29,7 @@ class ICalendarAPI {
     final File file = await _calendar;
     final ParsedCalendar parsedCalendar = ParsedCalendar();
     ICalSection mode = ICalSection.None;
-    Map<String, String> vEvent = <String, String>{};
+    final Map<String, String> vEvent = <String, String>{};
 
     if (!file.existsSync()) {
       throw Exception("File calendar.ics do not exists");
@@ -49,7 +49,7 @@ class ICalendarAPI {
       final List<String> line = data.trim().split(":");
       // Inside a VEVENT
       if (line[0] == 'BEGIN' && line[1] == 'VEVENT') {
-        vEvent = <String, String>{};
+        vEvent.clear();
         mode = ICalSection.VEVENT;
         continue; // Skip BEGIN:VEVENT
       }

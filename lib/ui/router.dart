@@ -52,8 +52,9 @@ class Router {
       default:
         return MaterialPageRoute<dynamic>(
           builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
+            body: Text(
+              'No route defined for ${settings.name}',
+              textAlign: TextAlign.center,
             ),
           ),
         );
