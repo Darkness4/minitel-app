@@ -27,6 +27,9 @@ class ParsedCalendar {
         break;
       default:
         print("Invalid key: $key");
+        if (value != null) {
+          print("with value: $value");
+        }
     }
   }
 }
