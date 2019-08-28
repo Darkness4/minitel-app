@@ -7,14 +7,13 @@ Welcome
 -------
 
 We invite you to join our team! Everyone is welcome to contribute code
-via pull requests, to file issues on GitHub, to help people asking for
-help on our mailing lists or on Stack Overflow, to help triage,
-reproduce, or fix bugs that people have filed, to add to our
-documentation, or to help out in any other way.
+via pull requests, to file issues on GitHub, reproduce, or fix bugs 
+that people have filed, to add to our documentation, or to help out 
+in any other way.
 
 We grant commit access (which includes full rights to the issue
 database, such as being able to edit labels) to people who have gained
-our trust and demonstrated a commitment to Flutter.
+our trust and demonstrated a commitment to Minitel Toolbox.
 
 This document focuses on what is needed to contribute by writing code
 and submitting pull requests for the Minitel Toolbox.
