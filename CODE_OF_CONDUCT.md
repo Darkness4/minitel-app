@@ -13,7 +13,7 @@ Should you experience anything that makes you feel unwelcome in Minitel's
 community, please contact someone on the team, for instance
 [Marc](mailto:nguyen_marc@live.fr). We will
 not tolerate harassment from anyone in Minitel's community, even outside
-of Flutter's public communication channels.
+of Minitel's public communication channels.
 
 ## Conflict resolution
 
