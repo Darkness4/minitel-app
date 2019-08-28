@@ -6,19 +6,13 @@ import 'package:minitel_toolbox/ui/widgets/app_lists_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PortailWebView extends StatefulWidget {
+class PortailWebView extends StatelessWidget {
   const PortailWebView({Key key}) : super(key: key);
-
-  @override
-  _PortailWebViewState createState() => _PortailWebViewState();
-}
-
-class _PortailWebViewState extends State<PortailWebView> {
-  final CookieManager cookieManager = CookieManager();
 
   @override
   Widget build(BuildContext context) {
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
+    final CookieManager cookieManager = CookieManager();
     for (final Cookie cookie in _portailAPI.cookies) {
       if (cookie.name == "AGIMUS") {
         cookieManager.setCookie('emse.fr', cookie.toString());

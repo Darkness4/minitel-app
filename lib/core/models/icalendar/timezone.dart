@@ -16,14 +16,6 @@ class TimezoneDescription {
 
   TimezoneDescription();
 
-  TimezoneDescription.fromJson(Map<String, dynamic> json) {
-    dtstart = DateTime.parse(json["DTSTART"]);
-    tzOffsetTo = json["TZOFFSETTO"];
-    tzOffsetFrom = json["TZOFFSETFROM"];
-    rRule = json["RRULE"];
-    tzName = json["TZNAME"];
-  }
-
   void set(String key, String value) {
     switch (key) {
       case "DTSTART":

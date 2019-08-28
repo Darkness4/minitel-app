@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class ScaffoldWebView extends StatefulWidget {
+class ScaffoldWebView extends StatelessWidget {
   final Widget title;
   final Color backgroundColor;
   final String initialUrl;
   final Function(WebViewController, BuildContext) onWebViewCreated;
+
   const ScaffoldWebView({
     @required this.title,
     @required this.backgroundColor,
@@ -16,14 +17,9 @@ class ScaffoldWebView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ScaffoldWebViewState createState() => _ScaffoldWebViewState();
-}
-
-class _ScaffoldWebViewState extends State<ScaffoldWebView> {
-  WebViewController _controller;
-
-  @override
   Widget build(BuildContext context) {
+    WebViewController _controller;
+
     return WillPopScope(
       onWillPop: () async {
         if (await _controller.canGoBack()) {
@@ -35,8 +31,8 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: widget.backgroundColor,
-          title: widget.title,
+          backgroundColor: backgroundColor,
+          title: title,
           elevation: 0.0,
           actions: <Widget>[
             IconButton(
@@ -48,7 +44,7 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
           ],
         ),
         bottomNavigationBar: BottomAppBar(
-          color: widget.backgroundColor,
+          color: backgroundColor,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -82,11 +78,11 @@ class _ScaffoldWebViewState extends State<ScaffoldWebView> {
         body: SafeArea(
           child: WebView(
             javascriptMode: JavascriptMode.unrestricted,
-            initialUrl: widget.initialUrl,
+            initialUrl: initialUrl,
             onWebViewCreated: (WebViewController wvc) {
               _controller = wvc;
-              if (widget.onWebViewCreated != null) {
-                widget.onWebViewCreated(wvc, context);
+              if (onWebViewCreated != null) {
+                onWebViewCreated(wvc, context);
               }
             },
           ),
