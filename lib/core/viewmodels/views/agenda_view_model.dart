@@ -129,7 +129,7 @@ class AgendaViewModel extends ChangeNotifier {
         if (dt.month != oldDt?.month) {
           // Return the last month
           if (dailyEvents.isNotEmpty && monthlyWidgets != null) {
-            monthlyWidgets.add(DayWidget(dt, dailyEvents));
+            monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
             monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
             yield monthPages;
           }
@@ -144,7 +144,7 @@ class AgendaViewModel extends ChangeNotifier {
         if (dt.day != oldDt?.day) {
           // Return the last day
           if (dailyEvents.isNotEmpty) {
-            monthlyWidgets.add(DayWidget(dt, dailyEvents));
+            monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
           }
 
           oldDt = dt;
@@ -157,7 +157,7 @@ class AgendaViewModel extends ChangeNotifier {
 
       // Return the last day
       if (dailyEvents.isNotEmpty && monthlyWidgets != null) {
-        monthlyWidgets.add(DayWidget(dt, dailyEvents));
+        monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
         monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
         yield monthPages;
       }
