@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
-import 'package:minitel_toolbox/core/models/diagnosis.dart';
-import 'package:minitel_toolbox/core/services/stormshield_api.dart';
+import 'package:minitel_toolbox/core/services/diagnosis_api.dart';
 import 'package:minitel_toolbox/core/services/webhook_api.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +13,7 @@ enum ReportTarget { Slack, Mail, Share }
 
 class ReportingViewModel extends ChangeNotifier {
   /// Diagnosis used to capture and store data
-  final Diagnosis diagnosis;
+  final DiagnosisAPI _diagnosisAPI;
 
   /// Webhook API called for hadling Slack communications
   final WebhookAPI _webhookAPI;
@@ -40,9 +39,9 @@ class ReportingViewModel extends ChangeNotifier {
 
   ReportingViewModel({
     @required WebhookAPI webhookAPI,
-    @required StormshieldAPI stormshieldAPI,
+    @required DiagnosisAPI diagnosisAPI,
   })  : _webhookAPI = webhookAPI,
-        diagnosis = Diagnosis(stormshieldAPI: stormshieldAPI);
+        _diagnosisAPI = diagnosisAPI;
 
   Future<DateTime> get _timeout async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -65,10 +64,10 @@ class ReportingViewModel extends ChangeNotifier {
       );
 
       // Refersh ONE second after launching diagnose
-      Future<void>.delayed(const Duration(seconds: 1), notifyListeners);
+      Future<void>.delayed(const Duration(seconds: 2), notifyListeners);
 
       // Diagnose
-      await diagnosis.diagnose();
+      await _diagnosisAPI.diagnose();
 
       // Kill timer
       timer.cancel();
@@ -90,7 +89,7 @@ class ReportingViewModel extends ChangeNotifier {
           "Titre: ${titleController.text}\n"
           "Description: ${descriptionController.text}\n\n"
           "*Diagnosis*\n"
-          "${await diagnosis.reportAll}";
+          "${await _diagnosisAPI.diagnosis.toStringAsync()}";
 
       switch (target) {
         case ReportTarget.Share:
@@ -111,7 +110,7 @@ class ReportingViewModel extends ChangeNotifier {
                 "*ID : ${nameController.text}*\n"
                 "*${titleController.text}*\n"
                 "_${descriptionController.text}_\n\n",
-                attachments: await diagnosis.reportAll,
+                attachments: await _diagnosisAPI.diagnosis.toMapAsync(),
                 channel: channel,
               );
               if (status == "ok") {
