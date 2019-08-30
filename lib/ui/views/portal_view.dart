@@ -4,7 +4,7 @@ import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
-import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
+import 'package:minitel_toolbox/core/viewmodels/views/portail_view_model.dart';
 import 'package:minitel_toolbox/ui/shared/shared_funcs.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
@@ -42,23 +42,23 @@ class PortalViewState extends State<PortalView> {
                 ],
               ),
             ),
-            child: BaseWidget<LoginViewModel>(
-              model: LoginViewModel(
-                portailAPI: Provider.of<PortailAPI>(context),
-                calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
-                stormshieldAPI: Provider.of<StormshieldAPI>(context),
-                iCalendar: Provider.of<ICalendarAPI>(context),
-              ),
-              onModelReady: (LoginViewModel model) =>
-                  model.rememberLogin(context),
-              builder: (BuildContext context, LoginViewModel model, _) =>
-                  TabBarView(
-                children: <Widget>[
-                  LoginPage(
-                    model: model,
-                  ),
-                  const AppsList(),
-                ],
+            child: Builder(
+              builder: (BuildContext context) => BaseWidget<PortailViewModel>(
+                model: PortailViewModel(
+                  portailAPI: Provider.of<PortailAPI>(context),
+                  calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
+                  stormshieldAPI: Provider.of<StormshieldAPI>(context),
+                  iCalendar: Provider.of<ICalendarAPI>(context),
+                ),
+                onModelReady: (PortailViewModel model) =>
+                    model.rememberLogin(context),
+                builder: (BuildContext context, PortailViewModel model, _) =>
+                    TabBarView(
+                  children: <Widget>[
+                    LoginPage(model: model),
+                    const AppsList(),
+                  ],
+                ),
               ),
             ),
           ),

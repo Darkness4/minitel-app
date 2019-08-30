@@ -11,9 +11,9 @@ import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Mutex
-enum LoginState { Busy, Available }
+enum PortailState { Busy, Available }
 
-class LoginViewModel extends ChangeNotifier {
+class PortailViewModel extends ChangeNotifier {
   final PortailAPI portailAPI;
   final StormshieldAPI stormshieldAPI;
   final CalendarUrlAPI calendarUrlAPI;
@@ -28,9 +28,9 @@ class LoginViewModel extends ChangeNotifier {
   final TextEditingController uidController = TextEditingController();
   final TextEditingController pswdController = TextEditingController();
 
-  LoginState loginState = LoginState.Available;
+  PortailState portailState = PortailState.Available;
 
-  LoginViewModel({
+  PortailViewModel({
     @required this.portailAPI,
     @required this.stormshieldAPI,
     @required this.calendarUrlAPI,
@@ -67,7 +67,7 @@ class LoginViewModel extends ChangeNotifier {
     );
 
     // Lock
-    loginState = LoginState.Busy;
+    portailState = PortailState.Busy;
     notifyListeners();
 
     // Login
@@ -111,7 +111,7 @@ class LoginViewModel extends ChangeNotifier {
     }
 
     // Unlock
-    loginState = LoginState.Available;
+    portailState = PortailState.Available;
     notifyListeners();
   }
 
@@ -128,5 +128,19 @@ class LoginViewModel extends ChangeNotifier {
     if (autoLogin.value) {
       await login(context, uidController.text, pswdController.text);
     }
+  }
+
+  @override
+  void dispose() {
+    selectedTime.dispose();
+    selectedUrl.dispose();
+    rememberMe.dispose();
+    autoLogin.dispose();
+    uidFocusNode.dispose();
+    pswdFocusNode.dispose();
+    uidController.dispose();
+    pswdController.dispose();
+
+    super.dispose();
   }
 }

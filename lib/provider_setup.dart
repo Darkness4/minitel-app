@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/services/diagnosis_api.dart';
 import 'package:provider/provider.dart';
 
 import 'core/services/calendar_url_api.dart';
@@ -7,7 +9,13 @@ import 'core/services/portail_emse_api.dart';
 import 'core/services/stormshield_api.dart';
 import 'core/services/webhook_api.dart';
 
-List<SingleChildCloneableWidget> providers = <Provider<dynamic>>[
+List<SingleChildCloneableWidget> providers = <SingleChildCloneableWidget>[
+  ...independentServices,
+  ...dependentServices,
+];
+
+List<SingleChildCloneableWidget> independentServices =
+    <SingleChildCloneableWidget>[
   // StormshieldAPI used in login and reporting_view
   Provider<StormshieldAPI>.value(value: StormshieldAPI()),
   // WebhookAPI used in feedback_view and reporting_view
@@ -20,4 +28,13 @@ List<SingleChildCloneableWidget> providers = <Provider<dynamic>>[
   Provider<ICalendarAPI>.value(value: ICalendarAPI()),
   // PortailAPI used in portail webview and portail
   Provider<PortailAPI>.value(value: PortailAPI()),
+];
+
+List<SingleChildCloneableWidget> dependentServices =
+    <SingleChildCloneableWidget>[
+  ProxyProvider<StormshieldAPI, DiagnosisAPI>(
+    builder: (BuildContext context, StormshieldAPI stormshieldAPI,
+            DiagnosisAPI diagnosisAPI) =>
+        DiagnosisAPI(stormshieldAPI: stormshieldAPI),
+  )
 ];

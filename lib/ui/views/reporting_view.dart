@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/services/stormshield_api.dart';
+import 'package:minitel_toolbox/core/services/diagnosis_api.dart';
 import 'package:minitel_toolbox/core/services/webhook_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
@@ -30,7 +30,7 @@ class ReportingViewState extends State<ReportingView>
     return BaseWidget<ReportingViewModel>(
       model: ReportingViewModel(
         webhookAPI: Provider.of<WebhookAPI>(context),
-        stormshieldAPI: Provider.of<StormshieldAPI>(context),
+        diagnosisAPI: Provider.of<DiagnosisAPI>(context),
       ),
       builder: (BuildContext context, ReportingViewModel model, _) =>
           DefaultTabController(
@@ -42,7 +42,7 @@ class ReportingViewState extends State<ReportingView>
             body: TabBarView(
               children: <Widget>[
                 ReportTab(model: model),
-                DiagnoseTab(diagnosis: model.diagnosis),
+                DiagnoseTab(), // Do not put const.
               ],
             ),
           ),

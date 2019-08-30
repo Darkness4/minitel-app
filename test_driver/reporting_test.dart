@@ -1,5 +1,4 @@
 import 'package:flutter_driver/flutter_driver.dart';
-import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:test/test.dart';
 
 import 'finders.dart';
@@ -62,7 +61,7 @@ void main() {
       test('PageView Scroll vertically', () async {
         await driver.scrollUntilVisible(
           minitelFinders.diagnosisList,
-          find.byValueKey('diagnose_tab/${DiagnosisContent.httpPortalGateway}'),
+          find.byValueKey('diagnose_tab/HTTP Portal Response Gateway'),
           dyScroll: -500.0,
         );
       }, timeout: const Timeout(Duration(minutes: 5)));

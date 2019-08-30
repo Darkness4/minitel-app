@@ -48,9 +48,13 @@ class StormshieldAPI {
       if (body.contains('title_error')) {
         throw Exception('Bad Username or Password');
       } else {
-        final Cookie netasq_user = response.cookies
-            .firstWhere((Cookie cookie) => cookie.name == "NETASQ_USER");
-        cookie = netasq_user;
+        if (response.cookies
+            .map((Cookie cookie) => cookie.name)
+            .contains("NETASQ_USER")) {
+          final Cookie netasq_user = response.cookies
+              .firstWhere((Cookie cookie) => cookie.name == "NETASQ_USER");
+          cookie = netasq_user;
+        }
       }
     } else {
       throw Exception("HttpError: ${response.statusCode}");

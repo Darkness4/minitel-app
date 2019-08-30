@@ -3,11 +3,11 @@ import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
-import 'package:minitel_toolbox/core/viewmodels/views/portal_tabs/login_model.dart';
+import 'package:minitel_toolbox/core/viewmodels/views/portail_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
-  final LoginViewModel model;
+  final PortailViewModel model;
   const LoginPage({
     @required this.model,
     Key key,
@@ -165,7 +165,7 @@ class LoginPage extends StatelessWidget {
           ),
         ),
         Center(
-          child: model.loginState == LoginState.Busy
+          child: model.portailState == PortailState.Busy
               ? const CircularProgressIndicator()
               : FloatingActionButton.extended(
                   key: const Key('login/connect'),

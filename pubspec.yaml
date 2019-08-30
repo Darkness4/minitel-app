@@ -5,7 +5,7 @@ repository: https://github.com/Darkness4/minitel-app
 documentation: https://github.com/Darkness4/minitel-app/wiki
 issue_tracker: https://github.com/Darkness4/minitel-app/issues
 author: Nguyen Marc <nguyen_marc@live.fr>
-version: 0.6.4
+version: 0.6.5
 
 environment:
   sdk: ^2.4.0
