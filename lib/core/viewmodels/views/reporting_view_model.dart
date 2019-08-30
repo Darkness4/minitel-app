@@ -138,4 +138,20 @@ class ReportingViewModel extends ChangeNotifier {
     await prefs.setString(
         'timeout', DateTime.now().add(const Duration(minutes: 5)).toString());
   }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    roomController.dispose();
+    nameController.dispose();
+
+    titleFocusNode.dispose();
+    descriptionFocusNode.dispose();
+    roomFocusNode.dispose();
+    nameFocusNode.dispose();
+
+    percentageDiagnoseProgress.dispose();
+    super.dispose();
+  }
 }

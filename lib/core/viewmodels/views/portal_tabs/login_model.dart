@@ -129,4 +129,18 @@ class LoginViewModel extends ChangeNotifier {
       await login(context, uidController.text, pswdController.text);
     }
   }
+
+  @override
+  void dispose() {
+    selectedTime.dispose();
+    selectedUrl.dispose();
+    rememberMe.dispose();
+    autoLogin.dispose();
+    uidFocusNode.dispose();
+    pswdFocusNode.dispose();
+    uidController.dispose();
+    pswdController.dispose();
+
+    super.dispose();
+  }
 }
