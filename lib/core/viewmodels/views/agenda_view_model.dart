@@ -37,17 +37,6 @@ class AgendaViewModel extends ChangeNotifier {
       const AndroidInitializationSettings('@mipmap/launcher_icon');
   final IOSInitializationSettings _initializationSettingsIOS =
       const IOSInitializationSettings();
-  final AndroidNotificationDetails _androidPlatformChannelSpecifics =
-      AndroidNotificationDetails(
-    'minitel_channel',
-    'Minitel Channel',
-    'Notification channel for the Minitel App',
-    importance: Importance.Max,
-    priority: Priority.High,
-    enableVibration: true,
-  );
-  final IOSNotificationDetails _iOSPlatformChannelSpecifics =
-      IOSNotificationDetails();
   final NotificationSettings _notificationSettings = NotificationSettings();
 
   AgendaViewModel({
@@ -211,6 +200,17 @@ class AgendaViewModel extends ChangeNotifier {
       @required int id,
       @required DateTime scheduledNotificationDateTime,
       String payload = "Title;Description"}) async {
+    final AndroidNotificationDetails _androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'minitel_channel',
+      'Minitel Channel',
+      'Notification channel for the Minitel App',
+      importance: Importance.Max,
+      priority: Priority.High,
+      enableVibration: true,
+    );
+    final IOSNotificationDetails _iOSPlatformChannelSpecifics =
+        IOSNotificationDetails();
     await _flutterLocalNotificationsPlugin.schedule(
       id,
       title,
