@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
@@ -17,11 +18,12 @@ class AgendaView extends StatelessWidget {
   const AgendaView({Key key, this.title}) : super(key: key);
 
   @override
-  @override
   Widget build(BuildContext context) {
     return BaseWidget<AgendaViewModel>(
-      onModelReady: (AgendaViewModel model) => model.onModelReady(context),
+      onModelReady: (AgendaViewModel model) async =>
+          model.onModelReady(context),
       model: AgendaViewModel(
+        flutterLocalNotificationsPlugin: FlutterLocalNotificationsPlugin(),
         calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
         iCalendar: Provider.of<ICalendarAPI>(context),
       ),

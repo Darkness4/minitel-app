@@ -21,9 +21,9 @@ dependencies:
   webview_flutter:
     git: 
       url: git://github.com/Darkness4/plugins.git
-      ref: d38e7f429f03a57bcf01f79916dbe192714a9702
+      ref: ece3972dbb5ed95239db92b6c3f8593569c59a9b
       path: packages/webview_flutter
-  connectivity: ^0.4.3+7  # Flutter Team
+  connectivity: ^0.4.4  # Flutter Team
   share: ^0.6.2+1  # Flutter Team
   url_launcher: ^5.1.2  # Flutter Team
   shared_preferences: ^0.5.3+4  # Flutter Team

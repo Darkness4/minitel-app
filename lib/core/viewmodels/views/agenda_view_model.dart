@@ -29,17 +29,13 @@ class AgendaViewModel extends ChangeNotifier {
 
   final CalendarUrlAPI calendarUrlAPI;
   final ICalendarAPI iCalendar;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   // Notification related
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  final AndroidInitializationSettings _initializationSettingsAndroid =
-      const AndroidInitializationSettings('@mipmap/launcher_icon');
-  final IOSInitializationSettings _initializationSettingsIOS =
-      const IOSInitializationSettings();
   final NotificationSettings _notificationSettings = NotificationSettings();
 
   AgendaViewModel({
+    @required this.flutterLocalNotificationsPlugin,
     @required this.iCalendar,
     @required this.calendarUrlAPI,
   });
@@ -69,7 +65,7 @@ class AgendaViewModel extends ChangeNotifier {
         .where((Event event) => event.dtstart.isAfter(DateTime.now()));
 
     // Throw away the old notifications
-    await _flutterLocalNotificationsPlugin.cancelAll();
+    await flutterLocalNotificationsPlugin.cancelAll();
 
     if (filteredEvents == null || filteredEvents.isEmpty) {
       yield <Widget>[
@@ -85,8 +81,8 @@ class AgendaViewModel extends ChangeNotifier {
       ];
     } else {
       DateTime dt;
+      int id = 0;
       for (final Event event in filteredEvents) {
-        int id = 0;
         dt = event.dtstart;
 
         // Notification System
@@ -150,6 +146,8 @@ class AgendaViewModel extends ChangeNotifier {
         monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
         yield monthPages;
       }
+
+      print("Scheduled $id notifications");
     }
   }
 
@@ -171,11 +169,15 @@ class AgendaViewModel extends ChangeNotifier {
   }
 
   /// Initialize the notification system
-  void onModelReady(BuildContext context) {
-    final InitializationSettings initializationSettings =
+  Future<void> onModelReady(BuildContext context) async {
+    const AndroidInitializationSettings _initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/launcher_icon');
+    const IOSInitializationSettings _initializationSettingsIOS =
+        IOSInitializationSettings();
+    const InitializationSettings initializationSettings =
         InitializationSettings(
             _initializationSettingsAndroid, _initializationSettingsIOS);
-    _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String payload) =>
             _onSelectNotification(payload, context));
   }
@@ -211,7 +213,7 @@ class AgendaViewModel extends ChangeNotifier {
     );
     final IOSNotificationDetails _iOSPlatformChannelSpecifics =
         IOSNotificationDetails();
-    await _flutterLocalNotificationsPlugin.schedule(
+    await flutterLocalNotificationsPlugin.schedule(
       id,
       title,
       description,
