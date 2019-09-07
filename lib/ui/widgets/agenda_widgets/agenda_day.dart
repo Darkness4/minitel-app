@@ -84,40 +84,39 @@ class EventCard extends StatelessWidget {
                 _event.summary.toLowerCase().contains("férié"))
             ? 0
             : 4,
-        child: Container(
+        child: Padding(
           padding: const EdgeInsets.all(4.0),
-          child: Column(
-            children: <Widget>[
-              Text(
-                _event.summary,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                _event.description,
-                style: const TextStyle(height: 1.4),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "${_event.location != "" ? '➡' : ''} ${_event.location} ",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                  fontSize: 16,
+          child: Text.rich(
+            TextSpan(
+              text: _event.summary + '\n',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              children: <TextSpan>[
+                TextSpan(
+                  text: _event.description + '\n',
+                  style: const TextStyle(
+                      fontWeight: FontWeight.normal, height: 1.4),
                 ),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "${DateFormat.Hm().format(_event.dtstart)}"
-                " - "
-                "${DateFormat.Hm().format(_event.dtend)}",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                TextSpan(
+                  text:
+                      "${_event.location != "" ? '➡' : ''} ${_event.location} \n",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                    fontSize: 16,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+                TextSpan(
+                  text: "${DateFormat.Hm().format(_event.dtstart)}"
+                      " - "
+                      "${DateFormat.Hm().format(_event.dtend)}",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
       ),

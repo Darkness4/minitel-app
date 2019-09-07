@@ -55,7 +55,6 @@ class AgendaViewModel extends ChangeNotifier {
     List<Widget> monthlyWidgets = <Widget>[];
     List<Widget> dailyEvents = <Widget>[];
     final List<Widget> monthPages = <Widget>[];
-
     DateTime oldDt;
 
     parsedCalendar.events.sort((Event event1, Event event2) =>
@@ -112,9 +111,11 @@ class AgendaViewModel extends ChangeNotifier {
 
         // New Month
         if (dt.month != oldDt?.month) {
-          // Return the last month
-          if (dailyEvents.isNotEmpty && monthlyWidgets != null) {
+          if (dailyEvents.isNotEmpty) {
             monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
+          }
+          // Return the last month
+          if (monthlyWidgets.isNotEmpty) {
             monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
             yield monthPages;
           }
@@ -141,7 +142,7 @@ class AgendaViewModel extends ChangeNotifier {
       }
 
       // Return the last day
-      if (dailyEvents.isNotEmpty && monthlyWidgets != null) {
+      if (dailyEvents.isNotEmpty && monthlyWidgets.isNotEmpty) {
         monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
         monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
         yield monthPages;

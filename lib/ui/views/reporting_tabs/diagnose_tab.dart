@@ -64,6 +64,9 @@ class DiagnoseTab extends StatelessWidget {
   }
 
   String _reportData(AsyncSnapshot<String> snapshot) {
+    if (snapshot.hasError) {
+      return '${snapshot.error}';
+    }
     switch (snapshot.connectionState) {
       case ConnectionState.none:
         return '';
@@ -71,11 +74,7 @@ class DiagnoseTab extends StatelessWidget {
       case ConnectionState.waiting:
         return '...';
       case ConnectionState.done:
-        if (snapshot.hasError) {
-          return '${snapshot.error}';
-        } else {
-          return snapshot.data;
-        }
+        return snapshot.data;
     }
     return null;
   }
