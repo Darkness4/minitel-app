@@ -12,6 +12,14 @@ class ZabbixTab extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(10.0),
         children: <Widget>[
+          const Card(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child:
+                  Text("Données récupérées à partir du serveur local Zabbix."),
+            ),
+          ),
+          const Divider(),
           const ServersCard(),
           const Divider(),
           const SwitchesCard(),
