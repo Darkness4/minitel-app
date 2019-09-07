@@ -23,24 +23,23 @@ class ServersCard extends StatelessWidget {
         ),
         builder:
             (BuildContext context, AsyncSnapshot<List<ZabbixHost>> snapshot) {
+          if (snapshot.hasError) {
+            return Text(
+              snapshot.error.toString(),
+              style: MinitelTextStyles.error,
+            );
+          }
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.waiting:
             case ConnectionState.active:
               return const CircularProgressIndicator();
             case ConnectionState.done:
-              if (snapshot.hasError) {
-                return Text(
-                  snapshot.error.toString(),
-                  style: MinitelTextStyles.error,
-                );
-              } else {
-                return Column(
-                  children: <Widget>[
-                    for (ZabbixHost host in snapshot.data) _ServerBody(host),
-                  ],
-                );
-              }
+              return Column(
+                children: <Widget>[
+                  for (ZabbixHost host in snapshot.data) _ServerBody(host),
+                ],
+              );
           }
           return null;
         },

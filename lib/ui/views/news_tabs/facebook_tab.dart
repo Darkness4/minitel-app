@@ -110,6 +110,13 @@ class FacebookTab extends StatelessWidget {
         child: FutureBuilder<Feed>(
           future: _facebookAPI.getFeed(),
           builder: (BuildContext context, AsyncSnapshot<Feed> feedSnapshot) {
+            if (feedSnapshot.hasError) {
+              return const Icon(
+                Icons.error,
+                color: Colors.white,
+                size: 40.0,
+              );
+            }
             switch (feedSnapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.active:
@@ -118,25 +125,17 @@ class FacebookTab extends StatelessWidget {
                   key: Key('facebook_tab/loading'),
                 );
               case ConnectionState.done:
-                if (feedSnapshot.hasError) {
-                  return const Icon(
-                    Icons.error,
-                    color: Colors.white,
-                    size: 40.0,
-                  );
-                } else {
-                  return ListView.builder(
-                    padding: const EdgeInsets.all(10.0),
-                    key: const Key('facebook_tab/list'),
-                    itemCount: feedSnapshot.data.posts.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        FacebookCard(
-                      post: feedSnapshot.data.posts[index],
-                      picture: _picture,
-                      key: Key('facebook_tab/fb_item_$index'),
-                    ),
-                  );
-                }
+                return ListView.builder(
+                  padding: const EdgeInsets.all(10.0),
+                  key: const Key('facebook_tab/list'),
+                  itemCount: feedSnapshot.data.posts.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      FacebookCard(
+                    post: feedSnapshot.data.posts[index],
+                    picture: _picture,
+                    key: Key('facebook_tab/fb_item_$index'),
+                  ),
+                );
             }
             return const Icon(
               Icons.error,

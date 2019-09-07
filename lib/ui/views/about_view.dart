@@ -100,15 +100,15 @@ SOFTWARE.""",
                   future: PackageInfo.fromPlatform(),
                   builder: (BuildContext context,
                       AsyncSnapshot<PackageInfo> packageInfo) {
+                    if (packageInfo.hasError) {
+                      return Text('Error: ${packageInfo.error}');
+                    }
                     switch (packageInfo.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.active:
                       case ConnectionState.waiting:
                         return const Text('Awaiting result...');
                       case ConnectionState.done:
-                        if (packageInfo.hasError) {
-                          return Text('Error: ${packageInfo.error}');
-                        }
                         return Text(packageInfo.data.version);
                     }
                     return null; // unreachable

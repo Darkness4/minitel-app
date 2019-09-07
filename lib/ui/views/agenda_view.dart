@@ -67,8 +67,11 @@ class AgendaView extends StatelessWidget {
                         switch (snapshotStream.connectionState) {
                           case ConnectionState.none:
                           case ConnectionState.waiting:
-                            return const CircularProgressIndicator();
                           case ConnectionState.active:
+                            return const CircularProgressIndicator(
+                              backgroundColor: Colors.white,
+                            );
+
                           case ConnectionState.done:
                             return PageView(children: snapshotStream.data);
                         }
