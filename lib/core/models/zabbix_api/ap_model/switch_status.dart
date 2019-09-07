@@ -20,7 +20,7 @@ class APStatus {
   /// 0 - (default) unknown;
   /// 1 - available;
   /// 2 - unavailable
-  final int available;
+  final int snmpAvailable;
 
   const APStatus({
     this.hostname,
@@ -28,14 +28,14 @@ class APStatus {
     this.utilization5G,
     this.utilization2G,
     this.users,
-    this.available,
+    this.snmpAvailable,
   });
 
   factory APStatus.fromHost(ZabbixHost host) {
     // Data to fill
     String hostname;
     Duration uptime;
-    int available;
+    int snmpAvailable;
     int utilization5G;
     int utilization2G;
     int users = 0;
@@ -46,7 +46,7 @@ class APStatus {
       } else if (item.name.contains('Uptime')) {
         uptime = Duration(seconds: double.parse(item.lastvalue).floor());
       } else if (item.name.contains('SNMP availability')) {
-        available = int.parse(item.lastvalue);
+        snmpAvailable = int.parse(item.lastvalue);
       } else if (item.name.contains('Channel utilization 2G')) {
         utilization2G = int.parse(item.lastvalue);
       } else if (item.name.contains('Channel utilization 5G')) {
@@ -58,7 +58,7 @@ class APStatus {
       }
     });
     return APStatus(
-      available: available,
+      snmpAvailable: snmpAvailable,
       hostname: hostname,
       uptime: uptime,
       utilization5G: utilization5G,

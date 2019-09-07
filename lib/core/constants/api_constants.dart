@@ -51,6 +51,9 @@ class ApiConstants {
   /// Zabbix group 17 (networking/accesspoints)
   static const int zabbixAP = 17;
 
+  /// Zabbix group 20 (networking/servers)
+  static const int zabbixServers = 20;
+
   /// Facebook api key
   static String get facebookApi => utf8.decode(base64.decode(_facebookApi));
 

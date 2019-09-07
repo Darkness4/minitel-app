@@ -5,7 +5,7 @@ import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/agenda_view_model.dart';
-import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
+import 'package:minitel_toolbox/ui/widgets/agenda_widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';

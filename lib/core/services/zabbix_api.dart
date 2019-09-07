@@ -51,6 +51,9 @@ class ZabbixAPI {
           'units',
           'snmp_oid',
         ],
+        "selectInterfaces": <String>[
+          "ip",
+        ],
       },
       "id": 2,
       "auth": token,

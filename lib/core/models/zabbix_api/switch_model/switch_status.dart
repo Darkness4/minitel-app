@@ -25,7 +25,7 @@ class SwitchStatus {
   /// 0 - (default) unknown;
   /// 1 - available;
   /// 2 - unavailable
-  final int available;
+  final int snmpAvailable;
 
   const SwitchStatus({
     this.ports,
@@ -33,7 +33,7 @@ class SwitchStatus {
     this.hostname,
     this.uptime,
     this.pingResponseTime,
-    this.available,
+    this.snmpAvailable,
   });
 
   factory SwitchStatus.fromHost(ZabbixHost host) {
@@ -43,7 +43,7 @@ class SwitchStatus {
     String hostname;
     Duration uptime;
     double pingResponseTime;
-    int available;
+    int snmpAvailable;
 
     host.items.forEach((final ZabbixItem item) {
       if (item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
@@ -69,13 +69,13 @@ class SwitchStatus {
       } else if (item.name.contains('Device uptime')) {
         uptime = Duration(seconds: int.parse(item.lastvalue));
       } else if (item.name.contains('SNMP availability')) {
-        available = int.parse(item.lastvalue);
+        snmpAvailable = int.parse(item.lastvalue);
       } else {
         print('${item.name} unhandled.');
       }
     });
     return SwitchStatus(
-      available: available,
+      snmpAvailable: snmpAvailable,
       description: description,
       hostname: hostname,
       pingResponseTime: pingResponseTime,

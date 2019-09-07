@@ -33,6 +33,7 @@ dependencies:
   package_info: ^0.4.0+6  # Flutter Team
   device_info: ^0.4.0+2  # Flutter Team
   provider: ^3.1.0  # Remi Rousselet and Flutter Team
+  intl: ^0.16.0  # Dart Team
 
 dev_dependencies:
   flutter_test:
