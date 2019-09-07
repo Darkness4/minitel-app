@@ -18,10 +18,10 @@ class NewsView extends StatelessWidget {
         backgroundColor: const Color(0xff087f23),
         body: NestedScrollView(
           key: const Key('news_view/tabs'),
-          body: TabBarView(
+          body: const TabBarView(
             children: <Widget>[
-              const FacebookTab(),
-              const GithubTab(),
+              FacebookTab(),
+              GithubTab(),
             ],
           ),
           headerSliverBuilder:

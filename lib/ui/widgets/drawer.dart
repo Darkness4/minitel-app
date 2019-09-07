@@ -20,9 +20,9 @@ class DocsDrawer extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(0.0),
         children: <Widget>[
-          SafeArea(
+          const SafeArea(
             top: true,
-            child: const DrawerHeader(
+            child: DrawerHeader(
               child: Text(
                 "Documentation",
                 style: MinitelTextStyles.mdH1,

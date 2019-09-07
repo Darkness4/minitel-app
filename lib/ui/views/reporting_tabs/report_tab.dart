@@ -16,7 +16,7 @@ class ReportTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(color: Colors.red),
+      decoration: const BoxDecoration(color: Colors.red),
       child: Scrollbar(
         child: ListView(
           padding: const EdgeInsets.all(10.0),
