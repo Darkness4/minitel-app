@@ -5,6 +5,7 @@ import 'package:minitel_toolbox/core/services/diagnosis_api.dart';
 import 'package:minitel_toolbox/core/services/webhook_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
+import 'package:minitel_toolbox/ui/views/reporting_tabs/zabbix_tab.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/buttons.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
@@ -34,7 +35,7 @@ class ReportingViewState extends State<ReportingView>
       ),
       builder: (BuildContext context, ReportingViewModel model, _) =>
           DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           body: NestedScrollView(
             key: const Key('reporting_view/tabs'),
@@ -42,7 +43,8 @@ class ReportingViewState extends State<ReportingView>
             body: TabBarView(
               children: <Widget>[
                 ReportTab(model: model),
-                DiagnoseTab(), // Do not put const.
+                DiagnoseTab(),
+                const ZabbixTab(),
               ],
             ),
           ),
@@ -146,6 +148,13 @@ class ReportingViewState extends State<ReportingView>
                   key: Key('reporting_view/diagnosis_tab'),
                 ),
                 text: "Diagnosis",
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.settings_ethernet,
+                  key: Key('reporting_view/zabbix_tab'),
+                ),
+                text: 'Network',
               ),
             ],
           ),

@@ -9,7 +9,7 @@ import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/icalendar_api.dart';
-import 'package:minitel_toolbox/ui/widgets/agenda_widgets.dart';
+import 'package:minitel_toolbox/ui/widgets/agenda_widgets/agenda_widgets.dart';
 
 class AgendaViewModel extends ChangeNotifier {
   static const List<String> _month = <String>[
@@ -182,6 +182,10 @@ class AgendaViewModel extends ChangeNotifier {
             _onSelectNotification(payload, context));
   }
 
+  void refresh() {
+    notifyListeners();
+  }
+
   /// Action when a notification is triggered and selected
   Future<void> _onSelectNotification(
       String payload, BuildContext context) async {
@@ -222,9 +226,5 @@ class AgendaViewModel extends ChangeNotifier {
           _androidPlatformChannelSpecifics, _iOSPlatformChannelSpecifics),
       payload: payload,
     );
-  }
-
-  void refresh() {
-    notifyListeners();
   }
 }

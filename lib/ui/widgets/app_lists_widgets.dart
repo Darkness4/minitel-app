@@ -49,7 +49,7 @@ class ScaffoldWebView extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Spacer(),
+              const Spacer(),
               Expanded(
                 child: IconButton(
                   color: Colors.white,
