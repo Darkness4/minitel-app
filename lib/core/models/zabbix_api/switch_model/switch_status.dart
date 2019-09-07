@@ -127,8 +127,8 @@ class SwitchStatus {
           statistics.lowerLayerDown++;
           break;
         default:
-          throw Exception(
-              'The operStatus is not respecting RFC 2863. Value not found: ${portStatus.operStatus}');
+          statistics.down++;
+          break;
       }
     });
 
