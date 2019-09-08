@@ -15,8 +15,6 @@ class MinitelFinders {
   final SerializableFinder goBack = find.byTooltip('Retour');
 
   // Authentication
-  final SerializableFinder closeUpdateButton =
-      find.byValueKey('portal_view/close_update');
   final SerializableFinder portalTabs = find.byValueKey('portal_view/tabs');
   final SerializableFinder appsTab = find.byValueKey('portal_view/apps_tab');
   final SerializableFinder loginTab = find.byValueKey('portal_view/login_tab');

@@ -33,8 +33,6 @@ void main() {
 
     group('Automated screenshot', () {
       test('Screenshot login', () async {
-        await driver.waitFor(minitelFinders.closeUpdateButton);
-        await driver.tap(minitelFinders.closeUpdateButton);
         await takeScreenshot(driver, ScreenshotsPaths.login);
       });
 
@@ -66,6 +64,7 @@ void main() {
         await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
         await driver.tap(minitelFinders.agendaConnect);
         print("Trying to login");
+        await Future<dynamic>.delayed(const Duration(seconds: 5));
         await takeScreenshot(driver, ScreenshotsPaths.agenda);
       });
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
-import 'package:minitel_toolbox/ui/shared/shared_funcs.dart';
 import 'package:package_info/package_info.dart';
 
 /// Page About
@@ -115,10 +114,6 @@ SOFTWARE.""",
                   },
                 ),
                 onTap: () {},
-              ),
-              ListTile(
-                title: const Text("Chercher une mise à jour"),
-                onTap: () => checkLatestVersion(context),
               ),
             ],
           ),

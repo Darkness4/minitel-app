@@ -28,8 +28,6 @@ void main() {
     });
 
     test('Move to Documentation Section', () async {
-      await driver.waitFor(minitelFinders.closeUpdateButton);
-      await driver.tap(minitelFinders.closeUpdateButton);
       await driver.tap(minitelFinders.drawer);
 
       await driver.tap(minitelFinders.docsRoute);

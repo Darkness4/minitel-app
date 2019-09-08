@@ -5,7 +5,6 @@ import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portail_view_model.dart';
-import 'package:minitel_toolbox/ui/shared/shared_funcs.dart';
 import 'package:minitel_toolbox/ui/widgets/base_view_widget.dart';
 import 'package:minitel_toolbox/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';
@@ -13,17 +12,10 @@ import 'package:provider/provider.dart';
 import 'portal_tabs/apps_list.dart';
 import 'portal_tabs/login.dart';
 
-class PortalView extends StatefulWidget {
+class PortalView extends StatelessWidget {
   final String title;
 
   const PortalView({Key key, this.title}) : super(key: key);
-
-  @override
-  PortalViewState createState() => PortalViewState();
-}
-
-class PortalViewState extends State<PortalView> {
-  bool _hasTriggeredOnce = false;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +57,7 @@ class PortalViewState extends State<PortalView> {
           headerSliverBuilder:
               (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
             SliverAppBar(
-              title: Text(widget.title),
+              title: Text(title),
               pinned: true,
               floating: true,
               forceElevated: true,
@@ -95,14 +87,5 @@ class PortalViewState extends State<PortalView> {
         ),
       ),
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    if (!_hasTriggeredOnce) {
-      checkLatestVersion(context, doNotShowIfNoUpdate: true);
-      _hasTriggeredOnce = true;
-    }
-    super.didChangeDependencies();
   }
 }

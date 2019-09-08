@@ -28,8 +28,6 @@ void main() {
     });
 
     test('Go to Reporting', () async {
-      await driver.waitFor(minitelFinders.closeUpdateButton);
-      await driver.tap(minitelFinders.closeUpdateButton);
       await driver.tap(minitelFinders.drawer);
       await driver.tap(minitelFinders.reportingRoute);
     });
