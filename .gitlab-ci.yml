@@ -188,7 +188,7 @@ build-test:
 
 build-apk:
   stage: build
-  image: darkness4/flutter-builder:28-master
+  image: darkness4/flutter-builder:28-stable
   
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
@@ -219,7 +219,7 @@ build-apk:
 
 build-aab:
   stage: build
-  image: darkness4/flutter-builder:28-master
+  image: darkness4/flutter-builder:28-stable
   
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
