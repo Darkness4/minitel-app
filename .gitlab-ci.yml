@@ -235,7 +235,7 @@ build-aab:
     - flutter build appbundle --verbose --target-platform android-arm,android-arm64
 
   after_script:
-    - mv build/app/outputs/bundle/release/app-release.aab minitel-toolbox.aab
+    - mv build/app/outputs/bundle/release/app.aab minitel-toolbox.aab
 
   artifacts:
     paths:
