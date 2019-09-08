@@ -48,5 +48,3 @@ of a Floating Action Button)
 
 These data, mentioned above, are not permanently saved and 
 are deleted after reading from the developer.
-
-Translated with www.DeepL.com/Translator
