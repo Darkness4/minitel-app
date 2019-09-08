@@ -232,7 +232,7 @@ build-aab:
     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
 
   script:
-    - flutter build appbundle
+    - flutter build appbundle --verbose --target-platform android-arm,android-arm64
 
   after_script:
     - mv build/app/outputs/bundle/release/app-release.aab minitel-toolbox.aab
