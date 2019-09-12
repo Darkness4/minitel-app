@@ -18,9 +18,6 @@ d'un Floating Action Button)
   - nslookup Google et EMSE
   - Requête HTTP vers la passerelle et stormshield
 
-- Bêta Feedback (volontairement envoyé par l'utilisateur)
-  - Titre et description
-
 Ces données, mentionnées ci-dessus, ne sont pas sauvegardées de façon permanente et 
 sont supprimés après lecture par le développeur.
 
@@ -42,9 +39,6 @@ of a Floating Action Button)
   Minitel and EMSE GCP
   - Google and EMSE nslookup
   - HTTP request to the gateway and stormshield
-
-- Beta Feedback (voluntarily sent by the user)
-  - Title and Description
 
 These data, mentioned above, are not permanently saved and 
 are deleted after reading from the developer.
