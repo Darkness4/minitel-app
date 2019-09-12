@@ -32,11 +32,6 @@ void main() {
     });
 
     group('Authentication Section', () {
-      test('Close Update', () async {
-        await driver.waitFor(minitelFinders.closeUpdateButton);
-        await driver.tap(minitelFinders.closeUpdateButton);
-      });
-
       test('Dropdown Nameserver', () async {
         await driver.tap(minitelFinders.nameServerDropdown);
         await driver.tap(find.text(MyIPAdresses.stormshieldIP));

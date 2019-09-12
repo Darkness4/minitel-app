@@ -186,7 +186,7 @@ build-test:
   - develop
   - tests
 
-build:
+build-apk:
   stage: build
   image: darkness4/flutter-builder:28-stable
   
@@ -211,6 +211,35 @@ build:
     paths:
       - minitel-toolbox-armeabi-v7a.apk
       - minitel-toolbox-arm64-v8a.apk
+    expire_in: 1 week
+
+  only:
+    - master
+    - develop
+
+build-aab:
+  stage: build
+  image: darkness4/flutter-builder:28-stable
+  
+  before_script:
+    - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
+    - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
+    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
+    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
+    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storeFile=keystore.jks" >> android/key.properties
+    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+    - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+
+  script:
+    - flutter build appbundle --verbose --target-platform android-arm,android-arm64
+
+  after_script:
+    - mv build/app/outputs/bundle/release/app.aab minitel-toolbox.aab
+
+  artifacts:
+    paths:
+      - minitel-toolbox.aab
     expire_in: 1 week
 
   only:

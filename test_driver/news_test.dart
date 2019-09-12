@@ -28,8 +28,6 @@ void main() {
     });
 
     test('Move to News section', () async {
-      await driver.waitFor(minitelFinders.closeUpdateButton);
-      await driver.tap(minitelFinders.closeUpdateButton);
       await driver.tap(minitelFinders.drawer);
       await driver.tap(minitelFinders.newsRoute);
       await driver.waitForAbsent(minitelFinders.newsLoading);
