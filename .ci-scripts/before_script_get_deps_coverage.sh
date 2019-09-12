@@ -1,5 +1,5 @@
 #!/bin/sh
-flutter channel master
+flutter channel stable
 flutter upgrade
 flutter packages get
 apt update

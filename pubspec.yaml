@@ -8,7 +8,7 @@ author: Nguyen Marc <nguyen_marc@live.fr>
 version: 1.0.0
 
 environment:
-  sdk: ^2.5.0
+  sdk: ^2.4.0
   flutter: ^1.9.1
 
 # Use ^version only if the package are stable
