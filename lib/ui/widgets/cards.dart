@@ -26,7 +26,7 @@ class LogCard extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Text(
+              child: SelectableText(
                 title,
                 style: const TextStyle(
                   fontSize: 12,
@@ -41,7 +41,7 @@ class LogCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4.0),
                 color: MinitelColors.TerminalBgColor,
               ),
-              child: Text(
+              child: SelectableText(
                 text,
                 style: const TextStyle(
                   fontSize: 10,

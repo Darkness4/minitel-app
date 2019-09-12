@@ -3,7 +3,7 @@
 ## Français
 
 Aucune donnée n'est partagée et stockée à votre insu. Les données recueillies sont 
-ceux que vous nous fournissez (diagnostic et feedback) et ne sont jamais sauvées. 
+ceux que vous nous fournissez (diagnostic) et ne sont jamais sauvées. 
 
 Les données qui peuvent être collectées sont :
 
@@ -24,7 +24,7 @@ sont supprimés après lecture par le développeur.
 ## English
 
 No data is shared and stored without your knowledge. The data collected are 
-the ones you provide us (diagnosis and feedback) and are never 
+the ones you provide us (diagnosis) and are never 
 saved. 
 
 The data that can be collected are:

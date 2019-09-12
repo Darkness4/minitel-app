@@ -20,7 +20,7 @@ List<SingleChildCloneableWidget> independentServices =
   // StormshieldAPI used in login and reporting_view
   Provider<StormshieldAPI>.value(value: StormshieldAPI()),
 
-  // WebhookAPI used in feedback_view and reporting_view
+  // WebhookAPI used in reporting_view
   Provider<WebhookAPI>.value(value: WebhookAPI()),
 
   // GithubAPI used in github_ab and about_view

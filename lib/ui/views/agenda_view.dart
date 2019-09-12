@@ -73,7 +73,26 @@ class AgendaView extends StatelessWidget {
                             );
 
                           case ConnectionState.done:
-                            return PageView(children: snapshotStream.data);
+                            return OrientationBuilder(
+                              builder: (BuildContext context,
+                                  Orientation orientation) {
+                                return PageView(
+                                  controller: PageController(
+                                      viewportFraction:
+                                          orientation == Orientation.portrait &&
+                                                  MediaQuery.of(context)
+                                                          .size
+                                                          .shortestSide <
+                                                      600
+                                              ? 1.0
+                                              : 0.7),
+                                  pageSnapping:
+                                      MediaQuery.of(context).size.shortestSide <
+                                          600,
+                                  children: snapshotStream.data,
+                                );
+                              },
+                            );
                         }
                         return null;
                       },

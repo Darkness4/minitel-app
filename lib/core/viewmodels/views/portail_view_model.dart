@@ -37,6 +37,10 @@ class PortailViewModel extends ChangeNotifier {
     @required this.iCalendar,
   });
 
+  Future<void> refresh() async {
+    notifyListeners();
+  }
+
   Future<void> login(BuildContext context, String uid, String pswd) async {
     // Remember me
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -80,6 +84,8 @@ class PortailViewModel extends ChangeNotifier {
       );
       notifyListeners();
     } on Exception catch (e) {
+      portailState = PortailState.Available;
+      notifyListeners();
       Scaffold.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );
@@ -94,6 +100,8 @@ class PortailViewModel extends ChangeNotifier {
       await iCalendar.saveCalendar(calendarUrl, calendarUrlAPI);
       notifyListeners();
     } on Exception catch (e) {
+      portailState = PortailState.Available;
+      notifyListeners();
       Scaffold.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );
@@ -105,6 +113,8 @@ class PortailViewModel extends ChangeNotifier {
         password: pswd,
       );
     } on Exception catch (e) {
+      portailState = PortailState.Available;
+      notifyListeners();
       Scaffold.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );

@@ -85,7 +85,7 @@ SOFTWARE.""",
                 title: const Text("Politique de confidentalité"),
                 subtitle: const Text(
                   "Aucune donnée est partagée et stockée à votre insu. Les données collectées sont "
-                  "celles que vous nous fournissez (diagnostique et feedback) et ne sont jamais "
+                  "celles que vous nous fournissez (diagnostique) et ne sont jamais "
                   "sauvegardées. ",
                   textAlign: TextAlign.justify,
                 ),

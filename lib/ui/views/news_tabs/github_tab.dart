@@ -18,19 +18,51 @@ class GithubTab extends StatelessWidget {
           future: Provider.of<GithubAPI>(context)
               .fetchReleases(ApiConstants.githubRepo),
           builder: (BuildContext context,
-                  AsyncSnapshot<List<GithubRelease>> snapshot) =>
-              snapshot.hasData
-                  ? ListView.builder(
-                      padding: const EdgeInsets.all(10.0),
-                      key: const Key('github_tab/list'),
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          GithubCard(
-                        release: snapshot.data[index],
-                        key: Key('github_tab/gh_item_$index'),
-                      ),
-                    )
-                  : const CircularProgressIndicator(),
+              AsyncSnapshot<List<GithubRelease>> snapshot) {
+            if (snapshot.hasError) {
+              return const Icon(
+                Icons.error,
+                color: Colors.white,
+                size: 40.0,
+              );
+            }
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+              case ConnectionState.active:
+                return const CircularProgressIndicator();
+              case ConnectionState.done:
+                return OrientationBuilder(
+                  builder: (BuildContext context, Orientation orientation) {
+                    if (MediaQuery.of(context).size.shortestSide < 600 &&
+                        orientation == Orientation.portrait) {
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(10.0),
+                        key: const Key('github_tab/list'),
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            GithubCard(
+                          release: snapshot.data[index],
+                          key: Key('github_tab/gh_item_$index'),
+                        ),
+                      );
+                    } else {
+                      return SingleChildScrollView(
+                        child: Wrap(
+                          key: const Key('github_tab/list'),
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: <Widget>[
+                            for (final GithubRelease release in snapshot.data)
+                              GithubCard(release: release),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                );
+            }
+            return null;
+          },
         ),
       ),
     );
