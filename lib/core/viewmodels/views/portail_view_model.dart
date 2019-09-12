@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
+import 'package:minitel_toolbox/core/services/imprimante_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
 import 'package:minitel_toolbox/core/services/icalendar_api.dart';
@@ -17,6 +18,7 @@ class PortailViewModel extends ChangeNotifier {
   final PortailAPI portailAPI;
   final StormshieldAPI stormshieldAPI;
   final CalendarUrlAPI calendarUrlAPI;
+  final ImprimanteAPI imprimanteAPI;
   final ICalendarAPI iCalendar;
   final ValueNotifier<String> selectedTime = ValueNotifier<String>('4 hours');
   final ValueNotifier<String> selectedUrl =
@@ -33,11 +35,13 @@ class PortailViewModel extends ChangeNotifier {
   PortailViewModel({
     @required this.portailAPI,
     @required this.stormshieldAPI,
+    @required this.imprimanteAPI,
     @required this.calendarUrlAPI,
     @required this.iCalendar,
   });
 
   Future<void> refresh() async {
+    portailState = PortailState.Available;
     notifyListeners();
   }
 
@@ -112,6 +116,21 @@ class PortailViewModel extends ChangeNotifier {
         username: uid,
         password: pswd,
       );
+    } on Exception catch (e) {
+      portailState = PortailState.Available;
+      notifyListeners();
+      Scaffold.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    }
+
+    // Imprimante
+    try {
+      await imprimanteAPI.login(
+        username: uid,
+        password: pswd,
+      );
+      notifyListeners();
     } on Exception catch (e) {
       portailState = PortailState.Available;
       notifyListeners();

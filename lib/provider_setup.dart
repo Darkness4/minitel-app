@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/core/services/diagnosis_api.dart';
-import 'package:minitel_toolbox/core/services/zabbix_api.dart';
 import 'package:provider/provider.dart';
 
 import 'core/services/calendar_url_api.dart';
+import 'core/services/diagnosis_api.dart';
 import 'core/services/github_api.dart';
 import 'core/services/icalendar_api.dart';
+import 'core/services/imprimante_api.dart';
 import 'core/services/portail_emse_api.dart';
 import 'core/services/stormshield_api.dart';
 import 'core/services/webhook_api.dart';
+import 'core/services/zabbix_api.dart';
 
-List<SingleChildCloneableWidget> providers = <SingleChildCloneableWidget>[
-  ...independentServices,
-  ...dependentServices,
+List<SingleChildCloneableWidget> dependentServices =
+    <SingleChildCloneableWidget>[
+  ProxyProvider<StormshieldAPI, DiagnosisAPI>(
+    builder: (BuildContext context, StormshieldAPI stormshieldAPI,
+            DiagnosisAPI diagnosisAPI) =>
+        DiagnosisAPI(stormshieldAPI: stormshieldAPI),
+  )
 ];
 
 List<SingleChildCloneableWidget> independentServices =
@@ -37,13 +42,12 @@ List<SingleChildCloneableWidget> independentServices =
 
   // ZabbixAPI used in ZabbixTab
   Provider<ZabbixAPI>.value(value: ZabbixAPI()),
+
+  // ImprimanteAPI used in imprimante.dart and login
+  Provider<ImprimanteAPI>.value(value: ImprimanteAPI()),
 ];
 
-List<SingleChildCloneableWidget> dependentServices =
-    <SingleChildCloneableWidget>[
-  ProxyProvider<StormshieldAPI, DiagnosisAPI>(
-    builder: (BuildContext context, StormshieldAPI stormshieldAPI,
-            DiagnosisAPI diagnosisAPI) =>
-        DiagnosisAPI(stormshieldAPI: stormshieldAPI),
-  )
+List<SingleChildCloneableWidget> providers = <SingleChildCloneableWidget>[
+  ...independentServices,
+  ...dependentServices,
 ];

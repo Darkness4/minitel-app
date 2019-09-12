@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
+import 'package:minitel_toolbox/core/services/imprimante_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portail_view_model.dart';
@@ -207,6 +208,7 @@ class _StatusCard extends StatelessWidget {
     final StormshieldAPI _gatewayAPI = Provider.of<StormshieldAPI>(context);
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
     final CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
+    final ImprimanteAPI _imprimanteAPI = Provider.of<ImprimanteAPI>(context);
 
     return Card(
       elevation: 10.0,
@@ -295,6 +297,25 @@ class _StatusCard extends StatelessWidget {
                     Icons.done,
                     color: Colors.green,
                     key: Key('login/portail_success'),
+                  )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                const Text(
+                  "Imprimante: ",
+                  style: TextStyle(fontSize: 20),
+                ),
+                if (_imprimanteAPI.cookie == null)
+                  const Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  )
+                else
+                  const Icon(
+                    Icons.done,
+                    color: Colors.green,
+                    key: Key('login/imrprimante_success'),
                   )
               ],
             ),
