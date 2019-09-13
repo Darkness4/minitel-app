@@ -17,73 +17,77 @@ class FacebookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: InkWell(
-        onTap: () => LaunchURL.launchURL(post.permalinkUrl),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: picture,
-                  ),
-                  Flexible(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Minitel Ismin",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline
-                              .copyWith(height: 1),
-                        ),
-                        Text(
-                          DateFormat.yMd()
-                              .add_Hm()
-                              .format(post.createdTime.toLocal()),
-                        ),
-                      ],
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.shortestSide / 2),
+      child: Card(
+        child: InkWell(
+          onTap: () => LaunchURL.launchURL(post.permalinkUrl),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: picture,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              child: Image.network(
-                post.pictureUrl,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                post.message,
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: FlatButton(
-                  textColor: Colors.blue,
-                  onPressed: () => LaunchURL.launchURL(post.permalinkUrl),
-                  child: const Text("Voir sur Facebook ..."),
+                    Flexible(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Minitel Ismin",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline
+                                .copyWith(height: 1),
+                          ),
+                          Text(
+                            DateFormat.yMd()
+                                .add_Hm()
+                                .format(post.createdTime.toLocal()),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Text(
-              post.id,
-              style: TextStyle(fontSize: 5, color: Colors.grey),
-            ),
-          ],
+              Container(
+                child: Image.network(
+                  post.pictureUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  post.message,
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: FlatButton(
+                    textColor: Colors.blue,
+                    onPressed: () => LaunchURL.launchURL(post.permalinkUrl),
+                    child: const Text("Voir sur Facebook ..."),
+                  ),
+                ),
+              ),
+              Text(
+                post.id,
+                style: TextStyle(fontSize: 5, color: Colors.grey),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -125,16 +129,37 @@ class FacebookTab extends StatelessWidget {
                   key: Key('facebook_tab/loading'),
                 );
               case ConnectionState.done:
-                return ListView.builder(
-                  padding: const EdgeInsets.all(10.0),
-                  key: const Key('facebook_tab/list'),
-                  itemCount: feedSnapshot.data.posts.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      FacebookCard(
-                    post: feedSnapshot.data.posts[index],
-                    picture: _picture,
-                    key: Key('facebook_tab/fb_item_$index'),
-                  ),
+                return OrientationBuilder(
+                  builder: (BuildContext context, Orientation orientation) {
+                    if (MediaQuery.of(context).size.shortestSide < 600 &&
+                        orientation == Orientation.portrait) {
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(10.0),
+                        key: const Key('facebook_tab/list'),
+                        itemCount: feedSnapshot.data.posts.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            FacebookCard(
+                          post: feedSnapshot.data.posts[index],
+                          picture: _picture,
+                          key: Key('facebook_tab/fb_item_$index'),
+                        ),
+                      );
+                    } else {
+                      return SingleChildScrollView(
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          key: const Key('facebook_tab/list'),
+                          children: <Widget>[
+                            for (final Post post in feedSnapshot.data.posts)
+                              FacebookCard(
+                                post: post,
+                                picture: _picture,
+                              ),
+                          ],
+                        ),
+                      );
+                    }
+                  },
                 );
             }
             return const Icon(

@@ -5,7 +5,6 @@ import 'package:minitel_toolbox/core/constants/texts_constants.dart';
 import 'views/about_view.dart';
 import 'views/agenda_view.dart';
 import 'views/docs_view.dart';
-import 'views/feedback_view.dart';
 import 'views/news_view.dart';
 import 'views/portal_view.dart';
 import 'views/reporting_view.dart';
@@ -42,11 +41,6 @@ class Router {
       case RoutePaths.About:
         return MaterialPageRoute<dynamic>(
           builder: (_) => const AboutView(title: Titles.About),
-          settings: settings,
-        );
-      case RoutePaths.Feedback:
-        return FadeRoute<dynamic>(
-          builder: (_) => const FeedbackView(title: Titles.Feedback),
           settings: settings,
         );
       default:

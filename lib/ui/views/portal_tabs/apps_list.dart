@@ -13,18 +13,35 @@ class AppsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double size = MediaQuery.of(context).size.shortestSide;
     return Scrollbar(
-      child: GridView.count(
+      child: Wrap(
         key: const Key('apps_list/list'),
-        padding: const EdgeInsets.all(10),
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        crossAxisCount: 2,
         children: <Widget>[
-          const _PortailCard(),
-          const _SogoCard(),
-          const _ImprimanteCard(),
-          const _WikiMinitelCard(),
+          Container(
+            padding: const EdgeInsets.all(5.0),
+            height: size / 2,
+            width: size / 2,
+            child: const _PortailCard(),
+          ),
+          Container(
+            padding: const EdgeInsets.all(5.0),
+            height: size / 2,
+            width: size / 2,
+            child: const _SogoCard(),
+          ),
+          Container(
+            padding: const EdgeInsets.all(5.0),
+            height: size / 2,
+            width: size / 2,
+            child: const _ImprimanteCard(),
+          ),
+          Container(
+            padding: const EdgeInsets.all(5.0),
+            height: size / 2,
+            width: size / 2,
+            child: const _WikiMinitelCard(),
+          ),
         ],
       ),
     );

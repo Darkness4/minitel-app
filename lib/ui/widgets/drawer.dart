@@ -468,27 +468,6 @@ class MainDrawer extends StatelessWidget {
               },
             ),
           ),
-          Container(
-            margin: DrawerStyle.HightlightMarginRight,
-            decoration: BoxDecoration(
-              color: currentRoutePaths == RoutePaths.Feedback
-                  ? MinitelColors.DrawerSelectedColor
-                  : Colors.transparent,
-              borderRadius: DrawerStyle.RoundedBorderRight,
-            ),
-            child: ListTile(
-              title: const Text(Titles.Feedback),
-              leading: const Icon(Icons.feedback),
-              selected: currentRoutePaths == RoutePaths.Feedback,
-              onTap: () {
-                Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name !=
-                    RoutePaths.Feedback) {
-                  Navigator.pushNamed(context, RoutePaths.Feedback);
-                }
-              },
-            ),
-          ),
         ],
       ),
     );

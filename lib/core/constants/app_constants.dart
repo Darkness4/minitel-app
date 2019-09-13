@@ -59,6 +59,5 @@ class RoutePaths {
   static const String Docs = '/docs';
   static const String Agenda = '/agenda';
   static const String About = '/about';
-  static const String Feedback = 'feedback';
   static const String News = '/news';
 }

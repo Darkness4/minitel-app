@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/icalendar_api.dart';
+import 'package:minitel_toolbox/core/services/imprimante_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portail_view_model.dart';
@@ -39,6 +40,7 @@ class PortalView extends StatelessWidget {
                 model: PortailViewModel(
                   portailAPI: Provider.of<PortailAPI>(context),
                   calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
+                  imprimanteAPI: Provider.of<ImprimanteAPI>(context),
                   stormshieldAPI: Provider.of<StormshieldAPI>(context),
                   iCalendar: Provider.of<ICalendarAPI>(context),
                 ),

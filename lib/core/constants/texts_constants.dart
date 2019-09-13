@@ -22,6 +22,5 @@ class Titles {
   static const String Docs = 'Documentation';
   static const String Agenda = 'Agenda';
   static const String About = 'À propos de Minitel Toolbox';
-  static const String Feedback = 'Beta Feedback';
   static const String News = 'Nouveautés';
 }

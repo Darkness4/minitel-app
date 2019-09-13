@@ -3,7 +3,7 @@
 ## Français
 
 Aucune donnée n'est partagée et stockée à votre insu. Les données recueillies sont 
-ceux que vous nous fournissez (diagnostic et feedback) et ne sont jamais sauvées. 
+ceux que vous nous fournissez (diagnostic) et ne sont jamais sauvées. 
 
 Les données qui peuvent être collectées sont :
 
@@ -18,16 +18,13 @@ d'un Floating Action Button)
   - nslookup Google et EMSE
   - Requête HTTP vers la passerelle et stormshield
 
-- Bêta Feedback (volontairement envoyé par l'utilisateur)
-  - Titre et description
-
 Ces données, mentionnées ci-dessus, ne sont pas sauvegardées de façon permanente et 
 sont supprimés après lecture par le développeur.
 
 ## English
 
 No data is shared and stored without your knowledge. The data collected are 
-the ones you provide us (diagnosis and feedback) and are never 
+the ones you provide us (diagnosis) and are never 
 saved. 
 
 The data that can be collected are:
@@ -42,9 +39,6 @@ of a Floating Action Button)
   Minitel and EMSE GCP
   - Google and EMSE nslookup
   - HTTP request to the gateway and stormshield
-
-- Beta Feedback (voluntarily sent by the user)
-  - Title and Description
 
 These data, mentioned above, are not permanently saved and 
 are deleted after reading from the developer.

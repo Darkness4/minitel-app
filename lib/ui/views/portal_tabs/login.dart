@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
+import 'package:minitel_toolbox/core/services/imprimante_api.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/portail_view_model.dart';
@@ -15,176 +16,180 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      key: const Key('login/list'),
-      padding: const EdgeInsets.all(20.0),
-      children: <Widget>[
-        _StatusCard(
-          selectedUrl: model.selectedUrl.value,
-        ),
-        Card(
-          elevation: 10.0,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                FittedBox(
-                  child: Row(
+    return RefreshIndicator(
+      onRefresh: model.refresh,
+      child: ListView(
+        key: const Key('login/list'),
+        padding: const EdgeInsets.all(20.0),
+        children: <Widget>[
+          _StatusCard(
+            selectedUrl: model.selectedUrl.value,
+          ),
+          Card(
+            elevation: 10.0,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  FittedBox(
+                    child: Row(
+                      children: <Widget>[
+                        const Text("Nom de domaine / IP "),
+                        ValueListenableBuilder<String>(
+                          valueListenable: model.selectedUrl,
+                          builder: (BuildContext context, String value, _) {
+                            return DropdownButton<String>(
+                              key: const Key('login/name_server'),
+                              value: value,
+                              items: <DropdownMenuItem<String>>[
+                                for (String value in LoginConstants.urlRootList)
+                                  DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  )
+                              ],
+                              onChanged: (String selectedUrl) async =>
+                                  model.selectedUrl.value = selectedUrl,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  FittedBox(
+                    child: Row(
+                      children: <Widget>[
+                        const Text("Durée d\'authentification "),
+                        ValueListenableBuilder<String>(
+                          valueListenable: model.selectedTime,
+                          builder: (BuildContext context, String value, _) {
+                            return DropdownButton<String>(
+                              key: const Key('login/time'),
+                              value: model.selectedTime.value,
+                              items: <DropdownMenuItem<String>>[
+                                for (String value
+                                    in LoginConstants.timeMap.keys)
+                                  DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  ),
+                              ],
+                              onChanged: (String selectedTime) =>
+                                  model.selectedTime.value = selectedTime,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Form(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: TextFormField(
+                            key: const Key('login/uid'),
+                            focusNode: model.uidFocusNode,
+                            controller: model.uidController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.person),
+                              hintText: "prenom.nom",
+                              labelText: "Nom d'utilisateur",
+                            ),
+                            onEditingComplete: () {
+                              model.uidFocusNode.unfocus();
+                              FocusScope.of(context)
+                                  .requestFocus(model.pswdFocusNode);
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: TextFormField(
+                            key: const Key('login/pswd'),
+                            controller: model.pswdController,
+                            obscureText: true,
+                            focusNode: model.pswdFocusNode,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.vpn_key),
+                              labelText: "Mot de passe",
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Nom de domaine / IP "),
-                      ValueListenableBuilder<String>(
-                        valueListenable: model.selectedUrl,
-                        builder: (BuildContext context, String value, _) {
-                          return DropdownButton<String>(
-                            key: const Key('login/name_server'),
+                      const Text("Se souvenir "),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: model.rememberMe,
+                        builder: (BuildContext context, bool value, _) {
+                          return Checkbox(
+                            key: const Key('login/remember_me'),
                             value: value,
-                            items: <DropdownMenuItem<String>>[
-                              for (String value in LoginConstants.urlRootList)
-                                DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                )
-                            ],
-                            onChanged: (String selectedUrl) async =>
-                                model.selectedUrl.value = selectedUrl,
+                            onChanged: (bool value) {
+                              if (!value) {
+                                model.autoLogin.value = false;
+                              }
+                              model.rememberMe.value = value;
+                            },
                           );
                         },
                       ),
                     ],
                   ),
-                ),
-                FittedBox(
-                  child: Row(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Durée d\'authentification "),
-                      ValueListenableBuilder<String>(
-                        valueListenable: model.selectedTime,
-                        builder: (BuildContext context, String value, _) {
-                          return DropdownButton<String>(
-                            key: const Key('login/time'),
-                            value: model.selectedTime.value,
-                            items: <DropdownMenuItem<String>>[
-                              for (String value in LoginConstants.timeMap.keys)
-                                DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                ),
-                            ],
-                            onChanged: (String selectedTime) =>
-                                model.selectedTime.value = selectedTime,
+                      const Text("Se connecter automatiquement"),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: model.autoLogin,
+                        builder: (BuildContext context, bool value, _) {
+                          return Checkbox(
+                            key: const Key('login/auto_login'),
+                            value: value,
+                            onChanged: (bool value) {
+                              if (value) {
+                                model.rememberMe.value = true;
+                              }
+                              model.autoLogin.value = value;
+                            },
                           );
                         },
                       ),
                     ],
                   ),
-                ),
-                Form(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextFormField(
-                          key: const Key('login/uid'),
-                          focusNode: model.uidFocusNode,
-                          controller: model.uidController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.person),
-                            hintText: "prenom.nom",
-                            labelText: "Nom d'utilisateur",
-                          ),
-                          onEditingComplete: () {
-                            model.uidFocusNode.unfocus();
-                            FocusScope.of(context)
-                                .requestFocus(model.pswdFocusNode);
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextFormField(
-                          key: const Key('login/pswd'),
-                          controller: model.pswdController,
-                          obscureText: true,
-                          focusNode: model.pswdFocusNode,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.vpn_key),
-                            labelText: "Mot de passe",
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text("Se souvenir "),
-                    ValueListenableBuilder<bool>(
-                      valueListenable: model.rememberMe,
-                      builder: (BuildContext context, bool value, _) {
-                        return Checkbox(
-                          key: const Key('login/remember_me'),
-                          value: value,
-                          onChanged: (bool value) {
-                            if (!value) {
-                              model.autoLogin.value = false;
-                            }
-                            model.rememberMe.value = value;
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text("Se connecter automatiquement"),
-                    ValueListenableBuilder<bool>(
-                      valueListenable: model.autoLogin,
-                      builder: (BuildContext context, bool value, _) {
-                        return Checkbox(
-                          key: const Key('login/auto_login'),
-                          value: value,
-                          onChanged: (bool value) {
-                            if (value) {
-                              model.rememberMe.value = true;
-                            }
-                            model.autoLogin.value = value;
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-        Center(
-          child: model.portailState == PortailState.Busy
-              ? const CircularProgressIndicator()
-              : FloatingActionButton.extended(
-                  key: const Key('login/connect'),
-                  onPressed: () => model.login(
-                    context,
-                    model.uidController.text,
-                    model.pswdController.text,
-                  ),
-                  label: const Text(
-                    "Se connecter",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+          Center(
+            child: model.portailState == PortailState.Busy
+                ? const CircularProgressIndicator()
+                : FloatingActionButton.extended(
+                    key: const Key('login/connect'),
+                    onPressed: () => model.login(
+                      context,
+                      model.uidController.text,
+                      model.pswdController.text,
                     ),
+                    label: const Text(
+                      "Se connecter",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    icon: const Icon(Icons.arrow_forward),
                   ),
-                  icon: const Icon(Icons.arrow_forward),
-                ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -203,6 +208,7 @@ class _StatusCard extends StatelessWidget {
     final StormshieldAPI _gatewayAPI = Provider.of<StormshieldAPI>(context);
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
     final CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
+    final ImprimanteAPI _imprimanteAPI = Provider.of<ImprimanteAPI>(context);
 
     return Card(
       elevation: 10.0,
@@ -291,6 +297,25 @@ class _StatusCard extends StatelessWidget {
                     Icons.done,
                     color: Colors.green,
                     key: Key('login/portail_success'),
+                  )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                const Text(
+                  "Imprimante: ",
+                  style: TextStyle(fontSize: 20),
+                ),
+                if (_imprimanteAPI.cookie == null)
+                  const Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  )
+                else
+                  const Icon(
+                    Icons.done,
+                    color: Colors.green,
+                    key: Key('login/imrprimante_success'),
                   )
               ],
             ),
