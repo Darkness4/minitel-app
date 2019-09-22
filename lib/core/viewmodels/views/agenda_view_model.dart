@@ -87,7 +87,8 @@ class AgendaViewModel extends ChangeNotifier {
         dt = event.dtstart;
 
         // Notification System
-        if (dt.isBefore(DateTime.now().add(_notificationSettings.range))) {
+        if (notificationSettings.enabled &&
+            dt.isBefore(DateTime.now().add(_notificationSettings.range))) {
           final String dtstart = DateFormat.Hm().format(dt);
           final String dtend = DateFormat.Hm().format(event.dtend);
 

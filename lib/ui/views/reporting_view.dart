@@ -128,7 +128,9 @@ class ReportingViewState extends State<ReportingView>
       <Widget>[
         SliverAppBar(
           title: Text(widget.title),
-          backgroundColor: MinitelColors.ReportPrimaryColor,
+          backgroundColor: Theme.of(context).brightness == Brightness.light
+              ? MinitelColors.ReportPrimaryColor
+              : Theme.of(context).primaryColor,
           pinned: true,
           floating: true,
           forceElevated: true,

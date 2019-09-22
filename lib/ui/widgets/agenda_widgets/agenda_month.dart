@@ -31,16 +31,16 @@ class MonthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          color: MinitelColors.MonthColorPalette[_month],
-          elevation: 4,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: _monthlyWidgets,
-          ),
+    return Card(
+      margin: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+      color: Theme.of(context).brightness == Brightness.light
+          ? MinitelColors.MonthColorPalette[_month]
+          : Theme.of(context).cardColor,
+      elevation: 4,
+      child: Scrollbar(
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: _monthlyWidgets,
         ),
       ),
     );

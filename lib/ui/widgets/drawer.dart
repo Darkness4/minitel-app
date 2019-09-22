@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/texts_constants.dart';
+import 'package:minitel_toolbox/provider_setup.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/drawer_styles.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
+import 'package:minitel_toolbox/ui/shared/theme_data.dart';
 import 'package:minitel_toolbox/ui/views/docs_pages/toolbox_docs.dart';
 import 'package:minitel_toolbox/ui/views/docs_pages/wiki_docs.dart';
 import 'package:minitel_toolbox/ui/widgets/page_animation.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DocsDrawer extends StatelessWidget {
   final DocsPageId _docsPageId;
@@ -55,7 +59,10 @@ class DocsDrawer extends StatelessWidget {
                   : Colors.transparent,
             ),
             child: ListTile(
-              title: const Text("Authentification"),
+              title: Text(
+                "Authentification",
+                style: Theme.of(context).textTheme.body1,
+              ),
               key: const Key('drawer/authentification'),
               onTap: () {
                 Navigator.pop(context);
@@ -468,6 +475,33 @@ class MainDrawer extends StatelessWidget {
               },
             ),
           ),
+          const Divider(),
+          FutureBuilder<SharedPreferences>(
+              future: SharedPreferences.getInstance(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<SharedPreferences> snapshot) {
+                return ListTile(
+                  title: const Text("Forcer le thème sombre"),
+                  trailing: Switch(
+                    value: Theme.of(context).brightness == Brightness.dark,
+                    onChanged: (bool value) {
+                      if (value) {
+                        Provider.of<ThemeChanger>(context).theme =
+                            MinitelThemeData.dark;
+                        if (snapshot.hasData) {
+                          snapshot.data.setBool('dark', true);
+                        }
+                      } else {
+                        Provider.of<ThemeChanger>(context).theme =
+                            MinitelThemeData.light;
+                        if (snapshot.hasData) {
+                          snapshot.data.setBool('dark', false);
+                        }
+                      }
+                    },
+                  ),
+                );
+              })
         ],
       ),
     );

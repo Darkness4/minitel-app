@@ -181,7 +181,6 @@ class LoginPage extends StatelessWidget {
                     label: const Text(
                       "Se connecter",
                       style: TextStyle(
-                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -219,34 +218,25 @@ class _StatusCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             FutureBuilder<String>(
-                future: _gatewayAPI.getStatus(
-                  _selectedUrl,
-                  cookie: _gatewayAPI.cookie,
-                ),
-                builder:
-                    (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.active:
-                    case ConnectionState.waiting:
-                      return const Center(
-                        child: LinearProgressIndicator(),
-                      );
-                    case ConnectionState.done:
-                      return Text(
-                        snapshot.data,
-                        key: const Key('login/gateway_text'),
-                        style: TextStyle(
-                            color: (snapshot.hasError ||
-                                    !snapshot.data.contains("second"))
-                                ? Colors.red
-                                : Colors.green,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      );
-                  }
-                  return null; //
-                }),
+              future: _gatewayAPI.getStatus(
+                _selectedUrl,
+                cookie: _gatewayAPI.cookie,
+              ),
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                return Text(
+                  snapshot.hasData ? snapshot.data : '',
+                  key: const Key('login/gateway_text'),
+                  style: TextStyle(
+                      color: (!snapshot.hasData ||
+                              snapshot.hasError ||
+                              !snapshot.data.contains("second"))
+                          ? Colors.red
+                          : Colors.green,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24),
+                );
+              },
+            ),
             Row(
               children: <Widget>[
                 const Text(
@@ -258,25 +248,19 @@ class _StatusCard extends StatelessWidget {
                       .savedCalendarURL, // a previously-obtained Future<String> or null
                   builder:
                       (BuildContext context, AsyncSnapshot<String> snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                      case ConnectionState.active:
-                      case ConnectionState.waiting:
-                        return const CircularProgressIndicator();
-                      case ConnectionState.done:
-                        if (snapshot.hasError || snapshot.data == "") {
-                          return const Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          );
-                        }
-                        return const Icon(
-                          Icons.done,
-                          color: Colors.green,
-                          key: Key('login/agenda_success'),
-                        );
+                    if (!snapshot.hasData ||
+                        snapshot.hasError ||
+                        snapshot.data == "") {
+                      return const Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      );
                     }
-                    return null; // unreachable
+                    return const Icon(
+                      Icons.done,
+                      color: Colors.green,
+                      key: Key('login/agenda_success'),
+                    ); // unreachable
                   },
                 ),
               ],

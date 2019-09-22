@@ -7,7 +7,7 @@ import 'package:minitel_toolbox/core/models/github/release.dart';
 import 'package:minitel_toolbox/core/services/github_api.dart';
 
 import '../mock_http_client.dart';
-import 'github_api_responses.dart' show responseAllReleases, latestRelease;
+import 'github_api_responses.dart' show responseAllReleases;
 
 void main() {
   const String repos = 'Darkness4/minitel-app';

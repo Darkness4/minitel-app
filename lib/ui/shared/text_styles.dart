@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
 /// Markdown-style body
 class BoxMdBody extends StatelessWidget {
@@ -117,22 +116,18 @@ class MinitelTextStyles {
   static const TextStyle body1 = TextStyle(
     height: 1.2,
     fontWeight: FontWeight.normal,
-    color: MinitelColors.FontColor,
   );
   static const TextStyle body2 = TextStyle(
     height: 1.2,
     fontWeight: FontWeight.bold,
-    color: MinitelColors.FontColor,
   );
   static const TextStyle headline = TextStyle(
     height: 1.5,
     fontWeight: FontWeight.bold,
-    color: MinitelColors.FontColor,
   );
   static const TextStyle title = TextStyle(
     height: 1.5,
     fontWeight: FontWeight.bold,
-    color: MinitelColors.FontColor,
   );
   static const TextStyle display1 = TextStyle(height: 1.5);
   static const TextStyle display2 = TextStyle(height: 1.5);
@@ -140,11 +135,9 @@ class MinitelTextStyles {
   static const TextStyle display4 = TextStyle(height: 1.5);
   static const TextStyle subhead = TextStyle(
     height: 1.5,
-    color: MinitelColors.FontColor,
   );
   static const TextStyle subtitle = TextStyle(
     height: 1.5,
-    color: MinitelColors.FontColor,
   );
 
   // Markdown Style
@@ -152,42 +145,35 @@ class MinitelTextStyles {
     fontSize: 32,
     fontWeight: FontWeight.w600,
     height: 1.25,
-    color: Color(0xff24292e),
   );
   static const TextStyle mdH2 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w600,
     height: 1.25,
-    color: Color(0xff24292e),
   );
   static const TextStyle mdH3 = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,
     height: 1.25,
-    color: Color(0xff24292e),
   );
   static const TextStyle mdH4 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     height: 1.25,
-    color: Color(0xff24292e),
   );
   static const TextStyle mdH5 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     height: 1.25,
-    color: Color(0xff24292e),
   );
   static const TextStyle mdH6 = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w600,
     height: 1.25,
-    color: Color(0xff6a737d),
   );
   static const TextStyle mdBody = TextStyle(
     fontSize: 16,
     height: 1.5,
-    color: Color(0xff24292e),
   );
 
   // Others Style
@@ -195,11 +181,6 @@ class MinitelTextStyles {
     color: Colors.red,
     fontWeight: FontWeight.bold,
     fontSize: 20,
-  );
-  static const TextStyle appTitle = TextStyle(
-    fontSize: 30,
-    fontWeight: FontWeight.bold,
-    color: Colors.black54,
   );
 
   static const TextTheme textTheme = TextTheme(
