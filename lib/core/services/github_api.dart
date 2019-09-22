@@ -13,29 +13,15 @@ class GithubAPI {
     final HttpClientResponse response = await request.close();
 
     if (response.statusCode == 200) {
-      final String data = await response.transform(utf8.decoder).join();
-      final List<Map<String, dynamic>> map =
-          List<Map<String, dynamic>>.from(json.decode(data));
-      return map
-          .map(
-              (Map<String, dynamic> release) => GithubRelease.fromJson(release))
+      final Future<List<GithubRelease>> data = response
+          .transform(utf8.decoder)
+          .transform(json.decoder)
+          .expand((Object data) => List<Map<String, dynamic>>.from(data))
+          .map((Map<String, dynamic> data) => GithubRelease.fromJson(data))
           .toList();
+      return data;
     } else {
       throw Exception('Failed to load releases');
-    }
-  }
-
-  /// [repo] = author/repo
-  Future<GithubRelease> fetchLatestRelease(String repo) async {
-    final HttpClientRequest request = await _client.getUrl(
-        Uri.parse('https://api.github.com/repos/$repo/releases/latest'));
-    final HttpClientResponse response = await request.close();
-
-    if (response.statusCode == 200) {
-      final String data = await response.transform(utf8.decoder).join();
-      return GithubRelease.fromJson(json.decode(data));
-    } else {
-      throw Exception('Failed to load latest release');
     }
   }
 }

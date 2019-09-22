@@ -58,45 +58,44 @@ class AgendaView extends StatelessWidget {
                   );
                 }
                 if (snapshot.hasData) {
-                  return Scrollbar(
-                    // Then parse the calendar et generate the pages
-                    child: StreamBuilder<List<Widget>>(
-                      stream: model.listEventCards(snapshot.data),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<Widget>> snapshotStream) {
-                        switch (snapshotStream.connectionState) {
-                          case ConnectionState.none:
-                          case ConnectionState.waiting:
-                          case ConnectionState.active:
-                            return const CircularProgressIndicator(
-                              backgroundColor: Colors.white,
-                            );
+                  return
+                      // Then parse the calendar et generate the pages
+                      StreamBuilder<List<Widget>>(
+                    stream: model.listEventCards(snapshot.data),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Widget>> snapshotStream) {
+                      switch (snapshotStream.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.waiting:
+                        case ConnectionState.active:
+                          return const CircularProgressIndicator(
+                            backgroundColor: Colors.white,
+                          );
 
-                          case ConnectionState.done:
-                            return OrientationBuilder(
-                              builder: (BuildContext context,
-                                  Orientation orientation) {
-                                return PageView(
-                                  controller: PageController(
-                                      viewportFraction:
-                                          orientation == Orientation.portrait &&
-                                                  MediaQuery.of(context)
-                                                          .size
-                                                          .shortestSide <
-                                                      600
-                                              ? 1.0
-                                              : 0.7),
-                                  pageSnapping:
-                                      MediaQuery.of(context).size.shortestSide <
-                                          600,
-                                  children: snapshotStream.data,
-                                );
-                              },
-                            );
-                        }
-                        return null;
-                      },
-                    ),
+                        case ConnectionState.done:
+                          return OrientationBuilder(
+                            builder: (BuildContext context,
+                                Orientation orientation) {
+                              return PageView(
+                                controller: PageController(
+                                    viewportFraction:
+                                        orientation == Orientation.portrait &&
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .shortestSide <
+                                                    600
+                                            ? 0.9
+                                            : 0.7),
+                                pageSnapping:
+                                    MediaQuery.of(context).size.shortestSide <
+                                        600,
+                                children: snapshotStream.data,
+                              );
+                            },
+                          );
+                      }
+                      return null;
+                    },
                   );
                 } else {
                   return const CircularProgressIndicator();

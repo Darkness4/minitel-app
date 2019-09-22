@@ -21,7 +21,9 @@ class DayWidget extends StatelessWidget {
             elevation: stuckAmount * 10,
             color: Color.lerp(
               Colors.transparent,
-              MinitelColors.MonthColorPalette[dt.month].withOpacity(0.9),
+              Theme.of(context).brightness == Brightness.light
+                  ? MinitelColors.MonthColorPalette[dt.month].withOpacity(0.9)
+                  : Theme.of(context).primaryColor,
               stuckAmount,
             ),
             child: Container(
@@ -54,22 +56,41 @@ class EventCard extends StatelessWidget {
       : _event = event,
         super(key: key);
 
-  Color get _cardColor {
-    final String upper = _event.summary.toLowerCase();
-    if (upper.contains("examen")) {
-      return Colors.red[200];
-    } else if (upper.contains("tp")) {
-      return Colors.orange[200];
-    } else if (upper.contains("td")) {
-      return Colors.green[200];
-    } else if (upper.contains("tutorat")) {
-      return Colors.blue[200];
-    } else if (upper.contains("sport") ||
-        upper.contains("vacance") ||
-        upper.contains("férié")) {
-      return Colors.transparent;
+  Color _getCardColor(BuildContext context) {
+    if (Theme.of(context).brightness == Brightness.light) {
+      final String upper = _event.summary.toLowerCase();
+      if (upper.contains("examen")) {
+        return Colors.red[200];
+      } else if (upper.contains("tp")) {
+        return Colors.orange[200];
+      } else if (upper.contains("td")) {
+        return Colors.green[200];
+      } else if (upper.contains("tutorat")) {
+        return Colors.blue[200];
+      } else if (upper.contains("sport") ||
+          upper.contains("vacance") ||
+          upper.contains("férié")) {
+        return Colors.transparent;
+      } else {
+        return Colors.white;
+      }
     } else {
-      return Colors.white;
+      final String upper = _event.summary.toLowerCase();
+      if (upper.contains("examen")) {
+        return Colors.red[900].withOpacity(0.5);
+      } else if (upper.contains("tp")) {
+        return Colors.orange[900].withOpacity(0.5);
+      } else if (upper.contains("td")) {
+        return Colors.green[900].withOpacity(0.5);
+      } else if (upper.contains("tutorat")) {
+        return Colors.blue[900].withOpacity(0.5);
+      } else if (upper.contains("sport") ||
+          upper.contains("vacance") ||
+          upper.contains("férié")) {
+        return Colors.transparent;
+      } else {
+        return Colors.grey.withOpacity(0.2);
+      }
     }
   }
 
@@ -78,7 +99,7 @@ class EventCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Card(
-        color: _cardColor,
+        color: _getCardColor(context),
         elevation: (_event.summary.toLowerCase().contains("sport") ||
                 _event.summary.toLowerCase().contains("vacance") ||
                 _event.summary.toLowerCase().contains("férié"))
@@ -111,7 +132,6 @@ class EventCard extends StatelessWidget {
                       "${DateFormat.Hm().format(_event.dtend)}",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
               ],

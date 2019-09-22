@@ -19,17 +19,16 @@ class DiagnoseDoc extends StatelessWidget {
             children: <Widget>[
               const BoxMdH("Diagnostique", 1),
               const BoxMdH("ip a", 2),
-              const Text.rich(
-                TextSpan(
-                    text: "Donne des informations utiles sur le matériel.\n\n"
-                        "Informations utiles:\n"
-                        "- Status\n"
-                        "- Addresse IP\n"
-                        "- Addresse MAC",
-                    style: MinitelTextStyles.body1),
+              Text(
+                "Donne des informations utiles sur le matériel.\n\n"
+                "Informations utiles:\n"
+                "- Status\n"
+                "- Addresse IP\n"
+                "- Addresse MAC",
+                style: Theme.of(context).textTheme.body1,
               ),
               const BoxMdH("Address Resolution Protocol", 2),
-              const Text.rich(
+              Text.rich(
                 TextSpan(
                   text: "Affiche les adresses MAC de tous les appareils "
                       "connectés au téléphone.\n\n"
@@ -38,8 +37,8 @@ class DiagnoseDoc extends StatelessWidget {
                       "Si l'addresse MAC de la passerelle ne correspond pas "
                       "à celui de la passerelle, on a affaire à une ARP "
                       "poisonning : \n",
-                  style: MinitelTextStyles.body1,
-                  children: <TextSpan>[
+                  style: Theme.of(context).textTheme.body1,
+                  children: const <TextSpan>[
                     TextSpan(
                       text:
                           "Le voleur d'IP de la passerelle répond à la réponse "
@@ -60,16 +59,16 @@ class DiagnoseDoc extends StatelessWidget {
               const LogCard("arp -s 10.163.0.2 00:0d:b4:10:99:e1",
                   title: "Shell    (Linux)"),
               const BoxMdH("Traceroute", 2),
-              const Text(
+              Text(
                 "Affiche le chemin et les délais des paquets vers un serveur Google.\n"
                 "Utile pour voir les causes de lag.",
-                style: MinitelTextStyles.body1,
+                style: Theme.of(context).textTheme.body1,
               ),
               const BoxMdH("Ping Loopback", 2),
-              const Text.rich(TextSpan(
+              Text.rich(TextSpan(
                 text: "Vérifie si le logiciel TCP/IP fonctionne.\n",
-                style: MinitelTextStyles.body1,
-                children: <TextSpan>[
+                style: Theme.of(context).textTheme.body1,
+                children: const <TextSpan>[
                   TextSpan(
                     text: "Devrait être toujours positif.",
                     style: MinitelTextStyles.mdH5,
@@ -77,15 +76,15 @@ class DiagnoseDoc extends StatelessWidget {
                 ],
               )),
               const BoxMdH("Ping Local", 2),
-              const Text.rich(
+              Text.rich(
                 TextSpan(
                   text: "Ping à un ordinateur local (10.163.0.5, qui est le "
                       "serveur Minitel et devrait être toujours allumé).\n\n"
                       "Si les paquets sont perdus, ceci sont les scenarios les plus probable:\n"
                       "    1.  Vous n\'avez pas d\'IP.",
-                  style: MinitelTextStyles.body1,
+                  style: Theme.of(context).textTheme.body1,
                   children: <TextSpan>[
-                    TextSpan(
+                    const TextSpan(
                       text:
                           " (Voir ip a, et alertez immediatement à Minitel)\n",
                       style: MinitelTextStyles.mdH5,
@@ -96,7 +95,7 @@ class DiagnoseDoc extends StatelessWidget {
                           "    3.  Le serveur (10.163.0.5) est déconnecté. (vous pouvez ping 10.163.0.10)\n"
                           "    4.  Un switch de la Maison des Elèves est déconnecté.\n"
                           "    5.  Un switch de la résidence est déconnecté.",
-                      style: MinitelTextStyles.body1,
+                      style: Theme.of(context).textTheme.body1,
                     )
                   ],
                 ),
@@ -171,11 +170,11 @@ class DiagnoseDoc extends StatelessWidget {
                 style: MinitelTextStyles.mdH5,
               ),
               const BoxMdH("Ping Gateway", 2),
-              const Text(
+              Text(
                 "La passerelle ignore normalement les pings."
                 " Cependant, si un ping est reçu, quelqu\'un a probablement"
                 " pris sont IP. Mais, rien est certain.",
-                style: MinitelTextStyles.body1,
+                style: Theme.of(context).textTheme.body1,
               ),
               const BoxMdH("Ping DNS", 2),
               const Text.rich(
@@ -188,18 +187,18 @@ class DiagnoseDoc extends StatelessWidget {
                   style: MinitelTextStyles.mdH5,
                 ),
               ),
-              const Text(
+              Text(
                 "Si un des DNS (sauf 10.163.0.6) répond, vous êtes connecté à Internet.",
-                style: MinitelTextStyles.body1,
+                style: Theme.of(context).textTheme.body1,
               ),
               const BoxMdH("NSLookup", 2),
-              const Text.rich(
+              Text.rich(
                 TextSpan(
                   text:
                       "S\'il n\'y a aucune réponse, mais le ping DNS fonctionne, votre appareil a un problème de cache DNS.\n",
-                  style: MinitelTextStyles.body1,
+                  style: Theme.of(context).textTheme.body1,
                   children: <TextSpan>[
-                    TextSpan(
+                    const TextSpan(
                       text: "Pour les appareils portable, redémarrez le Wifi.\n"
                           "Voici des solutions proposées:",
                       style: MinitelTextStyles.mdH5,

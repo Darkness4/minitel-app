@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 
 import 'portal_apps/imprimante.dart';
 import 'portal_apps/minitel.dart';
@@ -65,16 +64,20 @@ class _ImprimanteCard extends StatelessWidget {
         child: LayoutBuilder(
           builder: (_, BoxConstraints constraint) => Column(
             children: <Widget>[
-              Icon(
-                Icons.print,
-                size: constraint.biggest.height - 50,
-                color: Colors.blue,
-              ),
-              const FittedBox(
-                child: Text(
-                  "Imprimante",
-                  style: MinitelTextStyles.appTitle,
+              Expanded(
+                child: FittedBox(
+                  child: Icon(
+                    Icons.print,
+                    color: Colors.blue,
+                  ),
                 ),
+              ),
+              Text(
+                "Imprimante",
+                style: Theme.of(context)
+                    .textTheme
+                    .display1
+                    .apply(fontWeightDelta: 4),
               ),
             ],
           ),
@@ -101,18 +104,19 @@ class _PortailCard extends StatelessWidget {
         },
         child: Column(
           children: <Widget>[
-            Flexible(
+            Expanded(
               child: Image.asset(
                 AssetPaths.EMSE,
                 fit: BoxFit.scaleDown,
               ),
             ),
-            const FittedBox(
-              child: Text(
-                "Portail",
-                style: MinitelTextStyles.appTitle,
-              ),
-            )
+            Text(
+              "Portail",
+              style: Theme.of(context)
+                  .textTheme
+                  .display1
+                  .apply(fontWeightDelta: 4),
+            ),
           ],
         ),
       ),
@@ -155,17 +159,18 @@ class _WikiMinitelCard extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
-            Flexible(
+            Expanded(
               child: Image.asset(
                 AssetPaths.LogoMinitel,
                 fit: BoxFit.scaleDown,
               ),
             ),
-            const FittedBox(
-              child: Text(
-                "Wiki",
-                style: MinitelTextStyles.appTitle,
-              ),
+            Text(
+              "Wiki",
+              style: Theme.of(context)
+                  .textTheme
+                  .display1
+                  .apply(fontWeightDelta: 4),
             ),
           ],
         ),

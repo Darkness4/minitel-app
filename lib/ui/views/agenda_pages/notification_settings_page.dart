@@ -30,6 +30,20 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
+                const Text("Les notifications sont "),
+                Switch(
+                  value: widget.notificationSettings.enabled,
+                  onChanged: (bool value) => setState(() {
+                    widget.notificationSettings.enabled = value;
+                  }),
+                ),
+                Text(widget.notificationSettings.enabled
+                    ? 'activées'
+                    : 'désactivées'),
+              ],
+            ),
+            Row(
+              children: <Widget>[
                 const Text("Notifier "),
                 Expanded(
                   child: TextField(

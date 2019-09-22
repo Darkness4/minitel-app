@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
+import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/docs_widgets.dart';
 
@@ -16,7 +17,11 @@ class ReportTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: const BoxDecoration(color: Colors.red),
+      decoration: BoxDecoration(
+        color: Theme.of(context).brightness == Brightness.light
+            ? MinitelColors.ReportPrimaryColor
+            : Theme.of(context).primaryColor,
+      ),
       child: Scrollbar(
         child: ListView(
           padding: const EdgeInsets.all(10.0),
@@ -205,35 +210,35 @@ class _TutorialCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DocCard(
+    return DocCard(
       elevation: 4,
       children: <Widget>[
-        BoxMdH("Comment signaler sans internet ?", 1),
+        const BoxMdH("Comment signaler sans internet ?", 1),
         BoxMdBody(Text(
           "REMARQUE : Il est recommandé d\'installer le Root et Busybox.",
-          style: MinitelTextStyles.subhead,
+          style: Theme.of(context).textTheme.subhead,
         )),
-        BoxMdBody(Text(
+        const BoxMdBody(Text(
           "1. Connectez-vous à \'WiFi Minitel\'",
           style: MinitelTextStyles.mdH3,
         )),
-        BoxMdBody(Text(
+        const BoxMdBody(Text(
           "2. Lancez la suite de diagnostique en appuyant sur le bouton, et attendez 1 minute.",
           style: MinitelTextStyles.mdH3,
         )),
-        BoxMdBody(Text(
+        const BoxMdBody(Text(
           "3. Remplissez votre rapport. N'oubliez pas un moyen de communication (chambre, mail, messenger ...)",
           style: MinitelTextStyles.mdH3,
         )),
         BoxMdBody(Text(
           "Exemple : \nTitre: Pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c\'est ok.",
-          style: MinitelTextStyles.body1,
+          style: Theme.of(context).textTheme.body1,
         )),
-        BoxMdBody(Text(
+        const BoxMdBody(Text(
           "4. Connectez-vous sur un réseau où il y a Internet.",
           style: MinitelTextStyles.mdH3,
         )),
-        BoxMdBody(Text(
+        const BoxMdBody(Text(
           "5. Envoyez le rapport.",
           style: MinitelTextStyles.mdH3,
         )),

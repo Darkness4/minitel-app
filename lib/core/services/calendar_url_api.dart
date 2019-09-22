@@ -27,12 +27,13 @@ class CalendarUrlAPI {
           ..headers.removeAll(HttpHeaders.contentLengthHeader)
           ..cookies.add(phpSessionIDCAS);
     final HttpClientResponse response = await request.close();
-    final String body = await response
+    final Future<String> body = response
         .transform(utf8.decoder)
         .transform(const LineSplitter())
-        .firstWhere((String line) => line.contains(RegExp(r'https(.*)\.ics')));
+        .firstWhere((String line) => line.contains(RegExp(r'https(.*)\.ics')))
+        .then((String line) => RegExp(r'https(.*)\.ics').stringMatch(line));
 
-    return RegExp(r'https(.*)\.ics').stringMatch(body);
+    return body;
   }
 
   /// Save the url to get the ical in a SharedPrefs

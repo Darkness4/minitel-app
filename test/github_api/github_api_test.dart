@@ -7,7 +7,7 @@ import 'package:minitel_toolbox/core/models/github/release.dart';
 import 'package:minitel_toolbox/core/services/github_api.dart';
 
 import '../mock_http_client.dart';
-import 'github_api_responses.dart' show responseAllReleases, latestRelease;
+import 'github_api_responses.dart' show responseAllReleases;
 
 void main() {
   const String repos = 'Darkness4/minitel-app';
@@ -38,34 +38,6 @@ void main() {
       final GithubAPI _githubAPI = GithubAPI();
       try {
         await _githubAPI.fetchReleases("");
-        throw Exception('Unexpected Result');
-      } catch (e) {
-        expect(e.toString(), contains("Failed to"));
-      }
-    });
-
-    test('Get latest release from Github', () async {
-      await HttpOverrides.runZoned(
-        () async {
-          final GithubAPI _githubAPI = GithubAPI();
-          final GithubRelease release =
-              await _githubAPI.fetchLatestRelease(repos);
-
-          expect(release.id, equals(123456789)); // Check if mock is there
-          expect(release.html_url, contains(repos));
-        },
-        createHttpClient: (SecurityContext context) =>
-            createMockHttpClient(context, <Uri, Uint8List>{
-          Uri.parse("https://api.github.com/repos/$repos/releases/latest"):
-              utf8.encode(latestRelease),
-        }),
-      );
-    });
-
-    test('FAIL Get latest release from Github', () async {
-      final GithubAPI _githubAPI = GithubAPI();
-      try {
-        await _githubAPI.fetchLatestRelease("");
         throw Exception('Unexpected Result');
       } catch (e) {
         expect(e.toString(), contains("Failed to"));

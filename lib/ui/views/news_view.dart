@@ -15,7 +15,9 @@ class NewsView extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: const Color(0xff087f23),
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? const Color(0xff087f23)
+            : Theme.of(context).primaryColor,
         body: NestedScrollView(
           key: const Key('news_view/tabs'),
           body: const TabBarView(

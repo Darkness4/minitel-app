@@ -134,13 +134,11 @@ class DiagnosisAPI {
     }
   }
 
-  Future<String> _terminalCommand(String command, List<String> args) async {
-    try {
-      final ProcessResult result = await Process.run(command, args);
-      final String stdout = result.stdout;
-      return stdout.isEmpty ? "Nothing to show" : stdout;
-    } catch (e) {
-      return "Error: $e";
-    }
+  Future<String> _terminalCommand(String command, List<String> args) {
+    return Process.run(command, args)
+        .then((ProcessResult result) => result.stdout)
+        .then((dynamic stdout) =>
+            stdout.isEmpty ? "Nothing to show" : stdout.toString())
+        .catchError((dynamic e) => e.toString());
   }
 }

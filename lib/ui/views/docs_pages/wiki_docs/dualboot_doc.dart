@@ -25,9 +25,9 @@ class DualBootDoc extends StatelessWidget {
               child: const Text("Full Tutorial Dual Boot"),
             ),
           ),
-          const Text.rich(
+          Text.rich(
             TextSpan(
-              style: MinitelTextStyles.body2,
+              style: Theme.of(context).textTheme.body2,
               children: <TextSpan>[
                 TextSpan(
                   text: "Prenez conscience des risques d'installer Linux :\n",
@@ -37,7 +37,7 @@ class DualBootDoc extends StatelessWidget {
                           "    •  Linux est plus stable, mais les mises à jours de distributions sont plus fragiles (80 % des utilisateurs de Ubuntu préfère réinstaller que mettre à jour)\n"
                           "    •  Les pilotes sont les premières causes de crash brutal (NVIDIA, Realtek...)\n"
                           "    •  Une mauvaise config du BIOS peut également vous être fatal\n\n",
-                      style: MinitelTextStyles.body1,
+                      style: Theme.of(context).textTheme.body1,
                     ),
                   ],
                 ),
@@ -59,7 +59,7 @@ class DualBootDoc extends StatelessWidget {
                           "    •  Envie de se suicider ? \"Free Software Fondation OS\"\n"
                           "    •  Pire que la mort ? Linux From Scratch\n"
                           "    •  Faire ressuciter un Android en serveur Linux ? postmarketOS\n\n",
-                      style: MinitelTextStyles.body1,
+                      style: Theme.of(context).textTheme.body1,
                     )
                   ],
                 ),
@@ -74,14 +74,14 @@ class DualBootDoc extends StatelessWidget {
                           "    •  Désactiver le Fast Boot\n"
                           "    •  Préparer une partition vide de minimum 50 Go\n"
                           "    •  Avec Rufus, flashez une image sur la clé (FAT32, mettre à jour syslinux, mode ISO), en MBR\n\n",
-                      style: MinitelTextStyles.body1,
+                      style: Theme.of(context).textTheme.body1,
                     )
                   ],
                 ),
                 TextSpan(
                   text:
                       "Installer Linux (booter sur la clé en changeant l'ordre de boot sur le BIOS ou via une touche de clavier (F11? Suppr? Insert? F1? F2? F12?)) :\n",
-                  style: MinitelTextStyles.body2,
+                  style: Theme.of(context).textTheme.body2,
                   children: <TextSpan>[
                     TextSpan(
                       text: "    •  Langue, Timezone, Network...\n"
@@ -93,13 +93,13 @@ class DualBootDoc extends StatelessWidget {
                           "    •  Vérifiez et confirmez les partitions (regardez si windows est toujours là 🙂)\n"
                           "    •  Etc (attendez la fin de l'installation)...\n"
                           "    •  (UEFI) Changez l'ordre de boot UEFI dans le BIOS\n\n",
-                      style: MinitelTextStyles.body1,
+                      style: Theme.of(context).textTheme.body1,
                     )
                   ],
                 ),
                 TextSpan(
                   text: "Known Issue : NVIDIA + Intel Graphics:\n",
-                  style: MinitelTextStyles.body2,
+                  style: Theme.of(context).textTheme.body2,
                   children: <TextSpan>[
                     TextSpan(
                       text:
@@ -108,7 +108,7 @@ class DualBootDoc extends StatelessWidget {
                           "    •  Ajoutez \"nomodeset\" dans les options avancées de boot\n"
                           "    •  Enlevez également \"quiet splash\" pour la lisibilité\n"
                           "\nEx:",
-                      style: MinitelTextStyles.body1,
+                      style: Theme.of(context).textTheme.body1,
                     )
                   ],
                 ),
@@ -119,23 +119,23 @@ class DualBootDoc extends StatelessWidget {
             "linux /boot/vmlinuz-2.6.31-9 root=UUID=904bf39-9234 ro nomodeset\n",
             title: "GNU GRUB",
           ),
-          const Text.rich(
+          Text.rich(
             TextSpan(
               text: "Known Issue : Post-Install (NVIDIA + Intel Graphics) :\n",
-              style: MinitelTextStyles.body2,
+              style: Theme.of(context).textTheme.body2,
               children: <TextSpan>[
                 TextSpan(
                   text: "    Par défaut, Linux va tourner avec Intel. Ce qui "
                       "est très mauvais si vous voulez miner de l'ethereum ou "
                       "faire du Machine Learning.\n",
-                  style: MinitelTextStyles.body1,
+                  style: Theme.of(context).textTheme.body1,
                 ),
                 TextSpan(
                   text:
                       "    •  Téléchargez les pilotes de NVIDIA sur le site officiel de NVIDIA.\n"
                       "    •  (Téléchargez CUDA si nécessaire, sans pilotes, sans openGL)\n"
                       "    •  Passer en TTY via Ctrl + Alt + F1, Ctrl + Alt + F2 ... ",
-                  style: MinitelTextStyles.body1,
+                  style: Theme.of(context).textTheme.body1,
                 ),
               ],
             ),
@@ -196,10 +196,10 @@ GRUB_TERMINAL=console""",
             "sudo update-grub",
             title: "Shell - Mettre à jour le Grub",
           ),
-          const Text.rich(
+          Text.rich(
             TextSpan(
               text: "Changez de GNU/Linux ou pas...\n",
-              style: MinitelTextStyles.body2,
+              style: Theme.of(context).textTheme.body2,
               children: <TextSpan>[
                 TextSpan(
                   text: "    •  Généralement, on ne change pas de Linux. S'il "
@@ -212,7 +212,7 @@ GRUB_TERMINAL=console""",
                       "    •  LTS ? Généralement les LTS sont beaucoup plus stables\n"
                       "    •  Egalement, 80 % des utilisateurs de Ubuntu préfèrent"
                       " réinstaller que faire un dist-upgrade.\n",
-                  style: MinitelTextStyles.body1,
+                  style: Theme.of(context).textTheme.body1,
                 )
               ],
             ),

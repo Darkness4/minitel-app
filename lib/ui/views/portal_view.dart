@@ -26,12 +26,18 @@ class PortalView extends StatelessWidget {
         body: NestedScrollView(
           key: const Key('portail_view/tabs'),
           body: DecoratedBox(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 colors: <Color>[
-                  Color(0xff80e27e),
-                  Color(0xff087f23),
+                  if (Theme.of(context).brightness ==
+                      Brightness.light) ...<Color>[
+                    const Color(0xff80e27e),
+                    const Color(0xff087f23)
+                  ] else ...<Color>[
+                    Colors.black12,
+                    Colors.black87,
+                  ],
                 ],
               ),
             ),
