@@ -166,7 +166,7 @@ pages:
 
 build-test:
   stage: test
-  image: darkness4/flutter-builder:29-stable
+  image: darkness4/flutter-builder:29-master
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
@@ -188,7 +188,7 @@ build-test:
 
 build-apk:
   stage: build
-  image: darkness4/flutter-builder:29-stable
+  image: darkness4/flutter-builder:29-master
   
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
@@ -219,7 +219,7 @@ build-apk:
 
 build-aab:
   stage: build
-  image: darkness4/flutter-builder:29-stable
+  image: darkness4/flutter-builder:29-master
   
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
@@ -235,7 +235,7 @@ build-aab:
     - flutter build appbundle --verbose --target-platform android-arm,android-arm64
 
   after_script:
-    - mv build/app/outputs/bundle/release/app.aab minitel-toolbox.aab
+    - mv build/app/outputs/bundle/release/app-release.aab minitel-toolbox.aab
 
   artifacts:
     paths:
