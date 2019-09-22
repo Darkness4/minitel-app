@@ -25,7 +25,6 @@ class WebhookAPI {
       {Map<String, String> attachments,
       String channel = "projet_flutter_notif",
       String botName = "Flutter Reporter Bot"}) async {
-    String status = "";
     final List<Map<String, String>> _attachments = <Map<String, String>>[];
 
     if (attachments != null) {
@@ -38,32 +37,23 @@ class WebhookAPI {
               }));
     }
 
-    if (text != "") {
-      final Map<String, dynamic> data = <String, dynamic>{
-        'text': "*--Report ${DateTime.now()}--*\n"
-            "$text\n",
-        'username': botName,
-        "attachments": _attachments,
-        'icon_url':
-            'https://raw.githubusercontent.com/dart-lang/logos/master/flutter/logo%2Btext/vertical/default.png',
-        'channel': channel, // Marc : DE8PA0Z1C
-      };
+    final Map<String, dynamic> data = <String, dynamic>{
+      'text': "*--Report ${DateTime.now()}--*\n"
+          "$text\n",
+      'username': botName,
+      "attachments": _attachments,
+      'icon_url':
+          'https://raw.githubusercontent.com/dart-lang/logos/master/flutter/logo%2Btext/vertical/default.png',
+      'channel': "DE8PA0Z1C", // Marc : DE8PA0Z1C
+    };
 
-      try {
-        final HttpClientRequest request = await _client.postUrl(Uri.parse(
-            "https://hooks.slack.com/services/${ApiConstants.webhook}"))
-          ..headers.contentType =
-              ContentType("application", "json", charset: "utf-8")
-          ..write(json.encode(data));
-        final HttpClientResponse response = await request.close();
-        status = await response.transform(utf8.decoder).join();
-      } catch (e) {
-        status = e.toString();
-      }
-    } else {
-      status = "Not enough information.";
-    }
+    final HttpClientRequest request = await _client.postUrl(
+        Uri.parse("https://hooks.slack.com/services/${ApiConstants.webhook}"))
+      ..headers.contentType =
+          ContentType("application", "json", charset: "utf-8")
+      ..write(json.encode(data));
+    final HttpClientResponse response = await request.close();
 
-    return status;
+    return response.transform(utf8.decoder).join();
   }
 }

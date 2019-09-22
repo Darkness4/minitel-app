@@ -28,9 +28,9 @@ class ZabbixAPI {
           ..headers.set(HttpHeaders.contentTypeHeader, 'application/json-rpc')
           ..write(dataEncoded);
     final HttpClientResponse response = await request.close();
-    final String output = await response.transform(utf8.decoder).join();
-    final dynamic jsonData = json.decode(output);
-    return jsonData["result"];
+    final dynamic output =
+        await response.transform(utf8.decoder).transform(json.decoder).first;
+    return output["result"];
   }
 
   Future<List<ZabbixHost>> getZabbixHosts(int groupids, String zabbixPath,
@@ -69,18 +69,15 @@ class ZabbixAPI {
             ..write(dataEncoded);
       final HttpClientResponse response = await request.close();
 
-      final String output = await response.transform(utf8.decoder).join();
-
-      final Map<String, dynamic> jsonData = json.decode(output);
-
-      final List<Map<String, dynamic>> hosts =
-          List<Map<String, dynamic>>.from(jsonData["result"]);
-
-      final List<ZabbixHost> zabbixHosts = hosts
+      final Future<List<ZabbixHost>> output = response
+          .transform(utf8.decoder)
+          .transform(json.decoder)
+          .expand((dynamic jsonData) =>
+              List<Map<String, dynamic>>.from(jsonData["result"]))
           .map((Map<String, dynamic> host) => ZabbixHost.fromJson(host))
           .toList();
 
-      return zabbixHosts;
+      return output;
     } on SocketException catch (e) {
       if (e.toString().contains('timed out')) {
         throw Exception(

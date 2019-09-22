@@ -13,10 +13,13 @@ class FacebookAPI {
     final HttpClientRequest request = await _client.getUrl(Uri.parse(
         "https://graph.facebook.com/v4.0/me/feed?fields=full_picture,permalink_url,message,created_time&access_token=${ApiConstants.facebookApi}"));
     final HttpClientResponse response = await request.close();
+    final Future<Feed> body = response
+        .transform(utf8.decoder)
+        .transform(json.decoder)
+        .map((Object data) => Feed.fromJson(data))
+        .first;
 
-    final String body = await response.transform(utf8.decoder).join();
-
-    return Feed.fromJson(json.decode(body));
+    return body;
   }
 
   /// Get the url to HTTP GET the profile picture

@@ -103,11 +103,9 @@ class PortailAPI {
 
   /// Save the cookie gotten through CAS Authentication
   Future<List<Cookie>> saveCookiePortailFromLogin(
-      {String username, String password}) async {
+      {String username, String password}) {
     try {
-      final List<Cookie> cookies =
-          await _getPortailCookie(username: username, password: password);
-      return cookies;
+      return _getPortailCookie(username: username, password: password);
     } on Exception {
       _cookies.clear();
       rethrow;

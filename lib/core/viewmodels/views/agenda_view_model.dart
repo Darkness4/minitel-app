@@ -68,14 +68,16 @@ class AgendaViewModel extends ChangeNotifier {
 
     if (filteredEvents == null || filteredEvents.isEmpty) {
       yield <Widget>[
-        Text(
-          Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w300,
-            fontSize: 24.0,
+        Center(
+          child: Text(
+            Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
+              fontSize: 24.0,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
         ),
       ];
     } else {
