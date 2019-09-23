@@ -41,24 +41,22 @@ class PortalView extends StatelessWidget {
                 ],
               ),
             ),
-            child: Builder(
-              builder: (BuildContext context) => BaseWidget<PortailViewModel>(
-                model: PortailViewModel(
-                  portailAPI: Provider.of<PortailAPI>(context),
-                  calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
-                  imprimanteAPI: Provider.of<ImprimanteAPI>(context),
-                  stormshieldAPI: Provider.of<StormshieldAPI>(context),
-                  iCalendar: Provider.of<ICalendarAPI>(context),
-                ),
-                onModelReady: (PortailViewModel model) =>
-                    model.rememberLogin(context),
-                builder: (BuildContext context, PortailViewModel model, _) =>
-                    TabBarView(
-                  children: <Widget>[
-                    LoginPage(model: model),
-                    const AppsList(),
-                  ],
-                ),
+            child: BaseWidget<PortailViewModel>(
+              model: PortailViewModel(
+                portailAPI: Provider.of<PortailAPI>(context),
+                calendarUrlAPI: Provider.of<CalendarUrlAPI>(context),
+                imprimanteAPI: Provider.of<ImprimanteAPI>(context),
+                stormshieldAPI: Provider.of<StormshieldAPI>(context),
+                iCalendar: Provider.of<ICalendarAPI>(context),
+              ),
+              onModelReady: (PortailViewModel model) =>
+                  model.rememberLogin(context),
+              builder: (BuildContext context, PortailViewModel model, _) =>
+                  TabBarView(
+                children: <Widget>[
+                  LoginPage(model: model),
+                  const AppsList(),
+                ],
               ),
             ),
           ),
