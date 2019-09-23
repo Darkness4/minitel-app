@@ -13,7 +13,7 @@ class MinitelColors {
   static const Color ReportPrimaryColor = Colors.red;
 
   static Color DrawerSelectedColor = Colors.green.withOpacity(0.2);
-  static Color DrawerSelectedColorGrey = Colors.grey.withOpacity(0.2);
+  static Color DrawerSelectedColorGrey = Colors.grey.withOpacity(0.5);
 
   /// Attribuated color to each month
   static Map<int, Color> MonthColorPalette = <int, Color>{

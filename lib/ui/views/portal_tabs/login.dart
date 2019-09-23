@@ -26,9 +26,12 @@ class LoginPage extends StatelessWidget {
             selectedUrl: model.selectedUrl.value,
           ),
           Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
             elevation: 10.0,
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -93,7 +96,6 @@ class LoginPage extends StatelessWidget {
                             focusNode: model.uidFocusNode,
                             controller: model.uidController,
                             decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.person),
                               hintText: "prenom.nom",
                               labelText: "Nom d'utilisateur",
@@ -113,7 +115,6 @@ class LoginPage extends StatelessWidget {
                             obscureText: true,
                             focusNode: model.pswdFocusNode,
                             decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.vpn_key),
                               labelText: "Mot de passe",
                             ),
@@ -168,25 +169,6 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          Center(
-            child: model.portailState == PortailState.Busy
-                ? const CircularProgressIndicator()
-                : FloatingActionButton.extended(
-                    key: const Key('login/connect'),
-                    onPressed: () => model.login(
-                      context,
-                      model.uidController.text,
-                      model.pswdController.text,
-                    ),
-                    label: const Text(
-                      "Se connecter",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    icon: const Icon(Icons.arrow_forward),
-                  ),
-          ),
         ],
       ),
     );
@@ -210,6 +192,7 @@ class _StatusCard extends StatelessWidget {
     final ImprimanteAPI _imprimanteAPI = Provider.of<ImprimanteAPI>(context);
 
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       elevation: 10.0,
       child: Padding(
         padding: const EdgeInsets.all(25),

@@ -26,11 +26,13 @@ class ReportingViewState extends State<ReportingView>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
+  final WebhookAPI _webhookAPI = WebhookAPI();
+
   @override
   Widget build(BuildContext context) {
     return BaseWidget<ReportingViewModel>(
       model: ReportingViewModel(
-        webhookAPI: Provider.of<WebhookAPI>(context),
+        webhookAPI: _webhookAPI,
         diagnosisAPI: Provider.of<DiagnosisAPI>(context),
       ),
       builder: (BuildContext context, ReportingViewModel model, _) =>

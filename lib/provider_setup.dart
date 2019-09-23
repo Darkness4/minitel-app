@@ -8,8 +8,6 @@ import 'core/services/icalendar_api.dart';
 import 'core/services/imprimante_api.dart';
 import 'core/services/portail_emse_api.dart';
 import 'core/services/stormshield_api.dart';
-import 'core/services/webhook_api.dart';
-import 'core/services/zabbix_api.dart';
 
 class ProviderSetup {
   static List<SingleChildCloneableWidget> dependentServices =
@@ -23,28 +21,28 @@ class ProviderSetup {
 
   static List<SingleChildCloneableWidget> independentServices =
       <SingleChildCloneableWidget>[
-    // StormshieldAPI used in login and reporting_view
+    // StormshieldAPI used in portal_view and reporting_view and must be cached
     Provider<StormshieldAPI>.value(value: StormshieldAPI()),
 
     // WebhookAPI used in reporting_view
-    Provider<WebhookAPI>.value(value: WebhookAPI()),
+    // Provider<WebhookAPI>.value(value: WebhookAPI()),
 
-    // GithubAPI used in github_ab and about_view
+    // GithubAPI used in news_view and about_view
     Provider<GithubAPI>.value(value: GithubAPI()),
 
-    // GithubAPI used in login, agenda_view and agenda_widgets
+    // CalendarUrlAPI used in portal_view, agenda_view
     Provider<CalendarUrlAPI>.value(value: CalendarUrlAPI()),
 
-    // ICalendar used in login, agenda_view and agenda_widgets
+    // ICalendar used in portal_view, agenda_view
     Provider<ICalendarAPI>.value(value: ICalendarAPI()),
 
-    // PortailAPI used in portail webview and portail
+    // PortailAPI used in portail webview and portal_view and must be cached
     Provider<PortailAPI>.value(value: PortailAPI()),
 
     // ZabbixAPI used in ZabbixTab
-    Provider<ZabbixAPI>.value(value: ZabbixAPI()),
+    // Provider<ZabbixAPI>.value(value: ZabbixAPI()),
 
-    // ImprimanteAPI used in imprimante.dart and login
+    // ImprimanteAPI used in portal_view and must be cached
     Provider<ImprimanteAPI>.value(value: ImprimanteAPI()),
   ];
 
