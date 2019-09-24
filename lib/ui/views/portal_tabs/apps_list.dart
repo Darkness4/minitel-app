@@ -72,12 +72,14 @@ class _ImprimanteCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                "Imprimante",
-                style: Theme.of(context)
-                    .textTheme
-                    .display1
-                    .apply(fontWeightDelta: 4),
+              FittedBox(
+                child: Text(
+                  "Imprimante",
+                  style: Theme.of(context)
+                      .textTheme
+                      .display1
+                      .apply(fontWeightDelta: 4),
+                ),
               ),
             ],
           ),
@@ -110,12 +112,14 @@ class _PortailCard extends StatelessWidget {
                 fit: BoxFit.scaleDown,
               ),
             ),
-            Text(
-              "Portail",
-              style: Theme.of(context)
-                  .textTheme
-                  .display1
-                  .apply(fontWeightDelta: 4),
+            FittedBox(
+              child: Text(
+                "Portail",
+                style: Theme.of(context)
+                    .textTheme
+                    .display1
+                    .apply(fontWeightDelta: 4),
+              ),
             ),
           ],
         ),
@@ -165,12 +169,14 @@ class _WikiMinitelCard extends StatelessWidget {
                 fit: BoxFit.scaleDown,
               ),
             ),
-            Text(
-              "Wiki",
-              style: Theme.of(context)
-                  .textTheme
-                  .display1
-                  .apply(fontWeightDelta: 4),
+            FittedBox(
+              child: Text(
+                "Wiki",
+                style: Theme.of(context)
+                    .textTheme
+                    .display1
+                    .apply(fontWeightDelta: 4),
+              ),
             ),
           ],
         ),
