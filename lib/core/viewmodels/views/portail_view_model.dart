@@ -87,7 +87,7 @@ class PortailViewModel extends ChangeNotifier {
         LoginConstants.timeMap[selectedTime.value],
       );
       notifyListeners();
-    } on Exception catch (e) {
+    } catch (e) {
       portailState = PortailState.Available;
       notifyListeners();
       Scaffold.of(context).showSnackBar(
@@ -103,20 +103,7 @@ class PortailViewModel extends ChangeNotifier {
       );
       await iCalendar.saveCalendar(calendarUrl, calendarUrlAPI);
       notifyListeners();
-    } on Exception catch (e) {
-      portailState = PortailState.Available;
-      notifyListeners();
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
-    }
-    // Portail
-    try {
-      await portailAPI.saveCookiePortailFromLogin(
-        username: uid,
-        password: pswd,
-      );
-    } on Exception catch (e) {
+    } catch (e) {
       portailState = PortailState.Available;
       notifyListeners();
       Scaffold.of(context).showSnackBar(
@@ -124,20 +111,35 @@ class PortailViewModel extends ChangeNotifier {
       );
     }
 
-    // Imprimante
-    try {
-      await imprimanteAPI.login(
-        username: uid,
-        password: pswd,
-      );
-      notifyListeners();
-    } on Exception catch (e) {
+    // Portail
+    await portailAPI
+        .saveCookiePortailFromLogin(
+          username: uid,
+          password: pswd,
+        )
+        .then((_) => notifyListeners())
+        .catchError((dynamic e) {
       portailState = PortailState.Available;
       notifyListeners();
       Scaffold.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );
-    }
+    });
+
+    // Imprimante
+    await imprimanteAPI
+        .login(
+          username: uid,
+          password: pswd,
+        )
+        .then((_) => notifyListeners())
+        .catchError((dynamic e) {
+      portailState = PortailState.Available;
+      notifyListeners();
+      Scaffold.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    });
 
     // Unlock
     portailState = PortailState.Available;
