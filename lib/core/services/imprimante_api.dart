@@ -18,6 +18,9 @@ class ImprimanteAPI {
           await client.get("http://192.168.130.2/watchdoc/");
       return _cookie = response.headers['set-cookie'];
     } catch (e) {
+      if (e.toString().contains("NTLM")) {
+        throw Exception("Imprimante GCP: Accès refusé");
+      }
       rethrow;
     }
   }
