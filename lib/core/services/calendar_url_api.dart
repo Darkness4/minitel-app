@@ -31,7 +31,7 @@ class CalendarUrlAPI {
         .transform(utf8.decoder)
         .transform(const LineSplitter())
         .firstWhere((String line) => line.contains(RegExp(r'https(.*)\.ics')))
-        .then((String line) => RegExp(r'https(.*)\.ics').stringMatch(line));
+        .then(RegExp(r'https(.*)\.ics').stringMatch);
 
     return body;
   }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
@@ -48,24 +49,25 @@ class PortailViewModel extends ChangeNotifier {
   Future<void> login(BuildContext context, String uid, String pswd) async {
     // Remember me
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    const FlutterSecureStorage storage = FlutterSecureStorage();
     if (rememberMe.value) {
-      await Future.wait<bool>(<Future<bool>>[
+      await Future.wait<dynamic>(<Future<dynamic>>[
         prefs.setBool("rememberMe", true),
         prefs.setBool("autoLogin", autoLogin.value),
         prefs.setString("user", uid),
         prefs.setString("time", selectedTime.value),
-        prefs.setString(
-          "pswd",
-          base64.encode(utf8.encode(pswd)),
+        storage.write(
+          key: "pswd",
+          value: base64.encode(utf8.encode(pswd)),
         ),
       ]);
     } else {
-      await Future.wait<bool>(<Future<bool>>[
+      await Future.wait<dynamic>(<Future<dynamic>>[
         prefs.remove("rememberMe"),
         prefs.remove("autoLogin"),
         prefs.remove("user"),
         prefs.remove("time"),
-        prefs.remove("pswd"),
+        storage.delete(key: "pswd"),
       ]);
     }
 
@@ -149,11 +151,13 @@ class PortailViewModel extends ChangeNotifier {
   /// Load saved data and remember login if it was true
   Future<void> rememberLogin(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    const FlutterSecureStorage storage = FlutterSecureStorage();
     rememberMe.value = prefs.getBool("rememberMe") ?? false;
     if (rememberMe.value) {
       uidController.text = prefs.getString("user");
       selectedTime.value = prefs.getString("time");
-      pswdController.text = utf8.decode(base64.decode(prefs.getString("pswd")));
+      pswdController.text =
+          utf8.decode(base64.decode(await storage.read(key: "pswd")));
       autoLogin.value = prefs.getBool("autoLogin") ?? false;
     }
     if (autoLogin.value) {
