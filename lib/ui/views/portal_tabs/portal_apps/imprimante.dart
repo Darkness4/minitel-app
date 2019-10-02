@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/services/imprimante_api.dart';
 import 'package:minitel_toolbox/ui/widgets/app_lists_widgets.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class ImprimanteWebView extends StatelessWidget {
 
     return ScaffoldWebView(
       backgroundColor: Colors.grey,
-      title: const Text("Imprimante EMSE"),
+      title: Text(AppLoc.of(context).portal.apps.printer),
       initialUrl: 'http://192.168.130.2/watchdoc/jobs.asp?instance=default',
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
-import 'package:minitel_toolbox/core/constants/texts_constants.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/provider_setup.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:minitel_toolbox/ui/shared/drawer_styles.dart';
@@ -68,7 +68,7 @@ class DocsDrawer extends StatelessWidget {
               ),
               child: ListTile(
                 title: Text(
-                  "Authentification",
+                  AppLoc.of(context).docs.login.header,
                   style: Theme.of(context)
                       .textTheme
                       .body1
@@ -118,7 +118,7 @@ class DocsDrawer extends StatelessWidget {
               ),
               child: ListTile(
                 title: Text(
-                  "Diagnostique",
+                  AppLoc.of(context).docs.diagnose.header,
                   style: Theme.of(context)
                       .textTheme
                       .body1
@@ -169,7 +169,7 @@ class DocsDrawer extends StatelessWidget {
               ),
               child: ListTile(
                 title: Text(
-                  "Configuration de l'imprimante",
+                  AppLoc.of(context).docs.imprimante.header,
                   style: Theme.of(context)
                       .textTheme
                       .body1
@@ -217,7 +217,7 @@ class DocsDrawer extends StatelessWidget {
               ),
               child: ListTile(
                 title: Text(
-                  "Importation des mails SoGo",
+                  AppLoc.of(context).docs.mail.header,
                   style: Theme.of(context)
                       .textTheme
                       .body1
@@ -265,7 +265,7 @@ class DocsDrawer extends StatelessWidget {
               ),
               child: ListTile(
                 title: Text(
-                  "Installer un Dual Boot",
+                  AppLoc.of(context).docs.dualboot.header,
                   style: Theme.of(context)
                       .textTheme
                       .body1
@@ -313,7 +313,7 @@ class DocsDrawer extends StatelessWidget {
               ),
               child: ListTile(
                 title: Text(
-                  "Jouer avec des VM",
+                  "Virtual Machines",
                   style: Theme.of(context)
                       .textTheme
                       .body1
@@ -396,7 +396,7 @@ class MainDrawer extends StatelessWidget {
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-                title: const Text(Titles.Authentication),
+                title: Text(AppLoc.of(context).portal.title),
                 key: const Key('drawer/authentication'),
                 leading: const Icon(Icons.lock_outline),
                 selected: currentRoutePaths == RoutePaths.Authentication,
@@ -419,7 +419,7 @@ class MainDrawer extends StatelessWidget {
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-                title: const Text(Titles.News),
+                title: Text(AppLoc.of(context).news.title),
                 key: const Key('drawer/news'),
                 leading: const Icon(Icons.rss_feed),
                 selected: currentRoutePaths == RoutePaths.News,
@@ -439,7 +439,7 @@ class MainDrawer extends StatelessWidget {
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-                title: const Text(Titles.Agenda),
+                title: Text(AppLoc.of(context).agenda.title),
                 leading: const Icon(Icons.calendar_today),
                 key: const Key('drawer/agenda'),
                 selected: currentRoutePaths == RoutePaths.Agenda,
@@ -461,9 +461,9 @@ class MainDrawer extends StatelessWidget {
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-                title: const Text(
-                  Titles.Reporting,
-                  style: TextStyle(color: Colors.red),
+                title: Text(
+                  AppLoc.of(context).reporting.title,
+                  style: const TextStyle(color: Colors.red),
                 ),
                 selected: currentRoutePaths == RoutePaths.Reporting,
                 key: const Key('drawer/reporting'),
@@ -489,7 +489,7 @@ class MainDrawer extends StatelessWidget {
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-                title: const Text(Titles.Docs),
+                title: Text(AppLoc.of(context).docs.title),
                 leading: const Icon(Icons.library_books),
                 key: const Key('drawer/docs'),
                 selected: currentRoutePaths == RoutePaths.Docs,
@@ -509,7 +509,7 @@ class MainDrawer extends StatelessWidget {
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-              title: const Text(Titles.About),
+              title: Text(AppLoc.of(context).about.title),
               leading: const Icon(Icons.info),
               key: const Key('drawer/about'),
               selected: currentRoutePaths == RoutePaths.About,
@@ -527,7 +527,7 @@ class MainDrawer extends StatelessWidget {
               builder: (BuildContext context,
                   AsyncSnapshot<SharedPreferences> snapshot) {
                 return ListTile(
-                  title: const Text("Forcer le thème sombre"),
+                  title: Text(AppLoc.of(context).forceDark),
                   trailing: Switch(
                     value: Theme.of(context).brightness == Brightness.dark,
                     onChanged: (bool value) {

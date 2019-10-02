@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/services/diagnosis_api.dart';
 import 'package:minitel_toolbox/core/services/webhook_api.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/reporting_view_model.dart';
@@ -166,7 +167,7 @@ class ReportingViewState extends State<ReportingView>
       ];
 
   Widget _mailButton(ReportingViewModel model) => AnimatedFloatingButton(
-        "Email",
+        "Mail",
         start: 0.0,
         end: 0.5,
         controller: _animationController,
@@ -176,7 +177,7 @@ class ReportingViewState extends State<ReportingView>
 
   Widget _reportButton(BuildContext context, ReportingViewModel model) =>
       AnimatedFloatingButton(
-        "Notifier sur Slack",
+        AppLoc.of(context).reporting.slack,
         start: 0.0,
         end: 0.25,
         controller: _animationController,
@@ -190,7 +191,7 @@ class ReportingViewState extends State<ReportingView>
       );
 
   Widget _shareButton(ReportingViewModel model) => AnimatedFloatingButton(
-        "Partager",
+        AppLoc.of(context).reporting.share,
         start: 0.0,
         end: 1.0,
         controller: _animationController,

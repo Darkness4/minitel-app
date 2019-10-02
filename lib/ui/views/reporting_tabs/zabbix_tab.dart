@@ -19,8 +19,7 @@ class ZabbixTab extends StatelessWidget {
             const Card(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text(
-                    "Données récupérées à partir du serveur local Zabbix."),
+                child: Text("From Zabbix."),
               ),
             ),
             const Divider(),

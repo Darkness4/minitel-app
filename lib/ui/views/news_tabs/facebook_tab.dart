@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/feed.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/post.dart';
@@ -78,7 +79,7 @@ class FacebookCard extends StatelessWidget {
                   child: FlatButton(
                     textColor: Colors.blue,
                     onPressed: () => LaunchURL.launchURL(post.permalinkUrl),
-                    child: const Text("Voir sur Facebook ..."),
+                    child: Text(AppLoc.of(context).news.seeFacebook),
                   ),
                 ),
               ),

@@ -5,6 +5,76 @@ class AgendaLoc {
   final NotificationSettingsLoc notificationSettings;
   AgendaLoc(this.localeName)
       : notificationSettings = NotificationSettingsLoc(localeName);
+
+  String get title => Intl.message(
+        'Agenda',
+        name: 'AgendaLoc_title',
+        locale: localeName,
+      );
+
+  List<String> get cases => <String>[
+        emptyAgenda0,
+        emptyAgenda1,
+        emptyAgenda2,
+        emptyAgenda3,
+        emptyAgenda4,
+        emptyAgenda5,
+        emptyAgenda6,
+        emptyAgenda7,
+        emptyAgenda8,
+        emptyAgenda9,
+      ];
+
+  String get emptyAgenda0 => Intl.message(
+        "Ben alors ? On n'a pas cours ?",
+        name: "AgendaLoc_emptyAgenda0",
+        locale: localeName,
+      );
+  String get emptyAgenda1 => Intl.message(
+        "Ça sent le barbecue....",
+        name: "AgendaLoc_emptyAgenda1",
+        locale: localeName,
+      );
+  String get emptyAgenda2 => Intl.message(
+        "Libeeeeertééé !",
+        name: "AgendaLoc_emptyAgenda2",
+        locale: localeName,
+      );
+  String get emptyAgenda3 => Intl.message(
+        "Chatteux va !",
+        name: "AgendaLoc_emptyAgenda3",
+        locale: localeName,
+      );
+  String get emptyAgenda4 => Intl.message(
+        "Passe plus de temps avec la famille !\n(au lieu de regarder les prochains cours)",
+        name: "AgendaLoc_emptyAgenda4",
+        locale: localeName,
+      );
+  String get emptyAgenda5 => Intl.message(
+        "L'application compte plus de 10 000 lignes de codes...\n\n(avec 30 000 additions et 20 000 délétions)",
+        name: "AgendaLoc_emptyAgenda5",
+        locale: localeName,
+      );
+  String get emptyAgenda6 => Intl.message(
+        "L'application est développé avec Flutter et avec ❤️",
+        name: "AgendaLoc_emptyAgenda6",
+        locale: localeName,
+      );
+  String get emptyAgenda7 => Intl.message(
+        "Minitel gère !",
+        name: "AgendaLoc_emptyAgenda7",
+        locale: localeName,
+      );
+  String get emptyAgenda8 => Intl.message(
+        "Freeeeeeedom !",
+        name: "AgendaLoc_emptyAgenda8",
+        locale: localeName,
+      );
+  String get emptyAgenda9 => Intl.message(
+        "The sad panda sit alone.",
+        name: "AgendaLoc_emptyAgenda9",
+        locale: localeName,
+      );
 }
 
 class NotificationSettingsLoc {
@@ -26,9 +96,9 @@ class NotificationSettingsLoc {
 
   String enabled2(bool enabled) => Intl.select(
         enabled,
-        <Object, String>{true: 'activées.', false: 'désactivées.'},
+        <bool, String>{true: 'activées.', false: 'désactivées.'},
         name: 'NotificationSettingsLoc_enabled2',
-        args: <Object>[enabled],
+        args: <bool>[enabled],
         desc: 'Les notifications sont []',
         locale: localeName,
       );

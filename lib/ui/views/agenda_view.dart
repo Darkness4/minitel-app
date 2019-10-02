@@ -61,7 +61,7 @@ class AgendaView extends StatelessWidget {
                   return
                       // Then parse the calendar et generate the pages
                       StreamBuilder<List<Widget>>(
-                    stream: model.listEventCards(snapshot.data),
+                    stream: model.listEventCards(context, snapshot.data),
                     builder: (BuildContext context,
                         AsyncSnapshot<List<Widget>> snapshotStream) {
                       switch (snapshotStream.connectionState) {

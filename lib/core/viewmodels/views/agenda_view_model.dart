@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
-import 'package:minitel_toolbox/core/constants/texts_constants.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/models/icalendar/event.dart';
 import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
@@ -51,7 +51,8 @@ class AgendaViewModel extends ChangeNotifier {
   /// new page is immediatly streamed to assure a reactive behavior.
   ///
   /// At the very end, the last widgets are returned.
-  Stream<List<Widget>> listEventCards(ParsedCalendar parsedCalendar) async* {
+  Stream<List<Widget>> listEventCards(
+      BuildContext context, ParsedCalendar parsedCalendar) async* {
     List<Widget> monthlyWidgets = <Widget>[];
     List<Widget> dailyEvents = <Widget>[];
     final List<Widget> monthPages = <Widget>[];
@@ -70,7 +71,8 @@ class AgendaViewModel extends ChangeNotifier {
       yield <Widget>[
         Center(
           child: Text(
-            Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
+            AppLoc.of(context).agenda.cases[
+                Random().nextInt(AppLoc.of(context).agenda.cases.length)],
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w300,

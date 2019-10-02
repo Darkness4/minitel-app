@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/imprimante_api.dart';
@@ -38,7 +39,7 @@ class LoginPage extends StatelessWidget {
                   FittedBox(
                     child: Row(
                       children: <Widget>[
-                        const Text("Nom de domaine / IP "),
+                        Text(AppLoc.of(context).portal.domainNameHeader),
                         ValueListenableBuilder<String>(
                           valueListenable: model.selectedUrl,
                           builder: (BuildContext context, String value, _) {
@@ -63,7 +64,7 @@ class LoginPage extends StatelessWidget {
                   FittedBox(
                     child: Row(
                       children: <Widget>[
-                        const Text("Durée d\'authentification "),
+                        Text(AppLoc.of(context).portal.authTime),
                         ValueListenableBuilder<String>(
                           valueListenable: model.selectedTime,
                           builder: (BuildContext context, String value, _) {
@@ -95,10 +96,11 @@ class LoginPage extends StatelessWidget {
                             key: const Key('login/uid'),
                             focusNode: model.uidFocusNode,
                             controller: model.uidController,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.person),
-                              hintText: "prenom.nom",
-                              labelText: "Nom d'utilisateur",
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.person),
+                              hintText: AppLoc.of(context).portal.usernameHint,
+                              labelText:
+                                  AppLoc.of(context).portal.usernameLabel,
                             ),
                             onEditingComplete: () {
                               model.uidFocusNode.unfocus();
@@ -114,9 +116,9 @@ class LoginPage extends StatelessWidget {
                             controller: model.pswdController,
                             obscureText: true,
                             focusNode: model.pswdFocusNode,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.vpn_key),
-                              labelText: "Mot de passe",
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.vpn_key),
+                              labelText: AppLoc.of(context).portal.password,
                             ),
                           ),
                         ),
@@ -126,7 +128,7 @@ class LoginPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Se souvenir "),
+                      Text(AppLoc.of(context).portal.rememberMe),
                       ValueListenableBuilder<bool>(
                         valueListenable: model.rememberMe,
                         builder: (BuildContext context, bool value, _) {
@@ -147,7 +149,7 @@ class LoginPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Se connecter automatiquement"),
+                      Text(AppLoc.of(context).portal.autoLogin),
                       ValueListenableBuilder<bool>(
                         valueListenable: model.autoLogin,
                         builder: (BuildContext context, bool value, _) {
@@ -222,9 +224,9 @@ class _StatusCard extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                const Text(
-                  "Agenda: ",
-                  style: TextStyle(fontSize: 20),
+                Text(
+                  "${AppLoc.of(context).agenda.title}: ",
+                  style: const TextStyle(fontSize: 20),
                 ),
                 FutureBuilder<String>(
                   future: _calendarUrlAPI
@@ -250,9 +252,9 @@ class _StatusCard extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                const Text(
-                  "Portail: ",
-                  style: TextStyle(fontSize: 20),
+                Text(
+                  "${AppLoc.of(context).agenda.title}: ",
+                  style: const TextStyle(fontSize: 20),
                 ),
                 if (_portailAPI.cookies.isEmpty)
                   const Icon(
@@ -269,9 +271,9 @@ class _StatusCard extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                const Text(
-                  "Imprimante: ",
-                  style: TextStyle(fontSize: 20),
+                Text(
+                  "${AppLoc.of(context).portal.apps.printer}: ",
+                  style: const TextStyle(fontSize: 20),
                 ),
                 if (_imprimanteAPI.cookie == null)
                   const Icon(
@@ -282,7 +284,7 @@ class _StatusCard extends StatelessWidget {
                   const Icon(
                     Icons.done,
                     color: Colors.green,
-                    key: Key('login/imrprimante_success'),
+                    key: Key('login/imprimante_success'),
                   )
               ],
             ),

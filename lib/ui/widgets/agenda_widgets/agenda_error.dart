@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
@@ -40,9 +41,9 @@ class ErrorAgendaWidget extends StatelessWidget {
                     key: const Key('agenda_view/uid'),
                     focusNode: _uidFocusNode,
                     controller: _uidController,
-                    decoration: const InputDecoration(
-                      hintText: "prénom.nom",
-                      labelText: "Nom d'utilisateur",
+                    decoration: InputDecoration(
+                      hintText: AppLoc.of(context).portal.usernameHint,
+                      labelText: AppLoc.of(context).portal.usernameLabel,
                     ),
                     onEditingComplete: () {
                       _uidFocusNode.unfocus();
@@ -54,9 +55,9 @@ class ErrorAgendaWidget extends StatelessWidget {
                     controller: _pswdController,
                     obscureText: true,
                     focusNode: _pswdFocusNode,
-                    decoration: const InputDecoration(
-                      hintText: "Mot de passe",
-                      labelText: "Mot de passe",
+                    decoration: InputDecoration(
+                      hintText: AppLoc.of(context).portal.password,
+                      labelText: AppLoc.of(context).portal.password,
                     ),
                   ),
                 ],
@@ -88,9 +89,9 @@ class ErrorAgendaWidget extends StatelessWidget {
               }
               parentSetState();
             },
-            label: const Text(
-              "Se connecter",
-              style: TextStyle(
+            label: Text(
+              AppLoc.of(context).portal.login,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/core/services/imprimante_api.dart';
@@ -93,9 +94,9 @@ class PortalView extends StatelessWidget {
                         model.uidController.text,
                         model.pswdController.text,
                       ),
-                      label: const Text(
-                        "Se connecter",
-                        style: TextStyle(
+                      label: Text(
+                        AppLoc.of(context).portal.login,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
