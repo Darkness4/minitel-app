@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
 
 class NotificationSettingsPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Paramètres de notifications"),
+        title: Text(AppLoc.of(context).agenda.notificationSettings.title),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -30,21 +31,22 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                const Text("Les notifications sont "),
+                Text(AppLoc.of(context).agenda.notificationSettings.enabled1),
                 Switch(
                   value: widget.notificationSettings.enabled,
                   onChanged: (bool value) => setState(() {
                     widget.notificationSettings.enabled = value;
                   }),
                 ),
-                Text(widget.notificationSettings.enabled
-                    ? 'activées'
-                    : 'désactivées'),
+                Text(AppLoc.of(context)
+                    .agenda
+                    .notificationSettings
+                    .enabled2(widget.notificationSettings.enabled)),
               ],
             ),
             Row(
               children: <Widget>[
-                const Text("Notifier "),
+                Text(AppLoc.of(context).agenda.notificationSettings.early1),
                 Expanded(
                   child: TextField(
                     inputFormatters: <TextInputFormatter>[
@@ -57,12 +59,12 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                     controller: _earlyController,
                   ),
                 ),
-                const Text(" minutes avant le cours."),
+                Text(AppLoc.of(context).agenda.notificationSettings.early2),
               ],
             ),
             Row(
               children: <Widget>[
-                const Text("Notifier les cours des "),
+                Text(AppLoc.of(context).agenda.notificationSettings.range1),
                 Expanded(
                   child: TextField(
                     inputFormatters: <TextInputFormatter>[
@@ -75,7 +77,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                     controller: _rangeController,
                   ),
                 ),
-                const Text(" prochains jours."),
+                Text(AppLoc.of(context).agenda.notificationSettings.range2),
               ],
             ),
             Builder(
@@ -92,7 +94,8 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                     content: Text("Success."),
                   ));
                 },
-                child: const Text("Sauvegarder"),
+                child:
+                    Text(AppLoc.of(context).agenda.notificationSettings.save),
               ),
             ),
           ],

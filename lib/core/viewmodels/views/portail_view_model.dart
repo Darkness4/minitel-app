@@ -30,6 +30,7 @@ class PortailViewModel extends ChangeNotifier {
   final FocusNode pswdFocusNode = FocusNode();
   final TextEditingController uidController = TextEditingController();
   final TextEditingController pswdController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   PortailState portailState = PortailState.Available;
 
@@ -41,12 +42,14 @@ class PortailViewModel extends ChangeNotifier {
     @required this.iCalendar,
   });
 
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+
   Future<void> refresh() async {
     portailState = PortailState.Available;
     notifyListeners();
   }
 
-  Future<void> login(BuildContext context, String uid, String pswd) async {
+  Future<void> login(String uid, String pswd) async {
     // Remember me
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     const FlutterSecureStorage storage = FlutterSecureStorage();
@@ -72,9 +75,11 @@ class PortailViewModel extends ChangeNotifier {
     }
 
     // Notification
-    Scaffold.of(context).showSnackBar(
-      const SnackBar(content: Text('Requested')),
-    );
+    _scaffoldKey.currentState
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(content: Text('Requested')),
+      );
 
     // Lock
     portailState = PortailState.Busy;
@@ -92,9 +97,11 @@ class PortailViewModel extends ChangeNotifier {
     } catch (e) {
       portailState = PortailState.Available;
       notifyListeners();
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      _scaffoldKey.currentState
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
     }
 
     // Calendar
@@ -108,9 +115,11 @@ class PortailViewModel extends ChangeNotifier {
     } catch (e) {
       portailState = PortailState.Available;
       notifyListeners();
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      _scaffoldKey.currentState
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
     }
 
     // Portail
@@ -123,9 +132,11 @@ class PortailViewModel extends ChangeNotifier {
         .catchError((dynamic e) {
       portailState = PortailState.Available;
       notifyListeners();
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      _scaffoldKey.currentState
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
     });
 
     // Imprimante
@@ -138,9 +149,11 @@ class PortailViewModel extends ChangeNotifier {
         .catchError((dynamic e) {
       portailState = PortailState.Available;
       notifyListeners();
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      _scaffoldKey.currentState
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
     });
 
     // Unlock
@@ -149,7 +162,7 @@ class PortailViewModel extends ChangeNotifier {
   }
 
   /// Load saved data and remember login if it was true
-  Future<void> rememberLogin(BuildContext context) async {
+  Future<void> rememberLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     const FlutterSecureStorage storage = FlutterSecureStorage();
     rememberMe.value = prefs.getBool("rememberMe") ?? false;
@@ -161,7 +174,7 @@ class PortailViewModel extends ChangeNotifier {
       autoLogin.value = prefs.getBool("autoLogin") ?? false;
     }
     if (autoLogin.value) {
-      await login(context, uidController.text, pswdController.text);
+      await login(uidController.text, pswdController.text);
     }
   }
 

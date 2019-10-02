@@ -1,0 +1,142 @@
+{
+  "@@last_modified": "2019-10-02T20:27:10.405603",
+  "NotificationSettingsLoc_title": "Notification settings",
+  "@NotificationSettingsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled1": "The notifications are ",
+  "@NotificationSettingsLoc_enabled1": {
+    "description": "[] activées.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled2": "{enabled,select, true{enabled.}false{disabled.}}",
+  "@NotificationSettingsLoc_enabled2": {
+    "description": "Les notifications sont []",
+    "type": "text",
+    "placeholders": {
+      "enabled": {}
+    }
+  },
+  "NotificationSettingsLoc_early1": "Notify ",
+  "@NotificationSettingsLoc_early1": {
+    "description": "[] X minutes avant le cours",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_early2": " minutes before the course.",
+  "@NotificationSettingsLoc_early2": {
+    "description": "Notifier X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range1": "Notify the courses for the next ",
+  "@NotificationSettingsLoc_range1": {
+    "description": "[] X prochains jours.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range2": " days.",
+  "@NotificationSettingsLoc_range2": {
+    "description": "Notifier les cours des X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_save": "Save",
+  "@NotificationSettingsLoc_save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_header": "Diagnosis",
+  "@DiagnoseLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_ipaContent": "Gives useful information about the hardware.\n\nUseful information:\n- Status\n- IP Address\n- MAC Address",
+  "@DiagnoseLoc_ipaContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent1": "Displays the MAC addresses of all devices connected to the phone. The Gateway should be displayed and the MAC address should be 00-0d-b4-10-99-e1. If the MAC address of the gateway does not match that of the gateway, we are dealing with a fisonning ARP: \n",
+  "@DiagnoseLoc_arpContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent2": "The gateway's IP thief responds to the ARP response sent by the victim on broadcast, faster than the gateway.\n\n",
+  "@DiagnoseLoc_arpContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent3": "A temporary solution (only when WiFi is on) is:",
+  "@DiagnoseLoc_arpContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_tracerouteContent": "Displays the path and delays of packets to a Google server.\nUseful to see the causes of lag.",
+  "@DiagnoseLoc_tracerouteContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent1": "Vérifie si le logiciel TCP/IP fonctionne.\n",
+  "@DiagnoseLoc_pingLoContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent2": "Should always be positive.",
+  "@DiagnoseLoc_pingLoContent2": {
+    "description": "Le ping loopback devrait être toujours positif.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent1": "Ping to a local computer (10.163.0.5, which is the Minitel server and should always be on).\n\nIf the packets are lost, these are the most likely scenarios:\n    1.  You don't have an IP.",
+  "@DiagnoseLoc_pingLocalContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent2": " (See ip a, and alert Minitel immediately)\n",
+  "@DiagnoseLoc_pingLocalContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent3": "    2.  You are not connected to the local network.\n    3.  The server (10.163.0.5) is disconnected. (you can ping 10.163.0.10)\n    4.  A switch from the Student House is disconnected.\n    5.  A switch from the residence is disconnected.",
+  "@DiagnoseLoc_pingLocalContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_httpContent": "If a 4xx or 5xx error appears, please report it to Minitel.",
+  "@DiagnoseLoc_httpContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionHeader": "How should I react?",
+  "@DiagnoseLoc_reactionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionContent": "If there is no longer a network, contact Minitel and use the diagnostic suite on the \"Report to Minitel\" page",
+  "@DiagnoseLoc_reactionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingGatewayContent": "The gateway normally ignores pings. However, if a ping is received, someone probably took his IP. But, nothing is certain.",
+  "@DiagnoseLoc_pingGatewayContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingDNSContent": "If one of the DNS (except 10.163.0.6) answers, you are connected to the Internet.",
+  "@DiagnoseLoc_pingDNSContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent1": "If there is no answer, but the DNS ping works, your device has a DNS cache problem.\n",
+  "@DiagnoseLoc_nsLookupContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent2": "For portable devices, restart Wi-Fi.\nHere are some solutions:",
+  "@DiagnoseLoc_nsLookupContent2": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

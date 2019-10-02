@@ -1,0 +1,142 @@
+{
+  "@@last_modified": "2019-10-02T20:55:35.444961",
+  "NotificationSettingsLoc_title": "Paramètres de notifications",
+  "@NotificationSettingsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled1": "Les notifications sont ",
+  "@NotificationSettingsLoc_enabled1": {
+    "description": "[] activées.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled2": "{enabled,select, true{activées.}false{désactivées.}}",
+  "@NotificationSettingsLoc_enabled2": {
+    "description": "Les notifications sont []",
+    "type": "text",
+    "placeholders": {
+      "enabled": {}
+    }
+  },
+  "NotificationSettingsLoc_early1": "Notifier ",
+  "@NotificationSettingsLoc_early1": {
+    "description": "[] X minutes avant le cours",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_early2": " minutes avant le cours.",
+  "@NotificationSettingsLoc_early2": {
+    "description": "Notifier X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range1": "Notifier les cours des ",
+  "@NotificationSettingsLoc_range1": {
+    "description": "[] X prochains jours.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range2": " prochains jours.",
+  "@NotificationSettingsLoc_range2": {
+    "description": "Notifier les cours des X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_save": "Sauvegarder",
+  "@NotificationSettingsLoc_save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_header": "Diagnostique",
+  "@DiagnoseLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_ipaContent": "Donne des informations utiles sur le matériel.\n\nInformations utiles:\n- Status\n- Adresse IP\n- Adresse MAC",
+  "@DiagnoseLoc_ipaContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent1": "Affiche les adresses MAC de tous les appareils connectés au téléphone.\n\nLa Passerelle devrait être affiché et l'adresse MAC doit être 00-0d-b4-10-99-e1.\n\nSi l'adresse MAC de la passerelle ne correspond pas à celui de la passerelle, on a affaire à une ARP poisonning : \n",
+  "@DiagnoseLoc_arpContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent2": "Le voleur d'IP de la passerelle répond à la réponse ARP envoyé en broadcast par la victime, plus rapidement que la passerelle.\n\n",
+  "@DiagnoseLoc_arpContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent3": "Une solution temporaire (uniquement lorsque le WiFi est allumé) est :",
+  "@DiagnoseLoc_arpContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_tracerouteContent": "Affiche le chemin et les délais des paquets vers un serveur Google.\nUtile pour voir les causes de lag.",
+  "@DiagnoseLoc_tracerouteContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent1": "Vérifie si le logiciel TCP/IP fonctionne.\n",
+  "@DiagnoseLoc_pingLoContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent2": "Devrait être toujours positif.",
+  "@DiagnoseLoc_pingLoContent2": {
+    "description": "Le ping loopback devrait être toujours positif.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent1": "Ping à un ordinateur local (10.163.0.5, qui est le serveur Minitel et devrait être toujours allumé).\n\nSi les paquets sont perdus, ceci sont les scenarios les plus probable:\n    1.  Vous n'avez pas d'IP.",
+  "@DiagnoseLoc_pingLocalContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent2": " (Voir ip a, et alertez immediatement à Minitel)\n",
+  "@DiagnoseLoc_pingLocalContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent3": "    2.  Vous n'êtes pas connecté au réseau local.\n    3.  Le serveur (10.163.0.5) est déconnecté. (vous pouvez ping 10.163.0.10)\n    4.  Un switch de la Maison des Elèves est déconnecté.\n    5.  Un switch de la résidence est déconnecté.",
+  "@DiagnoseLoc_pingLocalContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_httpContent": "Si une erreur 4xx ou 5xx apparait, veuillez le signaler à Minitel.",
+  "@DiagnoseLoc_httpContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionHeader": "Comment devrais-je réagir?",
+  "@DiagnoseLoc_reactionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionContent": "S'il n'y a plus de réseau, contactez Minitel et utilisez la suite diagnostique dans la page \"Signaler Minitel\"",
+  "@DiagnoseLoc_reactionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingGatewayContent": "La passerelle ignore normalement les pings. Cependant, si un ping est reçu, quelqu'un a probablement pris sont IP. Mais, rien est certain.",
+  "@DiagnoseLoc_pingGatewayContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingDNSContent": "Si un des DNS (sauf 10.163.0.6) répond, vous êtes connecté à Internet.",
+  "@DiagnoseLoc_pingDNSContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent1": "S'il n'y a aucune réponse, mais le ping DNS fonctionne, votre appareil a un problème de cache DNS.\n",
+  "@DiagnoseLoc_nsLookupContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent2": "Pour les appareils portable, redémarrez le Wifi.\nVoici des solutions proposées:",
+  "@DiagnoseLoc_nsLookupContent2": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

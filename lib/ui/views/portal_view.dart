@@ -31,8 +31,9 @@ class PortalView extends StatelessWidget {
           stormshieldAPI: Provider.of<StormshieldAPI>(context),
           iCalendar: Provider.of<ICalendarAPI>(context),
         ),
-        onModelReady: (PortailViewModel model) => model.rememberLogin(context),
+        onModelReady: (PortailViewModel model) => model.rememberLogin(),
         builder: (BuildContext context, PortailViewModel model, _) => Scaffold(
+          key: model.scaffoldKey,
           body: CustomPaint(
             painter: PortailBackgroundPainter(
                 backgroundColor:
@@ -89,7 +90,6 @@ class PortalView extends StatelessWidget {
                   : FloatingActionButton.extended(
                       key: const Key('login/connect'),
                       onPressed: () => model.login(
-                        context,
                         model.uidController.text,
                         model.pswdController.text,
                       ),
