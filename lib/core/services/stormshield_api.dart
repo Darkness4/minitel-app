@@ -126,30 +126,33 @@ class StormshieldAPI {
     final String url = 'https://$selectedUrl/auth/login.html';
     final RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
-    try {
-      final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
-        ..headers.removeAll(HttpHeaders.contentLengthHeader);
+    final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+      ..headers.removeAll(HttpHeaders.contentLengthHeader);
 
-      if (cookie != null) {
-        request.cookies.add(cookie);
-      }
+    if (cookie != null) {
+      request.cookies.add(cookie);
+    }
 
-      final HttpClientResponse response = await request.close();
-      final String body = await response.transform(utf8.decoder).join();
-      if (response.statusCode == 200) {
-        if (!body.contains('l_rtime')) {
-          status = 'Non connecté';
-        } else {
-          final String match = exp.firstMatch(body).group(1);
-          status = '$match secondes restantes';
-        }
+    final HttpClientResponse response = await request.close();
+    final String body = await response.transform(utf8.decoder).join();
+    if (response.statusCode == 200) {
+      if (!body.contains('l_rtime')) {
+        throw NotLoggedInException();
       } else {
-        throw Exception("HttpError: ${response.statusCode}");
+        final String match = exp.firstMatch(body).group(1);
+        status = match;
       }
-    } catch (e) {
-      status = e.toString();
+    } else {
+      throw HttpException("HttpError: ${response.statusCode}");
     }
 
     return status;
+  }
+}
+
+class NotLoggedInException implements Exception {
+  @override
+  String toString() {
+    return "Not logged in";
   }
 }

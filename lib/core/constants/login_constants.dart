@@ -17,6 +17,9 @@ class LoginConstants {
     '2 hours': 120,
     '3 hours': 180,
     '4 hours': 240,
+    '(5 hours)': 300,
+    '(6 hours)': 360,
+    '(7 hours)': 420,
     '(8 hours)': 480,
   };
 }

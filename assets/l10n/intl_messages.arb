@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-10-03T00:20:25.591240",
+  "@@last_modified": "2019-10-03T23:31:05.325153",
   "forceDark": "Forcer le thème sombre",
   "@forceDark": {
     "type": "text",
@@ -503,6 +503,28 @@
   "@PortalLoc_authTime": {
     "type": "text",
     "placeholders": {}
+  },
+  "PortalLoc_statusInSeconds": "{seconds} secondes restantes",
+  "@PortalLoc_statusInSeconds": {
+    "type": "text",
+    "placeholders": {
+      "seconds": {}
+    }
+  },
+  "PortalLoc_statusInMinutes": "{minutes} minutes restantes",
+  "@PortalLoc_statusInMinutes": {
+    "type": "text",
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "PortalLoc_statusInHM": "{hours} hours and {minutes} minutes left",
+  "@PortalLoc_statusInHM": {
+    "type": "text",
+    "placeholders": {
+      "hours": {},
+      "minutes": {}
+    }
   },
   "AppListLoc_printer": "Imprimante",
   "@AppListLoc_printer": {

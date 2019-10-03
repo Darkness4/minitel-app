@@ -522,32 +522,25 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           const Divider(),
-          FutureBuilder<SharedPreferences>(
-              future: SharedPreferences.getInstance(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<SharedPreferences> snapshot) {
-                return ListTile(
-                  title: Text(AppLoc.of(context).forceDark),
-                  trailing: Switch(
-                    value: Theme.of(context).brightness == Brightness.dark,
-                    onChanged: (bool value) {
-                      if (value) {
-                        Provider.of<ThemeChanger>(context).theme =
-                            MinitelThemeData.dark;
-                        if (snapshot.hasData) {
-                          snapshot.data.setBool('dark', true);
-                        }
-                      } else {
-                        Provider.of<ThemeChanger>(context).theme =
-                            MinitelThemeData.light;
-                        if (snapshot.hasData) {
-                          snapshot.data.setBool('dark', false);
-                        }
-                      }
-                    },
-                  ),
-                );
-              })
+          ListTile(
+            title: Text(AppLoc.of(context).forceDark),
+            trailing: Switch(
+              value: Theme.of(context).brightness == Brightness.dark,
+              onChanged: (bool value) async {
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                if (value) {
+                  Provider.of<ThemeChanger>(context).theme =
+                      MinitelThemeData.dark;
+                  await prefs.setBool('dark', true);
+                } else {
+                  Provider.of<ThemeChanger>(context).theme =
+                      MinitelThemeData.light;
+                  await prefs.setBool('dark', false);
+                }
+              },
+            ),
+          ),
         ],
       ),
     );

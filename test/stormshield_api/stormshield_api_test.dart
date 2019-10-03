@@ -42,15 +42,20 @@ void main() {
       }
     });
 
-    test('Get status Non connecté from 195.83.139.7', () async {
+    test('Get status Not logged in from 195.83.139.7', () async {
       await HttpOverrides.runZoned(
         () async {
           final StormshieldAPI _stormshieldAPI = StormshieldAPI();
           await _stormshieldAPI.disconnectGateway("195.83.139.7");
-          final String status = await _stormshieldAPI.getStatus("195.83.139.7");
-          print(status);
+          try {
+            await _stormshieldAPI.getStatus("195.83.139.7");
+            expect(true, isFalse);
+          } on NotLoggedInException catch (e) {
+            final String status = e.toString();
+            print(status);
 
-          expect(status, contains("Non connecté"));
+            expect(status, contains("Not logged in"));
+          }
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
@@ -75,8 +80,8 @@ void main() {
           final String statusFromApi = await _stormshieldAPI
               .getStatus("195.83.139.7", cookie: _stormshieldAPI.cookie);
 
-          expect(statusFromApi, contains("second"));
-          expect(statusFromReturn, contains("second"));
+          expect(statusFromApi, contains("12345"));
+          expect(statusFromReturn, contains("12345"));
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
@@ -95,10 +100,14 @@ void main() {
 
     test('Get status intentionaly from google.fr to get error', () async {
       final StormshieldAPI _stormshieldAPI = StormshieldAPI();
-      final String status = await _stormshieldAPI.getStatus("www.google.fr");
-      print(status);
+      try {
+        await _stormshieldAPI.getStatus("www.google.fr");
+      } on HttpException catch (e) {
+        final String status = e.toString();
+        print(status);
 
-      expect(status, contains("HttpError"));
+        expect(status, contains("HttpError"));
+      }
     });
 
     test('Disconnect intentionaly from google.fr to get error', () async {

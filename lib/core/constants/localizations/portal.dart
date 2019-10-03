@@ -55,6 +55,25 @@ class PortalLoc {
         name: 'PortalLoc_authTime',
         locale: localeName,
       );
+
+  String statusInSeconds(int seconds) => Intl.message(
+        "${seconds} secondes restantes",
+        name: 'PortalLoc_statusInSeconds',
+        args: <Object>[seconds],
+        locale: localeName,
+      );
+  String statusInMinutes(int minutes) => Intl.message(
+        "${minutes} minutes restantes",
+        name: 'PortalLoc_statusInMinutes',
+        args: <Object>[minutes],
+        locale: localeName,
+      );
+  String statusInHM(int hours, int minutes) => Intl.message(
+        "${hours} heures and ${minutes} minutes restantes",
+        name: 'PortalLoc_statusInHM',
+        args: <Object>[hours, minutes],
+        locale: localeName,
+      );
 }
 
 class AppListLoc {

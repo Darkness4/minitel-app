@@ -115,7 +115,7 @@ class DiagnosisAPI {
         return <String>[];
       });
     } else {
-      _diagnosis.alert = "Pas de Wifi";
+      _diagnosis.alert = "No Wi-Fi";
     }
     return _diagnosis;
   }

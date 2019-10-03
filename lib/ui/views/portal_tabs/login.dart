@@ -31,8 +31,7 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.0)),
             elevation: 10.0,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -208,17 +207,47 @@ class _StatusCard extends StatelessWidget {
                 cookie: _gatewayAPI.cookie,
               ),
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                return Text(
-                  snapshot.hasData ? snapshot.data : '',
-                  key: const Key('login/gateway_text'),
-                  style: TextStyle(
-                      color: (!snapshot.hasData ||
-                              snapshot.hasError ||
-                              !snapshot.data.contains("second"))
-                          ? Colors.red
-                          : Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24),
+                String status = '';
+                if (snapshot.hasData) {
+                  final Duration duration =
+                      Duration(seconds: int.parse(snapshot.data));
+                  if (duration.inSeconds < 300) {
+                    status = AppLoc.of(context)
+                        .portal
+                        .statusInSeconds(duration.inSeconds);
+                  } else if (duration.inMinutes < 60) {
+                    status = AppLoc.of(context)
+                        .portal
+                        .statusInMinutes(duration.inMinutes);
+                  } else {
+                    status = AppLoc.of(context)
+                        .portal
+                        .statusInHM(duration.inHours, duration.inMinutes % 60);
+                  }
+                }
+                return Column(
+                  children: <Widget>[
+                    LinearProgressIndicator(
+                      value: (snapshot.hasData && !snapshot.hasError)
+                          ? Duration(seconds: int.parse(snapshot.data))
+                                  .inSeconds /
+                              28800
+                          : 0.0,
+                    ),
+                    FittedBox(
+                      child: Text(
+                        snapshot.hasError ? snapshot.error.toString() : status,
+                        key: const Key('login/gateway_text'),
+                        style: TextStyle(
+                          color: (snapshot.hasData && !snapshot.hasError)
+                              ? Colors.green
+                              : Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               },
             ),
@@ -253,7 +282,7 @@ class _StatusCard extends StatelessWidget {
             Row(
               children: <Widget>[
                 Text(
-                  "${AppLoc.of(context).agenda.title}: ",
+                  "${AppLoc.of(context).portal.title}: ",
                   style: const TextStyle(fontSize: 20),
                 ),
                 if (_portailAPI.cookies.isEmpty)
