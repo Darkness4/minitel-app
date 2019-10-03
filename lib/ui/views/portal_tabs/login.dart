@@ -233,19 +233,30 @@ class _StatusCard extends StatelessWidget {
                                   .inSeconds /
                               28800
                           : 0.0,
+                      backgroundColor: (snapshot.hasData && !snapshot.hasError)
+                          ? Theme.of(context).backgroundColor
+                          : Theme.of(context).errorColor,
                     ),
-                    FittedBox(
-                      child: Text(
-                        snapshot.hasError ? snapshot.error.toString() : status,
-                        key: const Key('login/gateway_text'),
-                        style: TextStyle(
-                          color: (snapshot.hasData && !snapshot.hasError)
-                              ? Colors.green
-                              : Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
+                    Text(
+                      snapshot.hasError ? snapshot.error.toString() : status,
+                      key: const Key('login/gateway_text'),
+                      style: TextStyle(
+                        color: (snapshot.hasData && !snapshot.hasError)
+                            ? Colors.green
+                            : Colors.red,
+                        fontWeight: FontWeight.bold,
                       ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    LinearProgressIndicator(
+                      value: (snapshot.hasData && !snapshot.hasError)
+                          ? Duration(seconds: int.parse(snapshot.data))
+                                  .inSeconds /
+                              28800
+                          : 0.0,
+                      backgroundColor: (snapshot.hasData && !snapshot.hasError)
+                          ? Theme.of(context).backgroundColor
+                          : Theme.of(context).errorColor,
                     ),
                   ],
                 );

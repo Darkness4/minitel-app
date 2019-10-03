@@ -484,7 +484,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "PortalLoc_domainNameHeader": "Domain name / IP",
+  "PortalLoc_domainNameHeader": "Domain name / IP ",
   "@PortalLoc_domainNameHeader": {
     "type": "text",
     "placeholders": {}

@@ -110,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "NotificationSettingsLoc_title" : MessageLookupByLibrary.simpleMessage("Notification settings"),
     "PortalLoc_authTime" : MessageLookupByLibrary.simpleMessage("Authentication time "),
     "PortalLoc_autoLogin" : MessageLookupByLibrary.simpleMessage("Login automatically"),
-    "PortalLoc_domainNameHeader" : MessageLookupByLibrary.simpleMessage("Domain name / IP"),
+    "PortalLoc_domainNameHeader" : MessageLookupByLibrary.simpleMessage("Domain name / IP "),
     "PortalLoc_login" : MessageLookupByLibrary.simpleMessage("Login"),
     "PortalLoc_password" : MessageLookupByLibrary.simpleMessage("Password"),
     "PortalLoc_rememberMe" : MessageLookupByLibrary.simpleMessage("Remember me "),
