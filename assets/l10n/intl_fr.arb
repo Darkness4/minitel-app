@@ -1,7 +1,102 @@
 {
-  "@@last_modified": "2019-10-02T23:39:44.885368",
+  "@@last_modified": "2019-10-04T00:44:56.367155",
   "forceDark": "Forcer le thème sombre",
   "@forceDark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_title": "À propos de Minitel Toolbox",
+  "@AboutLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_description": "Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre.",
+  "@AboutLoc_description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_developper": "Développeur",
+  "@AboutLoc_developper": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_lastVestion": "Dernière version",
+  "@AboutLoc_lastVestion": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_website": "Site Internet",
+  "@AboutLoc_website": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_license": "Licence",
+  "@AboutLoc_license": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicyTitle": "Politique de confidentalité",
+  "@AboutLoc_privacyPolicyTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicySubtitle": "Aucune donnée est partagée et stockée à votre insu. Les données collectées sont celles que vous nous fournissez (diagnostique) et ne sont jamais sauvegardées. ",
+  "@AboutLoc_privacyPolicySubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_title": "Agenda",
+  "@AgendaLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda0": "Ben alors ? On n'a pas cours ?",
+  "@AgendaLoc_emptyAgenda0": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda1": "Ça sent le barbecue....",
+  "@AgendaLoc_emptyAgenda1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda2": "Libeeeeertééé !",
+  "@AgendaLoc_emptyAgenda2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda3": "Chatteux va !",
+  "@AgendaLoc_emptyAgenda3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda4": "Passe plus de temps avec la famille !\n(au lieu de regarder les prochains cours)",
+  "@AgendaLoc_emptyAgenda4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda5": "L'application compte plus de 10 000 lignes de codes...\n\n(avec 30 000 additions et 20 000 délétions)",
+  "@AgendaLoc_emptyAgenda5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda6": "L'application est développé avec Flutter et avec ❤️",
+  "@AgendaLoc_emptyAgenda6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda7": "Minitel gère !",
+  "@AgendaLoc_emptyAgenda7": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda8": "Freeeeeeedom !",
+  "@AgendaLoc_emptyAgenda8": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda9": "The sad panda sit alone.",
+  "@AgendaLoc_emptyAgenda9": {
     "type": "text",
     "placeholders": {}
   },
@@ -50,6 +145,11 @@
   },
   "NotificationSettingsLoc_save": "Sauvegarder",
   "@NotificationSettingsLoc_save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_title": "Documentation",
+  "@DocsLoc_title": {
     "type": "text",
     "placeholders": {}
   },
@@ -259,7 +359,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "ImprimanteLoc_linuxContent1": "    -  Ouvrir \\\\192.168.130.2 avec l'explorer Windows\n    -  Mettre prenom.nom et mot de passe (testez également EMSE2000\\prenom.nom)\n    -  Double-cliquer sur \"imprimantes-gpc\"",
+  "ImprimanteLoc_linuxContent1": "    -  Ajoutez smb://192.168.130.2/imprimantes-gcp aux imprimantes réseaux\n    -  Pilote: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd",
   "@ImprimanteLoc_linuxContent1": {
     "type": "text",
     "placeholders": {}
@@ -349,13 +449,18 @@
     "type": "text",
     "placeholders": {}
   },
+  "NewsLoc_title": "Nouveautés",
+  "@NewsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
   "NewsLoc_seeFacebook": "Voir sur Facebook ...",
   "@NewsLoc_seeFacebook": {
     "type": "text",
     "placeholders": {}
   },
-  "PortalLoc_agenda": "Agenda",
-  "@PortalLoc_agenda": {
+  "PortalLoc_title": "Authentification",
+  "@PortalLoc_title": {
     "type": "text",
     "placeholders": {}
   },
@@ -399,6 +504,28 @@
     "type": "text",
     "placeholders": {}
   },
+  "PortalLoc_statusInSeconds": "{seconds} secondes restantes",
+  "@PortalLoc_statusInSeconds": {
+    "type": "text",
+    "placeholders": {
+      "seconds": {}
+    }
+  },
+  "PortalLoc_statusInMinutes": "{minutes} minutes restantes",
+  "@PortalLoc_statusInMinutes": {
+    "type": "text",
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "PortalLoc_statusInHM": "{hours} heures and {minutes} minutes restantes",
+  "@PortalLoc_statusInHM": {
+    "type": "text",
+    "placeholders": {
+      "hours": {},
+      "minutes": {}
+    }
+  },
   "AppListLoc_printer": "Imprimante",
   "@AppListLoc_printer": {
     "type": "text",
@@ -406,6 +533,11 @@
   },
   "AppListLoc_portal": "Portail",
   "@AppListLoc_portal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_title": "Signaler Minitel",
+  "@ReportingLoc_title": {
     "type": "text",
     "placeholders": {}
   },
@@ -496,41 +628,6 @@
   },
   "TutorialLoc_content5": "5. Envoyez le rapport.",
   "@TutorialLoc_content5": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "AboutLoc_description": "Minitel Toolbox regroupe les outils les plus utiles pour avoir un WiFi sans encombre.",
-  "@AboutLoc_description": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "AboutLoc_developper": "Développeur",
-  "@AboutLoc_developper": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "AboutLoc_lastVestion": "Dernière version",
-  "@AboutLoc_lastVestion": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "AboutLoc_website": "Site Internet",
-  "@AboutLoc_website": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "AboutLoc_license": "Licence",
-  "@AboutLoc_license": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "AboutLoc_privacyPolicyTitle": "Politique de confidentalité",
-  "@AboutLoc_privacyPolicyTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "AboutLoc_privacyPolicySubtitle": "Aucune donnée est partagée et stockée à votre insu. Les données collectées sont celles que vous nous fournissez (diagnostique) et ne sont jamais sauvegardées. ",
-  "@AboutLoc_privacyPolicySubtitle": {
     "type": "text",
     "placeholders": {}
   }

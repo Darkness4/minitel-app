@@ -37,6 +37,7 @@ class SwitchesCard extends StatelessWidget {
               return const CircularProgressIndicator();
             case ConnectionState.done:
               return Wrap(
+                alignment: WrapAlignment.center,
                 children: <Widget>[
                   for (ZabbixHost host in snapshot.data) ...<Widget>[
                     _SwitchBody(host),

@@ -12,21 +12,6 @@ import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/ui/widgets/agenda_widgets/agenda_widgets.dart';
 
 class AgendaViewModel extends ChangeNotifier {
-  static const List<String> _month = <String>[
-    "Janvier",
-    "Février",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre",
-  ];
-
   final CalendarUrlAPI calendarUrlAPI;
   final ICalendarAPI iCalendar;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -127,7 +112,9 @@ class AgendaViewModel extends ChangeNotifier {
           oldDt = dt;
 
           monthlyWidgets = <Widget>[];
-          monthlyWidgets.add(MonthHeader("${_month[dt.month - 1]}"));
+          monthlyWidgets.add(MonthHeader(
+              DateFormat.MMMM(AppLoc.of(context).localeName)
+                  .format(DateTime(dt.year, dt.month))));
           dailyEvents = <Widget>[];
         }
 

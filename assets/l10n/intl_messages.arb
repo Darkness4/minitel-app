@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-10-03T23:31:05.325153",
+  "@@last_modified": "2019-10-04T01:14:53.826300",
   "forceDark": "Forcer le thème sombre",
   "@forceDark": {
     "type": "text",
@@ -359,7 +359,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "ImprimanteLoc_linuxContent1": "    -  Ouvrir \\\\192.168.130.2 avec l'explorer Windows\n    -  Mettre prenom.nom et mot de passe (testez également EMSE2000\\prenom.nom)\n    -  Double-cliquer sur \"imprimantes-gpc\"",
+  "ImprimanteLoc_linuxContent1": "    -  Ajoutez smb://192.168.130.2/imprimantes-gcp aux imprimantes réseaux\n    -  Pilote: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd",
   "@ImprimanteLoc_linuxContent1": {
     "type": "text",
     "placeholders": {}
@@ -518,7 +518,7 @@
       "minutes": {}
     }
   },
-  "PortalLoc_statusInHM": "{hours} hours and {minutes} minutes left",
+  "PortalLoc_statusInHM": "{hours} heures and {minutes} minutes restantes",
   "@PortalLoc_statusInHM": {
     "type": "text",
     "placeholders": {

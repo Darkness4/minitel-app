@@ -36,6 +36,7 @@ class AccessPointsCard extends StatelessWidget {
               return const CircularProgressIndicator();
             case ConnectionState.done:
               return Wrap(
+                alignment: WrapAlignment.center,
                 children: <Widget>[
                   for (ZabbixHost host in snapshot.data) _AccessPointBody(host),
                 ],

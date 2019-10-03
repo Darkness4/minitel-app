@@ -377,9 +377,8 @@ class ImprimanteLoc {
       );
 
   String get linuxContent1 => Intl.message(
-        """    -  Ouvrir \\\\192.168.130.2 avec l'explorer Windows
-    -  Mettre prenom.nom et mot de passe (testez également EMSE2000\\prenom.nom)
-    -  Double-cliquer sur \"imprimantes-gpc\"""",
+        """    -  Ajoutez smb://192.168.130.2/imprimantes-gcp aux imprimantes réseaux
+    -  Pilote: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd""",
         name: 'ImprimanteLoc_linuxContent1',
         locale: localeName,
       );
