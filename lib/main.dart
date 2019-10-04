@@ -44,23 +44,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: ProviderSetup.providers,
-      child: FutureBuilder<SharedPreferences>(
-        future: SharedPreferences.getInstance(),
-        builder:
-            (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
-          if (snapshot.hasData) {
-            return ChangeNotifierProvider<ThemeChanger>(
-              builder: (_) {
-                final bool dark = snapshot.data.getBool('dark') ?? false;
-                return ThemeChanger(
-                  dark ? MinitelThemeData.dark : MinitelThemeData.light,
-                );
-              },
-              child: const MaterialAppWithTheme(),
-            );
-          }
-          return const Center();
+      child: ChangeNotifierProvider<ThemeChanger>(
+        builder: (_) {
+          final ThemeChanger themeChanger = ThemeChanger(
+            MinitelThemeData.light,
+          );
+          SharedPreferences.getInstance().then((SharedPreferences prefs) {
+            final bool dark = prefs.getBool('dark') ?? false;
+            if (dark != null && dark) {
+              themeChanger.theme = MinitelThemeData.dark;
+            }
+          });
+
+          return themeChanger;
         },
+        child: const MaterialAppWithTheme(),
       ),
     );
   }
