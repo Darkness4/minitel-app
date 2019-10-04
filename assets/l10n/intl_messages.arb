@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-10-04T01:14:53.826300",
+  "@@last_modified": "2019-10-04T08:54:43.834389",
   "forceDark": "Forcer le thème sombre",
   "@forceDark": {
     "type": "text",
@@ -42,11 +42,6 @@
   },
   "AboutLoc_privacyPolicySubtitle": "Aucune donnée est partagée et stockée à votre insu. Les données collectées sont celles que vous nous fournissez (diagnostique) et ne sont jamais sauvegardées. ",
   "@AboutLoc_privacyPolicySubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "AgendaLoc_title": "Agenda",
-  "@AgendaLoc_title": {
     "type": "text",
     "placeholders": {}
   },
@@ -100,24 +95,10 @@
     "type": "text",
     "placeholders": {}
   },
-  "NotificationSettingsLoc_title": "Paramètres de notifications",
-  "@NotificationSettingsLoc_title": {
+  "AgendaLoc_title": "Agenda",
+  "@AgendaLoc_title": {
     "type": "text",
     "placeholders": {}
-  },
-  "NotificationSettingsLoc_enabled1": "Les notifications sont ",
-  "@NotificationSettingsLoc_enabled1": {
-    "description": "[] activées.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "NotificationSettingsLoc_enabled2": "{enabled,select, true{activées.}false{désactivées.}}",
-  "@NotificationSettingsLoc_enabled2": {
-    "description": "Les notifications sont []",
-    "type": "text",
-    "placeholders": {
-      "enabled": {}
-    }
   },
   "NotificationSettingsLoc_early1": "Notifier ",
   "@NotificationSettingsLoc_early1": {
@@ -128,6 +109,12 @@
   "NotificationSettingsLoc_early2": " minutes avant le cours.",
   "@NotificationSettingsLoc_early2": {
     "description": "Notifier X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled1": "Les notifications sont ",
+  "@NotificationSettingsLoc_enabled1": {
+    "description": "[] activées.",
     "type": "text",
     "placeholders": {}
   },
@@ -148,25 +135,18 @@
     "type": "text",
     "placeholders": {}
   },
-  "DocsLoc_title": "Documentation",
-  "@DocsLoc_title": {
+  "NotificationSettingsLoc_title": "Paramètres de notifications",
+  "@NotificationSettingsLoc_title": {
     "type": "text",
     "placeholders": {}
   },
-  "DocsLoc_minitel": "L’asso réseau de la rez’ : si tu as besoin de matériel (câbles, ordi,...), de poser des ques-tions sur le fonctionnement des machines à l’école ou si tu rencontres des problèmes avec ton ordinateur, c’est à nous qu’il faut s’adresser !\n\nL’une des occupations principales de Minitel est l’entretien du réseau Internet de la résidence : cela se traduit par un effort constant dans l’amélioration (nouveaux équipements, monitoring...) du débit et de la fiabilité de ta connexion.\n\nNous te proposons également tout au long de l’année des formations variées qui pourront t’aider lors des cours, ou bien simplement satisfaire ta curiosité en informatique !\n\nEnfin, nous attachons une grande importance à l’animation de la vie étudiante du campus ! Pour cela, nous organisons plusieurs événements informatiques, comme la Nuit de l’Info ou encore des tournois de jeux vidéo !\n\nSi tu souhaites en savoir plus à propos de l’asso et de la vie numérique de la rez’, n’hésite pas à contacter l’un des membres de Minitel : nous serons ravis de pouvoir t’aider et répondre à toutes tes questions",
-  "@DocsLoc_minitel": {
+  "NotificationSettingsLoc_enabled2": "{enabled,select, true{activées.}false{désactivées.}}",
+  "@NotificationSettingsLoc_enabled2": {
+    "description": "Les notifications sont []",
     "type": "text",
-    "placeholders": {}
-  },
-  "DiagnoseLoc_header": "Diagnostique",
-  "@DiagnoseLoc_header": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "DiagnoseLoc_ipaContent": "Donne des informations utiles sur le matériel.\n\nInformations utiles:\n- Status\n- Adresse IP\n- Adresse MAC",
-  "@DiagnoseLoc_ipaContent": {
-    "type": "text",
-    "placeholders": {}
+    "placeholders": {
+      "enabled": {}
+    }
   },
   "DiagnoseLoc_arpContent1": "Affiche les adresses MAC de tous les appareils connectés au téléphone.\n\nLa Passerelle devrait être affiché et l'adresse MAC doit être 00-0d-b4-10-99-e1.\n\nSi l'adresse MAC de la passerelle ne correspond pas à celui de la passerelle, on a affaire à une ARP poisonning : \n",
   "@DiagnoseLoc_arpContent1": {
@@ -183,19 +163,38 @@
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_tracerouteContent": "Affiche le chemin et les délais des paquets vers un serveur Google.\nUtile pour voir les causes de lag.",
-  "@DiagnoseLoc_tracerouteContent": {
+  "DiagnoseLoc_header": "Diagnostique",
+  "@DiagnoseLoc_header": {
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_pingLoContent1": "Vérifie si le logiciel TCP/IP fonctionne.\n",
-  "@DiagnoseLoc_pingLoContent1": {
+  "DiagnoseLoc_httpContent": "Si une erreur 4xx ou 5xx apparait, veuillez le signaler à Minitel.",
+  "@DiagnoseLoc_httpContent": {
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_pingLoContent2": "Devrait être toujours positif.",
-  "@DiagnoseLoc_pingLoContent2": {
-    "description": "Le ping loopback devrait être toujours positif.",
+  "DiagnoseLoc_ipaContent": "Donne des informations utiles sur le matériel.\n\nInformations utiles:\n- Status\n- Adresse IP\n- Adresse MAC",
+  "@DiagnoseLoc_ipaContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent1": "S'il n'y a aucune réponse, mais le ping DNS fonctionne, votre appareil a un problème de cache DNS.\n",
+  "@DiagnoseLoc_nsLookupContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent2": "Pour les appareils portable, redémarrez le Wifi.\nVoici des solutions proposées:",
+  "@DiagnoseLoc_nsLookupContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingDNSContent": "Si un des DNS (sauf 10.163.0.6) répond, vous êtes connecté à Internet.",
+  "@DiagnoseLoc_pingDNSContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingGatewayContent": "La passerelle ignore normalement les pings. Cependant, si un ping est reçu, quelqu'un a probablement pris sont IP. Mais, rien est certain.",
+  "@DiagnoseLoc_pingGatewayContent": {
     "type": "text",
     "placeholders": {}
   },
@@ -214,13 +213,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_httpContent": "Si une erreur 4xx ou 5xx apparait, veuillez le signaler à Minitel.",
-  "@DiagnoseLoc_httpContent": {
+  "DiagnoseLoc_pingLoContent1": "Vérifie si le logiciel TCP/IP fonctionne.\n",
+  "@DiagnoseLoc_pingLoContent1": {
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_reactionHeader": "Comment devrais-je réagir?",
-  "@DiagnoseLoc_reactionHeader": {
+  "DiagnoseLoc_pingLoContent2": "Devrait être toujours positif.",
+  "@DiagnoseLoc_pingLoContent2": {
+    "description": "Le ping loopback devrait être toujours positif.",
     "type": "text",
     "placeholders": {}
   },
@@ -229,43 +229,43 @@
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_pingGatewayContent": "La passerelle ignore normalement les pings. Cependant, si un ping est reçu, quelqu'un a probablement pris sont IP. Mais, rien est certain.",
-  "@DiagnoseLoc_pingGatewayContent": {
+  "DiagnoseLoc_reactionHeader": "Comment devrais-je réagir?",
+  "@DiagnoseLoc_reactionHeader": {
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_pingDNSContent": "Si un des DNS (sauf 10.163.0.6) répond, vous êtes connecté à Internet.",
-  "@DiagnoseLoc_pingDNSContent": {
+  "DiagnoseLoc_tracerouteContent": "Affiche le chemin et les délais des paquets vers un serveur Google.\nUtile pour voir les causes de lag.",
+  "@DiagnoseLoc_tracerouteContent": {
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_nsLookupContent1": "S'il n'y a aucune réponse, mais le ping DNS fonctionne, votre appareil a un problème de cache DNS.\n",
-  "@DiagnoseLoc_nsLookupContent1": {
+  "DocsLoc_minitel": "L’asso réseau de la rez’ : si tu as besoin de matériel (câbles, ordi,...), de poser des ques-tions sur le fonctionnement des machines à l’école ou si tu rencontres des problèmes avec ton ordinateur, c’est à nous qu’il faut s’adresser !\n\nL’une des occupations principales de Minitel est l’entretien du réseau Internet de la résidence : cela se traduit par un effort constant dans l’amélioration (nouveaux équipements, monitoring...) du débit et de la fiabilité de ta connexion.\n\nNous te proposons également tout au long de l’année des formations variées qui pourront t’aider lors des cours, ou bien simplement satisfaire ta curiosité en informatique !\n\nEnfin, nous attachons une grande importance à l’animation de la vie étudiante du campus ! Pour cela, nous organisons plusieurs événements informatiques, comme la Nuit de l’Info ou encore des tournois de jeux vidéo !\n\nSi tu souhaites en savoir plus à propos de l’asso et de la vie numérique de la rez’, n’hésite pas à contacter l’un des membres de Minitel : nous serons ravis de pouvoir t’aider et répondre à toutes tes questions",
+  "@DocsLoc_minitel": {
     "type": "text",
     "placeholders": {}
   },
-  "DiagnoseLoc_nsLookupContent2": "Pour les appareils portable, redémarrez le Wifi.\nVoici des solutions proposées:",
-  "@DiagnoseLoc_nsLookupContent2": {
+  "DocsLoc_title": "Documentation",
+  "@DocsLoc_title": {
     "type": "text",
     "placeholders": {}
   },
-  "LoginLoc_header": "Authentification",
-  "@LoginLoc_header": {
+  "DualbootLoc_changeLinuxContent": "    •  Généralement, on ne change pas de Linux. S'il manque de la customization, cherchez \"Comment customiser un Display Manager(DM), ou un Window Manager (WM)\". Cherchez \"Comment customiser un terminal\" et testez les configs sur une VM\n    •  Envie de hacker ? Les outils de Kali Linux sont téléchargeables indépendaments de l'OS\n    •  LTS ? Généralement les LTS sont beaucoup plus stables\n    •  Egalement, 80 % des utilisateurs de Ubuntu préfèrent réinstaller que faire un dist-upgrade.\n",
+  "@DualbootLoc_changeLinuxContent": {
     "type": "text",
     "placeholders": {}
   },
-  "LoginLoc_domainNameContent1": "Choisir entre fw-cgcp.emse.fr, 10.163.0.2 et 195.83.139.7\n",
-  "@LoginLoc_domainNameContent1": {
+  "DualbootLoc_changeLinuxHeader": "Changez de GNU/Linux ou pas...\n",
+  "@DualbootLoc_changeLinuxHeader": {
     "type": "text",
     "placeholders": {}
   },
-  "LoginLoc_domainNameContent2": "Si le réseau local supporte un DNS, tel que 192.168.130.33 (DSI) ou 10.163.0.6 (Minitel), vous pouvez tenter fw-cgcp.emse.fr.\nSi le réseau est celui de Minitel (WiFi Minitel), utilisez 10.163.0.2\n",
-  "@LoginLoc_domainNameContent2": {
+  "DualbootLoc_customizeContent": "    •  Première fois ? Lubuntu LTS (au pire Kubuntu) ou Linux Mint\n    •  Deuxième fois ? Connaissez la différence entre KDE, Gnome, XFCE, LXDE, MATE, awesomewm...Et allez voir r/unixporn\n    •  Quelque chose de stylé et déjà fait ? MX Linux, deepin, Linux Lite, Elementary OS, Pop!_OS, ...\n    •  Envie de customizer à mort ? Arch Linux, Alpine, Manjaro, Debian\n    •  Quelque chose de professionel ? CentOS\n    •  Un simple server ? OpenSUSE\n    •  15 MB ? Alpine, Tiny Core (docker only)\n    •  Raspberry PI ? Raspbian\n    •  Pentest ONLY ? Kali Linux\n    •  Envie de se suicider ? \"Free Software Fondation OS\"\n    •  Pire que la mort ? Linux From Scratch\n    •  Faire ressuciter un Android en serveur Linux ? postmarketOS\n\n",
+  "@DualbootLoc_customizeContent": {
     "type": "text",
     "placeholders": {}
   },
-  "LoginLoc_domainNameContent3": "Généralement, 195.83.139.7 convient dans 90 % des cas.\nIl s'agit de l'addresse IP publique du portail, et est autorisé par la passerelle.\n",
-  "@LoginLoc_domainNameContent3": {
+  "DualbootLoc_customizeHeader": "La customization n'est pas limitée. Observez quelles distributions convient le mieux :\n",
+  "@DualbootLoc_customizeHeader": {
     "type": "text",
     "placeholders": {}
   },
@@ -279,43 +279,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "DualbootLoc_risksHeader": "Prenez conscience des risques d'installer Linux :\n",
-  "@DualbootLoc_risksHeader": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "DualbootLoc_risksContent": "    •  Linux est plus stable, mais les mises à jours de distributions sont plus fragiles (80 % des utilisateurs de Ubuntu préfère réinstaller que mettre à jour)\n    •  Les pilotes sont les premières causes de crash brutal (NVIDIA, Realtek...)\n    •  Une mauvaise config du BIOS peut également vous être fatal\n\n",
-  "@DualbootLoc_risksContent": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "DualbootLoc_customizeHeader": "La customization n'est pas limitée. Observez quelles distributions convient le mieux :\n",
-  "@DualbootLoc_customizeHeader": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "DualbootLoc_customizeContent": "    •  Première fois ? Lubuntu LTS (au pire Kubuntu) ou Linux Mint\n    •  Deuxième fois ? Connaissez la différence entre KDE, Gnome, XFCE, LXDE, MATE, awesomewm...Et allez voir r/unixporn\n    •  Quelque chose de stylé et déjà fait ? MX Linux, deepin, Linux Lite, Elementary OS, Pop!_OS, ...\n    •  Envie de customizer à mort ? Arch Linux, Alpine, Manjaro, Debian\n    •  Quelque chose de professionel ? CentOS\n    •  Un simple server ? OpenSUSE\n    •  15 MB ? Alpine, Tiny Core (docker only)\n    •  Raspberry PI ? Raspbian\n    •  Pentest ONLY ? Kali Linux\n    •  Envie de se suicider ? \"Free Software Fondation OS\"\n    •  Pire que la mort ? Linux From Scratch\n    •  Faire ressuciter un Android en serveur Linux ? postmarketOS\n\n",
-  "@DualbootLoc_customizeContent": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "DualbootLoc_prepHeader": "Préparations :\n",
-  "@DualbootLoc_prepHeader": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "DualbootLoc_prepContent": "    •  Windows\n    •  Clé USB 4 Go\n    •  Connaitre le type de BIOS : UEFI ou Legacy\n    •  Désactiver le Secure Boot\n    •  Désactiver le Fast Boot\n    •  Préparer une partition vide de minimum 50 Go\n    •  Avec Rufus, flashez une image sur la clé (FAT32, mettre à jour syslinux, mode ISO), en MBR\n\n",
-  "@DualbootLoc_prepContent": {
+  "DualbootLoc_installContent": "    •  Langue, Timezone, Network...\n    •  Configuration du disque manuel (conseillé)\n    •  Dans l'ordre : \n           •  \"/dev/sda1\" monté sur \"/\" en ext4, Taille de la partition Linux\n           •  \"/dev/sda2\" étant le SWAP, Taille = 1.5 * RAM si hibernation, sinon Taille = 1 / 4 * RAM\n    •  Le GRUB (boot loader) doit être installé à côté de Windows ! (en MBR, sinon ignorez)\n    •  Vérifiez et confirmez les partitions (regardez si windows est toujours là 🙂)\n    •  Etc (attendez la fin de l'installation)...\n    •  (UEFI) Changez l'ordre de boot UEFI dans le BIOS\n\n",
+  "@DualbootLoc_installContent": {
     "type": "text",
     "placeholders": {}
   },
   "DualbootLoc_installHeader": "Installer Linux (booter sur la clé en changeant l'ordre de boot sur le BIOS ou via une touche de clavier (F11? Suppr? Insert? F1? F2? F12?)) :\n",
   "@DualbootLoc_installHeader": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "DualbootLoc_installContent": "    •  Langue, Timezone, Network...\n    •  Configuration du disque manuel (conseillé)\n    •  Dans l'ordre : \n           •  \"/dev/sda1\" monté sur \"/\" en ext4, Taille de la partition Linux\n           •  \"/dev/sda2\" étant le SWAP, Taille = 1.5 * RAM si hibernation, sinon Taille = 1 / 4 * RAM\n    •  Le GRUB (boot loader) doit être installé à côté de Windows ! (en MBR, sinon ignorez)\n    •  Vérifiez et confirmez les partitions (regardez si windows est toujours là 🙂)\n    •  Etc (attendez la fin de l'installation)...\n    •  (UEFI) Changez l'ordre de boot UEFI dans le BIOS\n\n",
-  "@DualbootLoc_installContent": {
     "type": "text",
     "placeholders": {}
   },
@@ -339,23 +309,28 @@
     "type": "text",
     "placeholders": {}
   },
-  "DualbootLoc_changeLinuxHeader": "Changez de GNU/Linux ou pas...\n",
-  "@DualbootLoc_changeLinuxHeader": {
+  "DualbootLoc_prepContent": "    •  Windows\n    •  Clé USB 4 Go\n    •  Connaitre le type de BIOS : UEFI ou Legacy\n    •  Désactiver le Secure Boot\n    •  Désactiver le Fast Boot\n    •  Préparer une partition vide de minimum 50 Go\n    •  Avec Rufus, flashez une image sur la clé (FAT32, mettre à jour syslinux, mode ISO), en MBR\n\n",
+  "@DualbootLoc_prepContent": {
     "type": "text",
     "placeholders": {}
   },
-  "DualbootLoc_changeLinuxContent": "    •  Généralement, on ne change pas de Linux. S'il manque de la customization, cherchez \"Comment customiser un Display Manager(DM), ou un Window Manager (WM)\". Cherchez \"Comment customiser un terminal\" et testez les configs sur une VM\n    •  Envie de hacker ? Les outils de Kali Linux sont téléchargeables indépendaments de l'OS\n    •  LTS ? Généralement les LTS sont beaucoup plus stables\n    •  Egalement, 80 % des utilisateurs de Ubuntu préfèrent réinstaller que faire un dist-upgrade.\n",
-  "@DualbootLoc_changeLinuxContent": {
+  "DualbootLoc_prepHeader": "Préparations :\n",
+  "@DualbootLoc_prepHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksContent": "    •  Linux est plus stable, mais les mises à jours de distributions sont plus fragiles (80 % des utilisateurs de Ubuntu préfère réinstaller que mettre à jour)\n    •  Les pilotes sont les premières causes de crash brutal (NVIDIA, Realtek...)\n    •  Une mauvaise config du BIOS peut également vous être fatal\n\n",
+  "@DualbootLoc_risksContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksHeader": "Prenez conscience des risques d'installer Linux :\n",
+  "@DualbootLoc_risksHeader": {
     "type": "text",
     "placeholders": {}
   },
   "ImprimanteLoc_header": "Configurer l'imprimante",
   "@ImprimanteLoc_header": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "ImprimanteLoc_windowsContent": "    -  Ouvrir \\\\192.168.130.2 avec l'explorer Windows\n    -  Mettre prenom.nom et mot de passe (testez également EMSE2000\\prenom.nom)\n    -  Double-cliquer sur \"imprimantes-gpc\"",
-  "@ImprimanteLoc_windowsContent": {
     "type": "text",
     "placeholders": {}
   },
@@ -374,6 +349,31 @@
     "type": "text",
     "placeholders": {}
   },
+  "ImprimanteLoc_windowsContent": "    -  Ouvrir \\\\192.168.130.2 avec l'explorer Windows\n    -  Mettre prenom.nom et mot de passe (testez également EMSE2000\\prenom.nom)\n    -  Double-cliquer sur \"imprimantes-gpc\"",
+  "@ImprimanteLoc_windowsContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent1": "Choisir entre fw-cgcp.emse.fr, 10.163.0.2 et 195.83.139.7\n",
+  "@LoginLoc_domainNameContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent2": "Si le réseau local supporte un DNS, tel que 192.168.130.33 (DSI) ou 10.163.0.6 (Minitel), vous pouvez tenter fw-cgcp.emse.fr.\nSi le réseau est celui de Minitel (WiFi Minitel), utilisez 10.163.0.2\n",
+  "@LoginLoc_domainNameContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent3": "Généralement, 195.83.139.7 convient dans 90 % des cas.\nIl s'agit de l'addresse IP publique du portail, et est autorisé par la passerelle.\n",
+  "@LoginLoc_domainNameContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_header": "Authentification",
+  "@LoginLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
   "MailLoc_header": "Importation des mails Sogo",
   "@MailLoc_header": {
     "type": "text",
@@ -389,13 +389,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "VMLoc_definitionHeader": "Une VM, c'est :\n",
-  "@VMLoc_definitionHeader": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "VMLoc_definitionContent": "    Une Machine dont les composants sont émulées.\n    Une Machine qui est strictement isolée de l'hôte.\n    Comme les composants sont émulées, les chances de crash d'une VM sont largement moins faibles\n\n",
-  "@VMLoc_definitionContent": {
+  "VMLoc_customizeContent": "    -  Utile pour avoir une sandbox et faire plein de tests.\n    -  Utile pour s'entraîner à Linux (WM, DM, pilotes, installations...), sans faire péter son dual boot.\n    -  Utile pour faire un VPS.\n    -  Utile pour faire un compilateur avec un environnement dédié et protégé.\n\n",
+  "@VMLoc_customizeContent": {
     "type": "text",
     "placeholders": {}
   },
@@ -404,38 +399,18 @@
     "type": "text",
     "placeholders": {}
   },
-  "VMLoc_customizeContent": "    -  Utile pour avoir une sandbox et faire plein de tests.\n    -  Utile pour s'entraîner à Linux (WM, DM, pilotes, installations...), sans faire péter son dual boot.\n    -  Utile pour faire un VPS.\n    -  Utile pour faire un compilateur avec un environnement dédié et protégé.\n\n",
-  "@VMLoc_customizeContent": {
+  "VMLoc_definitionContent": "    Une Machine dont les composants sont émulées.\n    Une Machine qui est strictement isolée de l'hôte.\n    Comme les composants sont émulées, les chances de crash d'une VM sont largement moins faibles\n\n",
+  "@VMLoc_definitionContent": {
     "type": "text",
     "placeholders": {}
   },
-  "VMLoc_installHeader": "Cela va sans dire qu'il est inutile pour une VM d'avoir une interface graphique.\nTrès souvent, une connexion SSH est mise en place au lieu d'utiliser l'interface graphique ou TTY.\n\nGénéralement, l'installation d'une VM est rapide et simple :\n",
-  "@VMLoc_installHeader": {
+  "VMLoc_definitionHeader": "Une VM, c'est :\n",
+  "@VMLoc_definitionHeader": {
     "type": "text",
     "placeholders": {}
   },
-  "VMLoc_installContent": "    -  Création d'un disque virtuel > 20 Go\n    -  Insertion d'une image Linux dans le port CD émulé\n    -  Installation de Linux (similaire à un dual boot)\n    -  Configuration d'un accès SSH/telnet/RDP\n",
-  "@VMLoc_installContent": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "VMLoc_vmTypeHeader": "Certains hyperviseurs (VirtualBox, VMWare, Hyper-V) sont même équipés de fonctions d'installation rapide.\n\nCela permet également de s'entraîner aux dual boot 😄.\n\nTypes de VM :\n",
-  "@VMLoc_vmTypeHeader": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "VMLoc_vmTypeContent": "    -  Type I : Bare Metal, l'OS est lui-même l'hyperviseur.\n    -  Type II : Hosted, l'hyperviseur est hébergé par l'OS hôte.\n\n",
-  "@VMLoc_vmTypeContent": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "VMLoc_hypervisorHeader": "Voici l'ordre de préférence d'un Hyperviseur :\n",
-  "@VMLoc_hypervisorHeader": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "VMLoc_hypervisorContent": "    1.  [Leader] Hyper-V (type 1, Windows, si possible)\n    2.  [Visionary] KVM (type 1, Linux, 👍 Android)\n    3.  [Leader] VMWare Workstation (type 2, 👍 pour les réseaux, GNS3 et tout le reste)\n    4.  [Niche Player] VirtualBox (type 2)\n    5.  [Leader] VMware ESXi (type 1, pour les professionnels)\n\n",
-  "@VMLoc_hypervisorContent": {
+  "VMLoc_envContent": "    -  Pour Linux : Docker, (Container Linux, c-à-d. environnement dédié par application) (Notez que ça marche aussi sur Windows parce que ça tourne une VM Linux sur Hyper-V en arrière plan.)\n    -  Pour Windows : Windows Subsystem for Linux 1 (Kernel Linux natif. Attention, le matériel n'est pas émulé !)\n    -  Pour Windows : Windows Subsystem for Linux 2 (+ Docker) (Kernel Linux dans une micro-VM. Extrêmement rapide et RAM dynamiquement alloué.)\n",
+  "@VMLoc_envContent": {
     "type": "text",
     "placeholders": {}
   },
@@ -444,8 +419,33 @@
     "type": "text",
     "placeholders": {}
   },
-  "VMLoc_envContent": "    -  Pour Linux : Docker, (Container Linux, c-à-d. environnement dédié par application) (Notez que ça marche aussi sur Windows parce que ça tourne une VM Linux sur Hyper-V en arrière plan.)\n    -  Pour Windows : Windows Subsystem for Linux 1 (Kernel Linux natif. Attention, le matériel n'est pas émulé !)\n    -  Pour Windows : Windows Subsystem for Linux 2 (+ Docker) (Kernel Linux dans une micro-VM. Extrêmement rapide et RAM dynamiquement alloué.)\n",
-  "@VMLoc_envContent": {
+  "VMLoc_hypervisorContent": "    1.  [Leader] Hyper-V (type 1, Windows, si possible)\n    2.  [Visionary] KVM (type 1, Linux, 👍 Android)\n    3.  [Leader] VMWare Workstation (type 2, 👍 pour les réseaux, GNS3 et tout le reste)\n    4.  [Niche Player] VirtualBox (type 2)\n    5.  [Leader] VMware ESXi (type 1, pour les professionnels)\n\n",
+  "@VMLoc_hypervisorContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorHeader": "Voici l'ordre de préférence d'un Hyperviseur :\n",
+  "@VMLoc_hypervisorHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installContent": "    -  Création d'un disque virtuel > 20 Go\n    -  Insertion d'une image Linux dans le port CD émulé\n    -  Installation de Linux (similaire à un dual boot)\n    -  Configuration d'un accès SSH/telnet/RDP\n",
+  "@VMLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installHeader": "Cela va sans dire qu'il est inutile pour une VM d'avoir une interface graphique.\nTrès souvent, une connexion SSH est mise en place au lieu d'utiliser l'interface graphique ou TTY.\n\nGénéralement, l'installation d'une VM est rapide et simple :\n",
+  "@VMLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeContent": "    -  Type I : Bare Metal, l'OS est lui-même l'hyperviseur.\n    -  Type II : Hosted, l'hyperviseur est hébergé par l'OS hôte.\n\n",
+  "@VMLoc_vmTypeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeHeader": "Certains hyperviseurs (VirtualBox, VMWare, Hyper-V) sont même équipés de fonctions d'installation rapide.\n\nCela permet également de s'entraîner aux dual boot 😄.\n\nTypes de VM :\n",
+  "@VMLoc_vmTypeHeader": {
     "type": "text",
     "placeholders": {}
   },
@@ -459,43 +459,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "PortalLoc_title": "Authentification",
-  "@PortalLoc_title": {
+  "AppListLoc_portal": "Portail",
+  "@AppListLoc_portal": {
     "type": "text",
     "placeholders": {}
   },
-  "PortalLoc_autoLogin": "Se connecter automatiquement",
-  "@PortalLoc_autoLogin": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "PortalLoc_login": "Se connecter",
-  "@PortalLoc_login": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "PortalLoc_rememberMe": "Se souvenir ",
-  "@PortalLoc_rememberMe": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "PortalLoc_password": "Mot de passe",
-  "@PortalLoc_password": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "PortalLoc_domainNameHeader": "Nom de domaine / IP",
-  "@PortalLoc_domainNameHeader": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "PortalLoc_usernameLabel": "Nom d'utilisateur",
-  "@PortalLoc_usernameLabel": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "PortalLoc_usernameHint": "prenom.nom",
-  "@PortalLoc_usernameHint": {
+  "AppListLoc_printer": "Imprimante",
+  "@AppListLoc_printer": {
     "type": "text",
     "placeholders": {}
   },
@@ -504,19 +474,45 @@
     "type": "text",
     "placeholders": {}
   },
-  "PortalLoc_statusInSeconds": "{seconds} secondes restantes",
-  "@PortalLoc_statusInSeconds": {
+  "PortalLoc_autoLogin": "Se connecter automatiquement",
+  "@PortalLoc_autoLogin": {
     "type": "text",
-    "placeholders": {
-      "seconds": {}
-    }
+    "placeholders": {}
   },
-  "PortalLoc_statusInMinutes": "{minutes} minutes restantes",
-  "@PortalLoc_statusInMinutes": {
+  "PortalLoc_domainNameHeader": "Nom de domaine / IP",
+  "@PortalLoc_domainNameHeader": {
     "type": "text",
-    "placeholders": {
-      "minutes": {}
-    }
+    "placeholders": {}
+  },
+  "PortalLoc_login": "Se connecter",
+  "@PortalLoc_login": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_password": "Mot de passe",
+  "@PortalLoc_password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_rememberMe": "Se souvenir ",
+  "@PortalLoc_rememberMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_title": "Authentification",
+  "@PortalLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameHint": "prenom.nom",
+  "@PortalLoc_usernameHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameLabel": "Nom d'utilisateur",
+  "@PortalLoc_usernameLabel": {
+    "type": "text",
+    "placeholders": {}
   },
   "PortalLoc_statusInHM": "{hours} heures and {minutes} minutes restantes",
   "@PortalLoc_statusInHM": {
@@ -526,18 +522,22 @@
       "minutes": {}
     }
   },
-  "AppListLoc_printer": "Imprimante",
-  "@AppListLoc_printer": {
+  "PortalLoc_statusInMinutes": "{minutes} minutes restantes",
+  "@PortalLoc_statusInMinutes": {
     "type": "text",
-    "placeholders": {}
+    "placeholders": {
+      "minutes": {}
+    }
   },
-  "AppListLoc_portal": "Portail",
-  "@AppListLoc_portal": {
+  "PortalLoc_statusInSeconds": "{seconds} secondes restantes",
+  "@PortalLoc_statusInSeconds": {
     "type": "text",
-    "placeholders": {}
+    "placeholders": {
+      "seconds": {}
+    }
   },
-  "ReportingLoc_title": "Signaler Minitel",
-  "@ReportingLoc_title": {
+  "ReportingLoc_chamberHint": "Numero de chambre",
+  "@ReportingLoc_chamberHint": {
     "type": "text",
     "placeholders": {}
   },
@@ -546,18 +546,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_chamberHint": "Numero de chambre",
-  "@ReportingLoc_chamberHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "ReportingLoc_notEmpty": "Ne doit pas être vide",
-  "@ReportingLoc_notEmpty": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "ReportingLoc_idLabel": "Identité",
-  "@ReportingLoc_idLabel": {
+  "ReportingLoc_forceName": "Nom ET Prénom",
+  "@ReportingLoc_forceName": {
     "type": "text",
     "placeholders": {}
   },
@@ -566,23 +556,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_forceName": "Nom ET Prénom",
-  "@ReportingLoc_forceName": {
+  "ReportingLoc_idLabel": "Identité",
+  "@ReportingLoc_idLabel": {
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_titleLabel": "Titre",
-  "@ReportingLoc_titleLabel": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "ReportingLoc_titleHint": "J'ai plus internet !",
-  "@ReportingLoc_titleHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "ReportingLoc_slack": "Notifier sur Slack",
-  "@ReportingLoc_slack": {
+  "ReportingLoc_notEmpty": "Ne doit pas être vide",
+  "@ReportingLoc_notEmpty": {
     "type": "text",
     "placeholders": {}
   },
@@ -591,13 +571,23 @@
     "type": "text",
     "placeholders": {}
   },
-  "TutorialLoc_header": "Comment signaler sans internet ?",
-  "@TutorialLoc_header": {
+  "ReportingLoc_slack": "Notifier sur Slack",
+  "@ReportingLoc_slack": {
     "type": "text",
     "placeholders": {}
   },
-  "TutorialLoc_notice": "REMARQUE : Il est recommandé d'installer le Root et Busybox.",
-  "@TutorialLoc_notice": {
+  "ReportingLoc_title": "Signaler Minitel",
+  "@ReportingLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleHint": "J'ai plus internet !",
+  "@ReportingLoc_titleHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleLabel": "Titre",
+  "@ReportingLoc_titleLabel": {
     "type": "text",
     "placeholders": {}
   },
@@ -616,11 +606,6 @@
     "type": "text",
     "placeholders": {}
   },
-  "TutorialLoc_example": "Exemple : \nTitre: Pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c'est ok.",
-  "@TutorialLoc_example": {
-    "type": "text",
-    "placeholders": {}
-  },
   "TutorialLoc_content4": "4. Connectez-vous sur un réseau où il y a Internet.",
   "@TutorialLoc_content4": {
     "type": "text",
@@ -628,6 +613,21 @@
   },
   "TutorialLoc_content5": "5. Envoyez le rapport.",
   "@TutorialLoc_content5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_example": "Exemple : \nTitre: Pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c'est ok.",
+  "@TutorialLoc_example": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_header": "Comment signaler sans internet ?",
+  "@TutorialLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_notice": "REMARQUE : Il est recommandé d'installer le Root et Busybox.",
+  "@TutorialLoc_notice": {
     "type": "text",
     "placeholders": {}
   }

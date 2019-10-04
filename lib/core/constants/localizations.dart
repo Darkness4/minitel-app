@@ -12,20 +12,20 @@ import 'localizations/news.dart';
 class AppLoc {
   static const LocalizationsDelegate<AppLoc> delegate = AppLocDelegate();
   final String localeName;
-  final AgendaLoc agenda;
-  final NewsLoc news;
-  final DocsLoc docs;
-  final PortalLoc portal;
-  final ReportingLoc reporting;
-  final AboutLoc about;
+  AppLoc(this.localeName);
+  AboutLoc get about => AboutLoc(localeName);
+  AgendaLoc get agenda => AgendaLoc(localeName);
+  DocsLoc get docs => DocsLoc(localeName);
+  String get forceDark => Intl.message(
+        "Forcer le thème sombre",
+        name: 'forceDark',
+        locale: localeName,
+      );
+  NewsLoc get news => NewsLoc(localeName);
 
-  AppLoc(this.localeName)
-      : agenda = AgendaLoc(localeName),
-        docs = DocsLoc(localeName),
-        news = NewsLoc(localeName),
-        portal = PortalLoc(localeName),
-        reporting = ReportingLoc(localeName),
-        about = AboutLoc(localeName);
+  PortalLoc get portal => PortalLoc(localeName);
+
+  ReportingLoc get reporting => ReportingLoc(localeName);
 
   static Future<AppLoc> load(Locale locale) {
     final String name =
@@ -36,12 +36,6 @@ class AppLoc {
       return AppLoc(localeName);
     });
   }
-
-  String get forceDark => Intl.message(
-        "Forcer le thème sombre",
-        name: 'forceDark',
-        locale: localeName,
-      );
 
   static AppLoc of(BuildContext context) {
     return Localizations.of<AppLoc>(context, AppLoc);

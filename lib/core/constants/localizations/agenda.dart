@@ -2,16 +2,7 @@ import 'package:intl/intl.dart';
 
 class AgendaLoc {
   final String localeName;
-  final NotificationSettingsLoc notificationSettings;
-  AgendaLoc(this.localeName)
-      : notificationSettings = NotificationSettingsLoc(localeName);
-
-  String get title => Intl.message(
-        'Agenda',
-        name: 'AgendaLoc_title',
-        locale: localeName,
-      );
-
+  AgendaLoc(this.localeName);
   List<String> get cases => <String>[
         emptyAgenda0,
         emptyAgenda1,
@@ -30,11 +21,13 @@ class AgendaLoc {
         name: "AgendaLoc_emptyAgenda0",
         locale: localeName,
       );
+
   String get emptyAgenda1 => Intl.message(
         "Ça sent le barbecue....",
         name: "AgendaLoc_emptyAgenda1",
         locale: localeName,
       );
+
   String get emptyAgenda2 => Intl.message(
         "Libeeeeertééé !",
         name: "AgendaLoc_emptyAgenda2",
@@ -75,33 +68,18 @@ class AgendaLoc {
         name: "AgendaLoc_emptyAgenda9",
         locale: localeName,
       );
+  NotificationSettingsLoc get notificationSettings =>
+      NotificationSettingsLoc(localeName);
+  String get title => Intl.message(
+        'Agenda',
+        name: 'AgendaLoc_title',
+        locale: localeName,
+      );
 }
 
 class NotificationSettingsLoc {
   final String localeName;
   const NotificationSettingsLoc(this.localeName);
-
-  String get title => Intl.message(
-        "Paramètres de notifications",
-        name: 'NotificationSettingsLoc_title',
-        locale: localeName,
-      );
-
-  String get enabled1 => Intl.message(
-        "Les notifications sont ",
-        name: 'NotificationSettingsLoc_enabled1',
-        desc: '[] activées.',
-        locale: localeName,
-      );
-
-  String enabled2(bool enabled) => Intl.select(
-        enabled,
-        <bool, String>{true: 'activées.', false: 'désactivées.'},
-        name: 'NotificationSettingsLoc_enabled2',
-        args: <bool>[enabled],
-        desc: 'Les notifications sont []',
-        locale: localeName,
-      );
 
   String get early1 => Intl.message(
         "Notifier ",
@@ -114,6 +92,13 @@ class NotificationSettingsLoc {
         " minutes avant le cours.",
         name: 'NotificationSettingsLoc_early2',
         desc: 'Notifier X []',
+        locale: localeName,
+      );
+
+  String get enabled1 => Intl.message(
+        "Les notifications sont ",
+        name: 'NotificationSettingsLoc_enabled1',
+        desc: '[] activées.',
         locale: localeName,
       );
 
@@ -134,6 +119,21 @@ class NotificationSettingsLoc {
   String get save => Intl.message(
         "Sauvegarder",
         name: 'NotificationSettingsLoc_save',
+        locale: localeName,
+      );
+
+  String get title => Intl.message(
+        "Paramètres de notifications",
+        name: 'NotificationSettingsLoc_title',
+        locale: localeName,
+      );
+
+  String enabled2(bool enabled) => Intl.select(
+        enabled,
+        <bool, String>{true: 'activées.', false: 'désactivées.'},
+        name: 'NotificationSettingsLoc_enabled2',
+        args: <bool>[enabled],
+        desc: 'Les notifications sont []',
         locale: localeName,
       );
 }

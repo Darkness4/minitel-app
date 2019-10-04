@@ -1,13 +1,29 @@
 import 'package:intl/intl.dart';
 
+class AppListLoc {
+  final String localeName;
+  AppListLoc(this.localeName);
+  String get portal => Intl.message(
+        "Portail",
+        name: 'AppListLoc_portal',
+        locale: localeName,
+      );
+
+  String get printer => Intl.message(
+        "Imprimante",
+        name: 'AppListLoc_printer',
+        locale: localeName,
+      );
+}
+
 class PortalLoc {
   final String localeName;
-  final AppListLoc apps;
-  PortalLoc(this.localeName) : apps = AppListLoc(localeName);
+  PortalLoc(this.localeName);
+  AppListLoc get apps => AppListLoc(localeName);
 
-  String get title => Intl.message(
-        'Authentification',
-        name: 'PortalLoc_title',
+  String get authTime => Intl.message(
+        "Durée d\'authentification ",
+        name: 'PortalLoc_authTime',
         locale: localeName,
       );
 
@@ -16,14 +32,14 @@ class PortalLoc {
         name: 'PortalLoc_autoLogin',
         locale: localeName,
       );
+  String get domainNameHeader => Intl.message(
+        "Nom de domaine / IP",
+        name: 'PortalLoc_domainNameHeader',
+        locale: localeName,
+      );
   String get login => Intl.message(
         "Se connecter",
         name: 'PortalLoc_login',
-        locale: localeName,
-      );
-  String get rememberMe => Intl.message(
-        "Se souvenir ",
-        name: 'PortalLoc_rememberMe',
         locale: localeName,
       );
   String get password => Intl.message(
@@ -32,15 +48,15 @@ class PortalLoc {
         locale: localeName,
       );
 
-  String get domainNameHeader => Intl.message(
-        "Nom de domaine / IP",
-        name: 'PortalLoc_domainNameHeader',
+  String get rememberMe => Intl.message(
+        "Se souvenir ",
+        name: 'PortalLoc_rememberMe',
         locale: localeName,
       );
 
-  String get usernameLabel => Intl.message(
-        "Nom d'utilisateur",
-        name: 'PortalLoc_usernameLabel',
+  String get title => Intl.message(
+        'Authentification',
+        name: 'PortalLoc_title',
         locale: localeName,
       );
 
@@ -50,16 +66,16 @@ class PortalLoc {
         locale: localeName,
       );
 
-  String get authTime => Intl.message(
-        "Durée d\'authentification ",
-        name: 'PortalLoc_authTime',
+  String get usernameLabel => Intl.message(
+        "Nom d'utilisateur",
+        name: 'PortalLoc_usernameLabel',
         locale: localeName,
       );
 
-  String statusInSeconds(int seconds) => Intl.message(
-        "${seconds} secondes restantes",
-        name: 'PortalLoc_statusInSeconds',
-        args: <Object>[seconds],
+  String statusInHM(int hours, int minutes) => Intl.message(
+        "${hours} heures and ${minutes} minutes restantes",
+        name: 'PortalLoc_statusInHM',
+        args: <Object>[hours, minutes],
         locale: localeName,
       );
   String statusInMinutes(int minutes) => Intl.message(
@@ -68,26 +84,10 @@ class PortalLoc {
         args: <Object>[minutes],
         locale: localeName,
       );
-  String statusInHM(int hours, int minutes) => Intl.message(
-        "${hours} heures and ${minutes} minutes restantes",
-        name: 'PortalLoc_statusInHM',
-        args: <Object>[hours, minutes],
-        locale: localeName,
-      );
-}
-
-class AppListLoc {
-  final String localeName;
-  AppListLoc(this.localeName);
-  String get printer => Intl.message(
-        "Imprimante",
-        name: 'AppListLoc_printer',
-        locale: localeName,
-      );
-
-  String get portal => Intl.message(
-        "Portail",
-        name: 'AppListLoc_portal',
+  String statusInSeconds(int seconds) => Intl.message(
+        "${seconds} secondes restantes",
+        name: 'PortalLoc_statusInSeconds',
+        args: <Object>[seconds],
         locale: localeName,
       );
 }
