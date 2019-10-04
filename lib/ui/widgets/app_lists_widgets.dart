@@ -31,6 +31,11 @@ class ScaffoldWebView extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.close, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+            tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+          ),
           backgroundColor: backgroundColor,
           title: title,
           elevation: 0.0,

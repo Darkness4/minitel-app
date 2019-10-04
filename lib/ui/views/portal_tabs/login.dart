@@ -87,41 +87,58 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Form(
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: TextFormField(
-                            key: const Key('login/uid'),
-                            focusNode: model.uidFocusNode,
-                            controller: model.uidController,
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.person),
-                              hintText: AppLoc.of(context).portal.usernameHint,
-                              labelText:
-                                  AppLoc.of(context).portal.usernameLabel,
-                            ),
-                            onEditingComplete: () {
-                              model.uidFocusNode.unfocus();
-                              FocusScope.of(context)
-                                  .requestFocus(model.pswdFocusNode);
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: TextFormField(
-                            key: const Key('login/pswd'),
-                            controller: model.pswdController,
-                            obscureText: true,
-                            focusNode: model.pswdFocusNode,
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.vpn_key),
-                              labelText: AppLoc.of(context).portal.password,
+                    key: model.formKey,
+                    child: FocusScope(
+                      node: model.formNode,
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              key: const Key('login/uid'),
+                              controller: model.uidController,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.person),
+                                hintText:
+                                    AppLoc.of(context).portal.usernameHint,
+                                labelText:
+                                    AppLoc.of(context).portal.usernameLabel,
+                              ),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return AppLoc.of(context).reporting.notEmpty;
+                                }
+                                return null;
+                              },
+                              onFieldSubmitted: (_) {
+                                model.formNode.nextFocus();
+                              },
                             ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              key: const Key('login/pswd'),
+                              controller: model.pswdController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.vpn_key),
+                                labelText: AppLoc.of(context).portal.password,
+                              ),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return AppLoc.of(context).reporting.notEmpty;
+                                }
+                                return null;
+                              },
+                              onFieldSubmitted: (_) {
+                                model.formNode.unfocus();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Row(
@@ -242,8 +259,8 @@ class _StatusCard extends StatelessWidget {
                       key: const Key('login/gateway_text'),
                       style: TextStyle(
                         color: (snapshot.hasData && !snapshot.hasError)
-                            ? Colors.green
-                            : Colors.red,
+                            ? Theme.of(context).accentColor
+                            : Theme.of(context).errorColor,
                         fontWeight: FontWeight.bold,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -276,15 +293,15 @@ class _StatusCard extends StatelessWidget {
                     if (!snapshot.hasData ||
                         snapshot.hasError ||
                         snapshot.data == "") {
-                      return const Icon(
+                      return Icon(
                         Icons.close,
-                        color: Colors.red,
+                        color: Theme.of(context).errorColor,
                       );
                     }
-                    return const Icon(
+                    return Icon(
                       Icons.done,
-                      color: Colors.green,
-                      key: Key('login/agenda_success'),
+                      color: Theme.of(context).accentColor,
+                      key: const Key('login/agenda_success'),
                     ); // unreachable
                   },
                 ),
@@ -297,15 +314,15 @@ class _StatusCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 20),
                 ),
                 if (_portailAPI.cookies.isEmpty)
-                  const Icon(
+                  Icon(
                     Icons.close,
-                    color: Colors.red,
+                    color: Theme.of(context).errorColor,
                   )
                 else
-                  const Icon(
+                  Icon(
                     Icons.done,
-                    color: Colors.green,
-                    key: Key('login/portail_success'),
+                    color: Theme.of(context).accentColor,
+                    key: const Key('login/portail_success'),
                   )
               ],
             ),
@@ -316,15 +333,15 @@ class _StatusCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 20),
                 ),
                 if (_imprimanteAPI.cookie == null)
-                  const Icon(
+                  Icon(
                     Icons.close,
-                    color: Colors.red,
+                    color: Theme.of(context).errorColor,
                   )
                 else
-                  const Icon(
+                  Icon(
                     Icons.done,
-                    color: Colors.green,
-                    key: Key('login/imprimante_success'),
+                    color: Theme.of(context).accentColor,
+                    key: const Key('login/imprimante_success'),
                   )
               ],
             ),

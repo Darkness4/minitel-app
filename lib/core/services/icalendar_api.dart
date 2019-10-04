@@ -32,7 +32,7 @@ class ICalendarAPI {
     final Map<String, String> vEvent = <String, String>{};
 
     if (!file.existsSync()) {
-      throw Exception("File calendar.ics do not exists");
+      throw FileCalendarNotExistException();
     }
 
     // Use this line of code to inject a template.ics
@@ -138,3 +138,10 @@ class ICalendarAPI {
 
 /// Section of an icalendar
 enum ICalSection { None, VEVENT, VTIMEZONE, STANDARD, DAYLIGHT }
+
+class FileCalendarNotExistException implements Exception {
+  @override
+  String toString() {
+    return "File calendar.ics do not exists";
+  }
+}

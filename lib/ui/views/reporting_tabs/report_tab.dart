@@ -94,108 +94,94 @@ class _ReportCard extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: Form(
           key: model.formKey,
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                      key: const Key('report_tab/room'),
-                      controller: model.roomController,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                      focusNode: model.roomFocusNode,
-                      textInputAction: TextInputAction.next,
-                      inputFormatters: <TextInputFormatter>[
-                        WhitelistingTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(4),
-                      ],
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: AppLoc.of(context).reporting.chamberLabel,
-                        hintText: AppLoc.of(context).reporting.chamberHint,
+          child: FocusScope(
+            node: model.formNode,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextFormField(
+                        key: const Key('report_tab/room'),
+                        controller: model.roomController,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        textInputAction: TextInputAction.next,
+                        inputFormatters: <TextInputFormatter>[
+                          WhitelistingTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(4),
+                        ],
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelText: AppLoc.of(context).reporting.chamberLabel,
+                          hintText: AppLoc.of(context).reporting.chamberHint,
+                        ),
+                        autovalidate: true,
+                        onFieldSubmitted: (_) => model.formNode.nextFocus(),
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return AppLoc.of(context).reporting.notEmpty;
+                          }
+                          return null;
+                        },
                       ),
-                      autovalidate: true,
-                      onFieldSubmitted: (String term) {
-                        model.roomFocusNode.unfocus();
-                        FocusScope.of(context)
-                            .requestFocus(model.nameFocusNode);
-                      },
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return AppLoc.of(context).reporting.notEmpty;
-                        }
-                        return null;
-                      },
                     ),
-                  ),
-                  Expanded(
-                    child: TextFormField(
-                      key: const Key('report_tab/name'),
-                      controller: model.nameController,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                      focusNode: model.nameFocusNode,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: AppLoc.of(context).reporting.idLabel,
-                        hintText: AppLoc.of(context).reporting.idHint,
+                    Expanded(
+                      child: TextFormField(
+                        key: const Key('report_tab/name'),
+                        controller: model.nameController,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          labelText: AppLoc.of(context).reporting.idLabel,
+                          hintText: AppLoc.of(context).reporting.idHint,
+                        ),
+                        autovalidate: true,
+                        onFieldSubmitted: (_) => model.formNode.nextFocus(),
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return AppLoc.of(context).reporting.notEmpty;
+                          } else if (!value.contains(' ')) {
+                            return AppLoc.of(context).reporting.forceName;
+                          }
+                          return null;
+                        },
                       ),
-                      autovalidate: true,
-                      onFieldSubmitted: (String term) {
-                        model.nameFocusNode.unfocus();
-                        FocusScope.of(context)
-                            .requestFocus(model.titleFocusNode);
-                      },
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return AppLoc.of(context).reporting.notEmpty;
-                        } else if (!value.contains(' ')) {
-                          return AppLoc.of(context).reporting.forceName;
-                        }
-                        return null;
-                      },
                     ),
+                  ],
+                ),
+                TextFormField(
+                  key: const Key('report_tab/title'),
+                  controller: model.titleController,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    labelText: AppLoc.of(context).reporting.titleLabel,
+                    hintText: AppLoc.of(context).reporting.titleHint,
                   ),
-                ],
-              ),
-              TextFormField(
-                key: const Key('report_tab/title'),
-                controller: model.titleController,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                focusNode: model.titleFocusNode,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  labelText: AppLoc.of(context).reporting.titleLabel,
-                  hintText: AppLoc.of(context).reporting.titleHint,
+                  onFieldSubmitted: (_) => model.formNode.nextFocus(),
+                  autovalidate: true,
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return AppLoc.of(context).reporting.notEmpty;
+                    }
+                    return null;
+                  },
                 ),
-                onFieldSubmitted: (String term) {
-                  model.titleFocusNode.unfocus();
-                  FocusScope.of(context)
-                      .requestFocus(model.descriptionFocusNode);
-                },
-                autovalidate: true,
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return AppLoc.of(context).reporting.notEmpty;
-                  }
-                  return null;
-                },
-              ),
-              const Divider(),
-              TextFormField(
-                key: const Key('report_tab/description'),
-                controller: model.descriptionController,
-                maxLines: null,
-                focusNode: model.descriptionFocusNode,
-                textInputAction: TextInputAction.newline,
-                keyboardType: TextInputType.multiline,
-                maxLength: 500,
-                decoration: const InputDecoration(
-                  labelText: "Description",
+                const Divider(),
+                TextFormField(
+                  key: const Key('report_tab/description'),
+                  controller: model.descriptionController,
+                  maxLines: null,
+                  textInputAction: TextInputAction.newline,
+                  keyboardType: TextInputType.multiline,
+                  maxLength: 500,
+                  decoration: const InputDecoration(
+                    labelText: "Description",
+                  ),
+                  onFieldSubmitted: (_) => model.formNode.unfocus(),
                 ),
-                onFieldSubmitted: (String term) =>
-                    model.descriptionFocusNode.unfocus(),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

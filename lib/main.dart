@@ -51,16 +51,10 @@ class MyApp extends StatelessWidget {
           if (snapshot.hasData) {
             return ChangeNotifierProvider<ThemeChanger>(
               builder: (_) {
-                final bool dark = snapshot.data.getBool('dark');
-                if (dark != null && dark) {
-                  return ThemeChanger(
-                    MinitelThemeData.dark,
-                  );
-                } else {
-                  return ThemeChanger(
-                    MinitelThemeData.light,
-                  );
-                }
+                final bool dark = snapshot.data.getBool('dark') ?? false;
+                return ThemeChanger(
+                  dark ? MinitelThemeData.dark : MinitelThemeData.light,
+                );
               },
               child: const MaterialAppWithTheme(),
             );

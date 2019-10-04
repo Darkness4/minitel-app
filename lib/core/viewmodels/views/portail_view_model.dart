@@ -26,11 +26,11 @@ class PortailViewModel extends ChangeNotifier {
       ValueNotifier<String>(MyIPAdresses.stormshieldIP);
   final ValueNotifier<bool> rememberMe = ValueNotifier<bool>(false);
   final ValueNotifier<bool> autoLogin = ValueNotifier<bool>(false);
-  final FocusNode uidFocusNode = FocusNode();
-  final FocusNode pswdFocusNode = FocusNode();
+  final FocusScopeNode formNode = FocusScopeNode();
   final TextEditingController uidController = TextEditingController();
   final TextEditingController pswdController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   PortailState portailState = PortailState.Available;
 
@@ -43,6 +43,7 @@ class PortailViewModel extends ChangeNotifier {
   });
 
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+  GlobalKey<FormState> get formKey => _formKey;
 
   Future<void> refresh() async {
     portailState = PortailState.Available;
@@ -50,115 +51,117 @@ class PortailViewModel extends ChangeNotifier {
   }
 
   Future<void> login(String uid, String pswd) async {
-    // Remember me
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    const FlutterSecureStorage storage = FlutterSecureStorage();
-    if (rememberMe.value) {
-      await Future.wait<dynamic>(<Future<dynamic>>[
-        prefs.setBool("rememberMe", true),
-        prefs.setBool("autoLogin", autoLogin.value),
-        prefs.setString("user", uid),
-        prefs.setString("time", selectedTime.value),
-        storage.write(
-          key: "pswd",
-          value: base64.encode(utf8.encode(pswd)),
-        ),
-      ]);
-    } else {
-      await Future.wait<dynamic>(<Future<dynamic>>[
-        prefs.remove("rememberMe"),
-        prefs.remove("autoLogin"),
-        prefs.remove("user"),
-        prefs.remove("time"),
-        storage.delete(key: "pswd"),
-      ]);
-    }
+    if (_formKey.currentState.validate()) {
+// Remember me
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      const FlutterSecureStorage storage = FlutterSecureStorage();
+      if (rememberMe.value) {
+        await Future.wait<dynamic>(<Future<dynamic>>[
+          prefs.setBool("rememberMe", true),
+          prefs.setBool("autoLogin", autoLogin.value),
+          prefs.setString("user", uid),
+          prefs.setString("time", selectedTime.value),
+          storage.write(
+            key: "pswd",
+            value: base64.encode(utf8.encode(pswd)),
+          ),
+        ]);
+      } else {
+        await Future.wait<dynamic>(<Future<dynamic>>[
+          prefs.remove("rememberMe"),
+          prefs.remove("autoLogin"),
+          prefs.remove("user"),
+          prefs.remove("time"),
+          storage.delete(key: "pswd"),
+        ]);
+      }
 
-    // Notification
-    _scaffoldKey.currentState
-      ..removeCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(content: Text('Requested')),
-      );
-
-    // Lock
-    portailState = PortailState.Busy;
-    notifyListeners();
-
-    // Login
-    try {
-      await stormshieldAPI.autoLogin(
-        uid,
-        pswd,
-        selectedUrl.value,
-        LoginConstants.timeMap[selectedTime.value],
-      );
-      notifyListeners();
-    } catch (e) {
-      portailState = PortailState.Available;
-      notifyListeners();
+      // Notification
       _scaffoldKey.currentState
         ..removeCurrentSnackBar()
         ..showSnackBar(
-          SnackBar(content: Text(e.toString())),
+          const SnackBar(content: Text('Requested')),
         );
-    }
 
-    // Calendar
-    try {
-      final String calendarUrl = await calendarUrlAPI.getCalendarURL(
-        username: uid,
-        password: pswd,
-      );
-      await iCalendar.saveCalendar(calendarUrl, calendarUrlAPI);
+      // Lock
+      portailState = PortailState.Busy;
       notifyListeners();
-    } catch (e) {
-      portailState = PortailState.Available;
-      notifyListeners();
-      _scaffoldKey.currentState
-        ..removeCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(content: Text(e.toString())),
+
+      // Login
+      try {
+        await stormshieldAPI.autoLogin(
+          uid,
+          pswd,
+          selectedUrl.value,
+          LoginConstants.timeMap[selectedTime.value],
         );
-    }
+        notifyListeners();
+      } catch (e) {
+        portailState = PortailState.Available;
+        notifyListeners();
+        _scaffoldKey.currentState
+          ..removeCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(content: Text(e.toString())),
+          );
+      }
 
-    // Portail
-    await portailAPI
-        .saveCookiePortailFromLogin(
+      // Calendar
+      try {
+        final String calendarUrl = await calendarUrlAPI.getCalendarURL(
           username: uid,
           password: pswd,
-        )
-        .then((_) => notifyListeners())
-        .catchError((dynamic e) {
+        );
+        await iCalendar.saveCalendar(calendarUrl, calendarUrlAPI);
+        notifyListeners();
+      } catch (e) {
+        portailState = PortailState.Available;
+        notifyListeners();
+        _scaffoldKey.currentState
+          ..removeCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(content: Text(e.toString())),
+          );
+      }
+
+      // Portail
+      await portailAPI
+          .saveCookiePortailFromLogin(
+            username: uid,
+            password: pswd,
+          )
+          .then((_) => notifyListeners())
+          .catchError((dynamic e) {
+        portailState = PortailState.Available;
+        notifyListeners();
+        _scaffoldKey.currentState
+          ..removeCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(content: Text(e.toString())),
+          );
+      });
+
+      // Imprimante
+      await imprimanteAPI
+          .login(
+            username: uid,
+            password: pswd,
+          )
+          .then((_) => notifyListeners())
+          .catchError((dynamic e) {
+        portailState = PortailState.Available;
+        notifyListeners();
+        _scaffoldKey.currentState
+          ..removeCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(content: Text(e.toString())),
+          );
+      });
+
+      // Unlock
       portailState = PortailState.Available;
       notifyListeners();
-      _scaffoldKey.currentState
-        ..removeCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(content: Text(e.toString())),
-        );
-    });
-
-    // Imprimante
-    await imprimanteAPI
-        .login(
-          username: uid,
-          password: pswd,
-        )
-        .then((_) => notifyListeners())
-        .catchError((dynamic e) {
-      portailState = PortailState.Available;
-      notifyListeners();
-      _scaffoldKey.currentState
-        ..removeCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(content: Text(e.toString())),
-        );
-    });
-
-    // Unlock
-    portailState = PortailState.Available;
-    notifyListeners();
+    }
   }
 
   /// Load saved data and remember login if it was true
@@ -184,8 +187,7 @@ class PortailViewModel extends ChangeNotifier {
     selectedUrl.dispose();
     rememberMe.dispose();
     autoLogin.dispose();
-    uidFocusNode.dispose();
-    pswdFocusNode.dispose();
+    formNode.dispose();
     uidController.dispose();
     pswdController.dispose();
 

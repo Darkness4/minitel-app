@@ -51,10 +51,10 @@ class AgendaView extends StatelessWidget {
               future: model.loadCalendar(context),
               builder: (BuildContext context,
                   AsyncSnapshot<ParsedCalendar> snapshot) {
-                if (snapshot.hasError) {
+                if (!snapshot.hasData && snapshot.hasError) {
                   return ErrorAgendaWidget(
                     snapshot.error.toString(),
-                    model.refresh,
+                    model: model,
                   );
                 }
                 if (snapshot.hasData) {

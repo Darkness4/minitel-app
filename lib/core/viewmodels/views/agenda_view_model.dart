@@ -220,4 +220,22 @@ class AgendaViewModel extends ChangeNotifier {
       payload: payload,
     );
   }
+
+  Future<void> login(
+      BuildContext context, String uid, String pswd, FormState state) async {
+    if (state.validate()) {
+      try {
+        final String url = await calendarUrlAPI.getCalendarURL(
+          username: uid,
+          password: pswd,
+        );
+        await iCalendar.saveCalendar(url, calendarUrlAPI);
+      } on Exception catch (e) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
+      notifyListeners();
+    }
+  }
 }

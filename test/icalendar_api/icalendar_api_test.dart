@@ -39,7 +39,7 @@ void main() {
       try {
         await ICalendarAPI().getParsedCalendarFromFile();
         throw Exception("Fail to fail");
-      } catch (e) {
+      } on FileCalendarNotExistException catch (e) {
         expect(e.toString(), contains("File calendar.ics do not exists"));
       }
     });

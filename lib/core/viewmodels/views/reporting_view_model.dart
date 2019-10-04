@@ -32,10 +32,7 @@ class ReportingViewModel extends ChangeNotifier {
   final TextEditingController roomController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
-  final FocusNode titleFocusNode = FocusNode();
-  final FocusNode descriptionFocusNode = FocusNode();
-  final FocusNode roomFocusNode = FocusNode();
-  final FocusNode nameFocusNode = FocusNode();
+  final FocusScopeNode formNode = FocusScopeNode();
 
   ReportingViewModel({
     @required WebhookAPI webhookAPI,
@@ -146,10 +143,7 @@ class ReportingViewModel extends ChangeNotifier {
     roomController.dispose();
     nameController.dispose();
 
-    titleFocusNode.dispose();
-    descriptionFocusNode.dispose();
-    roomFocusNode.dispose();
-    nameFocusNode.dispose();
+    formNode.dispose();
 
     percentageDiagnoseProgress.dispose();
     super.dispose();
