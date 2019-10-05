@@ -19,7 +19,7 @@ class ImprimanteAPI {
       return _cookie = response.headers['set-cookie'];
     } catch (e) {
       if (e.toString().contains("NTLM")) {
-        throw Exception("Imprimante GCP: Accès refusé");
+        throw Exception("Imprimante GCP: Access denied");
       }
       rethrow;
     }

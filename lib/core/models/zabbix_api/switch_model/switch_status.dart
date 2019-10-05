@@ -49,16 +49,12 @@ class SwitchStatus {
       if (item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
         final int port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
-        if (ports[port] == null) {
-          ports[port] = SwitchPortStatus();
-        }
+        ports[port] ??= SwitchPortStatus();
         ports[port].speed = int.parse(item.lastvalue);
       } else if (item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
         final int port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
-        if (ports[port] == null) {
-          ports[port] = SwitchPortStatus();
-        }
+        ports[port] ??= SwitchPortStatus();
         ports[port].operStatus = int.parse(item.lastvalue);
       } else if (item.name.contains('Device description')) {
         description = item.lastvalue;

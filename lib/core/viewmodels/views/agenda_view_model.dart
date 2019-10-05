@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
-import 'package:minitel_toolbox/core/constants/texts_constants.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/models/icalendar/event.dart';
 import 'package:minitel_toolbox/core/models/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/core/models/notifications.dart';
@@ -12,21 +12,6 @@ import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/ui/widgets/agenda_widgets/agenda_widgets.dart';
 
 class AgendaViewModel extends ChangeNotifier {
-  static const List<String> _month = <String>[
-    "Janvier",
-    "Février",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre",
-  ];
-
   final CalendarUrlAPI calendarUrlAPI;
   final ICalendarAPI iCalendar;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -51,7 +36,8 @@ class AgendaViewModel extends ChangeNotifier {
   /// new page is immediatly streamed to assure a reactive behavior.
   ///
   /// At the very end, the last widgets are returned.
-  Stream<List<Widget>> listEventCards(ParsedCalendar parsedCalendar) async* {
+  Stream<List<Widget>> listEventCards(
+      BuildContext context, ParsedCalendar parsedCalendar) async* {
     List<Widget> monthlyWidgets = <Widget>[];
     List<Widget> dailyEvents = <Widget>[];
     final List<Widget> monthPages = <Widget>[];
@@ -70,7 +56,8 @@ class AgendaViewModel extends ChangeNotifier {
       yield <Widget>[
         Center(
           child: Text(
-            Texts.agendaVide[Random().nextInt(Texts.agendaVide.length)],
+            AppLoc.of(context).agenda.cases[
+                Random().nextInt(AppLoc.of(context).agenda.cases.length)],
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w300,
@@ -125,7 +112,9 @@ class AgendaViewModel extends ChangeNotifier {
           oldDt = dt;
 
           monthlyWidgets = <Widget>[];
-          monthlyWidgets.add(MonthHeader("${_month[dt.month - 1]}"));
+          monthlyWidgets.add(MonthHeader(
+              DateFormat.MMMM(AppLoc.of(context).localeName)
+                  .format(DateTime(dt.year, dt.month))));
           dailyEvents = <Widget>[];
         }
 
@@ -158,18 +147,20 @@ class AgendaViewModel extends ChangeNotifier {
   /// Save/update a calendar and parse it.
   Future<ParsedCalendar> loadCalendar(BuildContext context) async {
     // Try to update thr calendar
-    final String url = await calendarUrlAPI.savedCalendarURL;
+    final String url = await CalendarUrlAPI.fetchSaved();
+    final StringBuffer filePath = StringBuffer();
 
     // Try to update calendar
     if (url == "" || url == null) {
       print("Cannot update calendar. Taking from cache.");
+      filePath.write(await ICalendarAPI.calendarPATH);
     } else {
       print("Updating calendar.");
-      await iCalendar.saveCalendar(url, calendarUrlAPI);
+      filePath.write(await iCalendar.downloadCalendar(url));
     }
 
     // Read the actual calendar (throw if not existing)
-    return iCalendar.getParsedCalendarFromFile();
+    return ParsedCalendar.parse(filePath.toString());
   }
 
   /// Initialize the notification system
@@ -230,5 +221,23 @@ class AgendaViewModel extends ChangeNotifier {
           _androidPlatformChannelSpecifics, _iOSPlatformChannelSpecifics),
       payload: payload,
     );
+  }
+
+  Future<void> login(
+      BuildContext context, String uid, String pswd, FormState state) async {
+    if (state.validate()) {
+      try {
+        final String url = await calendarUrlAPI.getCalendarURL(
+          username: uid,
+          password: pswd,
+        );
+        await iCalendar.downloadCalendar(url);
+      } on Exception catch (e) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
+      notifyListeners();
+    }
   }
 }

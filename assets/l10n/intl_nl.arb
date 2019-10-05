@@ -1,0 +1,633 @@
+{
+  "forceDark": "Force Dark-thema",
+  "@forceDark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_title": "Over Minitel Toolbox",
+  "@AboutLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_description": "Minitel Toolbox bevat de meest handige tools om probleemloos wifi te hebben.",
+  "@AboutLoc_description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_developper": "Ontwikkelaar",
+  "@AboutLoc_developper": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_lastVestion": "Nieuwste versie",
+  "@AboutLoc_lastVestion": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_website": "Website",
+  "@AboutLoc_website": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_license": "Licentie",
+  "@AboutLoc_license": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicyTitle": "Privacybeleid",
+  "@AboutLoc_privacyPolicyTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicySubtitle": "Geen gegevens worden gedeeld en opgeslagen zonder uw medeweten. De verzamelde gegevens zijn de gegevens die u ons verstrekt (diagnostisch) en worden nooit opgeslagen.",
+  "@AboutLoc_privacyPolicySubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_title": "Kalender",
+  "@AgendaLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda0": "Goed ? Geen les ?",
+  "@AgendaLoc_emptyAgenda0": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda1": "'ruikt naar een barbecue ...",
+  "@AgendaLoc_emptyAgenda1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda2": "Vrijheid!",
+  "@AgendaLoc_emptyAgenda2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda3": "Lucky m8!",
+  "@AgendaLoc_emptyAgenda3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda4": "Breng meer tijd door met het gezin! (in plaats van de volgende lessen te bekijken)",
+  "@AgendaLoc_emptyAgenda4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda5": "De applicatie heeft meer dan 10.000 regels code .... (met 40.000 toevoegingen en 30.000 verwijderingen)",
+  "@AgendaLoc_emptyAgenda5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda6": "De applicatie is ontwikkeld met Flutter en ❤️",
+  "@AgendaLoc_emptyAgenda6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda7": "Minitel is koning!",
+  "@AgendaLoc_emptyAgenda7": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda8": "Gratis!",
+  "@AgendaLoc_emptyAgenda8": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda9": "De trieste panda zit alleen.",
+  "@AgendaLoc_emptyAgenda9": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_title": "Notificatie instellingen",
+  "@NotificationSettingsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled1": "De meldingen zijn ",
+  "@NotificationSettingsLoc_enabled1": {
+    "description": "[] activées.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled2": "{enabled, select, true {ingeschakeld.} false {gehandicapt.}}",
+  "@NotificationSettingsLoc_enabled2": {
+    "description": "Les notifications sont []",
+    "type": "text",
+    "placeholders": {
+      "enabled": {}
+    }
+  },
+  "NotificationSettingsLoc_early1": "verwittigen ",
+  "@NotificationSettingsLoc_early1": {
+    "description": "[] X minutes avant le cours",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_early2": " minuten voor de cursus.",
+  "@NotificationSettingsLoc_early2": {
+    "description": "Notifier X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range1": "Meld de cursussen voor de volgende ",
+  "@NotificationSettingsLoc_range1": {
+    "description": "[] X prochains jours.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range2": " dagen.",
+  "@NotificationSettingsLoc_range2": {
+    "description": "Notifier les cours des X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_save": "Opslaan",
+  "@NotificationSettingsLoc_save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_title": "Documentatie",
+  "@DocsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_minitel": "De netwerkvereniging van de woning: als u apparatuur (kabels, computer, ...) nodig hebt, om vragen te stellen over de werking van de machines op school of als u problemen hebt met uw computer, moeten wij contact met u opnemen! Een van de belangrijkste activiteiten van Minitel is het onderhoud van het internetnetwerk van het huis: dit betekent een constante inspanning om de snelheid en betrouwbaarheid van uw verbinding te verbeteren (nieuwe apparatuur, monitoring ...). We bieden je ook het hele jaar door verschillende trainingen die je tijdens de cursussen kunnen helpen, of gewoon je nieuwsgierigheid in de informatica kunnen bevredigen! Tot slot hechten we veel belang aan de animatie van het studentenleven op de campus! Om dit te doen, organiseren we verschillende computerevenementen, zoals de Nuit de l'Info of videogametoernooien! Als u meer wilt weten over de vereniging en het digitale leven van de residentie, aarzel dan niet om contact op te nemen met een van de Minitel-leden: we helpen u graag verder en beantwoorden al uw vragen.",
+  "@DocsLoc_minitel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_header": "Diagnose",
+  "@DiagnoseLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_ipaContent": "Geeft nuttige informatie over de hardware. Nuttige informatie: - Status - IP-adres - MAC-adres",
+  "@DiagnoseLoc_ipaContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent1": "Toont de MAC-adressen van alle apparaten die op de telefoon zijn aangesloten. De gateway moet worden weergegeven en het MAC-adres moet 00-0d-b4-10-99-e1 zijn. Als het MAC-adres van de gateway niet overeenkomt met dat van de gateway, hebben we te maken met een fisonning-ARP: \n",
+  "@DiagnoseLoc_arpContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent2": "De IP-dief van de gateway reageert op de ARP-reactie die door het slachtoffer op de uitzending wordt verzonden, sneller dan de gateway.\n\n",
+  "@DiagnoseLoc_arpContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent3": "Een tijdelijke oplossing (alleen wanneer WiFi is ingeschakeld) is:",
+  "@DiagnoseLoc_arpContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_tracerouteContent": "Toont het pad en de vertragingen van pakketten naar een Google-server. Handig om de oorzaken van vertraging te zien.",
+  "@DiagnoseLoc_tracerouteContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent1": "Controleert of de TCP / IP-software werkt.\n",
+  "@DiagnoseLoc_pingLoContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent2": "Moet altijd positief zijn.",
+  "@DiagnoseLoc_pingLoContent2": {
+    "description": "Le ping loopback devrait être toujours positif.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent1": "Ping naar een lokale computer (10.163.0.5, de Minitel-server die altijd aan moet staan). Als de pakketten verloren zijn, zijn dit de meest waarschijnlijke scenario's: 1. U hebt geen IP.",
+  "@DiagnoseLoc_pingLocalContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent2": " (Zie ip a en waarschuw Minitel onmiddellijk)\n",
+  "@DiagnoseLoc_pingLocalContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent3": "    2. U bent niet verbonden met het lokale netwerk. 3. De server (10.163.0.5) is niet verbonden. (je kunt 10.163.0.10 pingen) 4. Een schakelaar van het Studentenhuis is verbroken. 5. Een schakelaar van de woning is verbroken.",
+  "@DiagnoseLoc_pingLocalContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_httpContent": "Als een 4xx- of 5xx-fout verschijnt, meld dit dan aan Minitel.",
+  "@DiagnoseLoc_httpContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionHeader": "Hoe moet ik reageren?",
+  "@DiagnoseLoc_reactionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionContent": "Als er geen netwerk meer is, neemt u contact op met Minitel en gebruikt u de diagnosesuite op de pagina \"Rapporteren aan Minitel\"",
+  "@DiagnoseLoc_reactionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingGatewayContent": "De gateway negeert normaal pings. Als er echter een ping wordt ontvangen, heeft iemand waarschijnlijk zijn IP-adres gebruikt. Maar niets is zeker.",
+  "@DiagnoseLoc_pingGatewayContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingDNSContent": "Als een van de DNS (behalve 10.163.0.6) antwoordt, bent u verbonden met internet.",
+  "@DiagnoseLoc_pingDNSContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent1": "Als er geen antwoord is, maar de DNS-ping werkt, heeft uw apparaat een DNS-cacheprobleem.\n",
+  "@DiagnoseLoc_nsLookupContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent2": "Start voor draagbare apparaten Wi-Fi opnieuw. Hier zijn enkele oplossingen:",
+  "@DiagnoseLoc_nsLookupContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_header": "authenticatie",
+  "@LoginLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent1": "Kies tussen fw-cgcp.emse.fr, 10.163.0.2 en 195.83.139.7\n",
+  "@LoginLoc_domainNameContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent2": "Als het lokale netwerk een DNS ondersteunt, zoals 192.168.130.33 (DSI) of 10.163.0.6 (Minitel), kunt u fw-cgcp.emse.fr proberen. Als het netwerk Minitel (WiFi Minitel) is, gebruik dan 10.163.0.2\n",
+  "@LoginLoc_domainNameContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent3": "Over het algemeen is 195.83.139.7 geschikt in 90% van de gevallen. Dit is het openbare IP-adres van de portal en wordt geautoriseerd door de gateway.\n",
+  "@LoginLoc_domainNameContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_header": "De kunst van Dual Boot",
+  "@DualbootLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_infos": "Alleen de hoofdfasen worden getoond. Voor meer informatie:",
+  "@DualbootLoc_infos": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksHeader": "Let op de risico's van het installeren van Linux:\n",
+  "@DualbootLoc_risksHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksContent": "    • Linux is stabieler, maar distributie-updates zijn kwetsbaarder (80% van de Ubuntu-gebruikers liever opnieuw installeren dan updaten) • Stuurprogramma's zijn de eerste oorzaken van plotselinge crashes (NVIDIA, Realtek ...) • Een verkeerde BIOS-configuratie kan ook fataal voor jou\n\n",
+  "@DualbootLoc_risksContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_customizeHeader": "Maatwerk is niet beperkt. Let op welke verdelingen het meest geschikt zijn:\n",
+  "@DualbootLoc_customizeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_customizeContent": "    • Eerste keer? Lubuntu LTS (in het slechtste geval Kubuntu) of Linux Mint • Tweede keer? Ken het verschil tussen KDE, Gnome, XFCE, LXDE, MATE, awesomewm ... En bekijk r / unixporn • Iets stijlvols en al gedaan? MX Linux, deepin, Linux Lite, Elementair OS, Pop! _OS, ... • Wil je je aanpassen aan de dood? Arch Linux, Alpine, Manjaro, Debian • Iets professioneel? CentOS • Een eenvoudige server? OpenSUSE • 15 MB? Alpine, Tiny Core (alleen docker) • Raspberry PI? Raspbian • ALLEEN Pentest? Kali Linux • Wil je zelfmoord plegen? \"Free Software Fondation OS\" • Erger dan de dood? Linux From Scratch • Een Android weer tot leven brengen als Linux-server? postmarketOS\n\n",
+  "@DualbootLoc_customizeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_prepHeader": "Voorbereidende werkzaamheden :\n",
+  "@DualbootLoc_prepHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_prepContent": "    • Windows • USB Key 4 Go • Ken het type BIOS: UEFI ou Legacy • Schakel Secure Boot uit • Bereid een lege partitie van minstens 50 GB voor • Flash met Rufus een afbeelding op de sleutel (FAT32, update syslinux, ISO-modus) , in MBR\n\n",
+  "@DualbootLoc_prepContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_installHeader": "Installeer Linux (start op met de sleutel door de opstartvolgorde op het BIOS te wijzigen of via een toetsenbordtoets (F11? Verwijderen? Insert? F1? F2? F12?)):\n",
+  "@DualbootLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_installContent": "    • Taal, tijdzone, netwerk ... • Handmatige schijfconfiguratie (aanbevolen) • In deze volgorde: • \"/ dev / sda1\" mount on \"/\" met ext4, Partition Size Linux • \"/ dev / sda2\" is de SWAP, Grootte = 1,5 * RAM met slaapstand, anders Grootte = 1/4 * RAM • De GRUB (bootloader) moet naast Windows worden geïnstalleerd! (in MBR, negeer anders) • Controleer en bevestig de partities (controleer of Windows er nog is 🙂) • Etc (wacht tot de installatie is voltooid) ... • (UEFI) Wijzig de UEFI-opstartvolgorde in het BIOS\n\n",
+  "@DualbootLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue1Content": "Over het algemeen start Linux niet als de computer is uitgerust met hybride grafisch beheer. Oplossing: • Voeg \"nomodeset\" toe aan de geavanceerde opstartopties • Verwijder ook \"stille splash\" voor leesbaarheid Vb:",
+  "@DualbootLoc_issue1Content": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content1": "    Standaard wordt Linux uitgevoerd met Intel. Dat is heel erg als je ethereum wilt minen of Machine Learning wilt doen.\n",
+  "@DualbootLoc_issue2Content1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content2": "    • Download NVIDIA-stuurprogramma's van de officiële NVIDIA-website. • (download CUDA indien nodig, zonder stuurprogramma's, zonder openGL) • Schakel over naar TTY via Ctrl + Alt + F1, Ctrl + Alt + F2 ... ",
+  "@DualbootLoc_issue2Content2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content3": "Als de HDMI-poort niet langer werkt in BIOS Legacy op Windows:",
+  "@DualbootLoc_issue2Content3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_changeLinuxHeader": "Verander GNU / Linux of niet ....\n",
+  "@DualbootLoc_changeLinuxHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_changeLinuxContent": "    • Over het algemeen veranderen we Linux niet. Als aanpassing ontbreekt, zoek dan naar \"Een Display Manager (DM) of een Window Manager (WM) aanpassen\". Zoek naar \"Een terminal aanpassen\" en test de configuraties op een VM. • Wil je hacken? Kali Linux-tools kunnen onafhankelijk van het OS • LTS worden gedownload? Over het algemeen zijn LTS's veel stabieler • Bovendien geeft 80% van de Ubuntu-gebruikers de voorkeur aan herinstallatie in plaats van een dist-upgrade uit te voeren.\n",
+  "@DualbootLoc_changeLinuxContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_header": "Configureren van de printer",
+  "@ImprimanteLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_windowsContent": "    - Open \\\\ 192.168.168.130.2 met Windows Explorer - Voer voornaam en wachtwoord in (test ook EMSE2000 \\ first name.name) - Dubbelklik op \"imprimantes-gpc\"",
+  "@ImprimanteLoc_windowsContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_linuxContent1": "    - Voeg smb: //192.168.130.2/imprimantes-gcp toe aan netwerkprinters - Stuurprogramma: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd",
+  "@ImprimanteLoc_linuxContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_linuxContent2": "    - Ga naar http: // localhost: 631 / admin (Linux-accountnaam en wachtwoord) - Het tabblad \"Administration\" - \"Printer toevoegen\" - Type SMB, adres smb: //192.168.130.2/imprimantes-gcp - Gebruik de PPD file: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd - Configureer de rest en het zou in orde moeten zijn",
+  "@ImprimanteLoc_linuxContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_pukContent": "Gebruik de Minitel-applicatie> Apps> Printer",
+  "@ImprimanteLoc_pukContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_header": "Sogo e-mails importeren",
+  "@MailLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_mailContent1": "Gebruik bij uw favoriete e-mailtoepassing de handmatige configuratie en vul de bijbehorende velden in.",
+  "@MailLoc_mailContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_mailContent2": "E-mail: voornaam.lastnaam@etu.emse.fr Wachtwoord: uw schoolwachtwoord Inkomende server: IMAP Hostnaam: messel.emse.fr Poort: 993 Beveiliging: ssl / tls Verificatiemethode: standaard wachtwoord Identificatie: voornaam.lastnaam (⚠️ zonder @ etu.emse.fr) Uitgaande server: Hostnaam: messel.emse.fr Poort: 465 Beveiliging: ssl / tls uthentication methode: standaard wachtwoord Identifier: firstname.lastname (⚠️ zonder @ etu.emse.fr)",
+  "@MailLoc_mailContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_definitionHeader": "Een VM is:\n",
+  "@VMLoc_definitionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_definitionContent": "    Een machine waarvan de componenten worden geëmuleerd. Een machine die strikt geïsoleerd is van de host. Omdat de componenten worden geëmuleerd, is de kans op een VM-crash veel lager.\n\n",
+  "@VMLoc_definitionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_customizeHeader": "Een VM is daarom gemaakt om met de dood te worden geknoeid:\n",
+  "@VMLoc_customizeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_customizeContent": "    - Handig voor het hebben van een sandbox en het uitvoeren van veel tests. - Handig voor training op Linux (WM, DM, stuurprogramma's, installaties ...), zonder je dubbele boot op te blazen. - Handig voor het maken van een VPS. - Handig voor het gebruik van een compiler met een speciale en beschermde omgeving.\n\n",
+  "@VMLoc_customizeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installHeader": "Het spreekt voor zich dat het nutteloos is voor een VM om een grafische interface te hebben. Heel vaak wordt een SSH-verbinding opgezet in plaats van de grafische gebruikersinterface of TTY te gebruiken. Over het algemeen is de installatie van een VM snel en eenvoudig:\n",
+  "@VMLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installContent": "    - Een virtuele schijf maken> 20 GB - Een Linux-image in de geëmuleerde CD-poort plaatsen - Linux-installatie (vergelijkbaar met een dubbele opstartprocedure) - SSH / telnet / RDP-toegang configureren\n",
+  "@VMLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeHeader": "Sommige hypervisors (VirtualBox, VMWare, Hyper-V) zijn zelfs uitgerust met snelle installatiefuncties. Hiermee kun je ook dual boot oefenen 😄. Typen VM's:\n",
+  "@VMLoc_vmTypeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeContent": "    - Type I: Bare Metal, het besturingssysteem zelf is de hypervisor. - Type II: Gehost, de hypervisor wordt gehost door het host-besturingssysteem.\n\n",
+  "@VMLoc_vmTypeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorHeader": "Hier is de volgorde van voorkeur van een hypervisor:\n",
+  "@VMLoc_hypervisorHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorContent": "    1. [Leader] Hyper-V (type 1, Windows, indien mogelijk) 2. [Visionary] KVM (type 1, Linux, 👍 Android) 3. [Leader] VMWare Workstation (type 2, 👍 voor netwerken, GNS3 en alles anders) 4. [Niche Player] VirtualBox (type 2) 5. [Leader] VMware ESXi (type 1, voor professionals)\n\n",
+  "@VMLoc_hypervisorContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_envHeader": "Als het om een eenvoudige ontwikkelomgeving gaat:\n",
+  "@VMLoc_envHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_envContent": "    - Voor Linux: Docker, (Container Linux, dat wil zeggen speciale omgeving per applicatie) (Merk op dat het ook op Windows werkt omdat het op de achtergrond een Linux VM op Hyper-V draait.) - Voor Windows: Windows Subsysteem voor Linux 1 (kernel Linux native, wees voorzichtig, de hardware wordt niet geëmuleerd!) - Voor Windows: Windows Subsysteem voor Linux 2 (+ Docker) (Kernel Linux in een micro-VM. Extreem snel en dynamisch toegewezen RAM.)\n",
+  "@VMLoc_envContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NewsLoc_title": "Nieuws",
+  "@NewsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NewsLoc_seeFacebook": "Zie op Facebook ...",
+  "@NewsLoc_seeFacebook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_title": "authenticatie",
+  "@PortalLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_autoLogin": "Login automatisch",
+  "@PortalLoc_autoLogin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_login": "Log in",
+  "@PortalLoc_login": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_rememberMe": "Onthoud me ",
+  "@PortalLoc_rememberMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_password": "Wachtwoord",
+  "@PortalLoc_password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_domainNameHeader": "Domeinnaam / IP ",
+  "@PortalLoc_domainNameHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameLabel": "Gebruikersnaam",
+  "@PortalLoc_usernameLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameHint": "voornaam Achternaam",
+  "@PortalLoc_usernameHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_authTime": "Authenticatie tijd ",
+  "@PortalLoc_authTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_statusInSeconds": "{seconds} seconden resterend",
+  "@PortalLoc_statusInSeconds": {
+    "type": "text",
+    "placeholders": {
+      "seconds": {}
+    }
+  },
+  "PortalLoc_statusInMinutes": "{minutes} minuten resterend",
+  "@PortalLoc_statusInMinutes": {
+    "type": "text",
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "PortalLoc_statusInHM": "{hours} uren en {minutes} minuten resterend",
+  "@PortalLoc_statusInHM": {
+    "type": "text",
+    "placeholders": {
+      "hours": {},
+      "minutes": {}
+    }
+  },
+  "AppListLoc_printer": "Printer",
+  "@AppListLoc_printer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AppListLoc_portal": "Portaal",
+  "@AppListLoc_portal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_title": "Meld aan Minitel",
+  "@ReportingLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_chamberLabel": "Kamer",
+  "@ReportingLoc_chamberLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_chamberHint": "Kamernummer",
+  "@ReportingLoc_chamberHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_notEmpty": "Mag niet leeg zijn",
+  "@ReportingLoc_notEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_idLabel": "Identiteit",
+  "@ReportingLoc_idLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_idHint": "Achternaam voornaam",
+  "@ReportingLoc_idHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_forceName": "Achternaam EN voornaam",
+  "@ReportingLoc_forceName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleLabel": "Titel",
+  "@ReportingLoc_titleLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleHint": "Ik heb geen internet meer!",
+  "@ReportingLoc_titleHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_slack": "Melden bij speling",
+  "@ReportingLoc_slack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_share": "Delen",
+  "@ReportingLoc_share": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_header": "Hoe te rapporteren zonder internet?",
+  "@TutorialLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_notice": "OPMERKING: het wordt aanbevolen om de Root en Busybox te installeren.",
+  "@TutorialLoc_notice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content1": "1. Meld u aan bij 'WiFi Minitel'.",
+  "@TutorialLoc_content1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content2": "2. Start de diagnostische reeks door op de knop te drukken en wacht 1 minuut.",
+  "@TutorialLoc_content2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content3": "3. Vul uw rapport in. Vergeet geen communicatiemiddel (kamer, mail, messenger ...)",
+  "@TutorialLoc_content3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_example": "Voorbeeld: Titel: Geen internet sinds maandag. Beschrijving: ik verlies vaak de verbinding als ik op Ethernet ben. Wifi is oke.",
+  "@TutorialLoc_example": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content4": "4. Maak verbinding met een netwerk met internet.",
+  "@TutorialLoc_content4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content5": "5. Verzend het rapport.",
+  "@TutorialLoc_content5": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/icalendar_api.dart';
 import 'package:minitel_toolbox/core/services/imprimante_api.dart';
@@ -31,8 +32,9 @@ class PortalView extends StatelessWidget {
           stormshieldAPI: Provider.of<StormshieldAPI>(context),
           iCalendar: Provider.of<ICalendarAPI>(context),
         ),
-        onModelReady: (PortailViewModel model) => model.rememberLogin(context),
+        onModelReady: (PortailViewModel model) => model.rememberLogin(),
         builder: (BuildContext context, PortailViewModel model, _) => Scaffold(
+          key: model.scaffoldKey,
           body: CustomPaint(
             painter: PortailBackgroundPainter(
                 backgroundColor:
@@ -89,13 +91,12 @@ class PortalView extends StatelessWidget {
                   : FloatingActionButton.extended(
                       key: const Key('login/connect'),
                       onPressed: () => model.login(
-                        context,
                         model.uidController.text,
                         model.pswdController.text,
                       ),
-                      label: const Text(
-                        "Se connecter",
-                        style: TextStyle(
+                      label: Text(
+                        AppLoc.of(context).portal.login,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),

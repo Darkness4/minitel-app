@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 import 'package:minitel_toolbox/ui/widgets/cards.dart';
@@ -14,10 +15,10 @@ class DualBootDoc extends StatelessWidget {
     return SingleChildScrollView(
       child: DocCard(
         children: <Widget>[
-          const BoxMdH("L'art du Dual Boot", 1),
-          const Text(
-            "Seules les grandes phases sont montrées. Pour plus d'informations :",
-            style: TextStyle(fontWeight: FontWeight.bold),
+          BoxMdH(AppLoc.of(context).docs.dualboot.header, 1),
+          Text(
+            AppLoc.of(context).docs.dualboot.infos,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           Center(
             child: RaisedButton(
@@ -30,69 +31,38 @@ class DualBootDoc extends StatelessWidget {
               style: Theme.of(context).textTheme.body2,
               children: <TextSpan>[
                 TextSpan(
-                  text: "Prenez conscience des risques d'installer Linux :\n",
+                  text: AppLoc.of(context).docs.dualboot.risksHeader,
                   children: <TextSpan>[
                     TextSpan(
-                      text:
-                          "    •  Linux est plus stable, mais les mises à jours de distributions sont plus fragiles (80 % des utilisateurs de Ubuntu préfère réinstaller que mettre à jour)\n"
-                          "    •  Les pilotes sont les premières causes de crash brutal (NVIDIA, Realtek...)\n"
-                          "    •  Une mauvaise config du BIOS peut également vous être fatal\n\n",
+                      text: AppLoc.of(context).docs.dualboot.risksContent,
                       style: Theme.of(context).textTheme.body1,
                     ),
                   ],
                 ),
                 TextSpan(
-                  text:
-                      "La customization n'est pas limitée. Observez quelles distributions convient le mieux :\n",
+                  text: AppLoc.of(context).docs.dualboot.customizeHeader,
                   children: <TextSpan>[
                     TextSpan(
-                      text:
-                          "    •  Première fois ? Lubuntu LTS (au pire Kubuntu) ou Linux Mint\n"
-                          "    •  Deuxième fois ? Connaissez la différence entre KDE, Gnome, XFCE, LXDE, MATE, awesomewm...Et allez voir r/unixporn\n"
-                          "    •  Quelque chose de stylé et déjà fait ? MX Linux, deepin, Linux Lite, Elementary OS, Pop!_OS, ...\n"
-                          "    •  Envie de customizer à mort ? Arch Linux, Alpine, Manjaro, Debian\n"
-                          "    •  Quelque chose de professionel ? CentOS\n"
-                          "    •  Un simple server ? OpenSUSE\n"
-                          "    •  15 MB ? Alpine, Tiny Core (docker only)\n"
-                          "    •  Raspberry PI ? Raspbian\n"
-                          "    •  Pentest ONLY ? Kali Linux\n"
-                          "    •  Envie de se suicider ? \"Free Software Fondation OS\"\n"
-                          "    •  Pire que la mort ? Linux From Scratch\n"
-                          "    •  Faire ressuciter un Android en serveur Linux ? postmarketOS\n\n",
+                      text: AppLoc.of(context).docs.dualboot.customizeContent,
                       style: Theme.of(context).textTheme.body1,
                     )
                   ],
                 ),
                 TextSpan(
-                  text: "Préparations :\n",
+                  text: AppLoc.of(context).docs.dualboot.prepHeader,
                   children: <TextSpan>[
                     TextSpan(
-                      text: "    •  Windows\n"
-                          "    •  Clé USB 4 Go\n"
-                          "    •  Connaitre le type de BIOS : UEFI ou Legacy\n"
-                          "    •  Désactiver le Secure Boot\n"
-                          "    •  Désactiver le Fast Boot\n"
-                          "    •  Préparer une partition vide de minimum 50 Go\n"
-                          "    •  Avec Rufus, flashez une image sur la clé (FAT32, mettre à jour syslinux, mode ISO), en MBR\n\n",
+                      text: AppLoc.of(context).docs.dualboot.prepContent,
                       style: Theme.of(context).textTheme.body1,
                     )
                   ],
                 ),
                 TextSpan(
-                  text:
-                      "Installer Linux (booter sur la clé en changeant l'ordre de boot sur le BIOS ou via une touche de clavier (F11? Suppr? Insert? F1? F2? F12?)) :\n",
+                  text: AppLoc.of(context).docs.dualboot.installHeader,
                   style: Theme.of(context).textTheme.body2,
                   children: <TextSpan>[
                     TextSpan(
-                      text: "    •  Langue, Timezone, Network...\n"
-                          "    •  Configuration du disque manuel (conseillé)\n"
-                          "    •  Dans l'ordre : \n"
-                          "           •  \"/dev/sda1\" monté sur \"/\" en ext4, Taille de la partition Linux\n"
-                          "           •  \"/dev/sda2\" étant le SWAP, Taille = 1.5 * RAM si hibernation, sinon Taille = 1 / 4 * RAM\n"
-                          "    •  Le GRUB (boot loader) doit être installé à côté de Windows ! (en MBR, sinon ignorez)\n"
-                          "    •  Vérifiez et confirmez les partitions (regardez si windows est toujours là 🙂)\n"
-                          "    •  Etc (attendez la fin de l'installation)...\n"
-                          "    •  (UEFI) Changez l'ordre de boot UEFI dans le BIOS\n\n",
+                      text: AppLoc.of(context).docs.dualboot.installContent,
                       style: Theme.of(context).textTheme.body1,
                     )
                   ],
@@ -102,12 +72,7 @@ class DualBootDoc extends StatelessWidget {
                   style: Theme.of(context).textTheme.body2,
                   children: <TextSpan>[
                     TextSpan(
-                      text:
-                          "Généralement, si l'ordinateur est équipée d'une gestion graphique hybride, Linux n'arrivera pas à boot.\n"
-                          "Solution : \n"
-                          "    •  Ajoutez \"nomodeset\" dans les options avancées de boot\n"
-                          "    •  Enlevez également \"quiet splash\" pour la lisibilité\n"
-                          "\nEx:",
+                      text: AppLoc.of(context).docs.dualboot.issue1Content,
                       style: Theme.of(context).textTheme.body1,
                     )
                   ],
@@ -125,16 +90,11 @@ class DualBootDoc extends StatelessWidget {
               style: Theme.of(context).textTheme.body2,
               children: <TextSpan>[
                 TextSpan(
-                  text: "    Par défaut, Linux va tourner avec Intel. Ce qui "
-                      "est très mauvais si vous voulez miner de l'ethereum ou "
-                      "faire du Machine Learning.\n",
+                  text: AppLoc.of(context).docs.dualboot.issue2Content1,
                   style: Theme.of(context).textTheme.body1,
                 ),
                 TextSpan(
-                  text:
-                      "    •  Téléchargez les pilotes de NVIDIA sur le site officiel de NVIDIA.\n"
-                      "    •  (Téléchargez CUDA si nécessaire, sans pilotes, sans openGL)\n"
-                      "    •  Passer en TTY via Ctrl + Alt + F1, Ctrl + Alt + F2 ... ",
+                  text: AppLoc.of(context).docs.dualboot.issue2Content2,
                   style: Theme.of(context).textTheme.body1,
                 ),
               ],
@@ -142,19 +102,19 @@ class DualBootDoc extends StatelessWidget {
           ),
           const LogCard(
             "sudo service lightdm stop  # ou gdm, gdm3, lxdm",
-            title: "Shell - Arrêtez le Display Manager",
+            title: "Shell - Stop Display Manager",
           ),
           const LogCard(
-            "sudo nano /etc/init/gpu-manager.conf  # Ce n'est pas grave si il n'existe pas",
-            title: "Shell - Commentez tout le contenu",
+            "sudo nano /etc/init/gpu-manager.conf  # May not exists",
+            title: "Shell - Comment all",
           ),
           const LogCard(
-            "sudo prime-select nvidia   # Ce n'est pas grave si cela ne marche pas",
-            title: "Shell - Sélectionner la carte NVIDIA",
+            "sudo prime-select nvidia  # May not exists",
+            title: "Shell - Select NVIDIA",
           ),
           const LogCard(
             "sudo nano /etc/modprobe.d/blacklist-nouveau.conf",
-            title: "Shell - Blacklistez les pilotes non officiels de NVIDIA",
+            title: "Shell - Blacklist nouveau drivers",
           ),
           const LogCard(
             """blacklist nouveau
@@ -166,21 +126,20 @@ alias lbm-nouveau off""",
           ),
           const LogCard(
             """sudo update-initramfs -u""",
-            title: "Shell - Mettez à jour les configs",
+            title: "Shell - Update the filesystem mounter",
           ),
           const LogCard(
             "sudo bash ./NVIDIA-*.run --no-opengl-files",
-            title: "Shell - Installez les pilotes NVIDIA",
+            title: "Shell - Install NVIDIA drivers",
           ),
           const LogCard(
-            "sudo bash ./cuda_*_linux.run  # Sans OpenGL, avec CUDA Toolkit",
-            title: "Shell - Installez CUDA (si machine learning)",
+            "sudo bash ./cuda_*_linux.run  # Without OpenGL, with CUDA Toolkit",
+            title: "Shell - Install CUDA (if Tensorflow)",
           ),
-          const Text(
-              "Si jamais le port HDMI ne marche plus en BIOS Legacy sur Windows :"),
+          Text(AppLoc.of(context).docs.dualboot.issue2Content3),
           const LogCard(
             "sudo nano /etc/default/grub",
-            title: "Shell - Changez le Grub",
+            title: "Shell - Change Grub",
           ),
           const LogCard(
             """GRUB_DEFAULT=saved
@@ -190,28 +149,19 @@ GRUB_HIDDEN_TIMEOUT_QUIET=false
 GRUB_TIMEOUT=0
 GRUB_CMDLINE_LINUX_DEFAULT=\"\"
 GRUB_TERMINAL=console""",
-            title: "nano /etc/default/grub - Changez le Grub",
+            title: "nano /etc/default/grub - Change Grub",
           ),
           const LogCard(
             "sudo update-grub",
-            title: "Shell - Mettre à jour le Grub",
+            title: "Shell - Update Grub",
           ),
           Text.rich(
             TextSpan(
-              text: "Changez de GNU/Linux ou pas...\n",
+              text: AppLoc.of(context).docs.dualboot.changeLinuxHeader,
               style: Theme.of(context).textTheme.body2,
               children: <TextSpan>[
                 TextSpan(
-                  text: "    •  Généralement, on ne change pas de Linux. S'il "
-                      "manque de la customization, cherchez \"Comment "
-                      "customiser un Display Manager(DM), ou un Window "
-                      "Manager (WM)\". Cherchez \"Comment customiser un "
-                      "terminal\" et testez les configs sur une VM\n"
-                      "    •  Envie de hacker ? Les outils de Kali Linux sont "
-                      "téléchargeables indépendaments de l'OS\n"
-                      "    •  LTS ? Généralement les LTS sont beaucoup plus stables\n"
-                      "    •  Egalement, 80 % des utilisateurs de Ubuntu préfèrent"
-                      " réinstaller que faire un dist-upgrade.\n",
+                  text: AppLoc.of(context).docs.dualboot.changeLinuxContent,
                   style: Theme.of(context).textTheme.body1,
                 )
               ],

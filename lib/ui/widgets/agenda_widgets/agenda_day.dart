@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/models/icalendar/event.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -30,7 +31,7 @@ class DayWidget extends StatelessWidget {
               alignment: Alignment.center,
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                "${DateFormat.MMMMEEEEd("fr_FR").format(dt)}",
+                "${DateFormat.MMMMEEEEd(AppLoc.of(context).localeName).format(dt)}",
                 style: Theme.of(context)
                     .textTheme
                     .headline

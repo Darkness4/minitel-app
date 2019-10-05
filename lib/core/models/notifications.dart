@@ -11,7 +11,7 @@ class NotificationSettings {
   /// Enable notifications
   bool enabled = true;
 
-  Future<void> loadSavedSettings() async {
+  Future<void> loadSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final int earlyMinutes = prefs.getInt("early");
     final int rangeDays = prefs.getInt("range");

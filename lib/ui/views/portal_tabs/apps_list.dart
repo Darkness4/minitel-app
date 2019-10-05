@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 
 import 'portal_apps/imprimante.dart';
 import 'portal_apps/minitel.dart';
@@ -74,7 +75,7 @@ class _ImprimanteCard extends StatelessWidget {
               ),
               FittedBox(
                 child: Text(
-                  "Imprimante",
+                  AppLoc.of(context).portal.apps.printer,
                   style: Theme.of(context)
                       .textTheme
                       .display1
@@ -114,7 +115,7 @@ class _PortailCard extends StatelessWidget {
             ),
             FittedBox(
               child: Text(
-                "Portail",
+                AppLoc.of(context).portal.apps.portal,
                 style: Theme.of(context)
                     .textTheme
                     .display1

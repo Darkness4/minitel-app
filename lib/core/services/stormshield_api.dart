@@ -23,12 +23,12 @@ class StormshieldAPI {
   /// "Bad Username or Password".
   /// If no response is received, the HTTP error will be outputted.
   ///
-  /// You can use [autoLogin] like this:
+  /// You can use [login] like this:
   ///
   /// ```
-  /// String cookie = await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
+  /// String cookie = await login("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
   /// ```
-  Future<Cookie> autoLogin(
+  Future<Cookie> login(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
     // SessionId
     final String data = "uid=$uid&time=$selectedTime&pswd=$pswd";
@@ -68,7 +68,7 @@ class StormshieldAPI {
   /// ```
   /// String status = await disconnectGateway("172.17.0.1") // "You have logged out"
   /// ```
-  Future<String> disconnectGateway(String selectedUrl, {Cookie cookie}) async {
+  Future<String> logOut(String selectedUrl, {Cookie cookie}) async {
     final String url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     String status = "";
@@ -106,7 +106,7 @@ class StormshieldAPI {
   /// If not, the response will be "Non connecté"
   /// If no response is received, the HTTP error will be outputted.
   ///
-  /// You can use [getStatus] like this:
+  /// You can use [fetchStatus] like this:
   ///
   /// ```
   /// String status = await getStatus("172.17.0.1") // "x seconds left"
@@ -120,36 +120,39 @@ class StormshieldAPI {
   /// String status = await getStatus("172.17.0.1", cookie: _gateway.cookie) // "x seconds left"
   /// ```
   ///
-  Future<String> getStatus(String selectedUrl, {Cookie cookie}) async {
+  Future<String> fetchStatus(String selectedUrl, {Cookie cookie}) async {
     String status = "";
 
     final String url = 'https://$selectedUrl/auth/login.html';
     final RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
-    try {
-      final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
-        ..headers.removeAll(HttpHeaders.contentLengthHeader);
+    final HttpClientRequest request = await _client.getUrl(Uri.parse(url))
+      ..headers.removeAll(HttpHeaders.contentLengthHeader);
 
-      if (cookie != null) {
-        request.cookies.add(cookie);
-      }
+    if (cookie != null) {
+      request.cookies.add(cookie);
+    }
 
-      final HttpClientResponse response = await request.close();
-      final String body = await response.transform(utf8.decoder).join();
-      if (response.statusCode == 200) {
-        if (!body.contains('l_rtime')) {
-          status = 'Non connecté';
-        } else {
-          final String match = exp.firstMatch(body).group(1);
-          status = '$match secondes restantes';
-        }
+    final HttpClientResponse response = await request.close();
+    final String body = await response.transform(utf8.decoder).join();
+    if (response.statusCode == 200) {
+      if (!body.contains('l_rtime')) {
+        throw NotLoggedInException();
       } else {
-        throw Exception("HttpError: ${response.statusCode}");
+        final String match = exp.firstMatch(body).group(1);
+        status = match;
       }
-    } catch (e) {
-      status = e.toString();
+    } else {
+      throw HttpException("HttpError: ${response.statusCode}");
     }
 
     return status;
+  }
+}
+
+class NotLoggedInException implements Exception {
+  @override
+  String toString() {
+    return "Not logged in";
   }
 }

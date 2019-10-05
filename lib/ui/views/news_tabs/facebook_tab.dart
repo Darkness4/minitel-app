@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/feed.dart';
 import 'package:minitel_toolbox/core/models/facebook_api/post.dart';
@@ -78,7 +79,7 @@ class FacebookCard extends StatelessWidget {
                   child: FlatButton(
                     textColor: Colors.blue,
                     onPressed: () => LaunchURL.launchURL(post.permalinkUrl),
-                    child: const Text("Voir sur Facebook ..."),
+                    child: Text(AppLoc.of(context).news.seeFacebook),
                   ),
                 ),
               ),
@@ -103,7 +104,7 @@ class FacebookTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final FacebookAPI _facebookAPI = FacebookAPI();
     final Image _picture = Image.network(
-      _facebookAPI.getProfilePicture(),
+      _facebookAPI.profilePicture,
       fit: BoxFit.cover,
       height: 50,
       width: 50,
@@ -112,7 +113,7 @@ class FacebookTab extends StatelessWidget {
     return Center(
       child: Scrollbar(
         child: FutureBuilder<Feed>(
-          future: _facebookAPI.getFeed(),
+          future: _facebookAPI.fetchFeed(),
           builder: (BuildContext context, AsyncSnapshot<Feed> feedSnapshot) {
             if (feedSnapshot.hasError) {
               return const Icon(

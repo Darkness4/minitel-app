@@ -7,7 +7,7 @@ class ZabbixAPI {
   final HttpClient _client = HttpClient()
     ..badCertificateCallback = (_, __, ___) => true;
 
-  Future<String> getToken(
+  Future<String> fetchToken(
       String user, String password, String zabbixPath) async {
     final Map<String, dynamic> authentication = <String, dynamic>{
       "jsonrpc": "2.0",
@@ -33,7 +33,7 @@ class ZabbixAPI {
     return output["result"];
   }
 
-  Future<List<ZabbixHost>> getZabbixHosts(int groupids, String zabbixPath,
+  Future<List<ZabbixHost>> fetchZabbixHosts(int groupids, String zabbixPath,
       {String token = ""}) async {
     final Map<String, Object> data = <String, dynamic>{
       "jsonrpc": "2.0",

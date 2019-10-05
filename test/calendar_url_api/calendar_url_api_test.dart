@@ -22,8 +22,7 @@ void main() {
 
   group("Must FAIL", () {
     test("savedCalendarURL: not existing", () async {
-      final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
-      final String output = await _calendarURL.savedCalendarURL;
+      final String output = await CalendarUrlAPI.fetchSaved();
       expect(output, equals(""));
     });
 
@@ -76,18 +75,16 @@ void main() {
 
   group("Must WORK", () {
     test("saveCalendarURL", () async {
-      final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
       const String url =
           "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";
-      await _calendarURL.saveCalendarURL(url);
+      await CalendarUrlAPI.saveCalendarURL(url);
     });
 
     test("savedCalendarURL existing", () async {
-      final CalendarUrlAPI _calendarURL = CalendarUrlAPI();
       const String url =
           "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";
-      await _calendarURL.saveCalendarURL(url);
-      final String output = await _calendarURL.savedCalendarURL;
+      await CalendarUrlAPI.saveCalendarURL(url);
+      final String output = await CalendarUrlAPI.fetchSaved();
       print(RegExp(r'https(.*)\.ics').stringMatch(output));
       expect(output, equals(RegExp(r'https(.*)\.ics').stringMatch(output)));
     });

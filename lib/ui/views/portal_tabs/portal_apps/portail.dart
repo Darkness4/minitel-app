@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
 import 'package:minitel_toolbox/ui/widgets/app_lists_widgets.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class PortailWebView extends StatelessWidget {
     }
     return ScaffoldWebView(
       backgroundColor: Colors.deepPurple,
-      title: const Text("Portail"),
+      title: Text(AppLoc.of(context).portal.apps.portal),
       initialUrl: 'https://portail.emse.fr/',
     );
   }

@@ -17,7 +17,7 @@ class SwitchesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<List<ZabbixHost>>(
-        future: Provider.of<ZabbixAPI>(context).getZabbixHosts(
+        future: Provider.of<ZabbixAPI>(context).fetchZabbixHosts(
           ApiConstants.zabbixSwitches,
           ApiConstants.zabbixPath,
           token: ApiConstants.zabbixToken,
@@ -37,6 +37,7 @@ class SwitchesCard extends StatelessWidget {
               return const CircularProgressIndicator();
             case ConnectionState.done:
               return Wrap(
+                alignment: WrapAlignment.center,
                 children: <Widget>[
                   for (ZabbixHost host in snapshot.data) ...<Widget>[
                     _SwitchBody(host),

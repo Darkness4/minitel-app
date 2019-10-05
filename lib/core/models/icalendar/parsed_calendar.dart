@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'event.dart';
 import 'timezone.dart';
 
@@ -13,6 +16,87 @@ class ParsedCalendar {
   List<Event> events = <Event>[];
 
   ParsedCalendar();
+
+  /// Get existing the stream .ics from file
+  static Future<ParsedCalendar> parse(String filePath) async {
+    final File file = File(filePath);
+    final ParsedCalendar parsedCalendar = ParsedCalendar();
+    ICalSection mode = ICalSection.None;
+    final Map<String, String> vEvent = <String, String>{};
+
+    // Use this line of code to inject a template.ics
+    // await file
+    //     .writeAsString(await rootBundle.loadString(AssetsPaths.TemplateICS));
+
+    // Read the file
+    final Stream<String> calendarStream =
+        file.openRead().transform(utf8.decoder);
+
+    final Stream<String> lines = calendarStream.transform(const LineSplitter());
+
+    await for (final String data in lines) {
+      final List<String> line = data.trim().split(":");
+      // Inside a VEVENT
+      if (line[0] == 'BEGIN' && line[1] == 'VEVENT') {
+        vEvent.clear();
+        mode = ICalSection.VEVENT;
+        continue; // Skip BEGIN:VEVENT
+      }
+      if (line[0] == 'END' && line[1] == 'VEVENT') {
+        parsedCalendar.events.add(Event.fromMap(vEvent));
+        mode = ICalSection.None;
+        continue; // Skip END:VEVENT
+      }
+      if (line[0] == 'BEGIN' && line[1] == 'VTIMEZONE') {
+        mode = ICalSection.VTIMEZONE;
+        continue; // Skip BEGIN:VTIMEZONE
+      }
+      if (line[0] == 'END' && line[1] == 'VTIMEZONE') {
+        mode = ICalSection.None;
+        continue; // Skip END:VTIMEZONE
+      }
+      if (line[0] == 'BEGIN' && line[1] == 'STANDARD') {
+        mode = ICalSection.STANDARD;
+        continue; // Skip BEGIN:STANDARD
+      }
+      if (line[0] == 'END' && line[1] == 'STANDARD') {
+        mode = ICalSection.VTIMEZONE;
+        continue; // Skip END:STANDARD
+      }
+      if (line[0] == 'BEGIN' && line[1] == 'DAYLIGHT') {
+        mode = ICalSection.DAYLIGHT;
+        continue; // Skip BEGIN:DAYLIGHT
+      }
+      if (line[0] == 'END' && line[1] == 'DAYLIGHT') {
+        mode = ICalSection.VTIMEZONE;
+        continue; // Skip END:DAYLIGHT
+      }
+
+      if (line.length >= 2) {
+        switch (mode) {
+          case ICalSection.VEVENT:
+            vEvent[line[0]] = line[1];
+            break;
+          case ICalSection.VTIMEZONE:
+            if (line[0] == "TZID") {
+              parsedCalendar.timezone.tzid = line[1];
+            }
+            break;
+          case ICalSection.STANDARD:
+            parsedCalendar.timezone.standard.set(line[0], line[1]);
+            break;
+          case ICalSection.DAYLIGHT:
+            parsedCalendar.timezone.daylight.set(line[0], line[1]);
+            break;
+          case ICalSection.None:
+            parsedCalendar.set(line[0], line[1]);
+            break;
+        }
+      }
+    }
+
+    return parsedCalendar;
+  }
 
   void set(String key, String value) {
     switch (key) {
@@ -33,3 +117,6 @@ class ParsedCalendar {
     }
   }
 }
+
+/// Section of an icalendar
+enum ICalSection { None, VEVENT, VTIMEZONE, STANDARD, DAYLIGHT }

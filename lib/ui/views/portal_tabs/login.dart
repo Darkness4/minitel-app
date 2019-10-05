@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
 import 'package:minitel_toolbox/core/services/imprimante_api.dart';
@@ -30,15 +31,14 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.0)),
             elevation: 10.0,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   FittedBox(
                     child: Row(
                       children: <Widget>[
-                        const Text("Nom de domaine / IP "),
+                        Text(AppLoc.of(context).portal.domainNameHeader),
                         ValueListenableBuilder<String>(
                           valueListenable: model.selectedUrl,
                           builder: (BuildContext context, String value, _) {
@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                   FittedBox(
                     child: Row(
                       children: <Widget>[
-                        const Text("Durée d\'authentification "),
+                        Text(AppLoc.of(context).portal.authTime),
                         ValueListenableBuilder<String>(
                           valueListenable: model.selectedTime,
                           builder: (BuildContext context, String value, _) {
@@ -87,46 +87,64 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Form(
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: TextFormField(
-                            key: const Key('login/uid'),
-                            focusNode: model.uidFocusNode,
-                            controller: model.uidController,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.person),
-                              hintText: "prenom.nom",
-                              labelText: "Nom d'utilisateur",
-                            ),
-                            onEditingComplete: () {
-                              model.uidFocusNode.unfocus();
-                              FocusScope.of(context)
-                                  .requestFocus(model.pswdFocusNode);
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: TextFormField(
-                            key: const Key('login/pswd'),
-                            controller: model.pswdController,
-                            obscureText: true,
-                            focusNode: model.pswdFocusNode,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.vpn_key),
-                              labelText: "Mot de passe",
+                    key: model.formKey,
+                    child: FocusScope(
+                      node: model.formNode,
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              key: const Key('login/uid'),
+                              controller: model.uidController,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.person),
+                                hintText:
+                                    AppLoc.of(context).portal.usernameHint,
+                                labelText:
+                                    AppLoc.of(context).portal.usernameLabel,
+                              ),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return AppLoc.of(context).reporting.notEmpty;
+                                }
+                                return null;
+                              },
+                              onFieldSubmitted: (_) {
+                                model.formNode.nextFocus();
+                              },
                             ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              key: const Key('login/pswd'),
+                              controller: model.pswdController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.vpn_key),
+                                labelText: AppLoc.of(context).portal.password,
+                              ),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return AppLoc.of(context).reporting.notEmpty;
+                                }
+                                return null;
+                              },
+                              onFieldSubmitted: (_) {
+                                model.formNode.unfocus();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Se souvenir "),
+                      Text(AppLoc.of(context).portal.rememberMe),
                       ValueListenableBuilder<bool>(
                         valueListenable: model.rememberMe,
                         builder: (BuildContext context, bool value, _) {
@@ -147,7 +165,7 @@ class LoginPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Se connecter automatiquement"),
+                      Text(AppLoc.of(context).portal.autoLogin),
                       ValueListenableBuilder<bool>(
                         valueListenable: model.autoLogin,
                         builder: (BuildContext context, bool value, _) {
@@ -188,7 +206,6 @@ class _StatusCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final StormshieldAPI _gatewayAPI = Provider.of<StormshieldAPI>(context);
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
-    final CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
     final ImprimanteAPI _imprimanteAPI = Provider.of<ImprimanteAPI>(context);
 
     return Card(
@@ -201,48 +218,89 @@ class _StatusCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             FutureBuilder<String>(
-              future: _gatewayAPI.getStatus(
+              future: _gatewayAPI.fetchStatus(
                 _selectedUrl,
                 cookie: _gatewayAPI.cookie,
               ),
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                return Text(
-                  snapshot.hasData ? snapshot.data : '',
-                  key: const Key('login/gateway_text'),
-                  style: TextStyle(
-                      color: (!snapshot.hasData ||
-                              snapshot.hasError ||
-                              !snapshot.data.contains("second"))
-                          ? Colors.red
-                          : Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24),
+                String status = '';
+                if (snapshot.hasData) {
+                  final Duration duration =
+                      Duration(seconds: int.parse(snapshot.data));
+                  if (duration.inSeconds < 300) {
+                    status = AppLoc.of(context)
+                        .portal
+                        .statusInSeconds(duration.inSeconds);
+                  } else if (duration.inMinutes < 60) {
+                    status = AppLoc.of(context)
+                        .portal
+                        .statusInMinutes(duration.inMinutes);
+                  } else {
+                    status = AppLoc.of(context)
+                        .portal
+                        .statusInHM(duration.inHours, duration.inMinutes % 60);
+                  }
+                }
+                return Column(
+                  children: <Widget>[
+                    LinearProgressIndicator(
+                      value: (snapshot.hasData && !snapshot.hasError)
+                          ? Duration(seconds: int.parse(snapshot.data))
+                                  .inSeconds /
+                              28800
+                          : 0.0,
+                      backgroundColor: (snapshot.hasData && !snapshot.hasError)
+                          ? Theme.of(context).backgroundColor
+                          : Theme.of(context).errorColor,
+                    ),
+                    Text(
+                      snapshot.hasError ? snapshot.error.toString() : status,
+                      key: const Key('login/gateway_text'),
+                      style: TextStyle(
+                        color: (snapshot.hasData && !snapshot.hasError)
+                            ? Theme.of(context).accentColor
+                            : Theme.of(context).errorColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    LinearProgressIndicator(
+                      value: (snapshot.hasData && !snapshot.hasError)
+                          ? Duration(seconds: int.parse(snapshot.data))
+                                  .inSeconds /
+                              28800
+                          : 0.0,
+                      backgroundColor: (snapshot.hasData && !snapshot.hasError)
+                          ? Theme.of(context).backgroundColor
+                          : Theme.of(context).errorColor,
+                    ),
+                  ],
                 );
               },
             ),
             Row(
               children: <Widget>[
-                const Text(
-                  "Agenda: ",
-                  style: TextStyle(fontSize: 20),
+                Text(
+                  "${AppLoc.of(context).agenda.title}: ",
+                  style: const TextStyle(fontSize: 20),
                 ),
                 FutureBuilder<String>(
-                  future: _calendarUrlAPI
-                      .savedCalendarURL, // a previously-obtained Future<String> or null
+                  future: CalendarUrlAPI
+                      .fetchSaved(), // a previously-obtained Future<String> or null
                   builder:
                       (BuildContext context, AsyncSnapshot<String> snapshot) {
                     if (!snapshot.hasData ||
                         snapshot.hasError ||
                         snapshot.data == "") {
-                      return const Icon(
+                      return Icon(
                         Icons.close,
-                        color: Colors.red,
+                        color: Theme.of(context).errorColor,
                       );
                     }
-                    return const Icon(
+                    return Icon(
                       Icons.done,
-                      color: Colors.green,
-                      key: Key('login/agenda_success'),
+                      color: Theme.of(context).accentColor,
+                      key: const Key('login/agenda_success'),
                     ); // unreachable
                   },
                 ),
@@ -250,39 +308,39 @@ class _StatusCard extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                const Text(
-                  "Portail: ",
-                  style: TextStyle(fontSize: 20),
+                Text(
+                  "${AppLoc.of(context).portal.apps.portal}: ",
+                  style: const TextStyle(fontSize: 20),
                 ),
                 if (_portailAPI.cookies.isEmpty)
-                  const Icon(
+                  Icon(
                     Icons.close,
-                    color: Colors.red,
+                    color: Theme.of(context).errorColor,
                   )
                 else
-                  const Icon(
+                  Icon(
                     Icons.done,
-                    color: Colors.green,
-                    key: Key('login/portail_success'),
+                    color: Theme.of(context).accentColor,
+                    key: const Key('login/portail_success'),
                   )
               ],
             ),
             Row(
               children: <Widget>[
-                const Text(
-                  "Imprimante: ",
-                  style: TextStyle(fontSize: 20),
+                Text(
+                  "${AppLoc.of(context).portal.apps.printer}: ",
+                  style: const TextStyle(fontSize: 20),
                 ),
                 if (_imprimanteAPI.cookie == null)
-                  const Icon(
+                  Icon(
                     Icons.close,
-                    color: Colors.red,
+                    color: Theme.of(context).errorColor,
                   )
                 else
-                  const Icon(
+                  Icon(
                     Icons.done,
-                    color: Colors.green,
-                    key: Key('login/imrprimante_success'),
+                    color: Theme.of(context).accentColor,
+                    key: const Key('login/imprimante_success'),
                   )
               ],
             ),

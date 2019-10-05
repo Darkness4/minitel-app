@@ -22,8 +22,7 @@ void main() {
         () async {
           try {
             final PortailAPI _portail = PortailAPI();
-            await _portail.saveCookiePortailFromLogin(
-                username: "", password: "");
+            await _portail.login(username: "", password: "");
             throw Exception("saveCookiePortailFromLogin shouldn't work here");
           } on Exception catch (e) {
             expect(e.toString(), contains("bad username or password"));
@@ -52,7 +51,7 @@ void main() {
       await HttpOverrides.runZoned(
         () async {
           final PortailAPI _portail = PortailAPI();
-          await _portail.saveCookiePortailFromLogin(
+          await _portail.login(
               username: "marc.nguyen",
               password: utf8.decode(base64.decode("b3BzdGU5NjM=")));
           final List<Cookie> cookies = _portail.cookies;

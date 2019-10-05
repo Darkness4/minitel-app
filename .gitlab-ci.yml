@@ -6,7 +6,7 @@ stages:
 
 unit-tests:
   stage: test
-  image: darkness4/flutter-builder:29-stable
+  image: darkness4/flutter-builder:29-master
 
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_coverage.sh

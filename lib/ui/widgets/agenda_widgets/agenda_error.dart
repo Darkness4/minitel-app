@@ -1,18 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/core/services/calendar_url_api.dart';
-import 'package:minitel_toolbox/core/services/icalendar_api.dart';
-import 'package:minitel_toolbox/ui/shared/text_styles.dart';
-import 'package:provider/provider.dart';
+import 'package:minitel_toolbox/core/constants/localizations.dart';
+import 'package:minitel_toolbox/core/viewmodels/views/agenda_view_model.dart';
 
-class ErrorAgendaWidget extends StatelessWidget {
+class ErrorAgendaWidget extends StatefulWidget {
+  final dynamic error;
+  final AgendaViewModel model;
+
+  const ErrorAgendaWidget(this.error, {@required this.model});
+
+  @override
+  _ErrorAgendaWidgetState createState() => _ErrorAgendaWidgetState();
+}
+
+class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {
   final TextEditingController _uidController = TextEditingController();
-  final TextEditingController _pswdController = TextEditingController();
-  final FocusNode _uidFocusNode = FocusNode();
-  final FocusNode _pswdFocusNode = FocusNode();
-  final String error;
-  final Function parentSetState;
 
-  ErrorAgendaWidget(this.error, this.parentSetState);
+  final TextEditingController _pswdController = TextEditingController();
+
+  final FocusScopeNode _formNode = FocusScopeNode();
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +33,12 @@ class ErrorAgendaWidget extends StatelessWidget {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              error.toString(),
-              style: MinitelTextStyles.error,
+              widget.error is FileSystemException
+                  ? "File calendar.ics not found. Please log in."
+                  : widget.error.toString(),
+              style: TextStyle(
+                color: Theme.of(context).errorColor,
+              ),
             ),
           ),
         ),
@@ -34,32 +47,56 @@ class ErrorAgendaWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Form(
-              child: Column(
-                children: <Widget>[
-                  TextFormField(
-                    key: const Key('agenda_view/uid'),
-                    focusNode: _uidFocusNode,
-                    controller: _uidController,
-                    decoration: const InputDecoration(
-                      hintText: "prénom.nom",
-                      labelText: "Nom d'utilisateur",
+              key: _formKey,
+              child: FocusScope(
+                node: _formNode,
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextFormField(
+                        key: const Key('agenda_view/uid'),
+                        controller: _uidController,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.person),
+                          hintText: AppLoc.of(context).portal.usernameHint,
+                          labelText: AppLoc.of(context).portal.usernameLabel,
+                        ),
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return AppLoc.of(context).reporting.notEmpty;
+                          }
+                          return null;
+                        },
+                        onFieldSubmitted: (_) {
+                          _formNode.nextFocus();
+                        },
+                      ),
                     ),
-                    onEditingComplete: () {
-                      _uidFocusNode.unfocus();
-                      FocusScope.of(context).requestFocus(_pswdFocusNode);
-                    },
-                  ),
-                  TextFormField(
-                    key: const Key('agenda_view/pswd'),
-                    controller: _pswdController,
-                    obscureText: true,
-                    focusNode: _pswdFocusNode,
-                    decoration: const InputDecoration(
-                      hintText: "Mot de passe",
-                      labelText: "Mot de passe",
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextFormField(
+                        key: const Key('agenda_view/pswd'),
+                        controller: _pswdController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.vpn_key),
+                          labelText: AppLoc.of(context).portal.password,
+                        ),
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return AppLoc.of(context).reporting.notEmpty;
+                          }
+                          return null;
+                        },
+                        onFieldSubmitted: (_) {
+                          _formNode.unfocus();
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -71,26 +108,15 @@ class ErrorAgendaWidget extends StatelessWidget {
             key: const Key('agenda_view/connect'),
             backgroundColor: Colors.red,
             elevation: 10.0,
-            onPressed: () async {
-              final CalendarUrlAPI _calendarURL =
-                  Provider.of<CalendarUrlAPI>(context);
-              final ICalendarAPI ical = Provider.of<ICalendarAPI>(context);
-              try {
-                final String url = await _calendarURL.getCalendarURL(
-                  username: _uidController.text,
-                  password: _pswdController.text,
-                );
-                await ical.saveCalendar(url, _calendarURL);
-              } on Exception catch (e) {
-                Scaffold.of(context).showSnackBar(
-                  SnackBar(content: Text(e.toString())),
-                );
-              }
-              parentSetState();
-            },
-            label: const Text(
-              "Se connecter",
-              style: TextStyle(
+            onPressed: () => widget.model.login(
+              context,
+              _uidController.text,
+              _pswdController.text,
+              _formKey.currentState,
+            ),
+            label: Text(
+              AppLoc.of(context).portal.login,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),

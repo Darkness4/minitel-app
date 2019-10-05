@@ -43,69 +43,69 @@ class DiagnosisAPI {
       // Fill the report
       await Future.wait(<Future<String>>[
         _diagnosis.ip.content = Connectivity().getWifiIP(),
-        _diagnosis.ipAddr.content = _terminalCommand(
+        _diagnosis.ipAddr.content = _run(
           "/system/bin/ip",
           <String>['a'],
         ),
-        _diagnosis.arp.content = _terminalCommand(
+        _diagnosis.arp.content = _run(
           "su",
           <String>['-c', '/system/bin/arp -a'],
         ),
-        _diagnosis.tracertGoogle.content = _terminalCommand(
+        _diagnosis.tracertGoogle.content = _run(
           "su",
           <String>['-c', '/system/bin/traceroute', MyIPAdresses.google],
         ),
-        _diagnosis.tracertGoogleDNS.content = _terminalCommand(
+        _diagnosis.tracertGoogleDNS.content = _run(
           "su",
           <String>['-c', '/system/bin/traceroute', MyIPAdresses.googleDNSIP],
         ),
-        _diagnosis.pingLo.content = _terminalCommand(
+        _diagnosis.pingLo.content = _run(
           "/system/bin/ping",
           <String>[_argsPing, MyIPAdresses.localhostIP],
         ),
-        _diagnosis.pingLocal.content = _terminalCommand(
+        _diagnosis.pingLocal.content = _run(
           "/system/bin/ping",
           <String>[_argsPing, MyIPAdresses.proliantIP],
         ),
-        _diagnosis.pingGate.content = _terminalCommand(
+        _diagnosis.pingGate.content = _run(
           "/system/bin/ping",
           <String>[_argsPing, MyIPAdresses.gatewayIP],
         ),
-        _diagnosis.pingDNS1.content = _terminalCommand(
+        _diagnosis.pingDNS1.content = _run(
           "/system/bin/ping",
           <String>[_argsPing, MyIPAdresses.emseIsminDNS1IP],
         ),
-        _diagnosis.pingDNS2.content = _terminalCommand(
+        _diagnosis.pingDNS2.content = _run(
           "/system/bin/ping",
           <String>[_argsPing, MyIPAdresses.emseIsminDNS2IP],
         ),
-        _diagnosis.pingDNS3.content = _terminalCommand(
+        _diagnosis.pingDNS3.content = _run(
           "/system/bin/ping",
           <String>[_argsPing, MyIPAdresses.googleDNSIP],
         ),
-        _diagnosis.pingDNS4.content = _terminalCommand(
+        _diagnosis.pingDNS4.content = _run(
           "/system/bin/ping",
           <String>[_argsPing, MyIPAdresses.cloudflareDNSIP],
         ),
-        _diagnosis.pingDNS5.content = _terminalCommand(
+        _diagnosis.pingDNS5.content = _run(
           "/system/bin/ping",
           <String>[_argsPing, MyIPAdresses.localDNSIP],
         ),
-        _diagnosis.nsLookupEMSEBusy.content = _terminalCommand(
+        _diagnosis.nsLookupEMSEBusy.content = _run(
           "su",
           <String>['-c', "/system/bin/nslookup ${MyIPAdresses.stormshield}"],
         ),
-        _diagnosis.nsLookupGoogleBusy.content = _terminalCommand(
+        _diagnosis.nsLookupGoogleBusy.content = _run(
           "su",
           <String>['-c', "/system/bin/nslookup ${MyIPAdresses.google}"],
         ),
         _diagnosis.httpPortalPublic.content = _stormshieldAPI
-            .getStatus(MyIPAdresses.stormshieldIP,
+            .fetchStatus(MyIPAdresses.stormshieldIP,
                 cookie: _stormshieldAPI.cookie)
             .then(
                 (String status) => status.isEmpty ? "Nothing to show" : status),
         _diagnosis.httpPortalGateway.content = _stormshieldAPI
-            .getStatus(MyIPAdresses.gatewayIP, cookie: _stormshieldAPI.cookie)
+            .fetchStatus(MyIPAdresses.gatewayIP, cookie: _stormshieldAPI.cookie)
             .then(
                 (String status) => status.isEmpty ? "Nothing to show" : status),
         _diagnosis.nsLookupEMSE.content = _lookup(MyIPAdresses.stormshield),
@@ -115,7 +115,7 @@ class DiagnosisAPI {
         return <String>[];
       });
     } else {
-      _diagnosis.alert = "Pas de Wifi";
+      _diagnosis.alert = "No Wi-Fi";
     }
     return _diagnosis;
   }
@@ -134,7 +134,7 @@ class DiagnosisAPI {
     }
   }
 
-  Future<String> _terminalCommand(String command, List<String> args) {
+  Future<String> _run(String command, List<String> args) {
     return Process.run(command, args)
         .then((ProcessResult result) => result.stdout)
         .then((dynamic stdout) =>
