@@ -51,8 +51,8 @@ class MyApp extends StatelessWidget {
             MinitelThemeData.light,
           );
           SharedPreferences.getInstance().then((SharedPreferences prefs) {
-            final bool dark = prefs.getBool('dark') ?? false;
-            if (dark != null && dark) {
+            final bool isDark = prefs.getBool('dark') ?? false;
+            if (isDark) {
               themeChanger.theme = MinitelThemeData.dark;
             }
           });

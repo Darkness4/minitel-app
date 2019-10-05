@@ -8,7 +8,7 @@ class CalendarUrlAPI {
   final HttpClient _client = HttpClient();
 
   /// Get from SharedPrefs the url to get the ical
-  Future<String> get savedCalendarURL async {
+  static Future<String> fetchSaved() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String contents = prefs.getString('calendarURL') ?? "";
 
@@ -37,7 +37,7 @@ class CalendarUrlAPI {
   }
 
   /// Save the url to get the ical in a SharedPrefs
-  Future<void> saveCalendarURL(String url) async {
+  static Future<void> saveCalendarURL(String url) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('calendarURL', url);
   }

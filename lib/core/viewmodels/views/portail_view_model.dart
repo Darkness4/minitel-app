@@ -89,7 +89,7 @@ class PortailViewModel extends ChangeNotifier {
 
       // Login
       try {
-        await stormshieldAPI.autoLogin(
+        await stormshieldAPI.login(
           uid,
           pswd,
           selectedUrl.value,
@@ -112,7 +112,7 @@ class PortailViewModel extends ChangeNotifier {
           username: uid,
           password: pswd,
         );
-        await iCalendar.saveCalendar(calendarUrl, calendarUrlAPI);
+        await iCalendar.downloadCalendar(calendarUrl);
         notifyListeners();
       } catch (e) {
         portailState = PortailState.Available;
@@ -126,7 +126,7 @@ class PortailViewModel extends ChangeNotifier {
 
       // Portail
       await portailAPI
-          .saveCookiePortailFromLogin(
+          .login(
             username: uid,
             password: pswd,
           )

@@ -9,7 +9,7 @@ class FacebookAPI {
   final HttpClient _client = HttpClient();
 
   /// Get a Feed from Facebook Graph API
-  Future<Feed> getFeed() async {
+  Future<Feed> fetchFeed() async {
     final HttpClientRequest request = await _client.getUrl(Uri.parse(
         "https://graph.facebook.com/v4.0/me/feed?fields=full_picture,permalink_url,message,created_time&access_token=${ApiConstants.facebookApi}"));
     final HttpClientResponse response = await request.close();
@@ -23,7 +23,6 @@ class FacebookAPI {
   }
 
   /// Get the url to HTTP GET the profile picture
-  String getProfilePicture() {
-    return "https://graph.facebook.com/v4.0/${ApiConstants.facebookProfileId}/picture?type=large";
-  }
+  String get profilePicture =>
+      "https://graph.facebook.com/v4.0/${ApiConstants.facebookProfileId}/picture?type=large";
 }

@@ -118,7 +118,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
   }
 
   Future<void> _initStateAsync() async {
-    await widget.notificationSettings.loadSavedSettings();
+    await widget.notificationSettings.loadSettings();
     _rangeController.text = widget.notificationSettings.range.inDays.toString();
     _earlyController.text =
         widget.notificationSettings.early.inMinutes.toString();

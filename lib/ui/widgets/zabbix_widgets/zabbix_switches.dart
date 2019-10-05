@@ -17,7 +17,7 @@ class SwitchesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<List<ZabbixHost>>(
-        future: Provider.of<ZabbixAPI>(context).getZabbixHosts(
+        future: Provider.of<ZabbixAPI>(context).fetchZabbixHosts(
           ApiConstants.zabbixSwitches,
           ApiConstants.zabbixPath,
           token: ApiConstants.zabbixToken,

@@ -23,12 +23,12 @@ class StormshieldAPI {
   /// "Bad Username or Password".
   /// If no response is received, the HTTP error will be outputted.
   ///
-  /// You can use [autoLogin] like this:
+  /// You can use [login] like this:
   ///
   /// ```
-  /// String cookie = await autoLogin("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
+  /// String cookie = await login("MyName", "MyPassword", "10.163.0.2", 480) // "28800 seconds left"
   /// ```
-  Future<Cookie> autoLogin(
+  Future<Cookie> login(
       String uid, String pswd, String selectedUrl, int selectedTime) async {
     // SessionId
     final String data = "uid=$uid&time=$selectedTime&pswd=$pswd";
@@ -68,7 +68,7 @@ class StormshieldAPI {
   /// ```
   /// String status = await disconnectGateway("172.17.0.1") // "You have logged out"
   /// ```
-  Future<String> disconnectGateway(String selectedUrl, {Cookie cookie}) async {
+  Future<String> logOut(String selectedUrl, {Cookie cookie}) async {
     final String url =
         'https://$selectedUrl/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion';
     String status = "";
@@ -106,7 +106,7 @@ class StormshieldAPI {
   /// If not, the response will be "Non connecté"
   /// If no response is received, the HTTP error will be outputted.
   ///
-  /// You can use [getStatus] like this:
+  /// You can use [fetchStatus] like this:
   ///
   /// ```
   /// String status = await getStatus("172.17.0.1") // "x seconds left"
@@ -120,7 +120,7 @@ class StormshieldAPI {
   /// String status = await getStatus("172.17.0.1", cookie: _gateway.cookie) // "x seconds left"
   /// ```
   ///
-  Future<String> getStatus(String selectedUrl, {Cookie cookie}) async {
+  Future<String> fetchStatus(String selectedUrl, {Cookie cookie}) async {
     String status = "";
 
     final String url = 'https://$selectedUrl/auth/login.html';

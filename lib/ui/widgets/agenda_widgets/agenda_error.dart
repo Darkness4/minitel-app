@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/agenda_view_model.dart';
-import 'package:minitel_toolbox/ui/shared/text_styles.dart';
 
 class ErrorAgendaWidget extends StatefulWidget {
-  final String error;
+  final dynamic error;
   final AgendaViewModel model;
 
   const ErrorAgendaWidget(this.error, {@required this.model});
@@ -32,8 +33,12 @@ class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              widget.error,
-              style: MinitelTextStyles.error,
+              widget.error is FileSystemException
+                  ? "File calendar.ics not found. Please log in."
+                  : widget.error.toString(),
+              style: TextStyle(
+                color: Theme.of(context).errorColor,
+              ),
             ),
           ),
         ),

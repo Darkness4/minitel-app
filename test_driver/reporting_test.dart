@@ -16,9 +16,7 @@ void main() {
 
     // Close the connection to the driver after the tests have completed.
     tearDownAll(() async {
-      if (driver != null) {
-        await driver.close();
-      }
+      await driver?.close();
     });
 
     test('Check flutter driver health', () async {

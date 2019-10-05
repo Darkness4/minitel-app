@@ -90,7 +90,7 @@ class MockHttpClientResponse extends Mock implements HttpClientResponse {
   @override
   HttpHeaders get headers {
     final HttpHeaders mockHttpHeaders = MockHttpHeaders();
-    if (customHeaders != null && customHeaders.isNotEmpty) {
+    if (customHeaders?.isNotEmpty ?? false) {
       customHeaders.forEach(
           (String key, String value) => mockHttpHeaders.set(key, value));
     }

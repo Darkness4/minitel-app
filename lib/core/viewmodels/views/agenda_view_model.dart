@@ -147,18 +147,20 @@ class AgendaViewModel extends ChangeNotifier {
   /// Save/update a calendar and parse it.
   Future<ParsedCalendar> loadCalendar(BuildContext context) async {
     // Try to update thr calendar
-    final String url = await calendarUrlAPI.savedCalendarURL;
+    final String url = await CalendarUrlAPI.fetchSaved();
+    final StringBuffer filePath = StringBuffer();
 
     // Try to update calendar
     if (url == "" || url == null) {
       print("Cannot update calendar. Taking from cache.");
+      filePath.write(await ICalendarAPI.calendarPATH);
     } else {
       print("Updating calendar.");
-      await iCalendar.saveCalendar(url, calendarUrlAPI);
+      filePath.write(await iCalendar.downloadCalendar(url));
     }
 
     // Read the actual calendar (throw if not existing)
-    return iCalendar.getParsedCalendarFromFile();
+    return ParsedCalendar.parse(filePath.toString());
   }
 
   /// Initialize the notification system
@@ -229,7 +231,7 @@ class AgendaViewModel extends ChangeNotifier {
           username: uid,
           password: pswd,
         );
-        await iCalendar.saveCalendar(url, calendarUrlAPI);
+        await iCalendar.downloadCalendar(url);
       } on Exception catch (e) {
         Scaffold.of(context).showSnackBar(
           SnackBar(content: Text(e.toString())),

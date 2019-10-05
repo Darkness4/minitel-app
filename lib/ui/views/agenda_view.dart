@@ -53,7 +53,7 @@ class AgendaView extends StatelessWidget {
                   AsyncSnapshot<ParsedCalendar> snapshot) {
                 if (!snapshot.hasData && snapshot.hasError) {
                   return ErrorAgendaWidget(
-                    snapshot.error.toString(),
+                    snapshot.error,
                     model: model,
                   );
                 }

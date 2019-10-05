@@ -87,7 +87,7 @@ class ScaffoldWebView extends StatelessWidget {
             onWebViewCreated: (WebViewController wvc) {
               _controller = wvc;
               if (onWebViewCreated != null) {
-                onWebViewCreated(wvc, context);
+                this.onWebViewCreated(wvc, context);
               }
             },
           ),

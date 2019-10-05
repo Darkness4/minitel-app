@@ -206,7 +206,6 @@ class _StatusCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final StormshieldAPI _gatewayAPI = Provider.of<StormshieldAPI>(context);
     final PortailAPI _portailAPI = Provider.of<PortailAPI>(context);
-    final CalendarUrlAPI _calendarUrlAPI = Provider.of<CalendarUrlAPI>(context);
     final ImprimanteAPI _imprimanteAPI = Provider.of<ImprimanteAPI>(context);
 
     return Card(
@@ -219,7 +218,7 @@ class _StatusCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             FutureBuilder<String>(
-              future: _gatewayAPI.getStatus(
+              future: _gatewayAPI.fetchStatus(
                 _selectedUrl,
                 cookie: _gatewayAPI.cookie,
               ),
@@ -286,8 +285,8 @@ class _StatusCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 20),
                 ),
                 FutureBuilder<String>(
-                  future: _calendarUrlAPI
-                      .savedCalendarURL, // a previously-obtained Future<String> or null
+                  future: CalendarUrlAPI
+                      .fetchSaved(), // a previously-obtained Future<String> or null
                   builder:
                       (BuildContext context, AsyncSnapshot<String> snapshot) {
                     if (!snapshot.hasData ||
