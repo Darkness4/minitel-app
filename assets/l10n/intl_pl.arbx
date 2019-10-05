@@ -1,0 +1,633 @@
+{
+  "forceDark": "Force Dark Theme",
+  "@forceDark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_title": "Informacje o Minitel Toolbox",
+  "@AboutLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_description": "Minitel Toolbox zawiera najbardziej przydatne narzędzia do bezproblemowego Wi-Fi.",
+  "@AboutLoc_description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_developper": "Deweloper",
+  "@AboutLoc_developper": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_lastVestion": "Ostatnia wersja",
+  "@AboutLoc_lastVestion": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_website": "Stronie internetowej",
+  "@AboutLoc_website": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_license": "Licencja",
+  "@AboutLoc_license": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicyTitle": "Polityka prywatności",
+  "@AboutLoc_privacyPolicyTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicySubtitle": "Żadne dane nie są udostępniane i przechowywane bez Twojej wiedzy. Zebrane dane to dane, które nam przekazujesz (diagnostyczne) i nigdy nie są zapisywane.",
+  "@AboutLoc_privacyPolicySubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_title": "Kalendarz",
+  "@AgendaLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda0": "Dobrze ? Bez klasy ?",
+  "@AgendaLoc_emptyAgenda0": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda1": "'pachnie jak grill ...",
+  "@AgendaLoc_emptyAgenda1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda2": "Wolność!",
+  "@AgendaLoc_emptyAgenda2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda3": "Lucky m8!",
+  "@AgendaLoc_emptyAgenda3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda4": "Spędź więcej czasu z rodziną! (zamiast oglądać kolejne zajęcia)",
+  "@AgendaLoc_emptyAgenda4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda5": "Aplikacja zawiera ponad 10 000 wierszy kodu .... (z 40 000 dodatków i 30 000 usunięć)",
+  "@AgendaLoc_emptyAgenda5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda6": "Aplikacja jest rozwijana za pomocą Flutter i ❤️",
+  "@AgendaLoc_emptyAgenda6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda7": "Minitel jest królem!",
+  "@AgendaLoc_emptyAgenda7": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda8": "Freeeeeeedom!",
+  "@AgendaLoc_emptyAgenda8": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda9": "Smutna panda siedzi sama.",
+  "@AgendaLoc_emptyAgenda9": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_title": "Ustawienia powiadomień",
+  "@NotificationSettingsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled1": "Powiadomienia są ",
+  "@NotificationSettingsLoc_enabled1": {
+    "description": "[] activées.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled2": "{enabled, select, true {włączone.} false {niepełnosprawny.}}",
+  "@NotificationSettingsLoc_enabled2": {
+    "description": "Les notifications sont []",
+    "type": "text",
+    "placeholders": {
+      "enabled": {}
+    }
+  },
+  "NotificationSettingsLoc_early1": "Notyfikować ",
+  "@NotificationSettingsLoc_early1": {
+    "description": "[] X minutes avant le cours",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_early2": " kilka minut przed kursem.",
+  "@NotificationSettingsLoc_early2": {
+    "description": "Notifier X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range1": "Powiadom kursy o następnych ",
+  "@NotificationSettingsLoc_range1": {
+    "description": "[] X prochains jours.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range2": " dni.",
+  "@NotificationSettingsLoc_range2": {
+    "description": "Notifier les cours des X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_save": "Zapisać",
+  "@NotificationSettingsLoc_save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_title": "Dokumentacja",
+  "@DocsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_minitel": "Stowarzyszenie sieciowe rezydencji: jeśli potrzebujesz sprzętu (kabli, komputera, ...), aby zadawać pytania na temat funkcjonowania maszyn w szkole lub jeśli masz problemy z komputerem, skontaktuj się z nami! Jednym z głównych działań Minitel jest utrzymanie domowej sieci internetowej: oznacza to ciągły wysiłek w celu poprawy (nowego sprzętu, monitorowania ...) szybkości i niezawodności połączenia. Oferujemy również różne kursy szkoleniowe przez cały rok, które mogą Ci pomóc podczas kursów lub po prostu zaspokoić swoją ciekawość w dziedzinie informatyki! Wreszcie, przywiązujemy dużą wagę do animacji życia studenckiego na kampusie! W tym celu organizujemy kilka wydarzeń komputerowych, takich jak Nuit de l'Info lub turnieje gier wideo! Jeśli chcesz dowiedzieć się więcej o stowarzyszeniu i życiu cyfrowym rezydencji, nie wahaj się skontaktować z jednym z członków Minitel: chętnie pomożemy i odpowiemy na wszystkie pytania.",
+  "@DocsLoc_minitel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_header": "Diagnoza",
+  "@DiagnoseLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_ipaContent": "Dostarcza przydatnych informacji o sprzęcie. Przydatne informacje: - Status - Adres IP - Adres MAC",
+  "@DiagnoseLoc_ipaContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent1": "Wyświetla adresy MAC wszystkich urządzeń podłączonych do telefonu. Brama powinna zostać wyświetlona, a adres MAC powinien wynosić 00-0d-b4-10-99-e1. Jeśli adres MAC bramy nie zgadza się z adresem bramy, mamy do czynienia z zabezpieczającym ARP: \n",
+  "@DiagnoseLoc_arpContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent2": "Złodziej IP bramy reaguje na odpowiedź ARP wysłaną przez ofiarę podczas transmisji, szybciej niż brama.\n\n",
+  "@DiagnoseLoc_arpContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent3": "Tymczasowe rozwiązanie (tylko gdy WiFi jest włączone) to:",
+  "@DiagnoseLoc_arpContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_tracerouteContent": "Wyświetla ścieżkę i opóźnienia pakietów do serwera Google. Przydatne, aby zobaczyć przyczyny opóźnień.",
+  "@DiagnoseLoc_tracerouteContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent1": "Sprawdza, czy działa oprogramowanie TCP / IP.\n",
+  "@DiagnoseLoc_pingLoContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent2": "Zawsze powinno być pozytywne.",
+  "@DiagnoseLoc_pingLoContent2": {
+    "description": "Le ping loopback devrait être toujours positif.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent1": "Ping na komputer lokalny (10.163.0.5, który jest serwerem Minitel i zawsze powinien być włączony). Jeśli pakiety zostaną utracone, są to najbardziej prawdopodobne scenariusze: 1. Nie masz adresu IP.",
+  "@DiagnoseLoc_pingLocalContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent2": " (Zobacz ip a i natychmiast powiadom Minitel)\n",
+  "@DiagnoseLoc_pingLocalContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent3": "    2. Nie masz połączenia z siecią lokalną. 3. Serwer (10.163.0.5) jest odłączony. (możesz pingować 10.163.0.10) 4. Przełącznik z domu studenckiego jest odłączony. 5. Przełącznik z rezydencji jest odłączony.",
+  "@DiagnoseLoc_pingLocalContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_httpContent": "Jeśli pojawi się błąd 4xx lub 5xx, zgłoś to do Minitel.",
+  "@DiagnoseLoc_httpContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionHeader": "Jak mam zareagować?",
+  "@DiagnoseLoc_reactionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionContent": "Jeśli nie ma już sieci, skontaktuj się z Minitel i użyj pakietu diagnostycznego na stronie „Zgłoś się do Minitel”",
+  "@DiagnoseLoc_reactionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingGatewayContent": "Brama zwykle ignoruje pingi. Jednak w przypadku otrzymania polecenia ping ktoś prawdopodobnie odebrał jego adres IP. Ale nic nie jest pewne.",
+  "@DiagnoseLoc_pingGatewayContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingDNSContent": "Jeśli jeden z DNS (z wyjątkiem 10.163.0.6) odpowiada, masz połączenie z Internetem.",
+  "@DiagnoseLoc_pingDNSContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent1": "Jeśli nie ma odpowiedzi, ale ping DNS działa, urządzenie ma problem z pamięcią podręczną DNS.\n",
+  "@DiagnoseLoc_nsLookupContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent2": "W przypadku urządzeń przenośnych uruchom ponownie Wi-Fi. Oto kilka rozwiązań:",
+  "@DiagnoseLoc_nsLookupContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_header": "Poświadczenie",
+  "@LoginLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent1": "Wybierz pomiędzy fw-cgcp.emse.fr, 10.163.0.2 i 195.83.139.7\n",
+  "@LoginLoc_domainNameContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent2": "Jeśli sieć lokalna obsługuje DNS, taki jak 192.168.130.33 (DSI) lub 10.163.0.6 (Minitel), możesz spróbować fw-cgcp.emse.fr. Jeśli siecią jest Minitel (WiFi Minitel), użyj 10.163.0.2\n",
+  "@LoginLoc_domainNameContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent3": "Ogólnie rzecz biorąc, 195.83.139.7 jest odpowiedni w 90% przypadków. Jest to publiczny adres IP portalu i jest autoryzowany przez bramę.\n",
+  "@LoginLoc_domainNameContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_header": "Sztuka podwójnego rozruchu",
+  "@DualbootLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_infos": "Pokazane są tylko główne fazy. Po więcej informacji:",
+  "@DualbootLoc_infos": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksHeader": "Uważaj na ryzyko związane z instalacją Linuksa:\n",
+  "@DualbootLoc_risksHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksContent": "    • Linux jest bardziej stabilny, ale aktualizacje dystrybucji są bardziej delikatne (80% użytkowników Ubuntu woli instalować ponownie niż aktualizować) • Sterowniki są pierwszymi przyczynami nagłych awarii (NVIDIA, Realtek ...) • Niewłaściwa konfiguracja BIOS może być również śmiertelne dla ciebie\n\n",
+  "@DualbootLoc_risksContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_customizeHeader": "Personalizacja nie jest ograniczona. Obserwuj, które rozkłady są najbardziej odpowiednie:\n",
+  "@DualbootLoc_customizeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_customizeContent": "    • Pierwszy raz? Lubuntu LTS (w najgorszym przypadku Kubuntu) lub Linux Mint • Drugi raz? Poznaj różnicę między KDE, Gnome, XFCE, LXDE, MATE, awesomewm ... I sprawdź r / unixporn • Coś stylowego i już zrobionego? MX Linux, deepin, Linux Lite, Elementary OS, Pop! _OS, ... • Chcesz dostosować się do śmierci? Arch Linux, Alpine, Manjaro, Debian • Coś profesjonalnego? CentOS • Prosty serwer? OpenSUSE • 15 MB? Alpine, Tiny Core (tylko doker) • Raspberry PI? Raspbian • TYLKO Pentest? Kali Linux • Chcesz popełnić samobójstwo? „System operacyjny Fondation wolnego oprogramowania” • Gorzej niż śmierć? Linux od podstaw • Przywracanie Androida do życia jako serwera Linux? postmarketOS\n\n",
+  "@DualbootLoc_customizeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_prepHeader": "Przygotowania:\n",
+  "@DualbootLoc_prepHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_prepContent": "    • Windows • Klucz USB 4 Go • Poznaj typ BIOS: UEFI ou Legacy • Wyłącz Bezpieczny rozruch • Przygotuj pustą partycję o pojemności co najmniej 50 GB • Za pomocą Rufus, flashuj obraz na kluczu (FAT32, aktualizacja syslinux, tryb ISO) , w MBR\n\n",
+  "@DualbootLoc_prepContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_installHeader": "Zainstaluj system Linux (uruchom na kluczu, zmieniając kolejność uruchamiania w systemie BIOS lub za pomocą klawisza na klawiaturze (F11? Usuń? Wstaw? F1? F2? F12?)):\n",
+  "@DualbootLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_installContent": "    • Język, strefa czasowa, sieć ... • Ręczna konfiguracja dysku (zalecane) • W tej kolejności: • „/ dev / sda1” mount on ”/” with ext4, Partition Size Linux • „/ dev / sda2” to SWAP, Rozmiar = 1,5 * RAM z hibernacją, w przeciwnym razie Rozmiar = 1/4 * RAM • GRUB (bootloader) musi być zainstalowany razem z Windows! (w MBR, w przeciwnym razie zignoruj) • Sprawdź i potwierdź partycje (sprawdź, czy Windows nadal tam jest 🙂) • Itp (poczekaj, aż instalacja zostanie zakończona) ... • (UEFI) Zmień kolejność uruchamiania UEFI w BIOS\n\n",
+  "@DualbootLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue1Content": "Ogólnie, jeśli komputer jest wyposażony w hybrydowe zarządzanie grafiką, Linux nie uruchomi się. Rozwiązanie: • Dodaj „nomodeset” w zaawansowanych opcjach rozruchu • Usuń również „cichy plusk” dla zapewnienia czytelności Ex:",
+  "@DualbootLoc_issue1Content": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content1": "    Domyślnie Linux będzie działał z Intelem. Co jest bardzo złe, jeśli chcesz wydobywać eter lub robić uczenie maszynowe.\n",
+  "@DualbootLoc_issue2Content1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content2": "    • Pobierz sterowniki NVIDIA z oficjalnej strony NVIDIA. • (W razie potrzeby pobierz CUDA, bez sterowników, bez openGL) • Przełącz na TTY za pomocą Ctrl + Alt + F1, Ctrl + Alt + F2 ... ",
+  "@DualbootLoc_issue2Content2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content3": "Jeśli port HDMI nie działa już w systemie BIOS Legacy w systemie Windows:",
+  "@DualbootLoc_issue2Content3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_changeLinuxHeader": "Zmień GNU / Linux lub nie ....\n",
+  "@DualbootLoc_changeLinuxHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_changeLinuxContent": "    • Zasadniczo nie zmieniamy Linuksa. Jeśli brakuje dostosowania, poszukaj „Jak dostosować Menedżera wyświetlania (DM) lub Menedżera okien (WM)”. Wyszukaj „Jak dostosować terminal” i przetestuj konfiguracje na maszynie wirtualnej. • Chcesz włamać się? Narzędzia Kali Linux można pobrać niezależnie od systemu operacyjnego • LTS? Ogólnie rzecz biorąc, LTS są znacznie bardziej stabilne • Ponadto 80% użytkowników Ubuntu woli instalować ponownie, niż aktualizować.\n",
+  "@DualbootLoc_changeLinuxContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_header": "Konfigurowanie drukarki",
+  "@ImprimanteLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_windowsContent": "    - Otwórz \\\\ 192.168.168.130.2 za pomocą Eksploratora Windows - Wprowadź imię i hasło (przetestuj także EMSE2000 \\ first name.name) - Kliknij dwukrotnie „imprimantes-gpc”",
+  "@ImprimanteLoc_windowsContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_linuxContent1": "    - Dodaj smb: //192.168.130.2/imprimantes-gcp do drukarek sieciowych - Sterownik: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd",
+  "@ImprimanteLoc_linuxContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_linuxContent2": "    - Idź do http: // localhost: 631 / admin (nazwa i hasło konta linux) - Zakładka „Administracja” - „Dodaj drukarkę” - Wpisz SMB, adres smb: //192.168.130.2/imprimantes-gcp - Użyj PPD plik: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd - Skonfiguruj resztę i powinno być w porządku",
+  "@ImprimanteLoc_linuxContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_pukContent": "Użyj aplikacji Minitel> Aplikacje> Drukarka",
+  "@ImprimanteLoc_pukContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_header": "Importowanie wiadomości e-mail Sogo",
+  "@MailLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_mailContent1": "W swojej ulubionej aplikacji e-mail użyj konfiguracji ręcznej i wypełnij odpowiednie pola.",
+  "@MailLoc_mailContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_mailContent2": "E-mail: imię.nazwa@etu.emse.fr Hasło: hasło do szkoły Serwer przychodzący: IMAP Nazwa hosta: messel.emse.fr Port: 993 Bezpieczeństwo: ssl / tls Metoda uwierzytelnienia: standardowe hasło Identyfikator: imię.nazwa (⚠️ bez @ etu.emse.fr) Serwer wychodzący: nazwa hosta: messel.emse.fr Port: 465 Zabezpieczenia: metoda uwierzytelniania ssl / tls: standardowe hasło Identyfikator: imię.nazwa (bez et etu.emse.fr)",
+  "@MailLoc_mailContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_definitionHeader": "VM to:\n",
+  "@VMLoc_definitionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_definitionContent": "    Maszyna, której komponenty są emulowane. Maszyna ściśle odizolowana od hosta. W trakcie emulacji komponentów szanse na awarię maszyny wirtualnej są znacznie mniejsze.\n\n",
+  "@VMLoc_definitionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_customizeHeader": "Z tego powodu maszyna wirtualna została zmanipulowana na śmierć:\n",
+  "@VMLoc_customizeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_customizeContent": "    - Przydatny do posiadania piaskownicy i wykonywania wielu testów. - Przydatny do szkolenia w systemie Linux (WM, DM, sterowniki, instalacje ...), bez wysadzania podwójnego rozruchu. - Przydatny do tworzenia VPS. - Przydatny do używania kompilatora z dedykowanym i chronionym środowiskiem.\n\n",
+  "@VMLoc_customizeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installHeader": "Oczywiste jest, że maszyna wirtualna nie ma interfejsu graficznego. Bardzo często zestawiane jest połączenie SSH zamiast graficznego interfejsu użytkownika lub TTY. Ogólnie rzecz biorąc, instalacja maszyny wirtualnej jest szybka i łatwa:\n",
+  "@VMLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installContent": "    - Tworzenie dysku wirtualnego> 20 GB - Wstawianie obrazu systemu Linux do emulowanego portu CD - Instalacja systemu Linux (podobnie do podwójnego rozruchu) - Konfigurowanie dostępu SSH / telnet / RDP\n",
+  "@VMLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeHeader": "Niektóre hiperwizory (VirtualBox, VMWare, Hyper-V) są nawet wyposażone w funkcje szybkiej instalacji. Umożliwia to także ćwiczenie podwójnego rozruchu 😄. Rodzaje maszyn wirtualnych:\n",
+  "@VMLoc_vmTypeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeContent": "    - Typ I: Bare Metal, sam system operacyjny jest hiperwizorem. - Typ II: Hostowany, hypervisor jest hostowany przez system operacyjny hosta.\n\n",
+  "@VMLoc_vmTypeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorHeader": "Oto kolejność preferencji hiperwizora:\n",
+  "@VMLoc_hypervisorHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorContent": "    1. [Leader] Hyper-V (typ 1, Windows, jeśli to możliwe) 2. [Wizjoner] KVM (typ 1, Linux, 👍 Android) 3. [Leader] VMWare Workstation (typ 2, 👍 dla sieci, GNS3 i wszystkiego) else) 4. [Niszowy odtwarzacz] VirtualBox (typ 2) 5. [Lider] VMware ESXi (typ 1, dla profesjonalistów)\n\n",
+  "@VMLoc_hypervisorContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_envHeader": "Jeśli chodzi o proste środowisko programistyczne:\n",
+  "@VMLoc_envHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_envContent": "    - W przypadku systemu Linux: Docker, (Container Linux, tj. Dedykowane środowisko dla aplikacji) (Należy pamiętać, że działa również w systemie Windows, ponieważ w tle działa VM VM systemu Linux na Hyper-V). - W systemie Windows: Podsystem Windows dla systemu Linux 1 (jądro Linux macierzysty, bądź ostrożny, sprzęt nie jest emulowany!) - W przypadku systemu Windows: Windows Subsystem for Linux 2 (+ Docker) (jądro Linux w mikro-VM. Niezwykle szybka i dynamicznie przydzielana pamięć RAM).\n",
+  "@VMLoc_envContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NewsLoc_title": "Aktualności",
+  "@NewsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NewsLoc_seeFacebook": "Zobacz na Facebooku ...",
+  "@NewsLoc_seeFacebook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_title": "Poświadczenie",
+  "@PortalLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_autoLogin": "Zaloguj się automatycznie",
+  "@PortalLoc_autoLogin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_login": "Zaloguj sie",
+  "@PortalLoc_login": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_rememberMe": "Zapamiętaj mnie ",
+  "@PortalLoc_rememberMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_password": "Hasło",
+  "@PortalLoc_password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_domainNameHeader": "Nazwa domeny / IP ",
+  "@PortalLoc_domainNameHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameLabel": "Nazwa Użytkownika",
+  "@PortalLoc_usernameLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameHint": "imię Nazwisko",
+  "@PortalLoc_usernameHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_authTime": "Czas uwierzytelnienia ",
+  "@PortalLoc_authTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_statusInSeconds": "Pozostało {seconds} sekund",
+  "@PortalLoc_statusInSeconds": {
+    "type": "text",
+    "placeholders": {
+      "seconds": {}
+    }
+  },
+  "PortalLoc_statusInMinutes": "Pozostało {minutes} minut",
+  "@PortalLoc_statusInMinutes": {
+    "type": "text",
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "PortalLoc_statusInHM": "Pozostały {hours} godzin i {minutes} minut",
+  "@PortalLoc_statusInHM": {
+    "type": "text",
+    "placeholders": {
+      "hours": {},
+      "minutes": {}
+    }
+  },
+  "AppListLoc_printer": "Drukarka",
+  "@AppListLoc_printer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AppListLoc_portal": "Portal",
+  "@AppListLoc_portal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_title": "Zgłoś się do Minitel",
+  "@ReportingLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_chamberLabel": "Pokój",
+  "@ReportingLoc_chamberLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_chamberHint": "Numer pokoju",
+  "@ReportingLoc_chamberHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_notEmpty": "Nie może być pusty",
+  "@ReportingLoc_notEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_idLabel": "Tożsamość",
+  "@ReportingLoc_idLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_idHint": "Nazwisko Imię",
+  "@ReportingLoc_idHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_forceName": "Nazwisko ORAZ Imię",
+  "@ReportingLoc_forceName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleLabel": "Tytuł",
+  "@ReportingLoc_titleLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleHint": "Nie mam już internetu!",
+  "@ReportingLoc_titleHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_slack": "Powiadom o Slack",
+  "@ReportingLoc_slack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_share": "Dzielić",
+  "@ReportingLoc_share": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_header": "Jak zgłaszać się bez Internetu?",
+  "@TutorialLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_notice": "UWAGA: Zalecane jest zainstalowanie Roota i Busyboksa.",
+  "@TutorialLoc_notice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content1": "1. Zaloguj się do „WiFi Minitel”.",
+  "@TutorialLoc_content1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content2": "2. Rozpocznij sekwencję diagnostyczną, naciskając przycisk i poczekaj 1 minutę.",
+  "@TutorialLoc_content2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content3": "3. Wypełnij raport. Nie zapomnij o środkach komunikacji (pokój, poczta, komunikator ...)",
+  "@TutorialLoc_content3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_example": "Przykład: Tytuł: Nie Internet od poniedziałku. Opis: Często tracę połączenie, gdy jestem w sieci Ethernet. Wifi jest w porządku.",
+  "@TutorialLoc_example": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content4": "4. Połącz się z siecią, w której jest Internet.",
+  "@TutorialLoc_content4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content5": "5. Wyślij raport.",
+  "@TutorialLoc_content5": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

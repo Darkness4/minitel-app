@@ -1,0 +1,633 @@
+{
+  "forceDark": "力量黑暗主题",
+  "@forceDark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_title": "关于Minitel工具箱",
+  "@AboutLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_description": "Minitel Toolbox包含最有用的工具，可实现无故障WiFi。",
+  "@AboutLoc_description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_developper": "开发者",
+  "@AboutLoc_developper": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_lastVestion": "最新版本",
+  "@AboutLoc_lastVestion": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_website": "网站",
+  "@AboutLoc_website": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_license": "执照",
+  "@AboutLoc_license": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicyTitle": "隐私政策",
+  "@AboutLoc_privacyPolicyTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicySubtitle": "在您不知情的情况下，不会共享和存储任何数据。收集的数据是您提供给我们的数据（诊断性数据），永远不会保存。",
+  "@AboutLoc_privacyPolicySubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_title": "日历",
+  "@AgendaLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda0": "好 ？没课 ？",
+  "@AgendaLoc_emptyAgenda0": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda1": "闻起来像烧烤...",
+  "@AgendaLoc_emptyAgenda1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda2": "释放！",
+  "@AgendaLoc_emptyAgenda2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda3": "幸运M8！",
+  "@AgendaLoc_emptyAgenda3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda4": "与家人共度更多时光！ （而不是观看下一堂课）",
+  "@AgendaLoc_emptyAgenda4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda5": "该应用程序具有10,000行以上的代码...。（具有40,000个添加和30,000个删除）",
+  "@AgendaLoc_emptyAgenda5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda6": "该应用程序是由Flutter和❤️开发的",
+  "@AgendaLoc_emptyAgenda6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda7": "Minitel为王！",
+  "@AgendaLoc_emptyAgenda7": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda8": "Freeeeeeedom！",
+  "@AgendaLoc_emptyAgenda8": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda9": "悲伤的熊猫独自一人坐着。",
+  "@AgendaLoc_emptyAgenda9": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_title": "通知设置",
+  "@NotificationSettingsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled1": "通知是",
+  "@NotificationSettingsLoc_enabled1": {
+    "description": "[] activées.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled2": "{enabled, select, true {已启用。} false {禁用的。}}",
+  "@NotificationSettingsLoc_enabled2": {
+    "description": "Les notifications sont []",
+    "type": "text",
+    "placeholders": {
+      "enabled": {}
+    }
+  },
+  "NotificationSettingsLoc_early1": "通知",
+  "@NotificationSettingsLoc_early1": {
+    "description": "[] X minutes avant le cours",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_early2": "课程开始前几分钟。",
+  "@NotificationSettingsLoc_early2": {
+    "description": "Notifier X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range1": "通知下一个课程",
+  "@NotificationSettingsLoc_range1": {
+    "description": "[] X prochains jours.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range2": "天。",
+  "@NotificationSettingsLoc_range2": {
+    "description": "Notifier les cours des X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_save": "救",
+  "@NotificationSettingsLoc_save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_title": "文献资料",
+  "@DocsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_minitel": "住所的网络协会：如果您需要设备（电缆，计算机等），以询问有关学校机器的功能的问题，或者如果您的计算机有问题，则应该与我们联系！ Minitel的主要活动之一是家庭互联网网络的维护：这意味着不断地努力（连接新设备，监视...）来提高连接速度和可靠性。我们还全年为您提供各种培训课程，这些课程可以在课程期间为您提供帮助，或者只是满足您对计算机科学的好奇心！最后，我们非常重视校园学生生活的动画！为此，我们组织了一些计算机活动，例如Nuit de l'Info或视频游戏锦标赛！如果您想了解更多有关该住所的协会和数字生活的信息，请随时与Minitel的一名成员联系：我们将竭诚为您提供帮助，并回答您的所有问题。",
+  "@DocsLoc_minitel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_header": "诊断",
+  "@DiagnoseLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_ipaContent": "提供有关硬件的有用信息。有用的信息：-状态-IP地址-MAC地址",
+  "@DiagnoseLoc_ipaContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent1": "显示连接到电话的所有设备的MAC地址。应该显示网关，并且MAC地址应该是00-0d-b4-10-99-e1。如果网关的MAC地址与网关的MAC地址不匹配，则我们正在处理固定ARP：",
+  "@DiagnoseLoc_arpContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent2": "网关的IP小偷对广播中受害者发送的ARP响应的响应速度比网关快。",
+  "@DiagnoseLoc_arpContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent3": "临时解决方案（仅当WiFi打开时）是：",
+  "@DiagnoseLoc_arpContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_tracerouteContent": "显示到达Google服务器的数据包的路径和延迟。了解滞后原因很有用。",
+  "@DiagnoseLoc_tracerouteContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent1": "检查TCP / IP软件是否正在运行。",
+  "@DiagnoseLoc_pingLoContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent2": "应该永远是积极的。",
+  "@DiagnoseLoc_pingLoContent2": {
+    "description": "Le ping loopback devrait être toujours positif.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent1": "Ping到本地计算机（10.163.0.5，这是Minitel服务器，应始终打开）。如果数据包丢失，则很可能是以下情况：1.您没有IP。",
+  "@DiagnoseLoc_pingLocalContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent2": "（请参阅ip a，并立即提醒Minitel）",
+  "@DiagnoseLoc_pingLocalContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent3": "2.您未连接到本地网络。 3.服务器（10.163.0.5）已断开连接。 （您可以ping 10.163.0.10）4.来自学生之家的开关已断开连接。 5.住宅开关断开。",
+  "@DiagnoseLoc_pingLocalContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_httpContent": "如果出现4xx或5xx错误，请向Minitel报告。",
+  "@DiagnoseLoc_httpContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionHeader": "我该如何反应？",
+  "@DiagnoseLoc_reactionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionContent": "如果不再有网络，请联系Minitel并使用“报告给Minitel”页面上的诊断套件",
+  "@DiagnoseLoc_reactionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingGatewayContent": "网关通常会忽略ping。但是，如果收到ping命令，则可能有人盗用了他的IP。但是，没有什么是确定的。",
+  "@DiagnoseLoc_pingGatewayContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingDNSContent": "如果其中一个DNS（10.163.0.6除外）回答，则说明您已连接到Internet。",
+  "@DiagnoseLoc_pingDNSContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent1": "如果没有答案，但DNS ping正常，则您的设备存在DNS缓存问题。",
+  "@DiagnoseLoc_nsLookupContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent2": "对于便携式设备，请重新启动Wi-Fi。以下是一些解决方案：",
+  "@DiagnoseLoc_nsLookupContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_header": "认证方式",
+  "@LoginLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent1": "在fw-cgcp.emse.fr，10.163.0.2和195.83.139.7之间选择",
+  "@LoginLoc_domainNameContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent2": "如果本地网络支持DNS，例如192.168.130.33（DSI）或10.163.0.6（Minitel），则可以尝试fw-cgcp.emse.fr。如果网络是Minitel（WiFi Minitel），请使用10.163.0.2",
+  "@LoginLoc_domainNameContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent3": "通常，195.83.139.7适用于90％的情况。这是门户的公共IP地址，由网关授权。",
+  "@LoginLoc_domainNameContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_header": "双启动的艺术",
+  "@DualbootLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_infos": "仅显示主要阶段。欲获得更多信息：",
+  "@DualbootLoc_infos": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksHeader": "注意安装Linux的风险：",
+  "@DualbootLoc_risksHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksContent": "•Linux更加稳定，但是发行版更新更加脆弱（80％的Ubuntu用户更喜欢重新安装而不是更新）•驱动程序是突然崩溃的首要原因（NVIDIA，Realtek ...）•错误的BIOS配置也可能是由于对你致命",
+  "@DualbootLoc_risksContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_customizeHeader": "定制不受限制。观察哪些分布最合适：",
+  "@DualbootLoc_customizeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_customizeContent": "• 第一次？ Lubuntu LTS（最糟糕的是Kubuntu）或Linux Mint•第二次？了解KDE，Gnome，XFCE，LXDE，MATE，awesomewm之间的区别...并查看r / unixporn•一些时尚的东西已经完成了吗？ MX Linux，深度，Linux Lite，Elementary OS，Pop！_OS等...•是否想自定义？ Arch Linux，Alpine，Manjaro，Debian•专业吗？ CentOS•简单的服务器？ OpenSUSE•15 MB？ Alpine，Tiny Core（仅适用于docker）•Raspberry PI？ Raspbian•仅Pentest？ Kali Linux•想自杀吗？ “自由软件基金会OS”•比死亡更糟？从零开始的Linux•使Android作为Linux服务器重获新生？ postmarketOS",
+  "@DualbootLoc_customizeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_prepHeader": "准备工作：",
+  "@DualbootLoc_prepHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_prepContent": "•Windows•USB Key 4 Go•了解BIOS类型：UEFI或旧版•禁用安全启动•准备至少50 GB的空分区•使用Rufus，在密钥上刷新映像（FAT32，更新syslinux，ISO模式） ，以MBR为单位",
+  "@DualbootLoc_prepContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_installHeader": "安装Linux（通过更改BIOS上的启动顺序或通过键盘键（F11？Delete？Insert？F1？F2？F12？）在键上启动）：",
+  "@DualbootLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_installContent": "•语言，时区，网络...•手动光盘配置（推荐）•按此顺序：•将“ / dev / sda1”安装在分区大小为ext4的Linux上的“ /”上•“ / dev / sda2”是SWAP，大小= 1.5 *处于休眠状态的RAM，否则大小= 1/4 * RAM•必须将GRUB（引导程序）与Windows一起安装！ （在MBR中，否则忽略）•检查并确认分区（检查窗口是否仍然存在🙂）•等（等待安装完成）...•（UEFI）在BIOS中更改UEFI引导顺序",
+  "@DualbootLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue1Content": "通常，如果计算机配备了混合图形管理，则Linux将无法启动。解决方案：•在高级启动选项中添加“ nomodeset”•还要删除“ quiet splash”以提高可读性例如：",
+  "@DualbootLoc_issue1Content": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content1": "默认情况下，Linux将与Intel一起运行。如果您想开采以太坊或进行机器学习，这是非常糟糕的。",
+  "@DualbootLoc_issue2Content1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content2": "•从NVIDIA官方网站下载NVIDIA驱动程序。 •（如果需要，下载CUDA，没有驱动程序，没有openGL）•通过Ctrl + Alt + F1，Ctrl + Alt + F2切换到TTY ...",
+  "@DualbootLoc_issue2Content2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content3": "如果HDMI端口在Windows的BIOS传统中不再起作用：",
+  "@DualbootLoc_issue2Content3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_changeLinuxHeader": "是否更改GNU / Linux...。",
+  "@DualbootLoc_changeLinuxHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_changeLinuxContent": "•通常，我们不会更改Linux。如果缺少自定义，请查找“如何自定义显示管理器（DM）或窗口管理器（WM）”。查找“如何自定义终端”，然后在VM上测试配置。 •想要入侵？ Kali Linux工具可独立于OS下载•LTS？通常，LTS更加稳定•此外，80％的Ubuntu用户更喜欢重新安装而不是进行dist升级。",
+  "@DualbootLoc_changeLinuxContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_header": "配置打印机",
+  "@ImprimanteLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_windowsContent": "-使用Windows资源管理器打开\\\\ 192.168.168.130.2-输入名字和密码（也测试EMSE2000 \\ first.name）-双击“ imprimantes-gpc”",
+  "@ImprimanteLoc_windowsContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_linuxContent1": "-将smb：//192.168.130.2/imprimantes-gcp添加到网络打印机-驱动程序：https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd",
+  "@ImprimanteLoc_linuxContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_linuxContent2": "-转到http：// localhost：631 / admin（Linux帐户名和密码）-选项卡“管理”-“添加打印机”-键入SMB，地址为smb：//192.168.130.2/imprimantes-gcp-使用PPD文件：https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd-配置其余部分，一切正常",
+  "@ImprimanteLoc_linuxContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_pukContent": "使用Minitel应用程序>应用程序>打印机",
+  "@ImprimanteLoc_pukContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_header": "导入Sogo电子邮件",
+  "@MailLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_mailContent1": "在您喜欢的电子邮件应用程序中，使用手动配置并填写相应的字段。",
+  "@MailLoc_mailContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_mailContent2": "电子邮件：firstname.lastname@etu.emse.fr密码：您的学校密码传入服务器：IMAP主机名：messel.emse.fr端口：993安全性：ssl / tls身份验证方法：标准密码标识符：firstname.lastname（⚠️不带@ etu.emse.fr）发送服务器：主机名：messel.emse.fr端口：465安全性：ssl / tls验证方式：标准密码标识符：名。姓（⚠️不带@ etu.emse.fr）",
+  "@MailLoc_mailContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_definitionHeader": "虚拟机是：",
+  "@VMLoc_definitionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_definitionContent": "一台模拟其组件的机器。与主机严格隔离的计算机。随着组件的仿真，VM崩溃的可能性大大降低。",
+  "@VMLoc_definitionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_customizeHeader": "因此，VM被篡改致死：",
+  "@VMLoc_customizeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_customizeContent": "-对于拥有沙盒和进行大量测试很有用。 -有助于在Linux上进行培训（WM，DM，驱动程序，安装...），而不会破坏双引导。 -用于制作VPS。 -对于在专用且受保护的环境中使用编译器很有用。",
+  "@VMLoc_customizeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installHeader": "毫无疑问，VM具有图形界面是没有用的。通常，会建立SSH连接，而不使用图形用户界面或TTY。通常，VM的安装是快速简便的：",
+  "@VMLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installContent": "-创建大于20 GB的虚拟磁盘-将Linux映像插入仿真的CD端口-Linux安装（类似于双重启动）-配置SSH / telnet / RDP访问",
+  "@VMLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeHeader": "某些管理程序（VirtualBox，VMWare，Hyper-V）甚至配备了快速安装功能。这也使您可以练习双启动😄。虚拟机类型：",
+  "@VMLoc_vmTypeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeContent": "-类型I：裸机，操作系统本身就是管理程序。 -类型II：托管，系统管理程序由主机OS托管。",
+  "@VMLoc_vmTypeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorHeader": "这是系统管理程序的优先顺序：",
+  "@VMLoc_hypervisorHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorContent": "1. [Leader] Hyper-V（类型1，Windows，如果可能的话）2. [Visionary] KVM（类型1，Linux，👍Android）3. [Leader] VMWare工作站（类型2，👍用于网络，GNS3等）其他）4. [Niche Player] VirtualBox（类型2）5. [领导者] VMware ESXi（类型1，专业人士）",
+  "@VMLoc_hypervisorContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_envHeader": "如果有一个简单的开发环境的问题：",
+  "@VMLoc_envHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_envContent": "-对于Linux：Docker，（容器Linux，即每个应用程序专用的环境）（请注意，它也可在Windows上运行，因为它在后台在Hyper-V上运行Linux VM。）-对于Windows：适用于Linux 1的Windows子系统（内核）注意：Linux本机，请小心，不要模拟硬件！）-对于Windows：Linux 2的Windows子系统（+ Docker）（微型VM中的内核Linux。非常快速且动态分配的RAM。）",
+  "@VMLoc_envContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NewsLoc_title": "新闻",
+  "@NewsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NewsLoc_seeFacebook": "在Facebook上查看...",
+  "@NewsLoc_seeFacebook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_title": "认证方式",
+  "@PortalLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_autoLogin": "自动登录",
+  "@PortalLoc_autoLogin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_login": "登录",
+  "@PortalLoc_login": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_rememberMe": "记住账号",
+  "@PortalLoc_rememberMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_password": "密码",
+  "@PortalLoc_password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_domainNameHeader": "域名/ IP",
+  "@PortalLoc_domainNameHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameLabel": "用户名",
+  "@PortalLoc_usernameLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameHint": "名。姓",
+  "@PortalLoc_usernameHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_authTime": "认证时间",
+  "@PortalLoc_authTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_statusInSeconds": "{seconds}秒",
+  "@PortalLoc_statusInSeconds": {
+    "type": "text",
+    "placeholders": {
+      "seconds": {}
+    }
+  },
+  "PortalLoc_statusInMinutes": "还剩{minutes}分钟",
+  "@PortalLoc_statusInMinutes": {
+    "type": "text",
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "PortalLoc_statusInHM": "{hours}小时和{minutes}分钟",
+  "@PortalLoc_statusInHM": {
+    "type": "text",
+    "placeholders": {
+      "hours": {},
+      "minutes": {}
+    }
+  },
+  "AppListLoc_printer": "打印机",
+  "@AppListLoc_printer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AppListLoc_portal": "门户网站",
+  "@AppListLoc_portal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_title": "向Minitel报告",
+  "@ReportingLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_chamberLabel": "房间",
+  "@ReportingLoc_chamberLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_chamberHint": "房间号",
+  "@ReportingLoc_chamberHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_notEmpty": "不能为空",
+  "@ReportingLoc_notEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_idLabel": "身分识别",
+  "@ReportingLoc_idLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_idHint": "姓名",
+  "@ReportingLoc_idHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_forceName": "姓和名",
+  "@ReportingLoc_forceName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleLabel": "标题",
+  "@ReportingLoc_titleLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleHint": "我没有互联网了！",
+  "@ReportingLoc_titleHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_slack": "松弛通知",
+  "@ReportingLoc_slack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_share": "分享",
+  "@ReportingLoc_share": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_header": "没有互联网怎么报告？",
+  "@TutorialLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_notice": "注意：建议安装Root and Busybox。",
+  "@TutorialLoc_notice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content1": "1.登录到“ WiFi Minitel”。",
+  "@TutorialLoc_content1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content2": "2.按下按钮开始诊断程序，然后等待1分钟。",
+  "@TutorialLoc_content2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content3": "3.填写您的报告。不要忘记一种通讯方式（房间，邮件，信使...）",
+  "@TutorialLoc_content3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_example": "示例：标题：自星期一起不上网。说明：在以太网上时，我经常会丢失连接。无线网络还可以。",
+  "@TutorialLoc_example": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content4": "4.连接到有Internet的网络。",
+  "@TutorialLoc_content4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content5": "5.发送报告。",
+  "@TutorialLoc_content5": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

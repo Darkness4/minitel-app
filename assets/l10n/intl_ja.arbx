@@ -1,0 +1,633 @@
+{
+  "forceDark": "フォースダークテーマ",
+  "@forceDark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_title": "Minitel Toolboxについて",
+  "@AboutLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_description": "Minitel Toolboxには、トラブルのないWiFiを実現するための最も便利なツールが含まれています。",
+  "@AboutLoc_description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_developper": "開発者",
+  "@AboutLoc_developper": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_lastVestion": "最新バージョン",
+  "@AboutLoc_lastVestion": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_website": "ウェブサイト",
+  "@AboutLoc_website": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_license": "ライセンス",
+  "@AboutLoc_license": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicyTitle": "個人情報保護方針",
+  "@AboutLoc_privacyPolicyTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AboutLoc_privacyPolicySubtitle": "知らないうちにデータが共有、保存されることはありません。収集されたデータは、提供されたデータ（診断）であり、保存されることはありません。",
+  "@AboutLoc_privacyPolicySubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_title": "カレンダー",
+  "@AgendaLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda0": "まあ？授業はありません ？",
+  "@AgendaLoc_emptyAgenda0": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda1": "「バーベキューのようなにおい...",
+  "@AgendaLoc_emptyAgenda1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda2": "フリーダム！",
+  "@AgendaLoc_emptyAgenda2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda3": "ラッキーm8！",
+  "@AgendaLoc_emptyAgenda3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda4": "家族ともっと時間を過ごしましょう！ （次のクラスを見る代わりに）",
+  "@AgendaLoc_emptyAgenda4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda5": "アプリケーションには10,000行を超えるコードがあります。...（追加40,000および削除30,000）",
+  "@AgendaLoc_emptyAgenda5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda6": "アプリケーションはFlutterと❤️で開発されています",
+  "@AgendaLoc_emptyAgenda6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda7": "ミニテルは王様です！",
+  "@AgendaLoc_emptyAgenda7": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda8": "Freeeeeeedom！",
+  "@AgendaLoc_emptyAgenda8": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AgendaLoc_emptyAgenda9": "悲しいパンダは一人で座っています。",
+  "@AgendaLoc_emptyAgenda9": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_title": "通知設定",
+  "@NotificationSettingsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled1": "通知は",
+  "@NotificationSettingsLoc_enabled1": {
+    "description": "[] activées.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_enabled2": "{enabled, select, true {有効。} false {無効。}}",
+  "@NotificationSettingsLoc_enabled2": {
+    "description": "Les notifications sont []",
+    "type": "text",
+    "placeholders": {
+      "enabled": {}
+    }
+  },
+  "NotificationSettingsLoc_early1": "通知する",
+  "@NotificationSettingsLoc_early1": {
+    "description": "[] X minutes avant le cours",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_early2": "コースの数分前。",
+  "@NotificationSettingsLoc_early2": {
+    "description": "Notifier X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range1": "次のコースを通知する",
+  "@NotificationSettingsLoc_range1": {
+    "description": "[] X prochains jours.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_range2": "日々。",
+  "@NotificationSettingsLoc_range2": {
+    "description": "Notifier les cours des X []",
+    "type": "text",
+    "placeholders": {}
+  },
+  "NotificationSettingsLoc_save": "セーブ",
+  "@NotificationSettingsLoc_save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_title": "ドキュメンテーション",
+  "@DocsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DocsLoc_minitel": "住居のネットワーク協会：学校で機械の機能について質問するために機器（ケーブル、コンピューターなど）が必要な場合、またはコンピューターに問題がある場合は、お問い合わせください！ Minitelの主な活動の1つは、家庭のインターネットネットワークのメンテナンスです。これは、接続の速度と信頼性を改善する（新しい機器、監視...）ための絶え間ない努力を意味します。また、年間を通じてさまざまなトレーニングコースを提供しており、コース中に役立つか、単にコンピュータサイエンスの好奇心を満たすことができます！最後に、キャンパスでの学生生活のアニメーションを非常に重視しています！これを行うために、Nuit de l'Infoやビデオゲームトーナメントなど、いくつかのコンピューターイベントを開催します！アソシエーションとレジデンスのデジタルライフについて詳しく知りたい場合は、遠慮なくMinitelメンバーに連絡してください。喜んでお手伝いし、ご質問にお答えします。",
+  "@DocsLoc_minitel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_header": "診断",
+  "@DiagnoseLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_ipaContent": "ハードウェアに関する有用な情報を提供します。有用な情報：-ステータス-IPアドレス-MACアドレス",
+  "@DiagnoseLoc_ipaContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent1": "電話機に接続されているすべてのデバイスのMACアドレスを表示します。ゲートウェイが表示され、MACアドレスが00-0d-b4-10-99-e1である必要があります。ゲートウェイのMACアドレスがゲートウェイのMACアドレスと一致しない場合、fisonning ARPを処理しています。",
+  "@DiagnoseLoc_arpContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent2": "ゲートウェイのIP泥棒は、被害者がブロードキャストで送信したARP応答に、ゲートウェイよりも速く応答します。",
+  "@DiagnoseLoc_arpContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_arpContent3": "一時的な解決策（WiFiがオンの場合のみ）：",
+  "@DiagnoseLoc_arpContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_tracerouteContent": "Googleサーバーへのパケットのパスと遅延を表示します。遅延の原因を確認するのに役立ちます。",
+  "@DiagnoseLoc_tracerouteContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent1": "TCP / IPソフトウェアが機能しているかどうかを確認します。",
+  "@DiagnoseLoc_pingLoContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLoContent2": "常にポジティブであるべきです。",
+  "@DiagnoseLoc_pingLoContent2": {
+    "description": "Le ping loopback devrait être toujours positif.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent1": "ローカルコンピュータ（10.163.0.5、これはMinitelサーバーであり、常にオンになっている必要があります）にPingします。パケットが失われる場合、これらは最も可能性の高いシナリオです：1. IPがありません。",
+  "@DiagnoseLoc_pingLocalContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent2": "（ip aを参照し、すぐにMinitelに警告します）",
+  "@DiagnoseLoc_pingLocalContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingLocalContent3": "2.ローカルネットワークに接続していません。 3.サーバー（10.163.0.5）が切断されます。 （10.163.0.10にpingを送信できます）4.スチューデントハウスからのスイッチが切断されます。 5.住居からのスイッチが切断されます。",
+  "@DiagnoseLoc_pingLocalContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_httpContent": "4xxまたは5xxエラーが表示される場合は、Minitelに報告してください。",
+  "@DiagnoseLoc_httpContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionHeader": "どのように対応すればよいですか？",
+  "@DiagnoseLoc_reactionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_reactionContent": "ネットワークがなくなった場合は、Minitelに連絡して、「Minitelに報告」ページの診断スイートを使用してください。",
+  "@DiagnoseLoc_reactionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingGatewayContent": "通常、ゲートウェイはpingを無視します。ただし、pingを受信した場合、誰かがIPを取得した可能性があります。しかし、何も確かではありません。",
+  "@DiagnoseLoc_pingGatewayContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_pingDNSContent": "DNSのいずれか（10.163.0.6を除く）が応答すると、インターネットに接続されます。",
+  "@DiagnoseLoc_pingDNSContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent1": "応答がないが、DNS pingが機能する場合、デバイスにはDNSキャッシュの問題があります。",
+  "@DiagnoseLoc_nsLookupContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DiagnoseLoc_nsLookupContent2": "ポータブルデバイスの場合、Wi-Fiを再起動します。以下にいくつかの解決策を示します。",
+  "@DiagnoseLoc_nsLookupContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_header": "認証",
+  "@LoginLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent1": "fw-cgcp.emse.fr、10.163.0.2および195.83.139.7から選択します",
+  "@LoginLoc_domainNameContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent2": "ローカルネットワークが192.168.130.33（DSI）や10.163.0.6（Minitel）などのDNSをサポートしている場合、fw-cgcp.emse.frを試すことができます。ネットワークがMinitel（WiFi Minitel）の場合、10.163.0.2を使用します",
+  "@LoginLoc_domainNameContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "LoginLoc_domainNameContent3": "通常、ケースの90％で195.83.139.7が適切です。これはポータルのパブリックIPアドレスであり、ゲートウェイによって承認されます。",
+  "@LoginLoc_domainNameContent3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_header": "デュアルブートの芸術",
+  "@DualbootLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_infos": "主なフェーズのみが表示されます。詳細については：",
+  "@DualbootLoc_infos": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksHeader": "Linuxをインストールするリスクに注意してください。",
+  "@DualbootLoc_risksHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_risksContent": "•Linuxはより安定していますが、ディストリビューションの更新はより脆弱です（Ubuntuユーザーの80％が更新よりも再インストールを好む）•ドライバーは突然のクラッシュの最初の原因です（NVIDIA、Realtek ...）•間違ったBIOS設定も可能ですあなたにとって致命的",
+  "@DualbootLoc_risksContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_customizeHeader": "カスタマイズは制限されていません。どのディストリビューションが最も適切かを観察します。",
+  "@DualbootLoc_customizeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_customizeContent": "• 初めて？ Lubuntu LTS（最悪の場合Kubuntu）またはLinux Mint•2回目？ KDE、Gnome、XFCE、LXDE、MATE、awesomewmの違いを理解し、r / unixpornをチェックしてください。 MX Linux、deepin、Linux Lite、Elementary OS、Pop！_OS、...•死に合わせてカスタマイズしたいですか？ Arch Linux、Alpine、Manjaro、Debian•何かプロフェッショナルですか？ CentOS•シンプルなサーバー？ OpenSUSE•15 MB？ Alpine、Tiny Core（ドッカーのみ）•Raspberry PI？ Raspbian•ペンテストのみ？ Kali Linux•自殺したいですか？ 「Free Software Fondation OS」•死よりも悪い？ Linux From Scratch•LinuxサーバーとしてAndroidを復活させるには？ postmarketOS",
+  "@DualbootLoc_customizeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_prepHeader": "準備：",
+  "@DualbootLoc_prepHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_prepContent": "•Windows•USBキー4 Go•BIOSの種類を知る：UEFIまたはレガシー•セキュアブートを無効にする•50 GB以上の空のパーティションを準備する•Rufusを使用して、キーのイメージをフラッシュする（FAT32、syslinux、ISOモードの更新） 、MBRで",
+  "@DualbootLoc_prepContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_installHeader": "Linuxをインストールします（BIOSで起動順序を変更するか、キーボードキーを使用してキーを起動します（F11？削除？挿入？F1？F2？F12？））。",
+  "@DualbootLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_installContent": "•言語、タイムゾーン、ネットワーク...•手動ディスク構成（推奨）•次の順序で：•「/ dev / sda1」はext4で「/」にマウント、Linuxはパーティションサイズ•「/ dev / sda2」はSWAP、サイズ= 1.5 *休止状態のRAM、それ以外の場合はサイズ= 1/4 * RAM•GRUB（ブートローダー）はWindowsと一緒にインストールする必要があります。 （MBRで、それ以外は無視）•パーティションの確認と確認（Windowsがまだ存在するかどうかを確認🙂）•Etc（インストールが完了するまで待機）...•（UEFI）BIOSでUEFIブート順序を変更",
+  "@DualbootLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue1Content": "一般に、コンピューターにハイブリッドグラフィックス管理が装備されている場合、Linuxは起動しません。解決策：•高度なブートオプションに「nomodeset」を追加します。•読みやすくするために「静かなスプラッシュ」も削除します。例：",
+  "@DualbootLoc_issue1Content": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content1": "デフォルトでは、LinuxはIntelで実行されます。イーサリアムを採掘したり、機械学習をしたい場合は、これは非常に悪いことです。",
+  "@DualbootLoc_issue2Content1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content2": "•NVIDIA公式WebサイトからNVIDIAドライバーをダウンロードします。 •（必要に応じて、ドライバーなし、openGLなしでCUDAをダウンロードします）•Ctrl + Alt + F1、Ctrl + Alt + F2でTTYに切り替えます...",
+  "@DualbootLoc_issue2Content2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_issue2Content3": "WindowsのBIOSレガシーでHDMIポートが機能しなくなった場合：",
+  "@DualbootLoc_issue2Content3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_changeLinuxHeader": "GNU / Linuxを変更するかどうか...",
+  "@DualbootLoc_changeLinuxHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "DualbootLoc_changeLinuxContent": "•一般的に、Linuxは変更しません。カスタマイズがない場合は、「ディスプレイマネージャー（DM）またはウィンドウマネージャー（WM）をカスタマイズする方法」を探してください。 「端末をカスタマイズする方法」を探し、VMで構成をテストします。 •ハッキングしたいですか？ Kali Linuxツールは、OSとは独立してダウンロード可能です•LTS？一般に、LTSははるかに安定しています。また、Ubuntuユーザーの80％は、dist-upgradeではなく再インストールを好みます。",
+  "@DualbootLoc_changeLinuxContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_header": "プリンターの構成",
+  "@ImprimanteLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_windowsContent": "-Windowsエクスプローラーで\\\\ 192.168.168.130.2を開きます-名とパスワードを入力します（EMSE2000 \\ first name.nameもテストします）-「imprimantes-gpc」をダブルクリックします",
+  "@ImprimanteLoc_windowsContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_linuxContent1": "-smb：//192.168.130.2/imprimantes-gcpをネットワークプリンターに追加します-ドライバー：https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd",
+  "@ImprimanteLoc_linuxContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_linuxContent2": "-http：// localhost：631 / admin（Linuxアカウント名とパスワード）に移動します-「管理」タブ-「プリンターの追加」-SMBと入力し、アドレスsmb：//192.168.130.2/imprimantes-gcp-PPDを使用しますファイル：https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd-残りを設定すれば大丈夫です",
+  "@ImprimanteLoc_linuxContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ImprimanteLoc_pukContent": "Minitelアプリケーション>アプリ>プリンターを使用します",
+  "@ImprimanteLoc_pukContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_header": "Sogoメールのインポート",
+  "@MailLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_mailContent1": "お気に入りのメールアプリケーションで、手動設定を使用し、対応するフィールドに入力します。",
+  "@MailLoc_mailContent1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "MailLoc_mailContent2": "電子メール：firstname.lastname@etu.emse.frパスワード：学校のパスワード受信サーバー：IMAPホスト名：messel.emse.frポート：993セキュリティ：ssl / tls認証方法：標準パスワード識別子：firstname.lastname（@️なしの⚠️ etu.emse.fr）送信サーバー：ホスト名：messel.emse.frポート：465セキュリティ：ssl / tls認証方法：標準パスワード識別子：firstname.lastname（⚠️@ etu.emse.frなし）",
+  "@MailLoc_mailContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_definitionHeader": "VMは次のとおりです。",
+  "@VMLoc_definitionHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_definitionContent": "コンポーネントがエミュレートされるマシン。ホストから厳密に隔離されたマシン。コンポーネントがエミュレートされるため、VMがクラッシュする可能性ははるかに低くなります。",
+  "@VMLoc_definitionContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_customizeHeader": "したがって、VMは改ざんされて死に至ります。",
+  "@VMLoc_customizeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_customizeContent": "-サンドボックスを持ち、多くのテストを行うのに便利です。 -Linux（WM、DM、ドライバー、インストールなど）でのトレーニングに便利です。デュアルブートを起動する必要はありません。 -VPSの作成に役立ちます。 -専用の保護された環境でコンパイラを使用するのに便利です。",
+  "@VMLoc_customizeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installHeader": "言うまでもなく、VMがグラフィカルインターフェイスを持つことは無意味です。多くの場合、グラフィカルユーザーインターフェイスまたはTTYを使用する代わりに、SSH接続がセットアップされます。一般に、VMのインストールは迅速かつ簡単です。",
+  "@VMLoc_installHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_installContent": "-20 GBを超える仮想ディスクの作成-エミュレートされたCDポートへのLinuxイメージの挿入-Linuxインストール（デュアルブートと同様）-SSH / telnet / RDPアクセスの構成",
+  "@VMLoc_installContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeHeader": "一部のハイパーバイザー（VirtualBox、VMWare、Hyper-V）には、クイックインストール機能も備わっています。これにより、デュアルブートpracticeを練習することもできます。 VMの種類：",
+  "@VMLoc_vmTypeHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_vmTypeContent": "-タイプI：ベアメタル、OS自体がハイパーバイザーです。 -タイプII：ホストされ、ハイパーバイザーはホストOSによってホストされます。",
+  "@VMLoc_vmTypeContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorHeader": "ハイパーバイザーの優先順位は次のとおりです。",
+  "@VMLoc_hypervisorHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_hypervisorContent": "1. [リーダー] Hyper-V（可能な場合はタイプ1、Windows）2. [ビジョン] KVM（タイプ1、Linux、👍Android）3. [リーダー] VMWareワークステーション（タイプ2、ネットワーク、GNS3およびすべての場合） else）4. [ニッチプレーヤー] VirtualBox（タイプ2）5. [リーダー] VMware ESXi（プロフェッショナル向け、タイプ1）",
+  "@VMLoc_hypervisorContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_envHeader": "単純な開発環境を構築することの問題である場合：",
+  "@VMLoc_envHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "VMLoc_envContent": "-Linuxの場合：Docker（コンテナーLinux、つまりアプリケーションごとの専用環境）（バックグラウンドでHyper-VでLinux VMを実行するため、Windowsでも動作することに注意してください。）-Windowsの場合：Linux 1のWindowsサブシステム（カーネルLinuxネイティブ、注意してください、ハードウェアはエミュレートされません！）-Windowsの場合：Linux 2のWindows Subsystem（+ Docker）（マイクロVMのカーネルLinux。非常に高速で動的に割り当てられたRAM。）",
+  "@VMLoc_envContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NewsLoc_title": "ニュース",
+  "@NewsLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "NewsLoc_seeFacebook": "Facebookで見る...",
+  "@NewsLoc_seeFacebook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_title": "認証",
+  "@PortalLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_autoLogin": "自動的にログインする",
+  "@PortalLoc_autoLogin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_login": "ログインする",
+  "@PortalLoc_login": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_rememberMe": "私を覚えてますか",
+  "@PortalLoc_rememberMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_password": "パスワード",
+  "@PortalLoc_password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_domainNameHeader": "ドメイン名/ IP",
+  "@PortalLoc_domainNameHeader": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameLabel": "ユーザー名",
+  "@PortalLoc_usernameLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_usernameHint": "名前苗字",
+  "@PortalLoc_usernameHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_authTime": "認証時間",
+  "@PortalLoc_authTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "PortalLoc_statusInSeconds": "残り{seconds}秒",
+  "@PortalLoc_statusInSeconds": {
+    "type": "text",
+    "placeholders": {
+      "seconds": {}
+    }
+  },
+  "PortalLoc_statusInMinutes": "残り{minutes}分",
+  "@PortalLoc_statusInMinutes": {
+    "type": "text",
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "PortalLoc_statusInHM": "残り{hours}時間{minutes}分",
+  "@PortalLoc_statusInHM": {
+    "type": "text",
+    "placeholders": {
+      "hours": {},
+      "minutes": {}
+    }
+  },
+  "AppListLoc_printer": "プリンター",
+  "@AppListLoc_printer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AppListLoc_portal": "ポータル",
+  "@AppListLoc_portal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_title": "ミニテルへの報告",
+  "@ReportingLoc_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_chamberLabel": "ルーム",
+  "@ReportingLoc_chamberLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_chamberHint": "部屋番号",
+  "@ReportingLoc_chamberHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_notEmpty": "空にしないでください",
+  "@ReportingLoc_notEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_idLabel": "身元",
+  "@ReportingLoc_idLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_idHint": "姓名",
+  "@ReportingLoc_idHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_forceName": "姓と名",
+  "@ReportingLoc_forceName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleLabel": "タイトル",
+  "@ReportingLoc_titleLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_titleHint": "もうインターネットはありません！",
+  "@ReportingLoc_titleHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_slack": "Slackで通知する",
+  "@ReportingLoc_slack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_share": "シェア",
+  "@ReportingLoc_share": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_header": "インターネットなしで報告する方法は？",
+  "@TutorialLoc_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_notice": "注：RootおよびBusyboxをインストールすることをお勧めします。",
+  "@TutorialLoc_notice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content1": "1.「WiFi Minitel」にログインします。",
+  "@TutorialLoc_content1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content2": "2.ボタンを押して診断シーケンスを開始し、1分間待ちます。",
+  "@TutorialLoc_content2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content3": "3.レポートを記入します。コミュニケーション手段（部屋、郵便、メッセンジャーなど）を忘れないでください。",
+  "@TutorialLoc_content3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_example": "例：タイトル：月曜日からインターネットではありません。説明：イーサネットを使用していると、接続が頻繁に切断されます。 Wifiは大丈夫です。",
+  "@TutorialLoc_example": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content4": "4.インターネットがあるネットワークに接続します。",
+  "@TutorialLoc_content4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "TutorialLoc_content5": "5.レポートを送信します。",
+  "@TutorialLoc_content5": {
+    "type": "text",
+    "placeholders": {}
+  }
+}
