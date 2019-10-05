@@ -310,7 +310,7 @@ class _StatusCard extends StatelessWidget {
             Row(
               children: <Widget>[
                 Text(
-                  "${AppLoc.of(context).portal.title}: ",
+                  "${AppLoc.of(context).portal.apps.portal}: ",
                   style: const TextStyle(fontSize: 20),
                 ),
                 if (_portailAPI.cookies.isEmpty)

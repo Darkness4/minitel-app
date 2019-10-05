@@ -459,7 +459,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "PortalLoc_title": "Portal",
+  "PortalLoc_title": "Authentication",
   "@PortalLoc_title": {
     "type": "text",
     "placeholders": {}
