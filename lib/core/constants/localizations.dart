@@ -47,7 +47,7 @@ class AppLocDelegate extends LocalizationsDelegate<AppLoc> {
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['fr', 'en'].contains(locale.languageCode);
+      <String>['fr', 'en', 'it'].contains(locale.languageCode);
 
   @override
   Future<AppLoc> load(Locale locale) => AppLoc.load(locale);

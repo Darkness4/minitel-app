@@ -28,6 +28,7 @@ class MaterialAppWithTheme extends StatelessWidget {
       onGenerateRoute: Router.generateRoute,
       supportedLocales: const <Locale>[
         Locale('en', ''),
+        Locale('it', ''),
         Locale('fr', 'FR'),
       ],
       theme: themeChanger.theme,

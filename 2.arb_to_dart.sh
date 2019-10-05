@@ -4,6 +4,7 @@ arb_files=(
   assets/l10n/intl_messages.arb
   assets/l10n/intl_en.arb
   assets/l10n/intl_fr.arb
+  assets/l10n/intl_it.arb
 )
 localizations=lib/core/constants/localizations
 

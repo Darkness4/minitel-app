@@ -60,11 +60,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "AgendaLoc_emptyAgenda4": MessageLookupByLibrary.simpleMessage(
             "Spend more time with the family!\n(instead of watching the next classes)"),
         "AgendaLoc_emptyAgenda5": MessageLookupByLibrary.simpleMessage(
-            "The application has more than 10,000 lines of code....\n\n(with 40,000 additions and 30,000 deletions)"),
+            "The application has more than 10,000 lines of code...\n\n(with 40,000 additions and 30,000 deletions)"),
         "AgendaLoc_emptyAgenda6": MessageLookupByLibrary.simpleMessage(
             "The application is developed with Flutter and ❤️"),
         "AgendaLoc_emptyAgenda7":
-            MessageLookupByLibrary.simpleMessage("Minitel is king!"),
+            MessageLookupByLibrary.simpleMessage("Minitel is the best!"),
         "AgendaLoc_emptyAgenda8":
             MessageLookupByLibrary.simpleMessage("Freeeeeeedom !"),
         "AgendaLoc_emptyAgenda9":
@@ -135,7 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "DualbootLoc_issue2Content3": MessageLookupByLibrary.simpleMessage(
             "If the HDMI port no longer works in BIOS Legacy on Windows:"),
         "DualbootLoc_prepContent": MessageLookupByLibrary.simpleMessage(
-            "    •  Windows\n    •  USB Key 4 Go\n    •  Know the type of BIOS : UEFI ou Legacy\n    •  Disable Secure Boot\n    •  Prepare an empty partition of at least 50 GB\n    •  With Rufus, flash an image on the key (FAT32, update syslinux, ISO mode), in MBR\n\n"),
+            "    •  Windows\n    •  USB Key 4 GB\n    •  Know the type of BIOS : UEFI ou Legacy\n    •  Disable Secure Boot\n    •  Prepare an empty partition of at least 50 GB\n    •  With Rufus, flash an image on the key (FAT32, update syslinux, ISO mode), in MBR\n\n"),
         "DualbootLoc_prepHeader":
             MessageLookupByLibrary.simpleMessage("Preparations :\n"),
         "DualbootLoc_risksContent": MessageLookupByLibrary.simpleMessage(
@@ -145,13 +145,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "ImprimanteLoc_header":
             MessageLookupByLibrary.simpleMessage("Configuring the printer"),
         "ImprimanteLoc_linuxContent1": MessageLookupByLibrary.simpleMessage(
-            "    -  Add smb://192.168.130.2/imprimantes-gcp  to network printers\n    -  Driver: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd"),
+            "    -  Add smb://192.168.130.2/imprimantes-gcp to network printers\n    -  Driver: https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd"),
         "ImprimanteLoc_linuxContent2": MessageLookupByLibrary.simpleMessage(
             "    -  Go to http://localhost:631/admin (linux account name and password)\n    -  The tab \"Administration\"\n    -  \"Add Printer\"\n    -  Type SMB, address smb://192.168.130.2/imprimantes-gcp\n    -  Use the PPD file : https://www.openprinting.org/download/PPD/Ricoh/PS/Ricoh-MP_C3004_PS.ppd\n    -  Configure the rest and it should be okay"),
         "ImprimanteLoc_pukContent": MessageLookupByLibrary.simpleMessage(
             "Use the Minitel application > Apps > Printer"),
         "ImprimanteLoc_windowsContent": MessageLookupByLibrary.simpleMessage(
-            "    -  Open \\\\192.168.168.130.2 with Windows Explorer\n    -  Enter first name and password (also test EMSE2000\\first name.name)\n    -  Double-click on \"imprimantes-gpc\""),
+            "    -  Open \\\\192.168.130.2 with Windows Explorer\n    -  Enter full name and password (also test EMSE2000\\firstname.lastname)\n    -  Double-click on \"imprimantes-gpc\""),
         "LoginLoc_domainNameContent1": MessageLookupByLibrary.simpleMessage(
             "Choose between fw-cgcp.emse.fr, 10.163.0.2 and 195.83.139.7\n"),
         "LoginLoc_domainNameContent2": MessageLookupByLibrary.simpleMessage(
@@ -235,7 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TutorialLoc_content5":
             MessageLookupByLibrary.simpleMessage("5. Send the report."),
         "TutorialLoc_example": MessageLookupByLibrary.simpleMessage(
-            "Example : \nTitle: Not Internet since Monday. \nDescription: I frequently lose the connection when I\'m on Ethernet. Wifi is okay."),
+            "Example: \nTitle: Not Internet since Monday. \nDescription: I frequently lose the connection when I\'m on Ethernet. Wifi is okay."),
         "TutorialLoc_header": MessageLookupByLibrary.simpleMessage(
             "How to report without the Internet?"),
         "TutorialLoc_notice": MessageLookupByLibrary.simpleMessage(
@@ -249,7 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "VMLoc_definitionHeader":
             MessageLookupByLibrary.simpleMessage("A VM is:\n"),
         "VMLoc_envContent": MessageLookupByLibrary.simpleMessage(
-            "    -  For Linux: Docker, (Container Linux, i. e. dedicated environment per application) (Note that it also works on Windows because it runs a Linux VM on Hyper-V in the background.)\n    -  For Windows: Windows Subsystem for Linux 1 (Kernel Linux native, be careful, the hardware is not emulated!)\n    -  For Windows: Windows Subsystem for Linux 2 (+ Docker) (Kernel Linux in a micro-VM. Extremely fast and dynamically allocated RAM.)\n"),
+            "    -  For Linux: Docker, (Container Linux, cioè ambiente dedicato per applicazione) (Note that it also works on Windows because it runs a Linux VM on Hyper-V in the background.)\n    -  For Windows: Windows Subsystem for Linux 1 (Kernel Linux native, be careful, the hardware is not emulated!)\n    -  For Windows: Windows Subsystem for Linux 2 (+ Docker) (Kernel Linux in a micro-VM. Extremely fast and dynamically allocated RAM.)\n"),
         "VMLoc_envHeader": MessageLookupByLibrary.simpleMessage(
             "If it is a question of having a simple development environment:\n"),
         "VMLoc_hypervisorContent": MessageLookupByLibrary.simpleMessage(
