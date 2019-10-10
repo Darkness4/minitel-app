@@ -1,16 +1,16 @@
 class AssetPaths {
   static const String TemplateICS = 'assets/template.ics';
-  static const String LogoMinitelWhite = 'assets/img/logo_minitel_white.png';
-  static const String LogoMinitel = 'assets/img/logo_minitel.png';
-  static const String Icon = 'assets/icon/icon.png';
-  static const String DocNetwork = 'assets/img/network.jpg';
-  static const String DocLecteurReseau = 'assets/img/Lecteur-reseau.png';
-  static const String DocImprimanteLinux = 'assets/img/Linux.png';
-  static const String Slack = 'assets/img/Slack_Mark_Monochrome_White.png';
-  static const String Facebook = 'assets/icon/f_logo.png';
-  static const String Github = 'assets/icon/GitHub-Mark.png';
-  static const String EMSE = 'assets/img/logo_emse.png';
-  static const String Sogo = 'assets/img/mail.png';
+  static const String LogoMinitelWhite = 'assets/img/logo_minitel_white.webp';
+  static const String LogoMinitel = 'assets/img/logo_minitel.webp';
+  static const String Icon = 'assets/icon/icon.webp';
+  static const String DocNetwork = 'assets/img/network.webp';
+  static const String DocLecteurReseau = 'assets/img/Lecteur-reseau.webp';
+  static const String DocImprimanteLinux = 'assets/img/Linux.webp';
+  static const String Slack = 'assets/img/Slack_Mark_Monochrome_White.webp';
+  static const String Facebook = 'assets/icon/f_logo.webp';
+  static const String Github = 'assets/icon/GitHub-Mark.webp';
+  static const String EMSE = 'assets/img/logo_emse.webp';
+  static const String Sogo = 'assets/img/mail.webp';
 }
 
 /// Path of documentation
