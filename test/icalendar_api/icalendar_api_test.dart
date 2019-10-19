@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,7 +10,7 @@ import 'template.ics.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final Uint8List encodedICalendar = CalendarTemplate.iCalendarTemplate;
+  final List<int> encodedICalendar = CalendarTemplate.iCalendarTemplate;
 
   const String url =
       "https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics";
@@ -61,7 +60,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse(url): encodedICalendar,
           },
         ),
@@ -84,7 +83,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse(url): encodedICalendar,
           },
         ),

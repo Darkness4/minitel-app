@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -55,7 +54,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse(referee): utf8.encode('https://thisisafake.ics'),
             Uri.parse(
                     "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}"):
@@ -102,7 +101,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse(referee): utf8.encode('https://thisisafake.ics'),
             Uri.parse(
                     "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}"):

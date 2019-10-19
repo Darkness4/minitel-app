@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,16 @@ class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
 
   @override
   _BaseWidgetState<T> createState() => _BaseWidgetState<T>();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty<Function(T)>('onModelReady', onModelReady));
+    properties.add(DiagnosticsProperty<T>('model', model));
+    properties.add(DiagnosticsProperty<
+        Widget Function(
+            BuildContext context, T model, Widget child)>('builder', builder));
+  }
 }
 
 class _BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
@@ -42,5 +53,11 @@ class _BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
     }
 
     super.initState();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<T>('model', model));
   }
 }

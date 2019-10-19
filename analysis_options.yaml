@@ -1,4 +1,4 @@
-include: package:extra_pedantic/analysis_options.yaml
+include: package:extra_pedantic/analysis_options_flutter.yaml
 # include: package:pedantic/analysis_options.yaml
 
 linter:
@@ -7,8 +7,3 @@ linter:
     - curly_braces_in_flow_control_structures
     - always_put_control_body_on_new_line
     - always_specify_types
-    - avoid_as
-
-analyzer:
-#   exclude:
-#     - path/to/excluded/files/**

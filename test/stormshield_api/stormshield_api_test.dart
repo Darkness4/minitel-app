@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/stormshield_api.dart';
@@ -24,7 +23,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse("https://195.83.139.7/auth/plain.html"):
                 utf8.encode('title_error'),
           },
@@ -59,7 +58,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse(
                     "https://195.83.139.7/auth/auth.html?url=&uid=&time=480&logout=D%C3%A9connexion"):
                 utf8.encode('title_success'),
@@ -85,7 +84,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse("https://195.83.139.7/auth/plain.html"):
                 utf8.encode('title_success'),
             Uri.parse("https://195.83.139.7/auth/login.html"):
@@ -132,7 +131,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse("https://195.83.139.7/auth/plain.html"):
                 utf8.encode('title_success'),
             Uri.parse(
@@ -158,7 +157,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse("https://195.83.139.7/auth/plain.html"):
                 utf8.encode('title_success'),
           },

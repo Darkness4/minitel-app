@@ -11,6 +11,10 @@
 // ignore_for_file:always_specify_types, type_annotate_public_apis
 // ignore_for_file:always_declare_return_types, prefer_final_locals
 // ignore_for_file:always_put_control_body_on_new_line
+// ignore_for_file:implicit_dynamic_return
+// ignore_for_file:implicit_dynamic_parameter
+// ignore_for_file:invalid_assignment
+// ignore_for_file:map_value_type_not_assignable
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';

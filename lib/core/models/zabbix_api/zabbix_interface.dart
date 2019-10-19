@@ -10,8 +10,8 @@ class ZabbixInterface {
 
   factory ZabbixInterface.fromJson(Map<String, dynamic> json) {
     return ZabbixInterface(
-      dns: json['dns'],
-      ip: json['ip'],
+      dns: json['dns'] as String,
+      ip: json['ip'] as String,
     );
   }
 }

@@ -30,18 +30,17 @@ class GithubRelease {
 
   factory GithubRelease.fromJson(Map<String, dynamic> json) {
     final List<Map<String, dynamic>> assets =
-        List<Map<String, dynamic>>.from(json["assets"]);
-
+        List<Map<String, dynamic>>.from(json["assets"] as List<dynamic>);
     return GithubRelease(
-      id: json['id'],
-      body: json['body'],
-      author: GithubUser.fromJson(json['author']),
-      url: json['url'],
-      tag_name: json['tag_name'],
-      name: json['name'],
-      html_url: json['html_url'],
-      created_at: DateTime.parse(json['created_at']),
-      published_at: DateTime.parse(json['published_at']),
+      id: int.parse(json['id'].toString()),
+      body: json['body'] as String,
+      author: GithubUser.fromJson(json['author'] as Map<String, dynamic>),
+      url: json['url'] as String,
+      tag_name: json['tag_name'] as String,
+      name: json['name'] as String,
+      html_url: json['html_url'] as String,
+      created_at: DateTime.parse(json['created_at'] as String),
+      published_at: DateTime.parse(json['published_at'] as String),
       assets: assets
           .map((Map<String, dynamic> asset) => GithubAsset.fromJson(asset))
           .toList(),

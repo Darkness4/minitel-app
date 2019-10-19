@@ -35,15 +35,15 @@ class GithubAsset {
 
   factory GithubAsset.fromJson(Map<String, dynamic> json) {
     return GithubAsset(
-      url: json['url'],
-      name: json['name'],
-      browser_download_url: json['browser_download_url'],
-      id: json['id'],
-      uploader: GithubUser.fromJson(json['uploader']),
-      download_count: json['download_count'],
-      created_at: DateTime.parse(json['created_at']),
-      updated_at: DateTime.parse(json['updated_at']),
-      size: json['size'],
+      url: json['url'] as String,
+      name: json['name'] as String,
+      browser_download_url: json['browser_download_url'] as String,
+      id: int.parse(json['id'].toString()),
+      uploader: GithubUser.fromJson(json['uploader'] as Map<String, dynamic>),
+      download_count: int.parse(json['download_count'].toString()),
+      created_at: DateTime.parse(json['created_at'] as String),
+      updated_at: DateTime.parse(json['updated_at'] as String),
+      size: int.parse(json['size'].toString()),
     );
   }
 }

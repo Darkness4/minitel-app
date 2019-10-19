@@ -30,7 +30,7 @@ class ZabbixAPI {
     final HttpClientResponse response = await request.close();
     final dynamic output =
         await response.transform(utf8.decoder).transform(json.decoder).first;
-    return output["result"];
+    return output["result"] as String;
   }
 
   Future<List<ZabbixHost>> fetchZabbixHosts(int groupids, String zabbixPath,
@@ -72,8 +72,8 @@ class ZabbixAPI {
       final Future<List<ZabbixHost>> output = response
           .transform(utf8.decoder)
           .transform(json.decoder)
-          .expand((dynamic jsonData) =>
-              List<Map<String, dynamic>>.from(jsonData["result"]))
+          .expand((dynamic jsonData) => List<Map<String, dynamic>>.from(
+              jsonData["result"] as List<dynamic>))
           .map((Map<String, dynamic> host) => ZabbixHost.fromJson(host))
           .toList();
 

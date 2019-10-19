@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
@@ -35,7 +36,7 @@ class AgendaView extends StatelessWidget {
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.settings),
-                onPressed: () => Navigator.of(context).push(
+                onPressed: () => Navigator.of(context).push<dynamic>(
                   MaterialPageRoute<dynamic>(
                     builder: (_) => NotificationSettingsPage(
                       notificationSettings: model.notificationSettings,
@@ -109,5 +110,11 @@ class AgendaView extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
   }
 }

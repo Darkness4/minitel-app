@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/ui/shared/app_colors.dart';
 
@@ -6,7 +7,7 @@ class AnimatedFloatingButton extends StatelessWidget {
   final double start;
   final double end;
   final Widget child;
-  final Function onPressed;
+  final void Function() onPressed;
   final AnimationController controller;
 
   const AnimatedFloatingButton(
@@ -56,5 +57,16 @@ class AnimatedFloatingButton extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty<AnimationController>('controller', controller));
+    properties.add(DiagnosticsProperty<Function>('onPressed', onPressed));
+    properties.add(DoubleProperty('end', end));
+    properties.add(DoubleProperty('start', start));
+    properties.add(StringProperty('text', text));
   }
 }

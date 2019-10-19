@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DocCard extends StatelessWidget {
@@ -23,5 +24,12 @@ class DocCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('elevation', elevation));
+    properties.add(DoubleProperty('intPadding', intPadding));
   }
 }

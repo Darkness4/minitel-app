@@ -58,7 +58,7 @@ class _ImprimanteCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         key: const Key('app_lists/imprimante'),
-        onTap: () => Navigator.push(
+        onTap: () => Navigator.push<dynamic>(
           context,
           MaterialPageRoute<dynamic>(builder: (_) => const ImprimanteWebView()),
         ),
@@ -100,7 +100,7 @@ class _PortailCard extends StatelessWidget {
       child: InkWell(
         key: const Key('app_lists/portail'),
         onTap: () async {
-          await Navigator.push(
+          await Navigator.push<dynamic>(
             context,
             MaterialPageRoute<dynamic>(builder: (_) => const PortailWebView()),
           );
@@ -139,7 +139,7 @@ class _SogoCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         key: const Key('app_lists/sogo'),
-        onTap: () => Navigator.push(
+        onTap: () => Navigator.push<dynamic>(
           context,
           MaterialPageRoute<dynamic>(builder: (_) => const SogoWebView()),
         ),
@@ -158,7 +158,7 @@ class _WikiMinitelCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         key: const Key('app_lists/wiki_minitel'),
-        onTap: () => Navigator.push(
+        onTap: () => Navigator.push<dynamic>(
           context,
           MaterialPageRoute<dynamic>(builder: (_) => const MinitelWebView()),
         ),

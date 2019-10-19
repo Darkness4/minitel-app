@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 /// Color palette of the app
 class MinitelColors {
-  static const Color PrimaryColor = Colors.green;
-  static const Color AccentColor = Colors.greenAccent;
+  static const MaterialColor PrimaryColor = Colors.green;
+  static const MaterialAccentColor AccentColor = Colors.greenAccent;
   static const Color FontColor = Colors.black87;
 
   static const Color TerminalHeaderColor = Colors.lightBlue;

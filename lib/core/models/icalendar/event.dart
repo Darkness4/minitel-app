@@ -19,13 +19,13 @@ class Event {
 
   factory Event.fromMap(Map<String, dynamic> json) {
     return Event(
-      dtend: DateTime.parse(json["DTEND"]),
-      uid: json["UID"],
-      dtstamp: DateTime.parse(json["DTSTAMP"]),
-      location: json["LOCATION"],
-      description: json["DESCRIPTION"],
-      summary: json["SUMMARY"],
-      dtstart: DateTime.parse(json["DTSTART"]),
+      dtend: DateTime.parse(json["DTEND"] as String),
+      uid: json["UID"] as String,
+      dtstamp: DateTime.parse(json["DTSTAMP"] as String),
+      location: json["LOCATION"] as String,
+      description: json["DESCRIPTION"] as String,
+      summary: json["SUMMARY"] as String,
+      dtstart: DateTime.parse(json["DTSTART"] as String),
     );
   }
 }

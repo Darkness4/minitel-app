@@ -17,11 +17,11 @@ class GithubUser {
 
   factory GithubUser.fromJson(Map<String, dynamic> json) {
     return GithubUser(
-      login: json['login'],
-      id: json['id'],
-      html_url: json['html_url'],
-      url: json['url'],
-      avatar_url: json['avatar_url'],
+      login: json['login'] as String,
+      id: int.parse(json['id'].toString()),
+      html_url: json['html_url'] as String,
+      url: json['url'] as String,
+      avatar_url: json['avatar_url'] as String,
     );
   }
 }

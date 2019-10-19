@@ -55,4 +55,12 @@ class LogCard extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(StringProperty('text', text));
+    properties.add(DoubleProperty('elevation', elevation));
+  }
 }

@@ -16,7 +16,8 @@ class GithubAPI {
       final Future<List<GithubRelease>> data = response
           .transform(utf8.decoder)
           .transform(json.decoder)
-          .expand((Object data) => List<Map<String, dynamic>>.from(data))
+          .expand((Object data) =>
+              List<Map<String, dynamic>>.from(data as List<dynamic>))
           .map((Map<String, dynamic> data) => GithubRelease.fromJson(data))
           .toList();
       return data;

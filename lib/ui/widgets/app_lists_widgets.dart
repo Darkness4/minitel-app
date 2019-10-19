@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/funcs/url_launch.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -94,5 +95,15 @@ class ScaffoldWebView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty<Function(WebViewController, BuildContext)>(
+            'onWebViewCreated', onWebViewCreated));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(StringProperty('initialUrl', initialUrl));
   }
 }

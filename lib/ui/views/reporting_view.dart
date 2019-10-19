@@ -21,6 +21,11 @@ class ReportingView extends StatefulWidget {
 
   @override
   ReportingViewState createState() => ReportingViewState();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class ReportingViewState extends State<ReportingView>
@@ -184,7 +189,7 @@ class ReportingViewState extends State<ReportingView>
         onPressed: () async =>
             model.reportTo(ReportTarget.Slack, context: context),
         child: const ImageIcon(
-          AssetImage("assets/img/Slack_Mark_Monochrome_White.png"),
+          AssetImage(AssetPaths.Slack),
           size: 100.0,
           key: Key('reporting_view/slack'),
         ),
