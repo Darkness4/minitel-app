@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'dart:typed_data';
-
 class CalendarTemplate {
-  static Uint8List get iCalendarTemplate => utf8.encode("""BEGIN:VCALENDAR
+  static List<int> get iCalendarTemplate => utf8.encode("""BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//hacksw/handcal//NONSGML v1.0//EN
 CALSCALE:GREGORIAN

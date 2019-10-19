@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/viewmodels/views/agenda_view_model.dart';
@@ -12,6 +13,12 @@ class ErrorAgendaWidget extends StatefulWidget {
 
   @override
   _ErrorAgendaWidgetState createState() => _ErrorAgendaWidgetState();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AgendaViewModel>('model', model));
+    properties.add(DiagnosticsProperty<dynamic>('error', error));
+  }
 }
 
 class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
@@ -83,7 +84,7 @@ class DocsDrawer extends StatelessWidget {
                       viewportFraction: .9,
                     );
                     if (_docsPageId == DocsPageId.Home) {
-                      Navigator.push(
+                      Navigator.push<dynamic>(
                         context,
                         SlideRightRoute<dynamic>(
                           builder: (_) =>
@@ -91,7 +92,7 @@ class DocsDrawer extends StatelessWidget {
                         ),
                       );
                     } else if (_docsPageId == DocsPageId.Wiki) {
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacement<dynamic, dynamic>(
                         context,
                         FadeRoute<dynamic>(
                           builder: (_) =>
@@ -133,7 +134,7 @@ class DocsDrawer extends StatelessWidget {
                       viewportFraction: .9,
                     );
                     if (_docsPageId == DocsPageId.Home) {
-                      await Navigator.push(
+                      await Navigator.push<dynamic>(
                         context,
                         SlideRightRoute<dynamic>(
                           builder: (_) =>
@@ -141,7 +142,7 @@ class DocsDrawer extends StatelessWidget {
                         ),
                       );
                     } else if (_docsPageId == DocsPageId.Wiki) {
-                      await Navigator.pushReplacement(
+                      await Navigator.pushReplacement<dynamic, dynamic>(
                         context,
                         FadeRoute<dynamic>(
                           builder: (_) =>
@@ -184,14 +185,14 @@ class DocsDrawer extends StatelessWidget {
                       viewportFraction: .9,
                     );
                     if (_docsPageId == DocsPageId.Home) {
-                      Navigator.push(
+                      Navigator.push<dynamic>(
                         context,
                         SlideRightRoute<dynamic>(
                           builder: (_) => WikiDocs(controller: _newController),
                         ),
                       );
                     } else if (_docsPageId == DocsPageId.Toolbox) {
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacement<dynamic, dynamic>(
                         context,
                         FadeRoute<dynamic>(
                           builder: (_) => WikiDocs(controller: _newController),
@@ -232,14 +233,14 @@ class DocsDrawer extends StatelessWidget {
                       viewportFraction: .9,
                     );
                     if (_docsPageId == DocsPageId.Home) {
-                      Navigator.push(
+                      Navigator.push<dynamic>(
                         context,
                         SlideRightRoute<dynamic>(
                           builder: (_) => WikiDocs(controller: _newController),
                         ),
                       );
                     } else if (_docsPageId == DocsPageId.Toolbox) {
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacement<dynamic, dynamic>(
                         context,
                         FadeRoute<dynamic>(
                           builder: (_) => WikiDocs(controller: _newController),
@@ -280,14 +281,14 @@ class DocsDrawer extends StatelessWidget {
                       viewportFraction: .9,
                     );
                     if (_docsPageId == DocsPageId.Home) {
-                      Navigator.push(
+                      Navigator.push<dynamic>(
                         context,
                         SlideRightRoute<dynamic>(
                           builder: (_) => WikiDocs(controller: _newController),
                         ),
                       );
                     } else if (_docsPageId == DocsPageId.Toolbox) {
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacement<dynamic, dynamic>(
                         context,
                         FadeRoute<dynamic>(
                           builder: (_) => WikiDocs(controller: _newController),
@@ -328,14 +329,14 @@ class DocsDrawer extends StatelessWidget {
                       viewportFraction: .9,
                     );
                     if (_docsPageId == DocsPageId.Home) {
-                      Navigator.push(
+                      Navigator.push<dynamic>(
                         context,
                         SlideRightRoute<dynamic>(
                           builder: (_) => WikiDocs(controller: _newController),
                         ),
                       );
                     } else if (_docsPageId == DocsPageId.Toolbox) {
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacement<dynamic, dynamic>(
                         context,
                         FadeRoute<dynamic>(
                           builder: (_) => WikiDocs(controller: _newController),
@@ -356,6 +357,13 @@ class DocsDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty<PageController>('controller', controller));
   }
 }
 
@@ -544,5 +552,11 @@ class MainDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('currentRoutePaths', currentRoutePaths));
   }
 }

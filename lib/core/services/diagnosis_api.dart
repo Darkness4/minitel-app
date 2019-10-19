@@ -136,9 +136,9 @@ class DiagnosisAPI {
 
   Future<String> _run(String command, List<String> args) {
     return Process.run(command, args)
-        .then((ProcessResult result) => result.stdout)
-        .then((dynamic stdout) =>
-            stdout.isEmpty ? "Nothing to show" : stdout.toString())
+        .then<String>((ProcessResult result) => result.stdout.toString())
+        .then<String>(
+            (String stdout) => stdout.isEmpty ? "Nothing to show" : stdout)
         .catchError((dynamic e) => e.toString());
   }
 }

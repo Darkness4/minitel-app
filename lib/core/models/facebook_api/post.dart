@@ -16,11 +16,11 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      message: json["message"] ?? "",
-      id: json["id"],
-      pictureUrl: json["full_picture"] ?? "",
-      createdTime: DateTime.parse(json["created_time"]),
-      permalinkUrl: json["permalink_url"],
+      message: json["message"] as String ?? "",
+      id: json["id"] as String,
+      pictureUrl: json["full_picture"] as String ?? "",
+      createdTime: DateTime.parse(json["created_time"] as String),
+      permalinkUrl: json["permalink_url"] as String,
     );
   }
 }

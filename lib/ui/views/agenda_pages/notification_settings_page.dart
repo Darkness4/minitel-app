@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
@@ -11,6 +12,12 @@ class NotificationSettingsPage extends StatefulWidget {
   @override
   _NotificationSettingsPageState createState() =>
       _NotificationSettingsPageState();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NotificationSettings>(
+        'notificationSettings', notificationSettings));
+  }
 }
 
 class _NotificationSettingsPageState extends State<NotificationSettingsPage> {

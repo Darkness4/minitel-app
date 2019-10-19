@@ -31,12 +31,12 @@ class ZabbixHost {
 
   factory ZabbixHost.fromJson(Map<String, dynamic> json) {
     final List<Map<String, dynamic>> items =
-        List<Map<String, dynamic>>.from(json['items']);
+        List<Map<String, dynamic>>.from(json['items'] as List<dynamic>);
     final List<Map<String, dynamic>> interfaces =
-        List<Map<String, dynamic>>.from(json['interfaces']);
+        List<Map<String, dynamic>>.from(json['interfaces'] as List<dynamic>);
     return ZabbixHost(
-      host: json['host'],
-      id: json['id'],
+      host: json['host'] as String,
+      id: json['id'] as String,
       interfaces: interfaces
           .map((Map<String, dynamic> item) => ZabbixInterface.fromJson(item))
           .toList(),

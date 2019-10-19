@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:mockito/mockito.dart';
 
 // Returns a mock HTTP client that responds with an image to all requests.
-MockHttpClient createMockHttpClient(SecurityContext _, Map<Uri, Uint8List> data,
+MockHttpClient createMockHttpClient(SecurityContext _, Map<Uri, List<int>> data,
     {List<Cookie> cookies, Map<String, String> customHeaders}) {
   final MockHttpClient client = MockHttpClient();
   final MockHttpClientRequest request = MockHttpClientRequest();
@@ -19,11 +18,11 @@ MockHttpClient createMockHttpClient(SecurityContext _, Map<Uri, Uint8List> data,
   throwOnMissingStub(headers);
 
   when<dynamic>(client.getUrl(captureAny)).thenAnswer((Invocation invocation) {
-    response.requestedUrl = invocation.positionalArguments[0];
+    response.requestedUrl = invocation.positionalArguments[0] as Uri;
     return Future<HttpClientRequest>.value(request);
   });
   when<dynamic>(client.postUrl(captureAny)).thenAnswer((Invocation invocation) {
-    response.requestedUrl = invocation.positionalArguments[0];
+    response.requestedUrl = invocation.positionalArguments[0] as Uri;
     return Future<HttpClientRequest>.value(request);
   });
 
@@ -45,17 +44,20 @@ MockHttpClient createMockHttpClient(SecurityContext _, Map<Uri, Uint8List> data,
       onError: anyNamed('onError'),
     ),
   ).thenAnswer((Invocation invocation) {
-    final void Function(Uint8List) onData = invocation.positionalArguments[0];
+    final void Function(List<int>) onData =
+        invocation.positionalArguments[0] as void Function(List<int>);
 
-    final void Function() onDone = invocation.namedArguments[#onDone];
+    final void Function() onDone =
+        invocation.namedArguments[#onDone] as void Function();
 
-    final void Function(Object, [StackTrace]) onError =
-        invocation.namedArguments[#onError];
+    final void Function(Object, [StackTrace]) onError = invocation
+        .namedArguments[#onError] as void Function(Object, [StackTrace]);
 
-    final bool cancelOnError = invocation.namedArguments[#cancelOnError];
+    final bool cancelOnError =
+        invocation.namedArguments[#cancelOnError] as bool;
 
-    return Stream<Uint8List>.fromIterable(
-            <Uint8List>[data[response.requestedUrl]])
+    return Stream<List<int>>.fromIterable(
+            <List<int>>[data[response.requestedUrl]])
         .listen(onData,
             onDone: onDone, onError: onError, cancelOnError: cancelOnError);
   });
@@ -77,7 +79,7 @@ class MockHttpClientRequest extends Mock implements HttpClientRequest {
 }
 
 class MockHttpClientResponse extends Mock implements HttpClientResponse {
-  final Map<Uri, Uint8List> data;
+  final Map<Uri, List<int>> data;
   final Map<String, String> customHeaders;
   List<Cookie> customCookies = <Cookie>[];
   Uri requestedUrl;
@@ -101,8 +103,8 @@ class MockHttpClientResponse extends Mock implements HttpClientResponse {
   int statusCode = HttpStatus.ok;
 
   @override
-  Future<S> fold<S>(S initialValue, S Function(S, Uint8List) combine) =>
-      Stream<Uint8List>.fromIterable(<Uint8List>[data[requestedUrl]])
+  Future<S> fold<S>(S initialValue, S Function(S, List<int>) combine) =>
+      Stream<List<int>>.fromIterable(<List<int>>[data[requestedUrl]])
           .fold<S>(initialValue, combine);
 
   @override
@@ -126,8 +128,8 @@ class MockHttpHeaders extends Mock implements HttpHeaders {
   void set(String name, Object value) => headers[name] = value;
 
   @override
-  String value(String name) => headers[name];
+  String value(String name) => headers[name].toString();
 
   @override
-  List<String> operator [](String name) => <String>[headers[name]];
+  List<String> operator [](String name) => <String>[headers[name].toString()];
 }

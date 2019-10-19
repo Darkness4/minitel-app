@@ -185,7 +185,7 @@ class AgendaViewModel extends ChangeNotifier {
   Future<void> _onSelectNotification(
       String payload, BuildContext context) async {
     final List<String> output = payload.split(';');
-    await showDialog(
+    await showDialog<void>(
       context: context,
       builder: (_) => AlertDialog(
         title: Text("${output[0]}"),

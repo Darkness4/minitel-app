@@ -14,12 +14,12 @@ class Feed {
 
   factory Feed.fromJson(Map<String, dynamic> json) {
     final List<Map<String, dynamic>> data =
-        List<Map<String, dynamic>>.from(json["data"]);
+        List<Map<String, dynamic>>.from(json["data"] as List<dynamic>);
     return Feed(
       posts:
           data.map((Map<String, dynamic> post) => Post.fromJson(post)).toList(),
-      nextUrl: json["paging"]["next"],
-      prevUrl: json["paging"]["previous"],
+      nextUrl: json["paging"]["next"] as String,
+      prevUrl: json["paging"]["previous"] as String,
     );
   }
 }

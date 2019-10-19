@@ -16,7 +16,7 @@ class FacebookAPI {
     final Future<Feed> body = response
         .transform(utf8.decoder)
         .transform(json.decoder)
-        .map((Object data) => Feed.fromJson(data))
+        .map((Object data) => Feed.fromJson(data as Map<String, dynamic>))
         .first;
 
     return body;

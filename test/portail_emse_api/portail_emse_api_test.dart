@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/services/portail_emse_api.dart';
@@ -30,7 +29,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse(
                     "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"):
                 utf8.encode(
@@ -60,7 +59,7 @@ void main() {
         },
         createHttpClient: (SecurityContext context) => createMockHttpClient(
           context,
-          <Uri, Uint8List>{
+          <Uri, List<int>>{
             Uri.parse(
                     "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"):
                 utf8.encode(

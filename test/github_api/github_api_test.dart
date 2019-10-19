@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/models/github/release.dart';
@@ -27,7 +26,7 @@ void main() {
           expect(releases.first.html_url, contains(repos));
         },
         createHttpClient: (SecurityContext context) =>
-            createMockHttpClient(context, <Uri, Uint8List>{
+            createMockHttpClient(context, <Uri, List<int>>{
           Uri.parse("https://api.github.com/repos/$repos/releases"):
               utf8.encode(responseAllReleases),
         }),

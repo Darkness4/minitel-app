@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/ui/views/docs_pages/minitel_doc.dart';
@@ -21,5 +22,11 @@ class DocumentationView extends StatelessWidget {
       // drawer: const MainDrawer(currentRoutePaths: RoutePaths.Docs),
       endDrawer: const DocsDrawer(DocsPageId.Home),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
   }
 }

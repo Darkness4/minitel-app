@@ -57,12 +57,12 @@ class ZabbixItem {
 
   factory ZabbixItem.fromJson(Map<String, dynamic> json) {
     return ZabbixItem(
-      type: ZabbixItemType[int.parse(json['type'])],
-      value_type: int.parse(json['value_type']),
-      name: json['name'],
-      lastvalue: json['lastvalue'],
-      units: json['units'],
-      snmp_oid: json['snmp_oid'],
+      type: ZabbixItemType[int.parse(json['type'].toString())],
+      value_type: int.parse(json['value_type'].toString()),
+      name: json['name'] as String,
+      lastvalue: json['lastvalue'] as String,
+      units: json['units'] as String,
+      snmp_oid: json['snmp_oid'] as String,
     );
   }
 }
