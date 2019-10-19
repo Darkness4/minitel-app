@@ -87,7 +87,7 @@ class CalendarUrlAPI {
 
     final String location = response.headers.value(HttpHeaders.locationHeader);
 
-    if (location == null) {
+    if (location.toString() == "null") {
       throw Exception('Location was not found, probably a Bad login');
     }
 
