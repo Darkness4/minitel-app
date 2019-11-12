@@ -30,9 +30,6 @@ class ApiConstants {
   /// Facebook api key
   static const String _facebookApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
 
-  /// Profile ID of a facebook profile. Used to get the avatar.
-  static const String facebookProfileId = "100012919189214";
-
   /// Github Repo to get the releases changelog
   static const String githubRepo = "Darkness4/minitel-app";
 
@@ -56,10 +53,25 @@ class ApiConstants {
 
   /// Facebook api key
   static String get facebookApi => utf8.decode(base64.decode(_facebookApi));
+  static String get facebookProfilePictureUrl =>
+      "https://graph.facebook.com/v4.0/100012919189214/picture?type=large";
 
   /// Slack incomming webhook endpoint
   static String get webhook => utf8.decode(base64.decode(_webhook));
 
   /// Zabbix Token
   static String get zabbixToken => utf8.decode(base64.decode(_zabbixToken));
+}
+
+class CacheConstants {
+  // File
+  static const String releases = 'releases.json';
+  static const String feed = 'feed.json';
+  static const String iCalendar = 'calendar.ics';
+
+  // SharedPreferences
+  static const String early = 'early';
+  static const String range = 'range';
+  static const String enabled = 'enabled';
+  static const String calendarURL = 'calendarURL';
 }
