@@ -151,4 +151,40 @@ class GithubUserModel extends GithubUser {
         'created_at': created_at?.toIso8601String(),
         'updated_at': updated_at?.toIso8601String(),
       };
+
+  factory GithubUserModel.fromEntity(GithubUser entity) {
+    return GithubUserModel(
+      login: entity.login,
+      id: entity.id,
+      node_id: entity.node_id,
+      avatar_url: entity.avatar_url,
+      gravatar_id: entity.gravatar_id,
+      url: entity.url,
+      html_url: entity.html_url,
+      followers_url: entity.followers_url,
+      following_url: entity.following_url,
+      gists_url: entity.gists_url,
+      starred_url: entity.starred_url,
+      subscriptions_url: entity.subscriptions_url,
+      organizations_url: entity.organizations_url,
+      repos_url: entity.repos_url,
+      events_url: entity.events_url,
+      received_events_url: entity.received_events_url,
+      type: entity.type,
+      site_admin: entity.site_admin,
+      name: entity.name,
+      company: entity.company,
+      blog: entity.blog,
+      location: entity.location,
+      email: entity.email,
+      hireable: entity.hireable,
+      bio: entity.bio,
+      public_repos: entity.public_repos,
+      public_gists: entity.public_gists,
+      followers: entity.followers,
+      following: entity.following,
+      created_at: entity.created_at,
+      updated_at: entity.updated_at,
+    );
+  }
 }

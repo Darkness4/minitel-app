@@ -10,4 +10,12 @@ class NotificationSettingsModel extends NotificationSettings {
           range: range,
           enabled: enabled,
         );
+
+  factory NotificationSettingsModel.fromEntity(NotificationSettings entity) {
+    return NotificationSettingsModel(
+      early: entity.early,
+      range: entity.range,
+      enabled: entity.enabled,
+    );
+  }
 }

@@ -453,8 +453,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "NewsLoc_seeFacebook": "Zie op Facebook ...",
-  "@NewsLoc_seeFacebook": {
+  "NewsLoc_seeTwitter": "Zie op Twitter ...",
+  "@NewsLoc_seeTwitter": {
     "type": "text",
     "placeholders": {}
   },
@@ -565,8 +565,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_forceName": "Achternaam EN voornaam",
-  "@ReportingLoc_forceName": {
+  "ReportingLoc_isNotValidUid": "De gebruikersnaam moet in het formaat 'voornaam.achternaam' zijn.",
+  "@ReportingLoc_isNotValidUid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_mustOnlyBeNumbers": "Moet alleen getallen bevatten.",
+  "@ReportingLoc_mustOnlyBeNumbers": {
     "type": "text",
     "placeholders": {}
   },

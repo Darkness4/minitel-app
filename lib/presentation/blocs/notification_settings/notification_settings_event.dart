@@ -1,23 +1,51 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:minitel_toolbox/domain/entities/notifications.dart';
+part of 'notification_settings_bloc.dart';
 
-class GetNotificationSettingsEvent extends NotificationSettingsEvent {
-  const GetNotificationSettingsEvent();
+class NotificationSettingsLoad extends NotificationSettingsEvent {
+  const NotificationSettingsLoad();
+}
+
+abstract class NotificationSettingsEvent extends Equatable {
+  const NotificationSettingsEvent();
+
   @override
   List<Object> get props => [];
 }
 
-class SetNotificationSettingsEvent extends NotificationSettingsEvent {
+class SaveNotificationSettings extends NotificationSettingsEvent {
   final NotificationSettings settings;
 
-  const SetNotificationSettingsEvent(this.settings);
-
-  @override
-  List<Object> get props => [settings];
+  const SaveNotificationSettings(this.settings);
 }
 
-@immutable
-abstract class NotificationSettingsEvent extends Equatable {
-  const NotificationSettingsEvent();
+class EnablingChanged extends NotificationSettingsEvent {
+  final bool enabled;
+
+  const EnablingChanged({
+    @required this.enabled,
+  });
+
+  @override
+  List<Object> get props => [enabled];
+}
+
+class RangeChanged extends NotificationSettingsEvent {
+  final Duration range;
+
+  const RangeChanged({
+    @required this.range,
+  });
+
+  @override
+  List<Object> get props => [range];
+}
+
+class EarlyChanged extends NotificationSettingsEvent {
+  final Duration early;
+
+  const EarlyChanged({
+    @required this.early,
+  });
+
+  @override
+  List<Object> get props => [early];
 }

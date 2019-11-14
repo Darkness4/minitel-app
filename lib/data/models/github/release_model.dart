@@ -89,9 +89,10 @@ class GithubReleaseModel extends GithubRelease {
         'prerelease': prerelease,
         'created_at': created_at.toIso8601String(),
         'published_at': published_at.toIso8601String(),
-        'author': (author as GithubUserModel).toJson(),
+        'author': GithubUserModel.fromEntity(author).toJson(),
         'assets': assets
-            .map((GithubAsset asset) => (asset as GithubAssetModel).toJson())
+            .map((GithubAsset asset) =>
+                GithubAssetModel.fromEntity(asset).toJson())
             .toList(),
       };
 }

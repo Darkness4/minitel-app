@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
-import 'package:minitel_toolbox/data/datasources/icalendar_local_data_source.dart';
-import 'package:minitel_toolbox/data/datasources/icalendar_remote_data_source.dart';
+import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_source.dart';
+import 'package:minitel_toolbox/data/datasources/emse/icalendar_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/repositories/calendar_url_repository.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
@@ -20,14 +20,16 @@ class ICalendarRepositoryImpl implements ICalendarRepository {
   });
 
   @override
-  Future<ParsedCalendar> get parsedCalendar => localDataSource.parsedCalendar;
+  Future<ParsedCalendar> get parsedCalendar =>
+      localDataSource.getParsedCalendar();
 
   @override
   Future<void> download({
     @required String username,
     @required String password,
   }) async {
-    final String url = await calendarURLRepository.get();
+    final String url =
+        await calendarURLRepository.get(username: username, password: password);
     final Stream<String> data = remoteDataSource.streamICalendar(url);
     return localDataSource.cacheICalendar(data);
   }

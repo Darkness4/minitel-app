@@ -453,8 +453,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "NewsLoc_seeFacebook": "Смотрите в Фейсбуке ...",
-  "@NewsLoc_seeFacebook": {
+  "NewsLoc_seeTwitter": "Смотрите в Фейсбуке ...",
+  "@NewsLoc_seeTwitter": {
     "type": "text",
     "placeholders": {}
   },
@@ -565,8 +565,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_forceName": "Фамилия И Имя",
-  "@ReportingLoc_forceName": {
+  "ReportingLoc_isNotValidUid": "Имя пользователя должно быть в формате 'firstname.lastname'.",
+  "@ReportingLoc_isNotValidUid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_mustOnlyBeNumbers": "Должны содержать только цифры.",
+  "@ReportingLoc_mustOnlyBeNumbers": {
     "type": "text",
     "placeholders": {}
   },

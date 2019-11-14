@@ -37,6 +37,6 @@ class ClientException implements Exception {
 class NotLoggedInException implements Exception {
   @override
   String toString() {
-    return "Not logged in";
+    return "Not logged in.";
   }
 }

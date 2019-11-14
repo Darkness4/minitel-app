@@ -1,26 +1,24 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:minitel_toolbox/domain/entities/github/release.dart';
-import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
+part of 'zabbix_hosts_bloc.dart';
 
 @immutable
 abstract class ZabbixHostsState extends Equatable {
   const ZabbixHostsState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class ZabbixHostsStateError extends ZabbixHostsState {
-  final String message;
+  final dynamic error;
 
-  const ZabbixHostsStateError({@required this.message});
+  const ZabbixHostsStateError({@required this.error});
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [error];
 }
 
 class ZabbixHostsStateInitial extends ZabbixHostsState {
   const ZabbixHostsStateInitial();
-  @override
-  List<Object> get props => [];
 }
 
 class ZabbixHostsStateLoaded extends ZabbixHostsState {
@@ -34,6 +32,4 @@ class ZabbixHostsStateLoaded extends ZabbixHostsState {
 
 class ZabbixHostsStateLoading extends ZabbixHostsState {
   const ZabbixHostsStateLoading();
-  @override
-  List<Object> get props => [];
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:minitel_toolbox/data/models/icalendar/event_model.dart';
 import 'package:minitel_toolbox/data/models/icalendar/timezone_model.dart';
@@ -22,7 +21,8 @@ class ParsedCalendarModel extends ParsedCalendar {
         );
 
   /// Get existing the stream .ics from file
-  static Future<ParsedCalendarModel> parse(File file) async {
+  static Future<ParsedCalendarModel> parse(
+      Stream<String> calendarStream) async {
     final TimezoneModelBuffer timezoneBuffer = TimezoneModelBuffer();
     ICalSection mode = ICalSection.None;
     final Map<String, String> vEvent = <String, String>{};
@@ -30,14 +30,6 @@ class ParsedCalendarModel extends ParsedCalendar {
     String version;
     String prodID;
     String calscale;
-
-    // Use this line of code to inject a template.ics
-    // await file
-    //     .writeAsString(await rootBundle.loadString(AssetsPaths.TemplateICS));
-
-    // Read the file
-    final Stream<String> calendarStream =
-        file.openRead().transform(utf8.decoder);
 
     final Stream<String> lines = calendarStream.transform(const LineSplitter());
 
@@ -109,7 +101,7 @@ class ParsedCalendarModel extends ParsedCalendar {
               default:
                 print("Invalid key: ${line[0]}");
                 if (line[0] != null) {
-                  print("with value: $line[1]");
+                  print("with value: ${line[1]}");
                 }
             }
         }

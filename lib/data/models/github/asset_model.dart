@@ -65,6 +65,24 @@ class GithubAssetModel extends GithubAsset {
         'download_count': download_count,
         'created_at': created_at.toIso8601String(),
         'updated_at': updated_at.toIso8601String(),
-        'uploader': (uploader as GithubUserModel).toJson(),
+        'uploader': GithubUserModel.fromEntity(uploader).toJson(),
       };
+
+  factory GithubAssetModel.fromEntity(GithubAsset entity) {
+    return GithubAssetModel(
+      url: entity.url,
+      browser_download_url: entity.browser_download_url,
+      id: entity.id,
+      node_id: entity.node_id,
+      name: entity.name,
+      label: entity.label,
+      state: entity.state,
+      content_type: entity.content_type,
+      size: entity.size,
+      download_count: entity.download_count,
+      created_at: entity.created_at,
+      updated_at: entity.updated_at,
+      uploader: GithubUserModel.fromEntity(entity.uploader),
+    );
+  }
 }

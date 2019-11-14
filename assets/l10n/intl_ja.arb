@@ -453,8 +453,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "NewsLoc_seeFacebook": "Facebookで見る...",
-  "@NewsLoc_seeFacebook": {
+  "NewsLoc_seeTwitter": "Twitterで見る...",
+  "@NewsLoc_seeTwitter": {
     "type": "text",
     "placeholders": {}
   },
@@ -565,8 +565,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_forceName": "姓と名",
-  "@ReportingLoc_forceName": {
+  "ReportingLoc_isNotValidUid": "ユーザー名は「firstname.lastname」の形式である必要があります。",
+  "@ReportingLoc_isNotValidUid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_mustOnlyBeNumbers": "数字のみを含める必要があります。",
+  "@ReportingLoc_mustOnlyBeNumbers": {
     "type": "text",
     "placeholders": {}
   },

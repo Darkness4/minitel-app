@@ -1,11 +1,11 @@
-import 'package:minitel_toolbox/data/datasources/settings_local_data_source.dart';
+import 'package:minitel_toolbox/data/datasources/settings/notification_settings_data_source.dart';
 import 'package:minitel_toolbox/data/models/notifications_model.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/notification_settings_repository.dart';
 
 class NotificationSettingsRepositoryImpl
     implements NotificationSettingsRepository {
-  final SettingsLocalDataSource localDataSource;
+  final NotificationSettingsDataSource localDataSource;
 
   const NotificationSettingsRepositoryImpl({this.localDataSource});
 
@@ -14,5 +14,5 @@ class NotificationSettingsRepositoryImpl
 
   @override
   Future<void> save(NotificationSettings settings) => localDataSource
-      .saveNotificationSettings(settings as NotificationSettingsModel);
+      .saveNotificationSettings(NotificationSettingsModel.fromEntity(settings));
 }

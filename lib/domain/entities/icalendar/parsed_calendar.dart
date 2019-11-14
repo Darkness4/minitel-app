@@ -31,3 +31,14 @@ class ParsedCalendar extends Equatable {
         this.events,
       ];
 }
+
+extension ParsedCalendarUtils on ParsedCalendar {
+  Stream<Event> get sortedEvents async* {
+    this.events.sort((Event event1, Event event2) =>
+        event1.dtstart.compareTo(event2.dtstart));
+
+    for (final event in this.events) {
+      yield event;
+    }
+  }
+}

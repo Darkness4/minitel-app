@@ -11,13 +11,13 @@ import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 /// application.
 class ZabbixHostModel extends ZabbixHost {
   const ZabbixHostModel({
-    String id,
+    String hostid,
     String host,
     List<ZabbixItem> items,
     List<ZabbixInterface> interfaces,
     String ip,
   }) : super(
-          id: id,
+          hostid: hostid,
           host: host,
           items: items,
           interfaces: interfaces,
@@ -31,7 +31,7 @@ class ZabbixHostModel extends ZabbixHost {
         List<Map<String, dynamic>>.from(json['interfaces'] as List<dynamic>);
     return ZabbixHostModel(
       host: json['host'] as String,
-      id: json['id'] as String,
+      hostid: json['hostid'] as String,
       interfaces: interfaces
           .map((Map<String, dynamic> item) =>
               ZabbixInterfaceModel.fromJson(item))

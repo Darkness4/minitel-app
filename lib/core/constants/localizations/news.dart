@@ -10,9 +10,9 @@ class NewsLoc {
         locale: localeName,
       );
 
-  String get seeFacebook => Intl.message(
-        "Voir sur Facebook ...",
-        name: 'NewsLoc_seeFacebook',
+  String get seeTwitter => Intl.message(
+        "Voir sur Twitter ...",
+        name: 'NewsLoc_seeTwitter',
         locale: localeName,
       );
 }

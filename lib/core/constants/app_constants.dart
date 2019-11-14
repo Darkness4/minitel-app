@@ -7,7 +7,7 @@ class AssetPaths {
   static const String DocLecteurReseau = 'assets/img/Lecteur-reseau.webp';
   static const String DocImprimanteLinux = 'assets/img/Linux.webp';
   static const String Slack = 'assets/img/Slack_Mark_Monochrome_White.webp';
-  static const String Facebook = 'assets/icon/f_logo.webp';
+  static const String Twitter = 'assets/icon/Twitter_Logo_Blue.png';
   static const String Github = 'assets/icon/GitHub-Mark.webp';
   static const String EMSE = 'assets/img/logo_emse.webp';
   static const String Sogo = 'assets/img/mail.webp';
@@ -42,6 +42,9 @@ class MyIPAdresses {
   /// Cloudflare DNS IP
   static const String cloudflareDNSIP = "1.1.1.1";
 
+  /// Stormshield named address
+  static const String emseImprimanteIP = "192.168.130.2";
+
   /// Local DNS IP
   static const String localDNSIP = "10.163.0.6";
 
@@ -50,14 +53,4 @@ class MyIPAdresses {
 
   /// Stormshield named address
   static const String stormshield = "fw-cgcp.emse.fr";
-}
-
-/// Named Path of each Routes
-class RoutePaths {
-  static const String Authentication = '/';
-  static const String Reporting = '/reporting';
-  static const String Docs = '/docs';
-  static const String Agenda = '/agenda';
-  static const String About = '/about';
-  static const String News = '/news';
 }

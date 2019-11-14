@@ -1,38 +1,71 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:minitel_toolbox/domain/entities/notifications.dart';
+part of 'notification_settings_bloc.dart';
 
-@immutable
-abstract class NotificationSettingsState extends Equatable {
-  const NotificationSettingsState();
-}
+class NotificationSettingsState extends Equatable {
+  final NotificationSettings notificationSettings;
 
-class NotificationSettingsStateError extends NotificationSettingsState {
-  final String message;
+  final bool isSaved;
+  final bool isLoaded;
 
-  const NotificationSettingsStateError({@required this.message});
-
-  @override
-  List<Object> get props => [message];
-}
-
-class NotificationSettingsStateInitial extends NotificationSettingsState {
-  const NotificationSettingsStateInitial();
-  @override
-  List<Object> get props => [];
-}
-
-class NotificationSettingsStateLoaded extends NotificationSettingsState {
-  final NotificationSettings settings;
-
-  const NotificationSettingsStateLoaded({@required this.settings});
+  const NotificationSettingsState({
+    @required this.notificationSettings,
+    @required this.isSaved,
+    @required this.isLoaded,
+  });
 
   @override
-  List<Object> get props => [settings];
-}
+  List<Object> get props => [
+        this.notificationSettings,
+        this.isSaved,
+        this.isLoaded,
+      ];
 
-class NotificationSettingsStateLoading extends NotificationSettingsState {
-  const NotificationSettingsStateLoading();
+  factory NotificationSettingsState.initial() {
+    return const NotificationSettingsState(
+      notificationSettings: NotificationSettings(
+        early: Duration(minutes: 10),
+        enabled: true,
+        range: Duration(days: 30),
+      ),
+      isSaved: false,
+      isLoaded: false,
+    );
+  }
+
+  NotificationSettingsState update({
+    Duration early,
+    Duration range,
+    bool enabled,
+    bool isLoaded,
+  }) {
+    return copyWith(
+      notificationSettings: notificationSettings.copyWith(
+        early: early,
+        enabled: enabled,
+        range: range,
+      ),
+      isSaved: false,
+      isLoaded: isLoaded,
+    );
+  }
+
+  NotificationSettingsState copyWith({
+    NotificationSettings notificationSettings,
+    bool isSaved,
+    bool isLoaded,
+  }) {
+    return NotificationSettingsState(
+      notificationSettings: notificationSettings ?? this.notificationSettings,
+      isSaved: isSaved ?? this.isSaved,
+      isLoaded: isLoaded ?? false,
+    );
+  }
+
   @override
-  List<Object> get props => [];
+  String toString() {
+    return """NotificationSettingsState: {
+  notificationSettings: ${notificationSettings.toString()},
+  isSaved: $isSaved,
+  isLoaded: $isLoaded,
+}""";
+  }
 }

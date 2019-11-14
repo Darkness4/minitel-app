@@ -1,0 +1,14 @@
+{
+  "set-cookie": "JSESSIONID=2480F8BEBC9CA6A49A210B450AFEA2F9; Path=/; Secure; HttpOnly;HttpOnly;Secure",
+  "cache-control": "no-cache,no-store",
+  "transfer-encoding": "chunked",
+  "date": "Mon, 10 Feb 2020 00:12:33 GMT",
+  "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+  "x-frame-options": "SAMEORIGIN",
+  "pragma": "no-cache",
+  "content-type": "text/html;charset=UTF-8",
+  "x-xss-protection": "1; mode=block",
+  "x-content-type-options": "nosniff",
+  "server": "Apache",
+  "expires": "Thu, 01 Jan 1970 00:00:00 GMT"
+}

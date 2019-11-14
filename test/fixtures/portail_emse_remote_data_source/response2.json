@@ -1,0 +1,17 @@
+{
+  "connection": "keep-alive",
+  "cache-control": "no-store, no-cache, must-revalidate",
+  "set-cookie": "CASAuth=c82297b3f3600aa9cca3df90f7b490116fccd3edbc369305173667be72ecfcdd; path=/; HTTPOnly; Secure; HttpOnly",
+  "date": "Mon, 10 Feb 2020 18:16:32 GMT",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "referrer-policy": "no-referrer-when-downgrade",
+  "content-type": "text/html; charset=UTF-8",
+  "pragma": "no-cache",
+  "x-xss-protection": "1; mode=block",
+  "server": "nginx",
+  "location": "https://portail.emse.fr/login",
+  "content-length": "0",
+  "x-frame-options": "SAMEORIGIN",
+  "x-content-type-options": "nosniff",
+  "expires": "Thu, 19 Nov 1981 08:52:00 GMT"
+}

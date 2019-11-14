@@ -453,8 +453,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "NewsLoc_seeFacebook": "在Facebook上查看...",
-  "@NewsLoc_seeFacebook": {
+  "NewsLoc_seeTwitter": "在Twitter上查看...",
+  "@NewsLoc_seeTwitter": {
     "type": "text",
     "placeholders": {}
   },
@@ -565,8 +565,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_forceName": "姓和名",
-  "@ReportingLoc_forceName": {
+  "ReportingLoc_isNotValidUid": "用户名的格式必须为“ firstname.lastname”。",
+  "@ReportingLoc_isNotValidUid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_mustOnlyBeNumbers": "只能包含数字。",
+  "@ReportingLoc_mustOnlyBeNumbers": {
     "type": "text",
     "placeholders": {}
   },

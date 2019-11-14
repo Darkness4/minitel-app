@@ -15,11 +15,6 @@ class ReportingLoc {
         locale: localeName,
       );
 
-  String get forceName => Intl.message(
-        'Nom ET Prénom',
-        name: 'ReportingLoc_forceName',
-        locale: localeName,
-      );
   String get idHint => Intl.message(
         "Nom Prénom",
         name: 'ReportingLoc_idHint',
@@ -33,6 +28,16 @@ class ReportingLoc {
   String get notEmpty => Intl.message(
         'Ne doit pas être vide',
         name: 'ReportingLoc_notEmpty',
+        locale: localeName,
+      );
+  String get isNotValidUid => Intl.message(
+        "Le nom d'utilisateur doit être sous le format 'prénom.nom'.",
+        name: 'ReportingLoc_isNotValidUid',
+        locale: localeName,
+      );
+  String get mustOnlyBeNumbers => Intl.message(
+        'Ne doit contenir que des chiffres.',
+        name: 'ReportingLoc_mustOnlyBeNumbers',
         locale: localeName,
       );
   String get share => Intl.message(

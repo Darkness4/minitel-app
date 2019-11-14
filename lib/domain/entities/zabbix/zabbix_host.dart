@@ -9,7 +9,7 @@ import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 /// application.
 class ZabbixHost extends Equatable {
   /// ID of the host.
-  final String id;
+  final String hostid;
 
   /// Technical name of the host.
   final String host;
@@ -23,7 +23,7 @@ class ZabbixHost extends Equatable {
   final String ip;
 
   const ZabbixHost({
-    this.id,
+    this.hostid,
     this.host,
     this.items,
     this.interfaces,
@@ -32,7 +32,7 @@ class ZabbixHost extends Equatable {
 
   @override
   List<Object> get props => [
-        this.id,
+        this.hostid,
         this.host,
         this.items,
         this.interfaces,

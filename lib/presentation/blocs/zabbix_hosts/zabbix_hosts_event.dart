@@ -1,14 +1,12 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+part of 'zabbix_hosts_bloc.dart';
 
 class GetZabbixHostsEvent extends ZabbixHostsEvent {
   final int groupids;
-  final String zabbixPath;
 
-  const GetZabbixHostsEvent(this.groupids, this.zabbixPath);
+  const GetZabbixHostsEvent(this.groupids);
 
   @override
-  List<Object> get props => [groupids, zabbixPath];
+  List<Object> get props => [groupids];
 }
 
 @immutable

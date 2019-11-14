@@ -1,6 +1,8 @@
-import 'dart:collection';
-
 import 'package:equatable/equatable.dart';
+import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_statistics.dart';
+import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_status.dart';
+import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
+import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 
 class SwitchStatus extends Equatable {
   /// Status of <port, status>
@@ -35,6 +37,62 @@ class SwitchStatus extends Equatable {
     this.snmpAvailable,
   });
 
+  @override
+  List<Object> get props => [
+        this.ports,
+        this.description,
+        this.hostname,
+        this.uptime,
+        this.pingResponseTime,
+        this.snmpAvailable,
+      ];
+
+  static SwitchStatus fromHost(ZabbixHost host) {
+    // Data to fill
+    final Map<int, SwitchPortStatus> ports = <int, SwitchPortStatus>{};
+    String description;
+    String hostname;
+    Duration uptime;
+    double pingResponseTime;
+    int snmpAvailable;
+
+    host.items.forEach((final ZabbixItem item) {
+      if (item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
+        final int port = int.parse(
+            item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
+        ports[port] ??= SwitchPortStatus();
+        ports[port].speed = int.parse(item.lastvalue);
+      } else if (item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
+        final int port = int.parse(
+            item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
+        ports[port] ??= SwitchPortStatus();
+        ports[port].operStatus = int.parse(item.lastvalue);
+      } else if (item.name.contains('Device description')) {
+        description = item.lastvalue;
+      } else if (item.name.contains('Device name')) {
+        hostname = item.lastvalue;
+      } else if (item.name.contains('ICMP response time')) {
+        pingResponseTime = double.parse(item.lastvalue);
+      } else if (item.name.contains('Device uptime')) {
+        uptime = Duration(seconds: int.parse(item.lastvalue));
+      } else if (item.name.contains('SNMP availability')) {
+        snmpAvailable = int.parse(item.lastvalue);
+      } else {
+        print('${item.name} unhandled.');
+      }
+    });
+    return SwitchStatus(
+      snmpAvailable: snmpAvailable,
+      description: description,
+      hostname: hostname,
+      pingResponseTime: pingResponseTime,
+      ports: ports,
+      uptime: uptime,
+    );
+  }
+}
+
+extension SwitchStatusUtils on SwitchStatus {
   /// Return switch stats
   ///
   /// A list of 2 value is returned.
@@ -98,50 +156,4 @@ class SwitchStatus extends Equatable {
       return '${number / 1e9} G';
     }
   }
-
-  @override
-  List<Object> get props => [
-        this.ports,
-        this.description,
-        this.hostname,
-        this.uptime,
-        this.pingResponseTime,
-        this.snmpAvailable,
-      ];
-}
-
-class SwitchPortStatistics {
-  int up = 0;
-  int down = 0;
-  int testing = 0;
-  int unknown = 0;
-  int dormant = 0;
-  int notPresent = 0;
-  int lowerLayerDown = 0;
-  final SplayTreeMap<int, String> speedMap =
-      SplayTreeMap<int, String>((int key1, int key2) => key1.compareTo(key2));
-
-  @override
-  String toString() {
-    return 'Up: $up\n'
-        ' | With : $speedMap\n'
-        'Down: $down\n'
-        'Testing: $testing\n'
-        'Unknown: $unknown\n'
-        'Dormant: $dormant\n'
-        'NotPresent: $notPresent\n'
-        'LowerLayerDown: $lowerLayerDown';
-  }
-}
-
-class SwitchPortStatus {
-  static const String speedOid = '1.3.6.1.2.1.2.2.1.5';
-
-  /// Speed in bps
-  int speed;
-
-  static const String operStatusOid = '1.3.6.1.2.1.2.2.1.8';
-
-  /// Enumeration (1-up, 2-down, 3-testing, 4-unknown, 5-dormant, 6-notPresent, 7-lowerLayerDown)
-  int operStatus;
 }
