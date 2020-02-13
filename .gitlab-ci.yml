@@ -171,9 +171,9 @@ build-test:
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
-    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
-    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
-    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storePassword=$(echo ${KEYSTORE_PASSWORD} | base64 -d)" > android/key.properties
+    - echo "keyPassword=$(echo ${KEY_PASSWORD} | base64 -d)" >> android/key.properties
+    - echo "keyAlias=$(echo ${ALIAS} | base64 -d)" >> android/key.properties
     - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
     - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
@@ -193,9 +193,9 @@ build-apk:
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
-    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
-    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
-    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storePassword=$(echo ${KEYSTORE_PASSWORD} | base64 -d)" > android/key.properties
+    - echo "keyPassword=$(echo ${KEY_PASSWORD} | base64 -d)" >> android/key.properties
+    - echo "keyAlias=$(echo ${ALIAS} | base64 -d)" >> android/key.properties
     - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
     - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
@@ -224,9 +224,9 @@ build-aab:
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
-    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
-    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
-    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storePassword=$(echo ${KEYSTORE_PASSWORD} | base64 -d)" > android/key.properties
+    - echo "keyPassword=$(echo ${KEY_PASSWORD} | base64 -d)" >> android/key.properties
+    - echo "keyAlias=$(echo ${ALIAS} | base64 -d)" >> android/key.properties
     - echo "storeFile=keystore.jks" >> android/key.properties
     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
     - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
