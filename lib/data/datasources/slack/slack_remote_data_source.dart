@@ -69,7 +69,7 @@ class SlackRemoteDataSourceImpl implements SlackRemoteDataSource {
       body: json.encode(data),
       headers: {
         HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.zabbixToken}"
+        HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.webhook}"
       },
     );
 

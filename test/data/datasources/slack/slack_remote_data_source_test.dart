@@ -48,7 +48,7 @@ void main() {
           'text': "*--Report ${tDateTime}--*\n"
               "$tText\n",
           "attachments": tListAttachments,
-          'channel': tChannel, // Marc : DE8PA0Z1C
+          'channel': tChannel,
         };
         when(mockDateTimeManager.now()).thenReturn(tDateTime);
         when(mockHttpClient.post(
@@ -68,7 +68,7 @@ void main() {
           body: json.encode(tData),
           headers: {
             HttpHeaders.contentTypeHeader: "application/json",
-            HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.zabbixToken}",
+            HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.webhook}",
           },
         ));
         expect(result, equals("OK"));

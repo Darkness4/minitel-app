@@ -1,8 +1,6 @@
 import 'dart:io';
 
 abstract class ProcessManager {
-  const ProcessManager();
-
   Future<ProcessResult> run(String command, List<String> args);
 }
 

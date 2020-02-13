@@ -62,6 +62,33 @@ void main() {
                 "Host: ${tIpAddress.host}\nLookup: ${tIpAddress.address}\n"));
       },
     );
+
+    test(
+      'should return DiagnosisModel with a failed DNS Lookup',
+      () async {
+        // arrange
+        when(mockProcessManager.run(any, any))
+            .thenAnswer((_) async => ProcessResult(0, 0, "MOCK", ""));
+        when(mockStormshieldRemoteDataSource.fetchStatus(any))
+            .thenAnswer((_) async => "MOCK");
+        when(mockInternetAddressManager.lookup(any))
+            .thenAnswer((_) async => throw const SocketException("MOCK"));
+        when(mockConnectivity.getWifiIP()).thenAnswer((_) async => "0.1.0.1");
+        // act
+        final result = dataSource.diagnose();
+        // assert
+        verify(mockStormshieldRemoteDataSource
+            .fetchStatus(MyIPAdresses.gatewayIP));
+        verify(mockStormshieldRemoteDataSource
+            .fetchStatus(MyIPAdresses.stormshieldIP));
+        expect(await result[DiagnosisKeys.nsLookupEmse], contains("MOCK"));
+        expect(result.length, equals(19));
+        expect(await result[DiagnosisKeys.ip], equals("0.1.0.1"));
+        expect(await result[DiagnosisKeys.ipAddr], equals("MOCK"));
+        expect(await result[DiagnosisKeys.httpResponseStormshieldPublic],
+            equals("MOCK"));
+      },
+    );
   });
 }
 

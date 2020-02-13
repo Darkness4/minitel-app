@@ -25,13 +25,15 @@ void main() {
     when(
       mockHttpClient.get(
           'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
-    ).thenAnswer((_) async => http.Response(
-          fixture('datasources/calendar_url_remote_data_source/response0.html'),
-          200,
-          headers: Map<String, String>.from(json.decode(fixture(
-                  'datasources/calendar_url_remote_data_source/response0.json'))
-              as Map<String, dynamic>),
-        ));
+    ).thenAnswer(
+      (_) async => http.Response(
+        fixture('datasources/calendar_url_remote_data_source/response0.html'),
+        200,
+        headers: Map<String, String>.from(json.decode(fixture(
+                'datasources/calendar_url_remote_data_source/response0.json'))
+            as Map<String, dynamic>),
+      ),
+    );
 
     final Map<String, String> data = {
       'username': 'marc.nguyen',
@@ -41,27 +43,33 @@ void main() {
       '_eventId': 'submit',
     };
 
-    when(mockHttpClient.post(
-      'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
-      body: data,
-      headers: anyNamed("headers"),
-    )).thenAnswer((_) async => http.Response(
-          fixture('datasources/calendar_url_remote_data_source/response1.html'),
-          200,
-          headers: Map<String, String>.from(json.decode(fixture(
-                  'datasources/calendar_url_remote_data_source/response1.json'))
-              as Map<String, dynamic>),
-        ));
+    when(
+      mockHttpClient.post(
+        'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
+        body: data,
+        headers: anyNamed("headers"),
+      ),
+    ).thenAnswer(
+      (_) async => http.Response(
+        fixture('datasources/calendar_url_remote_data_source/response1.html'),
+        200,
+        headers: Map<String, String>.from(json.decode(fixture(
+                'datasources/calendar_url_remote_data_source/response1.json'))
+            as Map<String, dynamic>),
+      ),
+    );
 
     when(mockHttpClient.send(argThat(const TypeMatcher<http.BaseRequest>())))
-        .thenAnswer((_) async => http.StreamedResponse(
-              Stream.value(utf8.encode(fixture(
-                  'datasources/calendar_url_remote_data_source/response2.html'))),
-              200,
-              headers: Map<String, String>.from(json.decode(fixture(
-                      'datasources/calendar_url_remote_data_source/response2.json'))
-                  as Map<String, dynamic>),
-            ));
+        .thenAnswer(
+      (_) async => http.StreamedResponse(
+        Stream.value(utf8.encode(fixture(
+            'datasources/calendar_url_remote_data_source/response2.html'))),
+        200,
+        headers: Map<String, String>.from(json.decode(fixture(
+                'datasources/calendar_url_remote_data_source/response2.json'))
+            as Map<String, dynamic>),
+      ),
+    );
 
     when(
       mockHttpClient.get(
@@ -88,6 +96,46 @@ void main() {
     when(mockHttpClient.send(any)).thenAnswer((_) async =>
         http.StreamedResponse(
             Stream.value(utf8.encode('Something went wrong')), 404));
+  }
+
+  void setUpMockHttpClientBadLogin() {
+    when(
+      mockHttpClient.get(
+          'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
+    ).thenAnswer(
+      (_) async => http.Response(
+        fixture('datasources/calendar_url_remote_data_source/response0.html'),
+        200,
+        headers: Map<String, String>.from(json.decode(fixture(
+                'datasources/calendar_url_remote_data_source/response0.json'))
+            as Map<String, dynamic>),
+      ),
+    );
+
+    final Map<String, String> data = {
+      'username': 'marc.nguyen',
+      'password': 'abcdefgh',
+      'lt': 'LT-47000-PBHQEYqOvQgidUbfKaYJ2nVvlxGcXx-cas1.emse.fr',
+      'execution': 'e1s1',
+      '_eventId': 'submit',
+    };
+
+    when(
+      mockHttpClient.post(
+        'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
+        body: data,
+        headers: anyNamed("headers"),
+      ),
+    ).thenAnswer(
+      (_) async => http.Response(
+        fixture('datasources/calendar_url_remote_data_source/response1.html'),
+        200,
+        headers: Map<String, String>.from(json.decode(fixture(
+                'datasources/calendar_url_remote_data_source/response1.json'))
+            as Map<String, dynamic>)
+          ..remove(HttpHeaders.locationHeader),
+      ),
+    );
   }
 
   group('getCalendarURL', () {
@@ -155,6 +203,19 @@ void main() {
         // assert
         expect(() => call(username: tUser, password: tPassword),
             throwsA(const TypeMatcher<ServerException>()));
+      },
+    );
+
+    test(
+      'should throw a CLientException when there is a Bad login',
+      () async {
+        // arrange
+        setUpMockHttpClientBadLogin();
+        // act
+        final call = dataSource.getCalendarURL;
+        // assert
+        expect(() => call(username: tUser, password: tPassword),
+            throwsA(const TypeMatcher<ClientException>()));
       },
     );
   });

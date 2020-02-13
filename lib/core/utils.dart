@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 extension CookieUtils on Map<String, String> {
   List<Cookie> parseSetCookie() {
@@ -14,8 +14,8 @@ extension CookieUtils on Map<String, String> {
 class LaunchURLUtils {
   /// Launch the given url
   static Future<void> launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await url_launcher.canLaunch(url)) {
+      await url_launcher.launch(url);
     } else {
       throw Exception('Could not launch $url');
     }

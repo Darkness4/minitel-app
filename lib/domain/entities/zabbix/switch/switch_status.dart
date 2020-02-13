@@ -60,13 +60,14 @@ class SwitchStatus extends Equatable {
       if (item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
         final int port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
-        ports[port] ??= SwitchPortStatus();
-        ports[port].speed = int.parse(item.lastvalue);
+        ports[port] ??= const SwitchPortStatus();
+        ports[port] = ports[port].copyWith(speed: int.parse(item.lastvalue));
       } else if (item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
         final int port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
-        ports[port] ??= SwitchPortStatus();
-        ports[port].operStatus = int.parse(item.lastvalue);
+        ports[port] ??= const SwitchPortStatus();
+        ports[port] =
+            ports[port].copyWith(operStatus: int.parse(item.lastvalue));
       } else if (item.name.contains('Device description')) {
         description = item.lastvalue;
       } else if (item.name.contains('Device name')) {

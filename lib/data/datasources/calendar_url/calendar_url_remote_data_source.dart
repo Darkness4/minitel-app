@@ -81,11 +81,11 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
               'https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}'
         });
 
-    final String location = responsePOST.headers[HttpHeaders.locationHeader];
-
-    if (location == "null") {
+    if (!responsePOST.headers.containsKey(HttpHeaders.locationHeader)) {
       throw ClientException('Location was not found, probably a Bad login');
     }
+
+    final String location = responsePOST.headers[HttpHeaders.locationHeader];
 
     // GET CAS
     final http.Request request = http.Request('GET', Uri.parse(location))

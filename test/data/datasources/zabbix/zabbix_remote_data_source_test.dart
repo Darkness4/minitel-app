@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -42,6 +43,43 @@ void main() {
         headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response('Something went wrong', 404));
+  }
+
+  void setUpMockHttpClientTimedOut() {
+    when(
+      mockHttpClient.post(
+        any,
+        body: anyNamed('body'),
+        headers: anyNamed('headers'),
+      ),
+    ).thenAnswer(
+      (_) async =>
+          throw const SocketException("OS Error: Connection timed out"),
+    );
+  }
+
+  void setUpMockHttpClientNoRouteToHost() {
+    when(
+      mockHttpClient.post(
+        any,
+        body: anyNamed('body'),
+        headers: anyNamed('headers'),
+      ),
+    ).thenAnswer(
+      (_) async => throw const SocketException("OS Error: No route to host"),
+    );
+  }
+
+  void setUpMockHttpClientSocketException() {
+    when(
+      mockHttpClient.post(
+        any,
+        body: anyNamed('body'),
+        headers: anyNamed('headers'),
+      ),
+    ).thenAnswer(
+      (_) async => throw const SocketException("Something went wrong."),
+    );
   }
 
   group('fetchZabbixHosts', () {
@@ -122,6 +160,45 @@ void main() {
         // assert
         expect(() => call(tGroupIds, token: tToken),
             throwsA(const TypeMatcher<ServerException>()));
+      },
+    );
+
+    test(
+      'should throw a ClientException when SocketException',
+      () async {
+        // arrange
+        setUpMockHttpClientSocketException();
+        // act
+        final call = dataSource.fetchZabbixHosts;
+        // assert
+        expect(() => call(tGroupIds, token: tToken),
+            throwsA(const TypeMatcher<ClientException>()));
+      },
+    );
+
+    test(
+      'should throw a ClientException when No route to host',
+      () async {
+        // arrange
+        setUpMockHttpClientNoRouteToHost();
+        // act
+        final call = dataSource.fetchZabbixHosts;
+        // assert
+        expect(() => call(tGroupIds, token: tToken),
+            throwsA(const TypeMatcher<ClientException>()));
+      },
+    );
+
+    test(
+      'should throw a ClientException when Timed out',
+      () async {
+        // arrange
+        setUpMockHttpClientTimedOut();
+        // act
+        final call = dataSource.fetchZabbixHosts;
+        // assert
+        expect(() => call(tGroupIds, token: tToken),
+            throwsA(const TypeMatcher<ClientException>()));
       },
     );
   });
