@@ -83,7 +83,7 @@ class TwitterCard extends StatelessWidget {
                 ),
               ),
               Text(
-                post.id.toString(),
+                post.id_str,
                 style: TextStyle(fontSize: 5, color: Colors.grey),
               ),
             ],

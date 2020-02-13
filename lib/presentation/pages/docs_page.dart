@@ -6,7 +6,7 @@ class DocumentationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWebView(
+    return const ScaffoldWebView(
       backgroundColor: Colors.green,
       initialUrl: 'http://minitel.emse.fr/wiki/',
     );

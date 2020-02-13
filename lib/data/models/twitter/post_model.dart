@@ -5,7 +5,7 @@ import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 class PostModel extends Post {
   const PostModel({
     @required String text,
-    @required int id,
+    @required String id_str,
     @required String user_name,
     @required String screen_name,
     @required Uri profile_image_url_https,
@@ -13,7 +13,7 @@ class PostModel extends Post {
     @required DateTime created_at,
   }) : super(
           text: text,
-          id: id,
+          id_str: id_str,
           user_name: user_name,
           screen_name: screen_name,
           profile_image_url_https: profile_image_url_https,
@@ -24,7 +24,7 @@ class PostModel extends Post {
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(
       text: json["text"] as String ?? "",
-      id: int.parse(json["id_str"] as String),
+      id_str: json["id_str"] as String,
       user_name: json["user"]["name"] as String ?? "",
       profile_image_url_https:
           Uri.parse(json["user"]["profile_image_url_https"] as String),
@@ -38,7 +38,7 @@ class PostModel extends Post {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'text': text,
-      'id': id,
+      'id_str': id_str,
       'created_at': created_at.toTwitterFormat(),
       'user': {
         'screen_name': screen_name,
@@ -51,7 +51,7 @@ class PostModel extends Post {
   factory PostModel.fromEntity(Post entity) {
     return PostModel(
       text: entity.text,
-      id: entity.id,
+      id_str: entity.id_str,
       user_name: entity.user_name,
       profile_image_url_https: entity.profile_image_url_https,
       screen_name: entity.screen_name,

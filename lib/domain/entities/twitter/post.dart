@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class Post extends Equatable {
   final String text;
-  final int id;
+  final String id_str;
   final String user_name;
   final String screen_name;
   final Uri profile_image_url_https;
@@ -12,7 +12,7 @@ class Post extends Equatable {
 
   const Post({
     @required this.text,
-    @required this.id,
+    @required this.id_str,
     @required this.user_name,
     @required this.screen_name,
     @required this.profile_image_url_https,
@@ -23,7 +23,7 @@ class Post extends Equatable {
   @override
   List<Object> get props => [
         text,
-        id,
+        id_str,
         user_name,
         screen_name,
         profile_image_url_https,
