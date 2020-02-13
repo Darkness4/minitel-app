@@ -24,10 +24,11 @@ void main() {
     when(mockHttpClient.get(
       argThat(startsWith('https://api.github.com/repos/')),
     )).thenAnswer((_) async => http.Response(
-          fixture('github_remote_data_source/releases_response.json'),
+          fixture(
+              'datasources/github_remote_data_source/releases_response.json'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('github_remote_data_source/releases_header.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/github_remote_data_source/releases_header.json'))
               as Map<String, dynamic>),
         ));
   }
@@ -38,8 +39,9 @@ void main() {
   }
 
   group('fetchReleases', () {
-    final tListGithubReleaseModel = List<Map<String, dynamic>>.from(json.decode(
-                fixture('github_remote_data_source/releases_response.json'))
+    final tListGithubReleaseModel = List<
+            Map<String, dynamic>>.from(json.decode(fixture(
+                'datasources/github_remote_data_source/releases_response.json'))
             as List<dynamic>)
         .map((Map<String, dynamic> data) => GithubReleaseModel.fromJson(data))
         .toList();

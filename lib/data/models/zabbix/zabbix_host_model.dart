@@ -1,8 +1,6 @@
 import 'package:minitel_toolbox/data/models/zabbix/zabbix_interface_model.dart';
 import 'package:minitel_toolbox/data/models/zabbix/zabbix_item_model.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
-import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_interface.dart';
-import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 
 /// A host in Zabbix is a networked entity that you wish to monitor.
 ///
@@ -13,15 +11,13 @@ class ZabbixHostModel extends ZabbixHost {
   const ZabbixHostModel({
     String hostid,
     String host,
-    List<ZabbixItem> items,
-    List<ZabbixInterface> interfaces,
-    String ip,
+    List<ZabbixItemModel> items,
+    List<ZabbixInterfaceModel> interfaces,
   }) : super(
           hostid: hostid,
           host: host,
           items: items,
           interfaces: interfaces,
-          ip: ip,
         );
 
   factory ZabbixHostModel.fromJson(Map<String, dynamic> json) {

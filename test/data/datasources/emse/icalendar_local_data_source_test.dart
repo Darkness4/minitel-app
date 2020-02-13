@@ -29,14 +29,14 @@ void main() {
       () async {
         // arrange
         final tICalendar = Stream.value(utf8.encode(fixture(
-            'icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics')));
+            'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics')));
         when<bool>(mockFile.existsSync()).thenReturn(true);
         when(mockFile.openRead()).thenAnswer((_) => tICalendar);
         // act
         final result = await dataSource.getParsedCalendar();
         // assert
         final expectedICalendar = Stream.value(utf8.encode(fixture(
-            'icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics')));
+            'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics')));
         final expectedParsedCalendarModel = ParsedCalendarModel.parse(
             expectedICalendar.transform(utf8.decoder));
         verify(mockFile.openRead());
@@ -59,7 +59,7 @@ void main() {
 
   group('cacheICalendar', () {
     final tData = fixture(
-        'icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics');
+        'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics');
     final tICalendar = Stream.value(tData).asBroadcastStream();
 
     test(

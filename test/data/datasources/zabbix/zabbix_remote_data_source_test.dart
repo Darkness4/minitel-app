@@ -26,11 +26,11 @@ void main() {
       body: anyNamed('body'),
       headers: anyNamed('headers'),
     )).thenAnswer((_) async => http.Response(
-          fixture('zabbix_remote_data_source/ap_response.json'),
+          fixture('datasources/zabbix_remote_data_source/ap_response.json'),
           200,
-          headers: Map<String, String>.from(
-              json.decode(fixture('zabbix_remote_data_source/ap_header.json'))
-                  as Map<String, dynamic>),
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/zabbix_remote_data_source/ap_header.json'))
+              as Map<String, dynamic>),
         ));
   }
 
@@ -72,9 +72,9 @@ void main() {
       "auth": tToken,
     };
 
-    final tBody =
-        json.decode(fixture('zabbix_remote_data_source/ap_response.json'))
-            as Map<String, dynamic>;
+    final tBody = json.decode(
+            fixture('datasources/zabbix_remote_data_source/ap_response.json'))
+        as Map<String, dynamic>;
     final List<Map<String, dynamic>> result =
         List<Map<String, dynamic>>.from(tBody["result"] as List<dynamic>);
     final List<ZabbixHostModel> tListZabbixHostModel = result

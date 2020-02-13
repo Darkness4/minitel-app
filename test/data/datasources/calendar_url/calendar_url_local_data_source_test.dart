@@ -20,8 +20,8 @@ void main() {
   });
 
   group('getLastCalendarURL', () {
-    final tCalendarUrl =
-        fixture('calendar_url_local_data_source/shared_preferences');
+    final tCalendarUrl = fixture(
+        'datasources/calendar_url_local_data_source/shared_preferences');
     test(
       'should return GithubUserModel from SharedPreferences when there is one in the cache',
       () async {
@@ -49,8 +49,8 @@ void main() {
   });
 
   group('saveCalendarURL', () {
-    final tCalendarUrl =
-        fixture('calendar_url_local_data_source/shared_preferences');
+    final tCalendarUrl = fixture(
+        'datasources/calendar_url_local_data_source/shared_preferences');
 
     test(
       'should call SharedPreferences to cache the data',

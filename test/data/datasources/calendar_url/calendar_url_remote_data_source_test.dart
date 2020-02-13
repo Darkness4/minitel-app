@@ -26,10 +26,10 @@ void main() {
       mockHttpClient.get(
           'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
     ).thenAnswer((_) async => http.Response(
-          fixture('calendar_url_remote_data_source/response0.html'),
+          fixture('datasources/calendar_url_remote_data_source/response0.html'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('calendar_url_remote_data_source/response0.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/calendar_url_remote_data_source/response0.json'))
               as Map<String, dynamic>),
         ));
 
@@ -46,20 +46,20 @@ void main() {
       body: data,
       headers: anyNamed("headers"),
     )).thenAnswer((_) async => http.Response(
-          fixture('calendar_url_remote_data_source/response1.html'),
+          fixture('datasources/calendar_url_remote_data_source/response1.html'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('calendar_url_remote_data_source/response1.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/calendar_url_remote_data_source/response1.json'))
               as Map<String, dynamic>),
         ));
 
     when(mockHttpClient.send(argThat(const TypeMatcher<http.BaseRequest>())))
         .thenAnswer((_) async => http.StreamedResponse(
-              Stream.value(utf8.encode(
-                  fixture('calendar_url_remote_data_source/response2.html'))),
+              Stream.value(utf8.encode(fixture(
+                  'datasources/calendar_url_remote_data_source/response2.html'))),
               200,
-              headers: Map<String, String>.from(json.decode(
-                      fixture('calendar_url_remote_data_source/response2.json'))
+              headers: Map<String, String>.from(json.decode(fixture(
+                      'datasources/calendar_url_remote_data_source/response2.json'))
                   as Map<String, dynamic>),
             ));
 
@@ -72,10 +72,10 @@ void main() {
         },
       ),
     ).thenAnswer((_) async => http.Response(
-          fixture('calendar_url_remote_data_source/response3.html'),
+          fixture('datasources/calendar_url_remote_data_source/response3.html'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('calendar_url_remote_data_source/response3.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/calendar_url_remote_data_source/response3.json'))
               as Map<String, dynamic>),
         ));
   }

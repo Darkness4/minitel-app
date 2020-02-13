@@ -27,10 +27,10 @@ void main() {
           'https://api.twitter.com/1.1/statuses/user_timeline.json')),
       headers: anyNamed('headers'),
     )).thenAnswer((_) async => http.Response(
-          fixture('twitter_remote_data_source/feed_response.json'),
+          fixture('datasources/twitter_remote_data_source/feed_response.json'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('twitter_remote_data_source/feed_header.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/twitter_remote_data_source/feed_header.json'))
               as Map<String, dynamic>),
         ));
   }
@@ -43,9 +43,9 @@ void main() {
   }
 
   group('fetchFeed', () {
-    final tFeedModel = FeedModel.fromJson(
-        json.decode(fixture('twitter_remote_data_source/feed_response.json'))
-            as List<dynamic>);
+    final tFeedModel = FeedModel.fromJson(json.decode(fixture(
+            'datasources/twitter_remote_data_source/feed_response.json'))
+        as List<dynamic>);
 
     test(
       "should perform a GET request",

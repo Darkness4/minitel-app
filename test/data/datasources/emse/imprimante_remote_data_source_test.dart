@@ -32,10 +32,10 @@ void main() {
     when(
       mockNTLMClient.get('http://192.168.130.2/watchdoc/'),
     ).thenAnswer((_) async => Response(
-          fixture('imprimante_remote_data_source/response0.html'),
+          fixture('datasources/imprimante_remote_data_source/response0.html'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('imprimante_remote_data_source/response0.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/imprimante_remote_data_source/response0.json'))
               as Map<String, dynamic>),
         ));
     when(mockListCookies.addAll(any)).thenReturn(null);
@@ -71,9 +71,9 @@ void main() {
         final List<Cookie> cookies =
             await dataSource.login(username: tUser, password: tPassword);
         // assert
-        final headers = Map<String, String>.from(
-            json.decode(fixture('imprimante_remote_data_source/response0.json'))
-                as Map<String, dynamic>);
+        final headers = Map<String, String>.from(json.decode(fixture(
+                'datasources/imprimante_remote_data_source/response0.json'))
+            as Map<String, dynamic>);
 
         final verification = verify(mockListCookies
             .addAll(captureThat(const TypeMatcher<List<Cookie>>())));

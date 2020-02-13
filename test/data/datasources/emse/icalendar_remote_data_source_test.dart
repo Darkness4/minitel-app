@@ -24,7 +24,7 @@ void main() {
     when(mockHttpClient.send(any))
         .thenAnswer((_) async => http.StreamedResponse(
               Stream.value(utf8.encode(fixture(
-                  'icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics'))),
+                  'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics'))),
               200,
             ));
   }
@@ -60,7 +60,7 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         final String tICalendar = fixture(
-            'icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics');
+            'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics');
         // act
         final String result = await dataSource.streamICalendar(tURL).join();
         // assert

@@ -4,7 +4,7 @@ import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 
 class FeedModel extends Feed {
   const FeedModel({
-    List<Post> posts,
+    List<PostModel> posts,
   }) : super(posts: posts);
 
   factory FeedModel.fromJson(List<dynamic> json) {

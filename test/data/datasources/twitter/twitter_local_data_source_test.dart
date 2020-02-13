@@ -21,16 +21,16 @@ void main() {
   });
 
   group('fetchLastFeed', () {
-    final tFeedModel = FeedModel.fromJson(
-        json.decode(fixture('twitter_remote_data_source/feed_response.json'))
-            as List<dynamic>);
+    final tFeedModel = FeedModel.fromJson(json.decode(fixture(
+            'datasources/twitter_remote_data_source/feed_response.json'))
+        as List<dynamic>);
     test(
       'should return FeedModel from File when there is one in the cache',
       () async {
         // arrange
         when(mockFile.existsSync()).thenReturn(true);
-        when<String>(mockFile.readAsStringSync()).thenReturn(
-            fixture('twitter_remote_data_source/feed_response.json'));
+        when<String>(mockFile.readAsStringSync()).thenReturn(fixture(
+            'datasources/twitter_remote_data_source/feed_response.json'));
         // act
         final result = await dataSource.fetchLastFeed();
         // assert
@@ -54,9 +54,9 @@ void main() {
   });
 
   group('cacheFeed', () {
-    final tFeedModel = FeedModel.fromJson(
-        json.decode(fixture('twitter_remote_data_source/feed_response.json'))
-            as List<dynamic>);
+    final tFeedModel = FeedModel.fromJson(json.decode(fixture(
+            'datasources/twitter_remote_data_source/feed_response.json'))
+        as List<dynamic>);
 
     test(
       'should call File to cache the data',

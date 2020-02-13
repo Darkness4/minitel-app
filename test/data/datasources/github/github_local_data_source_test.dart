@@ -21,8 +21,9 @@ void main() {
   });
 
   group('fetchLastReleases', () {
-    final tListGithubReleaseModel = List<Map<String, dynamic>>.from(json.decode(
-                fixture('github_remote_data_source/releases_response.json'))
+    final tListGithubReleaseModel = List<
+            Map<String, dynamic>>.from(json.decode(fixture(
+                'datasources/github_remote_data_source/releases_response.json'))
             as List<dynamic>)
         .map((Map<String, dynamic> data) => GithubReleaseModel.fromJson(data))
         .toList();
@@ -31,8 +32,8 @@ void main() {
       () async {
         // arrange
         when(mockFile.existsSync()).thenReturn(true);
-        when<String>(mockFile.readAsStringSync()).thenReturn(
-            fixture('github_remote_data_source/releases_response.json'));
+        when<String>(mockFile.readAsStringSync()).thenReturn(fixture(
+            'datasources/github_remote_data_source/releases_response.json'));
         // act
         final result = await dataSource.fetchLastReleases();
         // assert
@@ -56,8 +57,9 @@ void main() {
   });
 
   group('cacheReleases', () {
-    final tListGithubReleaseModel = List<Map<String, dynamic>>.from(json.decode(
-                fixture('github_remote_data_source/releases_response.json'))
+    final tListGithubReleaseModel = List<
+            Map<String, dynamic>>.from(json.decode(fixture(
+                'datasources/github_remote_data_source/releases_response.json'))
             as List<dynamic>)
         .map((Map<String, dynamic> data) => GithubReleaseModel.fromJson(data))
         .toList();

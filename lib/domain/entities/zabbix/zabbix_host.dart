@@ -20,14 +20,11 @@ class ZabbixHost extends Equatable {
   /// List of [ZabbixInterface]
   final List<ZabbixInterface> interfaces;
 
-  final String ip;
-
   const ZabbixHost({
     this.hostid,
     this.host,
     this.items,
     this.interfaces,
-    this.ip,
   });
 
   @override
@@ -36,6 +33,5 @@ class ZabbixHost extends Equatable {
         this.host,
         this.items,
         this.interfaces,
-        this.ip,
       ];
 }

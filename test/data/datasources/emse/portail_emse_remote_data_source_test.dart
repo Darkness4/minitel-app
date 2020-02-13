@@ -37,10 +37,10 @@ void main() {
         "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
       ),
     ).thenAnswer((_) async => http.Response(
-          fixture('portail_emse_remote_data_source/response0.html'),
+          fixture('datasources/portail_emse_remote_data_source/response0.html'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('portail_emse_remote_data_source/response0.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/portail_emse_remote_data_source/response0.json'))
               as Map<String, dynamic>),
         ));
 
@@ -53,22 +53,22 @@ void main() {
           request.url.toString() ==
               "https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin") {
         return http.StreamedResponse(
-          Stream.value(utf8.encode(
-              fixture('portail_emse_remote_data_source/response1.html'))),
+          Stream.value(utf8.encode(fixture(
+              'datasources/portail_emse_remote_data_source/response1.html'))),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('portail_emse_remote_data_source/response1.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/portail_emse_remote_data_source/response1.json'))
               as Map<String, dynamic>),
         );
       } else if (request.method == 'GET' &&
           request.url.toString() ==
               "https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr") {
         return http.StreamedResponse(
-          Stream.value(utf8.encode(
-              fixture('portail_emse_remote_data_source/response2.html'))),
+          Stream.value(utf8.encode(fixture(
+              'datasources/portail_emse_remote_data_source/response2.html'))),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('portail_emse_remote_data_source/response2.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/portail_emse_remote_data_source/response2.json'))
               as Map<String, dynamic>),
         );
       } else {
@@ -82,10 +82,10 @@ void main() {
         headers: anyNamed("headers"),
       ),
     ).thenAnswer((_) async => http.Response(
-          fixture('portail_emse_remote_data_source/response3.html'),
+          fixture('datasources/portail_emse_remote_data_source/response3.html'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('portail_emse_remote_data_source/response3.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/portail_emse_remote_data_source/response3.json'))
               as Map<String, dynamic>),
         ));
   }
@@ -133,20 +133,20 @@ void main() {
         ));
         final actualCookies = verification.captured.first as List<Cookie>;
         final expectedCookies = <Cookie>[];
-        expectedCookies.addAll(Map<String, String>.from(json.decode(
-                    fixture('portail_emse_remote_data_source/response0.json'))
+        expectedCookies.addAll(Map<String, String>.from(json.decode(fixture(
+                    'datasources/portail_emse_remote_data_source/response0.json'))
                 as Map<String, dynamic>)
             .parseSetCookie());
-        expectedCookies.addAll(Map<String, String>.from(json.decode(
-                    fixture('portail_emse_remote_data_source/response1.json'))
+        expectedCookies.addAll(Map<String, String>.from(json.decode(fixture(
+                    'datasources/portail_emse_remote_data_source/response1.json'))
                 as Map<String, dynamic>)
             .parseSetCookie());
-        expectedCookies.addAll(Map<String, String>.from(json.decode(
-                    fixture('portail_emse_remote_data_source/response2.json'))
+        expectedCookies.addAll(Map<String, String>.from(json.decode(fixture(
+                    'datasources/portail_emse_remote_data_source/response2.json'))
                 as Map<String, dynamic>)
             .parseSetCookie());
-        expectedCookies.addAll(Map<String, String>.from(json.decode(
-                    fixture('portail_emse_remote_data_source/response3.json'))
+        expectedCookies.addAll(Map<String, String>.from(json.decode(fixture(
+                    'datasources/portail_emse_remote_data_source/response3.json'))
                 as Map<String, dynamic>)
             .parseSetCookie());
         expect(expectedCookies.map((e) => e.toString()).toList(),

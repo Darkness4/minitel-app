@@ -23,10 +23,19 @@ class ParsedCalendarModel extends ParsedCalendar {
   /// Get existing the stream .ics from file
   static Future<ParsedCalendarModel> parse(
       Stream<String> calendarStream) async {
-    final TimezoneModelBuffer timezoneBuffer = TimezoneModelBuffer();
     ICalSection mode = ICalSection.None;
     final Map<String, String> vEvent = <String, String>{};
     final List<EventModel> events = <EventModel>[];
+    TimezoneDescriptionModel daylight = TimezoneDescriptionModel(
+      dtstart: DateTime(0),
+    );
+    TimezoneDescriptionModel standard = TimezoneDescriptionModel(
+      dtstart: DateTime(0),
+    );
+    TimezoneModel timezoneModel = TimezoneModel(
+      daylight: daylight,
+      standard: standard,
+    );
     String version;
     String prodID;
     String calscale;
@@ -78,14 +87,14 @@ class ParsedCalendarModel extends ParsedCalendar {
             break;
           case ICalSection.VTIMEZONE:
             if (line[0] == "TZID") {
-              timezoneBuffer.tzid = line[1];
+              timezoneModel = timezoneModel.copyWith(tzid: line[1]);
             }
             break;
           case ICalSection.STANDARD:
-            timezoneBuffer.standard.set(line[0], line[1]);
+            standard = standard.copyWithKeyValue(line[0], line[1]);
             break;
           case ICalSection.DAYLIGHT:
-            timezoneBuffer.daylight.set(line[0], line[1]);
+            daylight = daylight.copyWithKeyValue(line[0], line[1]);
             break;
           case ICalSection.None:
             switch (line[0]) {
@@ -108,11 +117,16 @@ class ParsedCalendarModel extends ParsedCalendar {
       }
     }
 
+    timezoneModel = timezoneModel.copyWith(
+      daylight: daylight,
+      standard: standard,
+    );
+
     return ParsedCalendarModel(
       calscale: calscale,
       events: events,
       prodID: prodID,
-      timezone: timezoneBuffer.toTimezoneModel(),
+      timezone: timezoneModel,
       version: version,
     );
   }

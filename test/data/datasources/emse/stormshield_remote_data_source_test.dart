@@ -31,11 +31,11 @@ void main() {
     when(
       mockHttpClient.send(any),
     ).thenAnswer((_) async => http.StreamedResponse(
-          Stream.value(utf8.encode(
-              fixture('stormshield_remote_data_source/response_fetch.html'))),
+          Stream.value(utf8.encode(fixture(
+              'datasources/stormshield_remote_data_source/response_fetch.html'))),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('stormshield_remote_data_source/response_fetch.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/stormshield_remote_data_source/response_fetch.json'))
               as Map<String, dynamic>),
         ));
 
@@ -46,10 +46,11 @@ void main() {
         headers: anyNamed("headers"),
       ),
     ).thenAnswer((_) async => http.Response(
-          fixture('stormshield_remote_data_source/response_login.html'),
+          fixture(
+              'datasources/stormshield_remote_data_source/response_login.html'),
           200,
-          headers: Map<String, String>.from(json.decode(
-                  fixture('stormshield_remote_data_source/response_login.json'))
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/stormshield_remote_data_source/response_login.json'))
               as Map<String, dynamic>),
         ));
   }
