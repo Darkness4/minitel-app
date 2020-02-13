@@ -11,7 +11,7 @@ import 'package:mockito/mockito.dart';
 import '../../../fixtures/fixture_reader.dart';
 
 void main() {
-  GithubRemoteDataSourceImpl dataSource;
+  GithubRemoteDataSource dataSource;
   MockHttpClient mockHttpClient;
   const String tRepo = 'Darkness4/minitel-app';
 
