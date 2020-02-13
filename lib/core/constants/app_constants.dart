@@ -2,7 +2,7 @@ class AssetPaths {
   static const String TemplateICS = 'assets/template.ics';
   static const String LogoMinitelWhite = 'assets/img/logo_minitel_white.webp';
   static const String LogoMinitel = 'assets/img/logo_minitel.webp';
-  static const String Icon = 'assets/icon/icon.webp';
+  static const String Icon = 'assets/icon/icon.png';
   static const String DocNetwork = 'assets/img/network.webp';
   static const String DocLecteurReseau = 'assets/img/Lecteur-reseau.webp';
   static const String DocImprimanteLinux = 'assets/img/Linux.webp';
@@ -10,6 +10,8 @@ class AssetPaths {
   static const String Twitter = 'assets/icon/Twitter_Logo_Blue.png';
   static const String Github = 'assets/icon/GitHub-Mark.webp';
   static const String EMSE = 'assets/img/logo_emse.webp';
+  static const String Promethee = 'assets/img/logo_alcuin.png';
+  static const String Campus = 'assets/img/Moodle-Logo-RGB.png';
   static const String Sogo = 'assets/img/mail.webp';
 }
 

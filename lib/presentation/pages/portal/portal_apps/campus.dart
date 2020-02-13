@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/presentation/widgets/app_lists_widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PortailWebView extends StatelessWidget {
+class CampusWebView extends StatelessWidget {
   final List<Cookie> portailEMSEcookies;
 
-  const PortailWebView({@required this.portailEMSEcookies, Key key})
+  const CampusWebView({@required this.portailEMSEcookies, Key key})
       : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class PortailWebView extends StatelessWidget {
     }
     return ScaffoldWebView(
       backgroundColor: Colors.deepPurple,
-      initialUrl: 'https://portail.emse.fr/',
+      initialUrl: 'https://campus.emse.fr',
     );
   }
 }

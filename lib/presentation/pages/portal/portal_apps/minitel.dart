@@ -8,7 +8,6 @@ class MinitelWebView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ScaffoldWebView(
       backgroundColor: Colors.blue,
-      title: Text("Minitel Wiki"),
       initialUrl: 'http://minitel.emse.fr/wiki/',
     );
   }

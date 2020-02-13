@@ -4,13 +4,11 @@ import 'package:minitel_toolbox/core/utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ScaffoldWebView extends StatelessWidget {
-  final Widget title;
   final Color backgroundColor;
   final String initialUrl;
   final Function(WebViewController, BuildContext) onWebViewCreated;
 
   const ScaffoldWebView({
-    @required this.title,
     @required this.backgroundColor,
     @required this.initialUrl,
     Key key,
@@ -31,31 +29,28 @@ class ScaffoldWebView extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.close, color: Colors.white),
-            onPressed: () => Navigator.of(context).pop(),
-            tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-          ),
-          backgroundColor: backgroundColor,
-          title: title,
-          elevation: 0.0,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.public),
-              onPressed: () async =>
-                  LaunchURLUtils.launchURL(await _controller.currentUrl()),
-              tooltip: "Open in web browser",
-            )
-          ],
-        ),
         bottomNavigationBar: BottomAppBar(
           color: backgroundColor,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              const Spacer(),
+              Expanded(
+                child: IconButton(
+                  icon: Icon(Icons.close, color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+                  tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+                ),
+              ),
+              Expanded(
+                child: IconButton(
+                  color: Colors.white,
+                  icon: Icon(Icons.public),
+                  onPressed: () async =>
+                      LaunchURLUtils.launchURL(await _controller.currentUrl()),
+                  tooltip: "Open in web browser",
+                ),
+              ),
               Expanded(
                 child: IconButton(
                   color: Colors.white,

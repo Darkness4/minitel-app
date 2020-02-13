@@ -26,8 +26,7 @@ class Router {
         );
       case RoutePaths.Docs:
         return SlideRightRoute<void>(
-          builder: (BuildContext context) =>
-              DocumentationPage(title: AppLoc.of(context).docs.title),
+          builder: (BuildContext context) => const DocumentationPage(),
           settings: settings,
         );
       case RoutePaths.News:
