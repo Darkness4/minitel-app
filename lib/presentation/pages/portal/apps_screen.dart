@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
-import 'package:minitel_toolbox/core/utils.dart';
+import 'package:minitel_toolbox/core/utils/launch_url_utils.dart';
 import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/emse/portail_emse_remote_data_source.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';

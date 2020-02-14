@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/repositories/zabbix_hosts_repository.dart';
 
@@ -27,10 +26,7 @@ class ZabbixHostsBloc extends Bloc<ZabbixHostsEvent, ZabbixHostsState> {
     if (event is GetZabbixHostsEvent) {
       yield const ZabbixHostsStateLoading();
       try {
-        final hosts = await repository.get(
-          event.groupids,
-          token: ApiKeys.zabbixToken,
-        );
+        final hosts = await repository.get(event.groupids);
         yield ZabbixHostsStateLoaded(hosts: hosts);
       } catch (e) {
         yield ZabbixHostsStateError(error: e);

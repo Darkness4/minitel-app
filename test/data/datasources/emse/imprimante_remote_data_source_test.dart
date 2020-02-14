@@ -6,7 +6,7 @@ import 'package:matcher/matcher.dart';
 import 'package:http/http.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
-import 'package:minitel_toolbox/core/utils.dart';
+import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ntlm/ntlm.dart';
 
@@ -44,6 +44,11 @@ void main() {
   void setUpMockHttpClientFailure404() {
     when(mockNTLMClient.get(any))
         .thenAnswer((_) async => Response('Something went wrong', 404));
+  }
+
+  void setUpMockHttpClientFailure() {
+    when(mockNTLMClient.get(any))
+        .thenAnswer((_) async => throw Exception("Mock error"));
   }
 
   group('login', () {
@@ -90,6 +95,19 @@ void main() {
       () async {
         // arrange
         setUpMockHttpClientFailure404();
+        // act
+        final call = dataSource.login;
+        // assert
+        expect(() => call(username: tUser, password: tPassword),
+            throwsA(const TypeMatcher<ServerException>()));
+      },
+    );
+
+    test(
+      'should throw a ServerException when Client crash',
+      () async {
+        // arrange
+        setUpMockHttpClientFailure();
         // act
         final call = dataSource.login;
         // assert

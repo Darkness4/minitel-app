@@ -9,10 +9,7 @@ import 'package:minitel_toolbox/data/models/zabbix/zabbix_host_model.dart';
 
 abstract class ZabbixRemoteDataSource {
   /// Fetch Zabbix Hosts
-  Future<List<ZabbixHostModel>> fetchZabbixHosts(
-    int groupids, {
-    String token = "",
-  });
+  Future<List<ZabbixHostModel>> fetchZabbixHosts(int groupids);
 }
 
 class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
@@ -21,10 +18,7 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
   const ZabbixRemoteDataSourceImpl({@required this.clientNoCheck});
 
   @override
-  Future<List<ZabbixHostModel>> fetchZabbixHosts(
-    int groupids, {
-    String token = "",
-  }) async {
+  Future<List<ZabbixHostModel>> fetchZabbixHosts(int groupids) async {
     final Map<String, Object> data = <String, dynamic>{
       "jsonrpc": "2.0",
       "method": "host.get",
@@ -46,7 +40,7 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
         ],
       },
       "id": 2,
-      "auth": token,
+      "auth": ApiKeys.zabbixToken,
     };
 
     final String dataEncoded = json.encode(data);

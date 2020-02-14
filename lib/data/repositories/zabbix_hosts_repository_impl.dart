@@ -10,10 +10,9 @@ class ZabbixHostsRepositoryImpl implements ZabbixHostsRepository {
   });
 
   @override
-  Future<List<ZabbixHost>> get(int groupids, {String token = ""}) =>
-      _get(groupids, token);
+  Future<List<ZabbixHost>> get(int groupids) => _get(groupids);
 
-  Future<List<ZabbixHost>> _get(int groupids, String token) {
-    return remoteDataSource.fetchZabbixHosts(groupids, token: token);
+  Future<List<ZabbixHost>> _get(int groupids) {
+    return remoteDataSource.fetchZabbixHosts(groupids);
   }
 }

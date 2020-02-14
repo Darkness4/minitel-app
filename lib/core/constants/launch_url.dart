@@ -1,6 +1,6 @@
-import 'package:minitel_toolbox/core/utils.dart';
+import 'package:minitel_toolbox/core/utils/launch_url_utils.dart';
 
-class LaunchURL {
+class LaunchURLConstants {
   static Future<void> Function() mailToMarcNGUYEN =
       () => LaunchURLUtils.launchURL("mailto:nguyen_marc@live.fr");
   static Future<void> Function() githubDarkness4Releases = () =>

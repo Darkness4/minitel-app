@@ -68,6 +68,59 @@ void main() {
             Stream.value(utf8.encode('Something went wrong')), 404));
   }
 
+  void setUpMockHttpClientBadLogin() {
+    when(
+      mockHttpClient.send(any),
+    ).thenAnswer((_) async => http.StreamedResponse(
+          Stream.value(utf8.encode(fixture(
+              'datasources/stormshield_remote_data_source/response_fetch.html'))),
+          200,
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/stormshield_remote_data_source/response_fetch.json'))
+              as Map<String, dynamic>),
+        ));
+
+    when(
+      mockHttpClient.post(
+        'https://$tSelectedUrl/auth/plain.html',
+        body: anyNamed("body"),
+        headers: anyNamed("headers"),
+      ),
+    ).thenAnswer((_) async => http.Response(
+          fixture('datasources/stormshield_remote_data_source/failed.html'),
+          200,
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/stormshield_remote_data_source/response_login.json'))
+              as Map<String, dynamic>),
+        ));
+  }
+
+  void setUpMockHttpClientNotLoggedIn() {
+    when(
+      mockHttpClient.send(any),
+    ).thenAnswer((_) async => http.StreamedResponse(
+          Stream.value(utf8.encode(fixture(
+              'datasources/stormshield_remote_data_source/not_logged_in.html'))),
+          200,
+          headers: {},
+        ));
+
+    when(
+      mockHttpClient.post(
+        'https://$tSelectedUrl/auth/plain.html',
+        body: anyNamed("body"),
+        headers: anyNamed("headers"),
+      ),
+    ).thenAnswer((_) async => http.Response(
+          fixture(
+              'datasources/stormshield_remote_data_source/response_login.html'),
+          200,
+          headers: Map<String, String>.from(json.decode(fixture(
+                  'datasources/stormshield_remote_data_source/response_login.json'))
+              as Map<String, dynamic>),
+        ));
+  }
+
   group('login', () {
     test(
       "should perform a POST request",
@@ -110,6 +163,25 @@ void main() {
                   selectedUrl: tSelectedUrl,
                 ),
             throwsA(const TypeMatcher<ServerException>()));
+      },
+    );
+
+    test(
+      'should throw a ClientException when Bad Login',
+      () async {
+        // arrange
+        setUpMockHttpClientBadLogin();
+        // act
+        final call = dataSource.login;
+        // assert
+        expect(
+            () => call(
+                  uid: tUser,
+                  pswd: tPassword,
+                  selectedTime: tSelectedTime,
+                  selectedUrl: tSelectedUrl,
+                ),
+            throwsA(const TypeMatcher<ClientException>()));
       },
     );
   });
@@ -156,6 +228,19 @@ void main() {
         // assert
         expect(() => call(tSelectedUrl),
             throwsA(const TypeMatcher<ServerException>()));
+      },
+    );
+
+    test(
+      'should throw a NotLoggedInException when Not Logged in',
+      () async {
+        // arrange
+        setUpMockHttpClientNotLoggedIn();
+        // act
+        final call = dataSource.fetchStatus;
+        // assert
+        expect(() => call(tSelectedUrl),
+            throwsA(const TypeMatcher<NotLoggedInException>()));
       },
     );
   });

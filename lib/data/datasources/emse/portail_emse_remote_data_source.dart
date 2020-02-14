@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/core/utils.dart';
+import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 
 abstract class PortailEMSERemoteDataSource {
   /// Login to portail EMSE
@@ -32,7 +32,8 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
       cookies.clear();
 
       if (response.statusCode != 200) {
-        throw ServerException();
+        throw ServerException(
+            "HTTP Status Code : ${response.statusCode} from ${response.headers[HttpHeaders.hostHeader]}");
       }
 
       final String lt = RegExp(r'name="lt" value="([^"]*)"')
@@ -61,8 +62,14 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
               '${jSessionIDCampus.name}=${jSessionIDCampus.value}',
       );
 
+      if (response2.statusCode != 200) {
+        throw ServerException(
+            "HTTP Status Code : ${response.statusCode} from ${response.headers[HttpHeaders.hostHeader]}");
+      }
+
       if (!response2.headers[HttpHeaders.setCookieHeader].contains('AGIMUS')) {
-        throw Exception("AGIMUS not found. Maybe bad username or password.");
+        throw ClientException(
+            "AGIMUS not found. Maybe bad username or password.");
       }
 
       final listCookies2 = response2.headers.parseSetCookie();
@@ -84,6 +91,11 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
                   '${casGC.name}=${casGC.value}',
       );
 
+      if (response3.statusCode != 200) {
+        throw ServerException(
+            "HTTP Status Code : ${response.statusCode} from ${response.headers[HttpHeaders.hostHeader]}");
+      }
+
       final Cookie casAuth = response3.headers
           .parseSetCookie()
           .firstWhere((Cookie cookie) => cookie.name == "CASAuth");
@@ -93,6 +105,11 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
         HttpHeaders.cookieHeader: '${agimus.name}=${agimus.value}; '
             '${casAuth.name}=${casAuth.value}'
       });
+
+      if (response4.statusCode != 200) {
+        throw ServerException(
+            "HTTP Status Code : ${response.statusCode} from ${response.headers[HttpHeaders.hostHeader]}");
+      }
 
       final listCookies4 = response4.headers.parseSetCookie();
       final Cookie laravelToken = listCookies4
@@ -111,9 +128,9 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
       ]);
 
       return cookies;
-    } on Exception catch (e) {
+    } on Exception {
       cookies.clear();
-      throw ServerException(e.toString());
+      rethrow;
     }
   }
 }

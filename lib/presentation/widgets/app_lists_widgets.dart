@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/core/utils.dart';
+import 'package:minitel_toolbox/core/utils/launch_url_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ScaffoldWebView extends StatelessWidget {

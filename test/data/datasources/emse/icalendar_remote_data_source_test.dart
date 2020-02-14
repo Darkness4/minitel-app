@@ -35,6 +35,11 @@ void main() {
             Stream.value(utf8.encode('Something went wrong')), 404));
   }
 
+  void setUpMockHttpClientFailure() {
+    when(mockHttpClient.send(any))
+        .thenAnswer((_) async => throw Exception("Mock error"));
+  }
+
   group('streamICalendar', () {
     test(
       "should perform a GET request",
@@ -73,6 +78,19 @@ void main() {
       () async {
         // arrange
         setUpMockHttpClientFailure404();
+        // act
+        final call = dataSource.streamICalendar;
+        // assert
+        expect(() => call(tURL).drain<String>(),
+            throwsA(const TypeMatcher<ServerException>()));
+      },
+    );
+
+    test(
+      'should throw a ServerException when Client crash',
+      () async {
+        // arrange
+        setUpMockHttpClientFailure();
         // act
         final call = dataSource.streamICalendar;
         // assert

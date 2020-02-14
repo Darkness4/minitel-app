@@ -85,8 +85,7 @@ void main() {
   group('fetchZabbixHosts', () {
     // arrange
     const tGroupIds = 17;
-    const tToken = 'token';
-    const Map<String, Object> tData = <String, dynamic>{
+    final Map<String, Object> tData = <String, dynamic>{
       "jsonrpc": "2.0",
       "method": "host.get",
       "params": <String, dynamic>{
@@ -107,7 +106,7 @@ void main() {
         ],
       },
       "id": 2,
-      "auth": tToken,
+      "auth": ApiKeys.zabbixToken,
     };
 
     final tBody = json.decode(
@@ -126,7 +125,7 @@ void main() {
         setUpMockHttpClientSuccess200();
         final String tDataEncoded = json.encode(tData);
         // act
-        await dataSource.fetchZabbixHosts(tGroupIds, token: tToken);
+        await dataSource.fetchZabbixHosts(tGroupIds);
         // assert
         verify(mockHttpClient.post(
           '${ApiKeys.zabbixPath}/api_jsonrpc.php',
@@ -142,8 +141,7 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        final result =
-            await dataSource.fetchZabbixHosts(tGroupIds, token: tToken);
+        final result = await dataSource.fetchZabbixHosts(tGroupIds);
 
         // assert
         expect(result, equals(tListZabbixHostModel));
@@ -158,7 +156,7 @@ void main() {
         // act
         final call = dataSource.fetchZabbixHosts;
         // assert
-        expect(() => call(tGroupIds, token: tToken),
+        expect(() => call(tGroupIds),
             throwsA(const TypeMatcher<ServerException>()));
       },
     );
@@ -171,7 +169,7 @@ void main() {
         // act
         final call = dataSource.fetchZabbixHosts;
         // assert
-        expect(() => call(tGroupIds, token: tToken),
+        expect(() => call(tGroupIds),
             throwsA(const TypeMatcher<ClientException>()));
       },
     );
@@ -184,7 +182,7 @@ void main() {
         // act
         final call = dataSource.fetchZabbixHosts;
         // assert
-        expect(() => call(tGroupIds, token: tToken),
+        expect(() => call(tGroupIds),
             throwsA(const TypeMatcher<ClientException>()));
       },
     );
@@ -197,7 +195,7 @@ void main() {
         // act
         final call = dataSource.fetchZabbixHosts;
         // assert
-        expect(() => call(tGroupIds, token: tToken),
+        expect(() => call(tGroupIds),
             throwsA(const TypeMatcher<ClientException>()));
       },
     );

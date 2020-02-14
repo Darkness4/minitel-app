@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
+import 'package:minitel_toolbox/core/constants/launch_url.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
-import 'package:minitel_toolbox/core/launch_url.dart';
 import 'package:package_info/package_info.dart';
 
 /// Page About
@@ -30,20 +30,20 @@ class AboutPage extends StatelessWidget {
               ListTile(
                 title: Text(AppLoc.of(context).about.developper),
                 subtitle: const Text("Marc NGUYEN <nguyen_marc@live.fr>"),
-                onTap: LaunchURL.mailToMarcNGUYEN,
+                onTap: LaunchURLConstants.mailToMarcNGUYEN,
               ),
               const Divider(),
               ListTile(
                 title: Text(AppLoc.of(context).about.lastVestion),
                 subtitle: const Text(
                     "https://github.com/Darkness4/minitel-app/releases"),
-                onTap: LaunchURL.githubDarkness4Releases,
+                onTap: LaunchURLConstants.githubDarkness4Releases,
               ),
               const Divider(),
               ListTile(
                 title: Text(AppLoc.of(context).about.website), // Minitel
                 subtitle: const Text("minitel.emse.fr"),
-                onTap: LaunchURL.minitelWebsite,
+                onTap: LaunchURLConstants.minitelWebsite,
               ),
               const Divider(),
               ListTile(

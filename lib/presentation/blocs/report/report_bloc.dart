@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:minitel_toolbox/core/utils.dart';
+import 'package:minitel_toolbox/core/utils/launch_url_utils.dart';
 import 'package:minitel_toolbox/data/datasources/slack/slack_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 import 'package:share/share.dart';

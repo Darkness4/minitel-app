@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
-import 'package:minitel_toolbox/core/utils.dart';
+import 'package:minitel_toolbox/core/utils/launch_url_utils.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 
 class TwitterCard extends StatelessWidget {

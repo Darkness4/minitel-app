@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/core/utils.dart';
+import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 import 'package:ntlm/ntlm.dart';
 
 abstract class ImprimanteRemoteDataSource {

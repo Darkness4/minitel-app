@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:minitel_toolbox/core/constants/launch_url.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
-import 'package:minitel_toolbox/core/launch_url.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
 import 'package:minitel_toolbox/presentation/blocs/report_status/report_status_bloc.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
@@ -49,7 +49,7 @@ class _ContactsCard extends StatelessWidget {
         const BoxMdH("Contacts", 1),
         OutlineButton(
           textColor: Theme.of(context).accentColor,
-          onPressed: LaunchURL.messengerMarcNGUYEN,
+          onPressed: LaunchURLConstants.messengerMarcNGUYEN,
           child: const Text(
             "Facebook: Minitel Ismin",
             style: MinitelTextStyles.mdH3,
@@ -58,7 +58,7 @@ class _ContactsCard extends StatelessWidget {
         ),
         OutlineButton(
           textColor: Theme.of(context).accentColor,
-          onPressed: LaunchURL.mailToMinitel,
+          onPressed: LaunchURLConstants.mailToMinitel,
           child: const Text(
             "Mail: minitelismin@gmail.com",
             style: MinitelTextStyles.mdH3,
