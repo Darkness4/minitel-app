@@ -57,11 +57,15 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
       }
     } else if (agendaEvent is AgendaDownload) {
       yield const AgendaLoading();
-      await iCalendarRepository.download(
-        username: agendaEvent.uid,
-        password: agendaEvent.pswd,
-      );
-      add(AgendaLoad(notificationSettings: agendaEvent.notificationSettings));
+      try {
+        await iCalendarRepository.download(
+          username: agendaEvent.uid,
+          password: agendaEvent.pswd,
+        );
+        add(AgendaLoad(notificationSettings: agendaEvent.notificationSettings));
+      } catch (e) {
+        yield AgendaError(e);
+      }
     }
   }
 }
