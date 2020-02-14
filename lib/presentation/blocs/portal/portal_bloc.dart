@@ -86,12 +86,11 @@ class PortalBloc extends Bloc<PortalEvent, PortalState> {
           isLoaded: true,
         );
       } else {
-        yield state.update(
-          isLoaded: true,
-        );
+        yield state.update(isLoaded: true);
       }
     } catch (e) {
       yield PortalState.failure();
+      yield state.update(isLoaded: true);
     }
   }
 
