@@ -39,6 +39,7 @@ dependencies:
   equatable: ^1.0.3 # felangelov@gmail.com
   get_it: ^3.1.0 # fluttercommunity.dev
   flutter_markdown: ^0.3.3
+  google_fonts: ^0.3.9 # material.io
 
 dev_dependencies:
   flutter_test:

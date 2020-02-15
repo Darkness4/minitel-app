@@ -14,7 +14,7 @@ class ThemeDark extends ThemeState {
         bottomAppBarTheme: const BottomAppBarTheme(
           color: Colors.green,
         ),
-        textTheme: MinitelTextStyles.textTheme,
+        textTheme: MinitelTextStyles.getTextTheme(Brightness.dark),
         bottomAppBarColor: Colors.green,
       );
 
@@ -31,7 +31,7 @@ class ThemeLight extends ThemeState {
         bottomAppBarTheme: const BottomAppBarTheme(
           color: Colors.green,
         ),
-        textTheme: MinitelTextStyles.textTheme,
+        textTheme: MinitelTextStyles.getTextTheme(Brightness.light),
         bottomAppBarColor: Colors.green,
       );
 

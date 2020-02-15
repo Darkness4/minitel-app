@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:minitel_toolbox/core/constants/launch_url.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
 import 'package:minitel_toolbox/presentation/blocs/report_status/report_status_bloc.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
-import 'package:minitel_toolbox/presentation/shared/text_styles.dart';
 import 'package:minitel_toolbox/presentation/widgets/cards/doc_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,28 +46,31 @@ class _ContactsCard extends StatelessWidget {
     return DocCard(
       elevation: 4,
       children: <Widget>[
-        const BoxMdH("Contacts", 1),
+        Text(
+          "Contacts",
+          style: Theme.of(context).textTheme.headline5,
+        ),
         OutlineButton(
           textColor: Theme.of(context).accentColor,
           onPressed: LaunchURLConstants.messengerMarcNGUYEN,
-          child: const Text(
+          child: Text(
             "Facebook: Minitel Ismin",
-            style: MinitelTextStyles.mdH3,
+            style: Theme.of(context).textTheme.button,
             overflow: TextOverflow.ellipsis,
           ),
         ),
         OutlineButton(
           textColor: Theme.of(context).accentColor,
           onPressed: LaunchURLConstants.mailToMinitel,
-          child: const Text(
+          child: Text(
             "Mail: minitelismin@gmail.com",
-            style: MinitelTextStyles.mdH3,
+            style: Theme.of(context).textTheme.button,
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        const Text(
+        Text(
           "G*: Contact Admin",
-          style: MinitelTextStyles.mdH3,
+          style: Theme.of(context).textTheme.button,
           overflow: TextOverflow.ellipsis,
         ),
       ],
@@ -238,35 +241,22 @@ class _TutorialCard extends StatelessWidget {
     return DocCard(
       elevation: 4,
       children: <Widget>[
-        BoxMdH(AppLoc.of(context).reporting.tutorial.header, 1),
-        BoxMdBody(Text(
-          AppLoc.of(context).reporting.tutorial.notice,
-          style: Theme.of(context).textTheme.subtitle1,
-        )),
-        BoxMdBody(Text(
-          AppLoc.of(context).reporting.tutorial.content1,
-          style: MinitelTextStyles.mdH3,
-        )),
-        BoxMdBody(Text(
-          AppLoc.of(context).reporting.tutorial.content2,
-          style: MinitelTextStyles.mdH3,
-        )),
-        BoxMdBody(Text(
-          AppLoc.of(context).reporting.tutorial.content3,
-          style: MinitelTextStyles.mdH3,
-        )),
-        BoxMdBody(Text(
-          AppLoc.of(context).reporting.tutorial.example,
-          style: Theme.of(context).textTheme.bodyText2,
-        )),
-        BoxMdBody(Text(
-          AppLoc.of(context).reporting.tutorial.content4,
-          style: MinitelTextStyles.mdH3,
-        )),
-        BoxMdBody(Text(
-          AppLoc.of(context).reporting.tutorial.content5,
-          style: MinitelTextStyles.mdH3,
-        )),
+        MarkdownBody(data: """# ${AppLoc.of(context).reporting.tutorial.header}
+
+*${AppLoc.of(context).reporting.tutorial.notice}*
+
+**${AppLoc.of(context).reporting.tutorial.content1}**
+
+**${AppLoc.of(context).reporting.tutorial.content2}**
+
+**${AppLoc.of(context).reporting.tutorial.content3}**
+
+${AppLoc.of(context).reporting.tutorial.example}
+
+**${AppLoc.of(context).reporting.tutorial.content4}**
+
+**${AppLoc.of(context).reporting.tutorial.content5}**
+"""),
       ],
     );
   }
