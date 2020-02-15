@@ -2,14 +2,16 @@ class AssetPaths {
   static const String TemplateICS = 'assets/template.ics';
   static const String LogoMinitelWhite = 'assets/img/logo_minitel_white.webp';
   static const String LogoMinitel = 'assets/img/logo_minitel.webp';
-  static const String Icon = 'assets/icon/icon.webp';
+  static const String Icon = 'assets/icon/icon.png';
   static const String DocNetwork = 'assets/img/network.webp';
   static const String DocLecteurReseau = 'assets/img/Lecteur-reseau.webp';
   static const String DocImprimanteLinux = 'assets/img/Linux.webp';
   static const String Slack = 'assets/img/Slack_Mark_Monochrome_White.webp';
-  static const String Facebook = 'assets/icon/f_logo.webp';
+  static const String Twitter = 'assets/icon/Twitter_Logo_Blue.png';
   static const String Github = 'assets/icon/GitHub-Mark.webp';
   static const String EMSE = 'assets/img/logo_emse.webp';
+  static const String Promethee = 'assets/img/logo_alcuin.png';
+  static const String Campus = 'assets/img/Moodle-Logo-RGB.png';
   static const String Sogo = 'assets/img/mail.webp';
 }
 
@@ -42,6 +44,9 @@ class MyIPAdresses {
   /// Cloudflare DNS IP
   static const String cloudflareDNSIP = "1.1.1.1";
 
+  /// Stormshield named address
+  static const String emseImprimanteIP = "192.168.130.2";
+
   /// Local DNS IP
   static const String localDNSIP = "10.163.0.6";
 
@@ -50,14 +55,4 @@ class MyIPAdresses {
 
   /// Stormshield named address
   static const String stormshield = "fw-cgcp.emse.fr";
-}
-
-/// Named Path of each Routes
-class RoutePaths {
-  static const String Authentication = '/';
-  static const String Reporting = '/reporting';
-  static const String Docs = '/docs';
-  static const String Agenda = '/agenda';
-  static const String About = '/about';
-  static const String News = '/news';
 }

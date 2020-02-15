@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-10-04T08:54:43.834389",
+  "@@last_modified": "2020-02-09T20:28:58.846230",
   "forceDark": "Forcer le thème sombre",
   "@forceDark": {
     "type": "text",
@@ -454,8 +454,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "NewsLoc_seeFacebook": "Voir sur Facebook ...",
-  "@NewsLoc_seeFacebook": {
+  "NewsLoc_seeTwitter": "Voir sur Twitter ...",
+  "@NewsLoc_seeTwitter": {
     "type": "text",
     "placeholders": {}
   },
@@ -546,11 +546,6 @@
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_forceName": "Nom ET Prénom",
-  "@ReportingLoc_forceName": {
-    "type": "text",
-    "placeholders": {}
-  },
   "ReportingLoc_idHint": "Nom Prénom",
   "@ReportingLoc_idHint": {
     "type": "text",
@@ -563,6 +558,16 @@
   },
   "ReportingLoc_notEmpty": "Ne doit pas être vide",
   "@ReportingLoc_notEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_isNotValidUid": "Le nom d'utilisateur doit être sous le format 'prénom.nom'.",
+  "@ReportingLoc_isNotValidUid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_mustOnlyBeNumbers": "Ne doit contenir que des chiffres.",
+  "@ReportingLoc_mustOnlyBeNumbers": {
     "type": "text",
     "placeholders": {}
   },

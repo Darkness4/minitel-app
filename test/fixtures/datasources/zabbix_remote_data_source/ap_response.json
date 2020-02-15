@@ -1,0 +1,271 @@
+{
+  "jsonrpc": "2.0",
+  "result": [{
+    "hostid": "10264",
+    "host": "PointdaccsBat1et1",
+    "items": [{
+      "type": "6",
+      "value_type": "3",
+      "name": "WIFI Channel $2 on $1",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.1",
+      "lastvalue": "1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "WIFI Channel $2 on $1",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.2",
+      "lastvalue": "44"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "WIFI Channel $2 on $1",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.3",
+      "lastvalue": "1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "WIFI Channel $2 on $1",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.4",
+      "lastvalue": "44"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Users $2 on $1",
+      "units": "Users",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.8.1",
+      "lastvalue": "0"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Users $2 on $1",
+      "units": "Users",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.8.2",
+      "lastvalue": "1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Users $2 on $1",
+      "units": "Users",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.8.3",
+      "lastvalue": "0"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Users $2 on $1",
+      "units": "Users",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.8.4",
+      "lastvalue": "0"
+    }, {
+      "type": "6",
+      "value_type": "0",
+      "name": "Uptime",
+      "units": "uptime",
+      "snmp_oid": ".1.3.6.1.2.1.1.3.0",
+      "lastvalue": "12565761.2600"
+    }, {
+      "type": "6",
+      "value_type": "4",
+      "name": "IP Address",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.3.1.0",
+      "lastvalue": "10.163.0.22"
+    }, {
+      "type": "6",
+      "value_type": "4",
+      "name": "MAC Address",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.2.1.1.4.1",
+      "lastvalue": "80:2a:a8:c0:43:72"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Interface Speed (Mbit/s)",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.2.1.1.11.1",
+      "lastvalue": "1000"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Channel utilization 2G (BGN)",
+      "units": "%",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.1.1.6.1",
+      "lastvalue": "17"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Channel utilization 5G (AC)",
+      "units": "%",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.1.1.6.2",
+      "lastvalue": "4"
+    }, {
+      "type": "6",
+      "value_type": "4",
+      "name": "AP Hostname",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.2.1.1.5.0",
+      "lastvalue": "PointdaccsBat1et1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Channel 2G (N/G)",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.1",
+      "lastvalue": "1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Channel 5G (N/AC)",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.5",
+      "lastvalue": "0"
+    }, {
+      "type": "5",
+      "value_type": "3",
+      "name": "SNMP availability",
+      "units": "",
+      "snmp_oid": "",
+      "lastvalue": "1"
+    }],
+    "interfaces": [{
+      "ip": "10.163.0.22"
+    }]
+  }, {
+    "hostid": "10285",
+    "host": "PointdaccsBat1et0",
+    "items": [{
+      "type": "6",
+      "value_type": "3",
+      "name": "WIFI Channel $2 on $1",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.1",
+      "lastvalue": "1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "WIFI Channel $2 on $1",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.2",
+      "lastvalue": "44"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "WIFI Channel $2 on $1",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.3",
+      "lastvalue": "1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "WIFI Channel $2 on $1",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.4",
+      "lastvalue": "44"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Users $2 on $1",
+      "units": "Users",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.8.1",
+      "lastvalue": "0"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Users $2 on $1",
+      "units": "Users",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.8.2",
+      "lastvalue": "1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Users $2 on $1",
+      "units": "Users",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.8.3",
+      "lastvalue": "0"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Users $2 on $1",
+      "units": "Users",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.8.4",
+      "lastvalue": "0"
+    }, {
+      "type": "6",
+      "value_type": "0",
+      "name": "Uptime",
+      "units": "uptime",
+      "snmp_oid": ".1.3.6.1.2.1.1.3.0",
+      "lastvalue": "11871193.6500"
+    }, {
+      "type": "6",
+      "value_type": "4",
+      "name": "IP Address",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.3.1.0",
+      "lastvalue": "10.163.0.20"
+    }, {
+      "type": "6",
+      "value_type": "4",
+      "name": "MAC Address",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.2.1.1.4.1",
+      "lastvalue": "80:2a:a8:c0:44:fa"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Interface Speed (Mbit/s)",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.2.1.1.11.1",
+      "lastvalue": "1000"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Channel utilization 2G (BGN)",
+      "units": "%",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.1.1.6.1",
+      "lastvalue": "21"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Channel utilization 5G (AC)",
+      "units": "%",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.1.1.6.2",
+      "lastvalue": "4"
+    }, {
+      "type": "6",
+      "value_type": "4",
+      "name": "AP Hostname",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.2.1.1.5.0",
+      "lastvalue": "PointdaccsBat1et0"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Channel 2G (N/G)",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.1",
+      "lastvalue": "1"
+    }, {
+      "type": "6",
+      "value_type": "3",
+      "name": "Channel 5G (N/AC)",
+      "units": "",
+      "snmp_oid": ".1.3.6.1.4.1.41112.1.6.1.2.1.4.5",
+      "lastvalue": "0"
+    }, {
+      "type": "5",
+      "value_type": "3",
+      "name": "SNMP availability",
+      "units": "",
+      "snmp_oid": "",
+      "lastvalue": "1"
+    }],
+    "interfaces": [{
+      "ip": "10.163.0.20"
+    }]
+  }],
+  "id": 2
+}

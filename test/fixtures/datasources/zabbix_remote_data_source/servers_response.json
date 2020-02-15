@@ -1,0 +1,117 @@
+{
+  "jsonrpc": "2.0",
+  "result": [{
+    "hostid": "10322",
+    "host": "DHCP",
+    "items": [{
+      "type": "3",
+      "value_type": "3",
+      "name": "ICMP ping",
+      "units": "",
+      "snmp_oid": "",
+      "lastvalue": "1"
+    }, {
+      "type": "3",
+      "value_type": "0",
+      "name": "ICMP loss",
+      "units": "%",
+      "snmp_oid": "",
+      "lastvalue": "0.0000"
+    }, {
+      "type": "3",
+      "value_type": "0",
+      "name": "ICMP response time",
+      "units": "s",
+      "snmp_oid": "",
+      "lastvalue": "0.0002"
+    }],
+    "interfaces": [{
+      "ip": "10.163.0.5"
+    }]
+  }, {
+    "hostid": "10323",
+    "host": "DNS",
+    "items": [{
+      "type": "3",
+      "value_type": "3",
+      "name": "ICMP ping",
+      "units": "",
+      "snmp_oid": "",
+      "lastvalue": "1"
+    }, {
+      "type": "3",
+      "value_type": "0",
+      "name": "ICMP loss",
+      "units": "%",
+      "snmp_oid": "",
+      "lastvalue": "0.0000"
+    }, {
+      "type": "3",
+      "value_type": "0",
+      "name": "ICMP response time",
+      "units": "s",
+      "snmp_oid": "",
+      "lastvalue": "0.0001"
+    }],
+    "interfaces": [{
+      "ip": "10.163.0.6"
+    }]
+  }, {
+    "hostid": "10324",
+    "host": "GStar",
+    "items": [{
+      "type": "3",
+      "value_type": "3",
+      "name": "ICMP ping",
+      "units": "",
+      "snmp_oid": "",
+      "lastvalue": "1"
+    }, {
+      "type": "3",
+      "value_type": "0",
+      "name": "ICMP loss",
+      "units": "%",
+      "snmp_oid": "",
+      "lastvalue": "0.0000"
+    }, {
+      "type": "3",
+      "value_type": "0",
+      "name": "ICMP response time",
+      "units": "s",
+      "snmp_oid": "",
+      "lastvalue": "0.0003"
+    }],
+    "interfaces": [{
+      "ip": "10.163.0.10"
+    }]
+  }, {
+    "hostid": "10326",
+    "host": "Minecraft",
+    "items": [{
+      "type": "3",
+      "value_type": "3",
+      "name": "ICMP ping",
+      "units": "",
+      "snmp_oid": "",
+      "lastvalue": "1"
+    }, {
+      "type": "3",
+      "value_type": "0",
+      "name": "ICMP loss",
+      "units": "%",
+      "snmp_oid": "",
+      "lastvalue": "0.0000"
+    }, {
+      "type": "3",
+      "value_type": "0",
+      "name": "ICMP response time",
+      "units": "s",
+      "snmp_oid": "",
+      "lastvalue": "0.0001"
+    }],
+    "interfaces": [{
+      "ip": "10.163.0.50"
+    }]
+  }],
+  "id": 2
+}

@@ -1,0 +1,14 @@
+{
+  "connection": "keep-alive",
+  "location": "https://portail.emse.fr/ics/",
+  "set-cookie": "PHPSESSID=ST-40612-FcvunQKSxT4c0Cp9f0i7-cas1emsefr; path=/; HTTPOnly; Secure",
+  "cache-control": "no-store, no-cache, must-revalidate",
+  "date": "Mon, 10 Feb 2020 00:12:34 GMT",
+  "content-length": "0",
+  "x-frame-options": "ALLOWALL",
+  "pragma": "no-cache",
+  "content-type": "text/html; charset=UTF-8",
+  "x-xss-protection": "1; mode=block",
+  "server": "nginx",
+  "expires": "Thu, 19 Nov 1981 08:52:00 GMT"
+}

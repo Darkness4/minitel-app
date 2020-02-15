@@ -1,0 +1,11 @@
+{
+  "x-powered-by": "Watchdoc",
+  "persistent-auth": "true",
+  "cache-control": "private",
+  "set-cookie": "t%5FDEFAULT%5Fclient%5Fdefault=1091035530; path=/watchdoc,last%5Flang=fr%2DFR; expires=Wed, 11-Mar-2020 17:49:10 GMT; path=/watchdoc,lang%5Fdefault=fr%2DFR; expires=Tue, 09-Feb-2021 17:49:10 GMT; path=/watchdoc,SERVER=DEFAULT; path=/watchdoc,ASPSESSIONIDAQTCQSTR=JGILMLMALCJFCPALPMGKEHOF; path=/",
+  "date": "Mon, 10 Feb 2020 17:49:11 GMT",
+  "content-length": "61",
+  "content-type": "text/html",
+  "server": "Microsoft-IIS/8.5",
+  "expires": "Mon, 10 Feb 2020 01:09:11 GMT"
+}

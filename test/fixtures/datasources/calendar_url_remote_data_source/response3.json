@@ -1,0 +1,14 @@
+{
+  "connection": "keep-alive",
+  "cache-control": "no-store, no-cache, must-revalidate",
+  "date": "Mon, 10 Feb 2020 00:12:34 GMT",
+  "content-encoding": "gzip",
+  "vary": "Accept-Encoding",
+  "content-length": "879",
+  "x-frame-options": "ALLOWALL",
+  "pragma": "no-cache",
+  "content-type": "text/html; charset=UTF-8",
+  "x-xss-protection": "1; mode=block",
+  "server": "nginx",
+  "expires": "Thu, 19 Nov 1981 08:52:00 GMT"
+}

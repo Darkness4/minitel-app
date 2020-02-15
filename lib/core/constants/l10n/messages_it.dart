@@ -8,13 +8,6 @@
 // ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
 // ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
 // ignore_for_file:unused_import, file_names
-// ignore_for_file:always_specify_types, type_annotate_public_apis
-// ignore_for_file:always_declare_return_types, prefer_final_locals
-// ignore_for_file:always_put_control_body_on_new_line
-// ignore_for_file:implicit_dynamic_return
-// ignore_for_file:implicit_dynamic_parameter
-// ignore_for_file:invalid_assignment
-// ignore_for_file:map_value_type_not_assignable
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
@@ -170,8 +163,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Con la tua applicazione e-mail preferita, usa la configurazione manuale e compila i campi corrispondenti."),
         "MailLoc_mailContent2": MessageLookupByLibrary.simpleMessage(
             "E-mail: firstname.lastname@etu.emse.fr\nPassword: password della scuola\nServer in entrata: IMAP\nNome host: messel.emse.fr\nPorta: 993\nSicurezza: ssl / tls\nMetodo di autenticazione: password standard\nIdentificatore: firstname.lastname (⚠️ senza @etu.emse.fr)\nServer in uscita: Nome host: messel.emse.fr\nPorta: 465\nSicurezza: ssl / tls\nMetodo di autenticazione: password standard\nIdentificatore: firstname.lastname (⚠️ senza @etu.emse.fr)"),
-        "NewsLoc_seeFacebook":
-            MessageLookupByLibrary.simpleMessage("Vedi su Facebook ..."),
+        "NewsLoc_seeTwitter":
+            MessageLookupByLibrary.simpleMessage("Vedi su Twitter ..."),
         "NewsLoc_title": MessageLookupByLibrary.simpleMessage("Notizie"),
         "NotificationSettingsLoc_early1":
             MessageLookupByLibrary.simpleMessage("Notifica "),
@@ -211,12 +204,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Numero di Camera"),
         "ReportingLoc_chamberLabel":
             MessageLookupByLibrary.simpleMessage("Camera"),
-        "ReportingLoc_forceName":
-            MessageLookupByLibrary.simpleMessage("Cognome E Nome"),
         "ReportingLoc_idHint":
             MessageLookupByLibrary.simpleMessage("Cognome nome"),
         "ReportingLoc_idLabel":
             MessageLookupByLibrary.simpleMessage("Identità"),
+        "ReportingLoc_isNotValidUid": MessageLookupByLibrary.simpleMessage(
+            "Il nome utente deve essere nel formato \'nome.cognome\'."),
+        "ReportingLoc_mustOnlyBeNumbers":
+            MessageLookupByLibrary.simpleMessage("Deve contenere solo numeri."),
         "ReportingLoc_notEmpty":
             MessageLookupByLibrary.simpleMessage("Non deve essere vuoto"),
         "ReportingLoc_share":

@@ -1,0 +1,14 @@
+{
+  "set-cookie": "AGIMUS=TRACE-23198-doPYwPUNoliXBl9nGt9Eh31oTkbJyob7dBhbDwqDFzYlXlwDtg-cas1.emse.fr; Domain=.emse.fr; Expires=Sat, 15-Feb-2020 00:12:33 GMT; Path=/;HttpOnly;Secure,CASPRIVACY=\"\"; Path=/; Secure;HttpOnly;Secure,CASTGC=TGT-23198-SgmjcBfcpx9EizyvGQ96uHhS7RVOki2E5OE0zaGNceMVsRiaOu-cas1.emse.fr; Path=/; Secure;HttpOnly;Secure",
+  "cache-control": "no-cache,no-store",
+  "location": "https://portail.emse.fr/ics/?ticket=ST-40612-FcvunQKSxT4c0Cp9f0i7-cas1.emse.fr",
+  "date": "Mon, 10 Feb 2020 00:12:33 GMT",
+  "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+  "content-length": "0",
+  "x-frame-options": "SAMEORIGIN",
+  "pragma": "no-cache",
+  "x-xss-protection": "1; mode=block",
+  "x-content-type-options": "nosniff",
+  "server": "Apache",
+  "expires": "Thu, 01 Jan 1970 00:00:00 GMT"
+}

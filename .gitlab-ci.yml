@@ -19,7 +19,7 @@ unit-tests:
 
   artifacts:
     paths:
-    - coverage/
+      - coverage/
 
 # navigation_test:
 #   stage: integration-tests
@@ -27,8 +27,8 @@ unit-tests:
 
 #   before_script:
 #     - /bin/sh ./.ci-scripts/before_script_get_deps_emulator.sh
-#     - /bin/sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-#     - /bin/sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - /bin/sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+#     - /bin/sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 #     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
 #   script:
@@ -55,8 +55,8 @@ unit-tests:
 #     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
 #     - echo "keyAlias=${ALIAS}" >> android/key.properties
 #     - echo "storeFile=keystore.jks" >> android/key.properties
-#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-#     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+#     - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 #     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
 #   script:
@@ -79,8 +79,8 @@ unit-tests:
 #     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
 #     - echo "keyAlias=${ALIAS}" >> android/key.properties
 #     - echo "storeFile=keystore.jks" >> android/key.properties
-#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-#     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+#     - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 #     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
 #   script:
@@ -103,8 +103,8 @@ unit-tests:
 #     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
 #     - echo "keyAlias=${ALIAS}" >> android/key.properties
 #     - echo "storeFile=keystore.jks" >> android/key.properties
-#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-#     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+#     - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 #     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
 #   script:
@@ -127,8 +127,8 @@ unit-tests:
 #     - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
 #     - echo "keyAlias=${ALIAS}" >> android/key.properties
 #     - echo "storeFile=keystore.jks" >> android/key.properties
-#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-#     - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+#     - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+#     - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 #     - /bin/bash ./.ci-scripts/before_script_integration_tests.sh
 
 #   script:
@@ -148,7 +148,7 @@ pages:
 
   before_script:
     - gem install coveralls-lcov
-    - "echo \"repo_token: ${COVERALLS_TOKEN}\" > .coveralls.yml"
+    - 'echo "repo_token: ${COVERALLS_TOKEN}" > .coveralls.yml'
 
   script:
     - coveralls-lcov ./coverage/lcov.info
@@ -161,8 +161,8 @@ pages:
       - public
 
   only:
-  - master
-  - develop
+    - master
+    - develop
 
 build-test:
   stage: test
@@ -171,34 +171,34 @@ build-test:
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
-    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
-    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
-    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storePassword=$(echo ${KEYSTORE_PASSWORD} | base64 -d)" > android/key.properties
+    - echo "keyPassword=$(echo ${KEY_PASSWORD} | base64 -d)" >> android/key.properties
+    - echo "keyAlias=$(echo ${ALIAS} | base64 -d)" >> android/key.properties
     - echo "storeFile=keystore.jks" >> android/key.properties
-    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-    - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+    - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 
   script:
     - flutter build apk --verbose --target-platform android-arm --split-per-abi
 
   except:
-  - master
-  - develop
-  - tests
+    - master
+    - develop
+    - tests
 
 build-apk:
   stage: build
   image: darkness4/flutter-builder:29-master
-  
+
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
-    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
-    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
-    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storePassword=$(echo ${KEYSTORE_PASSWORD} | base64 -d)" > android/key.properties
+    - echo "keyPassword=$(echo ${KEY_PASSWORD} | base64 -d)" >> android/key.properties
+    - echo "keyAlias=$(echo ${ALIAS} | base64 -d)" >> android/key.properties
     - echo "storeFile=keystore.jks" >> android/key.properties
-    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-    - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+    - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 
   script:
     - flutter build apk --verbose --target-platform android-arm,android-arm64 --split-per-abi
@@ -220,16 +220,16 @@ build-apk:
 build-aab:
   stage: build
   image: darkness4/flutter-builder:29-master
-  
+
   before_script:
     - /bin/sh ./.ci-scripts/before_script_get_deps_build.sh
     - echo ${RELEASE_KEYSTORE_BASE64} | base64 -d > android/app/keystore.jks
-    - echo "storePassword=${KEYSTORE_PASSWORD}" > android/key.properties
-    - echo "keyPassword=${KEY_PASSWORD}" >> android/key.properties
-    - echo "keyAlias=${ALIAS}" >> android/key.properties
+    - echo "storePassword=$(echo ${KEYSTORE_PASSWORD} | base64 -d)" > android/key.properties
+    - echo "keyPassword=$(echo ${KEY_PASSWORD} | base64 -d)" >> android/key.properties
+    - echo "keyAlias=$(echo ${ALIAS} | base64 -d)" >> android/key.properties
     - echo "storeFile=keystore.jks" >> android/key.properties
-    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
-    - sed -iEn "s/_facebookApi = \"ZXhlbXBsZQ==\"/_facebookApi = \"${CI_FACEBOOK_KEY}\"/g" ./lib/core/constants/api_constants.dart
+    - sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+    - sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 
   script:
     - flutter build appbundle --verbose --target-platform android-arm,android-arm64

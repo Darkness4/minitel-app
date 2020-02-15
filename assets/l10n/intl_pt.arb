@@ -453,8 +453,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "NewsLoc_seeFacebook": "Veja no Facebook ...",
-  "@NewsLoc_seeFacebook": {
+  "NewsLoc_seeTwitter": "Veja no Twitter ...",
+  "@NewsLoc_seeTwitter": {
     "type": "text",
     "placeholders": {}
   },
@@ -565,8 +565,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "ReportingLoc_forceName": "Sobrenome E Nome",
-  "@ReportingLoc_forceName": {
+  "ReportingLoc_isNotValidUid": "O nome de usuário deve estar no formato 'firstname.lastname'.",
+  "@ReportingLoc_isNotValidUid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_mustOnlyBeNumbers": "Deve conter apenas números.",
+  "@ReportingLoc_mustOnlyBeNumbers": {
     "type": "text",
     "placeholders": {}
   },
