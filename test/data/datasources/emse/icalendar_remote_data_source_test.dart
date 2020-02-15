@@ -50,8 +50,7 @@ void main() {
         await dataSource.streamICalendar(tURL).drain<String>();
         // assert
         final verification = verify(
-          mockHttpClient
-              .send(captureThat(const TypeMatcher<http.BaseRequest>())),
+          mockHttpClient.send(captureThat(isA<http.BaseRequest>())),
         );
         final http.Request capturedRequest =
             verification.captured.first as http.Request;
@@ -81,8 +80,8 @@ void main() {
         // act
         final call = dataSource.streamICalendar;
         // assert
-        expect(() => call(tURL).drain<String>(),
-            throwsA(const TypeMatcher<ServerException>()));
+        expect(
+            () => call(tURL).drain<String>(), throwsA(isA<ServerException>()));
       },
     );
 
@@ -94,8 +93,8 @@ void main() {
         // act
         final call = dataSource.streamICalendar;
         // assert
-        expect(() => call(tURL).drain<String>(),
-            throwsA(const TypeMatcher<ServerException>()));
+        expect(
+            () => call(tURL).drain<String>(), throwsA(isA<ServerException>()));
       },
     );
   });

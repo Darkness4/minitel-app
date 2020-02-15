@@ -162,7 +162,7 @@ void main() {
                   selectedTime: tSelectedTime,
                   selectedUrl: tSelectedUrl,
                 ),
-            throwsA(const TypeMatcher<ServerException>()));
+            throwsA(isA<ServerException>()));
       },
     );
 
@@ -181,7 +181,7 @@ void main() {
                   selectedTime: tSelectedTime,
                   selectedUrl: tSelectedUrl,
                 ),
-            throwsA(const TypeMatcher<ClientException>()));
+            throwsA(isA<ClientException>()));
       },
     );
   });
@@ -196,7 +196,7 @@ void main() {
         await dataSource.fetchStatus(tSelectedUrl);
         // assert
         final verification = verify(await mockHttpClient.send(
-          captureThat(const TypeMatcher<http.Request>()),
+          captureThat(isA<http.Request>()),
         ));
 
         final http.Request request =
@@ -226,8 +226,7 @@ void main() {
         // act
         final call = dataSource.fetchStatus;
         // assert
-        expect(() => call(tSelectedUrl),
-            throwsA(const TypeMatcher<ServerException>()));
+        expect(() => call(tSelectedUrl), throwsA(isA<ServerException>()));
       },
     );
 
@@ -239,8 +238,7 @@ void main() {
         // act
         final call = dataSource.fetchStatus;
         // assert
-        expect(() => call(tSelectedUrl),
-            throwsA(const TypeMatcher<NotLoggedInException>()));
+        expect(() => call(tSelectedUrl), throwsA(isA<NotLoggedInException>()));
       },
     );
   });

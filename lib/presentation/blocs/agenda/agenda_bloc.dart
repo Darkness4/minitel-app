@@ -8,7 +8,6 @@ import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
-import 'package:rxdart/rxdart.dart';
 
 part 'agenda_event.dart';
 part 'agenda_state.dart';
@@ -42,16 +41,18 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
         print(
             "Notifications set up with settings: ${agendaEvent.notificationSettings.toString()}");
 
-        final Stream<Event> events = parsedCalendar.sortedEvents
-            .where((event) => event.dtstart.isAfter(DateTime.now()))
-            .doOnData((event) => event.addToNotification(
-                  flutterLocalNotificationsPlugin:
-                      flutterLocalNotificationsPlugin,
-                  notificationSettings: agendaEvent.notificationSettings,
-                  notificationDetails: notificationDetails,
-                ));
+        final Iterable<Event> events = parsedCalendar.sortedByDTStart
+            .where((event) => event.dtstart.isAfter(DateTime.now()));
 
-        yield AgendaLoaded(events: events);
+        yield AgendaLoaded(events: events.toList());
+
+        final List<Future<void>> futures = <Future<void>>[];
+        events.forEach((event) => futures.add(event.addToNotification(
+              flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
+              notificationSettings: agendaEvent.notificationSettings,
+              notificationDetails: notificationDetails,
+            )));
+        await Future.wait<void>(futures);
       } catch (e) {
         yield AgendaError(e);
       }

@@ -43,7 +43,7 @@ void main() {
         // act
         final call = dataSource.getLastCalendarURL;
         // assert
-        expect(call, throwsA(const TypeMatcher<CacheException>()));
+        expect(call, throwsA(isA<CacheException>()));
       },
     );
   });

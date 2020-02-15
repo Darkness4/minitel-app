@@ -55,7 +55,7 @@ void main() {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response1.html'))),
-          200,
+          302,
           headers: Map<String, String>.from(json.decode(fixture(
                   'datasources/portail_emse_remote_data_source/response1.json'))
               as Map<String, dynamic>),
@@ -66,7 +66,7 @@ void main() {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response2.html'))),
-          200,
+          302,
           headers: Map<String, String>.from(json.decode(fixture(
                   'datasources/portail_emse_remote_data_source/response2.json'))
               as Map<String, dynamic>),
@@ -116,7 +116,7 @@ void main() {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response1.html'))),
-          200,
+          302,
           headers: {HttpHeaders.setCookieHeader: ""},
         );
       } else if (request.method == 'GET' &&
@@ -125,7 +125,7 @@ void main() {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response2.html'))),
-          200,
+          302,
           headers: Map<String, String>.from(json.decode(fixture(
                   'datasources/portail_emse_remote_data_source/response2.json'))
               as Map<String, dynamic>),
@@ -151,8 +151,8 @@ void main() {
 
   void setUpMockHttpClientFailure404Case1() {
     when(mockHttpClient.get(
-            "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin"))
-        .thenAnswer((_) async => http.Response('Something went wrong', 404));
+      "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
+    )).thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
   void setUpMockHttpClientFailure404Case2() {
@@ -208,7 +208,7 @@ void main() {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response1.html'))),
-          200,
+          302,
           headers: Map<String, String>.from(json.decode(fixture(
                   'datasources/portail_emse_remote_data_source/response1.json'))
               as Map<String, dynamic>),
@@ -249,7 +249,7 @@ void main() {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response1.html'))),
-          200,
+          302,
           headers: Map<String, String>.from(json.decode(fixture(
                   'datasources/portail_emse_remote_data_source/response1.json'))
               as Map<String, dynamic>),
@@ -260,7 +260,7 @@ void main() {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response2.html'))),
-          200,
+          302,
           headers: Map<String, String>.from(json.decode(fixture(
                   'datasources/portail_emse_remote_data_source/response2.json'))
               as Map<String, dynamic>),
@@ -307,7 +307,7 @@ void main() {
             await dataSource.login(username: tUser, password: tPassword);
         // assert
         final verification = verify(mockListCookies.addAll(
-          captureThat(const TypeMatcher<List<Cookie>>()),
+          captureThat(isA<List<Cookie>>()),
         ));
         final actualCookies = verification.captured.first as List<Cookie>;
         final expectedCookies = <Cookie>[];
@@ -342,7 +342,7 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ServerException>()));
+            throwsA(isA<ServerException>()));
       },
     );
 
@@ -355,7 +355,7 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ServerException>()));
+            throwsA(isA<ServerException>()));
       },
     );
 
@@ -368,7 +368,7 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ServerException>()));
+            throwsA(isA<ServerException>()));
       },
     );
 
@@ -381,7 +381,7 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ServerException>()));
+            throwsA(isA<ServerException>()));
       },
     );
 
@@ -394,7 +394,7 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ClientException>()));
+            throwsA(isA<ClientException>()));
       },
     );
   });

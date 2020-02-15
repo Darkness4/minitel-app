@@ -80,8 +80,7 @@ void main() {
         // act
         final call = dataSource.fetchReleases;
         // assert
-        expect(
-            () => call(tRepo), throwsA(const TypeMatcher<ServerException>()));
+        expect(() => call(tRepo), throwsA(isA<ServerException>()));
       },
     );
   });

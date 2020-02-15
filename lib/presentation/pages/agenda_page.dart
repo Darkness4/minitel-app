@@ -71,8 +71,7 @@ class AgendaPage extends StatelessWidget {
                   return ErrorAgendaWidget(state.error);
                 } else if (state is AgendaLoaded) {
                   return StreamBuilder<List<Widget>>(
-                    stream: _listEventCards(
-                        context, state.events.asBroadcastStream()),
+                    stream: _listEventCards(context, state.events),
                     builder: (BuildContext context,
                         AsyncSnapshot<List<Widget>> snapshot) {
                       if (snapshot.hasData) {
@@ -110,13 +109,13 @@ class AgendaPage extends StatelessWidget {
   }
 
   Stream<List<Widget>> _listEventCards(
-      BuildContext context, Stream<Event> events) async* {
+      BuildContext context, Iterable<Event> events) async* {
     List<Widget> monthlyWidgets = <Widget>[];
     List<Widget> dailyEvents = <Widget>[];
     final List<Widget> monthPages = <Widget>[];
     DateTime oldDt;
 
-    if (await events.isEmpty) {
+    if (events.isEmpty) {
       yield <Widget>[
         Center(
           child: Text(
@@ -132,9 +131,10 @@ class AgendaPage extends StatelessWidget {
         ),
       ];
     } else {
+      yield monthPages;
       DateTime dt;
 
-      await for (final Event event in events) {
+      for (final Event event in events) {
         dt = event.dtstart;
 
         // New Month
@@ -145,7 +145,6 @@ class AgendaPage extends StatelessWidget {
           // Return the last month
           if (monthlyWidgets.isNotEmpty) {
             monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
-            yield monthPages;
           }
           oldDt = dt;
 
@@ -175,7 +174,6 @@ class AgendaPage extends StatelessWidget {
       if (dailyEvents.isNotEmpty && monthlyWidgets.isNotEmpty) {
         monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
         monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
-        yield monthPages;
       }
     }
   }

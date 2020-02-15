@@ -91,7 +91,7 @@ void main() {
         // act
         final call = dataSource.load;
         // assert
-        expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
+        expect(() => call(), throwsA(isA<CacheException>()));
       },
     );
   });

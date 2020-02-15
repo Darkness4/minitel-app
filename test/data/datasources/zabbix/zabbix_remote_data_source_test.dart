@@ -156,8 +156,7 @@ void main() {
         // act
         final call = dataSource.fetchZabbixHosts;
         // assert
-        expect(() => call(tGroupIds),
-            throwsA(const TypeMatcher<ServerException>()));
+        expect(() => call(tGroupIds), throwsA(isA<ServerException>()));
       },
     );
 
@@ -169,8 +168,7 @@ void main() {
         // act
         final call = dataSource.fetchZabbixHosts;
         // assert
-        expect(() => call(tGroupIds),
-            throwsA(const TypeMatcher<ClientException>()));
+        expect(() => call(tGroupIds), throwsA(isA<ClientException>()));
       },
     );
 
@@ -182,8 +180,7 @@ void main() {
         // act
         final call = dataSource.fetchZabbixHosts;
         // assert
-        expect(() => call(tGroupIds),
-            throwsA(const TypeMatcher<ClientException>()));
+        expect(() => call(tGroupIds), throwsA(isA<ClientException>()));
       },
     );
 
@@ -195,8 +192,7 @@ void main() {
         // act
         final call = dataSource.fetchZabbixHosts;
         // assert
-        expect(() => call(tGroupIds),
-            throwsA(const TypeMatcher<ClientException>()));
+        expect(() => call(tGroupIds), throwsA(isA<ClientException>()));
       },
     );
   });

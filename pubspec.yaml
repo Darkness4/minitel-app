@@ -8,8 +8,8 @@ author: Nguyen Marc <nguyen_marc@live.fr>
 version: 2.0.0+12
 
 environment:
-  sdk: '>=2.7.0 <3.0.0'
-  flutter: '>=1.12.13 <2.0.0'
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.12.13 <2.0.0"
 
 # Use ^version only if the package are stable
 # ^1.2.0 means >=1.2.0 <2.0.0
@@ -49,13 +49,14 @@ dev_dependencies:
   mockito: ^4.1.1
   flutter_launcher_icons: ^0.7.4
   intl_translation: ^0.17.9
+  matcher: ^0.12.6
 
 flutter_icons:
-  android: 'launcher_icon'
+  android: "launcher_icon"
   ios: true
-  image_path: 'assets/icon/icon.png'
-  adaptive_icon_background: '#43a047'
-  adaptive_icon_foreground: 'assets/icon/icon.png'
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#43a047"
+  adaptive_icon_foreground: "assets/icon/icon.png"
 
 flutter:
   assets:

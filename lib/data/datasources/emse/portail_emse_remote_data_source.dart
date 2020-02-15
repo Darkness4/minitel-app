@@ -33,7 +33,7 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
 
       if (response.statusCode != 200) {
         throw ServerException(
-            "HTTP Status Code : ${response.statusCode} from ${response.headers[HttpHeaders.hostHeader]}");
+            "HTTP Status Code : ${response.statusCode} ${response.reasonPhrase}");
       }
 
       final String lt = RegExp(r'name="lt" value="([^"]*)"')
@@ -62,9 +62,9 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
               '${jSessionIDCampus.name}=${jSessionIDCampus.value}',
       );
 
-      if (response2.statusCode != 200) {
+      if (response2.statusCode != 302) {
         throw ServerException(
-            "HTTP Status Code : ${response.statusCode} from ${response.headers[HttpHeaders.hostHeader]}");
+            "HTTP Status Code : ${response2.statusCode} ${response2.reasonPhrase}");
       }
 
       if (!response2.headers[HttpHeaders.setCookieHeader].contains('AGIMUS')) {
@@ -91,9 +91,9 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
                   '${casGC.name}=${casGC.value}',
       );
 
-      if (response3.statusCode != 200) {
+      if (response3.statusCode != 302) {
         throw ServerException(
-            "HTTP Status Code : ${response.statusCode} from ${response.headers[HttpHeaders.hostHeader]}");
+            "HTTP Status Code : ${response3.statusCode} ${response3.reasonPhrase}");
       }
 
       final Cookie casAuth = response3.headers
@@ -108,7 +108,7 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
 
       if (response4.statusCode != 200) {
         throw ServerException(
-            "HTTP Status Code : ${response.statusCode} from ${response.headers[HttpHeaders.hostHeader]}");
+            "HTTP Status Code : ${response4.statusCode} ${response4.reasonPhrase}");
       }
 
       final listCookies4 = response4.headers.parseSetCookie();

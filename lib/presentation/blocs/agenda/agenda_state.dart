@@ -28,7 +28,7 @@ class AgendaError extends AgendaState {
 }
 
 class AgendaLoaded extends AgendaState {
-  final Stream<Event> events;
+  final List<Event> events;
 
   const AgendaLoaded({@required this.events});
 

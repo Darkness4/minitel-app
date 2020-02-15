@@ -52,7 +52,7 @@ void main() {
         // act
         final call = dataSource.getParsedCalendar();
         // assert
-        expect(call, throwsA(const TypeMatcher<CacheException>()));
+        expect(call, throwsA(isA<CacheException>()));
       },
     );
   });

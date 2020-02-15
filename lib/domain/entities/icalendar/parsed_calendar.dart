@@ -33,7 +33,7 @@ class ParsedCalendar extends Equatable {
 }
 
 extension ParsedCalendarUtils on ParsedCalendar {
-  Stream<Event> get sortedEvents async* {
+  Iterable<Event> get sortedByDTStart sync* {
     this.events.sort((Event event1, Event event2) =>
         event1.dtstart.compareTo(event2.dtstart));
 

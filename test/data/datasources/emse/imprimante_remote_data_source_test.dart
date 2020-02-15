@@ -80,8 +80,8 @@ void main() {
                 'datasources/imprimante_remote_data_source/response0.json'))
             as Map<String, dynamic>);
 
-        final verification = verify(mockListCookies
-            .addAll(captureThat(const TypeMatcher<List<Cookie>>())));
+        final verification =
+            verify(mockListCookies.addAll(captureThat(isA<List<Cookie>>())));
         final actualCookies = verification.captured.first as List<Cookie>;
         final expectedCookies = headers.parseSetCookie();
         expect(cookies, equals(mockListCookies));
@@ -99,7 +99,7 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ServerException>()));
+            throwsA(isA<ServerException>()));
       },
     );
 
@@ -112,7 +112,7 @@ void main() {
         final call = dataSource.login;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ServerException>()));
+            throwsA(isA<ServerException>()));
       },
     );
   });

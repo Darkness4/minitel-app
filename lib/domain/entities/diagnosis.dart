@@ -1,8 +1,6 @@
 import 'dart:collection';
 
-import 'package:equatable/equatable.dart';
-
-class Diagnosis extends Equatable with MapMixin<String, Future<String>> {
+class Diagnosis with MapMixin<String, Future<String>> {
   final _internal = <String, Future<String>>{};
 
   Future<String> getReport() async {
@@ -18,9 +16,6 @@ class Diagnosis extends Equatable with MapMixin<String, Future<String>> {
 
   @override
   Future<String> operator [](Object key) => _internal[key];
-
-  @override
-  List<Object> get props => _internal.entries.toList();
 
   @override
   void operator []=(String key, Future<String> value) {

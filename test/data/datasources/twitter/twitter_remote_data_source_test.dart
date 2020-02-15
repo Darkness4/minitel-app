@@ -85,7 +85,7 @@ void main() {
         // act
         final call = dataSource.fetchFeed;
         // assert
-        expect(call, throwsA(const TypeMatcher<ServerException>()));
+        expect(call, throwsA(isA<ServerException>()));
       },
     );
   });

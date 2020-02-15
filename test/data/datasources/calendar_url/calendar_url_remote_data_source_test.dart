@@ -59,8 +59,7 @@ void main() {
       ),
     );
 
-    when(mockHttpClient.send(argThat(const TypeMatcher<http.BaseRequest>())))
-        .thenAnswer(
+    when(mockHttpClient.send(argThat(isA<http.BaseRequest>()))).thenAnswer(
       (_) async => http.StreamedResponse(
         Stream.value(utf8.encode(fixture(
             'datasources/calendar_url_remote_data_source/response2.html'))),
@@ -158,8 +157,7 @@ void main() {
           headers: anyNamed("headers"),
         ));
         final verification = verify(
-          mockHttpClient
-              .send(captureThat(const TypeMatcher<http.BaseRequest>())),
+          mockHttpClient.send(captureThat(isA<http.BaseRequest>())),
         );
         final http.Request capturedRequest =
             verification.captured.first as http.Request;
@@ -202,7 +200,7 @@ void main() {
         final call = dataSource.getCalendarURL;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ServerException>()));
+            throwsA(isA<ServerException>()));
       },
     );
 
@@ -215,7 +213,7 @@ void main() {
         final call = dataSource.getCalendarURL;
         // assert
         expect(() => call(username: tUser, password: tPassword),
-            throwsA(const TypeMatcher<ClientException>()));
+            throwsA(isA<ClientException>()));
       },
     );
   });
