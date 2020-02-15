@@ -46,7 +46,7 @@ void main() {
       test('Screenshot news', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
         await driver.tap(find.byValueKey(Keys.newsRoute));
-        await Future<dynamic>.delayed(const Duration(seconds: 5));
+        await Future<dynamic>.delayed(const Duration(seconds: 10));
         await takeScreenshot(driver, ScreenshotsPaths.news);
       });
 

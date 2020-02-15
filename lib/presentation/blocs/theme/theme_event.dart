@@ -14,3 +14,7 @@ class ThemeToDark extends ThemeEvent {
 class ThemeToLight extends ThemeEvent {
   const ThemeToLight();
 }
+
+class ThemeToAdaptive extends ThemeEvent {
+  const ThemeToAdaptive();
+}

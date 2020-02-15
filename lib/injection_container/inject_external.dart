@@ -2,15 +2,6 @@ part of 'injection_container.dart';
 
 Future<void> injectExternal() async {
   final sharedPreferences = await SharedPreferences.getInstance();
-  if (sharedPreferences.getBool('dark') ?? false) {
-    sl.registerFactory<ThemeState>(
-      () => const ThemeDark(),
-    );
-  } else {
-    sl.registerLazySingleton<ThemeState>(
-      () => const ThemeLight(),
-    );
-  }
   final customClient = HttpClient()
     ..badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true);

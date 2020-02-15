@@ -28,9 +28,20 @@ void injectBloc() {
       repository: sl<NotificationSettingsRepository>(),
     ),
   );
-  sl.registerFactory<ThemeBloc>(
-    () => ThemeBloc(initialState: sl<ThemeState>()),
-  );
+  final String initialTheme = sl<SharedPreferences>().getString('theme');
+  if (initialTheme == "Dark") {
+    sl.registerFactory<ThemeBloc>(
+      () => ThemeBloc(initialState: const ThemeDark()),
+    );
+  } else if (initialTheme == "Light") {
+    sl.registerFactory<ThemeBloc>(
+      () => ThemeBloc(initialState: const ThemeLight()),
+    );
+  } else {
+    sl.registerFactory<ThemeBloc>(
+      () => ThemeBloc(initialState: const ThemeAdaptive()),
+    );
+  }
 
   sl.registerFactory<PortalBloc>(
     () => PortalBloc(

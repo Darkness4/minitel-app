@@ -176,22 +176,53 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           const Divider(),
-          ListTile(
-            title: Text(AppLoc.of(context).forceDark),
-            trailing: Switch(
-              value: Theme.of(context).brightness == Brightness.dark,
-              onChanged: (bool value) async {
-                final prefs = sl<SharedPreferences>();
-                if (value) {
-                  context.bloc<ThemeBloc>().add(const ThemeToDark());
-                  await prefs.setBool('dark', true);
-                } else {
-                  context.bloc<ThemeBloc>().add(const ThemeToLight());
-                  await prefs.setBool('dark', false);
-                }
-              },
-            ),
+          const ListTile(
+            title: Text("Theme"),
           ),
+          BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Radio(
+                  value: "Dark",
+                  groupValue: state.toString(),
+                  onChanged: (Object _) async {
+                    final prefs = sl<SharedPreferences>();
+                    context.bloc<ThemeBloc>().add(const ThemeToDark());
+                    await prefs.setString('theme', state.toString());
+                  },
+                ),
+                Radio(
+                  value: "Adaptive",
+                  groupValue: state.toString(),
+                  onChanged: (Object _) async {
+                    final prefs = sl<SharedPreferences>();
+                    context.bloc<ThemeBloc>().add(const ThemeToAdaptive());
+                    await prefs.setString('theme', state.toString());
+                  },
+                ),
+                Radio(
+                  value: "Light",
+                  groupValue: state.toString(),
+                  onChanged: (Object _) async {
+                    final prefs = sl<SharedPreferences>();
+                    context.bloc<ThemeBloc>().add(const ThemeToLight());
+                    await prefs.setString('theme', state.toString());
+                  },
+                ),
+              ],
+            );
+          }),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const <Widget>[
+              Text("Dark"),
+              Text("Adaptative"),
+              Text("Light"),
+            ],
+          )
         ],
       ),
     );

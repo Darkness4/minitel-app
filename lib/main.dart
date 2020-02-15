@@ -34,7 +34,7 @@ Widget _buildMyApp(BuildContext context, ThemeState state) {
       Locale('fr', 'FR'),
     ],
     theme: state.themeData,
-    darkTheme: state.themeData,
+    darkTheme: state.themeDataDark,
     initialRoute: RoutePaths.Authentication,
   );
 }

@@ -23,6 +23,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       yield const ThemeDark();
     } else if (event is ThemeToLight) {
       yield const ThemeLight();
+    } else if (event is ThemeToAdaptive) {
+      yield const ThemeAdaptive();
     }
   }
 }

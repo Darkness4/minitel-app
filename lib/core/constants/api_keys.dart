@@ -28,7 +28,8 @@ class ApiKeys {
   static const String _webhook = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
 
   /// Twitter api key
-  static const String _twitterApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
+  static const String _twitterApi =
+      "QUFBQUFBQUFBQUFBQUFBQUFBQUFBQWp2Q1FFQUFBQUF3bjFTeGtBc1gyWHUxNnFGMW0lMkJSU0p0cHVVWSUzREdiMWZuejYxSENPSnF0V3M4T1FpSVhzNFZEM2sxRHhVMmR3RkJDOWM0bklZN2R1VzFT"; // ZXhlbXBsZQ== = exemple
 
   /// Github Repo to get the releases changelog
   static const String githubRepo = "Darkness4/minitel-app";

@@ -71,6 +71,7 @@ class FeedDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Image imageProfile = _imageProfile();
     return OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
         if (MediaQuery.of(context).size.shortestSide < 600 &&
@@ -81,12 +82,7 @@ class FeedDisplay extends StatelessWidget {
             itemCount: feed.posts.length,
             itemBuilder: (BuildContext context, int index) => TwitterCard(
               post: feed.posts[index],
-              picture: Image.network(
-                feed.posts[index].profile_image_url_https.toString(),
-                fit: BoxFit.cover,
-                height: 50,
-                width: 50,
-              ),
+              picture: imageProfile,
               key: Key(Keys.twitterItem(index)),
             ),
           );
@@ -99,12 +95,7 @@ class FeedDisplay extends StatelessWidget {
                 for (final Post post in feed.posts)
                   TwitterCard(
                     post: post,
-                    picture: Image.network(
-                      post.profile_image_url_https.toString(),
-                      fit: BoxFit.cover,
-                      height: 50,
-                      width: 50,
-                    ),
+                    picture: imageProfile,
                   ),
               ],
             ),
@@ -112,6 +103,16 @@ class FeedDisplay extends StatelessWidget {
         }
       },
     );
+  }
+
+  Image _imageProfile() {
+    final Image imageProfile = Image.network(
+      feed.posts.first.profile_image_url_https.toString(),
+      fit: BoxFit.cover,
+      height: 50,
+      width: 50,
+    );
+    return imageProfile;
   }
 }
 

@@ -16,6 +16,7 @@ class AppLoc {
   AboutLoc get about => AboutLoc(localeName);
   AgendaLoc get agenda => AgendaLoc(localeName);
   DocsLoc get docs => DocsLoc(localeName);
+  @Deprecated("Not used")
   String get forceDark => Intl.message(
         "Forcer le thème sombre",
         name: 'forceDark',

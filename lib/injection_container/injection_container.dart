@@ -71,20 +71,20 @@ part 'inject_repository.dart';
 final GetIt sl = GetIt.instance;
 
 Future<void> init() async {
-  // Bloc
-  injectBloc();
-
-  // Repository
-  injectRepository();
-
-  // Data sources
-  await injectDataSource();
+  //! External
+  await injectExternal();
 
   //! Core
   injectCore();
 
-  //! External
-  await injectExternal();
+  // Data sources
+  await injectDataSource();
+
+  // Repository
+  injectRepository();
+
+  // Bloc
+  injectBloc();
 }
 
 class ThemeChanger with ChangeNotifier {
