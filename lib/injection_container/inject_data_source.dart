@@ -34,6 +34,7 @@ Future<void> injectDataSource() async {
   );
   sl.registerLazySingleton<DiagnosisDataSource>(
     () => DiagnosisDataSourceImpl(
+      diagnosis: Diagnosis(),
       connectivity: sl<Connectivity>(),
       internetAddressManager: sl<InternetAddressManager>(),
       processManager: sl<ProcessManager>(),

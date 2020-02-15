@@ -40,13 +40,12 @@ extension EventUtils on Event {
     @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
     @required NotificationSettings notificationSettings,
     @required NotificationDetails notificationDetails,
-  }) async {
+  }) {
     final DateTime dt = this.dtstart;
     final DateTime now = DateTime.now();
 
     // Notification System
-    if (notificationSettings.enabled &&
-        dt.isBefore(now.add(notificationSettings.range))) {
+    if (dt.isBefore(now.add(notificationSettings.range))) {
       final String dtstart = DateFormat.Hm().format(dt);
       final String dtend = DateFormat.Hm().format(this.dtend);
 
@@ -57,7 +56,7 @@ extension EventUtils on Event {
           "$dtend";
       final DateTime scheduleDate = dt.subtract(notificationSettings.early);
 
-      await flutterLocalNotificationsPlugin.schedule(
+      return flutterLocalNotificationsPlugin.schedule(
         id,
         this.summary,
         body,
@@ -71,5 +70,6 @@ extension EventUtils on Event {
             "$dtend",
       );
     }
+    return Future.value(null);
   }
 }

@@ -15,7 +15,8 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
   DiagnosisBloc({@required this.diagnosisRepository});
 
   @override
-  DiagnosisState get initialState => const DiagnosisInitial();
+  DiagnosisState get initialState =>
+      DiagnosisInitial(diagnosis: diagnosisRepository.diagnosis);
 
   @override
   Stream<DiagnosisState> mapEventToState(
@@ -23,15 +24,17 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
   ) async* {
     if (event is DiagnosisRun) {
       try {
-        final diagnosis = await diagnosisRepository.diagnose();
-        yield DiagnosisLoading(diagnosis: diagnosis);
-        await diagnosis.waitAll().timeout(const Duration(minutes: 1));
-        yield DiagnosisLoaded(diagnosis: diagnosis);
+        await diagnosisRepository.diagnose();
+        yield DiagnosisLoading(diagnosis: diagnosisRepository.diagnosis);
+        await diagnosisRepository.diagnosis
+            .waitAll()
+            .timeout(const Duration(minutes: 1));
+        yield DiagnosisLoaded(diagnosis: diagnosisRepository.diagnosis);
       } catch (e) {
         yield DiagnosisError(error: e);
       }
     } else if (event is DiagnosisCancel) {
-      yield const DiagnosisInitial();
+      yield DiagnosisInitial(diagnosis: diagnosisRepository.diagnosis);
     }
   }
 }

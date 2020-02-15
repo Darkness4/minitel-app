@@ -23,4 +23,7 @@ class DiagnosisRepositoryImpl implements DiagnosisRepository {
       throw ClientException("No Wi-Fi");
     }
   }
+
+  @override
+  Diagnosis get diagnosis => diagnosisDataSource.diagnosis;
 }

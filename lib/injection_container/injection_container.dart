@@ -37,6 +37,7 @@ import 'package:minitel_toolbox/data/repositories/login_settings_repository_impl
 import 'package:minitel_toolbox/data/repositories/notification_settings_repository_impl.dart';
 import 'package:minitel_toolbox/data/repositories/releases_repository_impl.dart';
 import 'package:minitel_toolbox/data/repositories/zabbix_hosts_repository_impl.dart';
+import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 import 'package:minitel_toolbox/domain/repositories/calendar_url_repository.dart';
 import 'package:minitel_toolbox/domain/repositories/diagnosis_repository.dart';
 import 'package:minitel_toolbox/domain/repositories/feed_repository.dart';

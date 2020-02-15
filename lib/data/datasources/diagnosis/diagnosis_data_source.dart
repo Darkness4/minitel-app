@@ -7,14 +7,16 @@ import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 import 'package:minitel_toolbox/core/internet_address/internet_address_manager.dart';
 import 'package:minitel_toolbox/core/process/process_manager.dart';
 import 'package:minitel_toolbox/data/datasources/emse/stormshield_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/diagnosis_model.dart';
+import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 
 abstract class DiagnosisDataSource {
-  /// Run diagnosis suite
-  DiagnosisModel diagnose();
+  Diagnosis get diagnosis;
+  Diagnosis diagnose();
 }
 
 class DiagnosisDataSourceImpl implements DiagnosisDataSource {
+  @override
+  final Diagnosis diagnosis;
   final ProcessManager processManager;
   final InternetAddressManager internetAddressManager;
   final StormshieldRemoteDataSource stormshieldRemoteDataSource;
@@ -22,6 +24,7 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
   final String _argsPing = "-c 4 -w 5 -W 5";
 
   const DiagnosisDataSourceImpl({
+    @required this.diagnosis,
     @required this.processManager,
     @required this.connectivity,
     @required this.internetAddressManager,
@@ -29,9 +32,7 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
   });
 
   @override
-  DiagnosisModel diagnose() {
-    final DiagnosisModel diagnosis = DiagnosisModel();
-
+  Diagnosis diagnose() {
     diagnosis[DiagnosisKeys.ip] = connectivity.getWifiIP();
     diagnosis[DiagnosisKeys.ipAddr] = _run("/system/bin/ip", ['a']);
     diagnosis[DiagnosisKeys.arp] = _run("su", ['-c', '/system/bin/arp -a']);

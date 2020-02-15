@@ -9,6 +9,7 @@ import 'package:minitel_toolbox/core/internet_address/internet_address_manager.d
 import 'package:minitel_toolbox/core/process/process_manager.dart';
 import 'package:minitel_toolbox/data/datasources/diagnosis/diagnosis_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/emse/stormshield_remote_data_source.dart';
+import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 import 'package:mockito/mockito.dart';
 
 void main() {
@@ -17,13 +18,16 @@ void main() {
   MockProcessManager mockProcessManager;
   MockConnectivity mockConnectivity;
   DiagnosisDataSource dataSource;
+  MockDiagnosis mockDiagnosis;
 
   setUp(() {
     mockStormshieldRemoteDataSource = MockStormshieldRemoteDataSource();
     mockInternetAddressManager = MockInternetAddressManager();
     mockProcessManager = MockProcessManager();
     mockConnectivity = MockConnectivity();
+    mockDiagnosis = MockDiagnosis();
     dataSource = DiagnosisDataSourceImpl(
+      diagnosis: mockDiagnosis,
       internetAddressManager: mockInternetAddressManager,
       processManager: mockProcessManager,
       connectivity: mockConnectivity,
@@ -51,7 +55,6 @@ void main() {
             .fetchStatus(MyIPAdresses.gatewayIP));
         verify(mockStormshieldRemoteDataSource
             .fetchStatus(MyIPAdresses.stormshieldIP));
-        expect(result.length, equals(19));
         expect(await result[DiagnosisKeys.ip], equals("0.1.0.1"));
         expect(await result[DiagnosisKeys.ipAddr], equals("MOCK"));
         expect(await result[DiagnosisKeys.httpResponseStormshieldPublic],
@@ -82,7 +85,6 @@ void main() {
         verify(mockStormshieldRemoteDataSource
             .fetchStatus(MyIPAdresses.stormshieldIP));
         expect(await result[DiagnosisKeys.nsLookupEmse], contains("MOCK"));
-        expect(result.length, equals(19));
         expect(await result[DiagnosisKeys.ip], equals("0.1.0.1"));
         expect(await result[DiagnosisKeys.ipAddr], equals("MOCK"));
         expect(await result[DiagnosisKeys.httpResponseStormshieldPublic],
@@ -101,3 +103,39 @@ class MockInternetAddressManager extends Mock
     implements InternetAddressManager {}
 
 class MockConnectivity extends Mock implements Connectivity {}
+
+class MockDiagnosis extends Mock implements Diagnosis {
+  final _internal = <String, Future<String>>{
+    DiagnosisKeys.ip: Future<String>.value(""),
+    DiagnosisKeys.ipAddr: Future<String>.value(""),
+    DiagnosisKeys.arp: Future<String>.value(""),
+    DiagnosisKeys.tracerouteGoogle: Future<String>.value(""),
+    DiagnosisKeys.tracerouteGoogleDNS: Future<String>.value(""),
+    DiagnosisKeys.pingLo: Future<String>.value(""),
+    DiagnosisKeys.pingLocal: Future<String>.value(""),
+    DiagnosisKeys.pingGateway: Future<String>.value(""),
+    DiagnosisKeys.pingDNS1: Future<String>.value(""),
+    DiagnosisKeys.pingDNS2: Future<String>.value(""),
+    DiagnosisKeys.pingDNS3: Future<String>.value(""),
+    DiagnosisKeys.pingDNS4: Future<String>.value(""),
+    DiagnosisKeys.pingDNS5: Future<String>.value(""),
+    DiagnosisKeys.nsLookupEmse: Future<String>.value(""),
+    DiagnosisKeys.nsLookupEmseSU: Future<String>.value(""),
+    DiagnosisKeys.nsLookupGoogle: Future<String>.value(""),
+    DiagnosisKeys.nsLookupGoogleSU: Future<String>.value(""),
+    DiagnosisKeys.httpResponseStormshieldPublic: Future<String>.value(""),
+    DiagnosisKeys.httpResponseStormshieldLocal: Future<String>.value(""),
+  };
+
+  @override
+  Future<String> operator [](Object key) => _internal[key];
+
+  @override
+  void operator []=(String key, Future<String> value) {
+    if (_internal.containsKey(key)) {
+      _internal[key] = value;
+    } else {
+      throw ArgumentError.value(key, 'key', 'Cannot set value.');
+    }
+  }
+}

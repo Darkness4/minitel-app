@@ -47,11 +47,14 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
         yield AgendaLoaded(events: events.toList());
 
         final List<Future<void>> futures = <Future<void>>[];
-        events.forEach((event) => futures.add(event.addToNotification(
-              flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
-              notificationSettings: agendaEvent.notificationSettings,
-              notificationDetails: notificationDetails,
-            )));
+        if (agendaEvent.notificationSettings.enabled) {
+          events.forEach((event) => futures.add(event.addToNotification(
+                flutterLocalNotificationsPlugin:
+                    flutterLocalNotificationsPlugin,
+                notificationSettings: agendaEvent.notificationSettings,
+                notificationDetails: notificationDetails,
+              )));
+        }
         await Future.wait<void>(futures);
       } catch (e) {
         yield AgendaError(e);

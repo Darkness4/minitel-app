@@ -56,7 +56,7 @@ class NotificationSettingsState extends Equatable {
     return NotificationSettingsState(
       notificationSettings: notificationSettings ?? this.notificationSettings,
       isSaved: isSaved ?? this.isSaved,
-      isLoaded: isLoaded ?? false,
+      isLoaded: isLoaded ?? this.isLoaded,
     );
   }
 

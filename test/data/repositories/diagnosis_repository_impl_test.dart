@@ -5,6 +5,7 @@ import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/diagnosis/diagnosis_data_source.dart';
 import 'package:minitel_toolbox/data/models/diagnosis_model.dart';
 import 'package:minitel_toolbox/data/repositories/diagnosis_repository_impl.dart';
+import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 import 'package:minitel_toolbox/domain/repositories/diagnosis_repository.dart';
 import 'package:mockito/mockito.dart';
 
@@ -88,6 +89,18 @@ void main() {
           );
         },
       );
+    });
+  });
+
+  group('get diagnosis', () {
+    test('should get a Diagnosis Entity', () {
+      // arrange
+      final tDiagnosis = Diagnosis();
+      when(mockRemoteDataSource.diagnosis).thenReturn(tDiagnosis);
+      // act
+      final result = repository.diagnosis;
+      // assert
+      expect(result, equals(tDiagnosis));
     });
   });
 }

@@ -25,7 +25,9 @@ class DiagnoseScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-          if (state is DiagnosisLoading || state is DiagnosisLoaded)
+          if (state is DiagnosisLoading ||
+              state is DiagnosisLoaded ||
+              state is DiagnosisInitial)
             Center(
               child: Chip(
                 elevation: 2.0,
@@ -50,7 +52,9 @@ class DiagnoseScreen extends StatelessWidget {
                 ),
               ),
             ),
-          if (state is DiagnosisLoading || state is DiagnosisLoaded)
+          if (state is DiagnosisLoading ||
+              state is DiagnosisLoaded ||
+              state is DiagnosisInitial)
             for (final MapEntry<String, Future<String>> entry
                 in state.diagnosis.entries)
               if (entry.key != DiagnosisKeys.ip) // Ignore them

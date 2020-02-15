@@ -168,6 +168,17 @@ class PortalPage extends StatelessWidget {
       ..showSnackBar(
         const SnackBar(content: Text('Requested')),
       );
+
+    final portalBlocState = context.bloc<PortalBloc>().state;
+
+    context.bloc<PortalBloc>().add(RememberLoginEvent(
+          autoLogin: portalBlocState.autoLogin,
+          pswd: portalBlocState.pswd,
+          rememberMe: portalBlocState.rememberMe,
+          selectedTime: portalBlocState.selectedTime,
+          selectedUrl: portalBlocState.selectedUrl,
+          uid: portalBlocState.uid,
+        ));
   }
 
   void _onPortalLoginFailure(BuildContext context, PortalLoginState state) {
@@ -187,14 +198,5 @@ class PortalPage extends StatelessWidget {
 
     final selectedUrl = portalBlocState.selectedUrl;
     context.bloc<PortalStatusBloc>().add(RefreshEvent(selectedUrl));
-
-    context.bloc<PortalBloc>().add(RememberLoginEvent(
-          autoLogin: portalBlocState.autoLogin,
-          pswd: portalBlocState.pswd,
-          rememberMe: portalBlocState.rememberMe,
-          selectedTime: portalBlocState.selectedTime,
-          selectedUrl: portalBlocState.selectedUrl,
-          uid: portalBlocState.uid,
-        ));
   }
 }

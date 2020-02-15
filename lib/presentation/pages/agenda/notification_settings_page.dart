@@ -100,7 +100,7 @@ class _NotificationSettingsScreenState
                       child: TextField(
                         inputFormatters: <TextInputFormatter>[
                           WhitelistingTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(2),
+                          LengthLimitingTextInputFormatter(3),
                           BlacklistingTextInputFormatter.singleLineFormatter,
                         ],
                         textAlign: TextAlign.center,
@@ -144,13 +144,21 @@ class _NotificationSettingsScreenState
   }
 
   void _onEarlyChanged() {
-    _notificationSettingsBloc.add(EarlyChanged(
-        early: Duration(minutes: int.parse(_earlyController.text))));
+    if (_earlyController.text.length < 3 && _earlyController.text != "") {
+      _notificationSettingsBloc.add(EarlyChanged(
+          early: Duration(minutes: int.parse(_earlyController.text))));
+    } else {
+      print("_earlyController.text.length: Illegal range or character");
+    }
   }
 
   void _onRangeChanged() {
-    _notificationSettingsBloc.add(RangeChanged(
-        range: Duration(minutes: int.parse(_rangeController.text))));
+    if (_rangeController.text.length < 4 && _rangeController.text != "") {
+      _notificationSettingsBloc.add(RangeChanged(
+          range: Duration(days: int.parse(_rangeController.text))));
+    } else {
+      print("_rangeController.text.length: Illegal range  or character");
+    }
   }
 
   void _onEnablingChanged(bool value) {

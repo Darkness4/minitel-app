@@ -7,9 +7,9 @@ abstract class DiagnosisState extends Equatable {
 
 class DiagnosisInitial extends DiagnosisState {
   @override
-  Diagnosis get diagnosis => null;
+  final Diagnosis diagnosis;
 
-  const DiagnosisInitial();
+  const DiagnosisInitial({@required this.diagnosis});
 
   @override
   List<Object> get props => [];
