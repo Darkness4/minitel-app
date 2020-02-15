@@ -1,0 +1,18 @@
+{
+  "connection": "keep-alive",
+  "cache-control": "no-store, no-cache, must-revalidate, private, must-revalidate",
+  "set-cookie": "laravel_token=eyJpdiI6InVFdHhQdkxPYVMzeXNHRmVhYkJMM1E9PSIsInZhbHVlIjoiYTVPNk9lYzh3NDVCajZ4WVVnT2p5a05oT3M2VUpEMjY3ODNEN3dXaEpJQ3pJOVNYbzJWRjMrM0liZ0RyblI2VXZlZkJ4K0drblhXd3R5N0hNRWVMOUxMRFZvUGk3MnJqSkRZdGdSRnpGRkJsRWJhNWh2Ulo1aDhIOEt3YkNROFwvWnNhSWNhQmNFU2YwaWxuajRNdFlSWnBVSWlNb3F6M0tRcEdsdlFnY0xmdTVUUHN2a3FPcnhWSnc0aFJtU2xXTHhSajZhMGxhQnRUR3NjaGtuejJLQkd4WlVFcWFZeWtna2g5WHZTNG5qQzM4VGpsT1BrYnJoMFwva2crM0J0STllIiwibWFjIjoiMzM5MjgyZDNkNTk4ODA3NmVhZDQ1NGM1NzkzYzMxYjFjYjRiZDU4NGE5NTYzMDA4YTVkODE2NGNlYWE0NDRiZCJ9; expires=Mon, 10-Feb-2020 20:16:32 GMT; Max-Age=7200; path=/; HTTPOnly; Secure; httponly,XSRF-TOKEN=eyJpdiI6IlpwWExBYmtQampRR1Vla2ttS3JYaEE9PSIsInZhbHVlIjoiNU9VTEc4TTVhZ2dieXoyUDBydHZVXC84Vm8yWVA5Z0dxVU5DOTRIYXBaazBKSHBQaSt0VlwvVnZjYXdkREJNR3FOIiwibWFjIjoiOTE4OThhYzVlM2Y4MGI0M2E2MDA2NzdjNzhlYjVjYmNmNzBmNzM2NzFhNmE0OWQ1ZGI0N2I1MmExNWNkMThjMCJ9; expires=Mon, 10-Feb-2020 20:16:32 GMT; Max-Age=7200; path=/; HTTPOnly; Secure,portail_ent_emse_session=eyJpdiI6Iks2M1l0RXA0ZXVyZnBrZDg4Z3dCUUE9PSIsInZhbHVlIjoiZzZyeXBCNjRcL05jbFNvNWYxXC9JXC9taTZER0tybExxZkRPdmtKOXdsZFdwK0tWbExiUE5rR0N1Q1B2eEFHc0g1NCIsIm1hYyI6Ijg0M2JhZjA1MGQyNzMxOGYyNWVhZWZjZGZmYTc2MDU3MGQ5MDAwN2ZkMzYxMDE0NDBhNTk3NDJiNmMzZTRjZmMifQ%3D%3D; expires=Mon, 10-Feb-2020 20:16:32 GMT; Max-Age=7200; path=/; HTTPOnly; Secure; httponly",
+  "date": "Mon, 10 Feb 2020 18:16:32 GMT",
+  "vary": "Accept-Encoding",
+  "content-encoding": "gzip",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "referrer-policy": "no-referrer-when-downgrade",
+  "content-type": "text/html; charset=UTF-8",
+  "pragma": "no-cache, no-cache",
+  "x-xss-protection": "1; mode=block",
+  "server": "nginx",
+  "content-length": "21058",
+  "x-frame-options": "SAMEORIGIN",
+  "x-content-type-options": "nosniff",
+  "expires": "Thu, 19 Nov 1981 08:52:00 GMT, -1"
+}

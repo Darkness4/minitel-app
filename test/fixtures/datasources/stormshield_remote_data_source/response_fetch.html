@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>AUTHENTICATION</title>
+	<meta name="robots" content="noindex,nofollow">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="/data/common.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/data/auth.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/data/pda.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="/data/custom.css" media="all">
+	
+	<link rel="shortcut icon" href="/data/favicon.ico">
+	
+	<script type="text/javascript" src="/data/common.js"></script>
+	<script type="text/javascript">
+		<!--
+			function set_focus()
+			{
+				el = document.getElementById('uid');
+				if (el) el.focus();
+			}
+		-->
+	</script>
+	<!--[if lt IE 7]>
+	<script type="text/javascript">
+	  sfHover = function() {
+	    var sfEls = document.getElementById("lang").getElementsByTagName("li");
+	    for (var i=0; i<sfEls.length; i++) {
+	      sfEls[i].onmouseover = function() {
+	        this.className = this.className.replace(new RegExp(" sfhover"), "");
+		this.className += " sfhover";
+	      }
+	      sfEls[i].onmouseout = function() {
+	        this.className = this.className.replace(new RegExp(" sfhover"), "");
+	      }
+	    }
+	  }
+	  if (window.attachEvent) window.attachEvent("onload", sfHover);
+
+	</script>
+	<![endif]-->
+</head>
+
+<body onload="na_loadpage(); set_focus()">
+
+	<div id="page" class="mobile">
+
+		
+		<div id="logo">&nbsp;</div>
+		
+		<div id="header">
+			<div id="lang"><ul class="niveau1">
+  <li id="selected">
+    <img src="/data/flag-us.jpg" alt="us">
+    <ul class="niveau2">
+      <li><a href="/auth/lang.html?l=bg&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-bg.jpg" alt="bg"><span>bg</span></a></li>
+<li><a href="/auth/lang.html?l=cs&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-cs.jpg" alt="cs"><span>cs</span></a></li>
+<li><a href="/auth/lang.html?l=de&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-de.jpg" alt="de"><span>de</span></a></li>
+<li><a href="/auth/lang.html?l=en&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-en.jpg" alt="en"><span>en</span></a></li>
+<li><a href="/auth/lang.html?l=es&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-es.jpg" alt="es"><span>es</span></a></li>
+<li><a href="/auth/lang.html?l=fr&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-fr.jpg" alt="fr"><span>fr</span></a></li>
+<li><a href="/auth/lang.html?l=hu&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-hu.jpg" alt="hu"><span>hu</span></a></li>
+<li><a href="/auth/lang.html?l=it&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-it.jpg" alt="it"><span>it</span></a></li>
+<li><a href="/auth/lang.html?l=nl&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-nl.jpg" alt="nl"><span>nl</span></a></li>
+<li><a href="/auth/lang.html?l=pl&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-pl.jpg" alt="pl"><span>pl</span></a></li>
+<li><a href="/auth/lang.html?l=pt&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-pt.jpg" alt="pt"><span>pt</span></a></li>
+<li><a href="/auth/lang.html?l=sk&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-sk.jpg" alt="sk"><span>sk</span></a></li>
+<li><a href="/auth/lang.html?l=us&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-us.jpg" alt="us"><span>us</span></a></li>
+<li><a href="/auth/lang.html?l=zh_CN&rurl=%2Fauth%2Flogin.html"><img src="/data/flag-zh_CN.jpg" alt="zh_CN"><span>zh</span></a></li>
+
+    </ul>
+  </li>
+</ul>
+</div>
+			<div id="headerdata">Welcome <b>marc.nguyen</b>. <span id="ldyn_rtime">Logout in <span id="l_rtime">13424</span></span></div>
+		</div>
+
+		<div id="content">
+			<div id="contentleft" class="menu">
+	
+	<a class="menuentry currentpage" href="/auth/login.html">
+		<span class="titlebox">
+				<img src="/data/i_auth.png" alt="Logout">
+			Login / Logout
+		</span>
+		<span>
+			You can authenticate or change your password
+		</span>
+	</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<a class="menuentry " href="/auth/xvpns.html">
+		<span class="titlebox">
+			<img src="/data/i_access.png" alt="Secure access">
+			Secure access
+		</span>
+		<span>
+			Secured access to your company resources
+		</span>
+	</a>
+	
+
+	
+
+	
+	<a class="menuentry " href="/auth/userinfo.html">
+		<span class="titlebox">
+			<img src="/data/i_data.png" alt="User Informations">
+			Personal data
+		</span>
+		<span>
+			Get your connection parameters
+		</span>
+	</a>
+	
+</div>
+
+			<form accept-charset="utf-8" action="/auth/auth.html" autocomplete="on">
+			<div id="contentmiddle">
+				<div id="contenttop">
+					<div id="error"></div>
+				</div>
+				<div class="titlepage">AUTHENTICATION</div>
+
+				
+
+				<div class="titlebox">Please authenticate <a class="linkhelp" onmouseover="showhelp('help1',event)" onmouseout="hidehelp()"><img src="/data/help.gif" alt="Help"></a></div>
+
+				<input type="hidden" name="url" value="">
+				<div class="box">
+					<table>
+						<tr>
+							<td align="right">Username&nbsp;</td>
+							<td><input id="uid" name="uid" type="text" size="25" class="recherche" autocorrect="off" autocapitalize="off"
+									onkeypress="return check_forbidden_chars('uid', event);"
+									onpaste="return check_pasted_chars('uid', event);" /></td>
+						</tr>
+						<tr>
+							<td align="right">Authentication duration&nbsp;</td>
+							<td><select id="time" name="time" class="recherche">
+								<option  value="15">15 minutes</option><option  value="30">30 minutes</option><option  value="45">45 minutes</option><option  value="60">1 hour</option><option  value="120">2 hours</option><option  value="180">3 hours</option><option  value="240">4 hours</option><option  value="300">5 hours</option><option  value="360">6 hours</option><option  value="420">7 hours</option><option selected  value="480">8 hours</option>
+							</select></td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="btnform">
+					<input class="btnred" name="login" type="submit" value="Login">
+					<input class="btngray" name="logout" type="submit" value="Logout">
+					
+				</div>
+			</div>
+			</form>
+		</div>
+
+		<br style="clear: both">
+
+		<div style="display: none">
+			<div id="help1">If you are already authenticated, clicking on connect will extend the authentication by the selected duration</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

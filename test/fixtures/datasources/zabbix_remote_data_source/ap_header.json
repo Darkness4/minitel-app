@@ -1,0 +1,15 @@
+{
+  "connection": "keep-alive",
+  "transfer-encoding": "chunked",
+  "date": "Thu, 13 Feb 2020 01:40:44 GMT",
+  "access-control-allow-origin": "*",
+  "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+  "content-type": "application/json",
+  "access-control-max-age": "1000",
+  "server": "nginx",
+  "content-security-policy-report-only": "default-src https:; script-src https: 'unsafe-eval' 'unsafe-inline'; style-src https: 'unsafe-inline'; img-src https: data:; font-src https: data:; report-uri /csp-report",
+  "x-powered-by": "PHP/7.3.8",
+  "access-control-allow-headers": "Content-Type",
+  "keep-alive": "timeout=20",
+  "access-control-allow-methods": "POST"
+}

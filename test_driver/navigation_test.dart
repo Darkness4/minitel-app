@@ -3,15 +3,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_driver/flutter_driver.dart';
+import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:test/test.dart';
-
-import 'finders.dart';
 
 void main() {
   group('Minitel Toolbox', () {
     FlutterDriver driver;
-
-    final MinitelFinders minitelFinders = MinitelFinders();
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
@@ -35,55 +32,55 @@ void main() {
       });
 
       test('Screenshot apps', () async {
-        await driver.tap(minitelFinders.appsTab);
+        await driver.tap(find.byValueKey(Keys.appsTab));
         await takeScreenshot(driver, ScreenshotsPaths.apps);
       });
 
       test('Screenshot sogo', () async {
-        await driver.tap(minitelFinders.sogo);
+        await driver.tap(find.byValueKey(Keys.sogo));
         await Future<dynamic>.delayed(const Duration(seconds: 5));
         await takeScreenshot(driver, ScreenshotsPaths.sogo);
-        await driver.tap(minitelFinders.goBack);
+        await driver.tap(find.pageBack());
       });
 
       test('Screenshot news', () async {
-        await driver.tap(minitelFinders.drawer);
-        await driver.tap(minitelFinders.newsRoute);
-        await Future<dynamic>.delayed(const Duration(seconds: 5));
+        await driver.tap(find.byTooltip("Open navigation menu"));
+        await driver.tap(find.byValueKey(Keys.newsRoute));
+        await Future<dynamic>.delayed(const Duration(seconds: 10));
         await takeScreenshot(driver, ScreenshotsPaths.news);
       });
 
       test('Screenshot agenda', () async {
-        await driver.tap(minitelFinders.drawer);
-        await driver.tap(minitelFinders.agendaRoute);
-        await driver.tap(minitelFinders.agendaUid);
+        await driver.tap(find.byTooltip("Open navigation menu"));
+        await driver.tap(find.byValueKey(Keys.agendaRoute));
+        await driver.tap(find.byValueKey(Keys.agendaUid));
         await driver.enterText("marc.nguyen");
-        await driver.tap(minitelFinders.agendaPswd);
+        await driver.tap(find.byValueKey(Keys.agendaPswd));
         await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
-        await driver.tap(minitelFinders.agendaConnect);
+        await driver.tap(find.byValueKey(Keys.agendaConnect));
         print("Trying to login");
         await Future<dynamic>.delayed(const Duration(seconds: 5));
         await takeScreenshot(driver, ScreenshotsPaths.agenda);
       });
 
       test('Screenshot reporting', () async {
-        await driver.tap(minitelFinders.drawer);
-        await driver.tap(minitelFinders.reportingRoute);
+        await driver.tap(find.byTooltip("Open navigation menu"));
+        await driver.tap(find.byValueKey(Keys.reportingRoute));
         await takeScreenshot(driver, ScreenshotsPaths.reporting);
       });
 
       test('Screenshot diagnosis', () async {
-        await driver.tap(minitelFinders.diagnosisTab);
-        await driver.tap(minitelFinders.reportingFAB);
-        await driver.waitFor(minitelFinders.reportingFABDone,
+        await driver.tap(find.byValueKey(Keys.diagnosisTab));
+        await driver.tap(find.byValueKey(Keys.reportingFAB));
+        await driver.waitFor(find.byValueKey(Keys.reportingFABDone),
             timeout: const Duration(minutes: 2));
 
         await takeScreenshot(driver, ScreenshotsPaths.diagnosis);
       }, timeout: const Timeout(Duration(minutes: 3)));
 
       test('Screenshot docs', () async {
-        await driver.tap(minitelFinders.drawer);
-        await driver.tap(minitelFinders.docsRoute);
+        await driver.tap(find.byTooltip("Open navigation menu"));
+        await driver.tap(find.byValueKey(Keys.docsRoute));
         await takeScreenshot(driver, ScreenshotsPaths.docs);
       });
     });

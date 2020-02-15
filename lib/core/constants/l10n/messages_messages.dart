@@ -8,13 +8,6 @@
 // ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
 // ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
 // ignore_for_file:unused_import, file_names
-// ignore_for_file:always_specify_types, type_annotate_public_apis
-// ignore_for_file:always_declare_return_types, prefer_final_locals
-// ignore_for_file:always_put_control_body_on_new_line
-// ignore_for_file:implicit_dynamic_return
-// ignore_for_file:implicit_dynamic_parameter
-// ignore_for_file:invalid_assignment
-// ignore_for_file:map_value_type_not_assignable
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
@@ -174,8 +167,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Avec votre application mail préférée, utilisez la configuration manuelle et remplissez les champs correspondant."),
         "MailLoc_mailContent2": MessageLookupByLibrary.simpleMessage(
             "Email : prenom.nom@etu.emse.fr\nMot de passe : ton mot de passe école\n\nServeur entrant : IMAP\nNom d\'hote : messel.emse.fr\nPort : 993\nSécurité : ssl/tls\nMéthode d\'authentification : mot de passe normal\nIdentifiant : prenom.nom (⚠️ sans le @etu.emse.fr)\n\nServeur sortant :\nNom d\'hôte : messel.emse.fr\nPort : 465\nSécurité : ssl/tls\nMéthode d\'authentification : mot de passe normal\nIdentifiant : prenom.nom (⚠️ sans le @etu.emse.fr)"),
-        "NewsLoc_seeFacebook":
-            MessageLookupByLibrary.simpleMessage("Voir sur Facebook ..."),
+        "NewsLoc_seeTwitter":
+            MessageLookupByLibrary.simpleMessage("Voir sur Twitter ..."),
         "NewsLoc_title": MessageLookupByLibrary.simpleMessage("Nouveautés"),
         "NotificationSettingsLoc_early1":
             MessageLookupByLibrary.simpleMessage("Notifier "),
@@ -216,12 +209,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Numero de chambre"),
         "ReportingLoc_chamberLabel":
             MessageLookupByLibrary.simpleMessage("Chambre"),
-        "ReportingLoc_forceName":
-            MessageLookupByLibrary.simpleMessage("Nom ET Prénom"),
         "ReportingLoc_idHint":
             MessageLookupByLibrary.simpleMessage("Nom Prénom"),
         "ReportingLoc_idLabel":
             MessageLookupByLibrary.simpleMessage("Identité"),
+        "ReportingLoc_isNotValidUid": MessageLookupByLibrary.simpleMessage(
+            "Le nom d\'utilisateur doit être sous le format \'prénom.nom\'."),
+        "ReportingLoc_mustOnlyBeNumbers": MessageLookupByLibrary.simpleMessage(
+            "Ne doit contenir que des chiffres."),
         "ReportingLoc_notEmpty":
             MessageLookupByLibrary.simpleMessage("Ne doit pas être vide"),
         "ReportingLoc_share": MessageLookupByLibrary.simpleMessage("Partager"),

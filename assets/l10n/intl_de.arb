@@ -453,8 +453,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "NewsLoc_seeFacebook": "Siehe auf Facebook ...",
-  "@NewsLoc_seeFacebook": {
+  "NewsLoc_seeTwitter": "Siehe auf Twitter ...",
+  "@NewsLoc_seeTwitter": {
     "type": "text",
     "placeholders": {}
   },
@@ -555,6 +555,16 @@
     "type": "text",
     "placeholders": {}
   },
+  "ReportingLoc_isNotValidUid": "Der Benutzername muss das Format 'Vorname.Nachname' haben.",
+  "@ReportingLoc_isNotValidUid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_mustOnlyBeNumbers": "Darf nur Zahlen enthalten.",
+  "@ReportingLoc_mustOnlyBeNumbers": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ReportingLoc_idLabel": "Identität",
   "@ReportingLoc_idLabel": {
     "type": "text",
@@ -562,11 +572,6 @@
   },
   "ReportingLoc_idHint": "Nachname Vorname",
   "@ReportingLoc_idHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "ReportingLoc_forceName": "Nachname und Vorname",
-  "@ReportingLoc_forceName": {
     "type": "text",
     "placeholders": {}
   },

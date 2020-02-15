@@ -1,0 +1,36 @@
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
+import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
+import 'package:minitel_toolbox/domain/repositories/zabbix_hosts_repository.dart';
+
+part 'zabbix_hosts_event.dart';
+part 'zabbix_hosts_state.dart';
+
+class ZabbixHostsBloc extends Bloc<ZabbixHostsEvent, ZabbixHostsState> {
+  final ZabbixHostsRepository repository;
+
+  ZabbixHostsBloc({
+    @required this.repository,
+  }) : assert(repository != null);
+
+  @override
+  ZabbixHostsState get initialState => const ZabbixHostsStateInitial();
+
+  @override
+  Stream<ZabbixHostsState> mapEventToState(
+    ZabbixHostsEvent event,
+  ) async* {
+    if (event is GetZabbixHostsEvent) {
+      yield const ZabbixHostsStateLoading();
+      try {
+        final hosts = await repository.get(event.groupids);
+        yield ZabbixHostsStateLoaded(hosts: hosts);
+      } catch (e) {
+        yield ZabbixHostsStateError(error: e);
+      }
+    }
+  }
+}

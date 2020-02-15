@@ -454,8 +454,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "NewsLoc_seeFacebook": "See on Facebook ...",
-  "@NewsLoc_seeFacebook": {
+  "NewsLoc_seeTwitter": "See on Twitter ...",
+  "@NewsLoc_seeTwitter": {
     "type": "text",
     "placeholders": {}
   },
@@ -546,6 +546,16 @@
     "type": "text",
     "placeholders": {}
   },
+  "ReportingLoc_isNotValidUid": "The username must be in the format 'firstname.lastname'.",
+  "@ReportingLoc_isNotValidUid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportingLoc_mustOnlyBeNumbers": "Must only contain numbers.",
+  "@ReportingLoc_mustOnlyBeNumbers": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ReportingLoc_chamberHint": "Room number",
   "@ReportingLoc_chamberHint": {
     "type": "text",
@@ -563,11 +573,6 @@
   },
   "ReportingLoc_idHint": "Last name First name",
   "@ReportingLoc_idHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "ReportingLoc_forceName": "Last name AND First name",
-  "@ReportingLoc_forceName": {
     "type": "text",
     "placeholders": {}
   },

@@ -6,9 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/Darkness4/minitel-app/badge.svg?branch=master)](https://coveralls.io/github/Darkness4/minitel-app?branch=master)
 ![GitHub All Releases](https://img.shields.io/github/downloads/Darkness4/minitel-app/total.svg)
 
-
 ## Screenshots
-
 
 ![Login Screenshot](./docs/screenshots/login.png)
 ![Apps Screenshot](./docs/screenshots/apps.png)
@@ -18,7 +16,6 @@
 ![Documentation Screenshot](./docs/screenshots/docs.png)
 ![News Screenshot](./docs/screenshots/news.png)
 ![Agenda Screenshot](./docs/screenshots/agenda.png)
-
 
 ## Features
 
@@ -35,12 +32,12 @@
 
 ## Development
 
-Most of the development happens on GitHub. It's also where 
+Most of the development happens on GitHub. It's also where
 [our central repository](https://github.com/Darkness4/minitel-app) is hosted.
 
-If you want to contribute please take a look at the 
-[Contributor's Guide](./CONTRIBUTING.md) and 
-[Code of Conduct](./CODE_OF_CONDUCT.md). 
+If you want to contribute please take a look at the
+[Contributor's Guide](./CONTRIBUTING.md) and
+[Code of Conduct](./CODE_OF_CONDUCT.md).
 
 Our milestones are shown [here](https://github.com/Darkness4/minitel-app/projects).
 
@@ -53,7 +50,7 @@ See [Setting up the development environment](https://github.com/Darkness4/minite
 ```txt
 MIT License
 
-Copyright (c) 2019 NGUYEN Marc et Minitel
+Copyright (c) 2019-2020 NGUYEN Marc
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
