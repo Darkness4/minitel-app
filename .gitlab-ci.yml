@@ -212,6 +212,7 @@ build-apk:
     paths:
       - minitel-toolbox-armeabi-v7a.apk
       - minitel-toolbox-arm64-v8a.apk
+      - minitel-toolbox-x86_64.apk
     expire_in: 1 week
 
   only:
