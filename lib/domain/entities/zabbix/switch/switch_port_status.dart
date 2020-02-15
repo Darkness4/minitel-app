@@ -1,4 +1,6 @@
-class SwitchPortStatus {
+import 'package:equatable/equatable.dart';
+
+class SwitchPortStatus extends Equatable {
   static const String speedOid = '1.3.6.1.2.1.2.2.1.5';
 
   /// Speed in bps
@@ -17,4 +19,7 @@ class SwitchPortStatus {
       operStatus: operStatus ?? this.operStatus,
     );
   }
+
+  @override
+  List<Object> get props => [speed, operStatus];
 }

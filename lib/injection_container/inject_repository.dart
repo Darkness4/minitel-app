@@ -40,7 +40,6 @@ void injectRepository() {
   sl.registerLazySingleton<ICalendarRepository>(
     () => ICalendarRepositoryImpl(
       localDataSource: sl<ICalendarLocalDataSource>(),
-      networkInfo: sl<NetworkInfo>(),
       remoteDataSource: sl<ICalendarRemoteDataSource>(),
       calendarURLRepository: sl<CalendarURLRepository>(),
     ),

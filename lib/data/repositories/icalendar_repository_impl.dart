@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
@@ -10,13 +9,11 @@ class ICalendarRepositoryImpl implements ICalendarRepository {
   final ICalendarLocalDataSource localDataSource;
   final ICalendarRemoteDataSource remoteDataSource;
   final CalendarURLRepository calendarURLRepository;
-  final NetworkInfo networkInfo;
 
   const ICalendarRepositoryImpl({
-    this.localDataSource,
-    this.remoteDataSource,
-    this.networkInfo,
-    this.calendarURLRepository,
+    @required this.localDataSource,
+    @required this.remoteDataSource,
+    @required this.calendarURLRepository,
   });
 
   @override

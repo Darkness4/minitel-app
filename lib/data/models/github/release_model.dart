@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:minitel_toolbox/data/models/github/asset_model.dart';
 import 'package:minitel_toolbox/data/models/github/user_model.dart';
 import 'package:minitel_toolbox/domain/entities/github/asset.dart';
@@ -6,24 +5,24 @@ import 'package:minitel_toolbox/domain/entities/github/release.dart';
 
 class GithubReleaseModel extends GithubRelease {
   const GithubReleaseModel({
-    @required String url,
-    @required String html_url,
-    @required String assets_url,
-    @required String upload_url,
-    @required String tarball_url,
-    @required String zipball_url,
-    @required int id,
-    @required String node_id,
-    @required String tag_name,
-    @required String target_commitish,
-    @required String name,
-    @required String body,
-    @required bool draft,
-    @required bool prerelease,
-    @required DateTime created_at,
-    @required DateTime published_at,
-    @required GithubUserModel author,
-    @required List<GithubAssetModel> assets,
+    String url,
+    String html_url,
+    String assets_url,
+    String upload_url,
+    String tarball_url,
+    String zipball_url,
+    int id,
+    String node_id,
+    String tag_name,
+    String target_commitish,
+    String name,
+    String body,
+    bool draft,
+    bool prerelease,
+    DateTime created_at,
+    DateTime published_at,
+    GithubUserModel author,
+    List<GithubAssetModel> assets,
   }) : super(
           url: url,
           html_url: html_url,

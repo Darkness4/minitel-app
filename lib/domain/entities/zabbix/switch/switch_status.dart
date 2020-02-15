@@ -57,12 +57,14 @@ class SwitchStatus extends Equatable {
     int snmpAvailable;
 
     host.items.forEach((final ZabbixItem item) {
-      if (item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
+      if (item.snmp_oid != null &&
+          item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
         final int port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
         ports[port] ??= const SwitchPortStatus();
         ports[port] = ports[port].copyWith(speed: int.parse(item.lastvalue));
-      } else if (item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
+      } else if (item.snmp_oid != null &&
+          item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
         final int port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
         ports[port] ??= const SwitchPortStatus();
