@@ -37,7 +37,7 @@ dependencies:
   flutter_secure_storage: ^3.3.1+1 # German Saprykin
   flutter_bloc: ^3.2.0 # bloclibrary.dev
   equatable: ^1.1.0 # felangelov@gmail.com
-  get_it: ^3.1.0 # fluttercommunity.dev
+  get_it: ^4.0.0-release-candidate # fluttercommunity.dev
   flutter_markdown: ^0.3.3
   google_fonts: ^0.3.9 # material.io
 

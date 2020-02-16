@@ -16,8 +16,8 @@ import 'dart:convert';
 /// ```sh
 /// CI_WEBHOOK_KEY=${YOUR_API_KEY}
 /// CI_TWITTER_KEY=${YOUR_API_KEY_2}
-/// sed -iEn "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
-/// sed -iEn "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
+/// sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
+/// sed -i "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
 /// ```
 ///
 /// Please, see more in the .gitlab.yml file.
@@ -28,8 +28,7 @@ class ApiKeys {
   static const String _webhook = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
 
   /// Twitter api key
-  static const String _twitterApi =
-      "QUFBQUFBQUFBQUFBQUFBQUFBQUFBQWp2Q1FFQUFBQUF3bjFTeGtBc1gyWHUxNnFGMW0lMkJSU0p0cHVVWSUzREdiMWZuejYxSENPSnF0V3M4T1FpSVhzNFZEM2sxRHhVMmR3RkJDOWM0bklZN2R1VzFT"; // ZXhlbXBsZQ== = exemple
+  static const String _twitterApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
 
   /// Github Repo to get the releases changelog
   static const String githubRepo = "Darkness4/minitel-app";
