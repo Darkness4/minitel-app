@@ -21,6 +21,9 @@ class ReportStatusState extends Equatable {
   });
 
   @override
+  bool get stringify => true;
+
+  @override
   List<Object> get props => [
         this.name,
         this.room,

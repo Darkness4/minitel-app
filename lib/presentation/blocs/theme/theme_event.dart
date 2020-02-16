@@ -5,6 +5,9 @@ abstract class ThemeEvent extends Equatable {
 
   @override
   List<Object> get props => [];
+
+  @override
+  bool get stringify => true;
 }
 
 class ThemeToDark extends ThemeEvent {

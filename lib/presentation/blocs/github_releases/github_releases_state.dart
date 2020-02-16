@@ -2,6 +2,9 @@ part of 'github_releases_bloc.dart';
 
 abstract class GithubReleasesState extends Equatable {
   const GithubReleasesState();
+
+  @override
+  bool get stringify => true;
 }
 
 class GithubReleasesStateError extends GithubReleasesState {

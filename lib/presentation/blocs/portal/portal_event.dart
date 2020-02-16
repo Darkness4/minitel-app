@@ -3,6 +3,9 @@ part of 'portal_bloc.dart';
 abstract class PortalEvent extends Equatable {
   @override
   List<Object> get props => [];
+
+  @override
+  bool get stringify => true;
 }
 
 class RememberLoginEvent extends PortalEvent {

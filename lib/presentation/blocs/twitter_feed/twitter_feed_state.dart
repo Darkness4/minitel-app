@@ -3,6 +3,9 @@ part of 'twitter_feed_bloc.dart';
 @immutable
 abstract class TwitterFeedState extends Equatable {
   const TwitterFeedState();
+
+  @override
+  bool get stringify => true;
 }
 
 class TwitterFeedStateError extends TwitterFeedState {

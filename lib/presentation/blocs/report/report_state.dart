@@ -2,6 +2,9 @@ part of 'report_bloc.dart';
 
 abstract class ReportState extends Equatable {
   const ReportState();
+
+  @override
+  bool get stringify => true;
 }
 
 class ReportInitial extends ReportState {

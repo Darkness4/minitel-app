@@ -10,4 +10,7 @@ class GetFeedEvent extends TwitterFeedEvent {
 @immutable
 abstract class TwitterFeedEvent extends Equatable {
   const TwitterFeedEvent();
+
+  @override
+  bool get stringify => true;
 }

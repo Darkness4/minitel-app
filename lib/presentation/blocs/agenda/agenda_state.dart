@@ -2,6 +2,9 @@ part of 'agenda_bloc.dart';
 
 abstract class AgendaState extends Equatable {
   const AgendaState();
+
+  @override
+  bool get stringify => true;
 }
 
 class AgendaInitial extends AgendaState {

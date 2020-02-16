@@ -2,6 +2,9 @@ part of 'report_bloc.dart';
 
 abstract class ReportEvent extends Equatable {
   const ReportEvent();
+
+  @override
+  bool get stringify => true;
 }
 
 class ReportToInitState extends ReportEvent {

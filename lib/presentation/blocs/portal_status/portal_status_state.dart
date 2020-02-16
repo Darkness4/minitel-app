@@ -23,6 +23,9 @@ class PortalStatusState extends Equatable {
     @required this.error,
   });
 
+  @override
+  bool get stringify => true;
+
   factory PortalStatusState.empty() {
     return const PortalStatusState(
       calendarIsSuccess: false,
@@ -102,19 +105,5 @@ class PortalStatusState extends Equatable {
       isFailure: isFailure,
       error: error,
     );
-  }
-
-  @override
-  String toString() {
-    return """PortalStatusState: {
-  calendarIsSuccess: $calendarIsSuccess,
-  portalIsSuccess: $portalIsSuccess,
-  printerIsSuccess: $printerIsSuccess,
-  stormshieldState: $stormshieldState,
-  stormshieldIsSuccess: $stormshieldIsSuccess,
-  isFetching: $isFetching,
-  isFailure: $isFailure,
-  error: $error,
-}""";
   }
 }

@@ -69,12 +69,5 @@ class PortalLoginState extends Equatable {
   }
 
   @override
-  String toString() {
-    return """{
-  isSubmitting: $isSubmitting,
-  isSuccess: $isSuccess,
-  isFailure: $isFailure,
-  error: $error,
-}""";
-  }
+  bool get stringify => true;
 }

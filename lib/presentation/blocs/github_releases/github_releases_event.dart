@@ -12,4 +12,7 @@ class GetReleasesEvent extends GithubReleasesEvent {
 @immutable
 abstract class GithubReleasesEvent extends Equatable {
   const GithubReleasesEvent();
+
+  @override
+  bool get stringify => true;
 }

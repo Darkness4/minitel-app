@@ -3,6 +3,9 @@ part of 'diagnosis_bloc.dart';
 abstract class DiagnosisState extends Equatable {
   Diagnosis get diagnosis;
   const DiagnosisState();
+
+  @override
+  bool get stringify => true;
 }
 
 class DiagnosisInitial extends DiagnosisState {
