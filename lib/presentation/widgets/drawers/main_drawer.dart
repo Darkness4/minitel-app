@@ -187,28 +187,28 @@ class MainDrawer extends StatelessWidget {
                 Radio(
                   value: "Dark",
                   groupValue: state.toString(),
-                  onChanged: (Object _) async {
+                  onChanged: (String value) async {
                     final prefs = sl<SharedPreferences>();
                     context.bloc<ThemeBloc>().add(const ThemeToDark());
-                    await prefs.setString('theme', state.toString());
+                    await prefs.setString('theme', value);
                   },
                 ),
                 Radio(
                   value: "Adaptive",
                   groupValue: state.toString(),
-                  onChanged: (Object _) async {
+                  onChanged: (String value) async {
                     final prefs = sl<SharedPreferences>();
                     context.bloc<ThemeBloc>().add(const ThemeToAdaptive());
-                    await prefs.setString('theme', state.toString());
+                    await prefs.setString('theme', value);
                   },
                 ),
                 Radio(
                   value: "Light",
                   groupValue: state.toString(),
-                  onChanged: (Object _) async {
+                  onChanged: (String value) async {
                     final prefs = sl<SharedPreferences>();
                     context.bloc<ThemeBloc>().add(const ThemeToLight());
-                    await prefs.setString('theme', state.toString());
+                    await prefs.setString('theme', value);
                   },
                 ),
               ],
@@ -219,7 +219,7 @@ class MainDrawer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const <Widget>[
               Text("Dark"),
-              Text("Adaptative"),
+              Text("Adaptive"),
               Text("Light"),
             ],
           )
