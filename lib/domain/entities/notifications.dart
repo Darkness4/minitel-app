@@ -16,6 +16,9 @@ class NotificationSettings extends Equatable {
   @override
   List<Object> get props => [early, range, enabled];
 
+  @override
+  bool get stringify => true;
+
   NotificationSettings copyWith({
     Duration early,
     Duration range,
@@ -26,14 +29,5 @@ class NotificationSettings extends Equatable {
       enabled: enabled ?? this.enabled,
       range: range ?? this.range,
     );
-  }
-
-  @override
-  String toString() {
-    return """{
-  early: $early,
-  enabled: $enabled,
-  range: $range,
-}""";
   }
 }

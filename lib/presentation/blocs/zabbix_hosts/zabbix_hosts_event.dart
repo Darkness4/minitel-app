@@ -12,4 +12,7 @@ class GetZabbixHostsEvent extends ZabbixHostsEvent {
 @immutable
 abstract class ZabbixHostsEvent extends Equatable {
   const ZabbixHostsEvent();
+
+  @override
+  bool get stringify => true;
 }

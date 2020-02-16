@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 /// Main Text Styles of the app
 class MinitelTextStyles {
   // Others Style
-  static TextStyle error = TextStyle(
+  static const TextStyle error = TextStyle(
     color: Colors.red,
     fontWeight: FontWeight.bold,
     fontSize: 20,

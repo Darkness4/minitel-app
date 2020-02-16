@@ -27,6 +27,9 @@ class PortalState extends Equatable {
     @required this.isValidUid,
   });
 
+  @override
+  bool get stringify => true;
+
   factory PortalState.failure() {
     return const PortalState(
       rememberMe: false,
@@ -110,22 +113,6 @@ class PortalState extends Equatable {
       isLoaded: isLoaded ?? false,
       isValidUid: isValidUid ?? this.isValidUid,
     );
-  }
-
-  @override
-  String toString() {
-    return '''PortalState {
-  rememberMe: $rememberMe,
-  autoLogin: $autoLogin,
-  uid: $uid,
-  selectedTime: $selectedTime,
-  selectedUrl: $selectedUrl,
-  pswd: $pswd,
-  isError: $isError,
-  isLoading: $isLoading,
-  isLoaded: $isLoaded,
-  isValidUid: $isValidUid,
-}''';
   }
 
   PortalState update({

@@ -2,20 +2,20 @@ part of 'injection_container.dart';
 
 Future<void> injectExternal() async {
   final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   final customClient = HttpClient()
     ..badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true);
   const FlutterSecureStorage storage = FlutterSecureStorage();
   sl.registerLazySingleton<FlutterSecureStorage>(() => storage);
-  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   sl.registerLazySingleton<http.Client>(() => http.Client());
   sl.registerLazySingleton<HttpClient>(() => customClient);
   sl.registerLazySingleton<NTLMClient>(() => NTLMClient(
         username: "",
         password: "",
       ));
-  sl.registerLazySingleton<ioclient.IOClient>(
-      () => ioclient.IOClient(customClient));
+  sl.registerLazySingleton<io_client.IOClient>(
+      () => io_client.IOClient(customClient));
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
 
   final _androidPlatformChannelSpecifics = AndroidNotificationDetails(

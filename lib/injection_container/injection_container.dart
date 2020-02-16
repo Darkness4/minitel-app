@@ -7,7 +7,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart' as ioclient;
+import 'package:http/io_client.dart' as io_client;
 import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/constants/datetime/datetime_manager.dart';
 import 'package:minitel_toolbox/core/internet_address/internet_address_manager.dart';
@@ -59,7 +59,7 @@ import 'package:minitel_toolbox/presentation/blocs/report_status/report_status_b
 import 'package:minitel_toolbox/presentation/blocs/theme/theme_bloc.dart';
 import 'package:minitel_toolbox/presentation/blocs/zabbix_hosts/zabbix_hosts_bloc.dart';
 import 'package:ntlm/ntlm.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'inject_bloc.dart';

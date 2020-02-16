@@ -2,6 +2,9 @@ part of 'diagnosis_bloc.dart';
 
 abstract class DiagnosisEvent extends Equatable {
   const DiagnosisEvent();
+
+  @override
+  bool get stringify => true;
 }
 
 class DiagnosisRun extends DiagnosisEvent {

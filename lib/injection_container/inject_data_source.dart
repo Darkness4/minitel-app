@@ -1,7 +1,8 @@
 part of 'injection_container.dart';
 
 Future<void> injectDataSource() async {
-  final Directory directory = await getApplicationDocumentsDirectory();
+  final Directory directory =
+      await path_provider.getApplicationDocumentsDirectory();
   final File releasesFile = File('${directory.path}/${CacheKeys.releases}');
   final File feedFile = File('${directory.path}/${CacheKeys.feed}');
   final File icalendarFile = File('${directory.path}/${CacheKeys.iCalendar}');
@@ -18,7 +19,7 @@ Future<void> injectDataSource() async {
     () => GithubLocalDataSourceImpl(file: releasesFile),
   );
   sl.registerLazySingleton<ZabbixRemoteDataSource>(
-    () => ZabbixRemoteDataSourceImpl(clientNoCheck: sl<ioclient.IOClient>()),
+    () => ZabbixRemoteDataSourceImpl(clientNoCheck: sl<io_client.IOClient>()),
   );
   sl.registerLazySingleton<NotificationSettingsDataSource>(
     () => NotificationSettingsDataSourceImpl(prefs: sl<SharedPreferences>()),
@@ -30,7 +31,7 @@ Future<void> injectDataSource() async {
     () => TwitterLocalDataSourceImpl(file: feedFile),
   );
   sl.registerLazySingleton<StormshieldRemoteDataSource>(
-    () => StormshieldRemoteDataSourceImpl(client: sl<ioclient.IOClient>()),
+    () => StormshieldRemoteDataSourceImpl(client: sl<io_client.IOClient>()),
   );
   sl.registerLazySingleton<DiagnosisDataSource>(
     () => DiagnosisDataSourceImpl(

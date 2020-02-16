@@ -4,6 +4,9 @@ abstract class ThemeState extends Equatable {
   ThemeData get themeData;
   ThemeData get themeDataDark;
   const ThemeState();
+
+  @override
+  bool get stringify => true;
 }
 
 class ThemeDark extends ThemeState {

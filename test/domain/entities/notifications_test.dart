@@ -56,14 +56,12 @@ void main() {
       () async {
         // act
         final String result = tNotificationSettings.toString();
+        print(result);
         // assert
         expect(
           result,
-          equals("""{
-  early: ${const Duration(minutes: 10)},
-  enabled: ${true},
-  range: ${const Duration(days: 30)},
-}"""),
+          equals(
+              "NotificationSettings(${const Duration(minutes: 10)}, ${const Duration(days: 30)}, ${true})"),
         );
       },
     );

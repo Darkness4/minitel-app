@@ -13,6 +13,9 @@ class NotificationSettingsState extends Equatable {
   });
 
   @override
+  bool get stringify => true;
+
+  @override
   List<Object> get props => [
         this.notificationSettings,
         this.isSaved,
@@ -58,14 +61,5 @@ class NotificationSettingsState extends Equatable {
       isSaved: isSaved ?? this.isSaved,
       isLoaded: isLoaded ?? this.isLoaded,
     );
-  }
-
-  @override
-  String toString() {
-    return """NotificationSettingsState: {
-  notificationSettings: ${notificationSettings.toString()},
-  isSaved: $isSaved,
-  isLoaded: $isLoaded,
-}""";
   }
 }
