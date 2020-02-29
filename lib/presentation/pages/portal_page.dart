@@ -131,7 +131,7 @@ class PortalPage extends StatelessWidget {
                             ));
                       } else {
                         print(
-                            "Uid seems not valid. Must contains '.' and not '@'");
+                            "Uid seems not valid. Must contains '.' and not '@': ${portalState.uid}");
                       }
                     }
                   },

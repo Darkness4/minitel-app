@@ -5,7 +5,7 @@ repository: https://github.com/Darkness4/minitel-app
 documentation: https://github.com/Darkness4/minitel-app/wiki
 issue_tracker: https://github.com/Darkness4/minitel-app/issues
 author: Nguyen Marc <nguyen_marc@live.fr>
-version: 2.0.1+13
+version: 2.0.2+14
 
 environment:
   sdk: '>=2.7.0 <3.0.0'
@@ -23,23 +23,24 @@ dependencies:
       url: git://github.com/Darkness4/plugins.git
       ref: 0183a5ec8295c9593a789d2e2e88740752d0f9c1
       path: packages/webview_flutter
-  connectivity: ^0.4.6+2 # Flutter Team
-  share: ^0.6.3+5 # Flutter Team
-  url_launcher: ^5.4.1 # Flutter Team
-  shared_preferences: ^0.5.6+1 # Flutter Team
-  path_provider: ^1.6.0 # Flutter Team
+  connectivity: ^0.4.8+1 # Flutter Team
+  share: ^0.6.3+6 # Flutter Team
+  url_launcher: ^5.4.2 # Flutter Team
+  shared_preferences: ^0.5.6+2 # Flutter Team
+  path_provider: ^1.6.1 # Flutter Team
   sticky_headers: ^0.1.8+1 # Flutter Community
-  flutter_local_notifications: ^1.1.5+1 # Michael Bui
-  package_info: ^0.4.0+13 # Flutter Team
+  flutter_local_notifications: ^1.2.0+3 # Michael Bui
+  package_info: ^0.4.0+14 # Flutter Team
   intl: ^0.16.1
   ntlm: ^1.0.2 # MrBBot
   http: ^0.12.0+4 # Dart Team
   flutter_secure_storage: ^3.3.1+1 # German Saprykin
   flutter_bloc: ^3.2.0 # bloclibrary.dev
   equatable: ^1.1.0 # felangelov@gmail.com
-  get_it: ^4.0.0-release-candidate # fluttercommunity.dev
-  flutter_markdown: ^0.3.3
+  get_it: ^4.0.0 # fluttercommunity.dev
+  flutter_markdown: ^0.3.4
   google_fonts: ^0.3.9 # material.io
+  rxdart: ^0.23.1
 
 dev_dependencies:
   flutter_test:
