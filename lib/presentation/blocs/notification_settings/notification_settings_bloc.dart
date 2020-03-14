@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
@@ -21,25 +20,6 @@ class NotificationSettingsBloc
   @override
   NotificationSettingsState get initialState =>
       NotificationSettingsState.initial();
-
-  @override
-  Stream<NotificationSettingsState> transformEvents(
-    Stream<NotificationSettingsEvent> events,
-    Stream<NotificationSettingsState> Function(NotificationSettingsEvent event)
-        next,
-  ) {
-    final nonDebounceStream = events.where((event) {
-      return event is! RangeChanged && event is! EarlyChanged;
-    });
-    final debounceStream = events.where((event) {
-      return event is RangeChanged || event is EarlyChanged;
-    }).debounceTime(const Duration(milliseconds: 300));
-
-    return super.transformEvents(
-      nonDebounceStream.mergeWith([debounceStream]),
-      next,
-    );
-  }
 
   @override
   Stream<NotificationSettingsState> mapEventToState(
