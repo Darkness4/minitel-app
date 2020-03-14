@@ -32,50 +32,7 @@ class PortalStatusBloc extends Bloc<PortalStatusEvent, PortalStatusState> {
     PortalStatusEvent event,
   ) async* {
     if (event is RefreshEvent) {
-      yield PortalStatusState.loading();
-
-      final refreshStormshield =
-          stormshieldRemoteDataSource.fetchStatus(event.selectedUrl);
-
-      final refreshCalendar = calendarURLRepository.isSaved;
-
-      final portalIsSuccess = portailEMSERemoteDataSource.cookies.isNotEmpty;
-      if (state.portalIsSuccess != portalIsSuccess) {
-        add(PortalStatusChanged(portalIsSuccess: portalIsSuccess));
-      }
-
-      final printerIsSuccess = imprimanteRemoteDataSource.cookies.isNotEmpty;
-      if (state.printerIsSuccess != printerIsSuccess) {
-        add(PrinterStatusChanged(printerIsSuccess: printerIsSuccess));
-      }
-
-      try {
-        await refreshCalendar.then((calendarIsSuccess) {
-          if (state.calendarIsSuccess != calendarIsSuccess) {
-            add(CalendarStatusChanged(
-                calendarIsSuccess: calendarIsSuccess ?? false));
-          }
-        });
-      } catch (e) {
-        add(StormshieldStatusChanged(
-          stormshieldState: e.toString(),
-          stormshieldIsSuccess: false,
-        ));
-        add(PortalStatusFailureEvent(error: e));
-      }
-      try {
-        await refreshStormshield.then((status) {
-          if (state.stormshieldState != status) {
-            add(StormshieldStatusChanged(
-              stormshieldState: status,
-              stormshieldIsSuccess: true,
-            ));
-          }
-        });
-      } catch (e) {
-        add(CalendarStatusChanged(calendarIsSuccess: false));
-        add(PortalStatusFailureEvent(error: e));
-      }
+      yield* _mapRefreshEventToState(event);
     } else if (event is CalendarStatusChanged) {
       yield* _mapCalendarStatusChangedEventToState(event);
     } else if (event is PortalStatusChanged) {
@@ -86,6 +43,53 @@ class PortalStatusBloc extends Bloc<PortalStatusEvent, PortalStatusState> {
       yield* _mapStormshieldStatusChangedEventToState(event);
     } else if (event is PortalStatusFailureEvent) {
       yield state.update(error: event.error);
+    }
+  }
+
+  Stream<PortalStatusState> _mapRefreshEventToState(RefreshEvent event) async* {
+    yield PortalStatusState.loading();
+
+    final refreshStormshield =
+        stormshieldRemoteDataSource.fetchStatus(event.selectedUrl);
+
+    final refreshCalendar = calendarURLRepository.isSaved;
+
+    final portalIsSuccess = portailEMSERemoteDataSource.cookies.isNotEmpty;
+    if (state.portalIsSuccess != portalIsSuccess) {
+      add(PortalStatusChanged(portalIsSuccess: portalIsSuccess));
+    }
+
+    final printerIsSuccess = imprimanteRemoteDataSource.cookies.isNotEmpty;
+    if (state.printerIsSuccess != printerIsSuccess) {
+      add(PrinterStatusChanged(printerIsSuccess: printerIsSuccess));
+    }
+
+    try {
+      await refreshCalendar.then((calendarIsSuccess) {
+        if (state.calendarIsSuccess != calendarIsSuccess) {
+          add(CalendarStatusChanged(
+              calendarIsSuccess: calendarIsSuccess ?? false));
+        }
+      });
+    } catch (e) {
+      add(StormshieldStatusChanged(
+        stormshieldState: e.toString(),
+        stormshieldIsSuccess: false,
+      ));
+      add(PortalStatusFailureEvent(error: e));
+    }
+    try {
+      await refreshStormshield.then((status) {
+        if (state.stormshieldState != status) {
+          add(StormshieldStatusChanged(
+            stormshieldState: status,
+            stormshieldIsSuccess: true,
+          ));
+        }
+      });
+    } catch (e) {
+      add(CalendarStatusChanged(calendarIsSuccess: false));
+      add(PortalStatusFailureEvent(error: e));
     }
   }
 

@@ -25,13 +25,18 @@ class GithubReleasesBloc
     GithubReleasesEvent event,
   ) async* {
     if (event is GetReleasesEvent) {
-      yield const GithubReleasesStateLoading();
-      try {
-        final releases = await repository.get(event.repo);
-        yield GithubReleasesStateLoaded(releases: releases);
-      } catch (e) {
-        yield GithubReleasesStateError(message: e.toString());
-      }
+      yield* _mapGetReleasesEventToState(event);
+    }
+  }
+
+  Stream<GithubReleasesState> _mapGetReleasesEventToState(
+      GetReleasesEvent event) async* {
+    yield const GithubReleasesStateLoading();
+    try {
+      final releases = await repository.get(event.repo);
+      yield GithubReleasesStateLoaded(releases: releases);
+    } catch (e) {
+      yield GithubReleasesStateError(message: e.toString());
     }
   }
 }

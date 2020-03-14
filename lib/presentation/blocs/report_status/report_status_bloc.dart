@@ -32,22 +32,39 @@ class ReportStatusBloc extends Bloc<ReportStatusEvent, ReportStatusState> {
     ReportStatusEvent event,
   ) async* {
     if (event is NameChanged) {
-      yield state.update(
-        name: event.name,
-        isValidName: event.name.isNotEmpty,
-      );
+      yield* _mapNameChangedToState(event);
     } else if (event is RoomChanged) {
-      yield state.update(
-        room: event.room,
-        isValidRoom: event.room.isNotEmpty && event.room.containsOnlyNumbers,
-      );
+      yield* _mapRoomChangedToState(event);
     } else if (event is DescriptionChanged) {
-      yield state.update(description: event.description);
+      yield* _mapDescriptionChangedToState(event);
     } else if (event is TitleChanged) {
-      yield state.update(
-        title: event.title,
-        isValidTitle: event.title.isNotEmpty,
-      );
+      yield* _mapTitleChangedToState(event);
     }
+  }
+
+  Stream<ReportStatusState> _mapTitleChangedToState(TitleChanged event) async* {
+    yield state.update(
+      title: event.title,
+      isValidTitle: event.title.isNotEmpty,
+    );
+  }
+
+  Stream<ReportStatusState> _mapDescriptionChangedToState(
+      DescriptionChanged event) async* {
+    yield state.update(description: event.description);
+  }
+
+  Stream<ReportStatusState> _mapRoomChangedToState(RoomChanged event) async* {
+    yield state.update(
+      room: event.room,
+      isValidRoom: event.room.isNotEmpty && event.room.containsOnlyNumbers,
+    );
+  }
+
+  Stream<ReportStatusState> _mapNameChangedToState(NameChanged event) async* {
+    yield state.update(
+      name: event.name,
+      isValidName: event.name.isNotEmpty,
+    );
   }
 }

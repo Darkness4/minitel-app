@@ -24,13 +24,17 @@ class TwitterFeedBloc extends Bloc<TwitterFeedEvent, TwitterFeedState> {
     TwitterFeedEvent event,
   ) async* {
     if (event is GetFeedEvent) {
-      yield const TwitterFeedStateLoading();
-      try {
-        final feed = await repository.get();
-        yield TwitterFeedStateLoaded(feed: feed);
-      } catch (e) {
-        yield TwitterFeedStateError(message: e.toString());
-      }
+      yield* _mapGetFeedEventToState();
+    }
+  }
+
+  Stream<TwitterFeedState> _mapGetFeedEventToState() async* {
+    yield const TwitterFeedStateLoading();
+    try {
+      final feed = await repository.get();
+      yield TwitterFeedStateLoaded(feed: feed);
+    } catch (e) {
+      yield TwitterFeedStateError(message: e.toString());
     }
   }
 }

@@ -34,43 +34,47 @@ class PortalLoginBloc extends Bloc<PortalLoginEvent, PortalLoginState> {
     PortalLoginEvent event,
   ) async* {
     if (event is LoginEvent) {
-      yield PortalLoginState.loading();
-      try {
-        // First
-        final responseStormshield = stormshieldRemoteDataSource.login(
-          uid: event.uid,
-          pswd: event.pswd,
-          selectedUrl: event.selectedUrl,
-          selectedTime: LoginConstants.timeMap[event.selectedTime],
-        );
+      yield* _mapLoginEventToState(event);
+    }
+  }
 
-        final responseICalendar = iCalendarRepository.download(
-          username: event.uid,
-          password: event.pswd,
-        );
+  Stream<PortalLoginState> _mapLoginEventToState(LoginEvent event) async* {
+    yield PortalLoginState.loading();
+    try {
+      // First
+      final responseStormshield = stormshieldRemoteDataSource.login(
+        uid: event.uid,
+        pswd: event.pswd,
+        selectedUrl: event.selectedUrl,
+        selectedTime: LoginConstants.timeMap[event.selectedTime],
+      );
 
-        final responsePortailEMSE = portailEMSERemoteDataSource.login(
-          username: event.uid,
-          password: event.pswd,
-        );
+      final responseICalendar = iCalendarRepository.download(
+        username: event.uid,
+        password: event.pswd,
+      );
 
-        final responseImprimante = imprimanteRemoteDataSource.login(
-          username: event.uid,
-          password: event.pswd,
-        );
+      final responsePortailEMSE = portailEMSERemoteDataSource.login(
+        username: event.uid,
+        password: event.pswd,
+      );
 
-        await Future.wait([
-          responseStormshield,
-          responseICalendar,
-          responsePortailEMSE,
-          responseImprimante,
-        ]).timeout(const Duration(seconds: 5),
-            onTimeout: () => throw ClientException("Timed out"));
-        yield PortalLoginState.success();
-      } catch (e) {
-        yield PortalLoginState.failure(e.toString());
-        yield PortalLoginState.empty();
-      }
+      final responseImprimante = imprimanteRemoteDataSource.login(
+        username: event.uid,
+        password: event.pswd,
+      );
+
+      await Future.wait([
+        responseStormshield,
+        responseICalendar,
+        responsePortailEMSE,
+        responseImprimante,
+      ]).timeout(const Duration(seconds: 5),
+          onTimeout: () => throw ClientException("Timed out"));
+      yield PortalLoginState.success();
+    } catch (e) {
+      yield PortalLoginState.failure(e.toString());
+      yield PortalLoginState.empty();
     }
   }
 }

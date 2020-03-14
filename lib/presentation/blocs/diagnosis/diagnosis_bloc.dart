@@ -23,18 +23,26 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
     DiagnosisEvent event,
   ) async* {
     if (event is DiagnosisRun) {
-      try {
-        await diagnosisRepository.diagnose();
-        yield DiagnosisLoading(diagnosis: diagnosisRepository.diagnosis);
-        await diagnosisRepository.diagnosis
-            .waitAll()
-            .timeout(const Duration(minutes: 1));
-        yield DiagnosisLoaded(diagnosis: diagnosisRepository.diagnosis);
-      } catch (e) {
-        yield DiagnosisError(error: e);
-      }
+      yield* _mapDiagnosisRunToState();
     } else if (event is DiagnosisCancel) {
-      yield DiagnosisInitial(diagnosis: diagnosisRepository.diagnosis);
+      yield* _mapDiagnosisCancelToState();
+    }
+  }
+
+  Stream<DiagnosisState> _mapDiagnosisCancelToState() async* {
+    yield DiagnosisInitial(diagnosis: diagnosisRepository.diagnosis);
+  }
+
+  Stream<DiagnosisState> _mapDiagnosisRunToState() async* {
+    try {
+      await diagnosisRepository.diagnose();
+      yield DiagnosisLoading(diagnosis: diagnosisRepository.diagnosis);
+      await diagnosisRepository.diagnosis
+          .waitAll()
+          .timeout(const Duration(minutes: 1));
+      yield DiagnosisLoaded(diagnosis: diagnosisRepository.diagnosis);
+    } catch (e) {
+      yield DiagnosisError(error: e);
     }
   }
 }

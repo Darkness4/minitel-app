@@ -24,13 +24,18 @@ class ZabbixHostsBloc extends Bloc<ZabbixHostsEvent, ZabbixHostsState> {
     ZabbixHostsEvent event,
   ) async* {
     if (event is GetZabbixHostsEvent) {
-      yield const ZabbixHostsStateLoading();
-      try {
-        final hosts = await repository.get(event.groupids);
-        yield ZabbixHostsStateLoaded(hosts: hosts);
-      } catch (e) {
-        yield ZabbixHostsStateError(error: e);
-      }
+      yield* _mapGetZabbixHostsEventToState(event);
+    }
+  }
+
+  Stream<ZabbixHostsState> _mapGetZabbixHostsEventToState(
+      GetZabbixHostsEvent event) async* {
+    yield const ZabbixHostsStateLoading();
+    try {
+      final hosts = await repository.get(event.groupids);
+      yield ZabbixHostsStateLoaded(hosts: hosts);
+    } catch (e) {
+      yield ZabbixHostsStateError(error: e);
     }
   }
 }
