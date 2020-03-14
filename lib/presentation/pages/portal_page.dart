@@ -120,7 +120,6 @@ class PortalPage extends StatelessWidget {
                   key: const Key(Keys.loginButton),
                   onPressed: () {
                     if (formKey.currentState.validate()) {
-                      context.bloc<PortalBloc>().state;
                       final portalState = context.bloc<PortalBloc>().state;
                       if (portalState.isValidUid) {
                         context.bloc<PortalLoginBloc>().add(LoginEvent(
