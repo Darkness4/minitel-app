@@ -72,7 +72,6 @@ class PortalStatusBloc extends Bloc<PortalStatusEvent, PortalStatusState> {
             ));
           }
         });
-        ;
       } catch (e) {
         add(CalendarStatusChanged(calendarIsSuccess: false));
         add(PortalStatusFailureEvent(error: e));
