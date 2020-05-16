@@ -1,29 +1,15 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LoginSettings extends Equatable {
-  final bool rememberMe;
-  final bool autoLogin;
-  final String uid;
-  final String selectedTime;
-  final String selectedUrl;
-  final String pswd;
+part 'login_settings.freezed.dart';
 
-  const LoginSettings({
-    this.rememberMe,
-    this.autoLogin,
-    this.uid,
-    this.selectedTime,
-    this.selectedUrl,
-    this.pswd,
-  });
-
-  @override
-  List<Object> get props => [
-        this.rememberMe,
-        this.autoLogin,
-        this.uid,
-        this.selectedTime,
-        this.selectedUrl,
-        this.pswd,
-      ];
+@freezed
+abstract class LoginSettings with _$LoginSettings {
+  const factory LoginSettings({
+    @required @nullable bool rememberMe,
+    @required @nullable bool autoLogin,
+    @required @nullable String uid,
+    @required @nullable String selectedTime,
+    @required @nullable String selectedUrl,
+    @required @nullable String pswd,
+  }) = _LoginSettings;
 }

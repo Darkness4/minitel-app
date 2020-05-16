@@ -1,67 +1,29 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/github/asset.dart';
 import 'package:minitel_toolbox/domain/entities/github/user.dart';
 
-class GithubRelease extends Equatable {
-  final String url;
-  final String html_url;
-  final String assets_url;
-  final String upload_url;
-  final String tarball_url;
-  final String zipball_url;
-  final int id;
-  final String node_id;
-  final String tag_name;
-  final String target_commitish;
-  final String name;
-  final String body;
-  final bool draft;
-  final bool prerelease;
-  final DateTime created_at;
-  final DateTime published_at;
-  final GithubUser author;
-  final List<GithubAsset> assets;
+part 'release.freezed.dart';
 
-  const GithubRelease({
-    this.url,
-    this.html_url,
-    this.assets_url,
-    this.upload_url,
-    this.tarball_url,
-    this.zipball_url,
-    this.id,
-    this.node_id,
-    this.tag_name,
-    this.target_commitish,
-    this.name,
-    this.body,
-    this.draft,
-    this.prerelease,
-    this.created_at,
-    this.published_at,
-    this.author,
-    this.assets,
-  });
-
-  @override
-  List<Object> get props => <Object>[
-        url,
-        html_url,
-        assets_url,
-        upload_url,
-        tarball_url,
-        zipball_url,
-        id,
-        node_id,
-        tag_name,
-        target_commitish,
-        name,
-        body,
-        draft,
-        prerelease,
-        created_at,
-        published_at,
-        author,
-        assets,
-      ];
+@freezed
+abstract class GithubRelease with _$GithubRelease {
+  const factory GithubRelease({
+    @required @nullable String url,
+    @required @nullable String html_url,
+    @required @nullable String assets_url,
+    @required @nullable String upload_url,
+    @required @nullable String tarball_url,
+    @required @nullable String zipball_url,
+    @required @nullable int id,
+    @required @nullable String node_id,
+    @required @nullable String tag_name,
+    @required @nullable String target_commitish,
+    @required @nullable String name,
+    @required @nullable String body,
+    @required @nullable bool draft,
+    @required @nullable bool prerelease,
+    @required @nullable DateTime created_at,
+    @required @nullable DateTime published_at,
+    @required @nullable GithubUser author,
+    @required @nullable List<GithubAsset> assets,
+  }) = _GithubRelease;
 }

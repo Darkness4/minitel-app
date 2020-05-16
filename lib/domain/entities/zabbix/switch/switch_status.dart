@@ -1,98 +1,21 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_statistics.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_status.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 
-class SwitchStatus extends Equatable {
-  /// Status of <port, status>
-  final Map<int, SwitchPortStatus> ports;
+part 'switch_status.freezed.dart';
 
-  /// Most useful SNMP description
-  final String description;
-
-  /// Hostname
-  final String hostname;
-
-  /// Seconds
-  final Duration uptime;
-
-  /// Seconds
-  final double pingResponseTime;
-
-  /// Availability of Zabbix agent.
-  ///
-  /// Possible values are:
-  /// 0 - (default) unknown;
-  /// 1 - available;
-  /// 2 - unavailable
-  final int snmpAvailable;
-
-  const SwitchStatus({
-    this.ports,
-    this.description,
-    this.hostname,
-    this.uptime,
-    this.pingResponseTime,
-    this.snmpAvailable,
-  });
-
-  @override
-  List<Object> get props => [
-        this.ports,
-        this.description,
-        this.hostname,
-        this.uptime,
-        this.pingResponseTime,
-        this.snmpAvailable,
-      ];
-
-  static SwitchStatus fromHost(ZabbixHost host) {
-    // Data to fill
-    final Map<int, SwitchPortStatus> ports = <int, SwitchPortStatus>{};
-    String description;
-    String hostname;
-    Duration uptime;
-    double pingResponseTime;
-    int snmpAvailable;
-
-    host.items.forEach((final ZabbixItem item) {
-      if (item.snmp_oid != null &&
-          item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
-        final int port = int.parse(
-            item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
-        ports[port] ??= const SwitchPortStatus();
-        ports[port] = ports[port].copyWith(speed: int.parse(item.lastvalue));
-      } else if (item.snmp_oid != null &&
-          item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
-        final int port = int.parse(
-            item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
-        ports[port] ??= const SwitchPortStatus();
-        ports[port] =
-            ports[port].copyWith(operStatus: int.parse(item.lastvalue));
-      } else if (item.name.contains('Device description')) {
-        description = item.lastvalue;
-      } else if (item.name.contains('Device name')) {
-        hostname = item.lastvalue;
-      } else if (item.name.contains('ICMP response time')) {
-        pingResponseTime = double.parse(item.lastvalue);
-      } else if (item.name.contains('Device uptime')) {
-        uptime = Duration(seconds: int.parse(item.lastvalue));
-      } else if (item.name.contains('SNMP availability')) {
-        snmpAvailable = int.parse(item.lastvalue);
-      } else {
-        print('${item.name} unhandled.');
-      }
-    });
-    return SwitchStatus(
-      snmpAvailable: snmpAvailable,
-      description: description,
-      hostname: hostname,
-      pingResponseTime: pingResponseTime,
-      ports: ports,
-      uptime: uptime,
-    );
-  }
+@freezed
+abstract class SwitchStatus with _$SwitchStatus {
+  const factory SwitchStatus({
+    @required @nullable Map<int, SwitchPortStatus> ports,
+    @required @nullable String description,
+    @required @nullable String hostname,
+    @required @nullable Duration uptime,
+    @required @nullable double pingResponseTime,
+    @required @nullable int snmpAvailable,
+  }) = _SwitchStatus;
 }
 
 extension SwitchStatusUtils on SwitchStatus {
@@ -158,5 +81,52 @@ extension SwitchStatusUtils on SwitchStatus {
     } else {
       return '${number / 1e9} G';
     }
+  }
+
+  static SwitchStatus fromHost(ZabbixHost host) {
+    // Data to fill
+    final Map<int, SwitchPortStatus> ports = <int, SwitchPortStatus>{};
+    String description;
+    String hostname;
+    Duration uptime;
+    double pingResponseTime;
+    int snmpAvailable;
+
+    host.items.forEach((final ZabbixItem item) {
+      if (item.snmp_oid != null &&
+          item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
+        final int port = int.parse(
+            item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
+        ports[port] ??= const SwitchPortStatus();
+        ports[port] = ports[port].copyWith(speed: int.parse(item.lastvalue));
+      } else if (item.snmp_oid != null &&
+          item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
+        final int port = int.parse(
+            item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
+        ports[port] ??= const SwitchPortStatus();
+        ports[port] =
+            ports[port].copyWith(operStatus: int.parse(item.lastvalue));
+      } else if (item.name.contains('Device description')) {
+        description = item.lastvalue;
+      } else if (item.name.contains('Device name')) {
+        hostname = item.lastvalue;
+      } else if (item.name.contains('ICMP response time')) {
+        pingResponseTime = double.parse(item.lastvalue);
+      } else if (item.name.contains('Device uptime')) {
+        uptime = Duration(seconds: int.parse(item.lastvalue));
+      } else if (item.name.contains('SNMP availability')) {
+        snmpAvailable = int.parse(item.lastvalue);
+      } else {
+        print('${item.name} unhandled.');
+      }
+    });
+    return SwitchStatus(
+      snmpAvailable: snmpAvailable,
+      description: description,
+      hostname: hostname,
+      pingResponseTime: pingResponseTime,
+      ports: ports,
+      uptime: uptime,
+    );
   }
 }

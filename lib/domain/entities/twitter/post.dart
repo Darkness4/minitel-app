@@ -1,33 +1,17 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Post extends Equatable {
-  final String text;
-  final String id_str;
-  final String user_name;
-  final String screen_name;
-  final Uri profile_image_url_https;
-  final Uri url;
-  final DateTime created_at;
+part 'post.freezed.dart';
 
-  const Post({
-    @required this.text,
-    @required this.id_str,
-    @required this.user_name,
-    @required this.screen_name,
-    @required this.profile_image_url_https,
-    @required this.created_at,
-    @required this.url,
-  });
-
-  @override
-  List<Object> get props => [
-        text,
-        id_str,
-        user_name,
-        screen_name,
-        profile_image_url_https,
-        url,
-        created_at,
-      ];
+@freezed
+abstract class Post with _$Post {
+  const factory Post({
+    @required @nullable String text,
+    @required @nullable String id_str,
+    @required @nullable String user_name,
+    @required @nullable String screen_name,
+    @required @nullable Uri profile_image_url_https,
+    @required @nullable Uri url,
+    @required @nullable DateTime created_at,
+  }) = _Post;
 }

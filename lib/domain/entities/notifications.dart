@@ -1,33 +1,13 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'notifications.freezed.dart';
 
 /// Notifications settings
-class NotificationSettings extends Equatable {
-  /// Notify earlier than the indicated time
-  final Duration early;
-
-  /// Time range for the notification to work
-  final Duration range;
-
-  /// Enable notifications
-  final bool enabled;
-
-  const NotificationSettings({this.early, this.range, this.enabled});
-
-  @override
-  List<Object> get props => [early, range, enabled];
-
-  @override
-  bool get stringify => true;
-
-  NotificationSettings copyWith({
-    Duration early,
-    Duration range,
-    bool enabled,
-  }) {
-    return NotificationSettings(
-      early: early ?? this.early,
-      enabled: enabled ?? this.enabled,
-      range: range ?? this.range,
-    );
-  }
+@freezed
+abstract class NotificationSettings with _$NotificationSettings {
+  const factory NotificationSettings({
+    @required @nullable Duration early,
+    @required @nullable Duration range,
+    @required @nullable bool enabled,
+  }) = _NotificationSettings;
 }

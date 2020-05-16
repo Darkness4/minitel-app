@@ -1,16 +1,12 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'post.dart';
 
-class Feed extends Equatable {
-  final List<Post> posts;
+part 'feed.freezed.dart';
 
-  const Feed({
-    this.posts,
-  });
-
-  @override
-  List<Object> get props => [
-        posts,
-      ];
+@freezed
+abstract class Feed with _$Feed {
+  const factory Feed({
+    @required List<Post> posts,
+  }) = _Feed;
 }
