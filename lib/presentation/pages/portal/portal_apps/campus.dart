@@ -27,7 +27,7 @@ class CampusWebView extends StatelessWidget {
       cookieManager.setCookie("https://shibbo2.emse.fr",
           "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
     }
-    return ScaffoldWebView(
+    return const ScaffoldWebView(
       backgroundColor: Colors.deepPurple,
       initialUrl: 'https://campus.emse.fr',
     );

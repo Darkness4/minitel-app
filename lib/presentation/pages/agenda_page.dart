@@ -37,7 +37,7 @@ class AgendaPage extends StatelessWidget {
           title: Text(title),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.of(context).push<void>(
                   MaterialPageRoute<void>(
@@ -121,7 +121,7 @@ class AgendaPage extends StatelessWidget {
           child: Text(
             AppLoc.of(context).agenda.cases[
                 Random().nextInt(AppLoc.of(context).agenda.cases.length)],
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w300,
               fontSize: 24.0,

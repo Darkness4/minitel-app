@@ -46,21 +46,20 @@ class PortalBloc extends Bloc<PortalEvent, PortalState> {
   }
 
   @override
-  Stream<PortalState> transformEvents(
+  Stream<Transition<PortalEvent, PortalState>> transformEvents(
     Stream<PortalEvent> events,
-    Stream<PortalState> Function(PortalEvent event) next,
+    Stream<Transition<PortalEvent, PortalState>> Function(PortalEvent)
+        transitionFn,
   ) {
     final nonDebounceStream = events.where((event) {
       return event is! UidChanged && event is! PswdChanged;
     });
     final debounceStream = events.where((event) {
       return event is UidChanged || event is PswdChanged;
-    }).debounceTime(const Duration(milliseconds: 300));
+    }).debounceTime(const Duration(milliseconds: 100));
 
     return super.transformEvents(
-      nonDebounceStream.mergeWith([debounceStream]),
-      next,
-    );
+        nonDebounceStream.mergeWith([debounceStream]), transitionFn);
   }
 
   Stream<PortalState> _mapAutoLoginChangedEventToState(
