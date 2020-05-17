@@ -1,15 +1,15 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'zabbix_interface.freezed.dart';
+part 'zabbix_interface.g.dart';
 
 /// This is used to store interface data from a host.
-class ZabbixInterface extends Equatable {
-  final String ip;
+@freezed
+abstract class ZabbixInterface with _$ZabbixInterface {
+  const factory ZabbixInterface({
+    @required @nullable String ip,
+  }) = _ZabbixInterface;
 
-  const ZabbixInterface({
-    this.ip,
-  });
-
-  @override
-  List<Object> get props => [
-        this.ip,
-      ];
+  factory ZabbixInterface.fromJson(Map<String, dynamic> json) =>
+      _$ZabbixInterfaceFromJson(json);
 }

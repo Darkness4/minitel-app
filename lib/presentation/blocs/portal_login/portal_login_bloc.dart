@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
@@ -10,6 +10,7 @@ import 'package:minitel_toolbox/data/datasources/emse/portail_emse_remote_data_s
 import 'package:minitel_toolbox/data/datasources/emse/stormshield_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
 
+part 'portal_login_bloc.freezed.dart';
 part 'portal_login_event.dart';
 part 'portal_login_state.dart';
 
@@ -24,7 +25,10 @@ class PortalLoginBloc extends Bloc<PortalLoginEvent, PortalLoginState> {
     @required this.iCalendarRepository,
     @required this.imprimanteRemoteDataSource,
     @required this.portailEMSERemoteDataSource,
-  });
+  })  : assert(stormshieldRemoteDataSource != null),
+        assert(imprimanteRemoteDataSource != null),
+        assert(portailEMSERemoteDataSource != null),
+        assert(iCalendarRepository != null);
 
   @override
   PortalLoginState get initialState => PortalLoginState.empty();
@@ -72,8 +76,8 @@ class PortalLoginBloc extends Bloc<PortalLoginEvent, PortalLoginState> {
       ]).timeout(const Duration(seconds: 5),
           onTimeout: () => throw ClientException("Timed out"));
       yield PortalLoginState.success();
-    } catch (e) {
-      yield PortalLoginState.failure(e.toString());
+    } on Exception catch (e) {
+      yield PortalLoginState.failure(e);
       yield PortalLoginState.empty();
     }
   }

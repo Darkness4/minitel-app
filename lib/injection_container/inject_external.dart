@@ -18,7 +18,7 @@ Future<void> injectExternal() async {
       () => io_client.IOClient(customClient));
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
 
-  final _androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  const _androidPlatformChannelSpecifics = AndroidNotificationDetails(
     'minitel_channel',
     'Minitel Channel',
     'Notification channel for the Minitel App',
@@ -26,11 +26,11 @@ Future<void> injectExternal() async {
     priority: Priority.High,
     enableVibration: true,
   );
-  final _iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  const _iOSPlatformChannelSpecifics = IOSNotificationDetails();
 
   sl.registerLazySingleton<FlutterLocalNotificationsPlugin>(
       () => FlutterLocalNotificationsPlugin());
-  sl.registerLazySingleton<NotificationDetails>(() => NotificationDetails(
+  sl.registerLazySingleton<NotificationDetails>(() => const NotificationDetails(
         _androidPlatformChannelSpecifics,
         _iOSPlatformChannelSpecifics,
       ));

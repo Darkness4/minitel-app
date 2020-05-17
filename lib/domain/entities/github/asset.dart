@@ -1,51 +1,28 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/github/user.dart';
 
-class GithubAsset extends Equatable {
-  final String url;
-  final String browser_download_url;
-  final int id;
-  final String node_id;
-  final String name;
-  final String label;
-  final String state;
-  final String content_type;
-  final int size;
-  final int download_count;
-  final DateTime created_at;
-  final DateTime updated_at;
-  final GithubUser uploader;
+part 'asset.freezed.dart';
+part 'asset.g.dart';
 
-  const GithubAsset({
-    this.url,
-    this.browser_download_url,
-    this.id,
-    this.node_id,
-    this.name,
-    this.label,
-    this.state,
-    this.content_type,
-    this.size,
-    this.download_count,
-    this.created_at,
-    this.updated_at,
-    this.uploader,
-  });
+@freezed
+abstract class GithubAsset with _$GithubAsset {
+  @JsonSerializable(explicitToJson: true)
+  const factory GithubAsset({
+    @required @nullable String url,
+    @required @nullable String browser_download_url,
+    @required @nullable int id,
+    @required @nullable String node_id,
+    @required @nullable String name,
+    @required @nullable String label,
+    @required @nullable String state,
+    @required @nullable String content_type,
+    @required @nullable int size,
+    @required @nullable int download_count,
+    @required @nullable DateTime created_at,
+    @required @nullable DateTime updated_at,
+    @required @nullable GithubUser uploader,
+  }) = _GithubAsset;
 
-  @override
-  List<Object> get props => <Object>[
-        url,
-        browser_download_url,
-        id,
-        node_id,
-        name,
-        label,
-        state,
-        content_type,
-        size,
-        download_count,
-        created_at,
-        updated_at,
-        uploader,
-      ];
+  factory GithubAsset.fromJson(Map<String, dynamic> json) =>
+      _$GithubAssetFromJson(json);
 }

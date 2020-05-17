@@ -91,7 +91,9 @@ class GithubScreen extends StatelessWidget {
             } else if (state is GithubReleasesStateLoaded) {
               return GithubReleasesDisplay(releases: state.releases);
             } else if (state is GithubReleasesStateError) {
-              return ErrorDisplay(message: state.message);
+              return ErrorDisplay(
+                message: state.error.toString(),
+              );
             }
             return null;
           },

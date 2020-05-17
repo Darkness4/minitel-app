@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/settings/login_settings_data_source.dart';
-import 'package:minitel_toolbox/data/models/login_settings_model.dart';
+import 'package:minitel_toolbox/domain/entities/login_settings.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,7 +50,7 @@ void main() {
         const tSelectedUrl = "10.163.0.2";
         const tUid = "uid";
         const tPwsd = "pswd";
-        const tLoginSettingsModel = LoginSettingsModel(
+        const tLoginSettingsModel = LoginSettings(
           autoLogin: tAutoLogin,
           pswd: tPwsd,
           rememberMe: tRememberMe,
@@ -107,7 +107,7 @@ void main() {
         const tSelectedUrl = "10.163.0.2";
         const tUid = "uid";
         const tPwsd = "pswd";
-        const tLoginSettingsModel = LoginSettingsModel(
+        const tLoginSettingsModel = LoginSettings(
           autoLogin: tAutoLogin,
           pswd: tPwsd,
           rememberMe: tRememberMe,

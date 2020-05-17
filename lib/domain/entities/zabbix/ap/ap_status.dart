@@ -1,46 +1,19 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 
-class APStatus extends Equatable {
-  /// Hostname
-  final String hostname;
+part 'ap_status.freezed.dart';
 
-  /// Seconds
-  final Duration uptime;
-
-  final int utilization5G;
-
-  final int utilization2G;
-
-  final int users;
-
-  /// Availability of Zabbix agent.
-  ///
-  /// Possible values are:
-  /// 0 - (default) unknown;
-  /// 1 - available;
-  /// 2 - unavailable
-  final int snmpAvailable;
-
-  const APStatus({
-    this.hostname,
-    this.uptime,
-    this.utilization5G,
-    this.utilization2G,
-    this.users,
-    this.snmpAvailable,
-  });
-
-  @override
-  List<Object> get props => [
-        this.hostname,
-        this.uptime,
-        this.utilization5G,
-        this.utilization2G,
-        this.users,
-        this.snmpAvailable,
-      ];
+@freezed
+abstract class APStatus with _$APStatus {
+  const factory APStatus({
+    @required @nullable String hostname,
+    @required @nullable Duration uptime,
+    @required @nullable int utilization5G,
+    @required @nullable int utilization2G,
+    @required @nullable int users,
+    @required @nullable int snmpAvailable,
+  }) = _APStatus;
 
   static APStatus fromHost(ZabbixHost host) {
     // Data to fill

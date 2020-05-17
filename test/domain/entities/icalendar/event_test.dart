@@ -39,15 +39,18 @@ void main() {
         final verification =
             verify(mockFlutterLocalNotificationsPlugin.schedule(
           any,
-          "summary",
+          tEvent.summary,
           any,
           captureThat(isA<DateTime>()),
           any,
           payload: anyNamed('payload'),
         ));
         final catchedDateTime = verification.captured.first as DateTime;
-        expect(catchedDateTime.toString(),
-            equals(tDateTime.subtract(const Duration(seconds: 1)).toString()));
+        expect(
+            catchedDateTime.toString(),
+            equals(tEvent.dtstart
+                .subtract(const Duration(seconds: 1))
+                .toString()));
       },
     );
 
@@ -82,6 +85,37 @@ void main() {
         );
         // assert
         verifyZeroInteractions(mockFlutterLocalNotificationsPlugin);
+      },
+    );
+  });
+
+  group('fromMap', () {
+    final tEvent = Event(
+      dtend: DateTime.parse("20200127T100000"),
+      dtstamp: DateTime.parse("20200127T100000"),
+      description: "description",
+      dtstart: DateTime.parse("20200127T100000"),
+      location: "Location",
+      summary: "Summary",
+      uid: "5e41428d0e0d5",
+    );
+    test(
+      'should return a valid model',
+      () async {
+        // arrange
+        final Map<String, dynamic> jsonMap = <String, dynamic>{
+          "DTEND": "20200127T100000",
+          "UID": "5e41428d0e0d5",
+          "DTSTAMP": "20200127T100000",
+          "LOCATION": "Location",
+          "DESCRIPTION": "description",
+          "SUMMARY": "Summary",
+          "DTSTART": "20200127T100000",
+        };
+        // act
+        final result = Event.fromMap(jsonMap);
+        // assert
+        expect(result, tEvent);
       },
     );
   });

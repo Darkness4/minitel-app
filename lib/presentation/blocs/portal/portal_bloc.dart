@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
 import 'package:minitel_toolbox/domain/entities/login_settings.dart';
 import 'package:minitel_toolbox/domain/repositories/login_settings_repository.dart';
 import 'package:rxdart/rxdart.dart' show DebounceExtensions, MergeExtension;
 
+part 'portal_bloc.freezed.dart';
 part 'portal_event.dart';
 part 'portal_state.dart';
 
@@ -17,7 +18,7 @@ class PortalBloc extends Bloc<PortalEvent, PortalState> {
 
   PortalBloc({
     @required this.loginSetingsRepository,
-  });
+  }) : assert(loginSetingsRepository != null);
 
   @override
   PortalState get initialState => PortalState.initial();
@@ -26,41 +27,33 @@ class PortalBloc extends Bloc<PortalEvent, PortalState> {
   Stream<PortalState> mapEventToState(
     PortalEvent event,
   ) async* {
-    if (event is RememberLoginEvent) {
-      yield* _mapRememberLoginEventToState(event);
-    } else if (event is AutoLoginEvent) {
-      yield* _mapAutoLoginEventToState(event);
-    } else if (event is PswdChanged) {
-      yield* _mapPswdChangedEventToState(event);
-    } else if (event is UidChanged) {
-      yield* _mapUidChangedEventToState(event);
-    } else if (event is SelectedUrlChanged) {
-      yield* _mapSelectedUrlChangedEventToState(event);
-    } else if (event is SelectedTimeChanged) {
-      yield* _mapSelectedTimeChangedEventToState(event);
-    } else if (event is RememberMeChanged) {
-      yield* _mapRememberMeChangedEventToState(event);
-    } else if (event is AutoLoginChanged) {
-      yield* _mapAutoLoginChangedEventToState(event);
-    }
+    yield* event.map(
+      rememberLogin: _mapRememberLoginEventToState,
+      autoLogin: _mapAutoLoginEventToState,
+      pswdChanged: _mapPswdChangedEventToState,
+      uidChanged: _mapUidChangedEventToState,
+      selectedUrlChanged: _mapSelectedUrlChangedEventToState,
+      selectedTimeChanged: _mapSelectedTimeChangedEventToState,
+      rememberMeChanged: _mapRememberMeChangedEventToState,
+      autoLoginChanged: _mapAutoLoginChangedEventToState,
+    );
   }
 
   @override
-  Stream<PortalState> transformEvents(
+  Stream<Transition<PortalEvent, PortalState>> transformEvents(
     Stream<PortalEvent> events,
-    Stream<PortalState> Function(PortalEvent event) next,
+    Stream<Transition<PortalEvent, PortalState>> Function(PortalEvent)
+        transitionFn,
   ) {
     final nonDebounceStream = events.where((event) {
       return event is! UidChanged && event is! PswdChanged;
     });
     final debounceStream = events.where((event) {
       return event is UidChanged || event is PswdChanged;
-    }).debounceTime(const Duration(milliseconds: 300));
+    }).debounceTime(const Duration(milliseconds: 100));
 
     return super.transformEvents(
-      nonDebounceStream.mergeWith([debounceStream]),
-      next,
-    );
+        nonDebounceStream.mergeWith([debounceStream]), transitionFn);
   }
 
   Stream<PortalState> _mapAutoLoginChangedEventToState(
@@ -69,7 +62,7 @@ class PortalBloc extends Bloc<PortalEvent, PortalState> {
   }
 
   /// Load settings
-  Stream<PortalState> _mapAutoLoginEventToState(AutoLoginEvent event) async* {
+  Stream<PortalState> _mapAutoLoginEventToState(AutoLogin event) async* {
     yield PortalState.loading();
 
     try {

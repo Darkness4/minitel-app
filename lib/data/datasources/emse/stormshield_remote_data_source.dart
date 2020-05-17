@@ -49,7 +49,8 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
         throw ClientException('Bad Username or Password');
       }
     } else {
-      throw ServerException("HttpError: ${response.statusCode}");
+      throw ServerException(
+          "HttpError: ${response.statusCode} ${response.reasonPhrase}\n${response.body}");
     }
   }
 
@@ -72,7 +73,8 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
         return match;
       }
     } else {
-      throw ServerException("HttpError: ${response.statusCode}");
+      throw ServerException(
+          "HttpError: ${response.statusCode} ${response.reasonPhrase}");
     }
   }
 }

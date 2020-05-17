@@ -1,18 +1,6 @@
 part of 'github_releases_bloc.dart';
 
-class GetReleasesEvent extends GithubReleasesEvent {
-  final String repo;
-
-  const GetReleasesEvent(this.repo);
-
-  @override
-  List<Object> get props => [repo];
-}
-
-@immutable
-abstract class GithubReleasesEvent extends Equatable {
-  const GithubReleasesEvent();
-
-  @override
-  bool get stringify => true;
+@freezed
+abstract class GithubReleasesEvent with _$GithubReleasesEvent {
+  const factory GithubReleasesEvent.get(String repo) = GetReleasesEvent;
 }

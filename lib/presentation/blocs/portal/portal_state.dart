@@ -1,36 +1,21 @@
 part of 'portal_bloc.dart';
 
-class PortalState extends Equatable {
-  final bool rememberMe;
-  final bool autoLogin;
-  final String uid;
-  final String selectedTime;
-  final String selectedUrl;
-  final String pswd;
+@freezed
+abstract class PortalState with _$PortalState {
+  const factory PortalState({
+    @required bool rememberMe,
+    @required bool autoLogin,
+    @nullable @required String uid,
+    @required String selectedTime,
+    @required String selectedUrl,
+    @nullable @required String pswd,
+    @required bool isValidUid,
+    @required bool isLoaded,
+    @required bool isLoading,
+    @required bool isError,
+  }) = _PortalState;
 
-  final bool isValidUid;
-
-  final bool isLoaded;
-  final bool isLoading;
-  final bool isError;
-
-  const PortalState({
-    @required this.rememberMe,
-    @required this.autoLogin,
-    @required this.uid,
-    @required this.selectedTime,
-    @required this.selectedUrl,
-    @required this.pswd,
-    @required this.isError,
-    @required this.isLoading,
-    @required this.isLoaded,
-    @required this.isValidUid,
-  });
-
-  @override
-  bool get stringify => true;
-
-  factory PortalState.failure() {
+  static PortalState failure() {
     return const PortalState(
       rememberMe: false,
       autoLogin: false,
@@ -45,7 +30,7 @@ class PortalState extends Equatable {
     );
   }
 
-  factory PortalState.initial() {
+  static PortalState initial() {
     return const PortalState(
       rememberMe: false,
       autoLogin: false,
@@ -60,7 +45,7 @@ class PortalState extends Equatable {
     );
   }
 
-  factory PortalState.loading() {
+  static PortalState loading() {
     return const PortalState(
       rememberMe: false,
       autoLogin: false,
@@ -74,47 +59,9 @@ class PortalState extends Equatable {
       isValidUid: true,
     );
   }
+}
 
-  @override
-  List<Object> get props => [
-        this.rememberMe,
-        this.autoLogin,
-        this.uid,
-        this.selectedTime,
-        this.selectedUrl,
-        this.pswd,
-        this.isError,
-        this.isLoading,
-        this.isLoaded,
-        this.isValidUid,
-      ];
-
-  PortalState copyWith({
-    bool rememberMe,
-    bool autoLogin,
-    String uid,
-    String selectedTime,
-    String selectedUrl,
-    String pswd,
-    bool isError,
-    bool isLoading,
-    bool isLoaded,
-    bool isValidUid,
-  }) {
-    return PortalState(
-      rememberMe: rememberMe ?? this.rememberMe,
-      autoLogin: autoLogin ?? this.autoLogin,
-      uid: uid ?? this.uid,
-      selectedTime: selectedTime ?? this.selectedTime,
-      selectedUrl: selectedUrl ?? this.selectedUrl,
-      pswd: pswd ?? this.pswd,
-      isError: isError ?? this.isError,
-      isLoading: isLoading ?? this.isLoading,
-      isLoaded: isLoaded ?? false,
-      isValidUid: isValidUid ?? this.isValidUid,
-    );
-  }
-
+extension PortalStateX on PortalState {
   PortalState update({
     bool rememberMe,
     bool autoLogin,
@@ -125,17 +72,17 @@ class PortalState extends Equatable {
     bool isLoaded,
     bool isValidUid,
   }) {
-    return copyWith(
-      rememberMe: rememberMe,
-      autoLogin: autoLogin,
-      uid: uid,
-      selectedTime: selectedTime,
-      selectedUrl: selectedUrl,
-      pswd: pswd,
+    return this.copyWith(
+      rememberMe: rememberMe ?? this.rememberMe,
+      autoLogin: autoLogin ?? this.autoLogin,
+      uid: uid ?? this.uid,
+      selectedTime: selectedTime ?? this.selectedTime,
+      selectedUrl: selectedUrl ?? this.selectedUrl,
+      pswd: pswd ?? this.pswd,
       isError: false,
       isLoading: false,
-      isLoaded: isLoaded,
-      isValidUid: isValidUid,
+      isLoaded: isLoaded ?? this.isLoaded,
+      isValidUid: isValidUid ?? this.isValidUid,
     );
   }
 }

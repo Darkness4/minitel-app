@@ -108,20 +108,19 @@ class __ReportCardState extends State<_ReportCard> {
   }
 
   void _onTitleChanged() {
-    _reportStatusBloc.add(TitleChanged(title: _titleController.text));
+    _reportStatusBloc.add(TitleChanged(_titleController.text));
   }
 
   void _onRoomChanged() {
-    _reportStatusBloc.add(RoomChanged(room: _roomController.text));
+    _reportStatusBloc.add(RoomChanged(_roomController.text));
   }
 
   void _onDescriptionChanged() {
-    _reportStatusBloc
-        .add(DescriptionChanged(description: _descriptionController.text));
+    _reportStatusBloc.add(DescriptionChanged(_descriptionController.text));
   }
 
   void _onNameChanged() {
-    _reportStatusBloc.add(NameChanged(name: _nameController.text));
+    _reportStatusBloc.add(NameChanged(_nameController.text));
   }
 
   @override

@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/models/login_settings_model.dart';
+import 'package:minitel_toolbox/domain/entities/login_settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LoginSettingsDataSource {
-  Future<LoginSettingsModel> load();
-  Future<void> save(LoginSettingsModel settings);
+  Future<LoginSettings> load();
+  Future<void> save(LoginSettings settings);
   Future<void> clear();
 }
 
@@ -32,13 +32,13 @@ class LoginSettingsDataSourceImpl implements LoginSettingsDataSource {
   }
 
   @override
-  Future<LoginSettingsModel> load() async {
+  Future<LoginSettings> load() async {
     if (prefs.containsKey("autoLogin") &&
         prefs.containsKey("rememberMe") &&
         prefs.containsKey("selectedTime") &&
         prefs.containsKey("selectedUrl") &&
         prefs.containsKey("uid")) {
-      return LoginSettingsModel(
+      return LoginSettings(
         autoLogin: prefs.getBool("autoLogin"),
         pswd: (await storage.read(key: "pswd")) ?? "",
         rememberMe: prefs.getBool("rememberMe"),
@@ -52,7 +52,7 @@ class LoginSettingsDataSourceImpl implements LoginSettingsDataSource {
   }
 
   @override
-  Future<void> save(LoginSettingsModel settings) {
+  Future<void> save(LoginSettings settings) {
     return Future.wait<dynamic>([
       prefs.setBool("rememberMe", true),
       prefs.setBool("autoLogin", settings.autoLogin),

@@ -1,19 +1,15 @@
 part of 'portal_login_bloc.dart';
 
-class PortalLoginState extends Equatable {
-  final bool isSubmitting;
-  final bool isSuccess;
-  final bool isFailure;
-  final dynamic error;
+@freezed
+abstract class PortalLoginState with _$PortalLoginState {
+  const factory PortalLoginState({
+    @required bool isSubmitting,
+    @required bool isSuccess,
+    @required bool isFailure,
+    Exception error,
+  }) = _PortalLoginState;
 
-  const PortalLoginState({
-    @required this.isSubmitting,
-    @required this.isSuccess,
-    @required this.isFailure,
-    this.error,
-  });
-
-  factory PortalLoginState.empty() {
+  static PortalLoginState empty() {
     return const PortalLoginState(
       isSubmitting: false,
       isSuccess: false,
@@ -21,7 +17,7 @@ class PortalLoginState extends Equatable {
     );
   }
 
-  factory PortalLoginState.failure(dynamic error) {
+  static PortalLoginState failure(Exception error) {
     return PortalLoginState(
       isSubmitting: false,
       isSuccess: false,
@@ -30,7 +26,7 @@ class PortalLoginState extends Equatable {
     );
   }
 
-  factory PortalLoginState.loading() {
+  static PortalLoginState loading() {
     return const PortalLoginState(
       isSubmitting: true,
       isSuccess: false,
@@ -38,36 +34,11 @@ class PortalLoginState extends Equatable {
     );
   }
 
-  factory PortalLoginState.success() {
+  static PortalLoginState success() {
     return const PortalLoginState(
       isSubmitting: false,
       isSuccess: true,
       isFailure: false,
     );
   }
-
-  @override
-  List<Object> get props => [
-        this.isSubmitting,
-        this.isSuccess,
-        this.isFailure,
-        this.error,
-      ];
-
-  PortalLoginState copyWith({
-    bool isSubmitting,
-    bool isSuccess,
-    bool isFailure,
-    dynamic error,
-  }) {
-    return PortalLoginState(
-      isSubmitting: isSubmitting ?? this.isSubmitting,
-      isSuccess: isSuccess ?? this.isSuccess,
-      isFailure: isFailure ?? this.isFailure,
-      error: error ?? this.error,
-    );
-  }
-
-  @override
-  bool get stringify => true;
 }

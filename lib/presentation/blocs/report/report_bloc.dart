@@ -1,45 +1,45 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/core/utils/launch_url_utils.dart';
 import 'package:minitel_toolbox/data/datasources/slack/slack_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 import 'package:share/share.dart';
 
+part 'report_bloc.freezed.dart';
 part 'report_event.dart';
 part 'report_state.dart';
 
 class ReportBloc extends Bloc<ReportEvent, ReportState> {
   final SlackRemoteDataSource slackRemoteDataSource;
 
-  ReportBloc({@required this.slackRemoteDataSource});
+  ReportBloc({@required this.slackRemoteDataSource})
+      : assert(slackRemoteDataSource != null);
 
   @override
-  ReportState get initialState => const ReportInitial();
+  ReportState get initialState => const ReportState.initial();
 
   @override
   Stream<ReportState> mapEventToState(
     ReportEvent event,
   ) async* {
-    if (event is ReportToShare) {
-      yield* _mapReportToShareToState(event);
-    } else if (event is ReportToSlack) {
-      yield* _mapReportToSlackToState(event);
-    } else if (event is ReportToMail) {
-      yield* _mapReportToMailToState(event);
-    } else if (event is ReportToInitState) {
-      yield* _mapReportToInitStateToState();
-    }
+    yield* event.map(
+      toInitState: _mapReportToInitStateToState,
+      share: _mapReportToShareToState,
+      slack: _mapReportToSlackToState,
+      mail: _mapReportToMailToState,
+    );
   }
 
-  Stream<ReportState> _mapReportToInitStateToState() async* {
-    yield const ReportInitial();
+  Stream<ReportState> _mapReportToInitStateToState(
+      ReportToInitState event) async* {
+    yield const ReportState.initial();
   }
 
   Stream<ReportState> _mapReportToMailToState(ReportToMail event) async* {
-    yield const ReportLoading();
+    yield const ReportState.loading();
     try {
       final String body = "---Report ${DateTime.now().toString()}---\n\n"
           "Chambre: ${event.room}\n"
@@ -51,16 +51,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
 
       await LaunchURLUtils.launchURL(
           "mailto:minitelismin@gmail.com?subject=${event.title}&body=$body");
-      yield const ReportDone(null);
-      add(ReportToInitState());
-    } catch (e) {
-      yield ReportError(error: e);
-      add(ReportToInitState());
+      yield const ReportState.done(null);
+      add(const ReportEvent.toInitState());
+    } on Exception catch (e) {
+      yield ReportError(e);
+      add(const ReportEvent.toInitState());
     }
   }
 
   Stream<ReportState> _mapReportToSlackToState(ReportToSlack event) async* {
-    yield const ReportLoading();
+    yield const ReportState.loading();
     try {
       final String status = await slackRemoteDataSource.report(
         "*Chambre ${event.room}*\n"
@@ -70,16 +70,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         attachments: await event.diagnosis.waitAll(),
         channel: event.channel,
       );
-      yield ReportDone(status);
-      add(ReportToInitState());
-    } catch (e) {
-      yield ReportError(error: e);
-      add(ReportToInitState());
+      yield ReportState.done(status);
+      add(const ReportEvent.toInitState());
+    } on Exception catch (e) {
+      yield ReportState.error(e);
+      add(const ReportEvent.toInitState());
     }
   }
 
   Stream<ReportState> _mapReportToShareToState(ReportToShare event) async* {
-    yield const ReportLoading();
+    yield const ReportState.loading();
     try {
       final String body = "---Report ${DateTime.now().toString()}---\n\n"
           "Chambre: ${event.room}\n"
@@ -90,11 +90,11 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
           "${await event.diagnosis.getReport()}";
 
       await Share.share(body);
-      yield const ReportDone(null);
-      add(ReportToInitState());
-    } catch (e) {
-      yield ReportError(error: e);
-      add(ReportToInitState());
+      yield const ReportState.done(null);
+      add(const ReportEvent.toInitState());
+    } on Exception catch (e) {
+      yield ReportState.error(e);
+      add(const ReportEvent.toInitState());
     }
   }
 }

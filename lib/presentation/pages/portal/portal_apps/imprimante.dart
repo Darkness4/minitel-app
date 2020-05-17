@@ -26,7 +26,7 @@ class ImprimanteWebView extends StatelessWidget {
       }
     }
 
-    return ScaffoldWebView(
+    return const ScaffoldWebView(
       backgroundColor: Colors.grey,
       initialUrl:
           'http://${MyIPAdresses.emseImprimanteIP}/watchdoc/jobs.asp?instance=default',

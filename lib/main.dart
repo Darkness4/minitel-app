@@ -10,6 +10,7 @@ import 'package:minitel_toolbox/injection_container/injection_container.dart'
     show sl;
 import 'package:minitel_toolbox/presentation/blocs/theme/theme_bloc.dart';
 import 'package:minitel_toolbox/presentation/router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,7 @@ Widget _buildMyApp(BuildContext context, ThemeState state) {
       Locale('fr', 'FR'),
     ],
     theme: state.themeData,
-    darkTheme: state.themeDataDark,
+    darkTheme: state.darkThemeData,
     initialRoute: RoutePaths.Authentication,
   );
 }
@@ -43,7 +44,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ThemeBloc>(
-      create: (_) => sl<ThemeBloc>(),
+      create: (_) => ThemeBloc(
+        prefs: sl<SharedPreferences>(),
+      ),
       child: const BlocBuilder<ThemeBloc, ThemeState>(
         builder: _buildMyApp,
       ),

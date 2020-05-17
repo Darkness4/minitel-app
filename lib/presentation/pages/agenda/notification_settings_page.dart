@@ -145,8 +145,8 @@ class _NotificationSettingsScreenState
 
   void _onEarlyChanged() {
     if (_earlyController.text.length < 3 && _earlyController.text != "") {
-      _notificationSettingsBloc.add(EarlyChanged(
-          early: Duration(minutes: int.parse(_earlyController.text))));
+      _notificationSettingsBloc.add(
+          EarlyChanged(Duration(minutes: int.parse(_earlyController.text))));
     } else {
       print("_earlyController.text.length: Illegal range or character");
     }
@@ -154,15 +154,15 @@ class _NotificationSettingsScreenState
 
   void _onRangeChanged() {
     if (_rangeController.text.length < 4 && _rangeController.text != "") {
-      _notificationSettingsBloc.add(RangeChanged(
-          range: Duration(days: int.parse(_rangeController.text))));
+      _notificationSettingsBloc
+          .add(RangeChanged(Duration(days: int.parse(_rangeController.text))));
     } else {
       print("_rangeController.text.length: Illegal range  or character");
     }
   }
 
   void _onEnablingChanged(bool value) {
-    _notificationSettingsBloc.add(EnablingChanged(enabled: value));
+    _notificationSettingsBloc.add(EnablingChanged(value));
   }
 
   void _onSave() {

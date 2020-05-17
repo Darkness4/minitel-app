@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/models/notifications_model.dart';
+import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class NotificationSettingsDataSource {
   /// Load notifications settings from SharedPreferences
-  NotificationSettingsModel loadNotificationSettings();
+  NotificationSettings loadNotificationSettings();
 
   /// Save notifications settings to SharedPreferences
-  Future<void> saveNotificationSettings(NotificationSettingsModel settings);
+  Future<void> saveNotificationSettings(NotificationSettings settings);
 }
 
 class NotificationSettingsDataSourceImpl
@@ -19,7 +19,7 @@ class NotificationSettingsDataSourceImpl
   const NotificationSettingsDataSourceImpl({@required this.prefs});
 
   @override
-  NotificationSettingsModel loadNotificationSettings() {
+  NotificationSettings loadNotificationSettings() {
     if (prefs.containsKey(CacheKeys.early) &&
         prefs.containsKey(CacheKeys.range) &&
         prefs.containsKey(CacheKeys.enabled)) {
@@ -27,7 +27,7 @@ class NotificationSettingsDataSourceImpl
       final int rangeDays = prefs.getInt(CacheKeys.range);
       final bool enabled = prefs.getBool(CacheKeys.enabled);
 
-      return NotificationSettingsModel(
+      return NotificationSettings(
         early: Duration(minutes: earlyMinutes),
         range: Duration(days: rangeDays),
         enabled: enabled,
@@ -38,7 +38,7 @@ class NotificationSettingsDataSourceImpl
   }
 
   @override
-  Future<void> saveNotificationSettings(NotificationSettingsModel settings) {
+  Future<void> saveNotificationSettings(NotificationSettings settings) {
     return Future.wait(<Future<bool>>[
       prefs.setInt(CacheKeys.early, settings.early.inMinutes),
       prefs.setInt(CacheKeys.range, settings.range.inDays),

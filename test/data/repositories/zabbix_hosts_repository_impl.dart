@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/data/datasources/zabbix/zabbix_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/zabbix/zabbix_host_model.dart';
 import 'package:minitel_toolbox/data/repositories/zabbix_hosts_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/repositories/zabbix_hosts_repository.dart';
@@ -9,7 +8,14 @@ import 'package:mockito/mockito.dart';
 void main() {
   ZabbixHostsRepository repository;
   MockRemoteDataSource mockRemoteDataSource;
-  const tListZabbixHostModel = <ZabbixHostModel>[ZabbixHostModel()];
+  const tListZabbixHostModel = <ZabbixHost>[
+    ZabbixHost(
+      host: "host",
+      hostid: "hostid",
+      interfaces: [],
+      items: [],
+    )
+  ];
   const tGroupids = 1;
 
   setUp(() {

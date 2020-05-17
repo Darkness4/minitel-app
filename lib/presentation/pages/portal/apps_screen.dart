@@ -88,7 +88,7 @@ class _ImprimanteCard extends StatelessWidget {
         child: LayoutBuilder(
           builder: (_, BoxConstraints constraint) => Column(
             children: <Widget>[
-              Expanded(
+              const Expanded(
                 child: FittedBox(
                   child: Icon(
                     Icons.print,

@@ -7,7 +7,7 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/zabbix/zabbix_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/zabbix/zabbix_host_model.dart';
+import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -112,11 +112,10 @@ void main() {
     final tBody = json.decode(
             fixture('datasources/zabbix_remote_data_source/ap_response.json'))
         as Map<String, dynamic>;
-    final List<Map<String, dynamic>> result =
-        List<Map<String, dynamic>>.from(tBody["result"] as List<dynamic>);
-    final List<ZabbixHostModel> tListZabbixHostModel = result
-        .map<ZabbixHostModel>(
-            (Map<String, dynamic> host) => ZabbixHostModel.fromJson(host))
+    final List<ZabbixHost> tListZabbixHostModel = (tBody["result"]
+            as List<dynamic>)
+        .map<ZabbixHost>(
+            (dynamic host) => ZabbixHost.fromJson(host as Map<String, dynamic>))
         .toList();
     test(
       "should perform a GET request",

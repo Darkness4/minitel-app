@@ -5,32 +5,58 @@ import 'package:flutter/foundation.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
-import 'package:minitel_toolbox/data/models/twitter/feed_model.dart';
+import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 
 abstract class TwitterRemoteDataSource {
-  Future<FeedModel> fetchFeed();
+  Future<List<Post>> fetchAllPosts();
+  Future<String> getBearerToken();
 }
 
 class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
   final http.Client client;
+  String token;
 
-  const TwitterRemoteDataSourceImpl({
+  TwitterRemoteDataSourceImpl({
     @required this.client,
   });
 
   @override
-  Future<FeedModel> fetchFeed() async {
+  Future<List<Post>> fetchAllPosts() async {
+    token ??= await getBearerToken();
+    print("TOKEN $token");
     final response = await client.get(
       "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361",
-      headers: {
-        HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.twitterApi}"
-      },
+      headers: {HttpHeaders.authorizationHeader: "Bearer ${token}"},
     );
 
     if (response.statusCode == 200) {
-      return FeedModel.fromJson(json.decode(response.body) as List<dynamic>);
+      return List<Map<String, dynamic>>.from(
+              json.decode(response.body) as List<dynamic>)
+          .map((Map<String, dynamic> data) => Post.fromJson(data))
+          .toList();
     } else {
-      throw ServerException('Failed to load Feed : ${response.statusCode}');
+      throw ServerException(
+          'Failed to load Feed : ${response.statusCode} ${response.reasonPhrase}\n${response.body} ${response.reasonPhrase}\n${response.body}');
+    }
+  }
+
+  @override
+  Future<String> getBearerToken() async {
+    final response = await client.post(
+      "https://api.twitter.com/oauth2/token",
+      headers: {
+        HttpHeaders.authorizationHeader: 'Basic ' +
+            base64.encode(utf8
+                .encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}')),
+      },
+      body: {'grant_type': 'client_credentials'},
+    );
+
+    if (response.statusCode == 200) {
+      return token = json.decode(response.body)['access_token'] as String;
+    } else {
+      throw ServerException(
+          'Failed to load Feed : ${response.statusCode} ${response.reasonPhrase}\n${response.body} ${response.reasonPhrase}\n${response.body}');
     }
   }
 }

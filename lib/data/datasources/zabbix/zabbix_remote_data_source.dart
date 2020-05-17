@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/models/zabbix/zabbix_host_model.dart';
+import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 
 abstract class ZabbixRemoteDataSource {
   /// Fetch Zabbix Hosts
-  Future<List<ZabbixHostModel>> fetchZabbixHosts(int groupids);
+  Future<List<ZabbixHost>> fetchZabbixHosts(int groupids);
 }
 
 class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
@@ -18,7 +18,7 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
   const ZabbixRemoteDataSourceImpl({@required this.clientNoCheck});
 
   @override
-  Future<List<ZabbixHostModel>> fetchZabbixHosts(int groupids) async {
+  Future<List<ZabbixHost>> fetchZabbixHosts(int groupids) async {
     final Map<String, Object> data = <String, dynamic>{
       "jsonrpc": "2.0",
       "method": "host.get",
@@ -56,13 +56,14 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
         final body = json.decode(response.body) as Map<String, dynamic>;
         final List<Map<String, dynamic>> result =
             List<Map<String, dynamic>>.from(body["result"] as List<dynamic>);
-        final List<ZabbixHostModel> output = result
-            .map<ZabbixHostModel>(
-                (Map<String, dynamic> host) => ZabbixHostModel.fromJson(host))
+        final List<ZabbixHost> output = result
+            .map<ZabbixHost>(
+                (Map<String, dynamic> host) => ZabbixHost.fromJson(host))
             .toList();
         return output;
       } else {
-        throw ServerException('Failed to load User : ${response.statusCode}');
+        throw ServerException(
+            'Failed to load User : ${response.statusCode} ${response.reasonPhrase}\n${response.body}');
       }
     } on SocketException catch (e) {
       if (e.toString().contains('timed out')) {

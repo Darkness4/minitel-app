@@ -16,8 +16,9 @@ import 'dart:convert';
 /// ```sh
 /// CI_WEBHOOK_KEY=${YOUR_API_KEY}
 /// CI_TWITTER_KEY=${YOUR_API_KEY_2}
-/// sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
-/// sed -i "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
+/// sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
+/// sed -i "s/_consumerKey = \"ZXhlbXBsZQ==\"/_consumerKey = \"${{ secrets.CI_CONSUMER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+/// sed -i "s/_consumerSecret = \"ZXhlbXBsZQ==\"/_consumerSecret = \"${{ secrets.CI_CONSUMER_SECRET }}\"/g" ./lib/core/constants/api_keys.dart
 /// ```
 ///
 /// Please, see more in the .gitlab.yml file.
@@ -29,6 +30,9 @@ class ApiKeys {
 
   /// Twitter api key
   static const String _twitterApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
+
+  static const String _consumerKey = "ZXhlbXBsZQ==";
+  static const String _consumerSecret = "ZXhlbXBsZQ==";
 
   /// Github Repo to get the releases changelog
   static const String githubRepo = "Darkness4/minitel-app";
@@ -50,6 +54,11 @@ class ApiKeys {
 
   /// Zabbix group 20 (networking/servers)
   static const int zabbixServers = 20;
+
+  static String get consumerKey => utf8.decode(base64.decode(_consumerKey));
+
+  static String get consumerSecret =>
+      utf8.decode(base64.decode(_consumerSecret));
 
   /// Twitter api key
   static String get twitterApi => utf8.decode(base64.decode(_twitterApi));
