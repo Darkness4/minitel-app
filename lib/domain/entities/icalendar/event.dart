@@ -1,38 +1,34 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 
-class Event extends Equatable {
-  final DateTime dtend;
-  final String uid;
-  final DateTime dtstamp;
-  final String location;
-  final String description;
-  final String summary;
-  final DateTime dtstart;
+part 'event.freezed.dart';
 
-  const Event({
-    this.dtend,
-    this.uid,
-    this.dtstamp,
-    this.location,
-    this.description,
-    this.summary,
-    this.dtstart,
-  });
+@freezed
+abstract class Event with _$Event {
+  const factory Event({
+    @required @nullable DateTime dtend,
+    @required @nullable String uid,
+    @required @nullable DateTime dtstamp,
+    @required @nullable String location,
+    @required @nullable String description,
+    @required @nullable String summary,
+    @required @nullable DateTime dtstart,
+  }) = _Event;
 
-  @override
-  List<Object> get props => [
-        this.dtend,
-        this.uid,
-        this.dtstamp,
-        this.location,
-        this.description,
-        this.summary,
-        this.dtstart,
-      ];
+  static Event fromMap(Map<String, dynamic> json) {
+    return Event(
+      dtend: DateTime.parse(json["DTEND"] as String),
+      uid: json["UID"] as String,
+      dtstamp: DateTime.parse(json["DTSTAMP"] as String),
+      location: json["LOCATION"] as String,
+      description: json["DESCRIPTION"] as String,
+      summary: json["SUMMARY"] as String,
+      dtstart: DateTime.parse(json["DTSTART"] as String),
+    );
+  }
 }
 
 extension EventUtils on Event {

@@ -1,48 +1,48 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'timezone.freezed.dart';
 
 /// Timezone field from icalendar
-class Timezone extends Equatable {
-  final String tzid;
-  final TimezoneDescription daylight;
-  final TimezoneDescription standard;
-
-  const Timezone({
-    this.tzid,
-    this.daylight,
-    this.standard,
-  });
-
-  @override
-  List<Object> get props => [
-        this.tzid,
-        this.daylight,
-        this.standard,
-      ];
+@freezed
+abstract class Timezone with _$Timezone {
+  const factory Timezone({
+    String tzid,
+    TimezoneDescription daylight,
+    TimezoneDescription standard,
+  }) = _Timezone;
 }
 
-@immutable
-class TimezoneDescription extends Equatable {
-  final DateTime dtstart;
-  final String tzOffsetTo;
-  final String tzOffsetFrom;
-  final String rRule;
-  final String tzName;
+@freezed
+abstract class TimezoneDescription with _$TimezoneDescription {
+  const factory TimezoneDescription({
+    DateTime dtstart,
+    String tzOffsetTo,
+    String tzOffsetFrom,
+    String rRule,
+    String tzName,
+  }) = _TimezoneDescription;
+}
 
-  const TimezoneDescription({
-    this.dtstart,
-    this.tzOffsetTo,
-    this.tzOffsetFrom,
-    this.rRule,
-    this.tzName,
-  });
-
-  @override
-  List<Object> get props => [
-        this.dtstart,
-        this.tzOffsetTo,
-        this.tzOffsetFrom,
-        this.rRule,
-        this.tzName,
-      ];
+extension TimezoneDescriptionX on TimezoneDescription {
+  TimezoneDescription copyWithKeyValue(String key, String value) {
+    switch (key) {
+      case "DTSTART":
+        return this.copyWith(dtstart: DateTime.parse(value));
+        break;
+      case "TZOFFSETTO":
+        return this.copyWith(tzOffsetTo: value);
+        break;
+      case "TZOFFSETFROM":
+        return this.copyWith(tzOffsetFrom: value);
+        break;
+      case "RRULE":
+        return this.copyWith(rRule: value);
+        break;
+      case "TZNAME":
+        return this.copyWith(tzName: value);
+        break;
+    }
+    return this;
+  }
 }

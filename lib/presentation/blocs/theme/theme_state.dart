@@ -1,93 +1,44 @@
 part of 'theme_bloc.dart';
 
-abstract class ThemeState extends Equatable {
-  ThemeData get themeData;
-  ThemeData get themeDataDark;
-  const ThemeState();
+@freezed
+abstract class ThemeState implements _$ThemeState {
+  const factory ThemeState(
+    ThemeData themeData,
+    ThemeData darkThemeData,
+    String value,
+  ) = _ThemeState;
 
-  @override
-  bool get stringify => true;
-}
+  const ThemeState._();
 
-class ThemeDark extends ThemeState {
-  const ThemeDark();
-  @override
-  ThemeData get themeDataDark => ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: MinitelColors.primaryColor,
-        bottomAppBarTheme: const BottomAppBarTheme(
-          color: Colors.green,
-        ),
-        textTheme: MinitelTextStyles.getTextTheme(Brightness.dark),
-        bottomAppBarColor: Colors.green,
-      );
+  factory ThemeState.dark() {
+    return ThemeState(_themeDataDark, _themeDataDark, 'Dark');
+  }
 
-  @override
-  ThemeData get themeData => themeDataDark;
+  factory ThemeState.light() {
+    return ThemeState(_themeData, _themeData, 'Light');
+  }
 
-  @override
-  List<Object> get props => [themeData];
-
-  @override
-  String toString() {
-    return "Dark";
+  factory ThemeState.adaptive() {
+    return ThemeState(_themeData, _themeDataDark, 'Adaptive');
   }
 }
 
-class ThemeLight extends ThemeState {
-  const ThemeLight();
-  @override
-  ThemeData get themeData => ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: MinitelColors.primaryColor,
-        bottomAppBarTheme: const BottomAppBarTheme(
-          color: Colors.green,
-        ),
-        textTheme: MinitelTextStyles.getTextTheme(Brightness.light),
-        bottomAppBarColor: Colors.green,
-      );
+ThemeData get _themeDataDark => ThemeData(
+      brightness: Brightness.dark,
+      primarySwatch: MinitelColors.primaryColor,
+      bottomAppBarTheme: const BottomAppBarTheme(
+        color: Colors.green,
+      ),
+      textTheme: MinitelTextStyles.getTextTheme(Brightness.dark),
+      bottomAppBarColor: Colors.green,
+    );
 
-  @override
-  ThemeData get themeDataDark => themeData;
-
-  @override
-  List<Object> get props => [themeData];
-
-  @override
-  String toString() {
-    return "Light";
-  }
-}
-
-class ThemeAdaptive extends ThemeState {
-  const ThemeAdaptive();
-  @override
-  ThemeData get themeData => ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: MinitelColors.primaryColor,
-        bottomAppBarTheme: const BottomAppBarTheme(
-          color: Colors.green,
-        ),
-        textTheme: MinitelTextStyles.getTextTheme(Brightness.light),
-        bottomAppBarColor: Colors.green,
-      );
-
-  @override
-  ThemeData get themeDataDark => ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: MinitelColors.primaryColor,
-        bottomAppBarTheme: const BottomAppBarTheme(
-          color: Colors.green,
-        ),
-        textTheme: MinitelTextStyles.getTextTheme(Brightness.dark),
-        bottomAppBarColor: Colors.green,
-      );
-
-  @override
-  List<Object> get props => [themeData];
-
-  @override
-  String toString() {
-    return "Adaptive";
-  }
-}
+ThemeData get _themeData => ThemeData(
+      brightness: Brightness.light,
+      primarySwatch: MinitelColors.primaryColor,
+      bottomAppBarTheme: const BottomAppBarTheme(
+        color: Colors.green,
+      ),
+      textTheme: MinitelTextStyles.getTextTheme(Brightness.light),
+      bottomAppBarColor: Colors.green,
+    );

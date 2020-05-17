@@ -32,7 +32,9 @@ class ICalendarRepositoryImpl implements ICalendarRepository {
   }) async {
     if (await networkInfo.result != ConnectivityResult.none) {
       final String url = await calendarURLRepository.get(
-          username: username, password: password);
+        username: username,
+        password: password,
+      );
       final Stream<String> data = remoteDataSource.streamICalendar(url);
       return localDataSource.cacheICalendar(data);
     } else {

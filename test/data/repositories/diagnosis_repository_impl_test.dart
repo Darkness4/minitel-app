@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/diagnosis/diagnosis_data_source.dart';
-import 'package:minitel_toolbox/data/models/diagnosis_model.dart';
 import 'package:minitel_toolbox/data/repositories/diagnosis_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 import 'package:minitel_toolbox/domain/repositories/diagnosis_repository.dart';
@@ -46,7 +45,7 @@ void main() {
   }
 
   group('diagnose', () {
-    final tDiagnosisModel = DiagnosisModel();
+    final tDiagnosisModel = Diagnosis();
 
     test(
       'should check if the device is online',

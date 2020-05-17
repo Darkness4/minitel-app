@@ -4,7 +4,6 @@ import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/icalendar/parsed_calendar_model.dart';
 import 'package:minitel_toolbox/data/repositories/icalendar_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/repositories/calendar_url_repository.dart';
@@ -64,10 +63,6 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
-        when(mockCalendarURLRepository.get(username: tUser, password: tPswd))
-            .thenAnswer((_) async => "");
-        when(mockRemoteDataSource.streamICalendar(any))
-            .thenAnswer((_) => Stream<String>.value(""));
         // act
         await repository.download(username: tUser, password: tPswd);
         // assert
@@ -86,8 +81,6 @@ void main() {
           )).thenAnswer((_) async => tUrl);
           when(mockRemoteDataSource.streamICalendar(tUrl))
               .thenAnswer((_) => tICalendar);
-          when(mockLocalDataSource.cacheICalendar(any))
-              .thenAnswer((_) async => null);
           // act
           await repository.download(
             password: tPswd,
@@ -122,8 +115,14 @@ void main() {
   });
 
   group('parsedCalendar', () {
-    const ParsedCalendarModel tParsedCalendarModel = ParsedCalendarModel();
-    const ParsedCalendar tParsedCalendar = ParsedCalendarModel();
+    const ParsedCalendar tParsedCalendarModel = ParsedCalendar(
+      calscale: "calscale",
+      events: [],
+      prodID: "prodID",
+      timezone: null,
+      version: "version",
+    );
+    const ParsedCalendar tParsedCalendar = tParsedCalendarModel;
     test(
       'should call localDataSource',
       () async {

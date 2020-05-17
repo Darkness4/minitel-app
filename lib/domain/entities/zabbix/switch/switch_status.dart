@@ -1,51 +1,21 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_statistics.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_status.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 
-class SwitchStatus extends Equatable {
-  /// Status of <port, status>
-  final Map<int, SwitchPortStatus> ports;
+part 'switch_status.freezed.dart';
 
-  /// Most useful SNMP description
-  final String description;
-
-  /// Hostname
-  final String hostname;
-
-  /// Seconds
-  final Duration uptime;
-
-  /// Seconds
-  final double pingResponseTime;
-
-  /// Availability of Zabbix agent.
-  ///
-  /// Possible values are:
-  /// 0 - (default) unknown;
-  /// 1 - available;
-  /// 2 - unavailable
-  final int snmpAvailable;
-
-  const SwitchStatus({
-    this.ports,
-    this.description,
-    this.hostname,
-    this.uptime,
-    this.pingResponseTime,
-    this.snmpAvailable,
-  });
-
-  @override
-  List<Object> get props => [
-        this.ports,
-        this.description,
-        this.hostname,
-        this.uptime,
-        this.pingResponseTime,
-        this.snmpAvailable,
-      ];
+@freezed
+abstract class SwitchStatus with _$SwitchStatus {
+  const factory SwitchStatus({
+    @required @nullable Map<int, SwitchPortStatus> ports,
+    @required @nullable String description,
+    @required @nullable String hostname,
+    @required @nullable Duration uptime,
+    @required @nullable double pingResponseTime,
+    @required @nullable int snmpAvailable,
+  }) = _SwitchStatus;
 
   static SwitchStatus fromHost(ZabbixHost host) {
     // Data to fill

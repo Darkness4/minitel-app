@@ -1,38 +1,12 @@
 part of 'agenda_bloc.dart';
 
-abstract class AgendaEvent extends Equatable {
-  const AgendaEvent();
-
-  @override
-  List<Object> get props => [];
-
-  @override
-  bool get stringify => true;
-}
-
-class AgendaLoad extends AgendaEvent {
-  final NotificationSettings notificationSettings;
-  const AgendaLoad({@required this.notificationSettings});
-
-  @override
-  List<Object> get props => [notificationSettings];
-}
-
-class AgendaDownload extends AgendaEvent {
-  final String uid;
-  final String pswd;
-  final NotificationSettings notificationSettings;
-
-  const AgendaDownload({
-    @required this.uid,
-    @required this.pswd,
-    @required this.notificationSettings,
-  });
-
-  @override
-  List<Object> get props => [
-        this.uid,
-        this.pswd,
-        this.notificationSettings,
-      ];
+@freezed
+abstract class AgendaEvent with _$AgendaEvent {
+  const factory AgendaEvent.load(
+      {@required NotificationSettings notificationSettings}) = AgendaLoad;
+  const factory AgendaEvent.download({
+    @required String uid,
+    @required String pswd,
+    @required NotificationSettings notificationSettings,
+  }) = AgendaDownload;
 }

@@ -1,22 +1,7 @@
 part of 'diagnosis_bloc.dart';
 
-abstract class DiagnosisEvent extends Equatable {
-  const DiagnosisEvent();
-
-  @override
-  bool get stringify => true;
-}
-
-class DiagnosisRun extends DiagnosisEvent {
-  const DiagnosisRun();
-
-  @override
-  List<Object> get props => [];
-}
-
-class DiagnosisCancel extends DiagnosisEvent {
-  const DiagnosisCancel();
-
-  @override
-  List<Object> get props => [];
+@freezed
+abstract class DiagnosisEvent with _$DiagnosisEvent {
+  const factory DiagnosisEvent.run() = DiagnosisRun;
+  const factory DiagnosisEvent.cancel() = DiagnosisCancel;
 }

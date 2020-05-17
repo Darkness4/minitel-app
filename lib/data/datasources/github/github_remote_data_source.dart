@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/models/github/release_model.dart';
+import 'package:minitel_toolbox/domain/entities/github/release.dart';
 
 abstract class GithubRemoteDataSource {
   /// Fetch Releases from network
-  Future<List<GithubReleaseModel>> fetchReleases(String repo);
+  Future<List<GithubRelease>> fetchReleases(String repo);
 }
 
 class GithubRemoteDataSourceImpl implements GithubRemoteDataSource {
@@ -17,17 +17,18 @@ class GithubRemoteDataSourceImpl implements GithubRemoteDataSource {
 
   /// [repo] = author/repo
   @override
-  Future<List<GithubReleaseModel>> fetchReleases(String repo) async {
+  Future<List<GithubRelease>> fetchReleases(String repo) async {
     final response =
         await client.get('https://api.github.com/repos/$repo/releases');
 
     if (response.statusCode == 200) {
       return List<Map<String, dynamic>>.from(
               json.decode(response.body) as List<dynamic>)
-          .map((Map<String, dynamic> data) => GithubReleaseModel.fromJson(data))
+          .map((Map<String, dynamic> data) => GithubRelease.fromJson(data))
           .toList();
     } else {
-      throw ServerException('Failed to load Releases : ${response.statusCode}');
+      throw ServerException(
+          'Failed to load Releases : ${response.statusCode} ${response.reasonPhrase}\n${response.body}');
     }
   }
 }

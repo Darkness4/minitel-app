@@ -4,8 +4,8 @@ import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/github/github_local_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/github/github_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/github/release_model.dart';
 import 'package:minitel_toolbox/data/repositories/releases_repository_impl.dart';
+import 'package:minitel_toolbox/domain/entities/github/release.dart';
 import 'package:minitel_toolbox/domain/repositories/releases_repository.dart';
 import 'package:mockito/mockito.dart';
 
@@ -14,7 +14,28 @@ void main() {
   MockRemoteDataSource mockRemoteDataSource;
   MockNetworkInfo mockNetworkInfo;
   MockLocalDataSource mockLocalDataSource;
-  const tListGithubReleaseModel = <GithubReleaseModel>[GithubReleaseModel()];
+  const tListGithubReleaseModel = <GithubRelease>[
+    GithubRelease(
+      assets: [],
+      assets_url: "assets_url",
+      author: null,
+      body: "body",
+      created_at: null,
+      draft: false,
+      html_url: "html_url",
+      id: 0,
+      name: "name",
+      node_id: "node_id",
+      prerelease: false,
+      published_at: null,
+      tag_name: "tag_name",
+      tarball_url: "tarball_url",
+      target_commitish: "target_commitish",
+      upload_url: "upload_url",
+      url: "url",
+      zipball_url: "zipball_url",
+    ),
+  ];
   const tRepo = "name/repo";
 
   setUp(() {
@@ -57,10 +78,6 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
-        when(mockRemoteDataSource.fetchReleases(tRepo))
-            .thenAnswer((_) async => null);
-        when(mockLocalDataSource.cacheReleases(any))
-            .thenAnswer((_) async => null);
         // act
         await repository.get(tRepo);
         // assert
@@ -75,8 +92,6 @@ void main() {
           // arrange
           when(mockRemoteDataSource.fetchReleases(tRepo))
               .thenAnswer((_) async => tListGithubReleaseModel);
-          when(mockLocalDataSource.cacheReleases(any))
-              .thenAnswer((_) async => null);
           // act
           final result = await repository.get(tRepo);
           // assert
@@ -92,8 +107,6 @@ void main() {
           // arrange
           when(mockRemoteDataSource.fetchReleases(tRepo))
               .thenAnswer((_) async => tListGithubReleaseModel);
-          when(mockLocalDataSource.cacheReleases(any))
-              .thenAnswer((_) async => null);
           // act
           await repository.get(tRepo);
           // assert

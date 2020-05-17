@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/github/github_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/github/release_model.dart';
+import 'package:minitel_toolbox/domain/entities/github/release.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -43,7 +43,7 @@ void main() {
             Map<String, dynamic>>.from(json.decode(fixture(
                 'datasources/github_remote_data_source/releases_response.json'))
             as List<dynamic>)
-        .map((Map<String, dynamic> data) => GithubReleaseModel.fromJson(data))
+        .map((Map<String, dynamic> data) => GithubRelease.fromJson(data))
         .toList();
 
     test(

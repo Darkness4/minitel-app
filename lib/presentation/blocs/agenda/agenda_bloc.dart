@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
 
+part 'agenda_bloc.freezed.dart';
 part 'agenda_event.dart';
 part 'agenda_state.dart';
 
@@ -21,53 +22,66 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
     @required this.flutterLocalNotificationsPlugin,
     @required this.notificationDetails,
     @required this.iCalendarRepository,
-  });
+  })  : assert(flutterLocalNotificationsPlugin != null),
+        assert(notificationDetails != null),
+        assert(iCalendarRepository != null);
 
   @override
-  AgendaState get initialState => const AgendaInitial();
+  AgendaState get initialState => const AgendaState.initial();
 
   @override
   Stream<AgendaState> mapEventToState(
     AgendaEvent agendaEvent,
   ) async* {
-    if (agendaEvent is AgendaLoad) {
-      yield const AgendaLoading();
-      try {
-        final ParsedCalendar parsedCalendar =
-            await iCalendarRepository.parsedCalendar;
+    yield* agendaEvent.when(
+      load: _mapAgendaLoadToState,
+      download: _mapAgendaDownloadToState,
+    );
+  }
 
-        await flutterLocalNotificationsPlugin.cancelAll();
+  Stream<AgendaState> _mapAgendaLoadToState(
+      NotificationSettings notificationSettings) async* {
+    yield const AgendaState.loading();
+    try {
+      final ParsedCalendar parsedCalendar =
+          await iCalendarRepository.parsedCalendar;
 
-        print(
-            "Notifications set up with settings: ${agendaEvent.notificationSettings.toString()}");
+      await flutterLocalNotificationsPlugin.cancelAll();
 
-        final Iterable<Event> events = parsedCalendar.sortedByDTStart
-            .where((event) => event.dtstart.isAfter(DateTime.now()));
+      print(
+          "Notifications set up with settings: ${notificationSettings.toString()}");
 
-        yield AgendaLoaded(events: events.toList());
+      final Iterable<Event> events = parsedCalendar.sortedByDTStart
+          .where((event) => event.dtstart.isAfter(DateTime.now()));
 
-        if (agendaEvent.notificationSettings.enabled) {
-          events.forEach((event) => event.addToNotification(
-                flutterLocalNotificationsPlugin:
-                    flutterLocalNotificationsPlugin,
-                notificationSettings: agendaEvent.notificationSettings,
-                notificationDetails: notificationDetails,
-              ));
-        }
-      } catch (e) {
-        yield AgendaError(e);
+      yield AgendaState.loaded(events.toList());
+
+      if (notificationSettings.enabled) {
+        events.forEach((event) => event.addToNotification(
+              flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
+              notificationSettings: notificationSettings,
+              notificationDetails: notificationDetails,
+            ));
       }
-    } else if (agendaEvent is AgendaDownload) {
-      yield const AgendaLoading();
-      try {
-        await iCalendarRepository.download(
-          username: agendaEvent.uid,
-          password: agendaEvent.pswd,
-        );
-        add(AgendaLoad(notificationSettings: agendaEvent.notificationSettings));
-      } catch (e) {
-        yield AgendaError(e);
-      }
+    } on Exception catch (e) {
+      yield AgendaState.error(e);
+    }
+  }
+
+  Stream<AgendaState> _mapAgendaDownloadToState(
+    String uid,
+    String pswd,
+    NotificationSettings notificationSettings,
+  ) async* {
+    yield const AgendaState.loading();
+    try {
+      await iCalendarRepository.download(
+        username: uid,
+        password: pswd,
+      );
+      add(AgendaEvent.load(notificationSettings: notificationSettings));
+    } on Exception catch (e) {
+      yield AgendaState.error(e);
     }
   }
 }

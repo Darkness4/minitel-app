@@ -7,7 +7,7 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/twitter/feed_model.dart';
+import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -22,6 +22,14 @@ void main() {
   });
 
   void setUpMockHttpClientSuccess200() {
+    when(mockHttpClient.post(
+      "https://api.twitter.com/oauth2/token",
+      headers: anyNamed('headers'),
+      body: anyNamed('body'),
+    )).thenAnswer((_) async => http.Response(
+          json.encode({'access_token': "token"}),
+          200,
+        ));
     when(mockHttpClient.get(
       argThat(startsWith(
           'https://api.twitter.com/1.1/statuses/user_timeline.json')),
@@ -40,12 +48,19 @@ void main() {
       any,
       headers: anyNamed('headers'),
     )).thenAnswer((_) async => http.Response('Something went wrong', 404));
+    when(mockHttpClient.post(
+      any,
+      headers: anyNamed('headers'),
+      body: anyNamed('body'),
+    )).thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
   group('fetchFeed', () {
-    final tFeedModel = FeedModel.fromJson(json.decode(fixture(
-            'datasources/twitter_remote_data_source/feed_response.json'))
-        as List<dynamic>);
+    final tPosts = (json.decode(fixture(
+                'datasources/twitter_remote_data_source/feed_response.json'))
+            as List<dynamic>)
+        .map((dynamic data) => Post.fromJson(data as Map<String, dynamic>))
+        .toList();
 
     test(
       "should perform a GET request",
@@ -53,13 +68,13 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        await dataSource.fetchFeed();
+        await dataSource.fetchAllPosts();
         // assert
         verify(mockHttpClient.get(
           argThat(startsWith(
               'https://api.twitter.com/1.1/statuses/user_timeline.json')),
           headers: {
-            HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.twitterApi}",
+            HttpHeaders.authorizationHeader: "Bearer token",
           },
         ));
       },
@@ -71,9 +86,9 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        final result = await dataSource.fetchFeed();
+        final result = await dataSource.fetchAllPosts();
         // assert
-        expect(result, equals(tFeedModel));
+        expect(result, equals(tPosts));
       },
     );
 
@@ -83,7 +98,53 @@ void main() {
         // arrange
         setUpMockHttpClientFailure404();
         // act
-        final call = dataSource.fetchFeed;
+        final call = dataSource.fetchAllPosts;
+        // assert
+        expect(call, throwsA(isA<ServerException>()));
+      },
+    );
+  });
+
+  group('getBearerToken', () {
+    test(
+      "should perform a POST request",
+      () async {
+        // arrange
+        setUpMockHttpClientSuccess200();
+        // act
+        await dataSource.getBearerToken();
+        // assert
+        verify(mockHttpClient.post(
+          "https://api.twitter.com/oauth2/token",
+          headers: {
+            HttpHeaders.authorizationHeader: 'Basic ' +
+                base64.encode(utf8.encode(
+                    '${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}')),
+          },
+          body: {'grant_type': 'client_credentials'},
+        ));
+      },
+    );
+
+    test(
+      'should return FeedModel when the response code is 200 (success)',
+      () async {
+        // arrange
+        setUpMockHttpClientSuccess200();
+        // act
+        final result = await dataSource.getBearerToken();
+        // assert
+        expect(result, equals('token'));
+      },
+    );
+
+    test(
+      'should throw a ServerException when the response code is 404 or other',
+      () async {
+        // arrange
+        setUpMockHttpClientFailure404();
+        // act
+        final call = dataSource.getBearerToken;
         // assert
         expect(call, throwsA(isA<ServerException>()));
       },

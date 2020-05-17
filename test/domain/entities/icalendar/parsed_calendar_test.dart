@@ -4,49 +4,86 @@ import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/timezone.dart';
 
 void main() {
-  group('get props', () {
+  group('parse', () {
+    final tEventModel = Event(
+      dtend: DateTime.parse("20200127T100000"),
+      dtstamp: DateTime.parse("20200127T100000"),
+      description: "Description",
+      dtstart: DateTime.parse("20200127T100000"),
+      location: "Location",
+      summary: "Summary",
+      uid: "Uid",
+    );
+    final tParsedCalendarModel = ParsedCalendar(
+      calscale: "GREGORIAN",
+      prodID: "-//hacksw/handcal//NONSGML v1.0//EN",
+      timezone: Timezone(
+        daylight: TimezoneDescription(
+          dtstart: DateTime.parse("19710101T020000"),
+          rRule: "FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=3;BYDAY=-1SU",
+          tzName: "CEST",
+          tzOffsetFrom: "+0100",
+          tzOffsetTo: "+0200",
+        ),
+        standard: TimezoneDescription(
+          dtstart: DateTime.parse("19710101T030000"),
+          rRule: "FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=10;BYDAY=-1SU",
+          tzName: "CET",
+          tzOffsetFrom: "+0200",
+          tzOffsetTo: "+0100",
+        ),
+        tzid: "Europe/Paris",
+      ),
+      version: "2.0",
+      events: [
+        tEventModel,
+      ],
+    );
+
     test(
-      'should return true with same values with equals operator',
+      'should return a valid model',
       () async {
         // arrange
-        final DateTime tDateTime = DateTime.now().add(const Duration(days: 5));
+        const String value = """BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Europe/Paris
+BEGIN:STANDARD
+DTSTART:19710101T030000
+TZOFFSETTO:+0100
+TZOFFSETFROM:+0200
+RRULE:FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=10;BYDAY=-1SU
+TZNAME:CET
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:19710101T020000
+TZOFFSETTO:+0200
+TZOFFSETFROM:+0100
+RRULE:FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=3;BYDAY=-1SU
+TZNAME:CEST
+END:DAYLIGHT
+END:VTIMEZONE
 
-        final tEvent = Event(
-          description: "description",
-          dtend: tDateTime,
-          dtstamp: tDateTime,
-          dtstart: tDateTime,
-          location: "location",
-          summary: "summary",
-          uid: "123",
-        );
-        const tTimezone = Timezone(
-          daylight: TimezoneDescription(),
-          standard: TimezoneDescription(),
-          tzid: "tzid",
-        );
-        final tParsedCalendar = ParsedCalendar(
-          calscale: "calscale",
-          events: [tEvent],
-          prodID: "prodID",
-          timezone: tTimezone,
-          version: "version",
-        );
+BEGIN:VEVENT
+DTEND:20200127T100000
+UID:Uid
+DTSTAMP:20200127T100000
+LOCATION:Location 
+DESCRIPTION:Description  
+SUMMARY:Summary
+DTSTART:20200127T100000
+END:VEVENT
+END:VCALENDAR
+""";
         // act
-        final expectedCalendar = ParsedCalendar(
-          calscale: "calscale",
-          events: [tEvent],
-          prodID: "prodID",
-          timezone: tTimezone,
-          version: "version",
-        );
-        final result = tParsedCalendar == expectedCalendar;
+        final result = await ParsedCalendar.parse(Stream.value(value));
         // assert
-        expect(result, true);
+        expect(result, equals(tParsedCalendarModel));
       },
     );
   });
-
   group('sortedEvents', () {
     test('should return a sorted by datetime events', () {
       // Arrange

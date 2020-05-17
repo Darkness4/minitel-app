@@ -1,4 +1,5 @@
 // Imports the Flutter Driver API.
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -13,6 +14,15 @@ void main() {
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
       driver = await FlutterDriver.connect();
+      var connected = false;
+      while (!connected) {
+        try {
+          await driver.waitUntilFirstFrameRasterized();
+          connected = true;
+        } catch (error) {
+          continue;
+        }
+      }
     });
 
     // Close the connection to the driver after the tests have completed.
@@ -28,6 +38,11 @@ void main() {
 
     group('Automated screenshot', () {
       test('Screenshot login', () async {
+        await driver.tap(find.byValueKey(Keys.uidLoginTextField));
+        await driver.enterText("marc.nguyen");
+        await driver.tap(find.byValueKey(Keys.pswdLoginTextField));
+        await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
+        await driver.tap(find.byValueKey(Keys.loginButton));
         await takeScreenshot(driver, ScreenshotsPaths.login);
       });
 
@@ -38,10 +53,10 @@ void main() {
 
       test('Screenshot sogo', () async {
         await driver.tap(find.byValueKey(Keys.sogo));
-        await Future<dynamic>.delayed(const Duration(seconds: 5));
+        await Future<dynamic>.delayed(const Duration(seconds: 30));
         await takeScreenshot(driver, ScreenshotsPaths.sogo);
         await driver.tap(find.pageBack());
-      });
+      }, timeout: const Timeout(Duration(minutes: 1)));
 
       test('Screenshot news', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
@@ -53,15 +68,9 @@ void main() {
       test('Screenshot agenda', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
         await driver.tap(find.byValueKey(Keys.agendaRoute));
-        await driver.tap(find.byValueKey(Keys.agendaUid));
-        await driver.enterText("marc.nguyen");
-        await driver.tap(find.byValueKey(Keys.agendaPswd));
-        await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
-        await driver.tap(find.byValueKey(Keys.agendaConnect));
-        print("Trying to login");
-        await Future<dynamic>.delayed(const Duration(seconds: 5));
+        await Future<dynamic>.delayed(const Duration(seconds: 10));
         await takeScreenshot(driver, ScreenshotsPaths.agenda);
-      });
+      }, timeout: const Timeout(Duration(minutes: 1)));
 
       test('Screenshot reporting', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
@@ -72,8 +81,13 @@ void main() {
       test('Screenshot diagnosis', () async {
         await driver.tap(find.byValueKey(Keys.diagnosisTab));
         await driver.tap(find.byValueKey(Keys.reportingFAB));
-        await driver.waitFor(find.byValueKey(Keys.reportingFABDone),
-            timeout: const Duration(minutes: 2));
+        await driver
+            .waitFor(
+          find.byValueKey(Keys.reportingFABDone),
+        )
+            .timeout(const Duration(minutes: 2), onTimeout: () {
+          print("find.byValueKey(Keys.reportingFABDone) timed out.");
+        });
 
         await takeScreenshot(driver, ScreenshotsPaths.diagnosis);
       }, timeout: const Timeout(Duration(minutes: 3)));
@@ -81,18 +95,28 @@ void main() {
       test('Screenshot docs', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
         await driver.tap(find.byValueKey(Keys.docsRoute));
+        await Future<dynamic>.delayed(const Duration(seconds: 30));
         await takeScreenshot(driver, ScreenshotsPaths.docs);
-      });
+      }, timeout: const Timeout(Duration(minutes: 1)));
     });
   });
 }
 
 Future<void> takeScreenshot(FlutterDriver driver, String path) async {
-  await driver.waitUntilNoTransientCallbacks();
-  final List<int> pixels = await driver.screenshot();
-  final File file = File(path);
-  await file.writeAsBytes(pixels);
-  print(path);
+  try {
+    await driver
+        .waitUntilNoTransientCallbacks()
+        .timeout(const Duration(seconds: 5), onTimeout: () {
+      print("waitUntilNoTransientCallbacks timed out.");
+    });
+    final List<int> pixels = await driver.screenshot();
+    final File file = File(path);
+    file.createSync(recursive: true);
+    file.writeAsBytesSync(pixels);
+    print(path);
+  } catch (e) {
+    print(e);
+  }
 }
 
 class ScreenshotsPaths {

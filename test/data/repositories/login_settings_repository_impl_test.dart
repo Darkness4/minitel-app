@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/data/datasources/settings/login_settings_data_source.dart';
-import 'package:minitel_toolbox/data/models/login_settings_model.dart';
 import 'package:minitel_toolbox/data/repositories/login_settings_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/login_settings.dart';
 import 'package:minitel_toolbox/domain/repositories/login_settings_repository.dart';
@@ -9,7 +8,7 @@ import 'package:mockito/mockito.dart';
 void main() {
   LoginSettingsRepository repository;
   MockLocalDataSource mockLocalDataSource;
-  const tLoginSettingsModel = LoginSettingsModel();
+  const tLoginSettingsModel = LoginSettings();
 
   setUp(() {
     mockLocalDataSource = MockLocalDataSource();
@@ -55,8 +54,7 @@ void main() {
         // act
         await repository.save(tLoginSettings);
         // assert
-        verify(mockLocalDataSource
-            .save(LoginSettingsModel.fromEntity(tLoginSettingsModel)));
+        verify(mockLocalDataSource.save(tLoginSettingsModel));
       },
     );
   });

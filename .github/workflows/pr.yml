@@ -1,0 +1,160 @@
+on:
+  push:
+    branches:
+      - '*/*'
+      - '*'
+      - '!master'
+      - '!develop'
+
+name: PR Workflow
+jobs:
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup Java 8
+        uses: actions/setup-java@master
+        with:
+          java-version: '8.x'
+      - name: Flutter action
+        uses: subosito/flutter-action@master
+        with:
+          channel: 'beta'
+      - name: Upgrade flutter to beta latest
+        run: |
+          flutter channel beta
+          flutter upgrade
+          flutter --version
+      - run: flutter pub get
+      - run: sudo apt update
+      - name: Install LCOV
+        run: sudo apt install -y lcov
+      - name: run test coverage
+        run: |
+          flutter test --coverage
+          lcov -r coverage/lcov.info $(cat ./.lcovignore) -o coverage/lcov.info
+          genhtml -o coverage coverage/lcov.info
+      - name: Archive Coverage
+        uses: actions/upload-artifact@master
+        with:
+          name: coverage
+          path: coverage
+  integration-tests:
+    name: Integration tests
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup Java 8
+        uses: actions/setup-java@master
+        with:
+          java-version: '8.x'
+      - name: Flutter action
+        uses: subosito/flutter-action@master
+        with:
+          channel: 'beta'
+      - name: Upgrade flutter to beta latest
+        run: |
+          flutter channel beta
+          flutter upgrade
+          flutter --version
+      - name: Inject env variables
+        run: |
+          echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 -d > android/app/keystore.jks
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
+          echo "storeFile=keystore.jks" >> android/key.properties
+          sed -i '.original' -e "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i '.original' -e "s/_consumerKey = \"ZXhlbXBsZQ==\"/_consumerKey = \"${{ secrets.CI_CONSUMER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i '.original' -e "s/_consumerSecret = \"ZXhlbXBsZQ==\"/_consumerSecret = \"${{ secrets.CI_CONSUMER_SECRET }}\"/g" ./lib/core/constants/api_keys.dart
+      - name: run tests
+        timeout-minutes: 30
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          target: google_apis
+          profile: 'pixel'
+          script: /Users/runner/Library/Android/sdk/tools/bin/avdmanager list && sleep 20 && flutter doctor -v && flutter pub get && sh test_integration.sh
+      - name: upload screenshot
+        uses: actions/upload-artifact@master
+        with:
+          name: screenshots
+          path: test_driver/screenshots
+  apk-build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup Java 8
+        uses: actions/setup-java@master
+        with:
+          java-version: '8.x'
+      - name: Flutter action
+        uses: subosito/flutter-action@master
+        with:
+          channel: 'beta'
+      - name: Upgrade flutter to beta latest
+        run: |
+          flutter channel beta
+          flutter upgrade
+          flutter --version
+      - name: Inject env variables
+        run: |
+          echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 -d > android/app/keystore.jks
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
+          echo "storeFile=keystore.jks" >> android/key.properties
+          sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i "s/_consumerKey = \"ZXhlbXBsZQ==\"/_consumerKey = \"${{ secrets.CI_CONSUMER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i "s/_consumerSecret = \"ZXhlbXBsZQ==\"/_consumerSecret = \"${{ secrets.CI_CONSUMER_SECRET }}\"/g" ./lib/core/constants/api_keys.dart
+      - run: flutter pub get
+      - run: flutter build apk --release --split-per-abi
+      - name: Rename outputs
+        run: |
+          mv build/app/outputs/apk/release/app-armeabi-v7a-release.apk build/app/outputs/apk/release/toolbox-armeabi-v7a.apk
+          mv build/app/outputs/apk/release/app-arm64-v8a-release.apk build/app/outputs/apk/release/toolbox-arm64-v8a.apk
+          mv build/app/outputs/apk/release/app-x86_64-release.apk build/app/outputs/apk/release/toolbox-x86_64.apk
+      - name: Archive APK
+        uses: actions/upload-artifact@master
+        with:
+          name: release-apks
+          path: build/app/outputs/apk/release
+  aab-build:
+    name: Build AAB
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup Java 8
+        uses: actions/setup-java@master
+        with:
+          java-version: '8.x'
+      - name: Flutter action
+        uses: subosito/flutter-action@master
+        with:
+          channel: 'beta'
+      - name: Upgrade flutter to beta latest
+        run: |
+          flutter channel beta
+          flutter upgrade
+          flutter --version
+      - name: Inject env variables
+        run: |
+          echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 -d > android/app/keystore.jks
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
+          echo "storeFile=keystore.jks" >> android/key.properties
+          sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i "s/_consumerKey = \"ZXhlbXBsZQ==\"/_consumerKey = \"${{ secrets.CI_CONSUMER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i "s/_consumerSecret = \"ZXhlbXBsZQ==\"/_consumerSecret = \"${{ secrets.CI_CONSUMER_SECRET }}\"/g" ./lib/core/constants/api_keys.dart
+      - run: flutter pub get
+      - run: flutter build appbundle --release
+      - name: Move and renamed outputs
+        run: mv build/app/outputs/bundle/release/app-release.aab build/app/outputs/bundle/release/toolbox.aab
+      - name: Archive AAB
+        uses: actions/upload-artifact@master
+        with:
+          name: release-aab
+          path: build/app/outputs/bundle/release

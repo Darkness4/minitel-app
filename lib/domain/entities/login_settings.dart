@@ -1,29 +1,16 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:minitel_toolbox/core/constants/app_constants.dart';
 
-class LoginSettings extends Equatable {
-  final bool rememberMe;
-  final bool autoLogin;
-  final String uid;
-  final String selectedTime;
-  final String selectedUrl;
-  final String pswd;
+part 'login_settings.freezed.dart';
 
-  const LoginSettings({
-    this.rememberMe,
-    this.autoLogin,
-    this.uid,
-    this.selectedTime,
-    this.selectedUrl,
-    this.pswd,
-  });
-
-  @override
-  List<Object> get props => [
-        this.rememberMe,
-        this.autoLogin,
-        this.uid,
-        this.selectedTime,
-        this.selectedUrl,
-        this.pswd,
-      ];
+@freezed
+abstract class LoginSettings with _$LoginSettings {
+  const factory LoginSettings({
+    @Default(false) @nullable bool rememberMe,
+    @Default(false) @nullable bool autoLogin,
+    @Default('') @nullable String uid,
+    @Default('4 hours') @nullable String selectedTime,
+    @Default(MyIPAdresses.stormshieldIP) @nullable String selectedUrl,
+    @Default('') @nullable String pswd,
+  }) = _LoginSettings;
 }

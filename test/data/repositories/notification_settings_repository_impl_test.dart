@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/data/datasources/settings/notification_settings_data_source.dart';
-import 'package:minitel_toolbox/data/models/notifications_model.dart';
 import 'package:minitel_toolbox/data/repositories/notification_settings_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/notification_settings_repository.dart';
@@ -9,7 +8,7 @@ import 'package:mockito/mockito.dart';
 void main() {
   NotificationSettingsRepository repository;
   MockLocalDataSource mockLocalDataSource;
-  const tNotificationSettingsModel = NotificationSettingsModel();
+  const tNotificationSettingsModel = NotificationSettings();
 
   setUp(() {
     mockLocalDataSource = MockLocalDataSource();
@@ -44,8 +43,8 @@ void main() {
         // act
         await repository.save(tNotificationSettings);
         // assert
-        verify(mockLocalDataSource.saveNotificationSettings(
-            NotificationSettingsModel.fromEntity(tNotificationSettingsModel)));
+        verify(mockLocalDataSource
+            .saveNotificationSettings(tNotificationSettingsModel));
       },
     );
   });

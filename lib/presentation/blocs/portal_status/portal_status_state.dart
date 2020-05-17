@@ -1,32 +1,19 @@
 part of 'portal_status_bloc.dart';
 
-@immutable
-class PortalStatusState extends Equatable {
-  final bool calendarIsSuccess;
-  final bool portalIsSuccess;
-  final bool printerIsSuccess;
-  final String stormshieldState;
-  final bool stormshieldIsSuccess;
+@freezed
+abstract class PortalStatusState with _$PortalStatusState {
+  const factory PortalStatusState({
+    @required bool calendarIsSuccess,
+    @required bool portalIsSuccess,
+    @required bool printerIsSuccess,
+    @required String stormshieldState,
+    @required bool stormshieldIsSuccess,
+    @required bool isFetching,
+    @required bool isFailure,
+    Exception error,
+  }) = _PortalStatusState;
 
-  final bool isFetching;
-  final bool isFailure;
-  final dynamic error;
-
-  const PortalStatusState({
-    @required this.calendarIsSuccess,
-    @required this.portalIsSuccess,
-    @required this.printerIsSuccess,
-    @required this.stormshieldState,
-    @required this.stormshieldIsSuccess,
-    @required this.isFetching,
-    @required this.isFailure,
-    @required this.error,
-  });
-
-  @override
-  bool get stringify => true;
-
-  factory PortalStatusState.empty() {
+  static PortalStatusState empty() {
     return const PortalStatusState(
       calendarIsSuccess: false,
       portalIsSuccess: false,
@@ -39,7 +26,7 @@ class PortalStatusState extends Equatable {
     );
   }
 
-  factory PortalStatusState.loading() {
+  static PortalStatusState loading() {
     return const PortalStatusState(
       calendarIsSuccess: false,
       portalIsSuccess: false,
@@ -51,41 +38,9 @@ class PortalStatusState extends Equatable {
       error: null,
     );
   }
+}
 
-  @override
-  List<Object> get props => [
-        this.calendarIsSuccess,
-        this.portalIsSuccess,
-        this.printerIsSuccess,
-        this.stormshieldState,
-        this.stormshieldIsSuccess,
-        this.isFetching,
-        this.isFailure,
-        this.error,
-      ];
-
-  PortalStatusState copyWith({
-    bool calendarIsSuccess,
-    bool portalIsSuccess,
-    bool printerIsSuccess,
-    String stormshieldState,
-    bool stormshieldIsSuccess,
-    bool isFetching,
-    bool isFailure,
-    dynamic error,
-  }) {
-    return PortalStatusState(
-      calendarIsSuccess: calendarIsSuccess ?? this.calendarIsSuccess,
-      portalIsSuccess: portalIsSuccess ?? this.portalIsSuccess,
-      printerIsSuccess: printerIsSuccess ?? this.printerIsSuccess,
-      stormshieldState: stormshieldState ?? this.stormshieldState,
-      stormshieldIsSuccess: stormshieldIsSuccess ?? this.stormshieldIsSuccess,
-      isFetching: isFetching ?? this.isFetching,
-      isFailure: isFailure ?? this.isFailure,
-      error: error ?? this.error,
-    );
-  }
-
+extension PortalStatusStateX on PortalStatusState {
   PortalStatusState update({
     bool calendarIsSuccess,
     bool portalIsSuccess,
@@ -93,16 +48,16 @@ class PortalStatusState extends Equatable {
     String stormshieldState,
     bool stormshieldIsSuccess,
     bool isFailure,
-    dynamic error,
+    Exception error,
   }) {
     return copyWith(
-      calendarIsSuccess: calendarIsSuccess,
-      portalIsSuccess: portalIsSuccess,
-      printerIsSuccess: printerIsSuccess,
-      stormshieldState: stormshieldState,
-      stormshieldIsSuccess: stormshieldIsSuccess,
+      calendarIsSuccess: calendarIsSuccess ?? this.calendarIsSuccess,
+      portalIsSuccess: portalIsSuccess ?? this.portalIsSuccess,
+      printerIsSuccess: printerIsSuccess ?? this.printerIsSuccess,
+      stormshieldState: stormshieldState ?? this.stormshieldState,
+      stormshieldIsSuccess: stormshieldIsSuccess ?? this.stormshieldIsSuccess,
       isFetching: false,
-      isFailure: isFailure,
+      isFailure: isFailure ?? this.isFailure,
       error: error,
     );
   }

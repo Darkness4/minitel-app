@@ -15,7 +15,7 @@ void injectBloc() {
   );
   sl.registerFactory<TwitterFeedBloc>(
     () => TwitterFeedBloc(
-      repository: sl<FeedRepository>(),
+      repository: sl<PostRepository>(),
     ),
   );
   sl.registerFactory<GithubReleasesBloc>(
@@ -28,19 +28,6 @@ void injectBloc() {
       repository: sl<NotificationSettingsRepository>(),
     ),
   );
-
-  final prefs = sl<SharedPreferences>();
-
-  sl.registerFactory<ThemeBloc>(() {
-    final String initialTheme = prefs.getString('theme');
-    if (initialTheme == "Dark") {
-      return ThemeBloc(initialState: const ThemeDark());
-    } else if (initialTheme == "Light") {
-      return ThemeBloc(initialState: const ThemeLight());
-    } else {
-      return ThemeBloc(initialState: const ThemeAdaptive());
-    }
-  });
 
   sl.registerFactory<PortalBloc>(
     () => PortalBloc(

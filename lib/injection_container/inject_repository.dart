@@ -13,8 +13,8 @@ void injectRepository() {
       remoteDataSource: sl<GithubRemoteDataSource>(),
     ),
   );
-  sl.registerLazySingleton<FeedRepository>(
-    () => FeedRepositoryImpl(
+  sl.registerLazySingleton<PostRepository>(
+    () => PostRepositoryImpl(
       localDataSource: sl<TwitterLocalDataSource>(),
       networkInfo: sl<NetworkInfo>(),
       remoteDataSource: sl<TwitterRemoteDataSource>(),
