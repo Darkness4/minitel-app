@@ -13,6 +13,15 @@ void main() {
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
       driver = await FlutterDriver.connect();
+      var connected = false;
+      while (!connected) {
+        try {
+          await driver.waitUntilFirstFrameRasterized();
+          connected = true;
+        } catch (error) {
+          continue;
+        }
+      }
     });
 
     // Close the connection to the driver after the tests have completed.
@@ -88,11 +97,20 @@ void main() {
 }
 
 Future<void> takeScreenshot(FlutterDriver driver, String path) async {
-  await driver.waitUntilNoTransientCallbacks();
-  final List<int> pixels = await driver.screenshot();
-  final File file = File(path);
-  await file.writeAsBytes(pixels);
-  print(path);
+  try {
+    await driver
+        .waitUntilNoTransientCallbacks()
+        .timeout(const Duration(seconds: 5), onTimeout: () {
+      print("waitUntilNoTransientCallbacks timed out.");
+    });
+    final List<int> pixels = await driver.screenshot();
+    final File file = File(path);
+    file.createSync(recursive: true);
+    file.writeAsBytesSync(pixels);
+    print(path);
+  } catch (e) {
+    print(e);
+  }
 }
 
 class ScreenshotsPaths {

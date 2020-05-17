@@ -22,6 +22,14 @@ void main() {
   });
 
   void setUpMockHttpClientSuccess200() {
+    when(mockHttpClient.post(
+      "https://api.twitter.com/oauth2/token",
+      headers: anyNamed('headers'),
+      body: anyNamed('body'),
+    )).thenAnswer((_) async => http.Response(
+          json.encode({'access_token': "token"}),
+          200,
+        ));
     when(mockHttpClient.get(
       argThat(startsWith(
           'https://api.twitter.com/1.1/statuses/user_timeline.json')),
@@ -39,6 +47,11 @@ void main() {
     when(mockHttpClient.get(
       any,
       headers: anyNamed('headers'),
+    )).thenAnswer((_) async => http.Response('Something went wrong', 404));
+    when(mockHttpClient.post(
+      any,
+      headers: anyNamed('headers'),
+      body: anyNamed('body'),
     )).thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
@@ -61,7 +74,7 @@ void main() {
           argThat(startsWith(
               'https://api.twitter.com/1.1/statuses/user_timeline.json')),
           headers: {
-            HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.twitterApi}",
+            HttpHeaders.authorizationHeader: "Bearer token",
           },
         ));
       },
@@ -86,6 +99,52 @@ void main() {
         setUpMockHttpClientFailure404();
         // act
         final call = dataSource.fetchAllPosts;
+        // assert
+        expect(call, throwsA(isA<ServerException>()));
+      },
+    );
+  });
+
+  group('getBearerToken', () {
+    test(
+      "should perform a POST request",
+      () async {
+        // arrange
+        setUpMockHttpClientSuccess200();
+        // act
+        await dataSource.getBearerToken();
+        // assert
+        verify(mockHttpClient.post(
+          "https://api.twitter.com/oauth2/token",
+          headers: {
+            HttpHeaders.authorizationHeader: 'Basic ' +
+                base64.encode(utf8.encode(
+                    '${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}')),
+          },
+          body: {'grant_type': 'client_credentials'},
+        ));
+      },
+    );
+
+    test(
+      'should return FeedModel when the response code is 200 (success)',
+      () async {
+        // arrange
+        setUpMockHttpClientSuccess200();
+        // act
+        final result = await dataSource.getBearerToken();
+        // assert
+        expect(result, equals('token'));
+      },
+    );
+
+    test(
+      'should throw a ServerException when the response code is 404 or other',
+      () async {
+        // arrange
+        setUpMockHttpClientFailure404();
+        // act
+        final call = dataSource.getBearerToken;
         // assert
         expect(call, throwsA(isA<ServerException>()));
       },
