@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
 
+part 'agenda_bloc.freezed.dart';
 part 'agenda_event.dart';
 part 'agenda_state.dart';
 
@@ -20,24 +22,26 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
     @required this.flutterLocalNotificationsPlugin,
     @required this.notificationDetails,
     @required this.iCalendarRepository,
-  });
+  })  : assert(flutterLocalNotificationsPlugin != null),
+        assert(notificationDetails != null),
+        assert(iCalendarRepository != null);
 
   @override
-  AgendaState get initialState => const AgendaInitial();
+  AgendaState get initialState => const AgendaState.initial();
 
   @override
   Stream<AgendaState> mapEventToState(
     AgendaEvent agendaEvent,
   ) async* {
-    if (agendaEvent is AgendaLoad) {
-      yield* _mapAgendaLoadToState(agendaEvent);
-    } else if (agendaEvent is AgendaDownload) {
-      yield* _mapAgendaDownloadToState(agendaEvent);
-    }
+    yield* agendaEvent.when(
+      load: _mapAgendaLoadToState,
+      download: _mapAgendaDownloadToState,
+    );
   }
 
-  Stream<AgendaState> _mapAgendaLoadToState(AgendaLoad agendaEvent) async* {
-    yield const AgendaLoading();
+  Stream<AgendaState> _mapAgendaLoadToState(
+      NotificationSettings notificationSettings) async* {
+    yield const AgendaState.loading();
     try {
       final ParsedCalendar parsedCalendar =
           await iCalendarRepository.parsedCalendar;
@@ -45,36 +49,39 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
       await flutterLocalNotificationsPlugin.cancelAll();
 
       print(
-          "Notifications set up with settings: ${agendaEvent.notificationSettings.toString()}");
+          "Notifications set up with settings: ${notificationSettings.toString()}");
 
       final Iterable<Event> events = parsedCalendar.sortedByDTStart
           .where((event) => event.dtstart.isAfter(DateTime.now()));
 
-      yield AgendaLoaded(events: events.toList());
+      yield AgendaState.loaded(events.toList());
 
-      if (agendaEvent.notificationSettings.enabled) {
+      if (notificationSettings.enabled) {
         events.forEach((event) => event.addToNotification(
               flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
-              notificationSettings: agendaEvent.notificationSettings,
+              notificationSettings: notificationSettings,
               notificationDetails: notificationDetails,
             ));
       }
-    } catch (e) {
-      yield AgendaError(e);
+    } on Exception catch (e) {
+      yield AgendaState.error(e);
     }
   }
 
   Stream<AgendaState> _mapAgendaDownloadToState(
-      AgendaDownload agendaEvent) async* {
-    yield const AgendaLoading();
+    String uid,
+    String pswd,
+    NotificationSettings notificationSettings,
+  ) async* {
+    yield const AgendaState.loading();
     try {
       await iCalendarRepository.download(
-        username: agendaEvent.uid,
-        password: agendaEvent.pswd,
+        username: uid,
+        password: pswd,
       );
-      add(AgendaLoad(notificationSettings: agendaEvent.notificationSettings));
-    } catch (e) {
-      yield AgendaError(e);
+      add(AgendaEvent.load(notificationSettings: notificationSettings));
+    } on Exception catch (e) {
+      yield AgendaState.error(e);
     }
   }
 }

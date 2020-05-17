@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
 import 'package:minitel_toolbox/domain/repositories/releases_repository.dart';
 
+part 'github_releases_bloc.freezed.dart';
 part 'github_releases_event.dart';
 part 'github_releases_state.dart';
 
@@ -18,25 +19,22 @@ class GithubReleasesBloc
   }) : assert(repository != null);
 
   @override
-  GithubReleasesState get initialState => const GithubReleasesStateInitial();
+  GithubReleasesState get initialState => const GithubReleasesState.initial();
 
   @override
   Stream<GithubReleasesState> mapEventToState(
     GithubReleasesEvent event,
   ) async* {
-    if (event is GetReleasesEvent) {
-      yield* _mapGetReleasesEventToState(event);
-    }
+    yield* _mapGetReleasesEventToState(event.repo);
   }
 
-  Stream<GithubReleasesState> _mapGetReleasesEventToState(
-      GetReleasesEvent event) async* {
-    yield const GithubReleasesStateLoading();
+  Stream<GithubReleasesState> _mapGetReleasesEventToState(String repo) async* {
+    yield const GithubReleasesState.loading();
     try {
-      final releases = await repository.get(event.repo);
-      yield GithubReleasesStateLoaded(releases: releases);
-    } catch (e) {
-      yield GithubReleasesStateError(message: e.toString());
+      final releases = await repository.get(repo);
+      yield GithubReleasesState.loaded(releases);
+    } on Exception catch (e) {
+      yield GithubReleasesState.error(e);
     }
   }
 }

@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
 import 'package:rxdart/rxdart.dart' show DebounceExtensions;
 
+part 'report_status_bloc.freezed.dart';
 part 'report_status_event.dart';
 part 'report_status_state.dart';
 
@@ -17,15 +18,12 @@ class ReportStatusBloc extends Bloc<ReportStatusEvent, ReportStatusState> {
   Stream<ReportStatusState> mapEventToState(
     ReportStatusEvent event,
   ) async* {
-    if (event is NameChanged) {
-      yield* _mapNameChangedToState(event);
-    } else if (event is RoomChanged) {
-      yield* _mapRoomChangedToState(event);
-    } else if (event is DescriptionChanged) {
-      yield* _mapDescriptionChangedToState(event);
-    } else if (event is TitleChanged) {
-      yield* _mapTitleChangedToState(event);
-    }
+    yield* event.map(
+      nameChanged: _mapNameChangedToState,
+      roomChanged: _mapRoomChangedToState,
+      titleChanged: _mapTitleChangedToState,
+      descriptionChanged: _mapDescriptionChangedToState,
+    );
   }
 
   @override
@@ -43,25 +41,25 @@ class ReportStatusBloc extends Bloc<ReportStatusEvent, ReportStatusState> {
 
   Stream<ReportStatusState> _mapDescriptionChangedToState(
       DescriptionChanged event) async* {
-    yield state.update(description: event.description);
+    yield state.copyWith(description: event.description);
   }
 
   Stream<ReportStatusState> _mapNameChangedToState(NameChanged event) async* {
-    yield state.update(
+    yield state.copyWith(
       name: event.name,
       isValidName: event.name.isNotEmpty,
     );
   }
 
   Stream<ReportStatusState> _mapRoomChangedToState(RoomChanged event) async* {
-    yield state.update(
+    yield state.copyWith(
       room: event.room,
       isValidRoom: event.room.isNotEmpty && event.room.containsOnlyNumbers,
     );
   }
 
   Stream<ReportStatusState> _mapTitleChangedToState(TitleChanged event) async* {
-    yield state.update(
+    yield state.copyWith(
       title: event.title,
       isValidTitle: event.title.isNotEmpty,
     );

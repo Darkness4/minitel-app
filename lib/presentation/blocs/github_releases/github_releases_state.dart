@@ -1,38 +1,11 @@
 part of 'github_releases_bloc.dart';
 
-abstract class GithubReleasesState extends Equatable {
-  const GithubReleasesState();
-
-  @override
-  bool get stringify => true;
-}
-
-class GithubReleasesStateError extends GithubReleasesState {
-  final String message;
-
-  const GithubReleasesStateError({@required this.message});
-
-  @override
-  List<Object> get props => [message];
-}
-
-class GithubReleasesStateInitial extends GithubReleasesState {
-  const GithubReleasesStateInitial();
-  @override
-  List<Object> get props => [];
-}
-
-class GithubReleasesStateLoaded extends GithubReleasesState {
-  final List<GithubRelease> releases;
-
-  const GithubReleasesStateLoaded({@required this.releases});
-
-  @override
-  List<Object> get props => [releases];
-}
-
-class GithubReleasesStateLoading extends GithubReleasesState {
-  const GithubReleasesStateLoading();
-  @override
-  List<Object> get props => [];
+@freezed
+abstract class GithubReleasesState with _$GithubReleasesState {
+  const factory GithubReleasesState.initial() = GithubReleasesStateInitial;
+  const factory GithubReleasesState.loading() = GithubReleasesStateLoading;
+  const factory GithubReleasesState.loaded(List<GithubRelease> releases) =
+      GithubReleasesStateLoaded;
+  const factory GithubReleasesState.error(Exception error) =
+      GithubReleasesStateError;
 }

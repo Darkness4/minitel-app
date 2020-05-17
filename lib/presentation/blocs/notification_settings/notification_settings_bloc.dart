@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/notification_settings_repository.dart';
 
+part 'notification_settings_bloc.freezed.dart';
 part 'notification_settings_event.dart';
 part 'notification_settings_state.dart';
 
@@ -25,44 +26,40 @@ class NotificationSettingsBloc
   Stream<NotificationSettingsState> mapEventToState(
     NotificationSettingsEvent event,
   ) async* {
-    if (event is NotificationSettingsLoad) {
-      yield* _mapNotificationSettingsLoadToState();
-    } else if (event is SaveNotificationSettings) {
-      yield* _mapSaveNotificationSettingsToState(event);
-    } else if (event is EnablingChanged) {
-      yield* _mapEnablingChangedToState(event);
-    } else if (event is RangeChanged) {
-      yield* _mapRangeChangedToState(event);
-    } else if (event is EarlyChanged) {
-      yield* _mapEarlyChangedToState(event);
-    }
+    yield* event.when(
+      load: _mapNotificationSettingsLoadToState,
+      save: _mapSaveNotificationSettingsToState,
+      enablingChanged: _mapEnablingChangedToState,
+      rangeChanged: _mapRangeChangedToState,
+      earlyChanged: _mapEarlyChangedToState,
+    );
   }
 
   Stream<NotificationSettingsState> _mapEarlyChangedToState(
-      EarlyChanged event) async* {
+      Duration early) async* {
     yield state.update(
-      early: event.early,
+      early: early,
     );
   }
 
   Stream<NotificationSettingsState> _mapRangeChangedToState(
-      RangeChanged event) async* {
+      Duration range) async* {
     yield state.update(
-      range: event.range,
+      range: range,
     );
   }
 
   Stream<NotificationSettingsState> _mapEnablingChangedToState(
-      EnablingChanged event) async* {
+      bool enabled) async* {
     yield state.update(
-      enabled: event.enabled,
+      enabled: enabled,
     );
   }
 
   Stream<NotificationSettingsState> _mapSaveNotificationSettingsToState(
-      SaveNotificationSettings event) async* {
+      NotificationSettings settings) async* {
     try {
-      await repository.save(event.settings);
+      await repository.save(settings);
       yield state.copyWith(isSaved: true);
     } catch (e) {
       yield state.copyWith(isSaved: false);

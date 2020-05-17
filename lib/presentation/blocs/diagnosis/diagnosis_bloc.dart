@@ -1,48 +1,49 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 import 'package:minitel_toolbox/domain/repositories/diagnosis_repository.dart';
 
+part 'diagnosis_bloc.freezed.dart';
 part 'diagnosis_event.dart';
 part 'diagnosis_state.dart';
 
 class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
   final DiagnosisRepository diagnosisRepository;
 
-  DiagnosisBloc({@required this.diagnosisRepository});
+  DiagnosisBloc({@required this.diagnosisRepository})
+      : assert(diagnosisRepository != null);
 
   @override
   DiagnosisState get initialState =>
-      DiagnosisInitial(diagnosis: diagnosisRepository.diagnosis);
+      DiagnosisState.initial(diagnosisRepository.diagnosis);
 
   @override
   Stream<DiagnosisState> mapEventToState(
     DiagnosisEvent event,
   ) async* {
-    if (event is DiagnosisRun) {
-      yield* _mapDiagnosisRunToState();
-    } else if (event is DiagnosisCancel) {
-      yield* _mapDiagnosisCancelToState();
-    }
+    yield* event.when(
+      run: _mapDiagnosisRunToState,
+      cancel: _mapDiagnosisCancelToState,
+    );
   }
 
   Stream<DiagnosisState> _mapDiagnosisCancelToState() async* {
-    yield DiagnosisInitial(diagnosis: diagnosisRepository.diagnosis);
+    yield DiagnosisState.initial(diagnosisRepository.diagnosis);
   }
 
   Stream<DiagnosisState> _mapDiagnosisRunToState() async* {
     try {
       await diagnosisRepository.diagnose();
-      yield DiagnosisLoading(diagnosis: diagnosisRepository.diagnosis);
+      yield DiagnosisState.loading(diagnosisRepository.diagnosis);
       await diagnosisRepository.diagnosis
           .waitAll()
           .timeout(const Duration(minutes: 1));
-      yield DiagnosisLoaded(diagnosis: diagnosisRepository.diagnosis);
-    } catch (e) {
-      yield DiagnosisError(error: e);
+      yield DiagnosisState.loaded(diagnosisRepository.diagnosis);
+    } on Exception catch (e) {
+      yield DiagnosisState.error(e);
     }
   }
 }

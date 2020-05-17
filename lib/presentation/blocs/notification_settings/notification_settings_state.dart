@@ -1,28 +1,14 @@
 part of 'notification_settings_bloc.dart';
 
-class NotificationSettingsState extends Equatable {
-  final NotificationSettings notificationSettings;
+@freezed
+abstract class NotificationSettingsState with _$NotificationSettingsState {
+  const factory NotificationSettingsState({
+    @required @nullable NotificationSettings notificationSettings,
+    @required @nullable bool isSaved,
+    @required @nullable bool isLoaded,
+  }) = _NotificationSettingsState;
 
-  final bool isSaved;
-  final bool isLoaded;
-
-  const NotificationSettingsState({
-    @required this.notificationSettings,
-    @required this.isSaved,
-    @required this.isLoaded,
-  });
-
-  @override
-  bool get stringify => true;
-
-  @override
-  List<Object> get props => [
-        this.notificationSettings,
-        this.isSaved,
-        this.isLoaded,
-      ];
-
-  factory NotificationSettingsState.initial() {
+  static NotificationSettingsState initial() {
     return const NotificationSettingsState(
       notificationSettings: NotificationSettings(
         early: Duration(minutes: 10),
@@ -33,7 +19,9 @@ class NotificationSettingsState extends Equatable {
       isLoaded: false,
     );
   }
+}
 
+extension NotificationSettingsStateX on NotificationSettingsState {
   NotificationSettingsState update({
     Duration early,
     Duration range,
@@ -42,23 +30,11 @@ class NotificationSettingsState extends Equatable {
   }) {
     return copyWith(
       notificationSettings: notificationSettings.copyWith(
-        early: early,
-        enabled: enabled,
-        range: range,
+        early: early ?? this.notificationSettings.early,
+        enabled: enabled ?? this.notificationSettings.enabled,
+        range: range ?? this.notificationSettings.range,
       ),
       isSaved: false,
-      isLoaded: isLoaded,
-    );
-  }
-
-  NotificationSettingsState copyWith({
-    NotificationSettings notificationSettings,
-    bool isSaved,
-    bool isLoaded,
-  }) {
-    return NotificationSettingsState(
-      notificationSettings: notificationSettings ?? this.notificationSettings,
-      isSaved: isSaved ?? this.isSaved,
       isLoaded: isLoaded ?? this.isLoaded,
     );
   }

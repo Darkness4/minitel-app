@@ -16,6 +16,53 @@ abstract class SwitchStatus with _$SwitchStatus {
     @required @nullable double pingResponseTime,
     @required @nullable int snmpAvailable,
   }) = _SwitchStatus;
+
+  static SwitchStatus fromHost(ZabbixHost host) {
+    // Data to fill
+    final Map<int, SwitchPortStatus> ports = <int, SwitchPortStatus>{};
+    String description;
+    String hostname;
+    Duration uptime;
+    double pingResponseTime;
+    int snmpAvailable;
+
+    host.items.forEach((final ZabbixItem item) {
+      if (item.snmp_oid != null &&
+          item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
+        final int port = int.parse(
+            item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
+        ports[port] ??= const SwitchPortStatus();
+        ports[port] = ports[port].copyWith(speed: int.parse(item.lastvalue));
+      } else if (item.snmp_oid != null &&
+          item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
+        final int port = int.parse(
+            item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
+        ports[port] ??= const SwitchPortStatus();
+        ports[port] =
+            ports[port].copyWith(operStatus: int.parse(item.lastvalue));
+      } else if (item.name.contains('Device description')) {
+        description = item.lastvalue;
+      } else if (item.name.contains('Device name')) {
+        hostname = item.lastvalue;
+      } else if (item.name.contains('ICMP response time')) {
+        pingResponseTime = double.parse(item.lastvalue);
+      } else if (item.name.contains('Device uptime')) {
+        uptime = Duration(seconds: int.parse(item.lastvalue));
+      } else if (item.name.contains('SNMP availability')) {
+        snmpAvailable = int.parse(item.lastvalue);
+      } else {
+        print('${item.name} unhandled.');
+      }
+    });
+    return SwitchStatus(
+      snmpAvailable: snmpAvailable,
+      description: description,
+      hostname: hostname,
+      pingResponseTime: pingResponseTime,
+      ports: ports,
+      uptime: uptime,
+    );
+  }
 }
 
 extension SwitchStatusUtils on SwitchStatus {
@@ -81,52 +128,5 @@ extension SwitchStatusUtils on SwitchStatus {
     } else {
       return '${number / 1e9} G';
     }
-  }
-
-  static SwitchStatus fromHost(ZabbixHost host) {
-    // Data to fill
-    final Map<int, SwitchPortStatus> ports = <int, SwitchPortStatus>{};
-    String description;
-    String hostname;
-    Duration uptime;
-    double pingResponseTime;
-    int snmpAvailable;
-
-    host.items.forEach((final ZabbixItem item) {
-      if (item.snmp_oid != null &&
-          item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
-        final int port = int.parse(
-            item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
-        ports[port] ??= const SwitchPortStatus();
-        ports[port] = ports[port].copyWith(speed: int.parse(item.lastvalue));
-      } else if (item.snmp_oid != null &&
-          item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
-        final int port = int.parse(
-            item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
-        ports[port] ??= const SwitchPortStatus();
-        ports[port] =
-            ports[port].copyWith(operStatus: int.parse(item.lastvalue));
-      } else if (item.name.contains('Device description')) {
-        description = item.lastvalue;
-      } else if (item.name.contains('Device name')) {
-        hostname = item.lastvalue;
-      } else if (item.name.contains('ICMP response time')) {
-        pingResponseTime = double.parse(item.lastvalue);
-      } else if (item.name.contains('Device uptime')) {
-        uptime = Duration(seconds: int.parse(item.lastvalue));
-      } else if (item.name.contains('SNMP availability')) {
-        snmpAvailable = int.parse(item.lastvalue);
-      } else {
-        print('${item.name} unhandled.');
-      }
-    });
-    return SwitchStatus(
-      snmpAvailable: snmpAvailable,
-      description: description,
-      hostname: hostname,
-      pingResponseTime: pingResponseTime,
-      ports: ports,
-      uptime: uptime,
-    );
   }
 }
