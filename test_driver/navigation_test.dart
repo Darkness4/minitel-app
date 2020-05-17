@@ -41,7 +41,7 @@ void main() {
         await driver.tap(find.byValueKey(Keys.uidLoginTextField));
         await driver.enterText("marc.nguyen");
         await driver.tap(find.byValueKey(Keys.pswdLoginTextField));
-        await driver.enterText("opste963");
+        await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
         await driver.tap(find.byValueKey(Keys.loginButton));
         await takeScreenshot(driver, ScreenshotsPaths.login);
       });
@@ -68,13 +68,7 @@ void main() {
       test('Screenshot agenda', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
         await driver.tap(find.byValueKey(Keys.agendaRoute));
-        await driver.tap(find.byValueKey(Keys.agendaUid));
-        await driver.enterText("marc.nguyen");
-        await driver.tap(find.byValueKey(Keys.agendaPswd));
-        await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
-        await driver.tap(find.byValueKey(Keys.agendaConnect));
-        print("Trying to login");
-        await Future<dynamic>.delayed(const Duration(seconds: 30));
+        await Future<dynamic>.delayed(const Duration(seconds: 10));
         await takeScreenshot(driver, ScreenshotsPaths.agenda);
       }, timeout: const Timeout(Duration(minutes: 1)));
 
