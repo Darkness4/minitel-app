@@ -1,4 +1,5 @@
 // Imports the Flutter Driver API.
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -81,8 +82,14 @@ void main() {
       test('Screenshot diagnosis', () async {
         await driver.tap(find.byValueKey(Keys.diagnosisTab));
         await driver.tap(find.byValueKey(Keys.reportingFAB));
-        await driver.waitFor(find.byValueKey(Keys.reportingFABDone),
-            timeout: const Duration(minutes: 2));
+        try {
+          await driver.waitFor(
+            find.byValueKey(Keys.reportingFABDone),
+            timeout: const Duration(minutes: 2),
+          );
+        } on TimeoutException catch (e) {
+          print(e);
+        }
 
         await takeScreenshot(driver, ScreenshotsPaths.diagnosis);
       }, timeout: const Timeout(Duration(minutes: 3)));
