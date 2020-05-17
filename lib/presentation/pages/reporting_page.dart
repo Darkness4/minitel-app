@@ -102,7 +102,7 @@ class ReportingPageState extends State<ReportingPage>
   @override
   void dispose() {
     _timer?.cancel();
-    _animationController.dispose();
+    _animationController?.dispose();
     _percentageDiagnoseProgress.dispose();
     super.dispose();
   }
@@ -118,6 +118,7 @@ class ReportingPageState extends State<ReportingPage>
 
             context.bloc<DiagnosisBloc>().add(const DiagnosisRun());
             _percentageDiagnoseProgress.value = 0;
+            _timer?.cancel();
             _timer = Timer.periodic(
               const Duration(seconds: 1),
               (Timer t) => _percentageDiagnoseProgress.value += 1 / 60,

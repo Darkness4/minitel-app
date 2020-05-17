@@ -53,7 +53,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       node: formFocusScopeNode,
                       child: BlocListener<PortalBloc, PortalState>(
                         listener: (context, state) {
-                          if (state.isLoaded) {
+                          if (state.isLoaded &&
+                              (_uidController.text == null ||
+                                  (_uidController.text != null &&
+                                      _uidController.text.isEmpty))) {
                             _uidController.text = _portalBloc.state.uid;
                             _pswdController.text = _portalBloc.state.pswd;
                           }

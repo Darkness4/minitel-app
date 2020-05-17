@@ -38,9 +38,7 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
     try {
       await diagnosisRepository.diagnose();
       yield DiagnosisState.loading(diagnosisRepository.diagnosis);
-      await diagnosisRepository.diagnosis
-          .waitAll()
-          .timeout(const Duration(minutes: 1));
+      await diagnosisRepository.diagnosis.waitAll();
       yield DiagnosisState.loaded(diagnosisRepository.diagnosis);
     } on Exception catch (e) {
       yield DiagnosisState.error(null, error: e);

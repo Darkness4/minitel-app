@@ -38,6 +38,11 @@ void main() {
 
     group('Automated screenshot', () {
       test('Screenshot login', () async {
+        await driver.tap(find.byValueKey(Keys.uidLoginTextField));
+        await driver.enterText("marc.nguyen");
+        await driver.tap(find.byValueKey(Keys.pswdLoginTextField));
+        await driver.enterText("opste963");
+        await driver.tap(find.byValueKey(Keys.loginButton));
         await takeScreenshot(driver, ScreenshotsPaths.login);
       });
 
@@ -48,10 +53,10 @@ void main() {
 
       test('Screenshot sogo', () async {
         await driver.tap(find.byValueKey(Keys.sogo));
-        await Future<dynamic>.delayed(const Duration(seconds: 5));
+        await Future<dynamic>.delayed(const Duration(seconds: 30));
         await takeScreenshot(driver, ScreenshotsPaths.sogo);
         await driver.tap(find.pageBack());
-      });
+      }, timeout: const Timeout(Duration(minutes: 1)));
 
       test('Screenshot news', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
@@ -69,9 +74,9 @@ void main() {
         await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
         await driver.tap(find.byValueKey(Keys.agendaConnect));
         print("Trying to login");
-        await Future<dynamic>.delayed(const Duration(seconds: 5));
+        await Future<dynamic>.delayed(const Duration(seconds: 30));
         await takeScreenshot(driver, ScreenshotsPaths.agenda);
-      });
+      }, timeout: const Timeout(Duration(minutes: 1)));
 
       test('Screenshot reporting', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
@@ -96,8 +101,9 @@ void main() {
       test('Screenshot docs', () async {
         await driver.tap(find.byTooltip("Open navigation menu"));
         await driver.tap(find.byValueKey(Keys.docsRoute));
+        await Future<dynamic>.delayed(const Duration(seconds: 30));
         await takeScreenshot(driver, ScreenshotsPaths.docs);
-      });
+      }, timeout: const Timeout(Duration(minutes: 1)));
     });
   });
 }
