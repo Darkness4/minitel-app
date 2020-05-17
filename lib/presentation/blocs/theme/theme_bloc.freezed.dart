@@ -373,11 +373,11 @@ abstract class ThemeToAdaptive implements ThemeEvent {
 class _$ThemeStateTearOff {
   const _$ThemeStateTearOff();
 
-  _ThemeState call(
-      {@required ThemeData themeData, @required ThemeData themeDataDark}) {
+  _ThemeState call(ThemeData themeData, ThemeData darkThemeData, String value) {
     return _ThemeState(
-      themeData: themeData,
-      themeDataDark: themeDataDark,
+      themeData,
+      darkThemeData,
+      value,
     );
   }
 }
@@ -387,7 +387,8 @@ const $ThemeState = _$ThemeStateTearOff();
 
 mixin _$ThemeState {
   ThemeData get themeData;
-  ThemeData get themeDataDark;
+  ThemeData get darkThemeData;
+  String get value;
 
   $ThemeStateCopyWith<ThemeState> get copyWith;
 }
@@ -396,7 +397,7 @@ abstract class $ThemeStateCopyWith<$Res> {
   factory $ThemeStateCopyWith(
           ThemeState value, $Res Function(ThemeState) then) =
       _$ThemeStateCopyWithImpl<$Res>;
-  $Res call({ThemeData themeData, ThemeData themeDataDark});
+  $Res call({ThemeData themeData, ThemeData darkThemeData, String value});
 }
 
 class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
@@ -409,14 +410,16 @@ class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
   @override
   $Res call({
     Object themeData = freezed,
-    Object themeDataDark = freezed,
+    Object darkThemeData = freezed,
+    Object value = freezed,
   }) {
     return _then(_value.copyWith(
       themeData:
           themeData == freezed ? _value.themeData : themeData as ThemeData,
-      themeDataDark: themeDataDark == freezed
-          ? _value.themeDataDark
-          : themeDataDark as ThemeData,
+      darkThemeData: darkThemeData == freezed
+          ? _value.darkThemeData
+          : darkThemeData as ThemeData,
+      value: value == freezed ? _value.value : value as String,
     ));
   }
 }
@@ -426,7 +429,7 @@ abstract class _$ThemeStateCopyWith<$Res> implements $ThemeStateCopyWith<$Res> {
           _ThemeState value, $Res Function(_ThemeState) then) =
       __$ThemeStateCopyWithImpl<$Res>;
   @override
-  $Res call({ThemeData themeData, ThemeData themeDataDark});
+  $Res call({ThemeData themeData, ThemeData darkThemeData, String value});
 }
 
 class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
@@ -441,31 +444,36 @@ class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object themeData = freezed,
-    Object themeDataDark = freezed,
+    Object darkThemeData = freezed,
+    Object value = freezed,
   }) {
     return _then(_ThemeState(
-      themeData:
-          themeData == freezed ? _value.themeData : themeData as ThemeData,
-      themeDataDark: themeDataDark == freezed
-          ? _value.themeDataDark
-          : themeDataDark as ThemeData,
+      themeData == freezed ? _value.themeData : themeData as ThemeData,
+      darkThemeData == freezed
+          ? _value.darkThemeData
+          : darkThemeData as ThemeData,
+      value == freezed ? _value.value : value as String,
     ));
   }
 }
 
-class _$_ThemeState with DiagnosticableTreeMixin implements _ThemeState {
-  const _$_ThemeState({@required this.themeData, @required this.themeDataDark})
+class _$_ThemeState extends _ThemeState with DiagnosticableTreeMixin {
+  const _$_ThemeState(this.themeData, this.darkThemeData, this.value)
       : assert(themeData != null),
-        assert(themeDataDark != null);
+        assert(darkThemeData != null),
+        assert(value != null),
+        super._();
 
   @override
   final ThemeData themeData;
   @override
-  final ThemeData themeDataDark;
+  final ThemeData darkThemeData;
+  @override
+  final String value;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ThemeState(themeData: $themeData, themeDataDark: $themeDataDark)';
+    return 'ThemeState(themeData: $themeData, darkThemeData: $darkThemeData, value: $value)';
   }
 
   @override
@@ -474,7 +482,8 @@ class _$_ThemeState with DiagnosticableTreeMixin implements _ThemeState {
     properties
       ..add(DiagnosticsProperty('type', 'ThemeState'))
       ..add(DiagnosticsProperty('themeData', themeData))
-      ..add(DiagnosticsProperty('themeDataDark', themeDataDark));
+      ..add(DiagnosticsProperty('darkThemeData', darkThemeData))
+      ..add(DiagnosticsProperty('value', value));
   }
 
   @override
@@ -484,31 +493,37 @@ class _$_ThemeState with DiagnosticableTreeMixin implements _ThemeState {
             (identical(other.themeData, themeData) ||
                 const DeepCollectionEquality()
                     .equals(other.themeData, themeData)) &&
-            (identical(other.themeDataDark, themeDataDark) ||
+            (identical(other.darkThemeData, darkThemeData) ||
                 const DeepCollectionEquality()
-                    .equals(other.themeDataDark, themeDataDark)));
+                    .equals(other.darkThemeData, darkThemeData)) &&
+            (identical(other.value, value) ||
+                const DeepCollectionEquality().equals(other.value, value)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(themeData) ^
-      const DeepCollectionEquality().hash(themeDataDark);
+      const DeepCollectionEquality().hash(darkThemeData) ^
+      const DeepCollectionEquality().hash(value);
 
   @override
   _$ThemeStateCopyWith<_ThemeState> get copyWith =>
       __$ThemeStateCopyWithImpl<_ThemeState>(this, _$identity);
 }
 
-abstract class _ThemeState implements ThemeState {
+abstract class _ThemeState extends ThemeState {
+  const _ThemeState._() : super._();
   const factory _ThemeState(
-      {@required ThemeData themeData,
-      @required ThemeData themeDataDark}) = _$_ThemeState;
+          ThemeData themeData, ThemeData darkThemeData, String value) =
+      _$_ThemeState;
 
   @override
   ThemeData get themeData;
   @override
-  ThemeData get themeDataDark;
+  ThemeData get darkThemeData;
+  @override
+  String get value;
   @override
   _$ThemeStateCopyWith<_ThemeState> get copyWith;
 }

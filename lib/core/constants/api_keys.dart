@@ -16,8 +16,8 @@ import 'dart:convert';
 /// ```sh
 /// CI_WEBHOOK_KEY=${YOUR_API_KEY}
 /// CI_TWITTER_KEY=${YOUR_API_KEY_2}
-/// sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${CI_WEBHOOK_KEY}\"/g" ./lib/core/constants/api_keys.dart
-/// sed -i "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${CI_TWITTER_KEY}\"/g" ./lib/core/constants/api_keys.dart
+/// sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
+/// sed -i "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${{ secrets.CI_TWITTER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
 /// ```
 ///
 /// Please, see more in the .gitlab.yml file.

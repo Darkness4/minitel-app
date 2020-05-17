@@ -1,27 +1,27 @@
 part of 'theme_bloc.dart';
 
 @freezed
-abstract class ThemeState with _$ThemeState {
-  const factory ThemeState({
-    @required ThemeData themeData,
-    @required ThemeData themeDataDark,
-  }) = _ThemeState;
+abstract class ThemeState implements _$ThemeState {
+  const factory ThemeState(
+    ThemeData themeData,
+    ThemeData darkThemeData,
+    String value,
+  ) = _ThemeState;
+
+  const ThemeState._();
+
+  factory ThemeState.dark() {
+    return ThemeState(_themeDataDark, _themeDataDark, 'Dark');
+  }
+
+  factory ThemeState.light() {
+    return ThemeState(_themeData, _themeData, 'Light');
+  }
+
+  factory ThemeState.adaptive() {
+    return ThemeState(_themeData, _themeDataDark, 'Adaptive');
+  }
 }
-
-ThemeState ThemeDark = ThemeState(
-  themeData: _themeDataDark,
-  themeDataDark: _themeDataDark,
-);
-
-ThemeState ThemeLight = ThemeState(
-  themeData: _themeData,
-  themeDataDark: _themeData,
-);
-
-ThemeState ThemeAdaptive = ThemeState(
-  themeData: _themeData,
-  themeDataDark: _themeDataDark,
-);
 
 ThemeData get _themeDataDark => ThemeData(
       brightness: Brightness.dark,

@@ -29,19 +29,6 @@ void injectBloc() {
     ),
   );
 
-  final prefs = sl<SharedPreferences>();
-
-  sl.registerFactory<ThemeBloc>(() {
-    final String initialTheme = prefs.getString('theme');
-    if (initialTheme == "Dark") {
-      return ThemeBloc(initialState: ThemeDark);
-    } else if (initialTheme == "Light") {
-      return ThemeBloc(initialState: ThemeLight);
-    } else {
-      return ThemeBloc(initialState: ThemeAdaptive);
-    }
-  });
-
   sl.registerFactory<PortalBloc>(
     () => PortalBloc(
       loginSetingsRepository: sl<LoginSettingsRepository>(),

@@ -55,7 +55,6 @@ import 'package:minitel_toolbox/presentation/blocs/portal_login/portal_login_blo
 import 'package:minitel_toolbox/presentation/blocs/portal_status/portal_status_bloc.dart';
 import 'package:minitel_toolbox/presentation/blocs/report/report_bloc.dart';
 import 'package:minitel_toolbox/presentation/blocs/report_status/report_status_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/theme/theme_bloc.dart';
 import 'package:minitel_toolbox/presentation/blocs/twitter_feed/twitter_feed_bloc.dart';
 import 'package:minitel_toolbox/presentation/blocs/zabbix_hosts/zabbix_hosts_bloc.dart';
 import 'package:ntlm/ntlm.dart';

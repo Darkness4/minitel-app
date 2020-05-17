@@ -3,12 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
-import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/blocs/theme/theme_bloc.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/drawer_styles.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MainDrawer extends StatelessWidget {
   final String currentRoutePaths;
@@ -186,29 +184,23 @@ class MainDrawer extends StatelessWidget {
               children: <Widget>[
                 Radio(
                   value: "Dark",
-                  groupValue: state.toString(),
-                  onChanged: (String value) async {
-                    final prefs = sl<SharedPreferences>();
+                  groupValue: state.value,
+                  onChanged: (String _) async {
                     context.bloc<ThemeBloc>().add(const ThemeToDark());
-                    await prefs.setString('theme', value);
                   },
                 ),
                 Radio(
                   value: "Adaptive",
-                  groupValue: state.toString(),
-                  onChanged: (String value) async {
-                    final prefs = sl<SharedPreferences>();
+                  groupValue: state.value,
+                  onChanged: (String _) async {
                     context.bloc<ThemeBloc>().add(const ThemeToAdaptive());
-                    await prefs.setString('theme', value);
                   },
                 ),
                 Radio(
                   value: "Light",
-                  groupValue: state.toString(),
-                  onChanged: (String value) async {
-                    final prefs = sl<SharedPreferences>();
+                  groupValue: state.value,
+                  onChanged: (String _) async {
                     context.bloc<ThemeBloc>().add(const ThemeToLight());
-                    await prefs.setString('theme', value);
                   },
                 ),
               ],
