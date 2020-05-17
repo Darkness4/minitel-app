@@ -14,9 +14,7 @@ abstract class APStatus with _$APStatus {
     @required @nullable int users,
     @required @nullable int snmpAvailable,
   }) = _APStatus;
-}
 
-extension APStatusX on APStatus {
   static APStatus fromHost(ZabbixHost host) {
     // Data to fill
     String hostname;

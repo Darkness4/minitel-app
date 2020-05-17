@@ -275,9 +275,11 @@ class _$DiagnosisStateTearOff {
     );
   }
 
-  DiagnosisError error(Exception error) {
+  DiagnosisError error(@nullable Diagnosis diagnosis,
+      {@required Exception error}) {
     return DiagnosisError(
-      error,
+      diagnosis,
+      error: error,
     );
   }
 }
@@ -286,19 +288,21 @@ class _$DiagnosisStateTearOff {
 const $DiagnosisState = _$DiagnosisStateTearOff();
 
 mixin _$DiagnosisState {
+  Diagnosis get diagnosis;
+
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(Diagnosis diagnosis),
     @required Result loading(Diagnosis diagnosis),
     @required Result loaded(Diagnosis diagnosis),
-    @required Result error(Exception error),
+    @required Result error(@nullable Diagnosis diagnosis, Exception error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(Diagnosis diagnosis),
     Result loading(Diagnosis diagnosis),
     Result loaded(Diagnosis diagnosis),
-    Result error(Exception error),
+    Result error(@nullable Diagnosis diagnosis, Exception error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -316,12 +320,15 @@ mixin _$DiagnosisState {
     Result error(DiagnosisError value),
     @required Result orElse(),
   });
+
+  $DiagnosisStateCopyWith<DiagnosisState> get copyWith;
 }
 
 abstract class $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisStateCopyWith(
           DiagnosisState value, $Res Function(DiagnosisState) then) =
       _$DiagnosisStateCopyWithImpl<$Res>;
+  $Res call({Diagnosis diagnosis});
 }
 
 class _$DiagnosisStateCopyWithImpl<$Res>
@@ -331,12 +338,24 @@ class _$DiagnosisStateCopyWithImpl<$Res>
   final DiagnosisState _value;
   // ignore: unused_field
   final $Res Function(DiagnosisState) _then;
+
+  @override
+  $Res call({
+    Object diagnosis = freezed,
+  }) {
+    return _then(_value.copyWith(
+      diagnosis:
+          diagnosis == freezed ? _value.diagnosis : diagnosis as Diagnosis,
+    ));
+  }
 }
 
-abstract class $DiagnosisInitialCopyWith<$Res> {
+abstract class $DiagnosisInitialCopyWith<$Res>
+    implements $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisInitialCopyWith(
           DiagnosisInitial value, $Res Function(DiagnosisInitial) then) =
       _$DiagnosisInitialCopyWithImpl<$Res>;
+  @override
   $Res call({Diagnosis diagnosis});
 }
 
@@ -404,7 +423,7 @@ class _$DiagnosisInitial
     @required Result initial(Diagnosis diagnosis),
     @required Result loading(Diagnosis diagnosis),
     @required Result loaded(Diagnosis diagnosis),
-    @required Result error(Exception error),
+    @required Result error(@nullable Diagnosis diagnosis, Exception error),
   }) {
     assert(initial != null);
     assert(loading != null);
@@ -419,7 +438,7 @@ class _$DiagnosisInitial
     Result initial(Diagnosis diagnosis),
     Result loading(Diagnosis diagnosis),
     Result loaded(Diagnosis diagnosis),
-    Result error(Exception error),
+    Result error(@nullable Diagnosis diagnosis, Exception error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -464,14 +483,18 @@ class _$DiagnosisInitial
 abstract class DiagnosisInitial implements DiagnosisState {
   const factory DiagnosisInitial(Diagnosis diagnosis) = _$DiagnosisInitial;
 
+  @override
   Diagnosis get diagnosis;
+  @override
   $DiagnosisInitialCopyWith<DiagnosisInitial> get copyWith;
 }
 
-abstract class $DiagnosisLoadingCopyWith<$Res> {
+abstract class $DiagnosisLoadingCopyWith<$Res>
+    implements $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisLoadingCopyWith(
           DiagnosisLoading value, $Res Function(DiagnosisLoading) then) =
       _$DiagnosisLoadingCopyWithImpl<$Res>;
+  @override
   $Res call({Diagnosis diagnosis});
 }
 
@@ -539,7 +562,7 @@ class _$DiagnosisLoading
     @required Result initial(Diagnosis diagnosis),
     @required Result loading(Diagnosis diagnosis),
     @required Result loaded(Diagnosis diagnosis),
-    @required Result error(Exception error),
+    @required Result error(@nullable Diagnosis diagnosis, Exception error),
   }) {
     assert(initial != null);
     assert(loading != null);
@@ -554,7 +577,7 @@ class _$DiagnosisLoading
     Result initial(Diagnosis diagnosis),
     Result loading(Diagnosis diagnosis),
     Result loaded(Diagnosis diagnosis),
-    Result error(Exception error),
+    Result error(@nullable Diagnosis diagnosis, Exception error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -599,14 +622,18 @@ class _$DiagnosisLoading
 abstract class DiagnosisLoading implements DiagnosisState {
   const factory DiagnosisLoading(Diagnosis diagnosis) = _$DiagnosisLoading;
 
+  @override
   Diagnosis get diagnosis;
+  @override
   $DiagnosisLoadingCopyWith<DiagnosisLoading> get copyWith;
 }
 
-abstract class $DiagnosisLoadedCopyWith<$Res> {
+abstract class $DiagnosisLoadedCopyWith<$Res>
+    implements $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisLoadedCopyWith(
           DiagnosisLoaded value, $Res Function(DiagnosisLoaded) then) =
       _$DiagnosisLoadedCopyWithImpl<$Res>;
+  @override
   $Res call({Diagnosis diagnosis});
 }
 
@@ -674,7 +701,7 @@ class _$DiagnosisLoaded
     @required Result initial(Diagnosis diagnosis),
     @required Result loading(Diagnosis diagnosis),
     @required Result loaded(Diagnosis diagnosis),
-    @required Result error(Exception error),
+    @required Result error(@nullable Diagnosis diagnosis, Exception error),
   }) {
     assert(initial != null);
     assert(loading != null);
@@ -689,7 +716,7 @@ class _$DiagnosisLoaded
     Result initial(Diagnosis diagnosis),
     Result loading(Diagnosis diagnosis),
     Result loaded(Diagnosis diagnosis),
-    Result error(Exception error),
+    Result error(@nullable Diagnosis diagnosis, Exception error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -734,15 +761,19 @@ class _$DiagnosisLoaded
 abstract class DiagnosisLoaded implements DiagnosisState {
   const factory DiagnosisLoaded(Diagnosis diagnosis) = _$DiagnosisLoaded;
 
+  @override
   Diagnosis get diagnosis;
+  @override
   $DiagnosisLoadedCopyWith<DiagnosisLoaded> get copyWith;
 }
 
-abstract class $DiagnosisErrorCopyWith<$Res> {
+abstract class $DiagnosisErrorCopyWith<$Res>
+    implements $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisErrorCopyWith(
           DiagnosisError value, $Res Function(DiagnosisError) then) =
       _$DiagnosisErrorCopyWithImpl<$Res>;
-  $Res call({Exception error});
+  @override
+  $Res call({@nullable Diagnosis diagnosis, Exception error});
 }
 
 class _$DiagnosisErrorCopyWithImpl<$Res>
@@ -757,23 +788,29 @@ class _$DiagnosisErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object diagnosis = freezed,
     Object error = freezed,
   }) {
     return _then(DiagnosisError(
-      error == freezed ? _value.error : error as Exception,
+      diagnosis == freezed ? _value.diagnosis : diagnosis as Diagnosis,
+      error: error == freezed ? _value.error : error as Exception,
     ));
   }
 }
 
 class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
-  const _$DiagnosisError(this.error) : assert(error != null);
+  const _$DiagnosisError(@nullable this.diagnosis, {@required this.error})
+      : assert(error != null);
 
+  @override
+  @nullable
+  final Diagnosis diagnosis;
   @override
   final Exception error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DiagnosisState.error(error: $error)';
+    return 'DiagnosisState.error(diagnosis: $diagnosis, error: $error)';
   }
 
   @override
@@ -781,6 +818,7 @@ class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'DiagnosisState.error'))
+      ..add(DiagnosticsProperty('diagnosis', diagnosis))
       ..add(DiagnosticsProperty('error', error));
   }
 
@@ -788,13 +826,18 @@ class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is DiagnosisError &&
+            (identical(other.diagnosis, diagnosis) ||
+                const DeepCollectionEquality()
+                    .equals(other.diagnosis, diagnosis)) &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(diagnosis) ^
+      const DeepCollectionEquality().hash(error);
 
   @override
   $DiagnosisErrorCopyWith<DiagnosisError> get copyWith =>
@@ -806,13 +849,13 @@ class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
     @required Result initial(Diagnosis diagnosis),
     @required Result loading(Diagnosis diagnosis),
     @required Result loaded(Diagnosis diagnosis),
-    @required Result error(Exception error),
+    @required Result error(@nullable Diagnosis diagnosis, Exception error),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return error(this.error);
+    return error(diagnosis, this.error);
   }
 
   @override
@@ -821,12 +864,12 @@ class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
     Result initial(Diagnosis diagnosis),
     Result loading(Diagnosis diagnosis),
     Result loaded(Diagnosis diagnosis),
-    Result error(Exception error),
+    Result error(@nullable Diagnosis diagnosis, Exception error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (error != null) {
-      return error(this.error);
+      return error(diagnosis, this.error);
     }
     return orElse();
   }
@@ -864,8 +907,13 @@ class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
 }
 
 abstract class DiagnosisError implements DiagnosisState {
-  const factory DiagnosisError(Exception error) = _$DiagnosisError;
+  const factory DiagnosisError(@nullable Diagnosis diagnosis,
+      {@required Exception error}) = _$DiagnosisError;
 
+  @override
+  @nullable
+  Diagnosis get diagnosis;
   Exception get error;
+  @override
   $DiagnosisErrorCopyWith<DiagnosisError> get copyWith;
 }

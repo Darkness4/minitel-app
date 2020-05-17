@@ -68,7 +68,7 @@ class AgendaPage extends StatelessWidget {
                     backgroundColor: Colors.white,
                   );
                 } else if (state is AgendaError) {
-                  return ErrorAgendaWidget(state.error);
+                  return ErrorAgendaWidget(state.exception);
                 } else if (state is AgendaLoaded) {
                   return StreamBuilder<List<Widget>>(
                     stream: _listEventCards(context, state.events),

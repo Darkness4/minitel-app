@@ -43,7 +43,7 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
           .timeout(const Duration(minutes: 1));
       yield DiagnosisState.loaded(diagnosisRepository.diagnosis);
     } on Exception catch (e) {
-      yield DiagnosisState.error(e);
+      yield DiagnosisState.error(null, error: e);
     }
   }
 }

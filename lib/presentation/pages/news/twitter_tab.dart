@@ -52,7 +52,7 @@ class TwitterScreen extends StatelessWidget {
             } else if (state is TwitterFeedStateLoaded) {
               return FeedDisplay(feed: state.feed);
             } else if (state is TwitterFeedStateError) {
-              return ErrorDisplay(message: state.message);
+              return ErrorDisplay(message: state.error.toString());
             }
             return null;
           },

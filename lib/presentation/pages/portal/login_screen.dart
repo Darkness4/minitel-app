@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _portalStatusBloc = context.bloc<PortalStatusBloc>();
 
     // Remember credentials
-    _portalBloc.add(AutoLoginEvent());
+    _portalBloc.add(const AutoLogin());
 
     _uidController.addListener(_onUidChanged);
     _pswdController.addListener(_onPswdChanged);
@@ -151,13 +151,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _onPswdChanged() {
     _portalBloc.add(
-      PswdChanged(pswd: _pswdController.text),
+      PswdChanged(_pswdController.text),
     );
   }
 
   void _onUidChanged() {
     _portalBloc.add(
-      UidChanged(uid: _uidController.text),
+      UidChanged(_uidController.text),
     );
   }
 }
@@ -192,9 +192,7 @@ class UrlSelectorWidget extends StatelessWidget {
   }
 
   void _onSelectedUrlChanged(BuildContext context, String selectedUrl) {
-    context
-        .bloc<PortalBloc>()
-        .add(SelectedUrlChanged(selectedUrl: selectedUrl));
+    context.bloc<PortalBloc>().add(SelectedUrlChanged(selectedUrl));
   }
 }
 
@@ -230,9 +228,7 @@ class TimeSelectorWidget extends StatelessWidget {
   }
 
   void _onSelectedTimeChanged(BuildContext context, String selectedTime) {
-    context
-        .bloc<PortalBloc>()
-        .add(SelectedTimeChanged(selectedTime: selectedTime));
+    context.bloc<PortalBloc>().add(SelectedTimeChanged(selectedTime));
   }
 }
 
@@ -261,9 +257,9 @@ class RememberMeSelectorWidget extends StatelessWidget {
 
   void _onRememberMeChanged(BuildContext context, bool rememberMe) {
     if (!rememberMe) {
-      context.bloc<PortalBloc>().add(AutoLoginChanged(autoLogin: false));
+      context.bloc<PortalBloc>().add(const AutoLoginChanged(false));
     }
-    context.bloc<PortalBloc>().add(RememberMeChanged(rememberMe: rememberMe));
+    context.bloc<PortalBloc>().add(RememberMeChanged(rememberMe));
   }
 }
 
@@ -291,8 +287,8 @@ class AutoLoginSelectorWidget extends StatelessWidget {
 
   void _onAutoLoginChanged(BuildContext context, bool autoLogin) {
     if (autoLogin) {
-      context.bloc<PortalBloc>().add(RememberMeChanged(rememberMe: true));
+      context.bloc<PortalBloc>().add(const RememberMeChanged(true));
     }
-    context.bloc<PortalBloc>().add(AutoLoginChanged(autoLogin: autoLogin));
+    context.bloc<PortalBloc>().add(AutoLoginChanged(autoLogin));
   }
 }

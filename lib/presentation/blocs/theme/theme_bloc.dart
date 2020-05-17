@@ -22,43 +22,14 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ) async* {
     yield* event.when(
       toDark: () async* {
-        yield ThemeState(
-          themeData: themeDataDark,
-          themeDataDark: themeDataDark,
-        );
+        yield ThemeDark;
       },
       toLight: () async* {
-        yield ThemeState(
-          themeData: themeData,
-          themeDataDark: themeData,
-        );
+        yield ThemeLight;
       },
       toAdaptive: () async* {
-        yield ThemeState(
-          themeData: themeDataDark,
-          themeDataDark: themeDataDark,
-        );
+        yield ThemeAdaptive;
       },
     );
   }
-
-  static ThemeData themeDataDark = ThemeData(
-    brightness: Brightness.dark,
-    primarySwatch: MinitelColors.primaryColor,
-    bottomAppBarTheme: const BottomAppBarTheme(
-      color: Colors.green,
-    ),
-    textTheme: MinitelTextStyles.getTextTheme(Brightness.dark),
-    bottomAppBarColor: Colors.green,
-  );
-
-  static ThemeData themeData = ThemeData(
-    brightness: Brightness.light,
-    primarySwatch: MinitelColors.primaryColor,
-    bottomAppBarTheme: const BottomAppBarTheme(
-      color: Colors.green,
-    ),
-    textTheme: MinitelTextStyles.getTextTheme(Brightness.light),
-    bottomAppBarColor: Colors.green,
-  );
 }

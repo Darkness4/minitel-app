@@ -8,7 +8,7 @@ import 'package:minitel_toolbox/presentation/blocs/notification_settings/notific
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 
 class ErrorAgendaWidget extends StatefulWidget {
-  final dynamic error;
+  final Exception error;
 
   const ErrorAgendaWidget(this.error);
 

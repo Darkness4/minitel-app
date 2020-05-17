@@ -34,11 +34,11 @@ void injectBloc() {
   sl.registerFactory<ThemeBloc>(() {
     final String initialTheme = prefs.getString('theme');
     if (initialTheme == "Dark") {
-      return ThemeBloc(initialState: const ThemeDark());
+      return ThemeBloc(initialState: ThemeDark);
     } else if (initialTheme == "Light") {
-      return ThemeBloc(initialState: const ThemeLight());
+      return ThemeBloc(initialState: ThemeLight);
     } else {
-      return ThemeBloc(initialState: const ThemeAdaptive());
+      return ThemeBloc(initialState: ThemeAdaptive);
     }
   });
 

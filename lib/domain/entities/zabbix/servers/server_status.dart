@@ -10,9 +10,7 @@ abstract class ServerStatus with _$ServerStatus {
     @required @nullable double pingResponseTime,
     @required @nullable int icmpAvailable,
   }) = _ServerStatus;
-}
 
-extension ServerStatusX on ServerStatus {
   static ServerStatus fromHost(ZabbixHost host) {
     // Data to fill
     double pingResponseTime;
