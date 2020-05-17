@@ -2,35 +2,41 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/timezone.dart';
 
 void main() {
-  group('TimezoneDescription', () {
-    group('get props', () {
+  final tDaylight = TimezoneDescription(
+    dtstart: DateTime.parse("19710101T020000"),
+    rRule: "FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=3;BYDAY=-1SU",
+    tzName: "CEST",
+    tzOffsetFrom: "+0100",
+    tzOffsetTo: "+0200",
+  );
+
+  group('TimezoneDescriptionModel', () {
+    group('copyWithKeyValue', () {
       test(
-        'should return work with equals',
+        'should return a valid model',
         () async {
-          // arrange
-          final tDateTime = DateTime.now();
-          // ignore: prefer_const_constructors
-          final TimezoneDescription tTimezoneDescription = TimezoneDescription(
-            dtstart: tDateTime,
-            rRule: "rRule",
-            tzName: "tzName",
-            tzOffsetFrom: "tzOffsetFrom",
-            tzOffsetTo: "tzOffsetTo",
-          );
+          // act
+          final result = tDaylight.copyWithKeyValue("RRULE", "test");
           // assert
-          // ignore: prefer_const_constructors
-          final TimezoneDescription expectedTimezoneDescription =
-              TimezoneDescription(
-            dtstart: tDateTime,
-            rRule: "rRule",
-            tzName: "tzName",
-            tzOffsetFrom: "tzOffsetFrom",
-            tzOffsetTo: "tzOffsetTo",
+          final extectedResult = TimezoneDescription(
+            dtstart: DateTime.parse("19710101T020000"),
+            rRule: "test",
+            tzName: "CEST",
+            tzOffsetFrom: "+0100",
+            tzOffsetTo: "+0200",
           );
-          expect(
-            tTimezoneDescription,
-            equals(expectedTimezoneDescription),
-          );
+          expect(result, equals(extectedResult));
+        },
+      );
+
+      test(
+        'should return self if no change',
+        () async {
+          // act
+          final result =
+              tDaylight.copyWithKeyValue("KeyNotFound", "ValueIllegal");
+          // assert
+          expect(result, equals(tDaylight));
         },
       );
     });

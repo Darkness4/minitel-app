@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:meta/meta.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/models/twitter/feed_model.dart';
+import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 
 abstract class TwitterLocalDataSource {
   /// Save Feed to cache
-  Future<void> cacheFeed(FeedModel feedToCache);
+  Future<void> cacheAllPosts(List<Post> posts);
 
   /// Get last Feed
-  Future<FeedModel> fetchLastFeed();
+  Future<List<Post>> fetchAllPosts();
 }
 
 class TwitterLocalDataSourceImpl implements TwitterLocalDataSource {
@@ -19,17 +19,20 @@ class TwitterLocalDataSourceImpl implements TwitterLocalDataSource {
   const TwitterLocalDataSourceImpl({@required this.file});
 
   @override
-  Future<void> cacheFeed(FeedModel feedToCache) {
+  Future<void> cacheAllPosts(List<Post> posts) {
     return file.writeAsString(
-      json.encode(feedToCache.toJson()),
+      json.encode(posts.map((Post post) => post.toJson()).toList()),
     );
   }
 
   @override
-  Future<FeedModel> fetchLastFeed() async {
+  Future<List<Post>> fetchAllPosts() async {
     final String jsonString = file.readAsStringSync();
     if (jsonString != null && jsonString.isNotEmpty) {
-      return FeedModel.fromJson(json.decode(jsonString) as List<dynamic>);
+      return List<Map<String, dynamic>>.from(
+              json.decode(jsonString) as List<dynamic>)
+          .map((Map<String, dynamic> data) => Post.fromJson(data))
+          .toList();
     } else {
       throw CacheException();
     }

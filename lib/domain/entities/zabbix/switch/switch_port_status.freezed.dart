@@ -12,8 +12,7 @@ T _$identity<T>(T value) => value;
 class _$SwitchPortStatusTearOff {
   const _$SwitchPortStatusTearOff();
 
-  _SwitchPortStatus call(
-      {@required @nullable int speed, @required @nullable int operStatus}) {
+  _SwitchPortStatus call({int speed, int operStatus}) {
     return _SwitchPortStatus(
       speed: speed,
       operStatus: operStatus,
@@ -25,9 +24,7 @@ class _$SwitchPortStatusTearOff {
 const $SwitchPortStatus = _$SwitchPortStatusTearOff();
 
 mixin _$SwitchPortStatus {
-  @nullable
   int get speed;
-  @nullable
   int get operStatus;
 
   $SwitchPortStatusCopyWith<SwitchPortStatus> get copyWith;
@@ -37,7 +34,7 @@ abstract class $SwitchPortStatusCopyWith<$Res> {
   factory $SwitchPortStatusCopyWith(
           SwitchPortStatus value, $Res Function(SwitchPortStatus) then) =
       _$SwitchPortStatusCopyWithImpl<$Res>;
-  $Res call({@nullable int speed, @nullable int operStatus});
+  $Res call({int speed, int operStatus});
 }
 
 class _$SwitchPortStatusCopyWithImpl<$Res>
@@ -66,7 +63,7 @@ abstract class _$SwitchPortStatusCopyWith<$Res>
           _SwitchPortStatus value, $Res Function(_SwitchPortStatus) then) =
       __$SwitchPortStatusCopyWithImpl<$Res>;
   @override
-  $Res call({@nullable int speed, @nullable int operStatus});
+  $Res call({int speed, int operStatus});
 }
 
 class __$SwitchPortStatusCopyWithImpl<$Res>
@@ -92,14 +89,11 @@ class __$SwitchPortStatusCopyWithImpl<$Res>
 }
 
 class _$_SwitchPortStatus implements _SwitchPortStatus {
-  const _$_SwitchPortStatus(
-      {@required @nullable this.speed, @required @nullable this.operStatus});
+  const _$_SwitchPortStatus({this.speed, this.operStatus});
 
   @override
-  @nullable
   final int speed;
   @override
-  @nullable
   final int operStatus;
 
   @override
@@ -130,15 +124,12 @@ class _$_SwitchPortStatus implements _SwitchPortStatus {
 }
 
 abstract class _SwitchPortStatus implements SwitchPortStatus {
-  const factory _SwitchPortStatus(
-      {@required @nullable int speed,
-      @required @nullable int operStatus}) = _$_SwitchPortStatus;
+  const factory _SwitchPortStatus({int speed, int operStatus}) =
+      _$_SwitchPortStatus;
 
   @override
-  @nullable
   int get speed;
   @override
-  @nullable
   int get operStatus;
   @override
   _$SwitchPortStatusCopyWith<_SwitchPortStatus> get copyWith;

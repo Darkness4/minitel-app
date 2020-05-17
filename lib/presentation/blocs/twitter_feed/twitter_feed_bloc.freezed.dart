@@ -92,7 +92,7 @@ class _$TwitterFeedStateTearOff {
     return const TwitterFeedStateLoading();
   }
 
-  TwitterFeedStateLoaded loaded(Feed feed) {
+  TwitterFeedStateLoaded loaded(List<Post> feed) {
     return TwitterFeedStateLoaded(
       feed,
     );
@@ -113,14 +113,14 @@ mixin _$TwitterFeedState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(Feed feed),
+    @required Result loaded(List<Post> feed),
     @required Result error(Exception error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(Feed feed),
+    Result loaded(List<Post> feed),
     Result error(Exception error),
     @required Result orElse(),
   });
@@ -202,7 +202,7 @@ class _$TwitterFeedStateInitial
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(Feed feed),
+    @required Result loaded(List<Post> feed),
     @required Result error(Exception error),
   }) {
     assert(initial != null);
@@ -217,7 +217,7 @@ class _$TwitterFeedStateInitial
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(Feed feed),
+    Result loaded(List<Post> feed),
     Result error(Exception error),
     @required Result orElse(),
   }) {
@@ -310,7 +310,7 @@ class _$TwitterFeedStateLoading
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(Feed feed),
+    @required Result loaded(List<Post> feed),
     @required Result error(Exception error),
   }) {
     assert(initial != null);
@@ -325,7 +325,7 @@ class _$TwitterFeedStateLoading
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(Feed feed),
+    Result loaded(List<Post> feed),
     Result error(Exception error),
     @required Result orElse(),
   }) {
@@ -376,9 +376,7 @@ abstract class $TwitterFeedStateLoadedCopyWith<$Res> {
   factory $TwitterFeedStateLoadedCopyWith(TwitterFeedStateLoaded value,
           $Res Function(TwitterFeedStateLoaded) then) =
       _$TwitterFeedStateLoadedCopyWithImpl<$Res>;
-  $Res call({Feed feed});
-
-  $FeedCopyWith<$Res> get feed;
+  $Res call({List<Post> feed});
 }
 
 class _$TwitterFeedStateLoadedCopyWithImpl<$Res>
@@ -396,18 +394,8 @@ class _$TwitterFeedStateLoadedCopyWithImpl<$Res>
     Object feed = freezed,
   }) {
     return _then(TwitterFeedStateLoaded(
-      feed == freezed ? _value.feed : feed as Feed,
+      feed == freezed ? _value.feed : feed as List<Post>,
     ));
-  }
-
-  @override
-  $FeedCopyWith<$Res> get feed {
-    if (_value.feed == null) {
-      return null;
-    }
-    return $FeedCopyWith<$Res>(_value.feed, (value) {
-      return _then(_value.copyWith(feed: value));
-    });
   }
 }
 
@@ -417,7 +405,7 @@ class _$TwitterFeedStateLoaded
   const _$TwitterFeedStateLoaded(this.feed) : assert(feed != null);
 
   @override
-  final Feed feed;
+  final List<Post> feed;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -454,7 +442,7 @@ class _$TwitterFeedStateLoaded
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(Feed feed),
+    @required Result loaded(List<Post> feed),
     @required Result error(Exception error),
   }) {
     assert(initial != null);
@@ -469,7 +457,7 @@ class _$TwitterFeedStateLoaded
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(Feed feed),
+    Result loaded(List<Post> feed),
     Result error(Exception error),
     @required Result orElse(),
   }) {
@@ -513,9 +501,10 @@ class _$TwitterFeedStateLoaded
 }
 
 abstract class TwitterFeedStateLoaded implements TwitterFeedState {
-  const factory TwitterFeedStateLoaded(Feed feed) = _$TwitterFeedStateLoaded;
+  const factory TwitterFeedStateLoaded(List<Post> feed) =
+      _$TwitterFeedStateLoaded;
 
-  Feed get feed;
+  List<Post> get feed;
   $TwitterFeedStateLoadedCopyWith<TwitterFeedStateLoaded> get copyWith;
 }
 
@@ -589,7 +578,7 @@ class _$TwitterFeedStateError
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(Feed feed),
+    @required Result loaded(List<Post> feed),
     @required Result error(Exception error),
   }) {
     assert(initial != null);
@@ -604,7 +593,7 @@ class _$TwitterFeedStateError
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(Feed feed),
+    Result loaded(List<Post> feed),
     Result error(Exception error),
     @required Result orElse(),
   }) {

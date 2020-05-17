@@ -49,21 +49,4 @@ void main() {
       },
     );
   });
-
-  group('toString', () {
-    test(
-      'should return a valid String',
-      () async {
-        // act
-        final String result = tNotificationSettings.toString();
-        print(result);
-        // assert
-        expect(
-          result,
-          equals(
-              "NotificationSettings(${const Duration(minutes: 10)}, ${const Duration(days: 30)}, ${true})"),
-        );
-      },
-    );
-  });
 }

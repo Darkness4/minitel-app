@@ -56,6 +56,8 @@ abstract class $ParsedCalendarCopyWith<$Res> {
       @nullable String calscale,
       @nullable Timezone timezone,
       @nullable List<Event> events});
+
+  $TimezoneCopyWith<$Res> get timezone;
 }
 
 class _$ParsedCalendarCopyWithImpl<$Res>
@@ -82,6 +84,16 @@ class _$ParsedCalendarCopyWithImpl<$Res>
       events: events == freezed ? _value.events : events as List<Event>,
     ));
   }
+
+  @override
+  $TimezoneCopyWith<$Res> get timezone {
+    if (_value.timezone == null) {
+      return null;
+    }
+    return $TimezoneCopyWith<$Res>(_value.timezone, (value) {
+      return _then(_value.copyWith(timezone: value));
+    });
+  }
 }
 
 abstract class _$ParsedCalendarCopyWith<$Res>
@@ -96,6 +108,9 @@ abstract class _$ParsedCalendarCopyWith<$Res>
       @nullable String calscale,
       @nullable Timezone timezone,
       @nullable List<Event> events});
+
+  @override
+  $TimezoneCopyWith<$Res> get timezone;
 }
 
 class __$ParsedCalendarCopyWithImpl<$Res>

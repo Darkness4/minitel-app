@@ -17,6 +17,18 @@ abstract class Event with _$Event {
     @required @nullable String summary,
     @required @nullable DateTime dtstart,
   }) = _Event;
+
+  static Event fromMap(Map<String, dynamic> json) {
+    return Event(
+      dtend: DateTime.parse(json["DTEND"] as String),
+      uid: json["UID"] as String,
+      dtstamp: DateTime.parse(json["DTSTAMP"] as String),
+      location: json["LOCATION"] as String,
+      description: json["DESCRIPTION"] as String,
+      summary: json["SUMMARY"] as String,
+      dtstart: DateTime.parse(json["DTSTART"] as String),
+    );
+  }
 }
 
 extension EventUtils on Event {

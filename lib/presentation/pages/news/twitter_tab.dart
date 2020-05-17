@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:minitel_toolbox/domain/entities/twitter/feed.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/blocs/twitter_feed/twitter_feed_bloc.dart';
@@ -63,7 +62,7 @@ class TwitterScreen extends StatelessWidget {
 }
 
 class FeedDisplay extends StatelessWidget {
-  final Feed feed;
+  final List<Post> feed;
   const FeedDisplay({
     @required this.feed,
     Key key,
@@ -79,9 +78,9 @@ class FeedDisplay extends StatelessWidget {
           return ListView.builder(
             padding: const EdgeInsets.all(10.0),
             key: const Key(Keys.twitterList),
-            itemCount: feed.posts.length,
+            itemCount: feed.length,
             itemBuilder: (BuildContext context, int index) => TwitterCard(
-              post: feed.posts[index],
+              post: feed[index],
               picture: imageProfile,
               key: Key(Keys.twitterItem(index)),
             ),
@@ -92,7 +91,7 @@ class FeedDisplay extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               key: const Key(Keys.twitterList),
               children: <Widget>[
-                for (final Post post in feed.posts)
+                for (final Post post in feed)
                   TwitterCard(
                     post: post,
                     picture: imageProfile,
@@ -107,7 +106,7 @@ class FeedDisplay extends StatelessWidget {
 
   Image _imageProfile() {
     final Image imageProfile = Image.network(
-      feed.posts.first.profile_image_url_https.toString(),
+      feed.first.profile_image_url_https.toString(),
       fit: BoxFit.cover,
       height: 50,
       width: 50,

@@ -13,12 +13,12 @@ class _$LoginSettingsTearOff {
   const _$LoginSettingsTearOff();
 
   _LoginSettings call(
-      {@required @nullable bool rememberMe,
-      @required @nullable bool autoLogin,
-      @required @nullable String uid,
-      @required @nullable String selectedTime,
-      @required @nullable String selectedUrl,
-      @required @nullable String pswd}) {
+      {@nullable bool rememberMe = false,
+      @nullable bool autoLogin = false,
+      @nullable String uid = '',
+      @nullable String selectedTime = '4 hours',
+      @nullable String selectedUrl = MyIPAdresses.stormshieldIP,
+      @nullable String pswd = ''}) {
     return _LoginSettings(
       rememberMe: rememberMe,
       autoLogin: autoLogin,
@@ -146,28 +146,34 @@ class __$LoginSettingsCopyWithImpl<$Res>
 
 class _$_LoginSettings implements _LoginSettings {
   const _$_LoginSettings(
-      {@required @nullable this.rememberMe,
-      @required @nullable this.autoLogin,
-      @required @nullable this.uid,
-      @required @nullable this.selectedTime,
-      @required @nullable this.selectedUrl,
-      @required @nullable this.pswd});
+      {@nullable this.rememberMe = false,
+      @nullable this.autoLogin = false,
+      @nullable this.uid = '',
+      @nullable this.selectedTime = '4 hours',
+      @nullable this.selectedUrl = MyIPAdresses.stormshieldIP,
+      @nullable this.pswd = ''});
 
+  @JsonKey(defaultValue: false)
   @override
   @nullable
   final bool rememberMe;
+  @JsonKey(defaultValue: false)
   @override
   @nullable
   final bool autoLogin;
+  @JsonKey(defaultValue: '')
   @override
   @nullable
   final String uid;
+  @JsonKey(defaultValue: '4 hours')
   @override
   @nullable
   final String selectedTime;
+  @JsonKey(defaultValue: MyIPAdresses.stormshieldIP)
   @override
   @nullable
   final String selectedUrl;
+  @JsonKey(defaultValue: '')
   @override
   @nullable
   final String pswd;
@@ -216,12 +222,12 @@ class _$_LoginSettings implements _LoginSettings {
 
 abstract class _LoginSettings implements LoginSettings {
   const factory _LoginSettings(
-      {@required @nullable bool rememberMe,
-      @required @nullable bool autoLogin,
-      @required @nullable String uid,
-      @required @nullable String selectedTime,
-      @required @nullable String selectedUrl,
-      @required @nullable String pswd}) = _$_LoginSettings;
+      {@nullable bool rememberMe,
+      @nullable bool autoLogin,
+      @nullable String uid,
+      @nullable String selectedTime,
+      @nullable String selectedUrl,
+      @nullable String pswd}) = _$_LoginSettings;
 
   @override
   @nullable

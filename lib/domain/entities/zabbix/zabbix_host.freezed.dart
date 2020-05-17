@@ -8,6 +8,9 @@ part of 'zabbix_host.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+ZabbixHost _$ZabbixHostFromJson(Map<String, dynamic> json) {
+  return _ZabbixHost.fromJson(json);
+}
 
 class _$ZabbixHostTearOff {
   const _$ZabbixHostTearOff();
@@ -39,6 +42,7 @@ mixin _$ZabbixHost {
   @nullable
   List<ZabbixInterface> get interfaces;
 
+  Map<String, dynamic> toJson();
   $ZabbixHostCopyWith<ZabbixHost> get copyWith;
 }
 
@@ -117,12 +121,16 @@ class __$ZabbixHostCopyWithImpl<$Res> extends _$ZabbixHostCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
 class _$_ZabbixHost implements _ZabbixHost {
   const _$_ZabbixHost(
       {@required @nullable this.hostid,
       @required @nullable this.host,
       @required @nullable this.items,
       @required @nullable this.interfaces});
+
+  factory _$_ZabbixHost.fromJson(Map<String, dynamic> json) =>
+      _$_$_ZabbixHostFromJson(json);
 
   @override
   @nullable
@@ -168,6 +176,11 @@ class _$_ZabbixHost implements _ZabbixHost {
   @override
   _$ZabbixHostCopyWith<_ZabbixHost> get copyWith =>
       __$ZabbixHostCopyWithImpl<_ZabbixHost>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ZabbixHostToJson(this);
+  }
 }
 
 abstract class _ZabbixHost implements ZabbixHost {
@@ -176,6 +189,9 @@ abstract class _ZabbixHost implements ZabbixHost {
       @required @nullable String host,
       @required @nullable List<ZabbixItem> items,
       @required @nullable List<ZabbixInterface> interfaces}) = _$_ZabbixHost;
+
+  factory _ZabbixHost.fromJson(Map<String, dynamic> json) =
+      _$_ZabbixHost.fromJson;
 
   @override
   @nullable

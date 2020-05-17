@@ -1,9 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
+part 'user.g.dart';
 
 @freezed
 abstract class GithubUser with _$GithubUser {
+  @JsonSerializable(explicitToJson: true)
   const factory GithubUser({
     @required @nullable String login,
     @required @nullable int id,
@@ -37,4 +39,7 @@ abstract class GithubUser with _$GithubUser {
     @required @nullable DateTime created_at,
     @required @nullable DateTime updated_at,
   }) = _GithubUser;
+
+  factory GithubUser.fromJson(Map<String, dynamic> json) =>
+      _$GithubUserFromJson(json);
 }

@@ -7,19 +7,42 @@ part 'timezone.freezed.dart';
 @freezed
 abstract class Timezone with _$Timezone {
   const factory Timezone({
-    @required @nullable String tzid,
-    @required @nullable TimezoneDescription daylight,
-    @required @nullable TimezoneDescription standard,
+    String tzid,
+    TimezoneDescription daylight,
+    TimezoneDescription standard,
   }) = _Timezone;
 }
 
 @freezed
 abstract class TimezoneDescription with _$TimezoneDescription {
   const factory TimezoneDescription({
-    @required @nullable DateTime dtstart,
-    @required @nullable String tzOffsetTo,
-    @required @nullable String tzOffsetFrom,
-    @required @nullable String rRule,
-    @required @nullable String tzName,
+    DateTime dtstart,
+    String tzOffsetTo,
+    String tzOffsetFrom,
+    String rRule,
+    String tzName,
   }) = _TimezoneDescription;
+}
+
+extension TimezoneDescriptionX on TimezoneDescription {
+  TimezoneDescription copyWithKeyValue(String key, String value) {
+    switch (key) {
+      case "DTSTART":
+        return this.copyWith(dtstart: DateTime.parse(value));
+        break;
+      case "TZOFFSETTO":
+        return this.copyWith(tzOffsetTo: value);
+        break;
+      case "TZOFFSETFROM":
+        return this.copyWith(tzOffsetFrom: value);
+        break;
+      case "RRULE":
+        return this.copyWith(rRule: value);
+        break;
+      case "TZNAME":
+        return this.copyWith(tzName: value);
+        break;
+    }
+    return this;
+  }
 }

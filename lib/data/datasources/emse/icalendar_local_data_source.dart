@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/models/icalendar/parsed_calendar_model.dart';
+import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 
 abstract class ICalendarLocalDataSource {
   /// Save iCalendar to cache
   Future<void> cacheICalendar(Stream<String> data);
 
   /// Get a parsed calendar from cache
-  Future<ParsedCalendarModel> getParsedCalendar();
+  Future<ParsedCalendar> getParsedCalendar();
 }
 
 class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
@@ -28,7 +28,7 @@ class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
   }
 
   @override
-  Future<ParsedCalendarModel> getParsedCalendar() async {
+  Future<ParsedCalendar> getParsedCalendar() async {
     // Use this line of code to inject a template.ics
     // await file
     //     .writeAsString(await rootBundle.loadString(AssetsPaths.TemplateICS));
@@ -37,7 +37,7 @@ class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
     if (file.existsSync()) {
       final Stream<String> calendarStream =
           file.openRead().transform(utf8.decoder);
-      return ParsedCalendarModel.parse(calendarStream);
+      return ParsedCalendar.parse(calendarStream);
     } else {
       throw CacheException("No calendar in cache");
     }

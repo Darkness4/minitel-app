@@ -8,7 +8,7 @@ abstract class SwitchPortStatus with _$SwitchPortStatus {
   static const String operStatusOid = '1.3.6.1.2.1.2.2.1.8';
 
   const factory SwitchPortStatus({
-    @required @nullable int speed,
-    @required @nullable int operStatus,
+    int speed,
+    int operStatus,
   }) = _SwitchPortStatus;
 }

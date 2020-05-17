@@ -8,17 +8,22 @@ part of 'zabbix_item.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+ZabbixItem _$ZabbixItemFromJson(Map<String, dynamic> json) {
+  return _ZabbixItem.fromJson(json);
+}
 
 class _$ZabbixItemTearOff {
   const _$ZabbixItemTearOff();
 
   _ZabbixItem call(
-      {@required @nullable String type,
-      @required @nullable int value_type,
-      @required @nullable String name,
-      @required @nullable String lastvalue,
-      @required @nullable String units,
-      @required @nullable String snmp_oid}) {
+      {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
+          String type,
+      @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
+          int value_type,
+      String name,
+      String lastvalue,
+      String units,
+      String snmp_oid}) {
     return _ZabbixItem(
       type: type,
       value_type: value_type,
@@ -34,19 +39,16 @@ class _$ZabbixItemTearOff {
 const $ZabbixItem = _$ZabbixItemTearOff();
 
 mixin _$ZabbixItem {
-  @nullable
+  @JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
   String get type;
-  @nullable
+  @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
   int get value_type;
-  @nullable
   String get name;
-  @nullable
   String get lastvalue;
-  @nullable
   String get units;
-  @nullable
   String get snmp_oid;
 
+  Map<String, dynamic> toJson();
   $ZabbixItemCopyWith<ZabbixItem> get copyWith;
 }
 
@@ -55,12 +57,14 @@ abstract class $ZabbixItemCopyWith<$Res> {
           ZabbixItem value, $Res Function(ZabbixItem) then) =
       _$ZabbixItemCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String type,
-      @nullable int value_type,
-      @nullable String name,
-      @nullable String lastvalue,
-      @nullable String units,
-      @nullable String snmp_oid});
+      {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
+          String type,
+      @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
+          int value_type,
+      String name,
+      String lastvalue,
+      String units,
+      String snmp_oid});
 }
 
 class _$ZabbixItemCopyWithImpl<$Res> implements $ZabbixItemCopyWith<$Res> {
@@ -96,12 +100,14 @@ abstract class _$ZabbixItemCopyWith<$Res> implements $ZabbixItemCopyWith<$Res> {
       __$ZabbixItemCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String type,
-      @nullable int value_type,
-      @nullable String name,
-      @nullable String lastvalue,
-      @nullable String units,
-      @nullable String snmp_oid});
+      {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
+          String type,
+      @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
+          int value_type,
+      String name,
+      String lastvalue,
+      String units,
+      String snmp_oid});
 }
 
 class __$ZabbixItemCopyWithImpl<$Res> extends _$ZabbixItemCopyWithImpl<$Res>
@@ -133,32 +139,34 @@ class __$ZabbixItemCopyWithImpl<$Res> extends _$ZabbixItemCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
 class _$_ZabbixItem implements _ZabbixItem {
   const _$_ZabbixItem(
-      {@required @nullable this.type,
-      @required @nullable this.value_type,
-      @required @nullable this.name,
-      @required @nullable this.lastvalue,
-      @required @nullable this.units,
-      @required @nullable this.snmp_oid});
+      {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
+          this.type,
+      @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
+          this.value_type,
+      this.name,
+      this.lastvalue,
+      this.units,
+      this.snmp_oid});
+
+  factory _$_ZabbixItem.fromJson(Map<String, dynamic> json) =>
+      _$_$_ZabbixItemFromJson(json);
 
   @override
-  @nullable
+  @JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
   final String type;
   @override
-  @nullable
+  @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
   final int value_type;
   @override
-  @nullable
   final String name;
   @override
-  @nullable
   final String lastvalue;
   @override
-  @nullable
   final String units;
   @override
-  @nullable
   final String snmp_oid;
 
   @override
@@ -200,34 +208,40 @@ class _$_ZabbixItem implements _ZabbixItem {
   @override
   _$ZabbixItemCopyWith<_ZabbixItem> get copyWith =>
       __$ZabbixItemCopyWithImpl<_ZabbixItem>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ZabbixItemToJson(this);
+  }
 }
 
 abstract class _ZabbixItem implements ZabbixItem {
   const factory _ZabbixItem(
-      {@required @nullable String type,
-      @required @nullable int value_type,
-      @required @nullable String name,
-      @required @nullable String lastvalue,
-      @required @nullable String units,
-      @required @nullable String snmp_oid}) = _$_ZabbixItem;
+      {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
+          String type,
+      @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
+          int value_type,
+      String name,
+      String lastvalue,
+      String units,
+      String snmp_oid}) = _$_ZabbixItem;
+
+  factory _ZabbixItem.fromJson(Map<String, dynamic> json) =
+      _$_ZabbixItem.fromJson;
 
   @override
-  @nullable
+  @JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
   String get type;
   @override
-  @nullable
+  @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
   int get value_type;
   @override
-  @nullable
   String get name;
   @override
-  @nullable
   String get lastvalue;
   @override
-  @nullable
   String get units;
   @override
-  @nullable
   String get snmp_oid;
   @override
   _$ZabbixItemCopyWith<_ZabbixItem> get copyWith;

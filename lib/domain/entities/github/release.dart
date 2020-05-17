@@ -3,9 +3,11 @@ import 'package:minitel_toolbox/domain/entities/github/asset.dart';
 import 'package:minitel_toolbox/domain/entities/github/user.dart';
 
 part 'release.freezed.dart';
+part 'release.g.dart';
 
 @freezed
 abstract class GithubRelease with _$GithubRelease {
+  @JsonSerializable(explicitToJson: true)
   const factory GithubRelease({
     @required @nullable String url,
     @required @nullable String html_url,
@@ -26,4 +28,7 @@ abstract class GithubRelease with _$GithubRelease {
     @required @nullable GithubUser author,
     @required @nullable List<GithubAsset> assets,
   }) = _GithubRelease;
+
+  factory GithubRelease.fromJson(Map<String, dynamic> json) =>
+      _$GithubReleaseFromJson(json);
 }

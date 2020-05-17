@@ -7,7 +7,7 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/twitter/feed_model.dart';
+import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -43,9 +43,11 @@ void main() {
   }
 
   group('fetchFeed', () {
-    final tFeedModel = FeedModel.fromJson(json.decode(fixture(
-            'datasources/twitter_remote_data_source/feed_response.json'))
-        as List<dynamic>);
+    final tPosts = (json.decode(fixture(
+                'datasources/twitter_remote_data_source/feed_response.json'))
+            as List<dynamic>)
+        .map((dynamic data) => Post.fromJson(data as Map<String, dynamic>))
+        .toList();
 
     test(
       "should perform a GET request",
@@ -53,7 +55,7 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        await dataSource.fetchFeed();
+        await dataSource.fetchAllPosts();
         // assert
         verify(mockHttpClient.get(
           argThat(startsWith(
@@ -71,9 +73,9 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        final result = await dataSource.fetchFeed();
+        final result = await dataSource.fetchAllPosts();
         // assert
-        expect(result, equals(tFeedModel));
+        expect(result, equals(tPosts));
       },
     );
 
@@ -83,7 +85,7 @@ void main() {
         // arrange
         setUpMockHttpClientFailure404();
         // act
-        final call = dataSource.fetchFeed;
+        final call = dataSource.fetchAllPosts;
         // assert
         expect(call, throwsA(isA<ServerException>()));
       },

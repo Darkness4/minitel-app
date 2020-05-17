@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_local_data_source.dart';
-import 'package:minitel_toolbox/data/models/twitter/feed_model.dart';
+import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -20,10 +20,12 @@ void main() {
     );
   });
 
-  group('fetchLastFeed', () {
-    final tFeedModel = FeedModel.fromJson(json.decode(fixture(
-            'datasources/twitter_remote_data_source/feed_response.json'))
-        as List<dynamic>);
+  group('fetchAllPosts', () {
+    final tPosts = (json.decode(fixture(
+                'datasources/twitter_remote_data_source/feed_response.json'))
+            as List<dynamic>)
+        .map((dynamic data) => Post.fromJson(data as Map<String, dynamic>))
+        .toList();
     test(
       'should return FeedModel from File when there is one in the cache',
       () async {
@@ -32,10 +34,10 @@ void main() {
         when<String>(mockFile.readAsStringSync()).thenReturn(fixture(
             'datasources/twitter_remote_data_source/feed_response.json'));
         // act
-        final result = await dataSource.fetchLastFeed();
+        final result = await dataSource.fetchAllPosts();
         // assert
         verify(mockFile.readAsStringSync());
-        expect(result, equals(tFeedModel));
+        expect(result, equals(tPosts));
       },
     );
 
@@ -46,7 +48,7 @@ void main() {
         when(mockFile.readAsStringSync()).thenReturn(null);
         when(mockFile.existsSync()).thenReturn(false);
         // act
-        final call = dataSource.fetchLastFeed;
+        final call = dataSource.fetchAllPosts;
         // assert
         expect(() => call(), throwsA(isA<CacheException>()));
       },
@@ -54,17 +56,20 @@ void main() {
   });
 
   group('cacheFeed', () {
-    final tFeedModel = FeedModel.fromJson(json.decode(fixture(
-            'datasources/twitter_remote_data_source/feed_response.json'))
-        as List<dynamic>);
+    final tPosts = (json.decode(fixture(
+                'datasources/twitter_remote_data_source/feed_response.json'))
+            as List<dynamic>)
+        .map((dynamic data) => Post.fromJson(data as Map<String, dynamic>))
+        .toList();
 
     test(
       'should call File to cache the data',
       () async {
         // act
-        await dataSource.cacheFeed(tFeedModel);
+        await dataSource.cacheAllPosts(tPosts);
         // assert
-        final expectedJsonString = json.encode(tFeedModel);
+        final expectedJsonString =
+            json.encode(tPosts.map((Post post) => post.toJson()).toList());
         verify(mockFile.writeAsString(
           expectedJsonString,
         ));

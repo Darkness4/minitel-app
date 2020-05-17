@@ -6,8 +6,8 @@ part 'notifications.freezed.dart';
 @freezed
 abstract class NotificationSettings with _$NotificationSettings {
   const factory NotificationSettings({
-    @required @nullable Duration early,
-    @required @nullable Duration range,
-    @required @nullable bool enabled,
+    @Default(Duration(minutes: 10)) @nullable Duration early,
+    @Default(Duration(days: 30)) @nullable Duration range,
+    @Default(true) @nullable bool enabled,
   }) = _NotificationSettings;
 }

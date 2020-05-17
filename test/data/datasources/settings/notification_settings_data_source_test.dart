@@ -3,7 +3,7 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/settings/notification_settings_data_source.dart';
-import 'package:minitel_toolbox/data/models/notifications_model.dart';
+import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,7 +26,7 @@ void main() {
         const tEarly = 1;
         const tRange = 2;
         const tEnabled = true;
-        const tNotificationSettingsModel = NotificationSettingsModel(
+        const tNotificationSettingsModel = NotificationSettings(
           early: Duration(minutes: tEarly),
           range: Duration(days: tRange),
           enabled: tEnabled,
@@ -67,7 +67,7 @@ void main() {
         const tEarly = 1;
         const tRange = 2;
         const tEnabled = true;
-        const tNotificationSettingsModel = NotificationSettingsModel(
+        const tNotificationSettingsModel = NotificationSettings(
           early: Duration(minutes: tEarly),
           range: Duration(days: tRange),
           enabled: tEnabled,

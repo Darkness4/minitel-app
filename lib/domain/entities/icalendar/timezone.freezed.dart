@@ -13,9 +13,9 @@ class _$TimezoneTearOff {
   const _$TimezoneTearOff();
 
   _Timezone call(
-      {@required @nullable String tzid,
-      @required @nullable TimezoneDescription daylight,
-      @required @nullable TimezoneDescription standard}) {
+      {String tzid,
+      TimezoneDescription daylight,
+      TimezoneDescription standard}) {
     return _Timezone(
       tzid: tzid,
       daylight: daylight,
@@ -28,11 +28,8 @@ class _$TimezoneTearOff {
 const $Timezone = _$TimezoneTearOff();
 
 mixin _$Timezone {
-  @nullable
   String get tzid;
-  @nullable
   TimezoneDescription get daylight;
-  @nullable
   TimezoneDescription get standard;
 
   $TimezoneCopyWith<Timezone> get copyWith;
@@ -42,9 +39,12 @@ abstract class $TimezoneCopyWith<$Res> {
   factory $TimezoneCopyWith(Timezone value, $Res Function(Timezone) then) =
       _$TimezoneCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String tzid,
-      @nullable TimezoneDescription daylight,
-      @nullable TimezoneDescription standard});
+      {String tzid,
+      TimezoneDescription daylight,
+      TimezoneDescription standard});
+
+  $TimezoneDescriptionCopyWith<$Res> get daylight;
+  $TimezoneDescriptionCopyWith<$Res> get standard;
 }
 
 class _$TimezoneCopyWithImpl<$Res> implements $TimezoneCopyWith<$Res> {
@@ -70,6 +70,26 @@ class _$TimezoneCopyWithImpl<$Res> implements $TimezoneCopyWith<$Res> {
           : standard as TimezoneDescription,
     ));
   }
+
+  @override
+  $TimezoneDescriptionCopyWith<$Res> get daylight {
+    if (_value.daylight == null) {
+      return null;
+    }
+    return $TimezoneDescriptionCopyWith<$Res>(_value.daylight, (value) {
+      return _then(_value.copyWith(daylight: value));
+    });
+  }
+
+  @override
+  $TimezoneDescriptionCopyWith<$Res> get standard {
+    if (_value.standard == null) {
+      return null;
+    }
+    return $TimezoneDescriptionCopyWith<$Res>(_value.standard, (value) {
+      return _then(_value.copyWith(standard: value));
+    });
+  }
 }
 
 abstract class _$TimezoneCopyWith<$Res> implements $TimezoneCopyWith<$Res> {
@@ -77,9 +97,14 @@ abstract class _$TimezoneCopyWith<$Res> implements $TimezoneCopyWith<$Res> {
       __$TimezoneCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String tzid,
-      @nullable TimezoneDescription daylight,
-      @nullable TimezoneDescription standard});
+      {String tzid,
+      TimezoneDescription daylight,
+      TimezoneDescription standard});
+
+  @override
+  $TimezoneDescriptionCopyWith<$Res> get daylight;
+  @override
+  $TimezoneDescriptionCopyWith<$Res> get standard;
 }
 
 class __$TimezoneCopyWithImpl<$Res> extends _$TimezoneCopyWithImpl<$Res>
@@ -109,19 +134,13 @@ class __$TimezoneCopyWithImpl<$Res> extends _$TimezoneCopyWithImpl<$Res>
 }
 
 class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
-  const _$_Timezone(
-      {@required @nullable this.tzid,
-      @required @nullable this.daylight,
-      @required @nullable this.standard});
+  const _$_Timezone({this.tzid, this.daylight, this.standard});
 
   @override
-  @nullable
   final String tzid;
   @override
-  @nullable
   final TimezoneDescription daylight;
   @override
-  @nullable
   final TimezoneDescription standard;
 
   @override
@@ -167,18 +186,15 @@ class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
 
 abstract class _Timezone implements Timezone {
   const factory _Timezone(
-      {@required @nullable String tzid,
-      @required @nullable TimezoneDescription daylight,
-      @required @nullable TimezoneDescription standard}) = _$_Timezone;
+      {String tzid,
+      TimezoneDescription daylight,
+      TimezoneDescription standard}) = _$_Timezone;
 
   @override
-  @nullable
   String get tzid;
   @override
-  @nullable
   TimezoneDescription get daylight;
   @override
-  @nullable
   TimezoneDescription get standard;
   @override
   _$TimezoneCopyWith<_Timezone> get copyWith;
@@ -188,11 +204,11 @@ class _$TimezoneDescriptionTearOff {
   const _$TimezoneDescriptionTearOff();
 
   _TimezoneDescription call(
-      {@required @nullable DateTime dtstart,
-      @required @nullable String tzOffsetTo,
-      @required @nullable String tzOffsetFrom,
-      @required @nullable String rRule,
-      @required @nullable String tzName}) {
+      {DateTime dtstart,
+      String tzOffsetTo,
+      String tzOffsetFrom,
+      String rRule,
+      String tzName}) {
     return _TimezoneDescription(
       dtstart: dtstart,
       tzOffsetTo: tzOffsetTo,
@@ -207,15 +223,10 @@ class _$TimezoneDescriptionTearOff {
 const $TimezoneDescription = _$TimezoneDescriptionTearOff();
 
 mixin _$TimezoneDescription {
-  @nullable
   DateTime get dtstart;
-  @nullable
   String get tzOffsetTo;
-  @nullable
   String get tzOffsetFrom;
-  @nullable
   String get rRule;
-  @nullable
   String get tzName;
 
   $TimezoneDescriptionCopyWith<TimezoneDescription> get copyWith;
@@ -226,11 +237,11 @@ abstract class $TimezoneDescriptionCopyWith<$Res> {
           TimezoneDescription value, $Res Function(TimezoneDescription) then) =
       _$TimezoneDescriptionCopyWithImpl<$Res>;
   $Res call(
-      {@nullable DateTime dtstart,
-      @nullable String tzOffsetTo,
-      @nullable String tzOffsetFrom,
-      @nullable String rRule,
-      @nullable String tzName});
+      {DateTime dtstart,
+      String tzOffsetTo,
+      String tzOffsetFrom,
+      String rRule,
+      String tzName});
 }
 
 class _$TimezoneDescriptionCopyWithImpl<$Res>
@@ -269,11 +280,11 @@ abstract class _$TimezoneDescriptionCopyWith<$Res>
       __$TimezoneDescriptionCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable DateTime dtstart,
-      @nullable String tzOffsetTo,
-      @nullable String tzOffsetFrom,
-      @nullable String rRule,
-      @nullable String tzName});
+      {DateTime dtstart,
+      String tzOffsetTo,
+      String tzOffsetFrom,
+      String rRule,
+      String tzName});
 }
 
 class __$TimezoneDescriptionCopyWithImpl<$Res>
@@ -311,26 +322,21 @@ class _$_TimezoneDescription
     with DiagnosticableTreeMixin
     implements _TimezoneDescription {
   const _$_TimezoneDescription(
-      {@required @nullable this.dtstart,
-      @required @nullable this.tzOffsetTo,
-      @required @nullable this.tzOffsetFrom,
-      @required @nullable this.rRule,
-      @required @nullable this.tzName});
+      {this.dtstart,
+      this.tzOffsetTo,
+      this.tzOffsetFrom,
+      this.rRule,
+      this.tzName});
 
   @override
-  @nullable
   final DateTime dtstart;
   @override
-  @nullable
   final String tzOffsetTo;
   @override
-  @nullable
   final String tzOffsetFrom;
   @override
-  @nullable
   final String rRule;
   @override
-  @nullable
   final String tzName;
 
   @override
@@ -386,26 +392,21 @@ class _$_TimezoneDescription
 
 abstract class _TimezoneDescription implements TimezoneDescription {
   const factory _TimezoneDescription(
-      {@required @nullable DateTime dtstart,
-      @required @nullable String tzOffsetTo,
-      @required @nullable String tzOffsetFrom,
-      @required @nullable String rRule,
-      @required @nullable String tzName}) = _$_TimezoneDescription;
+      {DateTime dtstart,
+      String tzOffsetTo,
+      String tzOffsetFrom,
+      String rRule,
+      String tzName}) = _$_TimezoneDescription;
 
   @override
-  @nullable
   DateTime get dtstart;
   @override
-  @nullable
   String get tzOffsetTo;
   @override
-  @nullable
   String get tzOffsetFrom;
   @override
-  @nullable
   String get rRule;
   @override
-  @nullable
   String get tzName;
   @override
   _$TimezoneDescriptionCopyWith<_TimezoneDescription> get copyWith;

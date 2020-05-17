@@ -13,9 +13,9 @@ class _$NotificationSettingsTearOff {
   const _$NotificationSettingsTearOff();
 
   _NotificationSettings call(
-      {@required @nullable Duration early,
-      @required @nullable Duration range,
-      @required @nullable bool enabled}) {
+      {@nullable Duration early = const Duration(minutes: 10),
+      @nullable Duration range = const Duration(days: 30),
+      @nullable bool enabled = true}) {
     return _NotificationSettings(
       early: early,
       range: range,
@@ -108,16 +108,19 @@ class __$NotificationSettingsCopyWithImpl<$Res>
 
 class _$_NotificationSettings implements _NotificationSettings {
   const _$_NotificationSettings(
-      {@required @nullable this.early,
-      @required @nullable this.range,
-      @required @nullable this.enabled});
+      {@nullable this.early = const Duration(minutes: 10),
+      @nullable this.range = const Duration(days: 30),
+      @nullable this.enabled = true});
 
+  @JsonKey(defaultValue: const Duration(minutes: 10))
   @override
   @nullable
   final Duration early;
+  @JsonKey(defaultValue: const Duration(days: 30))
   @override
   @nullable
   final Duration range;
+  @JsonKey(defaultValue: true)
   @override
   @nullable
   final bool enabled;
@@ -154,9 +157,9 @@ class _$_NotificationSettings implements _NotificationSettings {
 
 abstract class _NotificationSettings implements NotificationSettings {
   const factory _NotificationSettings(
-      {@required @nullable Duration early,
-      @required @nullable Duration range,
-      @required @nullable bool enabled}) = _$_NotificationSettings;
+      {@nullable Duration early,
+      @nullable Duration range,
+      @nullable bool enabled}) = _$_NotificationSettings;
 
   @override
   @nullable

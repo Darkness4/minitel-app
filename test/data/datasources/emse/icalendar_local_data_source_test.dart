@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_source.dart';
-import 'package:minitel_toolbox/data/models/icalendar/parsed_calendar_model.dart';
+import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -37,8 +37,8 @@ void main() {
         // assert
         final expectedICalendar = Stream.value(utf8.encode(fixture(
             'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics')));
-        final expectedParsedCalendarModel = ParsedCalendarModel.parse(
-            expectedICalendar.transform(utf8.decoder));
+        final expectedParsedCalendarModel =
+            ParsedCalendar.parse(expectedICalendar.transform(utf8.decoder));
         verify(mockFile.openRead());
         expect(result, equals(await expectedParsedCalendarModel));
       },

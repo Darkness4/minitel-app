@@ -3,6 +3,7 @@ import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_interface.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 
 part 'zabbix_host.freezed.dart';
+part 'zabbix_host.g.dart';
 
 /// A host in Zabbix is a networked entity that you wish to monitor.
 ///
@@ -17,4 +18,7 @@ abstract class ZabbixHost with _$ZabbixHost {
     @required @nullable List<ZabbixItem> items,
     @required @nullable List<ZabbixInterface> interfaces,
   }) = _ZabbixHost;
+
+  factory ZabbixHost.fromJson(Map<String, dynamic> json) =>
+      _$ZabbixHostFromJson(json);
 }

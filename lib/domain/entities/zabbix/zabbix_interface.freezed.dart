@@ -8,6 +8,9 @@ part of 'zabbix_interface.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+ZabbixInterface _$ZabbixInterfaceFromJson(Map<String, dynamic> json) {
+  return _ZabbixInterface.fromJson(json);
+}
 
 class _$ZabbixInterfaceTearOff {
   const _$ZabbixInterfaceTearOff();
@@ -26,6 +29,7 @@ mixin _$ZabbixInterface {
   @nullable
   String get ip;
 
+  Map<String, dynamic> toJson();
   $ZabbixInterfaceCopyWith<ZabbixInterface> get copyWith;
 }
 
@@ -83,8 +87,12 @@ class __$ZabbixInterfaceCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
 class _$_ZabbixInterface implements _ZabbixInterface {
   const _$_ZabbixInterface({@required @nullable this.ip});
+
+  factory _$_ZabbixInterface.fromJson(Map<String, dynamic> json) =>
+      _$_$_ZabbixInterfaceFromJson(json);
 
   @override
   @nullable
@@ -110,11 +118,19 @@ class _$_ZabbixInterface implements _ZabbixInterface {
   @override
   _$ZabbixInterfaceCopyWith<_ZabbixInterface> get copyWith =>
       __$ZabbixInterfaceCopyWithImpl<_ZabbixInterface>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ZabbixInterfaceToJson(this);
+  }
 }
 
 abstract class _ZabbixInterface implements ZabbixInterface {
   const factory _ZabbixInterface({@required @nullable String ip}) =
       _$_ZabbixInterface;
+
+  factory _ZabbixInterface.fromJson(Map<String, dynamic> json) =
+      _$_ZabbixInterface.fromJson;
 
   @override
   @nullable

@@ -2,9 +2,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/github/user.dart';
 
 part 'asset.freezed.dart';
+part 'asset.g.dart';
 
 @freezed
 abstract class GithubAsset with _$GithubAsset {
+  @JsonSerializable(explicitToJson: true)
   const factory GithubAsset({
     @required @nullable String url,
     @required @nullable String browser_download_url,
@@ -20,4 +22,7 @@ abstract class GithubAsset with _$GithubAsset {
     @required @nullable DateTime updated_at,
     @required @nullable GithubUser uploader,
   }) = _GithubAsset;
+
+  factory GithubAsset.fromJson(Map<String, dynamic> json) =>
+      _$GithubAssetFromJson(json);
 }

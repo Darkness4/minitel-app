@@ -4,23 +4,33 @@ import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_local_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_remote_data_source.dart';
-import 'package:minitel_toolbox/data/models/twitter/feed_model.dart';
-import 'package:minitel_toolbox/data/repositories/feed_repository_impl.dart';
-import 'package:minitel_toolbox/domain/repositories/feed_repository.dart';
+import 'package:minitel_toolbox/data/repositories/post_repository_impl.dart';
+import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
+import 'package:minitel_toolbox/domain/repositories/post_repository.dart';
 import 'package:mockito/mockito.dart';
 
 void main() {
-  FeedRepository repository;
+  PostRepository repository;
   MockRemoteDataSource mockRemoteDataSource;
   MockNetworkInfo mockNetworkInfo;
   MockLocalDataSource mockLocalDataSource;
-  const tFeed = FeedModel(posts: []);
+  const tPosts = <Post>[
+    Post(
+      text: "text",
+      id_str: "id_str",
+      user_name: "user_name",
+      screen_name: "screen_name",
+      profile_image_url_https: null,
+      url: null,
+      created_at: null,
+    ),
+  ];
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
     mockLocalDataSource = MockLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
-    repository = FeedRepositoryImpl(
+    repository = PostRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
@@ -49,17 +59,15 @@ void main() {
     });
   }
 
-  group('get', () {
+  group('fetchAll', () {
     test(
       'should check if the device is online',
       () async {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
-        when(mockRemoteDataSource.fetchFeed()).thenAnswer((_) async => null);
-        when(mockLocalDataSource.cacheFeed(any)).thenAnswer((_) async => null);
         // act
-        await repository.get();
+        await repository.fetchAll();
         // assert
         verify(mockNetworkInfo.result);
       },
@@ -70,15 +78,14 @@ void main() {
         'should return remote data when the call to remote data source is successful',
         () async {
           // arrange
-          when(mockRemoteDataSource.fetchFeed()).thenAnswer((_) async => tFeed);
-          when(mockLocalDataSource.cacheFeed(any))
-              .thenAnswer((_) async => null);
+          when(mockRemoteDataSource.fetchAllPosts())
+              .thenAnswer((_) async => tPosts);
           // act
-          final result = await repository.get();
+          final result = await repository.fetchAll();
           // assert
-          verify(mockRemoteDataSource.fetchFeed());
+          verify(mockRemoteDataSource.fetchAllPosts());
 
-          expect(result, equals(tFeed));
+          expect(result, equals(tPosts));
         },
       );
 
@@ -86,13 +93,12 @@ void main() {
         'should cache the data locally when the call to remote data source is successful',
         () async {
           // arrange
-          when(mockRemoteDataSource.fetchFeed()).thenAnswer((_) async => tFeed);
-          when(mockLocalDataSource.cacheFeed(any))
-              .thenAnswer((_) async => null);
+          when(mockRemoteDataSource.fetchAllPosts())
+              .thenAnswer((_) async => tPosts);
           // act
-          await repository.get();
+          await repository.fetchAll();
           // assert
-          verify(mockLocalDataSource.cacheFeed(argThat(equals(tFeed))));
+          verify(mockLocalDataSource.cacheAllPosts(argThat(equals(tPosts))));
         },
       );
 
@@ -100,13 +106,13 @@ void main() {
         'should return server failure when the call to remote data source is unsuccessful',
         () async {
           // arrange
-          when(mockRemoteDataSource.fetchFeed())
+          when(mockRemoteDataSource.fetchAllPosts())
               .thenAnswer((_) async => throw ServerException());
           // act
-          final call = repository.get;
+          final call = repository.fetchAll;
           // assert
           expect(
-            call(),
+            call,
             throwsA(isInstanceOf<ServerException>()),
           );
         },
@@ -118,14 +124,14 @@ void main() {
         'should return last locally cached data when the cached data is present',
         () async {
           // arrange
-          when(mockLocalDataSource.fetchLastFeed())
-              .thenAnswer((_) async => tFeed);
+          when(mockLocalDataSource.fetchAllPosts())
+              .thenAnswer((_) async => tPosts);
           // act
-          final result = await repository.get();
+          final result = await repository.fetchAll();
           // assert
           verifyZeroInteractions(mockRemoteDataSource);
-          verify(mockLocalDataSource.fetchLastFeed());
-          expect(result, equals(tFeed));
+          verify(mockLocalDataSource.fetchAllPosts());
+          expect(result, equals(tPosts));
         },
       );
 
@@ -133,13 +139,13 @@ void main() {
         'should return CacheFailure when there is no cached data present',
         () async {
           // arrange
-          when(mockLocalDataSource.fetchLastFeed())
+          when(mockLocalDataSource.fetchAllPosts())
               .thenAnswer((_) async => throw CacheException());
           // act
-          final call = repository.get;
+          final call = repository.fetchAll;
           // assert
           expect(
-            call(),
+            call,
             throwsA(isInstanceOf<CacheException>()),
           );
         },

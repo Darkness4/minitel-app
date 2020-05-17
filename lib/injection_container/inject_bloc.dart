@@ -15,7 +15,7 @@ void injectBloc() {
   );
   sl.registerFactory<TwitterFeedBloc>(
     () => TwitterFeedBloc(
-      repository: sl<FeedRepository>(),
+      repository: sl<PostRepository>(),
     ),
   );
   sl.registerFactory<GithubReleasesBloc>(

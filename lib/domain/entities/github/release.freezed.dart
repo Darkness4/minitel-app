@@ -8,6 +8,9 @@ part of 'release.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+GithubRelease _$GithubReleaseFromJson(Map<String, dynamic> json) {
+  return _GithubRelease.fromJson(json);
+}
 
 class _$GithubReleaseTearOff {
   const _$GithubReleaseTearOff();
@@ -95,6 +98,7 @@ mixin _$GithubRelease {
   @nullable
   List<GithubAsset> get assets;
 
+  Map<String, dynamic> toJson();
   $GithubReleaseCopyWith<GithubRelease> get copyWith;
 }
 
@@ -121,6 +125,8 @@ abstract class $GithubReleaseCopyWith<$Res> {
       @nullable DateTime published_at,
       @nullable GithubUser author,
       @nullable List<GithubAsset> assets});
+
+  $GithubUserCopyWith<$Res> get author;
 }
 
 class _$GithubReleaseCopyWithImpl<$Res>
@@ -183,6 +189,16 @@ class _$GithubReleaseCopyWithImpl<$Res>
       assets: assets == freezed ? _value.assets : assets as List<GithubAsset>,
     ));
   }
+
+  @override
+  $GithubUserCopyWith<$Res> get author {
+    if (_value.author == null) {
+      return null;
+    }
+    return $GithubUserCopyWith<$Res>(_value.author, (value) {
+      return _then(_value.copyWith(author: value));
+    });
+  }
 }
 
 abstract class _$GithubReleaseCopyWith<$Res>
@@ -210,6 +226,9 @@ abstract class _$GithubReleaseCopyWith<$Res>
       @nullable DateTime published_at,
       @nullable GithubUser author,
       @nullable List<GithubAsset> assets});
+
+  @override
+  $GithubUserCopyWith<$Res> get author;
 }
 
 class __$GithubReleaseCopyWithImpl<$Res>
@@ -276,6 +295,7 @@ class __$GithubReleaseCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable(explicitToJson: true)
 class _$_GithubRelease implements _GithubRelease {
   const _$_GithubRelease(
       {@required @nullable this.url,
@@ -296,6 +316,9 @@ class _$_GithubRelease implements _GithubRelease {
       @required @nullable this.published_at,
       @required @nullable this.author,
       @required @nullable this.assets});
+
+  factory _$_GithubRelease.fromJson(Map<String, dynamic> json) =>
+      _$_$_GithubReleaseFromJson(json);
 
   @override
   @nullable
@@ -435,6 +458,11 @@ class _$_GithubRelease implements _GithubRelease {
   @override
   _$GithubReleaseCopyWith<_GithubRelease> get copyWith =>
       __$GithubReleaseCopyWithImpl<_GithubRelease>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_GithubReleaseToJson(this);
+  }
 }
 
 abstract class _GithubRelease implements GithubRelease {
@@ -457,6 +485,9 @@ abstract class _GithubRelease implements GithubRelease {
       @required @nullable DateTime published_at,
       @required @nullable GithubUser author,
       @required @nullable List<GithubAsset> assets}) = _$_GithubRelease;
+
+  factory _GithubRelease.fromJson(Map<String, dynamic> json) =
+      _$_GithubRelease.fromJson;
 
   @override
   @nullable

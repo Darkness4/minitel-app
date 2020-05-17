@@ -8,6 +8,9 @@ part of 'user.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+GithubUser _$GithubUserFromJson(Map<String, dynamic> json) {
+  return _GithubUser.fromJson(json);
+}
 
 class _$GithubUserTearOff {
   const _$GithubUserTearOff();
@@ -147,6 +150,7 @@ mixin _$GithubUser {
   @nullable
   DateTime get updated_at;
 
+  Map<String, dynamic> toJson();
   $GithubUserCopyWith<GithubUser> get copyWith;
 }
 
@@ -421,6 +425,7 @@ class __$GithubUserCopyWithImpl<$Res> extends _$GithubUserCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable(explicitToJson: true)
 class _$_GithubUser implements _GithubUser {
   const _$_GithubUser(
       {@required @nullable this.login,
@@ -454,6 +459,9 @@ class _$_GithubUser implements _GithubUser {
       @required @nullable this.following,
       @required @nullable this.created_at,
       @required @nullable this.updated_at});
+
+  factory _$_GithubUser.fromJson(Map<String, dynamic> json) =>
+      _$_$_GithubUserFromJson(json);
 
   @override
   @nullable
@@ -672,6 +680,11 @@ class _$_GithubUser implements _GithubUser {
   @override
   _$GithubUserCopyWith<_GithubUser> get copyWith =>
       __$GithubUserCopyWithImpl<_GithubUser>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_GithubUserToJson(this);
+  }
 }
 
 abstract class _GithubUser implements GithubUser {
@@ -707,6 +720,9 @@ abstract class _GithubUser implements GithubUser {
       @required @nullable int following,
       @required @nullable DateTime created_at,
       @required @nullable DateTime updated_at}) = _$_GithubUser;
+
+  factory _GithubUser.fromJson(Map<String, dynamic> json) =
+      _$_GithubUser.fromJson;
 
   @override
   @nullable

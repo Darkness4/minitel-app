@@ -8,6 +8,9 @@ part of 'asset.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+GithubAsset _$GithubAssetFromJson(Map<String, dynamic> json) {
+  return _GithubAsset.fromJson(json);
+}
 
 class _$GithubAssetTearOff {
   const _$GithubAssetTearOff();
@@ -75,6 +78,7 @@ mixin _$GithubAsset {
   @nullable
   GithubUser get uploader;
 
+  Map<String, dynamic> toJson();
   $GithubAssetCopyWith<GithubAsset> get copyWith;
 }
 
@@ -96,6 +100,8 @@ abstract class $GithubAssetCopyWith<$Res> {
       @nullable DateTime created_at,
       @nullable DateTime updated_at,
       @nullable GithubUser uploader});
+
+  $GithubUserCopyWith<$Res> get uploader;
 }
 
 class _$GithubAssetCopyWithImpl<$Res> implements $GithubAssetCopyWith<$Res> {
@@ -145,6 +151,16 @@ class _$GithubAssetCopyWithImpl<$Res> implements $GithubAssetCopyWith<$Res> {
       uploader: uploader == freezed ? _value.uploader : uploader as GithubUser,
     ));
   }
+
+  @override
+  $GithubUserCopyWith<$Res> get uploader {
+    if (_value.uploader == null) {
+      return null;
+    }
+    return $GithubUserCopyWith<$Res>(_value.uploader, (value) {
+      return _then(_value.copyWith(uploader: value));
+    });
+  }
 }
 
 abstract class _$GithubAssetCopyWith<$Res>
@@ -167,6 +183,9 @@ abstract class _$GithubAssetCopyWith<$Res>
       @nullable DateTime created_at,
       @nullable DateTime updated_at,
       @nullable GithubUser uploader});
+
+  @override
+  $GithubUserCopyWith<$Res> get uploader;
 }
 
 class __$GithubAssetCopyWithImpl<$Res> extends _$GithubAssetCopyWithImpl<$Res>
@@ -220,6 +239,7 @@ class __$GithubAssetCopyWithImpl<$Res> extends _$GithubAssetCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable(explicitToJson: true)
 class _$_GithubAsset implements _GithubAsset {
   const _$_GithubAsset(
       {@required @nullable this.url,
@@ -235,6 +255,9 @@ class _$_GithubAsset implements _GithubAsset {
       @required @nullable this.created_at,
       @required @nullable this.updated_at,
       @required @nullable this.uploader});
+
+  factory _$_GithubAsset.fromJson(Map<String, dynamic> json) =>
+      _$_$_GithubAssetFromJson(json);
 
   @override
   @nullable
@@ -340,6 +363,11 @@ class _$_GithubAsset implements _GithubAsset {
   @override
   _$GithubAssetCopyWith<_GithubAsset> get copyWith =>
       __$GithubAssetCopyWithImpl<_GithubAsset>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_GithubAssetToJson(this);
+  }
 }
 
 abstract class _GithubAsset implements GithubAsset {
@@ -357,6 +385,9 @@ abstract class _GithubAsset implements GithubAsset {
       @required @nullable DateTime created_at,
       @required @nullable DateTime updated_at,
       @required @nullable GithubUser uploader}) = _$_GithubAsset;
+
+  factory _GithubAsset.fromJson(Map<String, dynamic> json) =
+      _$_GithubAsset.fromJson;
 
   @override
   @nullable
