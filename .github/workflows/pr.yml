@@ -6,7 +6,7 @@ on:
       - '!master'
       - '!develop'
 
-name: Test, Build and Release APK and AAB for Features
+name: PR Workflow
 jobs:
   unit-tests:
     name: Unit tests
