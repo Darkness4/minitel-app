@@ -82,14 +82,13 @@ void main() {
       test('Screenshot diagnosis', () async {
         await driver.tap(find.byValueKey(Keys.diagnosisTab));
         await driver.tap(find.byValueKey(Keys.reportingFAB));
-        try {
-          await driver.waitFor(
-            find.byValueKey(Keys.reportingFABDone),
-            timeout: const Duration(minutes: 2),
-          );
-        } on TimeoutException catch (e) {
-          print(e);
-        }
+        await driver
+            .waitFor(
+          find.byValueKey(Keys.reportingFABDone),
+        )
+            .timeout(const Duration(minutes: 2), onTimeout: () {
+          print("find.byValueKey(Keys.reportingFABDone) timed out.");
+        });
 
         await takeScreenshot(driver, ScreenshotsPaths.diagnosis);
       }, timeout: const Timeout(Duration(minutes: 3)));
