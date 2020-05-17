@@ -27,7 +27,8 @@ class GithubRemoteDataSourceImpl implements GithubRemoteDataSource {
           .map((Map<String, dynamic> data) => GithubRelease.fromJson(data))
           .toList();
     } else {
-      throw ServerException('Failed to load Releases : ${response.statusCode}');
+      throw ServerException(
+          'Failed to load Releases : ${response.statusCode} ${response.reasonPhrase}\n${response.body}');
     }
   }
 }

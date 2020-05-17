@@ -20,7 +20,8 @@ class ICalendarRemoteDataSourceImpl implements ICalendarRemoteDataSource {
       if (response.statusCode == 200) {
         yield* response.stream.toStringStream();
       } else {
-        throw ServerException("Cannot fetch ICalendar: ${response.statusCode}");
+        throw ServerException(
+            "Cannot fetch ICalendar: ${response.statusCode} ${response.reasonPhrase}\n${response.stream.join()}");
       }
     } on ServerException {
       rethrow;

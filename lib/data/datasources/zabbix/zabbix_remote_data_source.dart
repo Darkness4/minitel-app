@@ -62,7 +62,8 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
             .toList();
         return output;
       } else {
-        throw ServerException('Failed to load User : ${response.statusCode}');
+        throw ServerException(
+            'Failed to load User : ${response.statusCode} ${response.reasonPhrase}\n${response.body}');
       }
     } on SocketException catch (e) {
       if (e.toString().contains('timed out')) {

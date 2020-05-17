@@ -65,8 +65,9 @@ jobs:
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
           echo "storeFile=keystore.jks" >> android/key.properties
-          sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
-          sed -i "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${{ secrets.CI_TWITTER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i '.original' -e "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i '.original' -e "s/_consumerKey = \"ZXhlbXBsZQ==\"/_consumerKey = \"${{ secrets.CI_CONSUMER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i '.original' -e "s/_consumerSecret = \"ZXhlbXBsZQ==\"/_consumerSecret = \"${{ secrets.CI_CONSUMER_SECRET }}\"/g" ./lib/core/constants/api_keys.dart
       - name: run tests
         timeout-minutes: 30
         uses: reactivecircus/android-emulator-runner@v2
@@ -106,7 +107,8 @@ jobs:
           echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
           echo "storeFile=keystore.jks" >> android/key.properties
           sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
-          sed -i "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${{ secrets.CI_TWITTER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i "s/_consumerKey = \"ZXhlbXBsZQ==\"/_consumerKey = \"${{ secrets.CI_CONSUMER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i "s/_consumerSecret = \"ZXhlbXBsZQ==\"/_consumerSecret = \"${{ secrets.CI_CONSUMER_SECRET }}\"/g" ./lib/core/constants/api_keys.dart
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
       - name: Rename outputs
@@ -145,7 +147,8 @@ jobs:
           echo "keyAlias=${{ secrets.ALIAS }}" >> android/key.properties
           echo "storeFile=keystore.jks" >> android/key.properties
           sed -i "s/_webhook = \"ZXhlbXBsZQ==\"/_webhook = \"${{ secrets.CI_WEBHOOK_KEY}}\"/g" ./lib/core/constants/api_keys.dart
-          sed -i "s/_twitterApi = \"ZXhlbXBsZQ==\"/_twitterApi = \"${{ secrets.CI_TWITTER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i "s/_consumerKey = \"ZXhlbXBsZQ==\"/_consumerKey = \"${{ secrets.CI_CONSUMER_KEY }}\"/g" ./lib/core/constants/api_keys.dart
+          sed -i "s/_consumerSecret = \"ZXhlbXBsZQ==\"/_consumerSecret = \"${{ secrets.CI_CONSUMER_SECRET }}\"/g" ./lib/core/constants/api_keys.dart
       - run: flutter pub get
       - run: flutter build appbundle --release
       - name: Move and renamed outputs

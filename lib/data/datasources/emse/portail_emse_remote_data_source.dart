@@ -33,7 +33,7 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
 
       if (response.statusCode != 200) {
         throw ServerException(
-            "HTTP Status Code : ${response.statusCode} ${response.reasonPhrase}");
+            "HTTP Status Code : ${response.statusCode} ${response.reasonPhrase}\n${response.body} ${response.reasonPhrase}");
       }
 
       final String lt = RegExp(r'name="lt" value="([^"]*)"')
