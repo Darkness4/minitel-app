@@ -22,7 +22,7 @@ class PortalLoc {
   AppListLoc get apps => AppListLoc(localeName);
 
   String get authTime => Intl.message(
-        "Durée d\'authentification ",
+        "Durée d'authentification ",
         name: 'PortalLoc_authTime',
         locale: localeName,
       );
@@ -73,19 +73,19 @@ class PortalLoc {
       );
 
   String statusInHM(int hours, int minutes) => Intl.message(
-        "${hours} heures and ${minutes} minutes restantes",
+        "$hours heures and $minutes minutes restantes",
         name: 'PortalLoc_statusInHM',
         args: <Object>[hours, minutes],
         locale: localeName,
       );
   String statusInMinutes(int minutes) => Intl.message(
-        "${minutes} minutes restantes",
+        "$minutes minutes restantes",
         name: 'PortalLoc_statusInMinutes',
         args: <Object>[minutes],
         locale: localeName,
       );
   String statusInSeconds(int seconds) => Intl.message(
-        "${seconds} secondes restantes",
+        "$seconds secondes restantes",
         name: 'PortalLoc_statusInSeconds',
         args: <Object>[seconds],
         locale: localeName,

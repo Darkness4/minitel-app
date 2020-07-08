@@ -28,10 +28,8 @@ class PortalLoginBloc extends Bloc<PortalLoginEvent, PortalLoginState> {
   })  : assert(stormshieldRemoteDataSource != null),
         assert(imprimanteRemoteDataSource != null),
         assert(portailEMSERemoteDataSource != null),
-        assert(iCalendarRepository != null);
-
-  @override
-  PortalLoginState get initialState => PortalLoginState.empty();
+        assert(iCalendarRepository != null),
+        super(PortalLoginState.empty());
 
   @override
   Stream<PortalLoginState> mapEventToState(

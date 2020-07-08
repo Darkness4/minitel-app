@@ -14,11 +14,8 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
   final DiagnosisRepository diagnosisRepository;
 
   DiagnosisBloc({@required this.diagnosisRepository})
-      : assert(diagnosisRepository != null);
-
-  @override
-  DiagnosisState get initialState =>
-      DiagnosisState.initial(diagnosisRepository.diagnosis);
+      : assert(diagnosisRepository != null),
+        super(DiagnosisState.initial(diagnosisRepository.diagnosis));
 
   @override
   Stream<DiagnosisState> mapEventToState(

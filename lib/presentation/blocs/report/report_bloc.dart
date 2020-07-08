@@ -16,10 +16,8 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   final SlackRemoteDataSource slackRemoteDataSource;
 
   ReportBloc({@required this.slackRemoteDataSource})
-      : assert(slackRemoteDataSource != null);
-
-  @override
-  ReportState get initialState => const ReportState.initial();
+      : assert(slackRemoteDataSource != null),
+        super(const ReportState.initial());
 
   @override
   Stream<ReportState> mapEventToState(

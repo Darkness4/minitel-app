@@ -15,10 +15,8 @@ class ZabbixHostsBloc extends Bloc<ZabbixHostsEvent, ZabbixHostsState> {
 
   ZabbixHostsBloc({
     @required this.repository,
-  }) : assert(repository != null);
-
-  @override
-  ZabbixHostsState get initialState => const ZabbixHostsStateInitial();
+  })  : assert(repository != null),
+        super(const ZabbixHostsStateInitial());
 
   @override
   Stream<ZabbixHostsState> mapEventToState(

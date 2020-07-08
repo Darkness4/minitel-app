@@ -23,10 +23,9 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
   @override
   Future<List<Post>> fetchAllPosts() async {
     token ??= await getBearerToken();
-    print("TOKEN $token");
     final response = await client.get(
       "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361",
-      headers: {HttpHeaders.authorizationHeader: "Bearer ${token}"},
+      headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
     );
 
     if (response.statusCode == 200) {
@@ -42,12 +41,12 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
 
   @override
   Future<String> getBearerToken() async {
+    final authorization = base64.encode(
+        utf8.encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}'));
     final response = await client.post(
       "https://api.twitter.com/oauth2/token",
       headers: {
-        HttpHeaders.authorizationHeader: 'Basic ' +
-            base64.encode(utf8
-                .encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}')),
+        HttpHeaders.authorizationHeader: 'Basic $authorization',
       },
       body: {'grant_type': 'client_credentials'},
     );

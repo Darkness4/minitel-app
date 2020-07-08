@@ -24,7 +24,6 @@ Future<void> injectExternal() async {
     'Notification channel for the Minitel App',
     importance: Importance.Max,
     priority: Priority.High,
-    enableVibration: true,
   );
   const _iOSPlatformChannelSpecifics = IOSNotificationDetails();
 

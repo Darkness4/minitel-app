@@ -35,6 +35,28 @@ mixin _$PortalLoginEvent {
   String get selectedUrl;
   String get selectedTime;
 
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required
+        Result login(
+            String uid, String pswd, String selectedUrl, String selectedTime),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result login(
+        String uid, String pswd, String selectedUrl, String selectedTime),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result login(LoginEvent value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result login(LoginEvent value),
+    @required Result orElse(),
+  });
+
   $PortalLoginEventCopyWith<PortalLoginEvent> get copyWith;
 }
 
@@ -172,6 +194,53 @@ class _$LoginEvent with DiagnosticableTreeMixin implements LoginEvent {
   @override
   $LoginEventCopyWith<LoginEvent> get copyWith =>
       _$LoginEventCopyWithImpl<LoginEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required
+        Result login(
+            String uid, String pswd, String selectedUrl, String selectedTime),
+  }) {
+    assert(login != null);
+    return login(uid, pswd, selectedUrl, selectedTime);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result login(
+        String uid, String pswd, String selectedUrl, String selectedTime),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (login != null) {
+      return login(uid, pswd, selectedUrl, selectedTime);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result login(LoginEvent value),
+  }) {
+    assert(login != null);
+    return login(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result login(LoginEvent value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (login != null) {
+      return login(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class LoginEvent implements PortalLoginEvent {

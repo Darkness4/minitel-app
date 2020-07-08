@@ -21,7 +21,8 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
   final InternetAddressManager internetAddressManager;
   final StormshieldRemoteDataSource stormshieldRemoteDataSource;
   final Connectivity connectivity;
-  final String _argsPing = "-c 4 -w 5 -W 5";
+
+  static const String _argsPing = "-c 4 -w 5 -W 5";
 
   const DiagnosisDataSourceImpl({
     @required this.diagnosis,

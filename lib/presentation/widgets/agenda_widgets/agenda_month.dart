@@ -35,7 +35,7 @@ class MonthPage extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.fromLTRB(5, 5, 5, 0),
       color: Theme.of(context).brightness == Brightness.light
-          ? MinitelColors.MonthColorPalette[_month]
+          ? MinitelColors.monthColorPalette[_month]
           : Theme.of(context).cardColor,
       elevation: 4,
       child: Scrollbar(

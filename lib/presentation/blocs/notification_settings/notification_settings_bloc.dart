@@ -16,11 +16,8 @@ class NotificationSettingsBloc
 
   NotificationSettingsBloc({
     @required this.repository,
-  }) : assert(repository != null);
-
-  @override
-  NotificationSettingsState get initialState =>
-      NotificationSettingsState.initial();
+  })  : assert(repository != null),
+        super(NotificationSettingsState.initial());
 
   @override
   Stream<NotificationSettingsState> mapEventToState(
@@ -77,7 +74,6 @@ class NotificationSettingsBloc
         isLoaded: true,
       );
     } catch (e) {
-      print("No notification settings saved. Saving a new one...");
       add(SaveNotificationSettings(state.notificationSettings));
       yield state.update(
         isLoaded: true,

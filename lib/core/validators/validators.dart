@@ -20,10 +20,10 @@ extension Validators on String {
   }
 
   bool get isValidEmseUsername {
-    return this.contains('.') && !this.contains('@');
+    return contains('.') && !contains('@');
   }
 
   bool get isNotValidEmseUsername {
-    return !this.isValidEmseUsername;
+    return !isValidEmseUsername;
   }
 }

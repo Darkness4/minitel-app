@@ -61,7 +61,7 @@ class Diagnosis with MapMixin<String, Future<String>> {
 
   Future<Map<String, String>> waitAll() async {
     final Map<String, String> map = {};
-    for (final entry in this.entries) {
+    for (final entry in entries) {
       map[entry.key] = await entry.value;
     }
     return map;

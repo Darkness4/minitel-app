@@ -114,12 +114,12 @@ void main() {
         // act
         await dataSource.getBearerToken();
         // assert
+        final authorization = base64.encode(
+            utf8.encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}'));
         verify(mockHttpClient.post(
           "https://api.twitter.com/oauth2/token",
           headers: {
-            HttpHeaders.authorizationHeader: 'Basic ' +
-                base64.encode(utf8.encode(
-                    '${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}')),
+            HttpHeaders.authorizationHeader: 'Basic $authorization',
           },
           body: {'grant_type': 'client_credentials'},
         ));

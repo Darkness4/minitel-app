@@ -128,7 +128,7 @@ class StatusCard extends StatelessWidget {
             backgroundColor: Theme.of(context).backgroundColor,
           ),
           Text(
-            "$status",
+            status,
             key: const Key(Keys.gatewayText),
             style: TextStyle(
               color: Theme.of(context).accentColor,
@@ -152,7 +152,7 @@ class StatusCard extends StatelessWidget {
             backgroundColor: Theme.of(context).errorColor,
           ),
           Text(
-            "${state.stormshieldState}",
+            state.stormshieldState,
             key: const Key(Keys.gatewayText),
             style: TextStyle(
               color: Theme.of(context).errorColor,

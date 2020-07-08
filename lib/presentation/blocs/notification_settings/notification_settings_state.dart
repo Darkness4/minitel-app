@@ -8,7 +8,7 @@ abstract class NotificationSettingsState with _$NotificationSettingsState {
     @required @nullable bool isLoaded,
   }) = _NotificationSettingsState;
 
-  static NotificationSettingsState initial() {
+  factory NotificationSettingsState.initial() {
     return const NotificationSettingsState(
       notificationSettings: NotificationSettings(
         early: Duration(minutes: 10),
@@ -30,9 +30,9 @@ extension NotificationSettingsStateX on NotificationSettingsState {
   }) {
     return copyWith(
       notificationSettings: notificationSettings.copyWith(
-        early: early ?? this.notificationSettings.early,
-        enabled: enabled ?? this.notificationSettings.enabled,
-        range: range ?? this.notificationSettings.range,
+        early: early ?? notificationSettings.early,
+        enabled: enabled ?? notificationSettings.enabled,
+        range: range ?? notificationSettings.range,
       ),
       isSaved: false,
       isLoaded: isLoaded ?? this.isLoaded,

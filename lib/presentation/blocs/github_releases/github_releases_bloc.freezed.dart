@@ -25,6 +25,25 @@ const $GithubReleasesEvent = _$GithubReleasesEventTearOff();
 mixin _$GithubReleasesEvent {
   String get repo;
 
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result get(String repo),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result get(String repo),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result get(GetReleasesEvent value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result get(GetReleasesEvent value),
+    @required Result orElse(),
+  });
+
   $GithubReleasesEventCopyWith<GithubReleasesEvent> get copyWith;
 }
 
@@ -118,6 +137,50 @@ class _$GetReleasesEvent
   @override
   $GetReleasesEventCopyWith<GetReleasesEvent> get copyWith =>
       _$GetReleasesEventCopyWithImpl<GetReleasesEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result get(String repo),
+  }) {
+    assert(get != null);
+    return get(repo);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result get(String repo),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (get != null) {
+      return get(repo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result get(GetReleasesEvent value),
+  }) {
+    assert(get != null);
+    return get(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result get(GetReleasesEvent value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (get != null) {
+      return get(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class GetReleasesEvent implements GithubReleasesEvent {

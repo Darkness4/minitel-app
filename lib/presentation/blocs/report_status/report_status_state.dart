@@ -12,7 +12,7 @@ abstract class ReportStatusState with _$ReportStatusState {
     @required bool isValidRoom,
   }) = _ReportStatusState;
 
-  static ReportStatusState initial() {
+  factory ReportStatusState.initial() {
     return const ReportStatusState(
       description: "",
       name: "",

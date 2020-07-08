@@ -46,8 +46,6 @@ void main() {
 
     when(mockHttpClient.send(any)).thenAnswer((realInvocation) async {
       final request = realInvocation.positionalArguments[0] as http.Request;
-      print(request.url.toString());
-      print(request.method.toString());
 
       if (request.method == 'POST' &&
           request.url.toString() ==
@@ -107,8 +105,6 @@ void main() {
 
     when(mockHttpClient.send(any)).thenAnswer((realInvocation) async {
       final request = realInvocation.positionalArguments[0] as http.Request;
-      print(request.url.toString());
-      print(request.method.toString());
 
       if (request.method == 'POST' &&
           request.url.toString() ==
@@ -171,8 +167,6 @@ void main() {
         ));
     when(mockHttpClient.send(any)).thenAnswer((realInvocation) async {
       final request = realInvocation.positionalArguments[0] as http.Request;
-      print(request.url.toString());
-      print(request.method.toString());
 
       if (request.method == 'POST' &&
           request.url.toString() ==
@@ -240,8 +234,6 @@ void main() {
 
     when(mockHttpClient.send(any)).thenAnswer((realInvocation) async {
       final request = realInvocation.positionalArguments[0] as http.Request;
-      print(request.url.toString());
-      print(request.method.toString());
 
       if (request.method == 'POST' &&
           request.url.toString() ==

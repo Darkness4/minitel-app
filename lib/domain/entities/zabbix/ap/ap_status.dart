@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
-import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 
 part 'ap_status.freezed.dart';
 
@@ -15,7 +14,7 @@ abstract class APStatus with _$APStatus {
     @required @nullable int snmpAvailable,
   }) = _APStatus;
 
-  static APStatus fromHost(ZabbixHost host) {
+  factory APStatus.fromHost(ZabbixHost host) {
     // Data to fill
     String hostname;
     Duration uptime;
@@ -24,7 +23,7 @@ abstract class APStatus with _$APStatus {
     int utilization2G;
     int users = 0;
 
-    host.items.forEach((final ZabbixItem item) {
+    for (final item in host.items) {
       if (item.name.contains('AP Hostname')) {
         hostname = item.lastvalue;
       } else if (item.name.contains('Uptime')) {
@@ -37,10 +36,8 @@ abstract class APStatus with _$APStatus {
         utilization5G = int.parse(item.lastvalue);
       } else if (item.name.contains('Users')) {
         users += int.parse(item.lastvalue);
-      } else {
-        print('${item.name} unhandled.');
       }
-    });
+    }
     return APStatus(
       snmpAvailable: snmpAvailable,
       hostname: hostname,

@@ -23,12 +23,10 @@ class TwitterCard extends StatelessWidget {
         child: InkWell(
           onTap: () => LaunchURLUtils.launchURL(post.url.toString()),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(20.0),

@@ -16,7 +16,7 @@ abstract class Post with _$Post {
     @required @nullable DateTime created_at,
   }) = _Post;
 
-  static Post fromJson(Map<String, dynamic> json) {
+  factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
       text: json["text"] as String ?? "",
       id_str: json["id_str"] as String,
@@ -49,7 +49,7 @@ extension PostX on Post {
 extension on String {
   DateTime toDateTime() {
     final DateFormat format = DateFormat("EEE MMM dd HH:mm:ss yyyy");
-    final List<String> loosedDate = this.split(' ')..removeAt(4);
+    final List<String> loosedDate = split(' ')..removeAt(4);
     return format.parseUtc(loosedDate.join(' '));
   }
 }
@@ -57,6 +57,6 @@ extension on String {
 extension on DateTime {
   String toTwitterFormat() {
     final DateFormat format = DateFormat("EEE MMM dd HH:mm:ss +0000 yyyy");
-    return format.format(this.toUtc());
+    return format.format(toUtc());
   }
 }

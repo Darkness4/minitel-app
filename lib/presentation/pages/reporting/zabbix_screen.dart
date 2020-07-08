@@ -11,19 +11,19 @@ class ZabbixScreen extends StatelessWidget {
     return Scrollbar(
       child: ListView(
         padding: const EdgeInsets.all(10.0),
-        children: <Widget>[
-          const Card(
+        children: const <Widget>[
+          Card(
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: Text("From Zabbix."),
             ),
           ),
-          const Divider(),
-          const ServersCard(),
-          const Divider(),
-          const SwitchesCard(),
-          const Divider(),
-          const AccessPointsCard(),
+          Divider(),
+          ServersCard(),
+          Divider(),
+          SwitchesCard(),
+          Divider(),
+          AccessPointsCard(),
         ],
       ),
     );

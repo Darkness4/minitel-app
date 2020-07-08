@@ -45,7 +45,7 @@ void main() {
         final tDateTime = DateTime.now();
         const tChannel = "T3ST";
         final Map<String, dynamic> tData = <String, dynamic>{
-          'text': "*--Report ${tDateTime}--*\n"
+          'text': "*--Report $tDateTime--*\n"
               "$tText\n",
           "attachments": tListAttachments,
           'channel': tChannel,

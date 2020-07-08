@@ -18,10 +18,8 @@ class PortalBloc extends Bloc<PortalEvent, PortalState> {
 
   PortalBloc({
     @required this.loginSetingsRepository,
-  }) : assert(loginSetingsRepository != null);
-
-  @override
-  PortalState get initialState => PortalState.initial();
+  })  : assert(loginSetingsRepository != null),
+        super(PortalState.initial());
 
   @override
   Stream<PortalState> mapEventToState(

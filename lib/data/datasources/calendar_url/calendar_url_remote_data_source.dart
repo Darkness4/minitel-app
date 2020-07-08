@@ -57,7 +57,7 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
       throw ServerException('HTTP Error: ${responseCAS.statusCode}');
     }
 
-    final String lt = RegExp(r'name="lt" value="([^"]*)"')
+    final String lt = RegExp('name="lt" value="([^"]*)"')
         .firstMatch(responseCAS.body)
         .group(1);
 

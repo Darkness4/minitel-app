@@ -11,8 +11,7 @@ part 'report_status_event.dart';
 part 'report_status_state.dart';
 
 class ReportStatusBloc extends Bloc<ReportStatusEvent, ReportStatusState> {
-  @override
-  ReportStatusState get initialState => ReportStatusState.initial();
+  ReportStatusBloc() : super(ReportStatusState.initial());
 
   @override
   Stream<ReportStatusState> mapEventToState(

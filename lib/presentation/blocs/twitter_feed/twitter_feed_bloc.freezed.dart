@@ -20,7 +20,26 @@ class _$TwitterFeedEventTearOff {
 // ignore: unused_element
 const $TwitterFeedEvent = _$TwitterFeedEventTearOff();
 
-mixin _$TwitterFeedEvent {}
+mixin _$TwitterFeedEvent {
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result get(),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result get(),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result get(GetFeedEvent value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result get(GetFeedEvent value),
+    @required Result orElse(),
+  });
+}
 
 abstract class $TwitterFeedEventCopyWith<$Res> {
   factory $TwitterFeedEventCopyWith(
@@ -75,6 +94,50 @@ class _$GetFeedEvent with DiagnosticableTreeMixin implements GetFeedEvent {
 
   @override
   int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result get(),
+  }) {
+    assert(get != null);
+    return get();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result get(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (get != null) {
+      return get();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result get(GetFeedEvent value),
+  }) {
+    assert(get != null);
+    return get(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result get(GetFeedEvent value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (get != null) {
+      return get(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class GetFeedEvent implements TwitterFeedEvent {

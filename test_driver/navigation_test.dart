@@ -32,7 +32,6 @@ void main() {
 
     test('Check flutter driver health', () async {
       final Health health = await driver.checkHealth();
-      print(health.status);
       expect(health.status, equals(HealthStatus.ok));
     });
 
@@ -83,11 +82,9 @@ void main() {
         await driver.tap(find.byValueKey(Keys.reportingFAB));
         await driver
             .waitFor(
-          find.byValueKey(Keys.reportingFABDone),
-        )
-            .timeout(const Duration(minutes: 2), onTimeout: () {
-          print("find.byValueKey(Keys.reportingFABDone) timed out.");
-        });
+              find.byValueKey(Keys.reportingFABDone),
+            )
+            .timeout(const Duration(minutes: 2), onTimeout: () {});
 
         await takeScreenshot(driver, ScreenshotsPaths.diagnosis);
       }, timeout: const Timeout(Duration(minutes: 3)));
@@ -106,14 +103,11 @@ Future<void> takeScreenshot(FlutterDriver driver, String path) async {
   try {
     await driver
         .waitUntilNoTransientCallbacks()
-        .timeout(const Duration(seconds: 5), onTimeout: () {
-      print("waitUntilNoTransientCallbacks timed out.");
-    });
+        .timeout(const Duration(seconds: 5), onTimeout: () {});
     final List<int> pixels = await driver.screenshot();
     final File file = File(path);
     file.createSync(recursive: true);
     file.writeAsBytesSync(pixels);
-    print(path);
   } catch (e) {
     print(e);
   }

@@ -75,7 +75,7 @@ class TutorialLoc {
   const TutorialLoc(this.localeName);
 
   String get content1 => Intl.message(
-        "1. Connectez-vous à \'WiFi Minitel\'",
+        "1. Connectez-vous à 'WiFi Minitel'",
         name: 'TutorialLoc_content1',
         locale: localeName,
       );
@@ -100,7 +100,7 @@ class TutorialLoc {
         locale: localeName,
       );
   String get example => Intl.message(
-        "Exemple : \nTitre: Pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c\'est ok.",
+        "Exemple : \nTitre: Pas Internet depuis Lundi.\nDescription: Je perds fréquemment la connexion lorsque je suis sur Ethernet. Le Wifi, c'est ok.",
         name: 'TutorialLoc_example',
         locale: localeName,
       );
@@ -110,7 +110,7 @@ class TutorialLoc {
         locale: localeName,
       );
   String get notice => Intl.message(
-        "REMARQUE : Il est recommandé d\'installer le Root et Busybox.",
+        "REMARQUE : Il est recommandé d'installer le Root et Busybox.",
         name: 'TutorialLoc_notice',
         locale: localeName,
       );

@@ -17,27 +17,24 @@ class DayWidget extends StatelessWidget {
     return StickyHeaderBuilder(
       builder: (BuildContext context, double stuckAmount) {
         stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0.0),
-          child: Material(
-            elevation: stuckAmount * 10,
-            color: Color.lerp(
-              Colors.transparent,
-              Theme.of(context).brightness == Brightness.light
-                  ? MinitelColors.MonthColorPalette[dt.month].withOpacity(0.9)
-                  : Theme.of(context).primaryColor,
-              stuckAmount,
-            ),
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(4.0),
-              child: Text(
-                "${DateFormat.MMMMEEEEd(AppLoc.of(context).localeName).format(dt)}",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    .apply(color: Colors.white),
-              ),
+        return Material(
+          elevation: stuckAmount * 10,
+          color: Color.lerp(
+            Colors.transparent,
+            Theme.of(context).brightness == Brightness.light
+                ? MinitelColors.monthColorPalette[dt.month].withOpacity(0.9)
+                : Theme.of(context).primaryColor,
+            stuckAmount,
+          ),
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              DateFormat.MMMMEEEEd(AppLoc.of(context).localeName).format(dt),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  .apply(color: Colors.white),
             ),
           ),
         );
@@ -109,11 +106,11 @@ class EventCard extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: Text.rich(
             TextSpan(
-              text: event.summary + '\n',
+              text: "${event.summary}\n",
               style: const TextStyle(fontWeight: FontWeight.bold),
               children: <TextSpan>[
                 TextSpan(
-                  text: event.description + '\n',
+                  text: "${event.description}\n",
                   style: const TextStyle(
                       fontWeight: FontWeight.normal, height: 1.4),
                 ),

@@ -15,10 +15,8 @@ class TwitterFeedBloc extends Bloc<TwitterFeedEvent, TwitterFeedState> {
 
   TwitterFeedBloc({
     @required this.repository,
-  }) : assert(repository != null);
-
-  @override
-  TwitterFeedState get initialState => const TwitterFeedStateInitial();
+  })  : assert(repository != null),
+        super(const TwitterFeedStateInitial());
 
   @override
   Stream<TwitterFeedState> mapEventToState(

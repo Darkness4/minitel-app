@@ -16,10 +16,8 @@ class GithubReleasesBloc
 
   GithubReleasesBloc({
     @required this.repository,
-  }) : assert(repository != null);
-
-  @override
-  GithubReleasesState get initialState => const GithubReleasesState.initial();
+  })  : assert(repository != null),
+        super(const GithubReleasesState.initial());
 
   @override
   Stream<GithubReleasesState> mapEventToState(

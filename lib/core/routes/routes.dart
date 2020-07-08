@@ -1,9 +1,9 @@
 /// Named Path of each Routes
 class RoutePaths {
-  static const String Authentication = '/';
-  static const String Reporting = '/reporting';
-  static const String Docs = '/docs';
-  static const String Agenda = '/agenda';
-  static const String About = '/about';
-  static const String News = '/news';
+  static const String authentication = '/';
+  static const String reporting = '/reporting';
+  static const String docs = '/docs';
+  static const String agenda = '/agenda';
+  static const String about = '/about';
+  static const String news = '/news';
 }

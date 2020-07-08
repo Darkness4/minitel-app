@@ -36,11 +36,11 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
             "HTTP Status Code : ${response.statusCode} ${response.reasonPhrase}\n${response.body} ${response.reasonPhrase}");
       }
 
-      final String lt = RegExp(r'name="lt" value="([^"]*)"')
+      final String lt = RegExp('name="lt" value="([^"]*)"')
           .firstMatch(response.body)
           .group(1);
       final String action =
-          RegExp(r'action="([^"]*)"').firstMatch(response.body).group(1);
+          RegExp('action="([^"]*)"').firstMatch(response.body).group(1);
 
       final Cookie jSessionIDCampus = response.headers
           .parseSetCookie()

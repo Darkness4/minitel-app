@@ -18,7 +18,7 @@ abstract class Event with _$Event {
     @required @nullable DateTime dtstart,
   }) = _Event;
 
-  static Event fromMap(Map<String, dynamic> json) {
+  factory Event.fromMap(Map<String, dynamic> json) {
     return Event(
       dtend: DateTime.parse(json["DTEND"] as String),
       uid: json["UID"] as String,
@@ -37,7 +37,7 @@ extension EventUtils on Event {
     @required NotificationSettings notificationSettings,
     @required NotificationDetails notificationDetails,
   }) {
-    final DateTime dt = this.dtstart;
+    final DateTime dt = dtstart;
     final DateTime now = DateTime.now();
 
     // Notification System
@@ -45,8 +45,8 @@ extension EventUtils on Event {
       final String dtstart = DateFormat.Hm().format(dt);
       final String dtend = DateFormat.Hm().format(this.dtend);
 
-      final id = int.parse(this.uid, radix: 16) % 2147483647;
-      final body = "${this.location}\n"
+      final id = int.parse(uid, radix: 16) % 2147483647;
+      final body = "$location\n"
           "$dtstart"
           " - "
           "$dtend";
@@ -54,18 +54,18 @@ extension EventUtils on Event {
 
       return flutterLocalNotificationsPlugin.schedule(
         id,
-        this.summary,
+        summary,
         body,
         scheduleDate,
         notificationDetails,
-        payload: "${this.summary};"
-            "${this.description}\n"
-            "${this.location}\n"
+        payload: "$summary;"
+            "$description\n"
+            "$location\n"
             "$dtstart"
             " - "
             "$dtend",
       );
     }
-    return Future.value(null);
+    return Future.value();
   }
 }

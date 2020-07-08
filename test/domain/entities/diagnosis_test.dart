@@ -119,7 +119,7 @@ void main() {
         // arrange
         final Diagnosis diagnosis = Diagnosis();
         // act
-        final call = () => diagnosis["Test"] = Future.value("testValue");
+        void call() => diagnosis["Test"] = Future.value("testValue");
         // assert
         expect(call, throwsArgumentError);
       },

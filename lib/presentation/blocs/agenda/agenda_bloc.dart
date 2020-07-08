@@ -24,10 +24,8 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
     @required this.iCalendarRepository,
   })  : assert(flutterLocalNotificationsPlugin != null),
         assert(notificationDetails != null),
-        assert(iCalendarRepository != null);
-
-  @override
-  AgendaState get initialState => const AgendaState.initial();
+        assert(iCalendarRepository != null),
+        super(const AgendaState.initial());
 
   @override
   Stream<AgendaState> mapEventToState(
@@ -48,20 +46,17 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
 
       await flutterLocalNotificationsPlugin.cancelAll();
 
-      print(
-          "Notifications set up with settings: ${notificationSettings.toString()}");
-
       final Iterable<Event> events = parsedCalendar.sortedByDTStart
           .where((event) => event.dtstart.isAfter(DateTime.now()));
 
       yield AgendaState.loaded(events.toList());
 
       if (notificationSettings.enabled) {
-        events.forEach((event) => event.addToNotification(
+        await Future.wait(events.map((event) => event.addToNotification(
               flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
               notificationSettings: notificationSettings,
               notificationDetails: notificationDetails,
-            ));
+            )));
       }
     } on Exception catch (e) {
       yield AgendaState.error(e);

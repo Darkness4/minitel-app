@@ -107,11 +107,6 @@ abstract class ParsedCalendar with _$ParsedCalendar {
               case "CALSCALE":
                 calscale = line[1];
                 break;
-              default:
-                print("Invalid key: ${line[0]}");
-                if (line[0] != null) {
-                  print("with value: ${line[1]}");
-                }
             }
         }
       }
@@ -134,10 +129,10 @@ abstract class ParsedCalendar with _$ParsedCalendar {
 
 extension ParsedCalendarUtils on ParsedCalendar {
   Iterable<Event> get sortedByDTStart sync* {
-    this.events.sort((Event event1, Event event2) =>
+    events.sort((Event event1, Event event2) =>
         event1.dtstart.compareTo(event2.dtstart));
 
-    for (final event in this.events) {
+    for (final event in events) {
       yield event;
     }
   }
