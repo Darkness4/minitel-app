@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
@@ -13,6 +14,7 @@ part 'agenda_bloc.freezed.dart';
 part 'agenda_event.dart';
 part 'agenda_state.dart';
 
+@injectable
 class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
   final ICalendarRepository iCalendarRepository;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;

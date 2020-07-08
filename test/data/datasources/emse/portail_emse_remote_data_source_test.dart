@@ -4,28 +4,31 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
+import 'package:minitel_toolbox/core/cookies/cookie_manager.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/datasources/emse/portail_emse_remote_data_source.dart';
 import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
+import 'package:minitel_toolbox/data/datasources/emse/portail_emse_remote_data_source.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
-
-class MockListCookies extends Mock implements List<Cookie> {}
 
 void main() {
   PortailEMSERemoteDataSource dataSource;
   MockHttpClient mockHttpClient;
   MockListCookies mockListCookies;
+  MockCookieManager mockCookieManager;
   const String tUser = 'marc.nguyen';
   const String tPassword = 'abcdefgh';
 
   setUp(() {
     mockHttpClient = MockHttpClient();
     mockListCookies = MockListCookies();
+    mockCookieManager = MockCookieManager();
+
+    when(mockCookieManager.portailCookies).thenReturn(mockListCookies);
     dataSource = PortailEMSERemoteDataSourceImpl(
       client: mockHttpClient,
-      cookies: mockListCookies,
+      cookieManager: mockCookieManager,
     );
   });
 
@@ -392,4 +395,8 @@ void main() {
   });
 }
 
+class MockCookieManager extends Mock implements CookieManager {}
+
 class MockHttpClient extends Mock implements http.Client {}
+
+class MockListCookies extends Mock implements List<Cookie> {}

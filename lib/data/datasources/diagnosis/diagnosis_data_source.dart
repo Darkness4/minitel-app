@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 import 'package:minitel_toolbox/core/internet_address/internet_address_manager.dart';
@@ -14,6 +15,7 @@ abstract class DiagnosisDataSource {
   Diagnosis diagnose({Duration timeLimit = const Duration(minutes: 1)});
 }
 
+@LazySingleton(as: DiagnosisDataSource)
 class DiagnosisDataSourceImpl implements DiagnosisDataSource {
   @override
   final Diagnosis diagnosis;

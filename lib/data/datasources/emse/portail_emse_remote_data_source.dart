@@ -1,28 +1,33 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
+import 'package:minitel_toolbox/core/cookies/cookie_manager.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 
 abstract class PortailEMSERemoteDataSource {
-  /// Login to portail EMSE
-  Future<List<Cookie>> login({String username, String password});
-
   /// Get list of cookies
   List<Cookie> get cookies;
+
+  /// Login to portail EMSE
+  Future<List<Cookie>> login({String username, String password});
 }
 
 /// HTTP requests handler for EMSE Portal
+@LazySingleton(as: PortailEMSERemoteDataSource)
 class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
   final http.Client client;
-
-  @override
-  final List<Cookie> cookies;
+  final CookieManager cookieManager;
 
   const PortailEMSERemoteDataSourceImpl({
     @required this.client,
-    @required this.cookies,
+    @required this.cookieManager,
   });
+
+  @override
+  List<Cookie> get cookies => cookieManager.portailCookies;
 
   @override
   Future<List<Cookie>> login({String username, String password}) async {

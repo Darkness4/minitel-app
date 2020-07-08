@@ -16,7 +16,7 @@ abstract class Post with _$Post {
     @required @nullable DateTime created_at,
   }) = _Post;
 
-  factory Post.fromJson(Map<String, dynamic> json) {
+  factory Post.fromMap(Map<String, dynamic> json) {
     return Post(
       text: json["text"] as String ?? "",
       id_str: json["id_str"] as String,

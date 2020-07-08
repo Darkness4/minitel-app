@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
+import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/data/datasources/github/github_local_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
 import 'package:mockito/mockito.dart';
@@ -12,11 +13,15 @@ import '../../../fixtures/fixture_reader.dart';
 void main() {
   GithubLocalDataSource dataSource;
   MockFile mockFile;
+  MockFileManager mockFileManager;
 
   setUp(() {
     mockFile = MockFile();
+    mockFileManager = MockFileManager();
+
+    when(mockFileManager.releasesFile).thenAnswer((_) async => mockFile);
     dataSource = GithubLocalDataSourceImpl(
-      file: mockFile,
+      fileManager: mockFileManager,
     );
   });
 
@@ -82,3 +87,5 @@ void main() {
 }
 
 class MockFile extends Mock implements File {}
+
+class MockFileManager extends Mock implements FileManager {}

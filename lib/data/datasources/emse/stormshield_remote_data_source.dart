@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 
 abstract class StormshieldRemoteDataSource {
@@ -19,6 +20,7 @@ abstract class StormshieldRemoteDataSource {
 }
 
 /// This class handle the connections through stormshield, aka the gateway.
+@LazySingleton(as: StormshieldRemoteDataSource)
 class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
   final http.Client client;
 

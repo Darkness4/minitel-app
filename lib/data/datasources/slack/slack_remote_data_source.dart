@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:http/http.dart' as http;
-import 'package:minitel_toolbox/core/constants/datetime/datetime_manager.dart';
+import 'package:minitel_toolbox/core/datetime/datetime_manager.dart';
 
 abstract class SlackRemoteDataSource {
   /// Report data to the Slack of Minitel
@@ -29,6 +30,7 @@ abstract class SlackRemoteDataSource {
 }
 
 /// Slack Incomming Webhook API
+@LazySingleton(as: SlackRemoteDataSource)
 class SlackRemoteDataSourceImpl implements SlackRemoteDataSource {
   final http.Client client;
   final DateTimeManager dateTimeManager;

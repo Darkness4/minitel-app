@@ -1,5 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_source.dart';
@@ -8,6 +9,7 @@ import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/repositories/calendar_url_repository.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
 
+@LazySingleton(as: ICalendarRepository)
 class ICalendarRepositoryImpl implements ICalendarRepository {
   final ICalendarLocalDataSource localDataSource;
   final ICalendarRemoteDataSource remoteDataSource;

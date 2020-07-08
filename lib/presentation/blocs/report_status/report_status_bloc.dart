@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
 import 'package:rxdart/rxdart.dart' show DebounceExtensions;
 
@@ -10,6 +11,7 @@ part 'report_status_bloc.freezed.dart';
 part 'report_status_event.dart';
 part 'report_status_state.dart';
 
+@injectable
 class ReportStatusBloc extends Bloc<ReportStatusEvent, ReportStatusState> {
   ReportStatusBloc() : super(ReportStatusState.initial());
 

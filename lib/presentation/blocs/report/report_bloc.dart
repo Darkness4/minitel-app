@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/utils/launch_url_utils.dart';
 import 'package:minitel_toolbox/data/datasources/slack/slack_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
@@ -12,6 +13,7 @@ part 'report_bloc.freezed.dart';
 part 'report_event.dart';
 part 'report_state.dart';
 
+@injectable
 class ReportBloc extends Bloc<ReportEvent, ReportState> {
   final SlackRemoteDataSource slackRemoteDataSource;
 

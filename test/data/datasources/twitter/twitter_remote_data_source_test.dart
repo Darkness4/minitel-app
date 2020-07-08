@@ -15,10 +15,15 @@ import '../../../fixtures/fixture_reader.dart';
 void main() {
   TwitterRemoteDataSourceImpl dataSource;
   MockHttpClient mockHttpClient;
+  StringBuffer tokenBuffer;
 
   setUp(() {
     mockHttpClient = MockHttpClient();
-    dataSource = TwitterRemoteDataSourceImpl(client: mockHttpClient);
+    tokenBuffer = StringBuffer();
+    dataSource = TwitterRemoteDataSourceImpl(
+      client: mockHttpClient,
+      tokenBuffer: tokenBuffer,
+    );
   });
 
   void setUpMockHttpClientSuccess200() {
@@ -59,7 +64,7 @@ void main() {
     final tPosts = (json.decode(fixture(
                 'datasources/twitter_remote_data_source/feed_response.json'))
             as List<dynamic>)
-        .map((dynamic data) => Post.fromJson(data as Map<String, dynamic>))
+        .map((dynamic data) => Post.fromMap(data as Map<String, dynamic>))
         .toList();
 
     test(

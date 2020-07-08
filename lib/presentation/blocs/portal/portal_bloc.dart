@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
 import 'package:minitel_toolbox/domain/entities/login_settings.dart';
@@ -13,6 +14,7 @@ part 'portal_bloc.freezed.dart';
 part 'portal_event.dart';
 part 'portal_state.dart';
 
+@injectable
 class PortalBloc extends Bloc<PortalEvent, PortalState> {
   final LoginSettingsRepository loginSetingsRepository;
 

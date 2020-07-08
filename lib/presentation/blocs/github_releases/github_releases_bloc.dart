@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
 import 'package:minitel_toolbox/domain/repositories/releases_repository.dart';
 
@@ -10,6 +11,7 @@ part 'github_releases_bloc.freezed.dart';
 part 'github_releases_event.dart';
 part 'github_releases_state.dart';
 
+@injectable
 class GithubReleasesBloc
     extends Bloc<GithubReleasesEvent, GithubReleasesState> {
   final ReleasesRepository repository;

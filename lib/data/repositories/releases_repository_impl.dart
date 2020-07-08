@@ -1,10 +1,12 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/github/github_local_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/github/github_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
 import 'package:minitel_toolbox/domain/repositories/releases_repository.dart';
 
+@LazySingleton(as: ReleasesRepository)
 class ReleasesRepositoryImpl implements ReleasesRepository {
   final GithubLocalDataSource localDataSource;
   final GithubRemoteDataSource remoteDataSource;

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
 
@@ -10,6 +11,7 @@ abstract class GithubRemoteDataSource {
   Future<List<GithubRelease>> fetchReleases(String repo);
 }
 
+@LazySingleton(as: GithubRemoteDataSource)
 class GithubRemoteDataSourceImpl implements GithubRemoteDataSource {
   final http.Client client;
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
 import 'package:minitel_toolbox/domain/repositories/diagnosis_repository.dart';
 
@@ -10,6 +11,7 @@ part 'diagnosis_bloc.freezed.dart';
 part 'diagnosis_event.dart';
 part 'diagnosis_state.dart';
 
+@injectable
 class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
   final DiagnosisRepository diagnosisRepository;
 

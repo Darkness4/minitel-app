@@ -1,7 +1,9 @@
 import 'dart:collection';
 
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 
+@injectable
 class Diagnosis with MapMixin<String, Future<String>> {
   final _internal = <String, Future<String>>{
     DiagnosisKeys.ip: Future<String>.value(""),
