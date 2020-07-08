@@ -26,7 +26,6 @@ class GithubCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -61,7 +60,7 @@ class GithubCard extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  stops: <double>[0.0, 0.1, 1.0],
+                  stops: const <double>[0.0, 0.1, 1.0],
                   colors: <Color>[
                     Colors.black,
                     Color(release.id ~/ 100 + 0xFF000000),
@@ -103,7 +102,7 @@ class GithubCard extends StatelessWidget {
                     textColor: Theme.of(context).primaryColor,
                     onPressed: () =>
                         LaunchURLUtils.launchURL(asset.browser_download_url),
-                    child: Text("${asset.name}"),
+                    child: Text(asset.name),
                   ),
               ],
             ),

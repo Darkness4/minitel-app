@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
@@ -14,6 +15,7 @@ part 'portal_login_bloc.freezed.dart';
 part 'portal_login_event.dart';
 part 'portal_login_state.dart';
 
+@injectable
 class PortalLoginBloc extends Bloc<PortalLoginEvent, PortalLoginState> {
   final StormshieldRemoteDataSource stormshieldRemoteDataSource;
   final ICalendarRepository iCalendarRepository;
@@ -28,10 +30,8 @@ class PortalLoginBloc extends Bloc<PortalLoginEvent, PortalLoginState> {
   })  : assert(stormshieldRemoteDataSource != null),
         assert(imprimanteRemoteDataSource != null),
         assert(portailEMSERemoteDataSource != null),
-        assert(iCalendarRepository != null);
-
-  @override
-  PortalLoginState get initialState => PortalLoginState.empty();
+        assert(iCalendarRepository != null),
+        super(PortalLoginState.empty());
 
   @override
   Stream<PortalLoginState> mapEventToState(

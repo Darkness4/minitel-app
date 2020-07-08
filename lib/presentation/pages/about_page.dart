@@ -55,7 +55,7 @@ class AboutPage extends StatelessWidget {
                   showLicensePage(
                     context: context,
                     applicationIcon: const ImageIcon(
-                      AssetImage(AssetPaths.Icon),
+                      AssetImage(AssetPaths.icon),
                     ),
                     applicationLegalese: """
 MIT License

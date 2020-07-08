@@ -6,7 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 class ScaffoldWebView extends StatelessWidget {
   final Color backgroundColor;
   final String initialUrl;
-  final Function(WebViewController, BuildContext) onWebViewCreated;
+  final dynamic Function(WebViewController, BuildContext) onWebViewCreated;
 
   const ScaffoldWebView({
     @required this.backgroundColor,
@@ -32,7 +32,6 @@ class ScaffoldWebView extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
           color: backgroundColor,
           child: Row(
-            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
@@ -83,7 +82,7 @@ class ScaffoldWebView extends StatelessWidget {
             onWebViewCreated: (WebViewController wvc) {
               _controller = wvc;
               if (onWebViewCreated != null) {
-                this.onWebViewCreated(wvc, context);
+                onWebViewCreated(wvc, context);
               }
             },
           ),

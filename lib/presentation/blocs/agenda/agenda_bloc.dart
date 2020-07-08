@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
@@ -13,6 +14,7 @@ part 'agenda_bloc.freezed.dart';
 part 'agenda_event.dart';
 part 'agenda_state.dart';
 
+@injectable
 class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
   final ICalendarRepository iCalendarRepository;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -24,10 +26,8 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
     @required this.iCalendarRepository,
   })  : assert(flutterLocalNotificationsPlugin != null),
         assert(notificationDetails != null),
-        assert(iCalendarRepository != null);
-
-  @override
-  AgendaState get initialState => const AgendaState.initial();
+        assert(iCalendarRepository != null),
+        super(const AgendaState.initial());
 
   @override
   Stream<AgendaState> mapEventToState(
@@ -48,20 +48,17 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
 
       await flutterLocalNotificationsPlugin.cancelAll();
 
-      print(
-          "Notifications set up with settings: ${notificationSettings.toString()}");
-
       final Iterable<Event> events = parsedCalendar.sortedByDTStart
           .where((event) => event.dtstart.isAfter(DateTime.now()));
 
       yield AgendaState.loaded(events.toList());
 
       if (notificationSettings.enabled) {
-        events.forEach((event) => event.addToNotification(
+        await Future.wait(events.map((event) => event.addToNotification(
               flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
               notificationSettings: notificationSettings,
               notificationDetails: notificationDetails,
-            ));
+            )));
       }
     } on Exception catch (e) {
       yield AgendaState.error(e);

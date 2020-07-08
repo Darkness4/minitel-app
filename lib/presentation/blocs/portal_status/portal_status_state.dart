@@ -13,7 +13,7 @@ abstract class PortalStatusState with _$PortalStatusState {
     Exception error,
   }) = _PortalStatusState;
 
-  static PortalStatusState empty() {
+  factory PortalStatusState.empty() {
     return const PortalStatusState(
       calendarIsSuccess: false,
       portalIsSuccess: false,
@@ -22,11 +22,10 @@ abstract class PortalStatusState with _$PortalStatusState {
       stormshieldIsSuccess: false,
       isFetching: false,
       isFailure: false,
-      error: null,
     );
   }
 
-  static PortalStatusState loading() {
+  factory PortalStatusState.loading() {
     return const PortalStatusState(
       calendarIsSuccess: false,
       portalIsSuccess: false,
@@ -35,7 +34,6 @@ abstract class PortalStatusState with _$PortalStatusState {
       stormshieldIsSuccess: false,
       isFetching: true,
       isFailure: false,
-      error: null,
     );
   }
 }

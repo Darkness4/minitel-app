@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
+import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 
 abstract class TwitterLocalDataSource {
@@ -13,13 +14,15 @@ abstract class TwitterLocalDataSource {
   Future<List<Post>> fetchAllPosts();
 }
 
+@LazySingleton(as: TwitterLocalDataSource)
 class TwitterLocalDataSourceImpl implements TwitterLocalDataSource {
-  final File file;
+  final FileManager fileManager;
 
-  const TwitterLocalDataSourceImpl({@required this.file});
+  const TwitterLocalDataSourceImpl({@required this.fileManager});
 
   @override
-  Future<void> cacheAllPosts(List<Post> posts) {
+  Future<void> cacheAllPosts(List<Post> posts) async {
+    final file = await fileManager.feedFile;
     return file.writeAsString(
       json.encode(posts.map((Post post) => post.toJson()).toList()),
     );
@@ -27,11 +30,12 @@ class TwitterLocalDataSourceImpl implements TwitterLocalDataSource {
 
   @override
   Future<List<Post>> fetchAllPosts() async {
+    final file = await fileManager.feedFile;
     final String jsonString = file.readAsStringSync();
     if (jsonString != null && jsonString.isNotEmpty) {
       return List<Map<String, dynamic>>.from(
               json.decode(jsonString) as List<dynamic>)
-          .map((Map<String, dynamic> data) => Post.fromJson(data))
+          .map((Map<String, dynamic> data) => Post.fromMap(data))
           .toList();
     } else {
       throw CacheException();

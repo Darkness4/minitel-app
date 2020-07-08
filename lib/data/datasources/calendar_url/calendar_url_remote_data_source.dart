@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 
@@ -15,6 +16,7 @@ abstract class CalendarURLRemoteDataSource {
 }
 
 /// Calendar Url "API"
+@LazySingleton(as: CalendarURLRemoteDataSource)
 class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
   final http.Client client;
 
@@ -57,7 +59,7 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
       throw ServerException('HTTP Error: ${responseCAS.statusCode}');
     }
 
-    final String lt = RegExp(r'name="lt" value="([^"]*)"')
+    final String lt = RegExp('name="lt" value="([^"]*)"')
         .firstMatch(responseCAS.body)
         .group(1);
 

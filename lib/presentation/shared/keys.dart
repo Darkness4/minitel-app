@@ -59,7 +59,7 @@ class Keys {
   static const String reportName = 'report_tab/name';
   static const String reportRoom = 'report_tab/room';
   static const String diagnosisList = 'diagnose_tab/list';
-  static String diagnosisEntry(String key) => 'diagnose_tab/${key}';
+  static String diagnosisEntry(String key) => 'diagnose_tab/$key';
 
   // Docs
   static const String toDocsHome = 'doc_drawer/minitel';

@@ -24,10 +24,10 @@ class ReportScreen extends StatelessWidget {
       child: Scrollbar(
         child: ListView(
           padding: const EdgeInsets.all(10.0),
-          children: <Widget>[
-            const _ReportCard(),
-            const _TutorialCard(),
-            const _ContactsCard(),
+          children: const <Widget>[
+            _ReportCard(),
+            _TutorialCard(),
+            _ContactsCard(),
           ],
         ),
       ),
@@ -44,7 +44,6 @@ class _ContactsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DocCard(
-      elevation: 4,
       children: <Widget>[
         Text(
           "Contacts",
@@ -238,9 +237,9 @@ class _TutorialCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DocCard(
-      elevation: 4,
       children: <Widget>[
-        MarkdownBody(data: """# ${AppLoc.of(context).reporting.tutorial.header}
+        MarkdownBody(data: """
+# ${AppLoc.of(context).reporting.tutorial.header}
 
 *${AppLoc.of(context).reporting.tutorial.notice}*
 

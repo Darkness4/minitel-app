@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:matcher/matcher.dart';
 import 'package:http/http.dart';
+import 'package:matcher/matcher.dart';
+import 'package:minitel_toolbox/core/cookies/cookie_manager.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
 import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
+import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ntlm/ntlm.dart';
 
@@ -16,15 +17,19 @@ void main() {
   ImprimanteRemoteDataSource dataSource;
   MockNTLMClient mockNTLMClient;
   MockListCookies mockListCookies;
+  MockCookieManager mockCookieManager;
   const String tUser = 'marc.nguyen';
   const String tPassword = 'abcdefgh';
 
   setUp(() {
     mockNTLMClient = MockNTLMClient();
     mockListCookies = MockListCookies();
+    mockCookieManager = MockCookieManager();
+
+    when(mockCookieManager.imprimanteCookies).thenReturn(mockListCookies);
     dataSource = ImprimanteRemoteDataSourceImpl(
       ntlmClient: mockNTLMClient,
-      cookies: mockListCookies,
+      cookieManager: mockCookieManager,
     );
   });
 
@@ -118,6 +123,8 @@ void main() {
   });
 }
 
-class MockNTLMClient extends Mock implements NTLMClient {}
+class MockCookieManager extends Mock implements CookieManager {}
 
 class MockListCookies extends Mock implements List<Cookie> {}
+
+class MockNTLMClient extends Mock implements NTLMClient {}

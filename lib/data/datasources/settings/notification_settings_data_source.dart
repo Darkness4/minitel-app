@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
@@ -12,6 +13,7 @@ abstract class NotificationSettingsDataSource {
   Future<void> saveNotificationSettings(NotificationSettings settings);
 }
 
+@LazySingleton(as: NotificationSettingsDataSource)
 class NotificationSettingsDataSourceImpl
     implements NotificationSettingsDataSource {
   final SharedPreferences prefs;

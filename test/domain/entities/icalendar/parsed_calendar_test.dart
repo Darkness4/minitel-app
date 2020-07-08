@@ -44,7 +44,8 @@ void main() {
       'should return a valid model',
       () async {
         // arrange
-        const String value = """BEGIN:VCALENDAR
+        const String value = """
+BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//hacksw/handcal//NONSGML v1.0//EN
 CALSCALE:GREGORIAN

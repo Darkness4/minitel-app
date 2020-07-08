@@ -15,10 +15,7 @@ part 'theme_state.dart';
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   final SharedPreferences prefs;
 
-  ThemeBloc({@required this.prefs});
-
-  @override
-  ThemeState get initialState => _getInitialState();
+  ThemeBloc({@required this.prefs}) : super(prefs.initialTheme);
 
   @override
   Stream<ThemeState> mapEventToState(
@@ -39,9 +36,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       },
     );
   }
+}
 
-  ThemeState _getInitialState() {
-    final initialTheme = prefs.getString('initial_theme');
+extension on SharedPreferences {
+  ThemeState get initialTheme {
+    final initialTheme = getString('initial_theme');
     switch (initialTheme) {
       case 'Dark':
         return ThemeState.dark();
@@ -50,7 +49,6 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       case 'Adaptive':
         return ThemeState.adaptive();
       default:
-        add(const ThemeEvent.toAdaptive());
         return ThemeState.adaptive();
     }
   }

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
+import 'package:injectable/injectable.dart';
+import 'package:minitel_toolbox/core/cookies/cookie_manager.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 import 'package:ntlm/ntlm.dart';
@@ -14,15 +16,17 @@ abstract class ImprimanteRemoteDataSource {
   List<Cookie> get cookies;
 }
 
+@LazySingleton(as: ImprimanteRemoteDataSource)
 class ImprimanteRemoteDataSourceImpl implements ImprimanteRemoteDataSource {
   final NTLMClient ntlmClient;
+  final CookieManager cookieManager;
 
   @override
-  final List<Cookie> cookies;
+  List<Cookie> get cookies => cookieManager.imprimanteCookies;
 
   const ImprimanteRemoteDataSourceImpl({
     @required this.ntlmClient,
-    @required this.cookies,
+    @required this.cookieManager,
   });
 
   @override

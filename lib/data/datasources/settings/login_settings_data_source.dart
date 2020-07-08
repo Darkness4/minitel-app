@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/domain/entities/login_settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,7 @@ abstract class LoginSettingsDataSource {
   Future<void> clear();
 }
 
+@LazySingleton(as: LoginSettingsDataSource)
 class LoginSettingsDataSourceImpl implements LoginSettingsDataSource {
   final SharedPreferences prefs;
   final FlutterSecureStorage storage;

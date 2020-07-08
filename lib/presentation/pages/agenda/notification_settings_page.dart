@@ -57,7 +57,6 @@ class _NotificationSettingsScreenState
           builder: (context, state) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Row(
                   children: <Widget>[
@@ -83,7 +82,7 @@ class _NotificationSettingsScreenState
                         inputFormatters: <TextInputFormatter>[
                           WhitelistingTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(2),
-                          BlacklistingTextInputFormatter.singleLineFormatter,
+                          FilteringTextInputFormatter.singleLineFormatter,
                         ],
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
@@ -101,7 +100,7 @@ class _NotificationSettingsScreenState
                         inputFormatters: <TextInputFormatter>[
                           WhitelistingTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(3),
-                          BlacklistingTextInputFormatter.singleLineFormatter,
+                          FilteringTextInputFormatter.singleLineFormatter,
                         ],
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
@@ -147,8 +146,6 @@ class _NotificationSettingsScreenState
     if (_earlyController.text.length < 3 && _earlyController.text != "") {
       _notificationSettingsBloc.add(
           EarlyChanged(Duration(minutes: int.parse(_earlyController.text))));
-    } else {
-      print("_earlyController.text.length: Illegal range or character");
     }
   }
 
@@ -156,8 +153,6 @@ class _NotificationSettingsScreenState
     if (_rangeController.text.length < 4 && _rangeController.text != "") {
       _notificationSettingsBloc
           .add(RangeChanged(Duration(days: int.parse(_rangeController.text))));
-    } else {
-      print("_rangeController.text.length: Illegal range  or character");
     }
   }
 

@@ -69,7 +69,7 @@ class ReportingPageState extends State<ReportingPage>
             ),
           ),
           drawer: const MainDrawer(
-            currentRoutePaths: RoutePaths.Reporting,
+            currentRoutePaths: RoutePaths.reporting,
           ),
           floatingActionButton: Builder(
             builder: (BuildContext context) => Column(
@@ -198,7 +198,6 @@ class ReportingPageState extends State<ReportingPage>
 
   Widget _mailButton(BuildContext context) => AnimatedFloatingButton(
         "Mail",
-        start: 0.0,
         end: 0.5,
         controller: _animationController,
         onPressed: () {
@@ -238,7 +237,6 @@ class ReportingPageState extends State<ReportingPage>
 
   Widget _reportButton(BuildContext context) => AnimatedFloatingButton(
         AppLoc.of(context).reporting.slack,
-        start: 0.0,
         end: 0.25,
         controller: _animationController,
         onPressed: () {
@@ -258,7 +256,7 @@ class ReportingPageState extends State<ReportingPage>
           }
         },
         child: const ImageIcon(
-          AssetImage(AssetPaths.Slack),
+          AssetImage(AssetPaths.slack),
           size: 100.0,
           key: Key(Keys.sendToSlack),
         ),
@@ -266,8 +264,6 @@ class ReportingPageState extends State<ReportingPage>
 
   Widget _shareButton(BuildContext context) => AnimatedFloatingButton(
         AppLoc.of(context).reporting.share,
-        start: 0.0,
-        end: 1.0,
         controller: _animationController,
         onPressed: () {
           final reportStatusState = context.bloc<ReportStatusBloc>().state;

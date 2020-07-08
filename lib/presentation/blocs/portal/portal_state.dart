@@ -15,7 +15,7 @@ abstract class PortalState with _$PortalState {
     @required bool isError,
   }) = _PortalState;
 
-  static PortalState failure() {
+  factory PortalState.failure() {
     return const PortalState(
       rememberMe: false,
       autoLogin: false,
@@ -30,7 +30,7 @@ abstract class PortalState with _$PortalState {
     );
   }
 
-  static PortalState initial() {
+  factory PortalState.initial() {
     return const PortalState(
       rememberMe: false,
       autoLogin: false,
@@ -45,7 +45,7 @@ abstract class PortalState with _$PortalState {
     );
   }
 
-  static PortalState loading() {
+  factory PortalState.loading() {
     return const PortalState(
       rememberMe: false,
       autoLogin: false,
@@ -72,7 +72,7 @@ extension PortalStateX on PortalState {
     bool isLoaded,
     bool isValidUid,
   }) {
-    return this.copyWith(
+    return copyWith(
       rememberMe: rememberMe ?? this.rememberMe,
       autoLogin: autoLogin ?? this.autoLogin,
       uid: uid ?? this.uid,

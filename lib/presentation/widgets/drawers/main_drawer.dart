@@ -27,7 +27,7 @@ class MainDrawer extends StatelessWidget {
               children: <Widget>[
                 SizedBox(
                   height: 75,
-                  child: Image.asset(AssetPaths.LogoMinitelWhite),
+                  child: Image.asset(AssetPaths.logoMinitelWhite),
                 ),
                 const Text(
                   "Minitel Toolbox",
@@ -39,7 +39,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             margin: DrawerStyle.HightlightMarginRight,
             decoration: BoxDecoration(
-              color: currentRoutePaths == RoutePaths.Authentication
+              color: currentRoutePaths == RoutePaths.authentication
                   ? MinitelColors.drawerSelectedColor
                   : Colors.transparent,
               borderRadius: DrawerStyle.RoundedBorderRight,
@@ -48,13 +48,13 @@ class MainDrawer extends StatelessWidget {
               title: Text(AppLoc.of(context).portal.title),
               key: const Key(Keys.authenticationRoute),
               leading: const Icon(Icons.lock_outline),
-              selected: currentRoutePaths == RoutePaths.Authentication,
+              selected: currentRoutePaths == RoutePaths.authentication,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
-                    RoutePaths.Authentication) {
+                    RoutePaths.authentication) {
                   Navigator.pushReplacementNamed(
-                      context, RoutePaths.Authentication);
+                      context, RoutePaths.authentication);
                 }
               },
             ),
@@ -63,7 +63,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             margin: DrawerStyle.HightlightMarginRight,
             decoration: BoxDecoration(
-              color: currentRoutePaths == RoutePaths.News
+              color: currentRoutePaths == RoutePaths.news
                   ? MinitelColors.drawerSelectedColor
                   : Colors.transparent,
               borderRadius: DrawerStyle.RoundedBorderRight,
@@ -72,11 +72,11 @@ class MainDrawer extends StatelessWidget {
               title: Text(AppLoc.of(context).news.title),
               key: const Key(Keys.newsRoute),
               leading: const Icon(Icons.rss_feed),
-              selected: currentRoutePaths == RoutePaths.News,
+              selected: currentRoutePaths == RoutePaths.news,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.News) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.News);
+                if (ModalRoute.of(context).settings.name != RoutePaths.news) {
+                  Navigator.pushReplacementNamed(context, RoutePaths.news);
                 }
               },
             ),
@@ -84,7 +84,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             margin: DrawerStyle.HightlightMarginRight,
             decoration: BoxDecoration(
-              color: currentRoutePaths == RoutePaths.Agenda
+              color: currentRoutePaths == RoutePaths.agenda
                   ? MinitelColors.drawerSelectedColor
                   : Colors.transparent,
               borderRadius: DrawerStyle.RoundedBorderRight,
@@ -93,11 +93,11 @@ class MainDrawer extends StatelessWidget {
               title: Text(AppLoc.of(context).agenda.title),
               leading: const Icon(Icons.calendar_today),
               key: const Key(Keys.agendaRoute),
-              selected: currentRoutePaths == RoutePaths.Agenda,
+              selected: currentRoutePaths == RoutePaths.agenda,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.Agenda) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.Agenda);
+                if (ModalRoute.of(context).settings.name != RoutePaths.agenda) {
+                  Navigator.pushReplacementNamed(context, RoutePaths.agenda);
                 }
               },
             ),
@@ -106,7 +106,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             margin: DrawerStyle.HightlightMarginRight,
             decoration: BoxDecoration(
-              color: currentRoutePaths == RoutePaths.Reporting
+              color: currentRoutePaths == RoutePaths.reporting
                   ? MinitelColors.drawerSelectedColor
                   : Colors.transparent,
               borderRadius: DrawerStyle.RoundedBorderRight,
@@ -116,7 +116,7 @@ class MainDrawer extends StatelessWidget {
                 AppLoc.of(context).reporting.title,
                 style: const TextStyle(color: Colors.red),
               ),
-              selected: currentRoutePaths == RoutePaths.Reporting,
+              selected: currentRoutePaths == RoutePaths.reporting,
               key: const Key(Keys.reportingRoute),
               leading: const Icon(
                 Icons.error,
@@ -125,8 +125,8 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
-                    RoutePaths.Reporting) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.Reporting);
+                    RoutePaths.reporting) {
+                  Navigator.pushReplacementNamed(context, RoutePaths.reporting);
                 }
               },
             ),
@@ -134,20 +134,20 @@ class MainDrawer extends StatelessWidget {
           Container(
             margin: DrawerStyle.HightlightMarginRight,
             decoration: BoxDecoration(
-              color: currentRoutePaths == RoutePaths.Docs
+              color: currentRoutePaths == RoutePaths.docs
                   ? MinitelColors.drawerSelectedColor
                   : Colors.transparent,
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-              title: Text(AppLoc.of(context).docs.title),
+              title: const Text("Documentation"),
               leading: const Icon(Icons.library_books),
               key: const Key(Keys.docsRoute),
-              selected: currentRoutePaths == RoutePaths.Docs,
+              selected: currentRoutePaths == RoutePaths.docs,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.Docs) {
-                  Navigator.pushNamed(context, RoutePaths.Docs);
+                if (ModalRoute.of(context).settings.name != RoutePaths.docs) {
+                  Navigator.pushNamed(context, RoutePaths.docs);
                 }
               },
             ),
@@ -155,7 +155,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             margin: DrawerStyle.HightlightMarginRight,
             decoration: BoxDecoration(
-              color: currentRoutePaths == RoutePaths.About
+              color: currentRoutePaths == RoutePaths.about
                   ? MinitelColors.drawerSelectedColor
                   : Colors.transparent,
               borderRadius: DrawerStyle.RoundedBorderRight,
@@ -164,11 +164,11 @@ class MainDrawer extends StatelessWidget {
               title: Text(AppLoc.of(context).about.title),
               leading: const Icon(Icons.info),
               key: const Key(Keys.aboutRoute),
-              selected: currentRoutePaths == RoutePaths.About,
+              selected: currentRoutePaths == RoutePaths.about,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.About) {
-                  Navigator.pushNamed(context, RoutePaths.About);
+                if (ModalRoute.of(context).settings.name != RoutePaths.about) {
+                  Navigator.pushNamed(context, RoutePaths.about);
                 }
               },
             ),
@@ -180,7 +180,6 @@ class MainDrawer extends StatelessWidget {
           BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Radio(
                   value: "Dark",
@@ -208,7 +207,6 @@ class MainDrawer extends StatelessWidget {
           }),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: const <Widget>[
               Text("Dark"),
               Text("Adaptive"),

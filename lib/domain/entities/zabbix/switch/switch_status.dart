@@ -2,7 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_statistics.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_status.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
-import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_item.dart';
 
 part 'switch_status.freezed.dart';
 
@@ -17,7 +16,7 @@ abstract class SwitchStatus with _$SwitchStatus {
     @required @nullable int snmpAvailable,
   }) = _SwitchStatus;
 
-  static SwitchStatus fromHost(ZabbixHost host) {
+  factory SwitchStatus.fromHost(ZabbixHost host) {
     // Data to fill
     final Map<int, SwitchPortStatus> ports = <int, SwitchPortStatus>{};
     String description;
@@ -26,7 +25,7 @@ abstract class SwitchStatus with _$SwitchStatus {
     double pingResponseTime;
     int snmpAvailable;
 
-    host.items.forEach((final ZabbixItem item) {
+    for (final item in host.items) {
       if (item.snmp_oid != null &&
           item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
         final int port = int.parse(
@@ -50,10 +49,9 @@ abstract class SwitchStatus with _$SwitchStatus {
         uptime = Duration(seconds: int.parse(item.lastvalue));
       } else if (item.name.contains('SNMP availability')) {
         snmpAvailable = int.parse(item.lastvalue);
-      } else {
-        print('${item.name} unhandled.');
       }
-    });
+    }
+
     return SwitchStatus(
       snmpAvailable: snmpAvailable,
       description: description,
@@ -87,7 +85,7 @@ extension SwitchStatusUtils on SwitchStatus {
     ports.forEach((final int port, final SwitchPortStatus portStatus) {
       switch (portStatus.operStatus) {
         case 1:
-          statistics.speedMap[port] = _formatUnit(portStatus.speed) + 'bps';
+          statistics.speedMap[port] = '${_formatUnit(portStatus.speed)}bps';
           statistics.up++;
           break;
         case 2:

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,7 @@ abstract class CalendarURLLocalDataSource {
 }
 
 /// Calendar Url "API"
+@LazySingleton(as: CalendarURLLocalDataSource)
 class CalendarURLLocalDataSourceImpl implements CalendarURLLocalDataSource {
   final SharedPreferences prefs;
 

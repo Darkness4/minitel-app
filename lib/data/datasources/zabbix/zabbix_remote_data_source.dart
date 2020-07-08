@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
@@ -12,6 +13,7 @@ abstract class ZabbixRemoteDataSource {
   Future<List<ZabbixHost>> fetchZabbixHosts(int groupids);
 }
 
+@LazySingleton(as: ZabbixRemoteDataSource)
 class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
   final http.Client clientNoCheck;
 

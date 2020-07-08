@@ -15,7 +15,7 @@ class MinitelColors {
   static Color drawerSelectedColorGrey = Colors.grey.withOpacity(0.5);
 
   /// Attribuated color to each month
-  static Map<int, Color> MonthColorPalette = <int, Color>{
+  static Map<int, Color> monthColorPalette = <int, Color>{
     DateTime.january: Colors.red,
     DateTime.february: Colors.pink,
     DateTime.march: Colors.purple,

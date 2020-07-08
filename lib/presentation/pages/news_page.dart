@@ -40,14 +40,14 @@ class NewsPage extends StatelessWidget {
                 tabs: <Tab>[
                   Tab(
                     icon: ImageIcon(
-                      AssetImage(AssetPaths.Twitter),
+                      AssetImage(AssetPaths.twitter),
                       key: Key(Keys.twitterTab),
                     ),
                     text: "Twitter",
                   ),
                   Tab(
                     icon: ImageIcon(
-                      AssetImage(AssetPaths.Github),
+                      AssetImage(AssetPaths.github),
                       key: Key(Keys.githubTab),
                     ),
                     text: "Github",
@@ -58,7 +58,7 @@ class NewsPage extends StatelessWidget {
           ],
         ),
         drawer: const MainDrawer(
-          currentRoutePaths: RoutePaths.News,
+          currentRoutePaths: RoutePaths.news,
         ),
       ),
     );

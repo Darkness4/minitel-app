@@ -136,7 +136,7 @@ class _PortailCard extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Image.asset(
-                AssetPaths.EMSE,
+                AssetPaths.emse,
                 fit: BoxFit.scaleDown,
               ),
             ),
@@ -179,7 +179,7 @@ class _CampusCard extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Image.asset(
-                AssetPaths.Campus,
+                AssetPaths.campus,
                 fit: BoxFit.scaleDown,
               ),
             ),
@@ -223,7 +223,7 @@ class _PrometheeCard extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Image.asset(
-                AssetPaths.Promethee,
+                AssetPaths.promethee,
                 fit: BoxFit.scaleDown,
               ),
             ),
@@ -257,7 +257,7 @@ class _SogoCard extends StatelessWidget {
           context,
           FadeRoute<dynamic>(builder: (_) => const SogoWebView()),
         ),
-        child: Image.asset(AssetPaths.Sogo),
+        child: Image.asset(AssetPaths.sogo),
       ),
     );
   }
@@ -280,7 +280,7 @@ class _WikiMinitelCard extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Image.asset(
-                AssetPaths.LogoMinitel,
+                AssetPaths.logoMinitel,
                 fit: BoxFit.scaleDown,
               ),
             ),

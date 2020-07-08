@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
+import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_local_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:mockito/mockito.dart';
@@ -12,11 +13,15 @@ import '../../../fixtures/fixture_reader.dart';
 void main() {
   TwitterLocalDataSource dataSource;
   MockFile mockFile;
+  MockFileManager mockFileManager;
 
   setUp(() {
     mockFile = MockFile();
+    mockFileManager = MockFileManager();
+
+    when(mockFileManager.feedFile).thenAnswer((_) async => mockFile);
     dataSource = TwitterLocalDataSourceImpl(
-      file: mockFile,
+      fileManager: mockFileManager,
     );
   });
 
@@ -24,7 +29,7 @@ void main() {
     final tPosts = (json.decode(fixture(
                 'datasources/twitter_remote_data_source/feed_response.json'))
             as List<dynamic>)
-        .map((dynamic data) => Post.fromJson(data as Map<String, dynamic>))
+        .map((dynamic data) => Post.fromMap(data as Map<String, dynamic>))
         .toList();
     test(
       'should return FeedModel from File when there is one in the cache',
@@ -59,7 +64,7 @@ void main() {
     final tPosts = (json.decode(fixture(
                 'datasources/twitter_remote_data_source/feed_response.json'))
             as List<dynamic>)
-        .map((dynamic data) => Post.fromJson(data as Map<String, dynamic>))
+        .map((dynamic data) => Post.fromMap(data as Map<String, dynamic>))
         .toList();
 
     test(
@@ -79,3 +84,5 @@ void main() {
 }
 
 class MockFile extends Mock implements File {}
+
+class MockFileManager extends Mock implements FileManager {}

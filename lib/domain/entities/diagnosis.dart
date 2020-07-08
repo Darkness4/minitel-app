@@ -1,7 +1,9 @@
 import 'dart:collection';
 
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 
+@injectable
 class Diagnosis with MapMixin<String, Future<String>> {
   final _internal = <String, Future<String>>{
     DiagnosisKeys.ip: Future<String>.value(""),
@@ -61,7 +63,7 @@ class Diagnosis with MapMixin<String, Future<String>> {
 
   Future<Map<String, String>> waitAll() async {
     final Map<String, String> map = {};
-    for (final entry in this.entries) {
+    for (final entry in entries) {
       map[entry.key] = await entry.value;
     }
     return map;

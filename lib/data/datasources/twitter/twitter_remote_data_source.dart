@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
@@ -12,27 +13,33 @@ abstract class TwitterRemoteDataSource {
   Future<String> getBearerToken();
 }
 
+@LazySingleton(as: TwitterRemoteDataSource)
 class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
   final http.Client client;
-  String token;
+  final StringBuffer tokenBuffer;
 
-  TwitterRemoteDataSourceImpl({
+  const TwitterRemoteDataSourceImpl({
     @required this.client,
+    @required this.tokenBuffer,
   });
 
   @override
   Future<List<Post>> fetchAllPosts() async {
-    token ??= await getBearerToken();
-    print("TOKEN $token");
+    final token = await getBearerToken();
+    if (token != null) {
+      tokenBuffer.clear();
+      tokenBuffer.write(token);
+    }
+
     final response = await client.get(
       "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361",
-      headers: {HttpHeaders.authorizationHeader: "Bearer ${token}"},
+      headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
     );
 
     if (response.statusCode == 200) {
       return List<Map<String, dynamic>>.from(
               json.decode(response.body) as List<dynamic>)
-          .map((Map<String, dynamic> data) => Post.fromJson(data))
+          .map((Map<String, dynamic> data) => Post.fromMap(data))
           .toList();
     } else {
       throw ServerException(
@@ -42,18 +49,23 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
 
   @override
   Future<String> getBearerToken() async {
+    final authorization = base64.encode(
+        utf8.encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}'));
     final response = await client.post(
       "https://api.twitter.com/oauth2/token",
       headers: {
-        HttpHeaders.authorizationHeader: 'Basic ' +
-            base64.encode(utf8
-                .encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}')),
+        HttpHeaders.authorizationHeader: 'Basic $authorization',
       },
       body: {'grant_type': 'client_credentials'},
     );
 
     if (response.statusCode == 200) {
-      return token = json.decode(response.body)['access_token'] as String;
+      final token = json.decode(response.body)['access_token'] as String;
+      if (token != null) {
+        tokenBuffer.clear();
+        tokenBuffer.write(token);
+      }
+      return tokenBuffer.toString();
     } else {
       throw ServerException(
           'Failed to load Feed : ${response.statusCode} ${response.reasonPhrase}\n${response.body} ${response.reasonPhrase}\n${response.body}');

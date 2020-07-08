@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
-import 'package:minitel_toolbox/core/constants/datetime/datetime_manager.dart';
+import 'package:minitel_toolbox/core/datetime/datetime_manager.dart';
 import 'package:minitel_toolbox/data/datasources/slack/slack_remote_data_source.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
@@ -45,7 +45,7 @@ void main() {
         final tDateTime = DateTime.now();
         const tChannel = "T3ST";
         final Map<String, dynamic> tData = <String, dynamic>{
-          'text': "*--Report ${tDateTime}--*\n"
+          'text': "*--Report $tDateTime--*\n"
               "$tText\n",
           "attachments": tListAttachments,
           'channel': tChannel,

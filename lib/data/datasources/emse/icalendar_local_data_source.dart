@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
+import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 
 abstract class ICalendarLocalDataSource {
@@ -13,15 +15,16 @@ abstract class ICalendarLocalDataSource {
   Future<ParsedCalendar> getParsedCalendar();
 }
 
+@LazySingleton(as: ICalendarLocalDataSource)
 class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
-  final File file;
+  final FileManager fileManager;
 
-  const ICalendarLocalDataSourceImpl({@required this.file});
+  const ICalendarLocalDataSourceImpl({@required this.fileManager});
 
   /// Get the calendar from url and save the .ics (and the url)
   @override
   Future<void> cacheICalendar(Stream<String> data) async {
-    final IOSink sink = file.openWrite();
+    final IOSink sink = (await fileManager.icalendarFile).openWrite();
 
     await data.forEach(sink.write);
     await sink.close();
@@ -34,6 +37,7 @@ class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
     //     .writeAsString(await rootBundle.loadString(AssetsPaths.TemplateICS));
 
     // Read the file
+    final file = await fileManager.icalendarFile;
     if (file.existsSync()) {
       final Stream<String> calendarStream =
           file.openRead().transform(utf8.decoder);

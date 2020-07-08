@@ -1,22 +1,19 @@
 class AssetPaths {
-  static const String TemplateICS = 'assets/template.ics';
-  static const String LogoMinitelWhite = 'assets/img/logo_minitel_white.webp';
-  static const String LogoMinitel = 'assets/img/logo_minitel.webp';
-  static const String Icon = 'assets/icon/icon.png';
-  static const String DocNetwork = 'assets/img/network.webp';
-  static const String DocLecteurReseau = 'assets/img/Lecteur-reseau.webp';
-  static const String DocImprimanteLinux = 'assets/img/Linux.webp';
-  static const String Slack = 'assets/img/Slack_Mark_Monochrome_White.webp';
-  static const String Twitter = 'assets/icon/Twitter_Logo_Blue.png';
-  static const String Github = 'assets/icon/GitHub-Mark.webp';
-  static const String EMSE = 'assets/img/logo_emse.webp';
-  static const String Promethee = 'assets/img/logo_alcuin.png';
-  static const String Campus = 'assets/img/Moodle-Logo-RGB.png';
-  static const String Sogo = 'assets/img/mail.webp';
+  static const String templateICS = 'assets/template.ics';
+  static const String logoMinitelWhite = 'assets/img/logo_minitel_white.webp';
+  static const String logoMinitel = 'assets/img/logo_minitel.webp';
+  static const String icon = 'assets/icon/icon.png';
+  static const String docNetwork = 'assets/img/network.webp';
+  static const String docLecteurReseau = 'assets/img/Lecteur-reseau.webp';
+  static const String docImprimanteLinux = 'assets/img/Linux.webp';
+  static const String slack = 'assets/img/Slack_Mark_Monochrome_White.webp';
+  static const String twitter = 'assets/icon/Twitter_Logo_Blue.png';
+  static const String github = 'assets/icon/GitHub-Mark.webp';
+  static const String emse = 'assets/img/logo_emse.webp';
+  static const String promethee = 'assets/img/logo_alcuin.png';
+  static const String campus = 'assets/img/Moodle-Logo-RGB.png';
+  static const String sogo = 'assets/img/mail.webp';
 }
-
-/// Path of documentation
-enum DocsPageId { Home, Wiki, Toolbox }
 
 /// All the IP used in the app.
 class MyIPAdresses {

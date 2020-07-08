@@ -6,7 +6,6 @@ import 'package:minitel_toolbox/core/constants/localizations/reporting.dart';
 import 'l10n/messages_all.dart';
 import 'localizations/about.dart';
 import 'localizations/agenda.dart';
-import 'localizations/docs.dart';
 import 'localizations/news.dart';
 
 class AppLoc {
@@ -15,7 +14,6 @@ class AppLoc {
   AppLoc(this.localeName);
   AboutLoc get about => AboutLoc(localeName);
   AgendaLoc get agenda => AgendaLoc(localeName);
-  DocsLoc get docs => DocsLoc(localeName);
   @Deprecated("Not used")
   String get forceDark => Intl.message(
         "Forcer le thème sombre",

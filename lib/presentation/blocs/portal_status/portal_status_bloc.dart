@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/emse/portail_emse_remote_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/emse/stormshield_remote_data_source.dart';
@@ -12,6 +13,7 @@ part 'portal_status_bloc.freezed.dart';
 part 'portal_status_event.dart';
 part 'portal_status_state.dart';
 
+@injectable
 class PortalStatusBloc extends Bloc<PortalStatusEvent, PortalStatusState> {
   final StormshieldRemoteDataSource stormshieldRemoteDataSource;
   final CalendarURLRepository calendarURLRepository;
@@ -26,10 +28,8 @@ class PortalStatusBloc extends Bloc<PortalStatusEvent, PortalStatusState> {
   })  : assert(stormshieldRemoteDataSource != null),
         assert(imprimanteRemoteDataSource != null),
         assert(portailEMSERemoteDataSource != null),
-        assert(calendarURLRepository != null);
-
-  @override
-  PortalStatusState get initialState => PortalStatusState.empty();
+        assert(calendarURLRepository != null),
+        super(PortalStatusState.empty());
 
   @override
   Stream<PortalStatusState> mapEventToState(

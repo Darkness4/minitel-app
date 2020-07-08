@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
+import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
 
 abstract class GithubLocalDataSource {
@@ -16,13 +17,15 @@ abstract class GithubLocalDataSource {
   Future<List<GithubRelease>> fetchLastReleases();
 }
 
+@LazySingleton(as: GithubLocalDataSource)
 class GithubLocalDataSourceImpl implements GithubLocalDataSource {
-  final File file;
+  final FileManager fileManager;
 
-  const GithubLocalDataSourceImpl({@required this.file});
+  const GithubLocalDataSourceImpl({@required this.fileManager});
 
   @override
-  Future<void> cacheReleases(List<GithubRelease> releasesToCache) {
+  Future<void> cacheReleases(List<GithubRelease> releasesToCache) async {
+    final file = await fileManager.releasesFile;
     return file.writeAsString(
       json.encode(releasesToCache
           .map((GithubRelease release) => release.toJson())
@@ -32,6 +35,7 @@ class GithubLocalDataSourceImpl implements GithubLocalDataSource {
 
   @override
   Future<List<GithubRelease>> fetchLastReleases() async {
+    final file = await fileManager.releasesFile;
     if (file.existsSync()) {
       final String jsonString = file.readAsStringSync();
       return List<Map<String, dynamic>>.from(

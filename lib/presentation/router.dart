@@ -12,36 +12,36 @@ import 'package:minitel_toolbox/presentation/widgets/animations/page_animation.d
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RoutePaths.Authentication:
+      case RoutePaths.authentication:
         return FadeRoute<void>(
           builder: (BuildContext context) =>
               PortalPage(title: AppLoc.of(context).portal.title),
           settings: settings,
         );
-      case RoutePaths.Reporting:
+      case RoutePaths.reporting:
         return FadeRoute<void>(
           builder: (BuildContext context) =>
               ReportingPage(title: AppLoc.of(context).reporting.title),
           settings: settings,
         );
-      case RoutePaths.Docs:
+      case RoutePaths.docs:
         return SlideRightRoute<void>(
           builder: (BuildContext context) => const DocumentationPage(),
           settings: settings,
         );
-      case RoutePaths.News:
+      case RoutePaths.news:
         return FadeRoute<void>(
           builder: (BuildContext context) =>
               NewsPage(title: AppLoc.of(context).news.title),
           settings: settings,
         );
-      case RoutePaths.Agenda:
+      case RoutePaths.agenda:
         return FadeRoute<void>(
           builder: (BuildContext context) =>
               AgendaPage(title: AppLoc.of(context).agenda.title),
           settings: settings,
         );
-      case RoutePaths.About:
+      case RoutePaths.about:
         return MaterialPageRoute<void>(
           builder: (BuildContext context) =>
               AboutPage(title: AppLoc.of(context).about.title),

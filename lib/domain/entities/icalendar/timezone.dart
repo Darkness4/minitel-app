@@ -28,19 +28,19 @@ extension TimezoneDescriptionX on TimezoneDescription {
   TimezoneDescription copyWithKeyValue(String key, String value) {
     switch (key) {
       case "DTSTART":
-        return this.copyWith(dtstart: DateTime.parse(value));
+        return copyWith(dtstart: DateTime.parse(value));
         break;
       case "TZOFFSETTO":
-        return this.copyWith(tzOffsetTo: value);
+        return copyWith(tzOffsetTo: value);
         break;
       case "TZOFFSETFROM":
-        return this.copyWith(tzOffsetFrom: value);
+        return copyWith(tzOffsetFrom: value);
         break;
       case "RRULE":
-        return this.copyWith(rRule: value);
+        return copyWith(rRule: value);
         break;
       case "TZNAME":
-        return this.copyWith(tzName: value);
+        return copyWith(tzName: value);
         break;
     }
     return this;

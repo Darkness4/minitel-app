@@ -25,12 +25,12 @@ abstract class PortalEvent with _$PortalEvent {
 extension RememberLoginEventX on RememberLoginEvent {
   LoginSettings toLoginSettings() {
     return LoginSettings(
-      autoLogin: this.autoLogin,
-      pswd: this.pswd,
-      rememberMe: this.rememberMe,
-      selectedTime: this.selectedTime,
-      selectedUrl: this.selectedUrl,
-      uid: this.uid,
+      autoLogin: autoLogin,
+      pswd: pswd,
+      rememberMe: rememberMe,
+      selectedTime: selectedTime,
+      selectedUrl: selectedUrl,
+      uid: uid,
     );
   }
 }

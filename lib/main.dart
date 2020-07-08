@@ -36,7 +36,7 @@ Widget _buildMyApp(BuildContext context, ThemeState state) {
     ],
     theme: state.themeData,
     darkTheme: state.darkThemeData,
-    initialRoute: RoutePaths.Authentication,
+    initialRoute: RoutePaths.authentication,
   );
 }
 

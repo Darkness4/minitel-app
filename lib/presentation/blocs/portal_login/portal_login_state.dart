@@ -9,7 +9,7 @@ abstract class PortalLoginState with _$PortalLoginState {
     Exception error,
   }) = _PortalLoginState;
 
-  static PortalLoginState empty() {
+  factory PortalLoginState.empty() {
     return const PortalLoginState(
       isSubmitting: false,
       isSuccess: false,
@@ -17,7 +17,7 @@ abstract class PortalLoginState with _$PortalLoginState {
     );
   }
 
-  static PortalLoginState failure(Exception error) {
+  factory PortalLoginState.failure(Exception error) {
     return PortalLoginState(
       isSubmitting: false,
       isSuccess: false,
@@ -26,7 +26,7 @@ abstract class PortalLoginState with _$PortalLoginState {
     );
   }
 
-  static PortalLoginState loading() {
+  factory PortalLoginState.loading() {
     return const PortalLoginState(
       isSubmitting: true,
       isSuccess: false,
@@ -34,7 +34,7 @@ abstract class PortalLoginState with _$PortalLoginState {
     );
   }
 
-  static PortalLoginState success() {
+  factory PortalLoginState.success() {
     return const PortalLoginState(
       isSubmitting: false,
       isSuccess: true,

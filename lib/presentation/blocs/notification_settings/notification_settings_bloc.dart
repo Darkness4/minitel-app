@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/notification_settings_repository.dart';
 
@@ -10,17 +11,15 @@ part 'notification_settings_bloc.freezed.dart';
 part 'notification_settings_event.dart';
 part 'notification_settings_state.dart';
 
+@injectable
 class NotificationSettingsBloc
     extends Bloc<NotificationSettingsEvent, NotificationSettingsState> {
   final NotificationSettingsRepository repository;
 
   NotificationSettingsBloc({
     @required this.repository,
-  }) : assert(repository != null);
-
-  @override
-  NotificationSettingsState get initialState =>
-      NotificationSettingsState.initial();
+  })  : assert(repository != null),
+        super(NotificationSettingsState.initial());
 
   @override
   Stream<NotificationSettingsState> mapEventToState(
@@ -77,7 +76,6 @@ class NotificationSettingsBloc
         isLoaded: true,
       );
     } catch (e) {
-      print("No notification settings saved. Saving a new one...");
       add(SaveNotificationSettings(state.notificationSettings));
       yield state.update(
         isLoaded: true,

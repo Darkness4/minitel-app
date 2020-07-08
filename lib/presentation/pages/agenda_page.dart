@@ -102,7 +102,7 @@ class AgendaPage extends StatelessWidget {
           ),
         ),
         drawer: const MainDrawer(
-          currentRoutePaths: RoutePaths.Agenda,
+          currentRoutePaths: RoutePaths.agenda,
         ),
       ),
     );

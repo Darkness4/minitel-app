@@ -107,7 +107,7 @@ class PortalPage extends StatelessWidget {
             ),
           ),
           drawer: const MainDrawer(
-            currentRoutePaths: RoutePaths.Authentication,
+            currentRoutePaths: RoutePaths.authentication,
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
@@ -128,9 +128,6 @@ class PortalPage extends StatelessWidget {
                               selectedUrl: portalState.selectedUrl,
                               uid: portalState.uid,
                             ));
-                      } else {
-                        print(
-                            "Uid seems not valid. Must contains '.' and not '@': ${portalState.uid}");
                       }
                     }
                   },

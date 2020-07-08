@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
+import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:mockito/mockito.dart';
@@ -13,13 +14,17 @@ import '../../../fixtures/fixture_reader.dart';
 void main() {
   ICalendarLocalDataSource dataSource;
   MockFile mockFile;
+  MockFileManager mockFileManager;
   MockIOSink mockIOSink;
 
   setUp(() {
     mockFile = MockFile();
     mockIOSink = MockIOSink();
+    mockFileManager = MockFileManager();
+
+    when(mockFileManager.icalendarFile).thenAnswer((_) async => mockFile);
     dataSource = ICalendarLocalDataSourceImpl(
-      file: mockFile,
+      fileManager: mockFileManager,
     );
   });
 
@@ -82,5 +87,7 @@ void main() {
 }
 
 class MockFile extends Mock implements File {}
+
+class MockFileManager extends Mock implements FileManager {}
 
 class MockIOSink extends Mock implements IOSink {}

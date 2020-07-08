@@ -15,10 +15,15 @@ import '../../../fixtures/fixture_reader.dart';
 void main() {
   TwitterRemoteDataSourceImpl dataSource;
   MockHttpClient mockHttpClient;
+  StringBuffer tokenBuffer;
 
   setUp(() {
     mockHttpClient = MockHttpClient();
-    dataSource = TwitterRemoteDataSourceImpl(client: mockHttpClient);
+    tokenBuffer = StringBuffer();
+    dataSource = TwitterRemoteDataSourceImpl(
+      client: mockHttpClient,
+      tokenBuffer: tokenBuffer,
+    );
   });
 
   void setUpMockHttpClientSuccess200() {
@@ -59,7 +64,7 @@ void main() {
     final tPosts = (json.decode(fixture(
                 'datasources/twitter_remote_data_source/feed_response.json'))
             as List<dynamic>)
-        .map((dynamic data) => Post.fromJson(data as Map<String, dynamic>))
+        .map((dynamic data) => Post.fromMap(data as Map<String, dynamic>))
         .toList();
 
     test(
@@ -114,12 +119,12 @@ void main() {
         // act
         await dataSource.getBearerToken();
         // assert
+        final authorization = base64.encode(
+            utf8.encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}'));
         verify(mockHttpClient.post(
           "https://api.twitter.com/oauth2/token",
           headers: {
-            HttpHeaders.authorizationHeader: 'Basic ' +
-                base64.encode(utf8.encode(
-                    '${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}')),
+            HttpHeaders.authorizationHeader: 'Basic $authorization',
           },
           body: {'grant_type': 'client_credentials'},
         ));

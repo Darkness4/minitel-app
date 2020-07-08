@@ -25,6 +25,25 @@ const $ZabbixHostsEvent = _$ZabbixHostsEventTearOff();
 mixin _$ZabbixHostsEvent {
   int get groupids;
 
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result get(int groupids),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result get(int groupids),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result get(GetZabbixHostsEvent value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result get(GetZabbixHostsEvent value),
+    @required Result orElse(),
+  });
+
   $ZabbixHostsEventCopyWith<ZabbixHostsEvent> get copyWith;
 }
 
@@ -119,6 +138,50 @@ class _$GetZabbixHostsEvent
   @override
   $GetZabbixHostsEventCopyWith<GetZabbixHostsEvent> get copyWith =>
       _$GetZabbixHostsEventCopyWithImpl<GetZabbixHostsEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result get(int groupids),
+  }) {
+    assert(get != null);
+    return get(groupids);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result get(int groupids),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (get != null) {
+      return get(groupids);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result get(GetZabbixHostsEvent value),
+  }) {
+    assert(get != null);
+    return get(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result get(GetZabbixHostsEvent value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (get != null) {
+      return get(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class GetZabbixHostsEvent implements ZabbixHostsEvent {

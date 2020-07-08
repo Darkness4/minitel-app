@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,6 +8,7 @@ abstract class ICalendarRemoteDataSource {
   Stream<String> streamICalendar(String url);
 }
 
+@LazySingleton(as: ICalendarRemoteDataSource)
 class ICalendarRemoteDataSourceImpl implements ICalendarRemoteDataSource {
   final http.Client client;
 

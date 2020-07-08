@@ -55,7 +55,7 @@ void main() {
     );
 
     test(
-      'shouldn\'t schedule with a out of range event',
+      "shouldn't schedule with a out of range event",
       () async {
         // arrange
         final DateTime tDateTime =
@@ -63,7 +63,7 @@ void main() {
         const tNotificationSettings = NotificationSettings(
           early: Duration(seconds: 1),
           enabled: true,
-          range: Duration(days: 0),
+          range: Duration(),
         );
         final tEvent = Event(
           description: "description",
