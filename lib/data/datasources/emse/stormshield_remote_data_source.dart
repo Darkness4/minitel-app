@@ -41,12 +41,12 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
       'time': selectedTime.toString(),
       'pswd': pswd,
     };
-    final http.Response response = await client.post(
+    final response = await client.post(
       'https://$selectedUrl/auth/plain.html',
       body: data,
       headers: {HttpHeaders.cookieHeader: "lang=us; disclaimer=1;"},
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == HttpStatus.ok) {
       if (response.body.contains('title_error')) {
         throw ClientException('Bad Username or Password');
       }
@@ -58,21 +58,20 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
 
   @override
   Future<String> fetchStatus(String selectedUrl) async {
-    final String url = 'https://$selectedUrl/auth/login.html';
-    final RegExp exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
+    final url = 'https://$selectedUrl/auth/login.html';
+    final exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
-    final http.StreamedResponse response = await client.send(
+    final response = await client.send(
       http.Request('GET', Uri.parse(url))
         ..headers[HttpHeaders.contentLengthHeader] = "0",
     );
 
-    final String body = await response.stream.transform(utf8.decoder).join();
-    if (response.statusCode == 200) {
-      if (!body.contains('l_rtime')) {
-        throw NotLoggedInException();
+    final body = await response.stream.transform(utf8.decoder).join();
+    if (response.statusCode == HttpStatus.ok) {
+      if (body.contains('l_rtime')) {
+        return exp.firstMatch(body).group(1);
       } else {
-        final String match = exp.firstMatch(body).group(1);
-        return match;
+        throw NotLoggedInException();
       }
     } else {
       throw ServerException(

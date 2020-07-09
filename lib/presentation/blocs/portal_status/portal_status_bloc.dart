@@ -34,8 +34,8 @@ class PortalStatusBloc extends Bloc<PortalStatusEvent, PortalStatusState> {
   @override
   Stream<PortalStatusState> mapEventToState(
     PortalStatusEvent event,
-  ) async* {
-    yield* event.map(
+  ) {
+    return event.map(
       calendarStatusChanged: _mapCalendarStatusChangedEventToState,
       portalStatusChanged: _mapPortalStatusChangedEventToState,
       failure: (event) async* {

@@ -26,8 +26,8 @@ class PortalBloc extends Bloc<PortalEvent, PortalState> {
   @override
   Stream<PortalState> mapEventToState(
     PortalEvent event,
-  ) async* {
-    yield* event.map(
+  ) {
+    return event.map(
       rememberLogin: _mapRememberLoginEventToState,
       autoLogin: _mapAutoLoginEventToState,
       pswdChanged: _mapPswdChangedEventToState,

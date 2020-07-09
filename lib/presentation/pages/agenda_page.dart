@@ -40,7 +40,7 @@ class AgendaPage extends StatelessWidget {
               icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.of(context).push<void>(
-                  MaterialPageRoute<void>(
+                  MaterialPageRoute(
                     builder: (context) => const NotificationSettingsPage(),
                   ),
                 );
@@ -63,15 +63,14 @@ class AgendaPage extends StatelessWidget {
             },
             child: BlocBuilder<AgendaBloc, AgendaState>(
               builder: (context, state) {
-                if (state is AgendaInitial || state is AgendaLoading) {
-                  return const CircularProgressIndicator(
-                    backgroundColor: Colors.white,
-                  );
-                } else if (state is AgendaError) {
-                  return ErrorAgendaWidget(state.exception);
-                } else if (state is AgendaLoaded) {
-                  return StreamBuilder<List<Widget>>(
-                    stream: _listEventCards(context, state.events),
+                return state.when(
+                  initial: () => const CircularProgressIndicator(
+                      backgroundColor: Colors.white),
+                  loading: () => const CircularProgressIndicator(
+                      backgroundColor: Colors.white),
+                  error: (exception) => ErrorAgendaWidget(exception),
+                  loaded: (events) => StreamBuilder<List<Widget>>(
+                    stream: _listEventCards(context, events),
                     builder: (BuildContext context,
                         AsyncSnapshot<List<Widget>> snapshot) {
                       if (snapshot.hasData) {
@@ -93,10 +92,8 @@ class AgendaPage extends StatelessWidget {
                         );
                       }
                     },
-                  );
-                } else {
-                  return null;
-                }
+                  ),
+                );
               },
             ),
           ),

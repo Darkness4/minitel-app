@@ -15,10 +15,10 @@ class ImprimanteWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CookieManager cookieManager = CookieManager();
+    final cookieManager = CookieManager();
 
     if (remoteDataSourceCookies != null && remoteDataSourceCookies.isNotEmpty) {
-      for (final Cookie cookie in remoteDataSourceCookies) {
+      for (final cookie in remoteDataSourceCookies) {
         cookieManager.setCookie(
           MyIPAdresses.emseImprimanteIP,
           cookie.toString(),

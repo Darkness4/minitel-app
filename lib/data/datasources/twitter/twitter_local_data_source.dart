@@ -31,11 +31,11 @@ class TwitterLocalDataSourceImpl implements TwitterLocalDataSource {
   @override
   Future<List<Post>> fetchAllPosts() async {
     final file = await fileManager.feedFile;
-    final String jsonString = file.readAsStringSync();
+    final jsonString = file.readAsStringSync();
+
     if (jsonString != null && jsonString.isNotEmpty) {
-      return List<Map<String, dynamic>>.from(
-              json.decode(jsonString) as List<dynamic>)
-          .map((Map<String, dynamic> data) => Post.fromMap(data))
+      return (json.decode(jsonString) as List<dynamic>)
+          .map((dynamic data) => Post.fromMap(data as Map<String, dynamic>))
           .toList();
     } else {
       throw CacheException();

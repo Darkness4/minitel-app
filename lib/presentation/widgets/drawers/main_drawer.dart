@@ -53,8 +53,8 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
                     RoutePaths.authentication) {
-                  Navigator.pushReplacementNamed(
-                      context, RoutePaths.authentication);
+                  Navigator.of(context)
+                      .pushReplacementNamed(RoutePaths.authentication);
                 }
               },
             ),
@@ -76,7 +76,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.news) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.news);
+                  Navigator.of(context).pushReplacementNamed(RoutePaths.news);
                 }
               },
             ),
@@ -97,7 +97,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.agenda) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.agenda);
+                  Navigator.of(context).pushReplacementNamed(RoutePaths.agenda);
                 }
               },
             ),
@@ -126,7 +126,8 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
                     RoutePaths.reporting) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.reporting);
+                  Navigator.of(context)
+                      .pushReplacementNamed(RoutePaths.reporting);
                 }
               },
             ),
@@ -147,7 +148,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.docs) {
-                  Navigator.pushNamed(context, RoutePaths.docs);
+                  Navigator.of(context).pushNamed(RoutePaths.docs);
                 }
               },
             ),
@@ -168,7 +169,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.about) {
-                  Navigator.pushNamed(context, RoutePaths.about);
+                  Navigator.of(context).pushNamed(RoutePaths.about);
                 }
               },
             ),

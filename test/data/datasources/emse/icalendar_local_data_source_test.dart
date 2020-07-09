@@ -65,7 +65,7 @@ void main() {
   group('cacheICalendar', () {
     final tData = fixture(
         'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics');
-    final tICalendar = Stream.value(tData).asBroadcastStream();
+    final tICalendar = Stream.value(utf8.encode(tData)).asBroadcastStream();
 
     test(
       'should call File.openWrite to cache the data',

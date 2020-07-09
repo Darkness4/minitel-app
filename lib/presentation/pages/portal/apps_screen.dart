@@ -18,50 +18,29 @@ import 'portal_apps/sogo.dart';
 class AppsScreen extends StatelessWidget {
   const AppsScreen({Key key}) : super(key: key);
 
+  static const List<Widget> cards = [
+    _PortailCard(),
+    _SogoCard(),
+    _PrometheeCard(),
+    _CampusCard(),
+    _ImprimanteCard(),
+    _WikiMinitelCard(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final double size = MediaQuery.of(context).size.shortestSide;
     return Scrollbar(
       child: Wrap(
         key: const Key(Keys.appsList),
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            height: size / 2,
-            width: size / 2,
-            child: const _PortailCard(),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            height: size / 2,
-            width: size / 2,
-            child: const _SogoCard(),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            height: size / 2,
-            width: size / 2,
-            child: const _PrometheeCard(),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            height: size / 2,
-            width: size / 2,
-            child: const _CampusCard(),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            height: size / 2,
-            width: size / 2,
-            child: const _ImprimanteCard(),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            height: size / 2,
-            width: size / 2,
-            child: const _WikiMinitelCard(),
-          ),
-        ],
+        children: cards
+            .map((card) => Container(
+                  padding: const EdgeInsets.all(5.0),
+                  height: size / 2,
+                  width: size / 2,
+                  child: const _PortailCard(),
+                ))
+            .toList(),
       ),
     );
   }
@@ -77,9 +56,8 @@ class _ImprimanteCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         key: const Key(Keys.imprimante),
-        onTap: () => Navigator.push<dynamic>(
-          context,
-          FadeRoute<dynamic>(
+        onTap: () => Navigator.of(context).push<void>(
+          FadeRoute(
             builder: (context) => ImprimanteWebView(
               remoteDataSourceCookies: sl<ImprimanteRemoteDataSource>().cookies,
             ),
@@ -123,9 +101,8 @@ class _PortailCard extends StatelessWidget {
       child: InkWell(
         key: const Key(Keys.portail),
         onTap: () async {
-          await Navigator.push<dynamic>(
-            context,
-            FadeRoute<dynamic>(
+          await Navigator.of(context).push<void>(
+            FadeRoute(
               builder: (_) => PortailWebView(
                 portailEMSEcookies: sl<PortailEMSERemoteDataSource>().cookies,
               ),
@@ -166,9 +143,8 @@ class _CampusCard extends StatelessWidget {
       child: InkWell(
         key: const Key(Keys.portail),
         onTap: () async {
-          await Navigator.push<dynamic>(
-            context,
-            FadeRoute<dynamic>(
+          await Navigator.of(context).push<void>(
+            FadeRoute(
               builder: (_) => CampusWebView(
                 portailEMSEcookies: sl<PortailEMSERemoteDataSource>().cookies,
               ),
@@ -209,7 +185,7 @@ class _PrometheeCard extends StatelessWidget {
       child: InkWell(
         key: const Key(Keys.portail),
         onTap: () async {
-          // await Navigator.push<dynamic>(
+          // await Navigator.of(context).push<dynamic>(
           //   context,
           //   FadeRoute<dynamic>(
           //     builder: (_) => PrometheeWebView(
@@ -253,9 +229,8 @@ class _SogoCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         key: const Key(Keys.sogo),
-        onTap: () => Navigator.push<dynamic>(
-          context,
-          FadeRoute<dynamic>(builder: (_) => const SogoWebView()),
+        onTap: () => Navigator.of(context).push<void>(
+          FadeRoute(builder: (_) => const SogoWebView()),
         ),
         child: Image.asset(AssetPaths.sogo),
       ),
@@ -272,9 +247,8 @@ class _WikiMinitelCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         key: const Key(Keys.wikiMinitel),
-        onTap: () => Navigator.push<dynamic>(
-          context,
-          FadeRoute<dynamic>(builder: (_) => const MinitelWebView()),
+        onTap: () => Navigator.of(context).push<void>(
+          FadeRoute(builder: (_) => const MinitelWebView()),
         ),
         child: Column(
           children: <Widget>[

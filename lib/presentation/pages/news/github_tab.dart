@@ -79,40 +79,22 @@ class GithubScreen extends StatelessWidget {
 
   BlocProvider<GithubReleasesBloc> buildBody(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<GithubReleasesBloc>(),
+      create: (_) => sl<GithubReleasesBloc>()
+        ..add(const GetReleasesEvent(ApiKeys.githubRepo)),
       child: Center(
         child: BlocBuilder<GithubReleasesBloc, GithubReleasesState>(
           builder: (BuildContext context, GithubReleasesState state) {
-            if (state is GithubReleasesStateInitial) {
-              return const InitialDisplay();
-            } else if (state is GithubReleasesStateLoading) {
-              return const CircularProgressIndicator(
-                  key: Key(Keys.newsLoading));
-            } else if (state is GithubReleasesStateLoaded) {
-              return GithubReleasesDisplay(releases: state.releases);
-            } else if (state is GithubReleasesStateError) {
-              return ErrorDisplay(
-                message: state.error.toString(),
-              );
-            }
-            return null;
+            return state.when(
+              initial: () =>
+                  const CircularProgressIndicator(key: Key(Keys.newsLoading)),
+              loading: () =>
+                  const CircularProgressIndicator(key: Key(Keys.newsLoading)),
+              loaded: (releases) => GithubReleasesDisplay(releases: releases),
+              error: (error) => ErrorDisplay(message: error.toString()),
+            );
           },
         ),
       ),
     );
-  }
-}
-
-class InitialDisplay extends StatelessWidget {
-  const InitialDisplay({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    context
-        .bloc<GithubReleasesBloc>()
-        .add(const GetReleasesEvent(ApiKeys.githubRepo));
-    return const CircularProgressIndicator(key: Key(Keys.newsLoading));
   }
 }

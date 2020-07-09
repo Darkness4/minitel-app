@@ -24,8 +24,8 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   @override
   Stream<ReportState> mapEventToState(
     ReportEvent event,
-  ) async* {
-    yield* event.map(
+  ) {
+    return event.map(
       toInitState: _mapReportToInitStateToState,
       share: _mapReportToShareToState,
       slack: _mapReportToSlackToState,

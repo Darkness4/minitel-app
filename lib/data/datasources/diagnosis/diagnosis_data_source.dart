@@ -104,15 +104,17 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
 
   Future<String> _lookup(String target) async {
     try {
-      final List<InternetAddress> addresses =
-          await internetAddressManager.lookup(target);
-      final StringBuffer output = StringBuffer();
-      for (final InternetAddress address in addresses) {
-        output.write("Host: ${address.host}\nLookup: ${address.address}\n");
-      }
-      return output.toString();
+      final addresses = await internetAddressManager.lookup(target);
+
+      return addresses
+          .map((address) =>
+              "Host: ${address.host}\nLookup: ${address.address}\n")
+          .join();
     } catch (e, s) {
-      return "Error: $e\n" "Stacktrace: $s";
+      return """
+Error: $e
+Stacktrace: $s
+""";
     }
   }
 

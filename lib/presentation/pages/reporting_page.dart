@@ -249,7 +249,7 @@ class ReportingPageState extends State<ReportingPage>
                   room: reportStatusState.room,
                   title: reportStatusState.title,
                   diagnosis: diagnosisState.diagnosis,
-                  channel: "minitel_toolbox_notifications", // TODO : Env.test
+                  channel: "minitel_toolbox_notifications",
                 ));
           } else if (!reportStatusState.isValid) {
             _showNotValidSnackbar(reportStatusState, context);

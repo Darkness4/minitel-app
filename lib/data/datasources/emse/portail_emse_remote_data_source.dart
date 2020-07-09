@@ -36,18 +36,18 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
           "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin");
       cookies.clear();
 
-      if (response.statusCode != 200) {
+      if (response.statusCode != HttpStatus.ok) {
         throw ServerException(
             "HTTP Status Code : ${response.statusCode} ${response.reasonPhrase}\n${response.body} ${response.reasonPhrase}");
       }
 
-      final String lt = RegExp('name="lt" value="([^"]*)"')
+      final lt = RegExp('name="lt" value="([^"]*)"')
           .firstMatch(response.body)
           .group(1);
-      final String action =
+      final action =
           RegExp('action="([^"]*)"').firstMatch(response.body).group(1);
 
-      final Cookie jSessionIDCampus = response.headers
+      final jSessionIDCampus = response.headers
           .parseSetCookie()
           .firstWhere((Cookie cookie) => cookie.name == "JSESSIONID");
 
@@ -67,7 +67,7 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
               '${jSessionIDCampus.name}=${jSessionIDCampus.value}',
       );
 
-      if (response2.statusCode != 302) {
+      if (response2.statusCode != HttpStatus.movedTemporarily) {
         throw ServerException(
             "HTTP Status Code : ${response2.statusCode} ${response2.reasonPhrase}");
       }
@@ -78,12 +78,12 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
       }
 
       final listCookies2 = response2.headers.parseSetCookie();
-      final Cookie agimus =
-          listCookies2.firstWhere((Cookie cookie) => cookie.name == "AGIMUS");
-      final Cookie casPrivacy = listCookies2
-          .firstWhere((Cookie cookie) => cookie.name == "CASPRIVACY");
-      final Cookie casGC =
-          listCookies2.firstWhere((Cookie cookie) => cookie.name == "CASTGC");
+      final agimus =
+          listCookies2.firstWhere((cookie) => cookie.name == "AGIMUS");
+      final casPrivacy =
+          listCookies2.firstWhere((cookie) => cookie.name == "CASPRIVACY");
+      final casGC =
+          listCookies2.firstWhere((cookie) => cookie.name == "CASTGC");
 
       String location = response2.headers[HttpHeaders.locationHeader];
 
@@ -101,9 +101,9 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
             "HTTP Status Code : ${response3.statusCode} ${response3.reasonPhrase}");
       }
 
-      final Cookie casAuth = response3.headers
+      final casAuth = response3.headers
           .parseSetCookie()
-          .firstWhere((Cookie cookie) => cookie.name == "CASAuth");
+          .firstWhere((cookie) => cookie.name == "CASAuth");
       location = response3.headers[HttpHeaders.locationHeader];
 
       final response4 = await client.get(location, headers: {
@@ -117,19 +117,19 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
       }
 
       final listCookies4 = response4.headers.parseSetCookie();
-      final Cookie laravelToken = listCookies4
-          .firstWhere((Cookie cookie) => cookie.name == "laravel_token");
-      final Cookie xsrfToken = listCookies4
-          .firstWhere((Cookie cookie) => cookie.name == "XSRF-TOKEN");
-      final Cookie portailEntEmseSession = listCookies4.firstWhere(
-          (Cookie cookie) => cookie.name == "portail_ent_emse_session");
+      final laravelToken =
+          listCookies4.firstWhere((cookie) => cookie.name == "laravel_token");
+      final xsrfToken =
+          listCookies4.firstWhere((cookie) => cookie.name == "XSRF-TOKEN");
+      final portailEntEmseSession = listCookies4
+          .firstWhere((cookie) => cookie.name == "portail_ent_emse_session");
 
-      cookies.addAll(<Cookie>[
+      cookies.addAll([
         agimus,
         casAuth,
         laravelToken,
         xsrfToken,
-        portailEntEmseSession
+        portailEntEmseSession,
       ]);
 
       return cookies;

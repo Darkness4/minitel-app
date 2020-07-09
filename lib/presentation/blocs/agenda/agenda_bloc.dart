@@ -32,8 +32,8 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
   @override
   Stream<AgendaState> mapEventToState(
     AgendaEvent agendaEvent,
-  ) async* {
-    yield* agendaEvent.when(
+  ) {
+    return agendaEvent.when(
       load: _mapAgendaLoadToState,
       download: _mapAgendaDownloadToState,
     );
@@ -43,15 +43,15 @@ class AgendaBloc extends Bloc<AgendaEvent, AgendaState> {
       NotificationSettings notificationSettings) async* {
     yield const AgendaState.loading();
     try {
-      final ParsedCalendar parsedCalendar =
-          await iCalendarRepository.parsedCalendar;
+      final parsedCalendar = await iCalendarRepository.parsedCalendar;
 
       await flutterLocalNotificationsPlugin.cancelAll();
 
-      final Iterable<Event> events = parsedCalendar.sortedByDTStart
-          .where((event) => event.dtstart.isAfter(DateTime.now()));
+      final events = parsedCalendar.sortedByDTStart
+          .where((event) => event.dtstart.isAfter(DateTime.now()))
+          .toList();
 
-      yield AgendaState.loaded(events.toList());
+      yield AgendaState.loaded(events);
 
       if (notificationSettings.enabled) {
         await Future.wait(events.map((event) => event.addToNotification(

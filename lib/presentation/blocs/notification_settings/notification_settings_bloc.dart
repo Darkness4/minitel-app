@@ -24,8 +24,8 @@ class NotificationSettingsBloc
   @override
   Stream<NotificationSettingsState> mapEventToState(
     NotificationSettingsEvent event,
-  ) async* {
-    yield* event.when(
+  ) {
+    return event.when(
       load: _mapNotificationSettingsLoadToState,
       save: _mapSaveNotificationSettingsToState,
       enablingChanged: _mapEnablingChangedToState,
@@ -36,23 +36,17 @@ class NotificationSettingsBloc
 
   Stream<NotificationSettingsState> _mapEarlyChangedToState(
       Duration early) async* {
-    yield state.update(
-      early: early,
-    );
+    yield state.update(early: early);
   }
 
   Stream<NotificationSettingsState> _mapRangeChangedToState(
       Duration range) async* {
-    yield state.update(
-      range: range,
-    );
+    yield state.update(range: range);
   }
 
   Stream<NotificationSettingsState> _mapEnablingChangedToState(
       bool enabled) async* {
-    yield state.update(
-      enabled: enabled,
-    );
+    yield state.update(enabled: enabled);
   }
 
   Stream<NotificationSettingsState> _mapSaveNotificationSettingsToState(

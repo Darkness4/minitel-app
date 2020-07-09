@@ -25,9 +25,9 @@ class NotificationSettingsDataSourceImpl
     if (prefs.containsKey(CacheKeys.early) &&
         prefs.containsKey(CacheKeys.range) &&
         prefs.containsKey(CacheKeys.enabled)) {
-      final int earlyMinutes = prefs.getInt(CacheKeys.early);
-      final int rangeDays = prefs.getInt(CacheKeys.range);
-      final bool enabled = prefs.getBool(CacheKeys.enabled);
+      final earlyMinutes = prefs.getInt(CacheKeys.early);
+      final rangeDays = prefs.getInt(CacheKeys.range);
+      final enabled = prefs.getBool(CacheKeys.enabled);
 
       return NotificationSettings(
         early: Duration(minutes: earlyMinutes),
@@ -41,7 +41,7 @@ class NotificationSettingsDataSourceImpl
 
   @override
   Future<void> saveNotificationSettings(NotificationSettings settings) {
-    return Future.wait(<Future<bool>>[
+    return Future.wait<bool>([
       prefs.setInt(CacheKeys.early, settings.early.inMinutes),
       prefs.setInt(CacheKeys.range, settings.range.inDays),
       prefs.setBool(CacheKeys.enabled, settings.enabled),

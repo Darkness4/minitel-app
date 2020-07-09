@@ -18,8 +18,8 @@ class ReportStatusBloc extends Bloc<ReportStatusEvent, ReportStatusState> {
   @override
   Stream<ReportStatusState> mapEventToState(
     ReportStatusEvent event,
-  ) async* {
-    yield* event.map(
+  ) {
+    return event.map(
       nameChanged: _mapNameChangedToState,
       roomChanged: _mapRoomChangedToState,
       titleChanged: _mapTitleChangedToState,

@@ -19,9 +19,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _uidController = TextEditingController();
-  final TextEditingController _pswdController = TextEditingController();
-  final FocusScopeNode formFocusScopeNode = FocusScopeNode();
+  TextEditingController _uidController;
+  TextEditingController _pswdController;
+  FocusScopeNode formFocusScopeNode;
 
   PortalBloc _portalBloc;
   PortalStatusBloc _portalStatusBloc;
@@ -136,6 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _uidController.dispose();
     _pswdController.dispose();
+    formFocusScopeNode.dispose();
     super.dispose();
   }
 
@@ -148,20 +149,20 @@ class _LoginScreenState extends State<LoginScreen> {
     // Remember credentials
     _portalBloc.add(const AutoLogin());
 
+    _uidController = TextEditingController();
+    _pswdController = TextEditingController();
+    formFocusScopeNode = FocusScopeNode();
+
     _uidController.addListener(_onUidChanged);
     _pswdController.addListener(_onPswdChanged);
   }
 
   void _onPswdChanged() {
-    _portalBloc.add(
-      PswdChanged(_pswdController.text),
-    );
+    _portalBloc.add(PswdChanged(_pswdController.text));
   }
 
   void _onUidChanged() {
-    _portalBloc.add(
-      UidChanged(_uidController.text),
-    );
+    _portalBloc.add(UidChanged(_uidController.text));
   }
 }
 

@@ -36,10 +36,9 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
       headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
     );
 
-    if (response.statusCode == 200) {
-      return List<Map<String, dynamic>>.from(
-              json.decode(response.body) as List<dynamic>)
-          .map((Map<String, dynamic> data) => Post.fromMap(data))
+    if (response.statusCode == HttpStatus.ok) {
+      return (json.decode(response.body) as List<dynamic>)
+          .map((dynamic data) => Post.fromMap(data as Map<String, dynamic>))
           .toList();
     } else {
       throw ServerException(
@@ -59,7 +58,7 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
       body: {'grant_type': 'client_credentials'},
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == HttpStatus.ok) {
       final token = json.decode(response.body)['access_token'] as String;
       if (token != null) {
         tokenBuffer.clear();

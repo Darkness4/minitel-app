@@ -39,21 +39,18 @@ class TwitterScreen extends StatelessWidget {
 
   BlocProvider<TwitterFeedBloc> buildBody(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<TwitterFeedBloc>(),
+      create: (_) => sl<TwitterFeedBloc>()..add(const GetFeedEvent()),
       child: Center(
         child: BlocBuilder<TwitterFeedBloc, TwitterFeedState>(
           builder: (BuildContext context, TwitterFeedState state) {
-            if (state is TwitterFeedStateInitial) {
-              return const InitialDisplay();
-            } else if (state is TwitterFeedStateLoading) {
-              return const CircularProgressIndicator(
-                  key: Key(Keys.newsLoading));
-            } else if (state is TwitterFeedStateLoaded) {
-              return FeedDisplay(feed: state.feed);
-            } else if (state is TwitterFeedStateError) {
-              return ErrorDisplay(message: state.error.toString());
-            }
-            return null;
+            return state.when(
+              initial: () =>
+                  const CircularProgressIndicator(key: Key(Keys.newsLoading)),
+              loading: () =>
+                  const CircularProgressIndicator(key: Key(Keys.newsLoading)),
+              loaded: (feed) => FeedDisplay(feed: feed),
+              error: (error) => ErrorDisplay(message: error.toString()),
+            );
           },
         ),
       ),
@@ -112,19 +109,5 @@ class FeedDisplay extends StatelessWidget {
       width: 50,
     );
     return imageProfile;
-  }
-}
-
-class InitialDisplay extends StatelessWidget {
-  const InitialDisplay({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    context.bloc<TwitterFeedBloc>().add(const GetFeedEvent());
-    return const CircularProgressIndicator(
-      key: Key(Keys.newsLoading),
-    );
   }
 }

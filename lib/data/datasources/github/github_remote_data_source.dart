@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -23,10 +24,10 @@ class GithubRemoteDataSourceImpl implements GithubRemoteDataSource {
     final response =
         await client.get('https://api.github.com/repos/$repo/releases');
 
-    if (response.statusCode == 200) {
-      return List<Map<String, dynamic>>.from(
-              json.decode(response.body) as List<dynamic>)
-          .map((Map<String, dynamic> data) => GithubRelease.fromJson(data))
+    if (response.statusCode == HttpStatus.ok) {
+      return (json.decode(response.body) as List<dynamic>)
+          .map((dynamic data) =>
+              GithubRelease.fromJson(data as Map<String, dynamic>))
           .toList();
     } else {
       throw ServerException(

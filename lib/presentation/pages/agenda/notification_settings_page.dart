@@ -28,8 +28,8 @@ class NotificationSettingsScreen extends StatefulWidget {
 
 class _NotificationSettingsScreenState
     extends State<NotificationSettingsScreen> {
-  final TextEditingController _rangeController = TextEditingController();
-  final TextEditingController _earlyController = TextEditingController();
+  TextEditingController _rangeTextController;
+  TextEditingController _earlyTextController;
   NotificationSettingsBloc _notificationSettingsBloc;
 
   @override
@@ -48,9 +48,9 @@ class _NotificationSettingsScreenState
                 content: Text("Data saved."),
               ));
             } else if (state.isLoaded) {
-              _rangeController.text =
+              _rangeTextController.text =
                   state.notificationSettings.range.inDays.toString();
-              _earlyController.text =
+              _earlyTextController.text =
                   state.notificationSettings.early.inMinutes.toString();
             }
           },
@@ -86,7 +86,7 @@ class _NotificationSettingsScreenState
                         ],
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
-                        controller: _earlyController,
+                        controller: _earlyTextController,
                       ),
                     ),
                     Text(AppLoc.of(context).agenda.notificationSettings.early2),
@@ -104,7 +104,7 @@ class _NotificationSettingsScreenState
                         ],
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
-                        controller: _rangeController,
+                        controller: _rangeTextController,
                       ),
                     ),
                     Text(AppLoc.of(context).agenda.notificationSettings.range2),
@@ -127,8 +127,8 @@ class _NotificationSettingsScreenState
 
   @override
   void dispose() {
-    _rangeController.dispose();
-    _earlyController.dispose();
+    _rangeTextController.dispose();
+    _earlyTextController.dispose();
     super.dispose();
   }
 
@@ -138,21 +138,26 @@ class _NotificationSettingsScreenState
 
     _notificationSettingsBloc = context.bloc<NotificationSettingsBloc>();
 
-    _rangeController.addListener(_onRangeChanged);
-    _earlyController.addListener(_onEarlyChanged);
+    _rangeTextController = TextEditingController();
+    _earlyTextController = TextEditingController();
+
+    _rangeTextController.addListener(_onRangeChanged);
+    _earlyTextController.addListener(_onEarlyChanged);
   }
 
   void _onEarlyChanged() {
-    if (_earlyController.text.length < 3 && _earlyController.text != "") {
-      _notificationSettingsBloc.add(
-          EarlyChanged(Duration(minutes: int.parse(_earlyController.text))));
+    if (_earlyTextController.text.length < 3 &&
+        _earlyTextController.text != "") {
+      _notificationSettingsBloc.add(EarlyChanged(
+          Duration(minutes: int.parse(_earlyTextController.text))));
     }
   }
 
   void _onRangeChanged() {
-    if (_rangeController.text.length < 4 && _rangeController.text != "") {
-      _notificationSettingsBloc
-          .add(RangeChanged(Duration(days: int.parse(_rangeController.text))));
+    if (_rangeTextController.text.length < 4 &&
+        _rangeTextController.text != "") {
+      _notificationSettingsBloc.add(
+          RangeChanged(Duration(days: int.parse(_rangeTextController.text))));
     }
   }
 

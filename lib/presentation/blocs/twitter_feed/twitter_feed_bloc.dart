@@ -23,10 +23,8 @@ class TwitterFeedBloc extends Bloc<TwitterFeedEvent, TwitterFeedState> {
   @override
   Stream<TwitterFeedState> mapEventToState(
     TwitterFeedEvent event,
-  ) async* {
-    if (event is GetFeedEvent) {
-      yield* _mapGetFeedEventToState();
-    }
+  ) {
+    return event.when(get: _mapGetFeedEventToState);
   }
 
   Stream<TwitterFeedState> _mapGetFeedEventToState() async* {

@@ -46,23 +46,19 @@ class SlackRemoteDataSourceImpl implements SlackRemoteDataSource {
     Map<String, String> attachments,
     String channel = "projet_flutter_notif",
   }) async {
-    final List<Map<String, String>> _attachments = <Map<String, String>>[];
+    final _attachments = attachments?.entries
+        ?.map((e) => {
+              "fallback": e.key,
+              "title": e.key,
+              "text": e.value,
+              "footer": "Slack API",
+            })
+        ?.toList();
 
-    if (attachments != null) {
-      attachments.forEach(
-        (String key, String value) => _attachments.add(<String, String>{
-          "fallback": key,
-          "title": key,
-          "text": value,
-          "footer": "Slack API",
-        }),
-      );
-    }
-
-    final Map<String, dynamic> data = <String, dynamic>{
+    final data = <String, dynamic>{
       'text': "*--Report ${dateTimeManager.now()}--*\n"
           "$text\n",
-      "attachments": _attachments,
+      if (_attachments != null) 'attachments': _attachments,
       'channel': channel, // Marc : DTXU7EU56
     };
 

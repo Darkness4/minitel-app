@@ -86,17 +86,22 @@ class _ReportCard extends StatefulWidget {
 }
 
 class __ReportCardState extends State<_ReportCard> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _roomController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final FocusScopeNode _formNode = FocusScopeNode();
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController _titleController;
+  TextEditingController _descriptionController;
+  TextEditingController _roomController;
+  TextEditingController _nameController;
+  FocusScopeNode _formNode;
 
   ReportStatusBloc _reportStatusBloc;
 
   @override
   void initState() {
+    _titleController = TextEditingController();
+    _descriptionController = TextEditingController();
+    _roomController = TextEditingController();
+    _nameController = TextEditingController();
+    _formNode = FocusScopeNode();
     _reportStatusBloc = context.bloc<ReportStatusBloc>();
 
     _titleController.addListener(_onTitleChanged);
@@ -104,6 +109,16 @@ class __ReportCardState extends State<_ReportCard> {
     _roomController.addListener(_onRoomChanged);
     _nameController.addListener(_onNameChanged);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    _roomController.dispose();
+    _nameController.dispose();
+    _formNode.dispose();
+    super.dispose();
   }
 
   void _onTitleChanged() {

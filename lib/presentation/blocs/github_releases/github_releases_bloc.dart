@@ -24,8 +24,8 @@ class GithubReleasesBloc
   @override
   Stream<GithubReleasesState> mapEventToState(
     GithubReleasesEvent event,
-  ) async* {
-    yield* _mapGetReleasesEventToState(event.repo);
+  ) {
+    return _mapGetReleasesEventToState(event.repo);
   }
 
   Stream<GithubReleasesState> _mapGetReleasesEventToState(String repo) async* {

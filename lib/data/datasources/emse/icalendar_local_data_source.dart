@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -9,7 +8,7 @@ import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 
 abstract class ICalendarLocalDataSource {
   /// Save iCalendar to cache
-  Future<void> cacheICalendar(Stream<String> data);
+  Future<void> cacheICalendar(Stream<List<int>> data);
 
   /// Get a parsed calendar from cache
   Future<ParsedCalendar> getParsedCalendar();
@@ -23,10 +22,10 @@ class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
 
   /// Get the calendar from url and save the .ics (and the url)
   @override
-  Future<void> cacheICalendar(Stream<String> data) async {
-    final IOSink sink = (await fileManager.icalendarFile).openWrite();
+  Future<void> cacheICalendar(Stream<List<int>> data) async {
+    final sink = (await fileManager.icalendarFile).openWrite();
 
-    await data.forEach(sink.write);
+    await data.forEach(sink.add);
     await sink.close();
   }
 
@@ -39,11 +38,15 @@ class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
     // Read the file
     final file = await fileManager.icalendarFile;
     if (file.existsSync()) {
-      final Stream<String> calendarStream =
-          file.openRead().transform(utf8.decoder);
-      return ParsedCalendar.parse(calendarStream);
+      return file.openRead().transform(utf8.decoder).toParsedCalendar();
     } else {
       throw CacheException("No calendar in cache");
     }
+  }
+}
+
+extension on Stream<String> {
+  Future<ParsedCalendar> toParsedCalendar() {
+    return ParsedCalendar.parse(this);
   }
 }

@@ -22,8 +22,8 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
   @override
   Stream<DiagnosisState> mapEventToState(
     DiagnosisEvent event,
-  ) async* {
-    yield* event.when(
+  ) {
+    return event.when(
       run: _mapDiagnosisRunToState,
       cancel: _mapDiagnosisCancelToState,
     );

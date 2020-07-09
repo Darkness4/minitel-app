@@ -20,8 +20,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   @override
   Stream<ThemeState> mapEventToState(
     ThemeEvent event,
-  ) async* {
-    yield* event.when(
+  ) {
+    return event.when(
       toDark: () async* {
         await prefs.setString('initial_theme', 'Dark');
         yield ThemeState.dark();

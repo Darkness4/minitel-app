@@ -21,15 +21,15 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
 
   @override
   Future<List<ZabbixHost>> fetchZabbixHosts(int groupids) async {
-    final Map<String, Object> data = <String, dynamic>{
+    final data = <String, dynamic>{
       "jsonrpc": "2.0",
       "method": "host.get",
-      "params": <String, dynamic>{
+      "params": {
         "groupids": groupids,
-        "output": <String>[
+        "output": [
           "host",
         ],
-        "selectItems": <String>[
+        "selectItems": [
           'type',
           'value_type',
           'name',
@@ -37,7 +37,7 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
           'units',
           'snmp_oid',
         ],
-        "selectInterfaces": <String>[
+        "selectInterfaces": [
           "ip",
         ],
       },
@@ -45,7 +45,7 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
       "auth": ApiKeys.zabbixToken,
     };
 
-    final String dataEncoded = json.encode(data);
+    final dataEncoded = json.encode(data);
 
     try {
       final response = await clientNoCheck.post(
@@ -54,13 +54,11 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
         body: dataEncoded,
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == HttpStatus.ok) {
         final body = json.decode(response.body) as Map<String, dynamic>;
-        final List<Map<String, dynamic>> result =
-            List<Map<String, dynamic>>.from(body["result"] as List<dynamic>);
-        final List<ZabbixHost> output = result
-            .map<ZabbixHost>(
-                (Map<String, dynamic> host) => ZabbixHost.fromJson(host))
+        final output = (body["result"] as List<dynamic>)
+            .map((dynamic host) =>
+                ZabbixHost.fromJson(host as Map<String, dynamic>))
             .toList();
         return output;
       } else {

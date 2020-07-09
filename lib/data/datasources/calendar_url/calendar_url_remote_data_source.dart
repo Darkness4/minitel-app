@@ -25,47 +25,45 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
   /// Get from EMSE the url to get the ical
   @override
   Future<String> getCalendarURL({String username, String password}) async {
-    final Cookie phpSessionIDCAS = await _fetchCasCookie(
+    final phpSessionIDCAS = await _fetchCasCookie(
       username: username,
       password: password,
     );
 
-    final String calendarUrl = await _fetchCalendarUrl(phpSessionIDCAS);
-    return calendarUrl;
+    return _fetchCalendarUrl(phpSessionIDCAS);
   }
 
   Future<String> _fetchCalendarUrl(Cookie phpSessionIDCAS) async {
-    final http.Response response = await client.get(
+    final response = await client.get(
       "https://portail.emse.fr/ics/",
       headers: {
         HttpHeaders.cookieHeader:
             "${phpSessionIDCAS.name}=${phpSessionIDCAS.value}"
       },
     );
-    final String calendarUrl =
-        RegExp(r'https(.*)\.ics').stringMatch(response.body);
+    final calendarUrl = RegExp(r'https(.*)\.ics').stringMatch(response.body);
     return calendarUrl;
   }
 
   /// Login through EMSE CAS Authentication
   Future<Cookie> _fetchCasCookie({String username, String password}) async {
-    const String referee = "https://portail.emse.fr/ics/";
+    final referee = Uri.encodeComponent("https://portail.emse.fr/ics/");
 
     // GET CAS
-    final http.Response responseCAS = await client.get(
-        "https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}");
+    final responseCAS =
+        await client.get("https://cas.emse.fr/login?service=$referee");
 
-    if (responseCAS.statusCode != 200) {
+    if (responseCAS.statusCode != HttpStatus.ok) {
       throw ServerException('HTTP Error: ${responseCAS.statusCode}');
     }
 
-    final String lt = RegExp('name="lt" value="([^"]*)"')
+    final lt = RegExp('name="lt" value="([^"]*)"')
         .firstMatch(responseCAS.body)
         .group(1);
 
-    final Cookie jSessionID = responseCAS.headers
+    final jSessionID = responseCAS.headers
         .parseSetCookie()
-        .firstWhere((Cookie cookie) => cookie.name == "JSESSIONID");
+        .firstWhere((cookie) => cookie.name == "JSESSIONID");
 
     // POST CAS
     final Map<String, String> data = {
@@ -75,28 +73,28 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
       'execution': 'e1s1',
       '_eventId': 'submit',
     };
-    final http.Response responsePOST = await client.post(
-        'https://cas.emse.fr/login;jsessionid=${jSessionID.value}?service=${Uri.encodeComponent(referee)}',
+    final responsePOST = await client.post(
+        'https://cas.emse.fr/login;jsessionid=${jSessionID.value}?service=$referee',
         body: data,
-        headers: <String, String>{
+        headers: {
           HttpHeaders.refererHeader:
-              'https://cas.emse.fr/login?service=${Uri.encodeComponent(referee)}'
+              'https://cas.emse.fr/login?service=$referee'
         });
 
     if (!responsePOST.headers.containsKey(HttpHeaders.locationHeader)) {
       throw ClientException('Location was not found, probably a Bad login');
     }
 
-    final String location = responsePOST.headers[HttpHeaders.locationHeader];
+    final location = responsePOST.headers[HttpHeaders.locationHeader];
 
     // GET CAS
-    final http.Request request = http.Request('GET', Uri.parse(location))
+    final request = http.Request('GET', Uri.parse(location))
       ..followRedirects = false;
     final responseFinal = await client.send(request);
 
-    final Cookie phpSessionIDCAS = responseFinal.headers
+    final phpSessionIDCAS = responseFinal.headers
         .parseSetCookie()
-        .firstWhere((Cookie cookie) => cookie.name == "PHPSESSID");
+        .firstWhere((cookie) => cookie.name == "PHPSESSID");
 
     // Cookie
     return phpSessionIDCAS;

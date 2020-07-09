@@ -33,11 +33,11 @@ class ICalendarRepositoryImpl implements ICalendarRepository {
     @required String password,
   }) async {
     if (await networkInfo.result != ConnectivityResult.none) {
-      final String url = await calendarURLRepository.get(
+      final url = await calendarURLRepository.get(
         username: username,
         password: password,
       );
-      final Stream<String> data = remoteDataSource.streamICalendar(url);
+      final data = remoteDataSource.streamICalendar(url);
       return localDataSource.cacheICalendar(data);
     } else {
       throw ClientException("No Wi-Fi.");
