@@ -72,7 +72,7 @@ class PortalLoginBloc extends Bloc<PortalLoginEvent, PortalLoginState> {
         responsePortailEMSE,
         responseImprimante,
       ]).timeout(const Duration(seconds: 5),
-          onTimeout: () => throw ClientException("Timed out"));
+          onTimeout: () => throw ClientException('Timed out'));
       yield PortalLoginState.success();
     } on Exception catch (e) {
       yield PortalLoginState.failure(e);

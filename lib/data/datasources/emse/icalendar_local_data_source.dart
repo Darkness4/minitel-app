@@ -40,7 +40,7 @@ class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
     if (file.existsSync()) {
       return file.openRead().transform(utf8.decoder).toParsedCalendar();
     } else {
-      throw CacheException("No calendar in cache");
+      throw CacheException('No calendar in cache');
     }
   }
 }

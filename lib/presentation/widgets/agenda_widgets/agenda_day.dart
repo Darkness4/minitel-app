@@ -55,35 +55,35 @@ class EventCard extends StatelessWidget {
 
   Color _getCardColor(BuildContext context) {
     if (Theme.of(context).brightness == Brightness.light) {
-      final String upper = event.summary.toLowerCase();
-      if (upper.contains("examen")) {
+      final upper = event.summary.toLowerCase();
+      if (upper.contains('examen')) {
         return Colors.red[200];
-      } else if (upper.contains("tp")) {
+      } else if (upper.contains('tp')) {
         return Colors.orange[200];
-      } else if (upper.contains("td")) {
+      } else if (upper.contains('td')) {
         return Colors.green[200];
-      } else if (upper.contains("tutorat")) {
+      } else if (upper.contains('tutorat')) {
         return Colors.blue[200];
-      } else if (upper.contains("sport") ||
-          upper.contains("vacance") ||
-          upper.contains("férié")) {
+      } else if (upper.contains('sport') ||
+          upper.contains('vacance') ||
+          upper.contains('férié')) {
         return Colors.transparent;
       } else {
         return Colors.white;
       }
     } else {
-      final String upper = event.summary.toLowerCase();
-      if (upper.contains("examen")) {
+      final upper = event.summary.toLowerCase();
+      if (upper.contains('examen')) {
         return Colors.red[900].withOpacity(0.5);
-      } else if (upper.contains("tp")) {
+      } else if (upper.contains('tp')) {
         return Colors.orange[900].withOpacity(0.5);
-      } else if (upper.contains("td")) {
+      } else if (upper.contains('td')) {
         return Colors.green[900].withOpacity(0.5);
-      } else if (upper.contains("tutorat")) {
+      } else if (upper.contains('tutorat')) {
         return Colors.blue[900].withOpacity(0.5);
-      } else if (upper.contains("sport") ||
-          upper.contains("vacance") ||
-          upper.contains("férié")) {
+      } else if (upper.contains('sport') ||
+          upper.contains('vacance') ||
+          upper.contains('férié')) {
         return Colors.transparent;
       } else {
         return Colors.grey.withOpacity(0.2);
@@ -97,20 +97,20 @@ class EventCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Card(
         color: _getCardColor(context),
-        elevation: (event.summary.toLowerCase().contains("sport") ||
-                event.summary.toLowerCase().contains("vacance") ||
-                event.summary.toLowerCase().contains("férié"))
+        elevation: (event.summary.toLowerCase().contains('sport') ||
+                event.summary.toLowerCase().contains('vacance') ||
+                event.summary.toLowerCase().contains('férié'))
             ? 0
             : 4,
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Text.rich(
             TextSpan(
-              text: "${event.summary}\n",
+              text: '${event.summary}\n',
               style: const TextStyle(fontWeight: FontWeight.bold),
               children: <TextSpan>[
                 TextSpan(
-                  text: "${event.description}\n",
+                  text: '${event.description}\n',
                   style: const TextStyle(
                       fontWeight: FontWeight.normal, height: 1.4),
                 ),
@@ -124,9 +124,9 @@ class EventCard extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: "${DateFormat.Hm().format(event.dtstart)}"
-                      " - "
-                      "${DateFormat.Hm().format(event.dtend)}",
+                  text: '${DateFormat.Hm().format(event.dtstart)}'
+                      ' - '
+                      '${DateFormat.Hm().format(event.dtend)}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

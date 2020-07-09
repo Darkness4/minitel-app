@@ -22,42 +22,41 @@ class AboutPage extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               ListTile(
-                title: const Text("Minitel Toolbox"),
+                title: const Text('Minitel Toolbox'),
                 isThreeLine: true,
                 subtitle: Text(AppLoc.of(context).about.description),
               ),
               const Divider(),
               ListTile(
                 title: Text(AppLoc.of(context).about.developper),
-                subtitle: const Text("Marc NGUYEN <nguyen_marc@live.fr>"),
+                subtitle: const Text('Marc NGUYEN <nguyen_marc@live.fr>'),
                 onTap: LaunchURLConstants.mailToMarcNGUYEN,
               ),
               const Divider(),
               ListTile(
                 title: Text(AppLoc.of(context).about.lastVestion),
                 subtitle: const Text(
-                    "https://github.com/Darkness4/minitel-app/releases"),
+                    'https://github.com/Darkness4/minitel-app/releases'),
                 onTap: LaunchURLConstants.githubDarkness4Releases,
               ),
               const Divider(),
               ListTile(
                 title: Text(AppLoc.of(context).about.website), // Minitel
-                subtitle: const Text("minitel.emse.fr"),
+                subtitle: const Text('minitel.emse.fr'),
                 onTap: LaunchURLConstants.minitelWebsite,
               ),
               const Divider(),
               ListTile(
                 title: Text(AppLoc.of(context).about.license),
-                subtitle: const Text("License MIT"),
+                subtitle: const Text('License MIT'),
                 onTap: () async {
-                  final PackageInfo packageInfo =
-                      await PackageInfo.fromPlatform();
+                  final packageInfo = await PackageInfo.fromPlatform();
                   showLicensePage(
                     context: context,
                     applicationIcon: const ImageIcon(
                       AssetImage(AssetPaths.icon),
                     ),
-                    applicationLegalese: """
+                    applicationLegalese: '''
 MIT License
 
 Copyright (c) 2019-2020 NGUYEN Marc
@@ -78,7 +77,8 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.""",
+SOFTWARE.
+''',
                     applicationVersion: packageInfo.version,
                   );
                 },
@@ -94,7 +94,7 @@ SOFTWARE.""",
               ),
               const Divider(),
               ListTile(
-                title: const Text("Version"),
+                title: const Text('Version'),
                 subtitle: FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
                   builder: (BuildContext context,

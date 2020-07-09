@@ -38,8 +38,7 @@ void main() {
       'should call localDataSource.saveNotificationSettings()',
       () async {
         // arrange
-        const NotificationSettings tNotificationSettings =
-            tNotificationSettingsModel;
+        const tNotificationSettings = tNotificationSettingsModel;
         // act
         await repository.save(tNotificationSettings);
         // assert

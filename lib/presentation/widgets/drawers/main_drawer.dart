@@ -30,7 +30,7 @@ class MainDrawer extends StatelessWidget {
                   child: Image.asset(AssetPaths.logoMinitelWhite),
                 ),
                 const Text(
-                  "Minitel Toolbox",
+                  'Minitel Toolbox',
                   style: TextStyle(color: Colors.white, fontSize: 23),
                 ),
               ],
@@ -141,7 +141,7 @@ class MainDrawer extends StatelessWidget {
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-              title: const Text("Documentation"),
+              title: const Text('Documentation'),
               leading: const Icon(Icons.library_books),
               key: const Key(Keys.docsRoute),
               selected: currentRoutePaths == RoutePaths.docs,
@@ -176,28 +176,28 @@ class MainDrawer extends StatelessWidget {
           ),
           const Divider(),
           const ListTile(
-            title: Text("Theme"),
+            title: Text('Theme'),
           ),
           BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Radio(
-                  value: "Dark",
+                  value: 'Dark',
                   groupValue: state.value,
                   onChanged: (String _) async {
                     context.bloc<ThemeBloc>().add(const ThemeToDark());
                   },
                 ),
                 Radio(
-                  value: "Adaptive",
+                  value: 'Adaptive',
                   groupValue: state.value,
                   onChanged: (String _) async {
                     context.bloc<ThemeBloc>().add(const ThemeToAdaptive());
                   },
                 ),
                 Radio(
-                  value: "Light",
+                  value: 'Light',
                   groupValue: state.value,
                   onChanged: (String _) async {
                     context.bloc<ThemeBloc>().add(const ThemeToLight());
@@ -209,9 +209,9 @@ class MainDrawer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const <Widget>[
-              Text("Dark"),
-              Text("Adaptive"),
-              Text("Light"),
+              Text('Dark'),
+              Text('Adaptive'),
+              Text('Light'),
             ],
           )
         ],

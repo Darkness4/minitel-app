@@ -15,10 +15,10 @@ class MockListCookies extends Mock implements List<Cookie> {}
 void main() {
   StormshieldRemoteDataSource dataSource;
   MockHttpClient mockHttpClient;
-  const String tUser = 'marc.nguyen';
-  const String tPassword = 'abcdefgh';
-  const String tSelectedUrl = "1.1.1.1";
-  const int tSelectedTime = 240;
+  const tUser = 'marc.nguyen';
+  const tPassword = 'abcdefgh';
+  const tSelectedUrl = '1.1.1.1';
+  const tSelectedTime = 240;
 
   setUp(() {
     mockHttpClient = MockHttpClient();
@@ -42,8 +42,8 @@ void main() {
     when(
       mockHttpClient.post(
         'https://$tSelectedUrl/auth/plain.html',
-        body: anyNamed("body"),
-        headers: anyNamed("headers"),
+        body: anyNamed('body'),
+        headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response(
           fixture(
@@ -60,8 +60,8 @@ void main() {
         .thenAnswer((_) async => http.Response('Something went wrong', 404));
     when(mockHttpClient.post(
       any,
-      body: anyNamed("body"),
-      headers: anyNamed("headers"),
+      body: anyNamed('body'),
+      headers: anyNamed('headers'),
     )).thenAnswer((_) async => http.Response('Something went wrong', 404));
     when(mockHttpClient.send(any)).thenAnswer((_) async =>
         http.StreamedResponse(
@@ -83,8 +83,8 @@ void main() {
     when(
       mockHttpClient.post(
         'https://$tSelectedUrl/auth/plain.html',
-        body: anyNamed("body"),
-        headers: anyNamed("headers"),
+        body: anyNamed('body'),
+        headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/stormshield_remote_data_source/failed.html'),
@@ -108,8 +108,8 @@ void main() {
     when(
       mockHttpClient.post(
         'https://$tSelectedUrl/auth/plain.html',
-        body: anyNamed("body"),
-        headers: anyNamed("headers"),
+        body: anyNamed('body'),
+        headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response(
           fixture(
@@ -123,7 +123,7 @@ void main() {
 
   group('login', () {
     test(
-      "should perform a POST request",
+      'should perform a POST request',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
@@ -142,7 +142,7 @@ void main() {
             'time': tSelectedTime.toString(),
             'pswd': tPassword,
           },
-          headers: anyNamed("headers"),
+          headers: anyNamed('headers'),
         ));
       },
     );
@@ -188,7 +188,7 @@ void main() {
 
   group('fetchStatus', () {
     test(
-      "should perform a GET request on a URL with tSelectedUrl being the endpoint",
+      'should perform a GET request on a URL with tSelectedUrl being the endpoint',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
@@ -199,8 +199,7 @@ void main() {
           captureThat(isA<http.Request>()),
         ));
 
-        final http.Request request =
-            verification.captured.first as http.Request;
+        final request = verification.captured.first as http.Request;
         expect(request.url.toString(),
             equals('https://$tSelectedUrl/auth/login.html'));
       },
@@ -214,7 +213,7 @@ void main() {
         // act
         final result = await dataSource.fetchStatus(tSelectedUrl);
         // assert
-        expect(result, equals("13424"));
+        expect(result, equals('13424'));
       },
     );
 

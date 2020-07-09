@@ -19,8 +19,8 @@ void main() {
       () async {
         // arrange
         const tZabbixHost = ZabbixHost(
-          host: "host",
-          hostid: "hostid",
+          host: 'host',
+          hostid: 'hostid',
           interfaces: [],
           items: [
             ZabbixItem(

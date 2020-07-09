@@ -15,7 +15,7 @@ class ZabbixScreen extends StatelessWidget {
           Card(
             child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text("From Zabbix."),
+              child: Text('From Zabbix.'),
             ),
           ),
           Divider(),

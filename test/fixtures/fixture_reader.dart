@@ -8,3 +8,11 @@ String fixture(String name) {
   );
   return File('$testDirectory/fixtures/$name').readAsStringSync();
 }
+
+List<int> fixtureBytes(String name) {
+  final testDirectory = join(
+    Directory.current.path,
+    Directory.current.path.endsWith('test') ? '' : 'test',
+  );
+  return File('$testDirectory/fixtures/$name').readAsBytesSync();
+}

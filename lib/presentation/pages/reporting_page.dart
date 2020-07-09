@@ -175,14 +175,14 @@ class ReportingPageState extends State<ReportingPage>
                   Icons.warning,
                   key: Key(Keys.reportingTab),
                 ),
-                text: "Report",
+                text: 'Report',
               ),
               Tab(
                 icon: Icon(
                   Icons.zoom_in,
                   key: Key(Keys.diagnosisTab),
                 ),
-                text: "Diagnosis",
+                text: 'Diagnosis',
               ),
               Tab(
                 icon: Icon(
@@ -197,7 +197,7 @@ class ReportingPageState extends State<ReportingPage>
       ];
 
   Widget _mailButton(BuildContext context) => AnimatedFloatingButton(
-        "Mail",
+        'Mail',
         end: 0.5,
         controller: _animationController,
         onPressed: () {
@@ -222,15 +222,15 @@ class ReportingPageState extends State<ReportingPage>
       ReportStatusState reportStatusState, BuildContext context) {
     if (!reportStatusState.isValidName) {
       Scaffold.of(context).showSnackBar(const SnackBar(
-        content: Text("Identity is not valid."),
+        content: Text('Identity is not valid.'),
       ));
     } else if (!reportStatusState.isValidRoom) {
       Scaffold.of(context).showSnackBar(const SnackBar(
-        content: Text("Room is not valid."),
+        content: Text('Room is not valid.'),
       ));
     } else if (!reportStatusState.isValidTitle) {
       Scaffold.of(context).showSnackBar(const SnackBar(
-        content: Text("Title is not valid."),
+        content: Text('Title is not valid.'),
       ));
     }
   }
@@ -249,7 +249,7 @@ class ReportingPageState extends State<ReportingPage>
                   room: reportStatusState.room,
                   title: reportStatusState.title,
                   diagnosis: diagnosisState.diagnosis,
-                  channel: "minitel_toolbox_notifications",
+                  channel: 'minitel_toolbox_notifications',
                 ));
           } else if (!reportStatusState.isValid) {
             _showNotValidSnackbar(reportStatusState, context);

@@ -31,16 +31,16 @@ void main() {
     });
 
     test('Check flutter driver health', () async {
-      final Health health = await driver.checkHealth();
+      final health = await driver.checkHealth();
       expect(health.status, equals(HealthStatus.ok));
     });
 
     group('Automated screenshot', () {
       test('Screenshot login', () async {
         await driver.tap(find.byValueKey(Keys.uidLoginTextField));
-        await driver.enterText("marc.nguyen");
+        await driver.enterText('marc.nguyen');
         await driver.tap(find.byValueKey(Keys.pswdLoginTextField));
-        await driver.enterText(utf8.decode(base64.decode("b3BzdGU5NjM=")));
+        await driver.enterText(utf8.decode(base64.decode('b3BzdGU5NjM=')));
         await driver.tap(find.byValueKey(Keys.loginButton));
         await takeScreenshot(driver, ScreenshotsPaths.login);
       });
@@ -58,21 +58,21 @@ void main() {
       }, timeout: const Timeout(Duration(minutes: 1)));
 
       test('Screenshot news', () async {
-        await driver.tap(find.byTooltip("Open navigation menu"));
+        await driver.tap(find.byTooltip('Open navigation menu'));
         await driver.tap(find.byValueKey(Keys.newsRoute));
         await Future<dynamic>.delayed(const Duration(seconds: 10));
         await takeScreenshot(driver, ScreenshotsPaths.news);
       });
 
       test('Screenshot agenda', () async {
-        await driver.tap(find.byTooltip("Open navigation menu"));
+        await driver.tap(find.byTooltip('Open navigation menu'));
         await driver.tap(find.byValueKey(Keys.agendaRoute));
         await Future<dynamic>.delayed(const Duration(seconds: 10));
         await takeScreenshot(driver, ScreenshotsPaths.agenda);
       }, timeout: const Timeout(Duration(minutes: 1)));
 
       test('Screenshot reporting', () async {
-        await driver.tap(find.byTooltip("Open navigation menu"));
+        await driver.tap(find.byTooltip('Open navigation menu'));
         await driver.tap(find.byValueKey(Keys.reportingRoute));
         await takeScreenshot(driver, ScreenshotsPaths.reporting);
       });
@@ -90,7 +90,7 @@ void main() {
       }, timeout: const Timeout(Duration(minutes: 3)));
 
       test('Screenshot docs', () async {
-        await driver.tap(find.byTooltip("Open navigation menu"));
+        await driver.tap(find.byTooltip('Open navigation menu'));
         await driver.tap(find.byValueKey(Keys.docsRoute));
         await Future<dynamic>.delayed(const Duration(seconds: 30));
         await takeScreenshot(driver, ScreenshotsPaths.docs);
@@ -104,8 +104,8 @@ Future<void> takeScreenshot(FlutterDriver driver, String path) async {
     await driver
         .waitUntilNoTransientCallbacks()
         .timeout(const Duration(seconds: 5), onTimeout: () {});
-    final List<int> pixels = await driver.screenshot();
-    final File file = File(path);
+    final pixels = await driver.screenshot();
+    final file = File(path);
     file.createSync(recursive: true);
     file.writeAsBytesSync(pixels);
   } catch (e) {
@@ -114,12 +114,12 @@ Future<void> takeScreenshot(FlutterDriver driver, String path) async {
 }
 
 class ScreenshotsPaths {
-  static const String login = "test_driver/screenshots/login.png";
-  static const String apps = "test_driver/screenshots/apps.png";
-  static const String news = "test_driver/screenshots/news.png";
-  static const String agenda = "test_driver/screenshots/agenda.png";
-  static const String reporting = "test_driver/screenshots/reporting.png";
-  static const String diagnosis = "test_driver/screenshots/diagnosis.png";
-  static const String docs = "test_driver/screenshots/docs.png";
-  static const String sogo = "test_driver/screenshots/sogo.png";
+  static const String login = 'test_driver/screenshots/login.png';
+  static const String apps = 'test_driver/screenshots/apps.png';
+  static const String news = 'test_driver/screenshots/news.png';
+  static const String agenda = 'test_driver/screenshots/agenda.png';
+  static const String reporting = 'test_driver/screenshots/reporting.png';
+  static const String diagnosis = 'test_driver/screenshots/diagnosis.png';
+  static const String docs = 'test_driver/screenshots/docs.png';
+  static const String sogo = 'test_driver/screenshots/sogo.png';
 }

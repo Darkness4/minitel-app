@@ -67,7 +67,7 @@ class FeedDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Image imageProfile = _imageProfile();
+    final imageProfile = _imageProfile();
     return OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
         if (MediaQuery.of(context).size.shortestSide < 600 &&
@@ -102,7 +102,7 @@ class FeedDisplay extends StatelessWidget {
   }
 
   Image _imageProfile() {
-    final Image imageProfile = Image.network(
+    final imageProfile = Image.network(
       feed.first.profile_image_url_https.toString(),
       fit: BoxFit.cover,
       height: 50,

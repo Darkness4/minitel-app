@@ -8,11 +8,11 @@ void main() {
         'if no specific message, return ServerException',
         () async {
           // arrange
-          final CacheException exception = CacheException();
+          final exception = CacheException();
           // act
           final result = exception.toString();
           // assert
-          expect(result, equals("CacheException"));
+          expect(result, equals('CacheException'));
         },
       );
 
@@ -20,11 +20,11 @@ void main() {
         'if specific message, return ServerException: [message]',
         () async {
           // arrange
-          final CacheException exception = CacheException("message");
+          final exception = CacheException('message');
           // act
           final result = exception.toString();
           // assert
-          expect(result, equals("CacheException: message"));
+          expect(result, equals('CacheException: message'));
         },
       );
     });
@@ -36,11 +36,11 @@ void main() {
         'if no specific message, return ServerException',
         () async {
           // arrange
-          final ServerException exception = ServerException();
+          final exception = ServerException();
           // act
           final result = exception.toString();
           // assert
-          expect(result, equals("ServerException"));
+          expect(result, equals('ServerException'));
         },
       );
 
@@ -48,11 +48,11 @@ void main() {
         'if specific message, return ServerException: [message]',
         () async {
           // arrange
-          final ServerException exception = ServerException("message");
+          final exception = ServerException('message');
           // act
           final result = exception.toString();
           // assert
-          expect(result, equals("ServerException: message"));
+          expect(result, equals('ServerException: message'));
         },
       );
     });
@@ -64,11 +64,11 @@ void main() {
         'if no specific message, return ClientException',
         () async {
           // arrange
-          final ClientException exception = ClientException();
+          final exception = ClientException();
           // act
           final result = exception.toString();
           // assert
-          expect(result, equals("ClientException"));
+          expect(result, equals('ClientException'));
         },
       );
 
@@ -76,11 +76,11 @@ void main() {
         'if specific message, return ClientException: [message]',
         () async {
           // arrange
-          final ClientException exception = ClientException("message");
+          final exception = ClientException('message');
           // act
           final result = exception.toString();
           // assert
-          expect(result, equals("ClientException: message"));
+          expect(result, equals('ClientException: message'));
         },
       );
     });
@@ -92,11 +92,11 @@ void main() {
         'return "Not logged in."',
         () async {
           // arrange
-          final NotLoggedInException exception = NotLoggedInException();
+          final exception = NotLoggedInException();
           // act
           final result = exception.toString();
           // assert
-          expect(result, equals("Not logged in."));
+          expect(result, equals('Not logged in.'));
         },
       );
     });

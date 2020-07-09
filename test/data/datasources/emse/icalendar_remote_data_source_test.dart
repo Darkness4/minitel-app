@@ -37,12 +37,12 @@ void main() {
 
   void setUpMockHttpClientFailure() {
     when(mockHttpClient.send(any))
-        .thenAnswer((_) async => throw Exception("Mock error"));
+        .thenAnswer((_) async => throw Exception('Mock error'));
   }
 
   group('streamICalendar', () {
     test(
-      "should perform a GET request",
+      'should perform a GET request',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
@@ -52,8 +52,7 @@ void main() {
         final verification = verify(
           mockHttpClient.send(captureThat(isA<http.BaseRequest>())),
         );
-        final http.Request capturedRequest =
-            verification.captured.first as http.Request;
+        final capturedRequest = verification.captured.first as http.Request;
         expect(capturedRequest.url.toString(), equals(tURL));
       },
     );
@@ -63,10 +62,11 @@ void main() {
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
-        final String tICalendar = fixture(
+        final tICalendar = fixtureBytes(
             'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics');
         // act
-        final String result = await dataSource.streamICalendar(tURL).join();
+        final result = await dataSource.streamICalendar(tURL).fold<List<int>>(
+            <int>[], (previous, element) => previous + element);
         // assert
         expect(result, equals(tICalendar));
       },

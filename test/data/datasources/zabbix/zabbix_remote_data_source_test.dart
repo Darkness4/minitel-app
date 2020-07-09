@@ -54,7 +54,7 @@ void main() {
       ),
     ).thenAnswer(
       (_) async =>
-          throw const SocketException("OS Error: Connection timed out"),
+          throw const SocketException('OS Error: Connection timed out'),
     );
   }
 
@@ -66,7 +66,7 @@ void main() {
         headers: anyNamed('headers'),
       ),
     ).thenAnswer(
-      (_) async => throw const SocketException("OS Error: No route to host"),
+      (_) async => throw const SocketException('OS Error: No route to host'),
     );
   }
 
@@ -78,7 +78,7 @@ void main() {
         headers: anyNamed('headers'),
       ),
     ).thenAnswer(
-      (_) async => throw const SocketException("Something went wrong."),
+      (_) async => throw const SocketException('Something went wrong.'),
     );
   }
 
@@ -86,14 +86,14 @@ void main() {
     // arrange
     const tGroupIds = 17;
     final Map<String, Object> tData = <String, dynamic>{
-      "jsonrpc": "2.0",
-      "method": "host.get",
-      "params": <String, dynamic>{
-        "groupids": tGroupIds,
-        "output": <String>[
-          "host",
+      'jsonrpc': '2.0',
+      'method': 'host.get',
+      'params': <String, dynamic>{
+        'groupids': tGroupIds,
+        'output': <String>[
+          'host',
         ],
-        "selectItems": <String>[
+        'selectItems': <String>[
           'type',
           'value_type',
           'name',
@@ -101,34 +101,33 @@ void main() {
           'units',
           'snmp_oid',
         ],
-        "selectInterfaces": <String>[
-          "ip",
+        'selectInterfaces': <String>[
+          'ip',
         ],
       },
-      "id": 2,
-      "auth": ApiKeys.zabbixToken,
+      'id': 2,
+      'auth': ApiKeys.zabbixToken,
     };
 
     final tBody = json.decode(
             fixture('datasources/zabbix_remote_data_source/ap_response.json'))
         as Map<String, dynamic>;
-    final List<ZabbixHost> tListZabbixHostModel = (tBody["result"]
-            as List<dynamic>)
+    final tListZabbixHostModel = (tBody['result'] as List<dynamic>)
         .map<ZabbixHost>(
             (dynamic host) => ZabbixHost.fromJson(host as Map<String, dynamic>))
         .toList();
     test(
-      "should perform a GET request",
+      'should perform a GET request',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
-        final String tDataEncoded = json.encode(tData);
+        final tDataEncoded = json.encode(tData);
         // act
         await dataSource.fetchZabbixHosts(tGroupIds);
         // assert
         verify(mockHttpClient.post(
           '${ApiKeys.zabbixPath}/api_jsonrpc.php',
-          headers: {"Content-Type": "application/json-rpc"},
+          headers: {'Content-Type': 'application/json-rpc'},
           body: tDataEncoded,
         ));
       },

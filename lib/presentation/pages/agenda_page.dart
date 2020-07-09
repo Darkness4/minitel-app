@@ -107,9 +107,9 @@ class AgendaPage extends StatelessWidget {
 
   Stream<List<Widget>> _listEventCards(
       BuildContext context, Iterable<Event> events) async* {
-    List<Widget> monthlyWidgets = <Widget>[];
-    List<Widget> dailyEvents = <Widget>[];
-    final List<Widget> monthPages = <Widget>[];
+    var monthlyWidgets = <Widget>[];
+    var dailyEvents = <Widget>[];
+    final monthPages = <Widget>[];
     DateTime oldDt;
 
     if (events.isEmpty) {
@@ -131,7 +131,7 @@ class AgendaPage extends StatelessWidget {
       yield monthPages;
       DateTime dt;
 
-      for (final Event event in events) {
+      for (final event in events) {
         dt = event.dtstart;
 
         // New Month

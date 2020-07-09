@@ -16,10 +16,10 @@ void main() {
   MockLocalDataSource mockLocalDataSource;
   const tPosts = <Post>[
     Post(
-      text: "text",
-      id_str: "id_str",
-      user_name: "user_name",
-      screen_name: "screen_name",
+      text: 'text',
+      id_str: 'id_str',
+      user_name: 'user_name',
+      screen_name: 'screen_name',
       profile_image_url_https: null,
       url: null,
       created_at: null,

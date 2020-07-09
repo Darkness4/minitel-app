@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 
 void main() {
-  const NotificationSettings tNotificationSettings = NotificationSettings(
+  const tNotificationSettings = NotificationSettings(
     early: Duration(minutes: 10),
     range: Duration(days: 30),
     enabled: true,
@@ -13,7 +13,7 @@ void main() {
       'should return a valid Entity with early modified',
       () async {
         // act
-        final NotificationSettings result =
+        final result =
             tNotificationSettings.copyWith(early: const Duration(minutes: 9));
         // assert
         expect(
@@ -33,7 +33,7 @@ void main() {
       'should return a valid Entity with range modified',
       () async {
         // act
-        final NotificationSettings result =
+        final result =
             tNotificationSettings.copyWith(range: const Duration(minutes: 9));
         // assert
         expect(

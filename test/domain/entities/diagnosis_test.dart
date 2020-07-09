@@ -8,91 +8,74 @@ void main() {
       'should return a valid String',
       () async {
         // arrange
-        final Diagnosis diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip] = Future.value("testValue");
+        final diagnosis = Diagnosis()
+          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
         // act
         final result = await diagnosis.getReport();
         // assert
         expect(
           result,
           equals(
-            '---IP---\n'
-            'testValue\n'
-            '---END IP---\n'
-            '\n'
-            '---ip addr---\n'
-            '\n'
-            '---END ip addr---\n'
-            '\n'
-            '---Address Resolution Protocol (SU + Busy)---\n'
-            '\n'
-            '---END Address Resolution Protocol (SU + Busy)---\n'
-            '\n'
-            '---Traceroute Google (Superuser)---\n'
-            '\n'
-            '---END Traceroute Google (Superuser)---\n'
-            '\n'
-            '---Traceroute Google DNS (Superuser)---\n'
-            '\n'
-            '---END Traceroute Google DNS (Superuser)---\n'
-            '\n'
-            '---Ping Loopback---\n'
-            '\n'
-            '---END Ping Loopback---\n'
-            '\n'
-            '---Ping Local---\n'
-            '\n'
-            '---END Ping Local---\n'
-            '\n'
-            '---Ping Gateway---\n'
-            '\n'
-            '---END Ping Gateway---\n'
-            '\n'
-            '---Ping DNS 1---\n'
-            '\n'
-            '---END Ping DNS 1---\n'
-            '\n'
-            '---Ping DNS 2---\n'
-            '\n'
-            '---END Ping DNS 2---\n'
-            '\n'
-            '---Ping DNS 3---\n'
-            '\n'
-            '---END Ping DNS 3---\n'
-            '\n'
-            '---Ping DNS 4---\n'
-            '\n'
-            '---END Ping DNS 4---\n'
-            '\n'
-            '---Ping DNS 5---\n'
-            '\n'
-            '---END Ping DNS 5---\n'
-            '\n'
-            '---NSLookup EMSE---\n'
-            '\n'
-            '---END NSLookup EMSE---\n'
-            '\n'
-            '---NSLookup EMSE (SU + Busy)---\n'
-            '\n'
-            '---END NSLookup EMSE (SU + Busy)---\n'
-            '\n'
-            '---NSLookup Google---\n'
-            '\n'
-            '---END NSLookup Google---\n'
-            '\n'
-            '---NSLookup Google (SU + Busy)---\n'
-            '\n'
-            '---END NSLookup Google (SU + Busy)---\n'
-            '\n'
-            '---HTTP Portal Response Public---\n'
-            '\n'
-            '---END HTTP Portal Response Public---\n'
-            '\n'
-            '---HTTP Portal Response Gateway---\n'
-            '\n'
-            '---END HTTP Portal Response Gateway---\n'
-            '\n'
-            '',
+            '''
+---IP---
+testValue
+---END IP---
+
+---ip addr---
+---END ip addr---
+
+---Address Resolution Protocol (SU + Busy)---
+---END Address Resolution Protocol (SU + Busy)---
+
+---Traceroute Google (Superuser)---
+---END Traceroute Google (Superuser)---
+
+---Traceroute Google DNS (Superuser)---
+---END Traceroute Google DNS (Superuser)---
+
+---Ping Loopback---
+---END Ping Loopback---
+
+---Ping Local---
+---END Ping Local---
+
+---Ping Gateway---
+---END Ping Gateway---
+
+---Ping DNS 1---
+---END Ping DNS 1---
+
+---Ping DNS 2---
+---END Ping DNS 2---
+
+---Ping DNS 3---
+---END Ping DNS 3---
+
+---Ping DNS 4---
+---END Ping DNS 4---
+
+---Ping DNS 5---
+---END Ping DNS 5---
+
+---NSLookup EMSE---
+---END NSLookup EMSE---
+
+---NSLookup EMSE (SU + Busy)---
+---END NSLookup EMSE (SU + Busy)---
+
+---NSLookup Google---
+---END NSLookup Google---
+
+---NSLookup Google (SU + Busy)---
+---END NSLookup Google (SU + Busy)---
+
+---HTTP Portal Response Public---
+---END HTTP Portal Response Public---
+
+---HTTP Portal Response Gateway---
+---END HTTP Portal Response Gateway---
+
+''',
           ),
         );
       },
@@ -104,24 +87,23 @@ void main() {
       'should run and return a valid String with a valid key',
       () async {
         // arrange
-        final Diagnosis diagnosis = Diagnosis();
+        final diagnosis = Diagnosis();
         // act
-        final result =
-            await (diagnosis[DiagnosisKeys.ip] = Future.value("testValue"));
+        await (diagnosis[DiagnosisKeys.ip].complete(Future.value('testValue')));
         // assert
-        expect(result, equals("testValue"));
+        expect(await diagnosis[DiagnosisKeys.ip].future, equals('testValue'));
       },
     );
 
     test(
-      'should run and throw a valid String',
+      'should run and throws',
       () async {
         // arrange
-        final Diagnosis diagnosis = Diagnosis();
+        final diagnosis = Diagnosis();
         // act
-        void call() => diagnosis["Test"] = Future.value("testValue");
+        final result = diagnosis['Test'];
         // assert
-        expect(call, throwsArgumentError);
+        expect(result, isNull);
       },
     );
   });
@@ -131,12 +113,12 @@ void main() {
       'should return a valid String',
       () async {
         // arrange
-        final Diagnosis diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip] = Future.value("testValue");
+        final diagnosis = Diagnosis()
+          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
         // act
-        final result = await diagnosis[DiagnosisKeys.ip];
+        final result = await diagnosis[DiagnosisKeys.ip].future;
         // assert
-        expect(result, equals("testValue"));
+        expect(result, equals('testValue'));
       },
     );
   });
@@ -146,8 +128,8 @@ void main() {
       'should throw UnimplementedError',
       () async {
         // arrange
-        final Diagnosis diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip] = Future.value("testValue");
+        final diagnosis = Diagnosis()
+          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
         // act
         final call = diagnosis.clear;
         // assert
@@ -161,8 +143,8 @@ void main() {
       'should get keys of diagnosis',
       () async {
         // arrange
-        final Diagnosis diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip] = Future.value("testValue");
+        final diagnosis = Diagnosis()
+          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
         // act
         final keys = diagnosis.keys;
         // assert
@@ -176,8 +158,8 @@ void main() {
       'should remove a item in diagnosis',
       () async {
         // arrange
-        final Diagnosis diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip] = Future.value("testValue");
+        final diagnosis = Diagnosis()
+          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
         // act
         final call = diagnosis.remove;
         // assert
@@ -192,20 +174,13 @@ void main() {
       'should wait all items in diagnosis and return',
       () async {
         // arrange
-        bool cbEnded1 = false;
-        bool cbEnded2 = false;
-        final Diagnosis diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip] =
-              Future.value("value").whenComplete(() => cbEnded1 = true)
-          ..[DiagnosisKeys.arp] =
-              Future.value("value2").whenComplete(() => cbEnded2 = true);
+        final diagnosis = Diagnosis();
+
+        diagnosis.forEach((key, value) => value.complete(Future.value(key)));
         // act
         final result = await diagnosis.waitAll();
         // assert
-        expect(result[DiagnosisKeys.ip], equals("value"));
-        expect(result[DiagnosisKeys.arp], equals("value2"));
-        expect(cbEnded1, true);
-        expect(cbEnded2, true);
+        result.forEach((key, value) => value == key);
       },
     );
   });

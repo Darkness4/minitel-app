@@ -10,8 +10,8 @@ void main() {
   MockRemoteDataSource mockRemoteDataSource;
   const tListZabbixHostModel = <ZabbixHost>[
     ZabbixHost(
-      host: "host",
-      hostid: "hostid",
+      host: 'host',
+      hostid: 'hostid',
       interfaces: [],
       items: [],
     )
@@ -30,7 +30,7 @@ void main() {
       'should call localDataSource.loadNotificationSettings()',
       () async {
         // arrange
-        const List<ZabbixHost> tListZabbixHost = tListZabbixHostModel;
+        const tListZabbixHost = tListZabbixHostModel;
         when(mockRemoteDataSource.fetchZabbixHosts(tGroupids))
             .thenAnswer((_) async => tListZabbixHostModel);
         // act

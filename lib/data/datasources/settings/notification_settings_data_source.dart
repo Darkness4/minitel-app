@@ -35,7 +35,7 @@ class NotificationSettingsDataSourceImpl
         enabled: enabled,
       );
     } else {
-      throw CacheException("No notificationSettings saved.");
+      throw CacheException('No notificationSettings saved.');
     }
   }
 

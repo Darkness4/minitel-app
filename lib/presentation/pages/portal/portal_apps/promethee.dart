@@ -24,7 +24,7 @@ class PrometheeWebView extends StatelessWidget {
           "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
       cookieManager.setCookie('https://cas.emse.fr',
           "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
-      cookieManager.setCookie("https://shibbo2.emse.fr",
+      cookieManager.setCookie('https://shibbo2.emse.fr',
           "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
     }
     return const ScaffoldWebView(

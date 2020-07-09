@@ -14,10 +14,10 @@ abstract class ReportStatusState with _$ReportStatusState {
 
   factory ReportStatusState.initial() {
     return const ReportStatusState(
-      description: "",
-      name: "",
-      room: "",
-      title: "",
+      description: '',
+      name: '',
+      room: '',
+      title: '',
       isValidName: false,
       isValidRoom: false,
       isValidTitle: false,

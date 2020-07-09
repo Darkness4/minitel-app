@@ -35,11 +35,11 @@ class DiagnoseScreen extends StatelessWidget {
                   label: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: FutureBuilder<String>(
-                      future: state.diagnosis[DiagnosisKeys.ip],
+                      future: state.diagnosis[DiagnosisKeys.ip].future,
                       builder: (BuildContext context,
                           AsyncSnapshot<String> ipSnapshot) {
-                        String output = "${DiagnosisKeys.ip}: ";
-                        output += ipSnapshot.hasData ? ipSnapshot.data : "";
+                        var output = '${DiagnosisKeys.ip}: ';
+                        output += ipSnapshot.hasData ? ipSnapshot.data : '';
                         return Text(
                           output,
                           style: const TextStyle(
@@ -55,11 +55,10 @@ class DiagnoseScreen extends StatelessWidget {
             if (state is DiagnosisLoading ||
                 state is DiagnosisLoaded ||
                 state is DiagnosisInitial)
-              for (final MapEntry<String, Future<String>> entry
-                  in state.diagnosis.entries)
+              for (final entry in state.diagnosis.entries)
                 if (entry.key != DiagnosisKeys.ip) // Ignore them
                   FutureBuilder<String>(
-                    future: entry.value,
+                    future: entry.value.future,
                     builder: (BuildContext context,
                             AsyncSnapshot<String> snapshot) =>
                         LogCard(

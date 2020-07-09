@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:alt_http/alt_http.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -27,10 +28,7 @@ abstract class ExternalsModule {
       FlutterLocalNotificationsPlugin();
 
   @lazySingleton
-  http.Client get httpClient => http.Client();
-
-  @lazySingleton
-  io_client.IOClient get ioClient => io_client.IOClient(HttpClient()
+  http.Client get httpClient => io_client.IOClient(AltHttpClient()
     ..badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true));
 
@@ -47,7 +45,7 @@ abstract class ExternalsModule {
       );
 
   @lazySingleton
-  NTLMClient get ntlmClient => NTLMClient(username: "", password: "");
+  NTLMClient get ntlmClient => NTLMClient(username: '', password: '');
 
   @preResolve
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();

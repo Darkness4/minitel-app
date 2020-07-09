@@ -38,7 +38,7 @@ class TwitterCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "Minitel Ismin",
+                            'Minitel Ismin',
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5

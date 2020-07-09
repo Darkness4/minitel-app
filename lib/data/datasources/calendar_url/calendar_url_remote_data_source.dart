@@ -35,10 +35,10 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
 
   Future<String> _fetchCalendarUrl(Cookie phpSessionIDCAS) async {
     final response = await client.get(
-      "https://portail.emse.fr/ics/",
+      'https://portail.emse.fr/ics/',
       headers: {
         HttpHeaders.cookieHeader:
-            "${phpSessionIDCAS.name}=${phpSessionIDCAS.value}"
+            '${phpSessionIDCAS.name}=${phpSessionIDCAS.value}'
       },
     );
     final calendarUrl = RegExp(r'https(.*)\.ics').stringMatch(response.body);
@@ -47,11 +47,11 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
 
   /// Login through EMSE CAS Authentication
   Future<Cookie> _fetchCasCookie({String username, String password}) async {
-    final referee = Uri.encodeComponent("https://portail.emse.fr/ics/");
+    final referee = Uri.encodeComponent('https://portail.emse.fr/ics/');
 
     // GET CAS
     final responseCAS =
-        await client.get("https://cas.emse.fr/login?service=$referee");
+        await client.get('https://cas.emse.fr/login?service=$referee');
 
     if (responseCAS.statusCode != HttpStatus.ok) {
       throw ServerException('HTTP Error: ${responseCAS.statusCode}');
@@ -63,10 +63,10 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
 
     final jSessionID = responseCAS.headers
         .parseSetCookie()
-        .firstWhere((cookie) => cookie.name == "JSESSIONID");
+        .firstWhere((cookie) => cookie.name == 'JSESSIONID');
 
     // POST CAS
-    final Map<String, String> data = {
+    final data = <String, String>{
       'username': username,
       'password': password,
       'lt': lt,
@@ -94,7 +94,7 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
 
     final phpSessionIDCAS = responseFinal.headers
         .parseSetCookie()
-        .firstWhere((cookie) => cookie.name == "PHPSESSID");
+        .firstWhere((cookie) => cookie.name == 'PHPSESSID');
 
     // Cookie
     return phpSessionIDCAS;

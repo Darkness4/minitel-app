@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 
@@ -36,7 +35,7 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
     @required int selectedTime,
   }) async {
     // SessionId
-    final Map<String, String> data = {
+    final data = <String, String>{
       'uid': uid,
       'time': selectedTime.toString(),
       'pswd': pswd,
@@ -44,7 +43,7 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
     final response = await client.post(
       'https://$selectedUrl/auth/plain.html',
       body: data,
-      headers: {HttpHeaders.cookieHeader: "lang=us; disclaimer=1;"},
+      headers: {HttpHeaders.cookieHeader: 'lang=us; disclaimer=1;'},
     );
     if (response.statusCode == HttpStatus.ok) {
       if (response.body.contains('title_error')) {
@@ -52,21 +51,18 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
       }
     } else {
       throw ServerException(
-          "HttpError: ${response.statusCode} ${response.reasonPhrase}\n${response.body}");
+          'HttpError: ${response.statusCode} ${response.reasonPhrase}\n${response.body}');
     }
   }
 
   @override
   Future<String> fetchStatus(String selectedUrl) async {
-    final url = 'https://$selectedUrl/auth/login.html';
+    final url = 'https://$selectedUrl/auth/xvpns.html';
     final exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
-    final response = await client.send(
-      http.Request('GET', Uri.parse(url))
-        ..headers[HttpHeaders.contentLengthHeader] = "0",
-    );
+    final response = await client.post(url);
 
-    final body = await response.stream.transform(utf8.decoder).join();
+    final body = response.body;
     if (response.statusCode == HttpStatus.ok) {
       if (body.contains('l_rtime')) {
         return exp.firstMatch(body).group(1);
@@ -75,7 +71,7 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
       }
     } else {
       throw ServerException(
-          "HttpError: ${response.statusCode} ${response.reasonPhrase}");
+          'HttpError: ${response.statusCode} ${response.reasonPhrase}');
     }
   }
 }

@@ -46,14 +46,14 @@ class _ContactsCard extends StatelessWidget {
     return DocCard(
       children: <Widget>[
         Text(
-          "Contacts",
+          'Contacts',
           style: Theme.of(context).textTheme.headline5,
         ),
         OutlineButton(
           textColor: Theme.of(context).accentColor,
           onPressed: LaunchURLConstants.messengerMarcNGUYEN,
           child: Text(
-            "Facebook: Minitel Ismin",
+            'Facebook: Minitel Ismin',
             style: Theme.of(context).textTheme.button,
             overflow: TextOverflow.ellipsis,
           ),
@@ -62,13 +62,13 @@ class _ContactsCard extends StatelessWidget {
           textColor: Theme.of(context).accentColor,
           onPressed: LaunchURLConstants.mailToMinitel,
           child: Text(
-            "Mail: minitelismin@gmail.com",
+            'Mail: minitelismin@gmail.com',
             style: Theme.of(context).textTheme.button,
             overflow: TextOverflow.ellipsis,
           ),
         ),
         Text(
-          "G*: Contact Admin",
+          'G*: Contact Admin',
           style: Theme.of(context).textTheme.button,
           overflow: TextOverflow.ellipsis,
         ),
@@ -230,7 +230,7 @@ class __ReportCardState extends State<_ReportCard> {
                   keyboardType: TextInputType.multiline,
                   maxLength: 500,
                   decoration: const InputDecoration(
-                    labelText: "Description",
+                    labelText: 'Description',
                   ),
                   onFieldSubmitted: (_) => _formNode.unfocus(),
                 ),
@@ -253,7 +253,8 @@ class _TutorialCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return DocCard(
       children: <Widget>[
-        MarkdownBody(data: """
+        MarkdownBody(
+          data: '''
 # ${AppLoc.of(context).reporting.tutorial.header}
 
 *${AppLoc.of(context).reporting.tutorial.notice}*
@@ -269,7 +270,8 @@ ${AppLoc.of(context).reporting.tutorial.example}
 **${AppLoc.of(context).reporting.tutorial.content4}**
 
 **${AppLoc.of(context).reporting.tutorial.content5}**
-"""),
+''',
+        ),
       ],
     );
   }

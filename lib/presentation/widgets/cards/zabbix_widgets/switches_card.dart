@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
-import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_port_statistics.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_status.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_interface.dart';
@@ -65,7 +64,7 @@ class _SwitchBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SwitchPortStatistics statistics = _status.count();
+    final statistics = _status.count();
 
     return Card(
       elevation: 2.0,

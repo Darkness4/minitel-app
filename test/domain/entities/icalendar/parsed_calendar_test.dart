@@ -6,35 +6,35 @@ import 'package:minitel_toolbox/domain/entities/icalendar/timezone.dart';
 void main() {
   group('parse', () {
     final tEventModel = Event(
-      dtend: DateTime.parse("20200127T100000"),
-      dtstamp: DateTime.parse("20200127T100000"),
-      description: "Description",
-      dtstart: DateTime.parse("20200127T100000"),
-      location: "Location",
-      summary: "Summary",
-      uid: "Uid",
+      dtend: DateTime.parse('20200127T100000'),
+      dtstamp: DateTime.parse('20200127T100000'),
+      description: 'Description',
+      dtstart: DateTime.parse('20200127T100000'),
+      location: 'Location',
+      summary: 'Summary',
+      uid: 'Uid',
     );
     final tParsedCalendarModel = ParsedCalendar(
-      calscale: "GREGORIAN",
-      prodID: "-//hacksw/handcal//NONSGML v1.0//EN",
+      calscale: 'GREGORIAN',
+      prodID: '-//hacksw/handcal//NONSGML v1.0//EN',
       timezone: Timezone(
         daylight: TimezoneDescription(
-          dtstart: DateTime.parse("19710101T020000"),
-          rRule: "FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=3;BYDAY=-1SU",
-          tzName: "CEST",
-          tzOffsetFrom: "+0100",
-          tzOffsetTo: "+0200",
+          dtstart: DateTime.parse('19710101T020000'),
+          rRule: 'FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=3;BYDAY=-1SU',
+          tzName: 'CEST',
+          tzOffsetFrom: '+0100',
+          tzOffsetTo: '+0200',
         ),
         standard: TimezoneDescription(
-          dtstart: DateTime.parse("19710101T030000"),
-          rRule: "FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=10;BYDAY=-1SU",
-          tzName: "CET",
-          tzOffsetFrom: "+0200",
-          tzOffsetTo: "+0100",
+          dtstart: DateTime.parse('19710101T030000'),
+          rRule: 'FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=10;BYDAY=-1SU',
+          tzName: 'CET',
+          tzOffsetFrom: '+0200',
+          tzOffsetTo: '+0100',
         ),
-        tzid: "Europe/Paris",
+        tzid: 'Europe/Paris',
       ),
-      version: "2.0",
+      version: '2.0',
       events: [
         tEventModel,
       ],
@@ -44,7 +44,7 @@ void main() {
       'should return a valid model',
       () async {
         // arrange
-        const String value = """
+        const value = '''
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//hacksw/handcal//NONSGML v1.0//EN
@@ -77,7 +77,7 @@ SUMMARY:Summary
 DTSTART:20200127T100000
 END:VEVENT
 END:VCALENDAR
-""";
+''';
         // act
         final result = await ParsedCalendar.parse(Stream.value(value));
         // assert
@@ -88,38 +88,37 @@ END:VCALENDAR
   group('sortedEvents', () {
     test('should return a sorted by datetime events', () {
       // Arrange
-      final DateTime tDateTimeEarliest = DateTime.now();
-      final DateTime tDateTimeLatest =
-          DateTime.now().add(const Duration(days: 5));
+      final tDateTimeEarliest = DateTime.now();
+      final tDateTimeLatest = DateTime.now().add(const Duration(days: 5));
       const tTimezone = Timezone(
         daylight: TimezoneDescription(),
         standard: TimezoneDescription(),
-        tzid: "tzid",
+        tzid: 'tzid',
       );
       final tEventEarly = Event(
-        description: "description",
+        description: 'description',
         dtend: tDateTimeEarliest,
         dtstamp: tDateTimeEarliest,
         dtstart: tDateTimeEarliest,
-        location: "location",
-        summary: "summary",
-        uid: "123",
+        location: 'location',
+        summary: 'summary',
+        uid: '123',
       );
       final tEventLate = Event(
-        description: "description",
+        description: 'description',
         dtend: tDateTimeLatest,
         dtstamp: tDateTimeLatest,
         dtstart: tDateTimeLatest,
-        location: "location",
-        summary: "summary",
-        uid: "123",
+        location: 'location',
+        summary: 'summary',
+        uid: '123',
       );
       final tParsedCalendar = ParsedCalendar(
-        calscale: "calscale",
+        calscale: 'calscale',
         events: [tEventLate, tEventEarly],
-        prodID: "prodID",
+        prodID: 'prodID',
         timezone: tTimezone,
-        version: "version",
+        version: 'version',
       );
       // Act
       final result = tParsedCalendar.sortedByDTStart.toList();

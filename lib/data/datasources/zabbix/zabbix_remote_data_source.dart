@@ -22,14 +22,14 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
   @override
   Future<List<ZabbixHost>> fetchZabbixHosts(int groupids) async {
     final data = <String, dynamic>{
-      "jsonrpc": "2.0",
-      "method": "host.get",
-      "params": {
-        "groupids": groupids,
-        "output": [
-          "host",
+      'jsonrpc': '2.0',
+      'method': 'host.get',
+      'params': {
+        'groupids': groupids,
+        'output': [
+          'host',
         ],
-        "selectItems": [
+        'selectItems': [
           'type',
           'value_type',
           'name',
@@ -37,12 +37,12 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
           'units',
           'snmp_oid',
         ],
-        "selectInterfaces": [
-          "ip",
+        'selectInterfaces': [
+          'ip',
         ],
       },
-      "id": 2,
-      "auth": ApiKeys.zabbixToken,
+      'id': 2,
+      'auth': ApiKeys.zabbixToken,
     };
 
     final dataEncoded = json.encode(data);
@@ -50,13 +50,13 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
     try {
       final response = await clientNoCheck.post(
         '${ApiKeys.zabbixPath}/api_jsonrpc.php',
-        headers: {"Content-Type": "application/json-rpc"},
+        headers: {'Content-Type': 'application/json-rpc'},
         body: dataEncoded,
       );
 
       if (response.statusCode == HttpStatus.ok) {
         final body = json.decode(response.body) as Map<String, dynamic>;
-        final output = (body["result"] as List<dynamic>)
+        final output = (body['result'] as List<dynamic>)
             .map((dynamic host) =>
                 ZabbixHost.fromJson(host as Map<String, dynamic>))
             .toList();
@@ -71,7 +71,7 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
             "N'est pas connecté au réseau WiFi Minitel. Connection timed out.");
       } else if (e.toString().contains('No route to host')) {
         throw ClientException(
-            "Le server de monitoring semble être éteint. No route to host.");
+            'Le server de monitoring semble être éteint. No route to host.');
       } else {
         throw ClientException(e);
       }

@@ -45,7 +45,7 @@ class _NotificationSettingsScreenState
           listener: (context, state) {
             if (state.isSaved) {
               Scaffold.of(context).showSnackBar(const SnackBar(
-                content: Text("Data saved."),
+                content: Text('Data saved.'),
               ));
             } else if (state.isLoaded) {
               _rangeTextController.text =
@@ -147,7 +147,7 @@ class _NotificationSettingsScreenState
 
   void _onEarlyChanged() {
     if (_earlyTextController.text.length < 3 &&
-        _earlyTextController.text != "") {
+        _earlyTextController.text != '') {
       _notificationSettingsBloc.add(EarlyChanged(
           Duration(minutes: int.parse(_earlyTextController.text))));
     }
@@ -155,7 +155,7 @@ class _NotificationSettingsScreenState
 
   void _onRangeChanged() {
     if (_rangeTextController.text.length < 4 &&
-        _rangeTextController.text != "") {
+        _rangeTextController.text != '') {
       _notificationSettingsBloc.add(
           RangeChanged(Duration(days: int.parse(_rangeTextController.text))));
     }

@@ -41,16 +41,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   Stream<ReportState> _mapReportToMailToState(ReportToMail event) async* {
     yield const ReportState.loading();
     try {
-      final String body = "---Report ${DateTime.now().toString()}---\n\n"
-          "Chambre: ${event.room}\n"
-          "ID: ${event.name}\n"
-          "Titre: ${event.title}\n"
-          "Description: ${event.description}\n\n"
-          "*Diagnosis*\n"
-          "${await event.diagnosis.getReport()}";
+      final body = '---Report ${DateTime.now().toString()}---\n\n'
+          'Chambre: ${event.room}\n'
+          'ID: ${event.name}\n'
+          'Titre: ${event.title}\n'
+          'Description: ${event.description}\n\n'
+          '*Diagnosis*\n'
+          '${await event.diagnosis.getReport()}';
 
       await LaunchURLUtils.launchURL(
-          "mailto:minitelismin@gmail.com?subject=${event.title}&body=$body");
+          'mailto:minitelismin@gmail.com?subject=${event.title}&body=$body');
       yield const ReportState.done(null);
       add(const ReportEvent.toInitState());
     } on Exception catch (e) {
@@ -62,11 +62,11 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   Stream<ReportState> _mapReportToSlackToState(ReportToSlack event) async* {
     yield const ReportState.loading();
     try {
-      final String status = await slackRemoteDataSource.report(
-        "*Chambre ${event.room}*\n"
-        "*ID : ${event.name}*\n"
-        "*${event.title}*\n"
-        "_${event.description}_\n\n",
+      final status = await slackRemoteDataSource.report(
+        '*Chambre ${event.room}*\n'
+        '*ID : ${event.name}*\n'
+        '*${event.title}*\n'
+        '_${event.description}_\n\n',
         attachments: await event.diagnosis.waitAll(),
         channel: event.channel,
       );
@@ -81,13 +81,13 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   Stream<ReportState> _mapReportToShareToState(ReportToShare event) async* {
     yield const ReportState.loading();
     try {
-      final String body = "---Report ${DateTime.now().toString()}---\n\n"
-          "Chambre: ${event.room}\n"
-          "ID: ${event.name}\n"
-          "Titre: ${event.title}\n"
-          "Description: ${event.description}\n\n"
-          "*Diagnosis*\n"
-          "${await event.diagnosis.getReport()}";
+      final body = '---Report ${DateTime.now().toString()}---\n\n'
+          'Chambre: ${event.room}\n'
+          'ID: ${event.name}\n'
+          'Titre: ${event.title}\n'
+          'Description: ${event.description}\n\n'
+          '*Diagnosis*\n'
+          '${await event.diagnosis.getReport()}';
 
       await Share.share(body);
       yield const ReportState.done(null);

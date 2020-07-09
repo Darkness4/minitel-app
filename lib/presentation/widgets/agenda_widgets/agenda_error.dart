@@ -36,7 +36,7 @@ class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               widget.error is FileSystemException
-                  ? "File calendar.ics not found. Please log in."
+                  ? 'File calendar.ics not found. Please log in.'
                   : widget.error.toString(),
               style: TextStyle(
                 color: Theme.of(context).errorColor,

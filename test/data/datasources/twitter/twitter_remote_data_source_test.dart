@@ -28,11 +28,11 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(mockHttpClient.post(
-      "https://api.twitter.com/oauth2/token",
+      'https://api.twitter.com/oauth2/token',
       headers: anyNamed('headers'),
       body: anyNamed('body'),
     )).thenAnswer((_) async => http.Response(
-          json.encode({'access_token': "token"}),
+          json.encode({'access_token': 'token'}),
           200,
         ));
     when(mockHttpClient.get(
@@ -68,7 +68,7 @@ void main() {
         .toList();
 
     test(
-      "should perform a GET request",
+      'should perform a GET request',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
@@ -79,7 +79,7 @@ void main() {
           argThat(startsWith(
               'https://api.twitter.com/1.1/statuses/user_timeline.json')),
           headers: {
-            HttpHeaders.authorizationHeader: "Bearer token",
+            HttpHeaders.authorizationHeader: 'Bearer token',
           },
         ));
       },
@@ -112,7 +112,7 @@ void main() {
 
   group('getBearerToken', () {
     test(
-      "should perform a POST request",
+      'should perform a POST request',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
@@ -122,7 +122,7 @@ void main() {
         final authorization = base64.encode(
             utf8.encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}'));
         verify(mockHttpClient.post(
-          "https://api.twitter.com/oauth2/token",
+          'https://api.twitter.com/oauth2/token',
           headers: {
             HttpHeaders.authorizationHeader: 'Basic $authorization',
           },

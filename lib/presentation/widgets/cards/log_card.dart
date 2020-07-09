@@ -45,7 +45,7 @@ class LogCard extends StatelessWidget {
                 text,
                 style: const TextStyle(
                   fontSize: 10,
-                  fontFamily: "RobotoMono",
+                  fontFamily: 'RobotoMono',
                   color: MinitelColors.terminalFgColor,
                 ),
               ),

@@ -17,26 +17,26 @@ void main() {
   const tListGithubReleaseModel = <GithubRelease>[
     GithubRelease(
       assets: [],
-      assets_url: "assets_url",
+      assets_url: 'assets_url',
       author: null,
-      body: "body",
+      body: 'body',
       created_at: null,
       draft: false,
-      html_url: "html_url",
+      html_url: 'html_url',
       id: 0,
-      name: "name",
-      node_id: "node_id",
+      name: 'name',
+      node_id: 'node_id',
       prerelease: false,
       published_at: null,
-      tag_name: "tag_name",
-      tarball_url: "tarball_url",
-      target_commitish: "target_commitish",
-      upload_url: "upload_url",
-      url: "url",
-      zipball_url: "zipball_url",
+      tag_name: 'tag_name',
+      tarball_url: 'tarball_url',
+      target_commitish: 'target_commitish',
+      upload_url: 'upload_url',
+      url: 'url',
+      zipball_url: 'zipball_url',
     ),
   ];
-  const tRepo = "name/repo";
+  const tRepo = 'name/repo';
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();

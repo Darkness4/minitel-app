@@ -13,8 +13,8 @@ import '../../../fixtures/fixture_reader.dart';
 void main() {
   CalendarURLRemoteDataSource dataSource;
   MockHttpClient mockHttpClient;
-  const String tUser = 'marc.nguyen';
-  const String tPassword = 'abcdefgh';
+  const tUser = 'marc.nguyen';
+  const tPassword = 'abcdefgh';
 
   setUp(() {
     mockHttpClient = MockHttpClient();
@@ -29,13 +29,12 @@ void main() {
       (_) async => http.Response(
         fixture('datasources/calendar_url_remote_data_source/response0.html'),
         200,
-        headers: Map<String, String>.from(json.decode(fixture(
-                'datasources/calendar_url_remote_data_source/response0.json'))
-            as Map<String, dynamic>),
+        headers: Map<String, String>.from((json.decode(fixture(
+            'datasources/calendar_url_remote_data_source/response0.json')))),
       ),
     );
 
-    final Map<String, String> data = {
+    final data = <String, String>{
       'username': 'marc.nguyen',
       'password': 'abcdefgh',
       'lt': 'LT-47000-PBHQEYqOvQgidUbfKaYJ2nVvlxGcXx-cas1.emse.fr',
@@ -47,15 +46,14 @@ void main() {
       mockHttpClient.post(
         'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
         body: data,
-        headers: anyNamed("headers"),
+        headers: anyNamed('headers'),
       ),
     ).thenAnswer(
       (_) async => http.Response(
         fixture('datasources/calendar_url_remote_data_source/response1.html'),
         200,
         headers: Map<String, String>.from(json.decode(fixture(
-                'datasources/calendar_url_remote_data_source/response1.json'))
-            as Map<String, dynamic>),
+            'datasources/calendar_url_remote_data_source/response1.json'))),
       ),
     );
 
@@ -65,25 +63,23 @@ void main() {
             'datasources/calendar_url_remote_data_source/response2.html'))),
         200,
         headers: Map<String, String>.from(json.decode(fixture(
-                'datasources/calendar_url_remote_data_source/response2.json'))
-            as Map<String, dynamic>),
+            'datasources/calendar_url_remote_data_source/response2.json'))),
       ),
     );
 
     when(
       mockHttpClient.get(
-        "https://portail.emse.fr/ics/",
+        'https://portail.emse.fr/ics/',
         headers: {
           HttpHeaders.cookieHeader:
-              "PHPSESSID=ST-40612-FcvunQKSxT4c0Cp9f0i7-cas1emsefr"
+              'PHPSESSID=ST-40612-FcvunQKSxT4c0Cp9f0i7-cas1emsefr'
         },
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/calendar_url_remote_data_source/response3.html'),
           200,
           headers: Map<String, String>.from(json.decode(fixture(
-                  'datasources/calendar_url_remote_data_source/response3.json'))
-              as Map<String, dynamic>),
+              'datasources/calendar_url_remote_data_source/response3.json'))),
         ));
   }
 
@@ -106,12 +102,11 @@ void main() {
         fixture('datasources/calendar_url_remote_data_source/response0.html'),
         200,
         headers: Map<String, String>.from(json.decode(fixture(
-                'datasources/calendar_url_remote_data_source/response0.json'))
-            as Map<String, dynamic>),
+            'datasources/calendar_url_remote_data_source/response0.json'))),
       ),
     );
 
-    final Map<String, String> data = {
+    final data = <String, String>{
       'username': 'marc.nguyen',
       'password': 'abcdefgh',
       'lt': 'LT-47000-PBHQEYqOvQgidUbfKaYJ2nVvlxGcXx-cas1.emse.fr',
@@ -123,15 +118,14 @@ void main() {
       mockHttpClient.post(
         'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
         body: data,
-        headers: anyNamed("headers"),
+        headers: anyNamed('headers'),
       ),
     ).thenAnswer(
       (_) async => http.Response(
         fixture('datasources/calendar_url_remote_data_source/response1.html'),
         200,
         headers: Map<String, String>.from(json.decode(fixture(
-                'datasources/calendar_url_remote_data_source/response1.json'))
-            as Map<String, dynamic>)
+            'datasources/calendar_url_remote_data_source/response1.json')))
           ..remove(HttpHeaders.locationHeader),
       ),
     );
@@ -139,7 +133,7 @@ void main() {
 
   group('getCalendarURL', () {
     test(
-      "should perform a GET CAS request, then a POST CAS, then a GET location, then a GET portail",
+      'should perform a GET CAS request, then a POST CAS, then a GET location, then a GET portail',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
@@ -148,29 +142,28 @@ void main() {
         // assert
         verify(mockHttpClient.get(
           'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
-          headers: anyNamed("headers"),
+          headers: anyNamed('headers'),
         ));
         verify(mockHttpClient.post(
           'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
-          body: anyNamed("body"),
-          encoding: anyNamed("encoding"),
-          headers: anyNamed("headers"),
+          body: anyNamed('body'),
+          encoding: anyNamed('encoding'),
+          headers: anyNamed('headers'),
         ));
         final verification = verify(
           mockHttpClient.send(captureThat(isA<http.BaseRequest>())),
         );
-        final http.Request capturedRequest =
-            verification.captured.first as http.Request;
+        final capturedRequest = verification.captured.first as http.Request;
         expect(
           capturedRequest.url.toString(),
           equals(
-            "https://portail.emse.fr/ics/?ticket=ST-40612-FcvunQKSxT4c0Cp9f0i7-cas1.emse.fr",
+            'https://portail.emse.fr/ics/?ticket=ST-40612-FcvunQKSxT4c0Cp9f0i7-cas1.emse.fr',
           ),
         );
         verify(
           mockHttpClient.get(
-            "https://portail.emse.fr/ics/",
-            headers: anyNamed("headers"),
+            'https://portail.emse.fr/ics/',
+            headers: anyNamed('headers'),
           ),
         );
       },
@@ -181,10 +174,10 @@ void main() {
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
-        const String tCalendarURL =
+        const tCalendarURL =
             'https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics';
         // act
-        final String result = await dataSource.getCalendarURL(
+        final result = await dataSource.getCalendarURL(
             username: tUser, password: tPassword);
         // assert
         expect(result, equals(tCalendarURL));

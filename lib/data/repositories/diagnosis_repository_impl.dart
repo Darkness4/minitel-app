@@ -22,7 +22,7 @@ class DiagnosisRepositoryImpl implements DiagnosisRepository {
     if (await networkInfo.result != ConnectivityResult.none) {
       return diagnosisDataSource.diagnose();
     } else {
-      throw ClientException("No Wi-Fi");
+      throw ClientException('No Wi-Fi');
     }
   }
 

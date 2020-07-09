@@ -11,7 +11,7 @@ class PortailBackgroundPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()..style = PaintingStyle.fill;
+    final paint = Paint()..style = PaintingStyle.fill;
 
     canvas
       ..drawRect(

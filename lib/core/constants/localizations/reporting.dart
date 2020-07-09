@@ -4,24 +4,24 @@ class ReportingLoc {
   final String localeName;
   ReportingLoc(this.localeName);
   String get chamberHint => Intl.message(
-        "Numero de chambre",
+        'Numero de chambre',
         name: 'ReportingLoc_chamberHint',
         locale: localeName,
       );
 
   String get chamberLabel => Intl.message(
-        "Chambre",
+        'Chambre',
         name: 'ReportingLoc_chamberLabel',
         locale: localeName,
       );
 
   String get idHint => Intl.message(
-        "Nom Prénom",
+        'Nom Prénom',
         name: 'ReportingLoc_idHint',
         locale: localeName,
       );
   String get idLabel => Intl.message(
-        "Identité",
+        'Identité',
         name: 'ReportingLoc_idLabel',
         locale: localeName,
       );
@@ -41,12 +41,12 @@ class ReportingLoc {
         locale: localeName,
       );
   String get share => Intl.message(
-        "Partager",
+        'Partager',
         name: 'ReportingLoc_share',
         locale: localeName,
       );
   String get slack => Intl.message(
-        "Notifier sur Slack",
+        'Notifier sur Slack',
         name: 'ReportingLoc_slack',
         locale: localeName,
       );
@@ -62,7 +62,7 @@ class ReportingLoc {
       );
 
   String get titleLabel => Intl.message(
-        "Titre",
+        'Titre',
         name: 'ReportingLoc_titleLabel',
         locale: localeName,
       );
@@ -80,7 +80,7 @@ class TutorialLoc {
         locale: localeName,
       );
   String get content2 => Intl.message(
-        "2. Lancez la suite de diagnostique en appuyant sur le bouton, et attendez 1 minute.",
+        '2. Lancez la suite de diagnostique en appuyant sur le bouton, et attendez 1 minute.',
         name: 'TutorialLoc_content2',
         locale: localeName,
       );
@@ -90,12 +90,12 @@ class TutorialLoc {
         locale: localeName,
       );
   String get content4 => Intl.message(
-        "4. Connectez-vous sur un réseau où il y a Internet.",
+        '4. Connectez-vous sur un réseau où il y a Internet.',
         name: 'TutorialLoc_content4',
         locale: localeName,
       );
   String get content5 => Intl.message(
-        "5. Envoyez le rapport.",
+        '5. Envoyez le rapport.',
         name: 'TutorialLoc_content5',
         locale: localeName,
       );
@@ -105,7 +105,7 @@ class TutorialLoc {
         locale: localeName,
       );
   String get header => Intl.message(
-        "Comment signaler sans internet ?",
+        'Comment signaler sans internet ?',
         name: 'TutorialLoc_header',
         locale: localeName,
       );

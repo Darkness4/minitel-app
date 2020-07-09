@@ -27,7 +27,7 @@ Widget _buildMyApp(BuildContext context, ThemeState state) {
       GlobalWidgetsLocalizations.delegate,
       AppLoc.delegate,
     ],
-    title: "Minitel Toolbox",
+    title: 'Minitel Toolbox',
     onGenerateRoute: Router.generateRoute,
     supportedLocales: const <Locale>[
       Locale('en', ''),
@@ -55,11 +55,10 @@ class MyApp extends StatelessWidget {
 }
 
 Future<void> initializeFlutterLocalNotificationPlugin() async {
-  const AndroidInitializationSettings _initializationSettingsAndroid =
+  const _initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/launcher_icon');
-  const IOSInitializationSettings _initializationSettingsIOS =
-      IOSInitializationSettings();
-  const InitializationSettings initializationSettings = InitializationSettings(
+  const _initializationSettingsIOS = IOSInitializationSettings();
+  const initializationSettings = InitializationSettings(
     _initializationSettingsAndroid,
     _initializationSettingsIOS,
   );

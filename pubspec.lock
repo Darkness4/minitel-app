@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0"
+  alt_http:
+    dependency: "direct main"
+    description:
+      name: alt_http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   analyzer:
     dependency: transitive
     description:
@@ -205,7 +212,7 @@ packages:
     source: hosted
     version: "0.16.1"
   cubit:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cubit
       url: "https://pub.dartlang.org"
@@ -225,13 +232,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.2"
-  extra_pedantic:
-    dependency: "direct dev"
-    description:
-      name: extra_pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0"
   fake_async:
     dependency: transitive
     description:
@@ -266,7 +266,7 @@ packages:
     source: hosted
     version: "5.0.1"
   flutter_cubit:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_cubit
       url: "https://pub.dartlang.org"
@@ -599,7 +599,7 @@ packages:
     source: hosted
     version: "1.0.2"
   pedantic:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: pedantic
       url: "https://pub.dartlang.org"

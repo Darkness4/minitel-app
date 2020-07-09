@@ -28,26 +28,26 @@ void main() {
       'should execute',
       () async {
         // arrange
-        final Map<String, String> tAttachments = <String, String>{
-          "key1": "value1",
-          "key2": "value2",
+        final tAttachments = <String, String>{
+          'key1': 'value1',
+          'key2': 'value2',
         };
         final tListAttachments = <Map<String, String>>[];
         tAttachments.forEach(
           (String key, String value) => tListAttachments.add(<String, String>{
-            "fallback": key,
-            "title": key,
-            "text": value,
-            "footer": "Slack API",
+            'fallback': key,
+            'title': key,
+            'text': value,
+            'footer': 'Slack API',
           }),
         );
-        const tText = "test";
+        const tText = 'test';
         final tDateTime = DateTime.now();
-        const tChannel = "T3ST";
-        final Map<String, dynamic> tData = <String, dynamic>{
-          'text': "*--Report $tDateTime--*\n"
-              "$tText\n",
-          "attachments": tListAttachments,
+        const tChannel = 'T3ST';
+        final tData = <String, dynamic>{
+          'text': '*--Report $tDateTime--*\n'
+              '$tText\n',
+          'attachments': tListAttachments,
           'channel': tChannel,
         };
         when(mockDateTimeManager.now()).thenReturn(tDateTime);
@@ -55,7 +55,7 @@ void main() {
           any,
           body: anyNamed('body'),
           headers: anyNamed('headers'),
-        )).thenAnswer((_) async => http.Response("OK", 200));
+        )).thenAnswer((_) async => http.Response('OK', 200));
         // act
         final result = await dataSource.report(
           tText,
@@ -64,14 +64,14 @@ void main() {
         );
         // assert
         verify(mockHttpClient.post(
-          "https://slack.com/api/chat.postMessage",
+          'https://slack.com/api/chat.postMessage',
           body: json.encode(tData),
           headers: {
-            HttpHeaders.contentTypeHeader: "application/json",
-            HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.webhook}",
+            HttpHeaders.contentTypeHeader: 'application/json',
+            HttpHeaders.authorizationHeader: 'Bearer ${ApiKeys.webhook}',
           },
         ));
-        expect(result, equals("OK"));
+        expect(result, equals('OK'));
       },
     );
   });

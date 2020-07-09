@@ -40,7 +40,7 @@ class ICalendarRepositoryImpl implements ICalendarRepository {
       final data = remoteDataSource.streamICalendar(url);
       return localDataSource.cacheICalendar(data);
     } else {
-      throw ClientException("No Wi-Fi.");
+      throw ClientException('No Wi-Fi.');
     }
   }
 }

@@ -33,14 +33,14 @@ class ImprimanteRemoteDataSourceImpl implements ImprimanteRemoteDataSource {
     ntlmClient.password = password;
     ntlmClient.username = username;
     try {
-      final response = await ntlmClient.get("http://192.168.130.2/watchdoc/");
+      final response = await ntlmClient.get('http://192.168.130.2/watchdoc/');
 
       if (response.statusCode == HttpStatus.ok) {
         cookies.addAll(response.headers.parseSetCookie());
         return cookies;
       } else {
         throw ServerException(
-            "Cannot fetch Imprimante: ${response.statusCode} ${response.reasonPhrase}\n${response.body}");
+            'Cannot fetch Imprimante: ${response.statusCode} ${response.reasonPhrase}\n${response.body}');
       }
     } on ServerException {
       rethrow;

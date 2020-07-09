@@ -16,7 +16,7 @@ abstract class ReportEvent with _$ReportEvent {
     @required @nullable String title,
     @required @nullable String description,
     @required @nullable Diagnosis diagnosis,
-    @Default("minitel_toolbox_notifications") String channel,
+    @Default('minitel_toolbox_notifications') String channel,
   }) = ReportToSlack;
   const factory ReportEvent.mail({
     @required @nullable String room,

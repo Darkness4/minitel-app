@@ -29,7 +29,7 @@ class AppsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = MediaQuery.of(context).size.shortestSide;
+    final size = MediaQuery.of(context).size.shortestSide;
     return Scrollbar(
       child: Wrap(
         key: const Key(Keys.appsList),
@@ -38,7 +38,7 @@ class AppsScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   height: size / 2,
                   width: size / 2,
-                  child: const _PortailCard(),
+                  child: card,
                 ))
             .toList(),
       ),
@@ -161,7 +161,7 @@ class _CampusCard extends StatelessWidget {
             ),
             FittedBox(
               child: Text(
-                "Campus",
+                'Campus',
                 style: Theme.of(context)
                     .textTheme
                     .headline4
@@ -193,7 +193,7 @@ class _PrometheeCard extends StatelessWidget {
           //     ),
           //   ),
           // );
-          await LaunchURLUtils.launchURL("https://promethee.emse.fr");
+          await LaunchURLUtils.launchURL('https://promethee.emse.fr');
         },
         child: Column(
           children: <Widget>[
@@ -205,7 +205,7 @@ class _PrometheeCard extends StatelessWidget {
             ),
             FittedBox(
               child: Text(
-                "Promethee",
+                'Promethee',
                 style: Theme.of(context)
                     .textTheme
                     .headline4
@@ -260,7 +260,7 @@ class _WikiMinitelCard extends StatelessWidget {
             ),
             FittedBox(
               child: Text(
-                "Wiki",
+                'Wiki',
                 style: Theme.of(context)
                     .textTheme
                     .headline4

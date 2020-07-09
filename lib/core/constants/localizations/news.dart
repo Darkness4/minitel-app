@@ -11,7 +11,7 @@ class NewsLoc {
       );
 
   String get seeTwitter => Intl.message(
-        "Voir sur Twitter ...",
+        'Voir sur Twitter ...',
         name: 'NewsLoc_seeTwitter',
         locale: localeName,
       );

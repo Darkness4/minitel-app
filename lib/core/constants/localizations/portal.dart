@@ -4,13 +4,13 @@ class AppListLoc {
   final String localeName;
   AppListLoc(this.localeName);
   String get portal => Intl.message(
-        "Portail",
+        'Portail',
         name: 'AppListLoc_portal',
         locale: localeName,
       );
 
   String get printer => Intl.message(
-        "Imprimante",
+        'Imprimante',
         name: 'AppListLoc_printer',
         locale: localeName,
       );
@@ -28,28 +28,28 @@ class PortalLoc {
       );
 
   String get autoLogin => Intl.message(
-        "Se connecter automatiquement",
+        'Se connecter automatiquement',
         name: 'PortalLoc_autoLogin',
         locale: localeName,
       );
   String get domainNameHeader => Intl.message(
-        "Nom de domaine / IP",
+        'Nom de domaine / IP',
         name: 'PortalLoc_domainNameHeader',
         locale: localeName,
       );
   String get login => Intl.message(
-        "Se connecter",
+        'Se connecter',
         name: 'PortalLoc_login',
         locale: localeName,
       );
   String get password => Intl.message(
-        "Mot de passe",
+        'Mot de passe',
         name: 'PortalLoc_password',
         locale: localeName,
       );
 
   String get rememberMe => Intl.message(
-        "Se souvenir ",
+        'Se souvenir ',
         name: 'PortalLoc_rememberMe',
         locale: localeName,
       );
@@ -61,7 +61,7 @@ class PortalLoc {
       );
 
   String get usernameHint => Intl.message(
-        "prenom.nom",
+        'prenom.nom',
         name: 'PortalLoc_usernameHint',
         locale: localeName,
       );
@@ -73,19 +73,19 @@ class PortalLoc {
       );
 
   String statusInHM(int hours, int minutes) => Intl.message(
-        "$hours heures and $minutes minutes restantes",
+        '$hours heures and $minutes minutes restantes',
         name: 'PortalLoc_statusInHM',
         args: <Object>[hours, minutes],
         locale: localeName,
       );
   String statusInMinutes(int minutes) => Intl.message(
-        "$minutes minutes restantes",
+        '$minutes minutes restantes',
         name: 'PortalLoc_statusInMinutes',
         args: <Object>[minutes],
         locale: localeName,
       );
   String statusInSeconds(int seconds) => Intl.message(
-        "$seconds secondes restantes",
+        '$seconds secondes restantes',
         name: 'PortalLoc_statusInSeconds',
         args: <Object>[seconds],
         locale: localeName,

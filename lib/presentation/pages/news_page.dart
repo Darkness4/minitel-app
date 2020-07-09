@@ -43,14 +43,14 @@ class NewsPage extends StatelessWidget {
                       AssetImage(AssetPaths.twitter),
                       key: Key(Keys.twitterTab),
                     ),
-                    text: "Twitter",
+                    text: 'Twitter',
                   ),
                   Tab(
                     icon: ImageIcon(
                       AssetImage(AssetPaths.github),
                       key: Key(Keys.githubTab),
                     ),
-                    text: "Github",
+                    text: 'Github',
                   ),
                 ],
               ),

@@ -13,7 +13,7 @@ import '../../../fixtures/fixture_reader.dart';
 void main() {
   GithubRemoteDataSource dataSource;
   MockHttpClient mockHttpClient;
-  const String tRepo = 'Darkness4/minitel-app';
+  const tRepo = 'Darkness4/minitel-app';
 
   setUp(() {
     mockHttpClient = MockHttpClient();
@@ -47,7 +47,7 @@ void main() {
         .toList();
 
     test(
-      "should perform a GET request on a URL with tRepo being the endpoint",
+      'should perform a GET request on a URL with tRepo being the endpoint',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
