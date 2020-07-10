@@ -46,8 +46,7 @@ class PortalCubit extends Cubit<PortalState> {
         emit(state.update(isLoaded: true));
       }
     } catch (e) {
-      emit(PortalState.failure());
-      emit(state.update(isLoaded: true));
+      emit(PortalState.failure().copyWith(isLoaded: true));
     }
   }
 

@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.2"
-  bloc:
-    dependency: transitive
-    description:
-      name: bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -212,12 +205,12 @@ packages:
     source: hosted
     version: "0.16.1"
   cubit:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cubit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "0.2.0-dev.1"
   dart_style:
     dependency: transitive
     description:
@@ -258,20 +251,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_bloc:
-    dependency: "direct main"
-    description:
-      name: flutter_bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.1"
   flutter_cubit:
     dependency: "direct main"
     description:
       name: flutter_cubit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.1"
+    version: "0.2.0-dev.1"
   flutter_driver:
     dependency: "direct dev"
     description: flutter

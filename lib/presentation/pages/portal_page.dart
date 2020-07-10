@@ -31,7 +31,7 @@ class PortalPage extends StatelessWidget {
             create: (_) => sl<PortalLoginCubit>(),
           ),
           CubitProvider<PortalCubit>(
-            create: (_) => sl<PortalCubit>(),
+            create: (_) => sl<PortalCubit>()..autoLogin(),
           ),
           CubitProvider<StormshieldStatusCubit>(
             create: (_) => sl<StormshieldStatusCubit>(),
