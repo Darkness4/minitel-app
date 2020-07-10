@@ -49,12 +49,12 @@ dev_dependencies:
     sdk: flutter
   flutter_driver:
     sdk: flutter
-  test: any
+  test:
+  matcher:
+  build_runner:
   mockito: ^4.1.1
   flutter_launcher_icons: ^0.7.5
   intl_translation: ^0.17.10
-  matcher: ^0.12.8
-  build_runner: any
   freezed: ^0.11.2
   json_serializable: ^3.3.0
   injectable_generator: ^0.4.1

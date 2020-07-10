@@ -17,10 +17,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'dev'
-      - name: Upgrade flutter to master latest
+          channel: 'beta'
+      - name: Upgrade flutter to beta latest
         run: |
-          flutter channel master
+          flutter channel beta
           flutter upgrade
           flutter --version
       - run: flutter pub get
@@ -57,10 +57,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'dev'
-      - name: Upgrade flutter to master latest
+          channel: 'beta'
+      - name: Upgrade flutter to beta latest
         run: |
-          flutter channel master
+          flutter channel beta
           flutter upgrade
           flutter --version
       - name: Inject env variables
@@ -98,10 +98,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'dev'
-      - name: Upgrade flutter to master latest
+          channel: 'beta'
+      - name: Upgrade flutter to beta latest
         run: |
-          flutter channel master
+          flutter channel beta
           flutter upgrade
           flutter --version
       - name: Inject env variables
@@ -138,10 +138,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'dev'
-      - name: Upgrade flutter to master latest
+          channel: 'beta'
+      - name: Upgrade flutter to beta latest
         run: |
-          flutter channel master
+          flutter channel beta
           flutter upgrade
           flutter --version
       - name: Inject env variables
