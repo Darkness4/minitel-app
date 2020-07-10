@@ -96,10 +96,10 @@ void main() {
 
   void setUpMockHttpClientNotLoggedIn() {
     when(
-      mockHttpClient.send(any),
-    ).thenAnswer((_) async => http.StreamedResponse(
-          Stream.value(utf8.encode(fixture(
-              'datasources/stormshield_remote_data_source/not_logged_in.html'))),
+      mockHttpClient.post('https://$tSelectedUrl/auth/login.html'),
+    ).thenAnswer((_) async => http.Response(
+          fixture(
+              'datasources/stormshield_remote_data_source/not_logged_in.html'),
           200,
           headers: {},
         ));
