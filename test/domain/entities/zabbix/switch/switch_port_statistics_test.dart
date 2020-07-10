@@ -9,8 +9,8 @@ void main() {
       'should return a valid String',
       () async {
         // arrange
-        tSwitchPortStatistics.speedMap[0] = "100Mbps";
-        tSwitchPortStatistics.speedMap[1] = "10Mbps";
+        tSwitchPortStatistics.speedMap[0] = '100Mbps';
+        tSwitchPortStatistics.speedMap[1] = '10Mbps';
         // act
         final result = tSwitchPortStatistics.toString();
         // assert

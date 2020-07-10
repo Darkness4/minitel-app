@@ -18,7 +18,7 @@ abstract class SwitchStatus with _$SwitchStatus {
 
   factory SwitchStatus.fromHost(ZabbixHost host) {
     // Data to fill
-    final Map<int, SwitchPortStatus> ports = <int, SwitchPortStatus>{};
+    final ports = <int, SwitchPortStatus>{};
     String description;
     String hostname;
     Duration uptime;
@@ -28,13 +28,13 @@ abstract class SwitchStatus with _$SwitchStatus {
     for (final item in host.items) {
       if (item.snmp_oid != null &&
           item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
-        final int port = int.parse(
+        final port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
         ports[port] ??= const SwitchPortStatus();
         ports[port] = ports[port].copyWith(speed: int.parse(item.lastvalue));
       } else if (item.snmp_oid != null &&
           item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
-        final int port = int.parse(
+        final port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
         ports[port] ??= const SwitchPortStatus();
         ports[port] =
@@ -81,7 +81,7 @@ extension SwitchStatusUtils on SwitchStatus {
   /// The second value is a Map. The key is an up port and the value is the
   /// corresponding speed in String, converted in XXX (G/M/k)bps.
   SwitchPortStatistics count() {
-    final SwitchPortStatistics statistics = SwitchPortStatistics();
+    final statistics = SwitchPortStatistics();
     ports.forEach((final int port, final SwitchPortStatus portStatus) {
       switch (portStatus.operStatus) {
         case 1:
@@ -116,7 +116,7 @@ extension SwitchStatusUtils on SwitchStatus {
   }
 
   String _formatUnit(int number) {
-    final int length = number.toString().length;
+    final length = number.toString().length;
     if (length <= 3) {
       return '$number ';
     } else if (length <= 6) {

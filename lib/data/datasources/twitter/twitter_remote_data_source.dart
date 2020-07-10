@@ -32,14 +32,13 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
     }
 
     final response = await client.get(
-      "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361",
-      headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
+      'https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361',
+      headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
     );
 
-    if (response.statusCode == 200) {
-      return List<Map<String, dynamic>>.from(
-              json.decode(response.body) as List<dynamic>)
-          .map((Map<String, dynamic> data) => Post.fromMap(data))
+    if (response.statusCode == HttpStatus.ok) {
+      return (json.decode(response.body) as List<dynamic>)
+          .map((dynamic data) => Post.fromMap(data as Map<String, dynamic>))
           .toList();
     } else {
       throw ServerException(
@@ -52,14 +51,14 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
     final authorization = base64.encode(
         utf8.encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}'));
     final response = await client.post(
-      "https://api.twitter.com/oauth2/token",
+      'https://api.twitter.com/oauth2/token',
       headers: {
         HttpHeaders.authorizationHeader: 'Basic $authorization',
       },
       body: {'grant_type': 'client_credentials'},
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == HttpStatus.ok) {
       final token = json.decode(response.body)['access_token'] as String;
       if (token != null) {
         tokenBuffer.clear();

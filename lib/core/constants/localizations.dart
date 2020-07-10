@@ -14,9 +14,9 @@ class AppLoc {
   AppLoc(this.localeName);
   AboutLoc get about => AboutLoc(localeName);
   AgendaLoc get agenda => AgendaLoc(localeName);
-  @Deprecated("Not used")
+  @Deprecated('Not used')
   String get forceDark => Intl.message(
-        "Forcer le thème sombre",
+        'Forcer le thème sombre',
         name: 'forceDark',
         locale: localeName,
       );
@@ -27,9 +27,9 @@ class AppLoc {
   ReportingLoc get reporting => ReportingLoc(localeName);
 
   static Future<AppLoc> load(Locale locale) {
-    final String name =
+    final name =
         locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
-    final String localeName = Intl.canonicalizedLocale(name);
+    final localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
       return AppLoc(localeName);

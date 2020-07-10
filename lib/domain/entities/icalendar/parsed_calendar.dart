@@ -23,16 +23,12 @@ abstract class ParsedCalendar with _$ParsedCalendar {
 
   /// Get existing the stream .ics from file
   static Future<ParsedCalendar> parse(Stream<String> calendarStream) async {
-    ICalSection mode = ICalSection.None;
-    final Map<String, String> vEvent = <String, String>{};
-    final List<Event> events = <Event>[];
-    TimezoneDescription daylight = TimezoneDescription(
-      dtstart: DateTime(0),
-    );
-    TimezoneDescription standard = TimezoneDescription(
-      dtstart: DateTime(0),
-    );
-    Timezone timezone = Timezone(
+    var mode = ICalSection.None;
+    final vEvent = <String, String>{};
+    final events = <Event>[];
+    var daylight = TimezoneDescription(dtstart: DateTime(0));
+    var standard = TimezoneDescription(dtstart: DateTime(0));
+    var timezone = Timezone(
       daylight: daylight,
       standard: standard,
     );
@@ -40,10 +36,10 @@ abstract class ParsedCalendar with _$ParsedCalendar {
     String prodID;
     String calscale;
 
-    final Stream<String> lines = calendarStream.transform(const LineSplitter());
+    final lines = calendarStream.transform(const LineSplitter());
 
     await for (final String data in lines) {
-      final List<String> line = data.trim().split(":");
+      final line = data.trim().split(':');
       // Inside a VEVENT
       if (line[0] == 'BEGIN' && line[1] == 'VEVENT') {
         vEvent.clear();
@@ -86,7 +82,7 @@ abstract class ParsedCalendar with _$ParsedCalendar {
             vEvent[line[0]] = line[1];
             break;
           case ICalSection.VTIMEZONE:
-            if (line[0] == "TZID") {
+            if (line[0] == 'TZID') {
               timezone = timezone.copyWith(tzid: line[1]);
             }
             break;
@@ -98,13 +94,13 @@ abstract class ParsedCalendar with _$ParsedCalendar {
             break;
           case ICalSection.None:
             switch (line[0]) {
-              case "VERSION":
+              case 'VERSION':
                 version = line[1];
                 break;
-              case "PRODID":
+              case 'PRODID':
                 prodID = line[1];
                 break;
-              case "CALSCALE":
+              case 'CALSCALE':
                 calscale = line[1];
                 break;
             }

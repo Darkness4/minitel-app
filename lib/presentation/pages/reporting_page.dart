@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
-import 'package:minitel_toolbox/presentation/blocs/diagnosis/diagnosis_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/report/report_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/report_status/report_status_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/diagnosis/diagnosis_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/report/report_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/report_status/report_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/pages/reporting/diagnose_screen.dart';
 import 'package:minitel_toolbox/presentation/pages/reporting/report_screen.dart';
 import 'package:minitel_toolbox/presentation/pages/reporting/zabbix_screen.dart';
@@ -37,16 +37,16 @@ class ReportingPageState extends State<ReportingPage>
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiCubitProvider(
       providers: [
-        BlocProvider(create: (_) => sl<ReportBloc>()),
-        BlocProvider(create: (_) => sl<DiagnosisBloc>()),
-        BlocProvider(create: (_) => sl<ReportStatusBloc>()),
+        CubitProvider(create: (_) => sl<ReportCubit>()),
+        CubitProvider(create: (_) => sl<DiagnosisCubit>()),
+        CubitProvider(create: (_) => sl<ReportStatusCubit>()),
       ],
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
-          body: BlocListener<ReportBloc, ReportState>(
+          body: CubitListener<ReportCubit, ReportState>(
             listener: (context, state) {
               if (state is ReportDone) {
                 if (state.status != null) {
@@ -79,7 +79,7 @@ class ReportingPageState extends State<ReportingPage>
                 _shareButton(context),
                 _mailButton(context),
                 _reportButton(context),
-                BlocBuilder<DiagnosisBloc, DiagnosisState>(
+                CubitBuilder<DiagnosisCubit, DiagnosisState>(
                   builder: _diagnosisButton,
                 ),
               ],
@@ -116,7 +116,7 @@ class ReportingPageState extends State<ReportingPage>
               _animationController.reverse();
             }
 
-            context.bloc<DiagnosisBloc>().add(const DiagnosisRun());
+            context.cubit<DiagnosisCubit>().diagnosisRun();
             _percentageDiagnoseProgress.value = 0;
             _timer?.cancel();
             _timer = Timer.periodic(
@@ -175,14 +175,14 @@ class ReportingPageState extends State<ReportingPage>
                   Icons.warning,
                   key: Key(Keys.reportingTab),
                 ),
-                text: "Report",
+                text: 'Report',
               ),
               Tab(
                 icon: Icon(
                   Icons.zoom_in,
                   key: Key(Keys.diagnosisTab),
                 ),
-                text: "Diagnosis",
+                text: 'Diagnosis',
               ),
               Tab(
                 icon: Icon(
@@ -197,20 +197,20 @@ class ReportingPageState extends State<ReportingPage>
       ];
 
   Widget _mailButton(BuildContext context) => AnimatedFloatingButton(
-        "Mail",
+        'Mail',
         end: 0.5,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.bloc<ReportStatusBloc>().state;
-          final diagnosisState = context.bloc<DiagnosisBloc>().state;
+          final reportStatusState = context.cubit<ReportStatusCubit>().state;
+          final diagnosisState = context.cubit<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.bloc<ReportBloc>().add(ReportToMail(
+            context.cubit<ReportCubit>().reportToMail(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,
                   title: reportStatusState.title,
                   diagnosis: diagnosisState.diagnosis,
-                ));
+                );
           } else if (!reportStatusState.isValid) {
             _showNotValidSnackbar(reportStatusState, context);
           }
@@ -222,15 +222,15 @@ class ReportingPageState extends State<ReportingPage>
       ReportStatusState reportStatusState, BuildContext context) {
     if (!reportStatusState.isValidName) {
       Scaffold.of(context).showSnackBar(const SnackBar(
-        content: Text("Identity is not valid."),
+        content: Text('Identity is not valid.'),
       ));
     } else if (!reportStatusState.isValidRoom) {
       Scaffold.of(context).showSnackBar(const SnackBar(
-        content: Text("Room is not valid."),
+        content: Text('Room is not valid.'),
       ));
     } else if (!reportStatusState.isValidTitle) {
       Scaffold.of(context).showSnackBar(const SnackBar(
-        content: Text("Title is not valid."),
+        content: Text('Title is not valid.'),
       ));
     }
   }
@@ -240,17 +240,17 @@ class ReportingPageState extends State<ReportingPage>
         end: 0.25,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.bloc<ReportStatusBloc>().state;
-          final diagnosisState = context.bloc<DiagnosisBloc>().state;
+          final reportStatusState = context.cubit<ReportStatusCubit>().state;
+          final diagnosisState = context.cubit<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.bloc<ReportBloc>().add(ReportToSlack(
+            context.cubit<ReportCubit>().reportToSlack(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,
                   title: reportStatusState.title,
                   diagnosis: diagnosisState.diagnosis,
-                  channel: "minitel_toolbox_notifications", // TODO : Env.test
-                ));
+                  channel: 'minitel_toolbox_notifications',
+                );
           } else if (!reportStatusState.isValid) {
             _showNotValidSnackbar(reportStatusState, context);
           }
@@ -266,16 +266,16 @@ class ReportingPageState extends State<ReportingPage>
         AppLoc.of(context).reporting.share,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.bloc<ReportStatusBloc>().state;
-          final diagnosisState = context.bloc<DiagnosisBloc>().state;
+          final reportStatusState = context.cubit<ReportStatusCubit>().state;
+          final diagnosisState = context.cubit<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.bloc<ReportBloc>().add(ReportToShare(
+            context.cubit<ReportCubit>().reportToShare(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,
                   title: reportStatusState.title,
                   diagnosis: diagnosisState.diagnosis,
-                ));
+                );
           } else if (!reportStatusState.isValid) {
             _showNotValidSnackbar(reportStatusState, context);
           }

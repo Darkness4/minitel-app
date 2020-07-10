@@ -27,19 +27,19 @@ abstract class TimezoneDescription with _$TimezoneDescription {
 extension TimezoneDescriptionX on TimezoneDescription {
   TimezoneDescription copyWithKeyValue(String key, String value) {
     switch (key) {
-      case "DTSTART":
+      case 'DTSTART':
         return copyWith(dtstart: DateTime.parse(value));
         break;
-      case "TZOFFSETTO":
+      case 'TZOFFSETTO':
         return copyWith(tzOffsetTo: value);
         break;
-      case "TZOFFSETFROM":
+      case 'TZOFFSETFROM':
         return copyWith(tzOffsetFrom: value);
         break;
-      case "RRULE":
+      case 'RRULE':
         return copyWith(rRule: value);
         break;
-      case "TZNAME":
+      case 'TZNAME':
         return copyWith(tzName: value);
         break;
     }

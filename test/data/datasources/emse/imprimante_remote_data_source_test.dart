@@ -18,8 +18,8 @@ void main() {
   MockNTLMClient mockNTLMClient;
   MockListCookies mockListCookies;
   MockCookieManager mockCookieManager;
-  const String tUser = 'marc.nguyen';
-  const String tPassword = 'abcdefgh';
+  const tUser = 'marc.nguyen';
+  const tPassword = 'abcdefgh';
 
   setUp(() {
     mockNTLMClient = MockNTLMClient();
@@ -53,12 +53,12 @@ void main() {
 
   void setUpMockHttpClientFailure() {
     when(mockNTLMClient.get(any))
-        .thenAnswer((_) async => throw Exception("Mock error"));
+        .thenAnswer((_) async => throw Exception('Mock error'));
   }
 
   group('login', () {
     test(
-      "should perform a GET request",
+      'should perform a GET request',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
@@ -67,7 +67,7 @@ void main() {
         // assert
         verify(mockNTLMClient.get(
           'http://192.168.130.2/watchdoc/',
-          headers: anyNamed("headers"),
+          headers: anyNamed('headers'),
         ));
       },
     );
@@ -78,7 +78,7 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        final List<Cookie> cookies =
+        final cookies =
             await dataSource.login(username: tUser, password: tPassword);
         // assert
         final headers = Map<String, String>.from(json.decode(fixture(

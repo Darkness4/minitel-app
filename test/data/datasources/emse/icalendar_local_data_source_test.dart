@@ -63,8 +63,8 @@ void main() {
   });
 
   group('cacheICalendar', () {
-    final tData = fixture(
-        'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics');
+    final tData = utf8.encode(fixture(
+        'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics'));
     final tICalendar = Stream.value(tData).asBroadcastStream();
 
     test(
@@ -77,10 +77,7 @@ void main() {
         // act
         await dataSource.cacheICalendar(tICalendar);
         // assert
-        final String expectedString = tData;
-        verify(mockIOSink.write(
-          expectedString,
-        ));
+        verify(mockIOSink.add(tData));
       },
     );
   });

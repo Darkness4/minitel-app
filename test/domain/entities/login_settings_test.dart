@@ -8,23 +8,23 @@ void main() {
       () async {
         // arrange
         // ignore: prefer_const_constructors
-        final LoginSettings tLoginSettings = LoginSettings(
+        final tLoginSettings = LoginSettings(
           autoLogin: true,
-          pswd: "pswd",
+          pswd: 'pswd',
           rememberMe: false,
-          selectedTime: "4 hours",
-          selectedUrl: "10.163.0.2",
-          uid: "uid",
+          selectedTime: '4 hours',
+          selectedUrl: '10.163.0.2',
+          uid: 'uid',
         );
         // assert
         // ignore: prefer_const_constructors
-        final LoginSettings expectedSettings = LoginSettings(
+        final expectedSettings = LoginSettings(
           autoLogin: true,
-          pswd: "pswd",
+          pswd: 'pswd',
           rememberMe: false,
-          selectedTime: "4 hours",
-          selectedUrl: "10.163.0.2",
-          uid: "uid",
+          selectedTime: '4 hours',
+          selectedUrl: '10.163.0.2',
+          uid: 'uid',
         );
         expect(
           tLoginSettings,

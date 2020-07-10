@@ -17,8 +17,8 @@ void main() {
   MockHttpClient mockHttpClient;
   MockListCookies mockListCookies;
   MockCookieManager mockCookieManager;
-  const String tUser = 'marc.nguyen';
-  const String tPassword = 'abcdefgh';
+  const tUser = 'marc.nguyen';
+  const tPassword = 'abcdefgh';
 
   setUp(() {
     mockHttpClient = MockHttpClient();
@@ -37,7 +37,7 @@ void main() {
 
     when(
       mockHttpClient.get(
-        "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
+        'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
@@ -52,7 +52,7 @@ void main() {
 
       if (request.method == 'POST' &&
           request.url.toString() ==
-              "https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin") {
+              'https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin') {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response1.html'))),
@@ -63,7 +63,7 @@ void main() {
         );
       } else if (request.method == 'GET' &&
           request.url.toString() ==
-              "https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr") {
+              'https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr') {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response2.html'))),
@@ -79,8 +79,8 @@ void main() {
 
     when(
       mockHttpClient.get(
-        "https://portail.emse.fr/login",
-        headers: anyNamed("headers"),
+        'https://portail.emse.fr/login',
+        headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response3.html'),
@@ -96,7 +96,7 @@ void main() {
 
     when(
       mockHttpClient.get(
-        "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
+        'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
@@ -111,16 +111,16 @@ void main() {
 
       if (request.method == 'POST' &&
           request.url.toString() ==
-              "https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin") {
+              'https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin') {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response1.html'))),
           302,
-          headers: {HttpHeaders.setCookieHeader: ""},
+          headers: {HttpHeaders.setCookieHeader: ''},
         );
       } else if (request.method == 'GET' &&
           request.url.toString() ==
-              "https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr") {
+              'https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr') {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response2.html'))),
@@ -136,8 +136,8 @@ void main() {
 
     when(
       mockHttpClient.get(
-        "https://portail.emse.fr/login",
-        headers: anyNamed("headers"),
+        'https://portail.emse.fr/login',
+        headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response3.html'),
@@ -150,7 +150,7 @@ void main() {
 
   void setUpMockHttpClientFailure404Case1() {
     when(mockHttpClient.get(
-      "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
+      'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
     )).thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
@@ -159,7 +159,7 @@ void main() {
 
     when(
       mockHttpClient.get(
-        "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
+        'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
@@ -173,7 +173,7 @@ void main() {
 
       if (request.method == 'POST' &&
           request.url.toString() ==
-              "https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin") {
+              'https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin') {
         return http.StreamedResponse(
             Stream.value(utf8.encode('Something went wrong')), 404);
       } else {
@@ -187,7 +187,7 @@ void main() {
 
     when(
       mockHttpClient.get(
-        "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
+        'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
@@ -197,11 +197,11 @@ void main() {
               as Map<String, dynamic>),
         ));
     when(mockHttpClient.send(any)).thenAnswer((realInvocation) async {
-      final http.Request capturedRequest =
+      final capturedRequest =
           realInvocation.positionalArguments[0] as http.Request;
       if (capturedRequest.method == 'POST' &&
           capturedRequest.url.toString() ==
-              "https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin") {
+              'https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin') {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response1.html'))),
@@ -212,7 +212,7 @@ void main() {
         );
       } else if (capturedRequest.method == 'GET' &&
           capturedRequest.url.toString() ==
-              "https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr") {
+              'https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr') {
         return http.StreamedResponse(
             Stream.value(utf8.encode('Something went wrong')), 404);
       }
@@ -225,7 +225,7 @@ void main() {
 
     when(
       mockHttpClient.get(
-        "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
+        'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
@@ -240,7 +240,7 @@ void main() {
 
       if (request.method == 'POST' &&
           request.url.toString() ==
-              "https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin") {
+              'https://cas.emse.fr/login;jsessionid=28F55541F17E7697C445DE5CB8366B59?service=https%3A%2F%2Fportail.emse.fr%2Flogin') {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response1.html'))),
@@ -251,7 +251,7 @@ void main() {
         );
       } else if (request.method == 'GET' &&
           request.url.toString() ==
-              "https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr") {
+              'https://portail.emse.fr/login?ticket=ST-44381-5FcocqYP4qcebfFMsvso-cas1.emse.fr') {
         return http.StreamedResponse(
           Stream.value(utf8.encode(fixture(
               'datasources/portail_emse_remote_data_source/response2.html'))),
@@ -267,15 +267,15 @@ void main() {
 
     when(
       mockHttpClient.get(
-        "https://portail.emse.fr/login",
-        headers: anyNamed("headers"),
+        'https://portail.emse.fr/login',
+        headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
   group('login', () {
     test(
-      "should perform a suite of requests",
+      'should perform a suite of requests',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
@@ -283,8 +283,8 @@ void main() {
         await dataSource.login(username: tUser, password: tPassword);
         // assert
         verify(mockHttpClient.get(
-          "https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin",
-          headers: anyNamed("headers"),
+          'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
+          headers: anyNamed('headers'),
         ));
         verify(
           mockHttpClient.send(any),
@@ -298,7 +298,7 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        final List<Cookie> result =
+        final result =
             await dataSource.login(username: tUser, password: tPassword);
         // assert
         final verification = verify(mockListCookies.addAll(

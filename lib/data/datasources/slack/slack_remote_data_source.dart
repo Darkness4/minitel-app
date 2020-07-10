@@ -25,7 +25,7 @@ abstract class SlackRemoteDataSource {
   Future<String> report(
     String text, {
     Map<String, String> attachments,
-    String channel = "projet_flutter_notif",
+    String channel = 'projet_flutter_notif',
   });
 }
 
@@ -44,34 +44,30 @@ class SlackRemoteDataSourceImpl implements SlackRemoteDataSource {
   Future<String> report(
     String text, {
     Map<String, String> attachments,
-    String channel = "projet_flutter_notif",
+    String channel = 'projet_flutter_notif',
   }) async {
-    final List<Map<String, String>> _attachments = <Map<String, String>>[];
+    final _attachments = attachments?.entries
+        ?.map((e) => {
+              'fallback': e.key,
+              'title': e.key,
+              'text': e.value,
+              'footer': 'Slack API',
+            })
+        ?.toList();
 
-    if (attachments != null) {
-      attachments.forEach(
-        (String key, String value) => _attachments.add(<String, String>{
-          "fallback": key,
-          "title": key,
-          "text": value,
-          "footer": "Slack API",
-        }),
-      );
-    }
-
-    final Map<String, dynamic> data = <String, dynamic>{
-      'text': "*--Report ${dateTimeManager.now()}--*\n"
-          "$text\n",
-      "attachments": _attachments,
+    final data = <String, dynamic>{
+      'text': '*--Report ${dateTimeManager.now()}--*\n'
+          '$text\n',
+      if (_attachments != null) 'attachments': _attachments,
       'channel': channel, // Marc : DTXU7EU56
     };
 
     final response = await client.post(
-      "https://slack.com/api/chat.postMessage",
+      'https://slack.com/api/chat.postMessage',
       body: json.encode(data),
       headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: "Bearer ${ApiKeys.webhook}"
+        HttpHeaders.contentTypeHeader: 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer ${ApiKeys.webhook}'
       },
     );
 

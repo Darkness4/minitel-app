@@ -47,14 +47,14 @@ class ScaffoldWebView extends StatelessWidget {
                   icon: const Icon(Icons.public),
                   onPressed: () async =>
                       LaunchURLUtils.launchURL(await _controller.currentUrl()),
-                  tooltip: "Open in web browser",
+                  tooltip: 'Open in web browser',
                 ),
               ),
               Expanded(
                 child: IconButton(
                   color: Colors.white,
                   icon: const Icon(Icons.refresh),
-                  tooltip: "Refresh",
+                  tooltip: 'Refresh',
                   onPressed: () async {
                     await _controller.reload();
                   },
@@ -63,7 +63,7 @@ class ScaffoldWebView extends StatelessWidget {
               Expanded(
                 child: IconButton(
                   color: Colors.white,
-                  tooltip: "Forward",
+                  tooltip: 'Forward',
                   icon: const Icon(Icons.arrow_forward),
                   onPressed: () async {
                     if (await _controller.canGoForward()) {

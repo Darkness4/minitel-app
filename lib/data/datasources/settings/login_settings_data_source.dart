@@ -24,44 +24,44 @@ class LoginSettingsDataSourceImpl implements LoginSettingsDataSource {
   @override
   Future<void> clear() {
     return Future.wait<dynamic>([
-      prefs.remove("rememberMe"),
-      prefs.remove("autoLogin"),
-      prefs.remove("uid"),
-      prefs.remove("selectedTime"),
-      prefs.remove("selectedUrl"),
-      storage.delete(key: "pswd"),
+      prefs.remove('rememberMe'),
+      prefs.remove('autoLogin'),
+      prefs.remove('uid'),
+      prefs.remove('selectedTime'),
+      prefs.remove('selectedUrl'),
+      storage.delete(key: 'pswd'),
     ]);
   }
 
   @override
   Future<LoginSettings> load() async {
-    if (prefs.containsKey("autoLogin") &&
-        prefs.containsKey("rememberMe") &&
-        prefs.containsKey("selectedTime") &&
-        prefs.containsKey("selectedUrl") &&
-        prefs.containsKey("uid")) {
+    if (prefs.containsKey('autoLogin') &&
+        prefs.containsKey('rememberMe') &&
+        prefs.containsKey('selectedTime') &&
+        prefs.containsKey('selectedUrl') &&
+        prefs.containsKey('uid')) {
       return LoginSettings(
-        autoLogin: prefs.getBool("autoLogin"),
-        pswd: (await storage.read(key: "pswd")) ?? "",
-        rememberMe: prefs.getBool("rememberMe"),
-        selectedTime: prefs.getString("selectedTime"),
-        selectedUrl: prefs.getString("selectedUrl"),
-        uid: prefs.getString("uid"),
+        autoLogin: prefs.getBool('autoLogin'),
+        pswd: (await storage.read(key: 'pswd')) ?? '',
+        rememberMe: prefs.getBool('rememberMe'),
+        selectedTime: prefs.getString('selectedTime'),
+        selectedUrl: prefs.getString('selectedUrl'),
+        uid: prefs.getString('uid'),
       );
     } else {
-      throw CacheException("No Login Settings saved.");
+      throw CacheException('No Login Settings saved.');
     }
   }
 
   @override
   Future<void> save(LoginSettings settings) {
     return Future.wait<dynamic>([
-      prefs.setBool("rememberMe", true),
-      prefs.setBool("autoLogin", settings.autoLogin),
-      prefs.setString("uid", settings.uid),
-      prefs.setString("selectedTime", settings.selectedTime),
-      prefs.setString("selectedUrl", settings.selectedUrl),
-      storage.write(key: "pswd", value: settings.pswd),
+      prefs.setBool('rememberMe', true),
+      prefs.setBool('autoLogin', settings.autoLogin),
+      prefs.setString('uid', settings.uid),
+      prefs.setString('selectedTime', settings.selectedTime),
+      prefs.setString('selectedUrl', settings.selectedUrl),
+      storage.write(key: 'pswd', value: settings.pswd),
     ]);
   }
 }

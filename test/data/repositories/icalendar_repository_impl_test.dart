@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
@@ -16,10 +18,10 @@ void main() {
   MockLocalDataSource mockLocalDataSource;
   MockCalendarURLRepository mockCalendarURLRepository;
   MockNetworkInfo mockNetworkInfo;
-  final tICalendar = Stream.value("ICalendar");
-  const tUser = "user";
-  const tPswd = "pswd";
-  const tUrl = "https://localhost/";
+  final tICalendar = Stream.value(utf8.encode('ICalendar'));
+  const tUser = 'user';
+  const tPswd = 'pswd';
+  const tUrl = 'https://localhost/';
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
@@ -115,14 +117,14 @@ void main() {
   });
 
   group('parsedCalendar', () {
-    const ParsedCalendar tParsedCalendarModel = ParsedCalendar(
-      calscale: "calscale",
+    const tParsedCalendarModel = ParsedCalendar(
+      calscale: 'calscale',
       events: [],
-      prodID: "prodID",
+      prodID: 'prodID',
       timezone: null,
-      version: "version",
+      version: 'version',
     );
-    const ParsedCalendar tParsedCalendar = tParsedCalendarModel;
+    const tParsedCalendar = tParsedCalendarModel;
     test(
       'should call localDataSource',
       () async {

@@ -30,12 +30,12 @@ void main() {
       // act
       await dataSource.clear();
       // assert
-      verify(mockSharedPreferences.remove("rememberMe"));
-      verify(mockSharedPreferences.remove("autoLogin"));
-      verify(mockSharedPreferences.remove("uid"));
-      verify(mockSharedPreferences.remove("selectedTime"));
-      verify(mockSharedPreferences.remove("selectedUrl"));
-      verify(mockFlutterSecureStorage.delete(key: "pswd"));
+      verify(mockSharedPreferences.remove('rememberMe'));
+      verify(mockSharedPreferences.remove('autoLogin'));
+      verify(mockSharedPreferences.remove('uid'));
+      verify(mockSharedPreferences.remove('selectedTime'));
+      verify(mockSharedPreferences.remove('selectedUrl'));
+      verify(mockFlutterSecureStorage.delete(key: 'pswd'));
     });
   });
 
@@ -46,10 +46,10 @@ void main() {
         // arrange
         const tAutoLogin = true;
         const tRememberMe = true;
-        const tSelectedTime = "4 hours";
-        const tSelectedUrl = "10.163.0.2";
-        const tUid = "uid";
-        const tPwsd = "pswd";
+        const tSelectedTime = '4 hours';
+        const tSelectedUrl = '10.163.0.2';
+        const tUid = 'uid';
+        const tPwsd = 'pswd';
         const tLoginSettingsModel = LoginSettings(
           autoLogin: tAutoLogin,
           pswd: tPwsd,
@@ -59,26 +59,26 @@ void main() {
           uid: tUid,
         );
         when(mockSharedPreferences.containsKey(any)).thenReturn(true);
-        when(mockSharedPreferences.getBool("autoLogin")).thenReturn(tAutoLogin);
-        when(mockSharedPreferences.getBool("rememberMe"))
+        when(mockSharedPreferences.getBool('autoLogin')).thenReturn(tAutoLogin);
+        when(mockSharedPreferences.getBool('rememberMe'))
             .thenReturn(tRememberMe);
-        when(mockSharedPreferences.getString("selectedTime"))
+        when(mockSharedPreferences.getString('selectedTime'))
             .thenReturn(tSelectedTime);
-        when(mockSharedPreferences.getString("selectedUrl"))
+        when(mockSharedPreferences.getString('selectedUrl'))
             .thenReturn(tSelectedUrl);
-        when(mockSharedPreferences.getString("uid")).thenReturn(tUid);
-        when(mockFlutterSecureStorage.read(key: "pswd"))
+        when(mockSharedPreferences.getString('uid')).thenReturn(tUid);
+        when(mockFlutterSecureStorage.read(key: 'pswd'))
             .thenAnswer((_) async => tPwsd);
         // act
         final result = await dataSource.load();
         // assert
         verify(mockSharedPreferences.containsKey(any));
-        verify(mockSharedPreferences.getBool("autoLogin"));
-        verify(mockSharedPreferences.getBool("rememberMe"));
-        verify(mockSharedPreferences.getString("selectedTime"));
-        verify(mockSharedPreferences.getString("selectedUrl"));
-        verify(mockSharedPreferences.getString("uid"));
-        verify(mockFlutterSecureStorage.read(key: "pswd"));
+        verify(mockSharedPreferences.getBool('autoLogin'));
+        verify(mockSharedPreferences.getBool('rememberMe'));
+        verify(mockSharedPreferences.getString('selectedTime'));
+        verify(mockSharedPreferences.getString('selectedUrl'));
+        verify(mockSharedPreferences.getString('uid'));
+        verify(mockFlutterSecureStorage.read(key: 'pswd'));
         expect(result, equals(tLoginSettingsModel));
       },
     );
@@ -103,10 +103,10 @@ void main() {
         // arrange
         const tAutoLogin = true;
         const tRememberMe = true;
-        const tSelectedTime = "4 hours";
-        const tSelectedUrl = "10.163.0.2";
-        const tUid = "uid";
-        const tPwsd = "pswd";
+        const tSelectedTime = '4 hours';
+        const tSelectedUrl = '10.163.0.2';
+        const tUid = 'uid';
+        const tPwsd = 'pswd';
         const tLoginSettingsModel = LoginSettings(
           autoLogin: tAutoLogin,
           pswd: tPwsd,
@@ -126,12 +126,12 @@ void main() {
         // act
         await dataSource.save(tLoginSettingsModel);
         // assert
-        verify(mockSharedPreferences.setBool("rememberMe", tRememberMe));
-        verify(mockSharedPreferences.setBool("autoLogin", tAutoLogin));
-        verify(mockSharedPreferences.setString("uid", tUid));
-        verify(mockSharedPreferences.setString("selectedTime", tSelectedTime));
-        verify(mockSharedPreferences.setString("selectedUrl", tSelectedUrl));
-        verify(mockFlutterSecureStorage.write(key: "pswd", value: tPwsd));
+        verify(mockSharedPreferences.setBool('rememberMe', tRememberMe));
+        verify(mockSharedPreferences.setBool('autoLogin', tAutoLogin));
+        verify(mockSharedPreferences.setString('uid', tUid));
+        verify(mockSharedPreferences.setString('selectedTime', tSelectedTime));
+        verify(mockSharedPreferences.setString('selectedUrl', tSelectedUrl));
+        verify(mockFlutterSecureStorage.write(key: 'pswd', value: tPwsd));
       },
     );
   });

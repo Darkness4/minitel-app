@@ -16,35 +16,35 @@ void main() {
           speed: 10,
         );
         const tSwitchStatus = SwitchStatus(
-          description: "description",
-          hostname: "hostname",
+          description: 'description',
+          hostname: 'hostname',
           ports: {0: tSwitchPortStatus},
           pingResponseTime: 1.0,
           snmpAvailable: 1,
           uptime: Duration(seconds: 1),
         );
         const tZabbixHost = ZabbixHost(
-          host: "host",
-          hostid: "hostid",
+          host: 'host',
+          hostid: 'hostid',
           interfaces: [],
           items: [
             ZabbixItem(
               lastvalue: '10',
-              snmp_oid: "${SwitchPortStatus.speedOid}.0",
+              snmp_oid: '${SwitchPortStatus.speedOid}.0',
             ),
             ZabbixItem(
               lastvalue: '1',
-              snmp_oid: "${SwitchPortStatus.operStatusOid}.0",
+              snmp_oid: '${SwitchPortStatus.operStatusOid}.0',
             ),
             ZabbixItem(
               name: 'Device description',
               lastvalue: 'description',
-              snmp_oid: "",
+              snmp_oid: '',
             ),
             ZabbixItem(
               name: 'Device name',
               lastvalue: 'hostname',
-              snmp_oid: "",
+              snmp_oid: '',
             ),
             ZabbixItem(
               name: 'ICMP response time',
@@ -78,8 +78,8 @@ void main() {
       () async {
         // arrange
         const tSwitchStatus = SwitchStatus(
-          description: "description",
-          hostname: "hostname",
+          description: 'description',
+          hostname: 'hostname',
           ports: {
             0: SwitchPortStatus(
               operStatus: 1,
@@ -127,10 +127,10 @@ void main() {
         final result = tSwitchStatus.count();
         // assert
         final expectedSwitchPortStatistics = SwitchPortStatistics()
-          ..speedMap[0] = "10 bps"
-          ..speedMap[8] = "1.0 kbps"
-          ..speedMap[9] = "1.0 Mbps"
-          ..speedMap[10] = "1.0 Gbps"
+          ..speedMap[0] = '10 bps'
+          ..speedMap[8] = '1.0 kbps'
+          ..speedMap[9] = '1.0 Mbps'
+          ..speedMap[10] = '1.0 Gbps'
           ..up = 4
           ..down = 2
           ..dormant = 1

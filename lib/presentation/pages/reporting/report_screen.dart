@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:minitel_toolbox/core/constants/launch_url.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
-import 'package:minitel_toolbox/presentation/blocs/report_status/report_status_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/report_status/report_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:minitel_toolbox/presentation/widgets/cards/doc_card.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReportScreen extends StatelessWidget {
   const ReportScreen({Key key}) : super(key: key);
@@ -46,14 +46,14 @@ class _ContactsCard extends StatelessWidget {
     return DocCard(
       children: <Widget>[
         Text(
-          "Contacts",
+          'Contacts',
           style: Theme.of(context).textTheme.headline5,
         ),
         OutlineButton(
           textColor: Theme.of(context).accentColor,
           onPressed: LaunchURLConstants.messengerMarcNGUYEN,
           child: Text(
-            "Facebook: Minitel Ismin",
+            'Facebook: Minitel Ismin',
             style: Theme.of(context).textTheme.button,
             overflow: TextOverflow.ellipsis,
           ),
@@ -62,13 +62,13 @@ class _ContactsCard extends StatelessWidget {
           textColor: Theme.of(context).accentColor,
           onPressed: LaunchURLConstants.mailToMinitel,
           child: Text(
-            "Mail: minitelismin@gmail.com",
+            'Mail: minitelismin@gmail.com',
             style: Theme.of(context).textTheme.button,
             overflow: TextOverflow.ellipsis,
           ),
         ),
         Text(
-          "G*: Contact Admin",
+          'G*: Contact Admin',
           style: Theme.of(context).textTheme.button,
           overflow: TextOverflow.ellipsis,
         ),
@@ -86,18 +86,23 @@ class _ReportCard extends StatefulWidget {
 }
 
 class __ReportCardState extends State<_ReportCard> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _roomController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final FocusScopeNode _formNode = FocusScopeNode();
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController _titleController;
+  TextEditingController _descriptionController;
+  TextEditingController _roomController;
+  TextEditingController _nameController;
+  FocusScopeNode _formNode;
 
-  ReportStatusBloc _reportStatusBloc;
+  ReportStatusCubit _reportStatusCubit;
 
   @override
   void initState() {
-    _reportStatusBloc = context.bloc<ReportStatusBloc>();
+    _titleController = TextEditingController();
+    _descriptionController = TextEditingController();
+    _roomController = TextEditingController();
+    _nameController = TextEditingController();
+    _formNode = FocusScopeNode();
+    _reportStatusCubit = context.cubit<ReportStatusCubit>();
 
     _titleController.addListener(_onTitleChanged);
     _descriptionController.addListener(_onDescriptionChanged);
@@ -106,20 +111,30 @@ class __ReportCardState extends State<_ReportCard> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    _roomController.dispose();
+    _nameController.dispose();
+    _formNode.dispose();
+    super.dispose();
+  }
+
   void _onTitleChanged() {
-    _reportStatusBloc.add(TitleChanged(_titleController.text));
+    _reportStatusCubit.titleChanged(_titleController.text);
   }
 
   void _onRoomChanged() {
-    _reportStatusBloc.add(RoomChanged(_roomController.text));
+    _reportStatusCubit.roomChanged(_roomController.text);
   }
 
   void _onDescriptionChanged() {
-    _reportStatusBloc.add(DescriptionChanged(_descriptionController.text));
+    _reportStatusCubit.descriptionChanged(_descriptionController.text);
   }
 
   void _onNameChanged() {
-    _reportStatusBloc.add(NameChanged(_nameController.text));
+    _reportStatusCubit.nameChanged(_nameController.text);
   }
 
   @override
@@ -215,7 +230,7 @@ class __ReportCardState extends State<_ReportCard> {
                   keyboardType: TextInputType.multiline,
                   maxLength: 500,
                   decoration: const InputDecoration(
-                    labelText: "Description",
+                    labelText: 'Description',
                   ),
                   onFieldSubmitted: (_) => _formNode.unfocus(),
                 ),
@@ -238,7 +253,8 @@ class _TutorialCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return DocCard(
       children: <Widget>[
-        MarkdownBody(data: """
+        MarkdownBody(
+          data: '''
 # ${AppLoc.of(context).reporting.tutorial.header}
 
 *${AppLoc.of(context).reporting.tutorial.notice}*
@@ -254,7 +270,8 @@ ${AppLoc.of(context).reporting.tutorial.example}
 **${AppLoc.of(context).reporting.tutorial.content4}**
 
 **${AppLoc.of(context).reporting.tutorial.content5}**
-"""),
+''',
+        ),
       ],
     );
   }

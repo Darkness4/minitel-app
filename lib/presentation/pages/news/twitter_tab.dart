@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
-import 'package:minitel_toolbox/presentation/blocs/twitter_feed/twitter_feed_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/twitter_feed/twitter_feed_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:minitel_toolbox/presentation/widgets/cards/twitter_card.dart';
 
@@ -37,23 +37,20 @@ class TwitterScreen extends StatelessWidget {
     return buildBody(context);
   }
 
-  BlocProvider<TwitterFeedBloc> buildBody(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<TwitterFeedBloc>(),
+  Widget buildBody(BuildContext context) {
+    return CubitProvider(
+      create: (_) => sl<TwitterFeedCubit>()..getFeed(),
       child: Center(
-        child: BlocBuilder<TwitterFeedBloc, TwitterFeedState>(
+        child: CubitBuilder<TwitterFeedCubit, TwitterFeedState>(
           builder: (BuildContext context, TwitterFeedState state) {
-            if (state is TwitterFeedStateInitial) {
-              return const InitialDisplay();
-            } else if (state is TwitterFeedStateLoading) {
-              return const CircularProgressIndicator(
-                  key: Key(Keys.newsLoading));
-            } else if (state is TwitterFeedStateLoaded) {
-              return FeedDisplay(feed: state.feed);
-            } else if (state is TwitterFeedStateError) {
-              return ErrorDisplay(message: state.error.toString());
-            }
-            return null;
+            return state.when(
+              initial: () =>
+                  const CircularProgressIndicator(key: Key(Keys.newsLoading)),
+              loading: () =>
+                  const CircularProgressIndicator(key: Key(Keys.newsLoading)),
+              loaded: (feed) => FeedDisplay(feed: feed),
+              error: (error) => ErrorDisplay(message: error.toString()),
+            );
           },
         ),
       ),
@@ -70,7 +67,7 @@ class FeedDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Image imageProfile = _imageProfile();
+    final imageProfile = _imageProfile();
     return OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
         if (MediaQuery.of(context).size.shortestSide < 600 &&
@@ -105,26 +102,12 @@ class FeedDisplay extends StatelessWidget {
   }
 
   Image _imageProfile() {
-    final Image imageProfile = Image.network(
+    final imageProfile = Image.network(
       feed.first.profile_image_url_https.toString(),
       fit: BoxFit.cover,
       height: 50,
       width: 50,
     );
     return imageProfile;
-  }
-}
-
-class InitialDisplay extends StatelessWidget {
-  const InitialDisplay({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    context.bloc<TwitterFeedBloc>().add(const GetFeedEvent());
-    return const CircularProgressIndicator(
-      key: Key(Keys.newsLoading),
-    );
   }
 }

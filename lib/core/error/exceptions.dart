@@ -5,8 +5,8 @@ class CacheException implements Exception {
 
   @override
   String toString() {
-    if (message == null) return "CacheException";
-    return "CacheException: $message";
+    if (message == null) return 'CacheException';
+    return 'CacheException: $message';
   }
 }
 
@@ -17,8 +17,8 @@ class ServerException implements Exception {
 
   @override
   String toString() {
-    if (message == null) return "ServerException";
-    return "ServerException: $message";
+    if (message == null) return 'ServerException';
+    return 'ServerException: $message';
   }
 }
 
@@ -29,14 +29,14 @@ class ClientException implements Exception {
 
   @override
   String toString() {
-    if (message == null) return "ClientException";
-    return "ClientException: $message";
+    if (message == null) return 'ClientException';
+    return 'ClientException: $message';
   }
 }
 
 class NotLoggedInException implements Exception {
   @override
   String toString() {
-    return "Not logged in.";
+    return 'Not logged in.';
   }
 }

@@ -26,22 +26,22 @@ import 'dart:convert';
 /// Also, for secutiry reason, DO NOT ADD ANY UNIT TEST USING THIS FILE.
 class ApiKeys {
   /// Slack incomming webhook endpoint
-  static const String _webhook = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
+  static const String _webhook = 'ZXhlbXBsZQ=='; // ZXhlbXBsZQ== = exemple
 
   /// Twitter api key
-  static const String _twitterApi = "ZXhlbXBsZQ=="; // ZXhlbXBsZQ== = exemple
+  static const String _twitterApi = 'ZXhlbXBsZQ=='; // ZXhlbXBsZQ== = exemple
 
-  static const String _consumerKey = "ZXhlbXBsZQ==";
-  static const String _consumerSecret = "ZXhlbXBsZQ==";
+  static const String _consumerKey = 'ZXhlbXBsZQ==';
+  static const String _consumerSecret = 'ZXhlbXBsZQ==';
 
   /// Github Repo to get the releases changelog
-  static const String githubRepo = "Darkness4/minitel-app";
+  static const String githubRepo = 'Darkness4/minitel-app';
 
   /// Zabbix authentication Token
   ///
   /// This is only procures read only permissions. It can be publicly published.
   static const String _zabbixToken =
-      "NzQ0ZDI3NjkwZWE0NGIxMWEyNzlmZTk4Zjk3N2Y5N2U=";
+      'NzQ0ZDI3NjkwZWE0NGIxMWEyNzlmZTk4Zjk3N2Y5N2U=';
 
   /// Host URI to zabbix server
   static const String zabbixPath = 'https://10.163.0.7';

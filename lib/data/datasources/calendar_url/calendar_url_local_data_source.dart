@@ -22,7 +22,7 @@ class CalendarURLLocalDataSourceImpl implements CalendarURLLocalDataSource {
   /// Get from SharedPrefs the url to get the ical
   @override
   Future<String> getLastCalendarURL() async {
-    final String contents = prefs.getString(CacheKeys.calendarURL);
+    final contents = prefs.getString(CacheKeys.calendarURL);
 
     if (contents != null && contents.isNotEmpty) {
       return contents;

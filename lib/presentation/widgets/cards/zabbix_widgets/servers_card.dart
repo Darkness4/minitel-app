@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/servers/server_status.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_interface.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
-import 'package:minitel_toolbox/presentation/blocs/zabbix_hosts/zabbix_hosts_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/zabbix_hosts/zabbix_hosts_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/text_styles.dart';
 
 class ServersCard extends StatelessWidget {
@@ -16,32 +16,29 @@ class ServersCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: BlocProvider<ZabbixHostsBloc>(
-        create: (_) => sl<ZabbixHostsBloc>(),
-        child: BlocBuilder<ZabbixHostsBloc, ZabbixHostsState>(
+      child: CubitProvider<ZabbixHostsCubit>(
+        create: (_) =>
+            sl<ZabbixHostsCubit>()..getZabbixHosts(ApiKeys.zabbixServers),
+        child: CubitBuilder<ZabbixHostsCubit, ZabbixHostsState>(
           builder: (context, state) {
-            if (state is ZabbixHostsStateInitial) {
-              context
-                  .bloc<ZabbixHostsBloc>()
-                  .add(const GetZabbixHostsEvent(ApiKeys.zabbixServers));
-              return const CircularProgressIndicator();
-            } else if (state is ZabbixHostsStateLoading) {
-              return const CircularProgressIndicator();
-            } else if (state is ZabbixHostsStateError) {
-              return Text(
-                state.error.toString(),
-                style: MinitelTextStyles.error,
-              );
-            } else if (state is ZabbixHostsStateLoaded) {
-              return Wrap(
-                alignment: WrapAlignment.center,
-                children: <Widget>[
-                  for (ZabbixHost host in state.hosts) _ServerBody(host),
-                ],
-              );
-            } else {
-              return null;
-            }
+            return state.when(
+              initial: () => const CircularProgressIndicator(),
+              loading: () => const CircularProgressIndicator(),
+              loaded: (hosts) {
+                return Wrap(
+                  alignment: WrapAlignment.center,
+                  children: <Widget>[
+                    for (final host in hosts) _ServerBody(host),
+                  ],
+                );
+              },
+              error: (e) {
+                return Text(
+                  state.toString(),
+                  style: MinitelTextStyles.error,
+                );
+              },
+            );
           },
         ),
       ),

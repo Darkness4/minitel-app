@@ -27,9 +27,7 @@ class GithubLocalDataSourceImpl implements GithubLocalDataSource {
   Future<void> cacheReleases(List<GithubRelease> releasesToCache) async {
     final file = await fileManager.releasesFile;
     return file.writeAsString(
-      json.encode(releasesToCache
-          .map((GithubRelease release) => release.toJson())
-          .toList()),
+      json.encode(releasesToCache.map((release) => release.toJson()).toList()),
     );
   }
 
@@ -37,10 +35,10 @@ class GithubLocalDataSourceImpl implements GithubLocalDataSource {
   Future<List<GithubRelease>> fetchLastReleases() async {
     final file = await fileManager.releasesFile;
     if (file.existsSync()) {
-      final String jsonString = file.readAsStringSync();
-      return List<Map<String, dynamic>>.from(
-              json.decode(jsonString) as List<dynamic>)
-          .map((Map<String, dynamic> data) => GithubRelease.fromJson(data))
+      final jsonString = file.readAsStringSync();
+      return (json.decode(jsonString) as List<dynamic>)
+          .map((dynamic data) =>
+              GithubRelease.fromJson(data as Map<String, dynamic>))
           .toList();
     } else {
       throw CacheException();

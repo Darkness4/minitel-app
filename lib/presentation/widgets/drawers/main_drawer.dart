@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
-import 'package:minitel_toolbox/presentation/blocs/theme/theme_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/theme/theme_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/drawer_styles.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
@@ -30,7 +30,7 @@ class MainDrawer extends StatelessWidget {
                   child: Image.asset(AssetPaths.logoMinitelWhite),
                 ),
                 const Text(
-                  "Minitel Toolbox",
+                  'Minitel Toolbox',
                   style: TextStyle(color: Colors.white, fontSize: 23),
                 ),
               ],
@@ -53,8 +53,8 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
                     RoutePaths.authentication) {
-                  Navigator.pushReplacementNamed(
-                      context, RoutePaths.authentication);
+                  Navigator.of(context)
+                      .pushReplacementNamed(RoutePaths.authentication);
                 }
               },
             ),
@@ -76,7 +76,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.news) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.news);
+                  Navigator.of(context).pushReplacementNamed(RoutePaths.news);
                 }
               },
             ),
@@ -97,7 +97,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.agenda) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.agenda);
+                  Navigator.of(context).pushReplacementNamed(RoutePaths.agenda);
                 }
               },
             ),
@@ -126,7 +126,8 @@ class MainDrawer extends StatelessWidget {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name !=
                     RoutePaths.reporting) {
-                  Navigator.pushReplacementNamed(context, RoutePaths.reporting);
+                  Navigator.of(context)
+                      .pushReplacementNamed(RoutePaths.reporting);
                 }
               },
             ),
@@ -140,14 +141,14 @@ class MainDrawer extends StatelessWidget {
               borderRadius: DrawerStyle.RoundedBorderRight,
             ),
             child: ListTile(
-              title: const Text("Documentation"),
+              title: const Text('Documentation'),
               leading: const Icon(Icons.library_books),
               key: const Key(Keys.docsRoute),
               selected: currentRoutePaths == RoutePaths.docs,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.docs) {
-                  Navigator.pushNamed(context, RoutePaths.docs);
+                  Navigator.of(context).pushNamed(RoutePaths.docs);
                 }
               },
             ),
@@ -168,49 +169,51 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context); // Close Drawer
                 if (ModalRoute.of(context).settings.name != RoutePaths.about) {
-                  Navigator.pushNamed(context, RoutePaths.about);
+                  Navigator.of(context).pushNamed(RoutePaths.about);
                 }
               },
             ),
           ),
           const Divider(),
           const ListTile(
-            title: Text("Theme"),
+            title: Text('Theme'),
           ),
-          BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Radio(
-                  value: "Dark",
-                  groupValue: state.value,
-                  onChanged: (String _) async {
-                    context.bloc<ThemeBloc>().add(const ThemeToDark());
-                  },
-                ),
-                Radio(
-                  value: "Adaptive",
-                  groupValue: state.value,
-                  onChanged: (String _) async {
-                    context.bloc<ThemeBloc>().add(const ThemeToAdaptive());
-                  },
-                ),
-                Radio(
-                  value: "Light",
-                  groupValue: state.value,
-                  onChanged: (String _) async {
-                    context.bloc<ThemeBloc>().add(const ThemeToLight());
-                  },
-                ),
-              ],
-            );
-          }),
+          CubitBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Radio(
+                    value: 'Dark',
+                    groupValue: state.value,
+                    onChanged: (String _) {
+                      context.cubit<ThemeCubit>().toDark();
+                    },
+                  ),
+                  Radio(
+                    value: 'Adaptive',
+                    groupValue: state.value,
+                    onChanged: (String _) {
+                      context.cubit<ThemeCubit>().toAdaptive();
+                    },
+                  ),
+                  Radio(
+                    value: 'Light',
+                    groupValue: state.value,
+                    onChanged: (String _) {
+                      context.cubit<ThemeCubit>().toLight();
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const <Widget>[
-              Text("Dark"),
-              Text("Adaptive"),
-              Text("Light"),
+              Text('Dark'),
+              Text('Adaptive'),
+              Text('Light'),
             ],
           )
         ],

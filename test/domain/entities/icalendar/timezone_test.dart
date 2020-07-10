@@ -3,11 +3,11 @@ import 'package:minitel_toolbox/domain/entities/icalendar/timezone.dart';
 
 void main() {
   final tDaylight = TimezoneDescription(
-    dtstart: DateTime.parse("19710101T020000"),
-    rRule: "FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=3;BYDAY=-1SU",
-    tzName: "CEST",
-    tzOffsetFrom: "+0100",
-    tzOffsetTo: "+0200",
+    dtstart: DateTime.parse('19710101T020000'),
+    rRule: 'FREQ=YEARLY;WKST=MO;INTERVAL=1;BYMONTH=3;BYDAY=-1SU',
+    tzName: 'CEST',
+    tzOffsetFrom: '+0100',
+    tzOffsetTo: '+0200',
   );
 
   group('TimezoneDescriptionModel', () {
@@ -16,14 +16,14 @@ void main() {
         'should return a valid model',
         () async {
           // act
-          final result = tDaylight.copyWithKeyValue("RRULE", "test");
+          final result = tDaylight.copyWithKeyValue('RRULE', 'test');
           // assert
           final extectedResult = TimezoneDescription(
-            dtstart: DateTime.parse("19710101T020000"),
-            rRule: "test",
-            tzName: "CEST",
-            tzOffsetFrom: "+0100",
-            tzOffsetTo: "+0200",
+            dtstart: DateTime.parse('19710101T020000'),
+            rRule: 'test',
+            tzName: 'CEST',
+            tzOffsetFrom: '+0100',
+            tzOffsetTo: '+0200',
           );
           expect(result, equals(extectedResult));
         },
@@ -34,7 +34,7 @@ void main() {
         () async {
           // act
           final result =
-              tDaylight.copyWithKeyValue("KeyNotFound", "ValueIllegal");
+              tDaylight.copyWithKeyValue('KeyNotFound', 'ValueIllegal');
           // assert
           expect(result, equals(tDaylight));
         },

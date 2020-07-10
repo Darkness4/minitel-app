@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
-import 'package:minitel_toolbox/presentation/blocs/agenda/agenda_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/notification_settings/notification_settings_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/agenda/agenda_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
 import 'package:minitel_toolbox/presentation/pages/agenda/notification_settings_page.dart';
 import 'package:minitel_toolbox/presentation/widgets/agenda_widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/presentation/widgets/drawers/main_drawer.dart';
@@ -21,14 +21,14 @@ class AgendaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiCubitProvider(
       providers: [
-        BlocProvider<NotificationSettingsBloc>(
-          create: (_) => sl<NotificationSettingsBloc>()
-            ..add(const NotificationSettingsLoad()),
+        CubitProvider<NotificationSettingsCubit>(
+          create: (_) =>
+              sl<NotificationSettingsCubit>()..notificationSettingsLoad(),
         ),
-        BlocProvider<AgendaBloc>(
-          create: (context) => sl<AgendaBloc>(),
+        CubitProvider<AgendaCubit>(
+          create: (context) => sl<AgendaCubit>(),
         ),
       ],
       child: Scaffold(
@@ -40,7 +40,7 @@ class AgendaPage extends StatelessWidget {
               icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.of(context).push<void>(
-                  MaterialPageRoute<void>(
+                  MaterialPageRoute(
                     builder: (context) => const NotificationSettingsPage(),
                   ),
                 );
@@ -49,29 +49,28 @@ class AgendaPage extends StatelessWidget {
           ],
         ),
         body: Center(
-          child:
-              BlocListener<NotificationSettingsBloc, NotificationSettingsState>(
+          child: CubitListener<NotificationSettingsCubit,
+              NotificationSettingsState>(
             listener: (context, state) {
               if (state.isLoaded) {
-                final agendaState = context.bloc<AgendaBloc>().state;
+                final agendaState = context.cubit<AgendaCubit>().state;
                 if (agendaState is AgendaInitial) {
-                  context.bloc<AgendaBloc>().add(AgendaLoad(
-                        notificationSettings: state.notificationSettings,
-                      ));
+                  context
+                      .cubit<AgendaCubit>()
+                      .agendaLoad(state.notificationSettings);
                 }
               }
             },
-            child: BlocBuilder<AgendaBloc, AgendaState>(
+            child: CubitBuilder<AgendaCubit, AgendaState>(
               builder: (context, state) {
-                if (state is AgendaInitial || state is AgendaLoading) {
-                  return const CircularProgressIndicator(
-                    backgroundColor: Colors.white,
-                  );
-                } else if (state is AgendaError) {
-                  return ErrorAgendaWidget(state.exception);
-                } else if (state is AgendaLoaded) {
-                  return StreamBuilder<List<Widget>>(
-                    stream: _listEventCards(context, state.events),
+                return state.when(
+                  initial: () => const CircularProgressIndicator(
+                      backgroundColor: Colors.white),
+                  loading: () => const CircularProgressIndicator(
+                      backgroundColor: Colors.white),
+                  error: (exception) => ErrorAgendaWidget(exception),
+                  loaded: (events) => StreamBuilder<List<Widget>>(
+                    stream: _listEventCards(context, events),
                     builder: (BuildContext context,
                         AsyncSnapshot<List<Widget>> snapshot) {
                       if (snapshot.hasData) {
@@ -93,10 +92,8 @@ class AgendaPage extends StatelessWidget {
                         );
                       }
                     },
-                  );
-                } else {
-                  return null;
-                }
+                  ),
+                );
               },
             ),
           ),
@@ -110,9 +107,9 @@ class AgendaPage extends StatelessWidget {
 
   Stream<List<Widget>> _listEventCards(
       BuildContext context, Iterable<Event> events) async* {
-    List<Widget> monthlyWidgets = <Widget>[];
-    List<Widget> dailyEvents = <Widget>[];
-    final List<Widget> monthPages = <Widget>[];
+    var monthlyWidgets = <Widget>[];
+    var dailyEvents = <Widget>[];
+    final monthPages = <Widget>[];
     DateTime oldDt;
 
     if (events.isEmpty) {
@@ -134,7 +131,7 @@ class AgendaPage extends StatelessWidget {
       yield monthPages;
       DateTime dt;
 
-      for (final Event event in events) {
+      for (final event in events) {
         dt = event.dtstart;
 
         // New Month

@@ -20,13 +20,13 @@ abstract class Event with _$Event {
 
   factory Event.fromMap(Map<String, dynamic> json) {
     return Event(
-      dtend: DateTime.parse(json["DTEND"] as String),
-      uid: json["UID"] as String,
-      dtstamp: DateTime.parse(json["DTSTAMP"] as String),
-      location: json["LOCATION"] as String,
-      description: json["DESCRIPTION"] as String,
-      summary: json["SUMMARY"] as String,
-      dtstart: DateTime.parse(json["DTSTART"] as String),
+      dtend: DateTime.parse(json['DTEND'] as String),
+      uid: json['UID'] as String,
+      dtstamp: DateTime.parse(json['DTSTAMP'] as String),
+      location: json['LOCATION'] as String,
+      description: json['DESCRIPTION'] as String,
+      summary: json['SUMMARY'] as String,
+      dtstart: DateTime.parse(json['DTSTART'] as String),
     );
   }
 }
@@ -37,20 +37,20 @@ extension EventUtils on Event {
     @required NotificationSettings notificationSettings,
     @required NotificationDetails notificationDetails,
   }) {
-    final DateTime dt = dtstart;
-    final DateTime now = DateTime.now();
+    final dt = dtstart;
+    final now = DateTime.now();
 
     // Notification System
     if (dt.isBefore(now.add(notificationSettings.range))) {
-      final String dtstart = DateFormat.Hm().format(dt);
-      final String dtend = DateFormat.Hm().format(this.dtend);
+      final dtstart = DateFormat.Hm().format(dt);
+      final dtend = DateFormat.Hm().format(this.dtend);
 
       final id = int.parse(uid, radix: 16) % 2147483647;
-      final body = "$location\n"
-          "$dtstart"
-          " - "
-          "$dtend";
-      final DateTime scheduleDate = dt.subtract(notificationSettings.early);
+      final body = '$location\n'
+          '$dtstart'
+          ' - '
+          '$dtend';
+      final scheduleDate = dt.subtract(notificationSettings.early);
 
       return flutterLocalNotificationsPlugin.schedule(
         id,
@@ -58,12 +58,12 @@ extension EventUtils on Event {
         body,
         scheduleDate,
         notificationDetails,
-        payload: "$summary;"
-            "$description\n"
-            "$location\n"
-            "$dtstart"
-            " - "
-            "$dtend",
+        payload: '$summary;'
+            '$description\n'
+            '$location\n'
+            '$dtstart'
+            ' - '
+            '$dtend',
       );
     }
     return Future.value();

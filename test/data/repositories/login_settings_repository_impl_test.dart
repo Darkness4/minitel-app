@@ -50,7 +50,7 @@ void main() {
       'should call localDataSource.save()',
       () async {
         // arrange
-        const LoginSettings tLoginSettings = tLoginSettingsModel;
+        const tLoginSettings = tLoginSettingsModel;
         // act
         await repository.save(tLoginSettings);
         // assert

@@ -24,7 +24,7 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
   final StormshieldRemoteDataSource stormshieldRemoteDataSource;
   final Connectivity connectivity;
 
-  static const String _argsPing = "-c 4 -w 5 -W 5";
+  static const String _argsPing = '-c 4 -w 5 -W 5';
 
   const DiagnosisDataSourceImpl({
     @required this.diagnosis,
@@ -36,83 +36,89 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
 
   @override
   Diagnosis diagnose({Duration timeLimit = const Duration(minutes: 1)}) {
-    diagnosis[DiagnosisKeys.ip] = connectivity
+    diagnosis.clear();
+    diagnosis[DiagnosisKeys.ip].complete(connectivity
         .getWifiIP()
-        .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.ipAddr] = _run("/system/bin/ip", ['a'])
-        .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.arp] = _run("su", ['-c', '/system/bin/arp -a'])
-        .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.tracerouteGoogle] =
-        _run("su", ['-c', '/system/bin/traceroute', MyIPAdresses.google])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.tracerouteGoogleDNS] =
-        _run("su", ['-c', '/system/bin/traceroute', MyIPAdresses.googleDNSIP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.pingLo] =
-        _run("/system/bin/ping", [_argsPing, MyIPAdresses.localhostIP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.pingLocal] =
-        _run("/system/bin/ping", [_argsPing, MyIPAdresses.proliantIP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.pingGateway] =
-        _run("/system/bin/ping", [_argsPing, MyIPAdresses.gatewayIP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.pingDNS1] =
-        _run("/system/bin/ping", [_argsPing, MyIPAdresses.emseIsminDNS1IP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.pingDNS2] =
-        _run("/system/bin/ping", [_argsPing, MyIPAdresses.emseIsminDNS2IP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.pingDNS3] =
-        _run("/system/bin/ping", [_argsPing, MyIPAdresses.googleDNSIP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.pingDNS4] =
-        _run("/system/bin/ping", [_argsPing, MyIPAdresses.cloudflareDNSIP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.pingDNS5] =
-        _run("/system/bin/ping", [_argsPing, MyIPAdresses.localDNSIP])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.nsLookupEmseSU] =
-        _run("su", ['-c', "/system/bin/nslookup ${MyIPAdresses.stormshield}"])
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.nsLookupGoogleSU] = _run(
-            "su", <String>['-c', "/system/bin/nslookup ${MyIPAdresses.google}"])
-        .timeout(timeLimit, onTimeout: () => "Timed out.");
+        .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.ipAddr].complete(_run('/system/bin/ip', ['a'])
+        .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.arp].complete(
+        _run('su', ['-c', '/system/bin/arp -a'])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.tracerouteGoogle].complete(
+        _run('su', ['-c', '/system/bin/traceroute', MyIPAdresses.google])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.tracerouteGoogleDNS].complete(
+        _run('su', ['-c', '/system/bin/traceroute', MyIPAdresses.googleDNSIP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.pingLo].complete(
+        _run('/system/bin/ping', [_argsPing, MyIPAdresses.localhostIP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.pingLocal].complete(
+        _run('/system/bin/ping', [_argsPing, MyIPAdresses.proliantIP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.pingGateway].complete(
+        _run('/system/bin/ping', [_argsPing, MyIPAdresses.gatewayIP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.pingDNS1].complete(
+        _run('/system/bin/ping', [_argsPing, MyIPAdresses.emseIsminDNS1IP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.pingDNS2].complete(
+        _run('/system/bin/ping', [_argsPing, MyIPAdresses.emseIsminDNS2IP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.pingDNS3].complete(
+        _run('/system/bin/ping', [_argsPing, MyIPAdresses.googleDNSIP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.pingDNS4].complete(
+        _run('/system/bin/ping', [_argsPing, MyIPAdresses.cloudflareDNSIP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.pingDNS5].complete(
+        _run('/system/bin/ping', [_argsPing, MyIPAdresses.localDNSIP])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.nsLookupEmseSU].complete(
+        _run('su', ['-c', '/system/bin/nslookup ${MyIPAdresses.stormshield}'])
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.nsLookupGoogleSU].complete(_run(
+            'su', <String>['-c', '/system/bin/nslookup ${MyIPAdresses.google}'])
+        .timeout(timeLimit, onTimeout: () => 'Timed out.'));
 
-    diagnosis[DiagnosisKeys.httpResponseStormshieldPublic] =
+    diagnosis[DiagnosisKeys.httpResponseStormshieldPublic].complete(
         stormshieldRemoteDataSource
-            .fetchStatus(MyIPAdresses.stormshieldIP)
-            .then((status) => status.isEmpty ? "Nothing to show" : status)
+            .fetchStatus(MyIPAdresses.stormshield)
+            .then((status) => status.isEmpty ? 'Nothing to show' : status)
             .catchError((dynamic e) => e.toString())
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
 
-    diagnosis[DiagnosisKeys.httpResponseStormshieldLocal] =
+    diagnosis[DiagnosisKeys.httpResponseStormshieldLocal].complete(
         stormshieldRemoteDataSource
             .fetchStatus(MyIPAdresses.gatewayIP)
-            .then((status) => status.isEmpty ? "Nothing to show" : status)
+            .then((status) => status.isEmpty ? 'Nothing to show' : status)
             .catchError((dynamic e) => e.toString())
-            .timeout(timeLimit, onTimeout: () => "Timed out.");
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
 
-    diagnosis[DiagnosisKeys.nsLookupEmse] = _lookup(MyIPAdresses.stormshield)
-        .timeout(timeLimit, onTimeout: () => "Timed out.");
-    diagnosis[DiagnosisKeys.nsLookupGoogle] = _lookup(MyIPAdresses.google)
-        .timeout(timeLimit, onTimeout: () => "Timed out.");
+    diagnosis[DiagnosisKeys.nsLookupEmse].complete(
+        _lookup(MyIPAdresses.stormshield)
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
+    diagnosis[DiagnosisKeys.nsLookupGoogle].complete(
+        _lookup(MyIPAdresses.google)
+            .timeout(timeLimit, onTimeout: () => 'Timed out.'));
 
     return diagnosis;
   }
 
   Future<String> _lookup(String target) async {
     try {
-      final List<InternetAddress> addresses =
-          await internetAddressManager.lookup(target);
-      final StringBuffer output = StringBuffer();
-      for (final InternetAddress address in addresses) {
-        output.write("Host: ${address.host}\nLookup: ${address.address}\n");
-      }
-      return output.toString();
+      final addresses = await internetAddressManager.lookup(target);
+
+      return addresses
+          .map((address) =>
+              'Host: ${address.host}\nLookup: ${address.address}\n')
+          .join();
     } catch (e, s) {
-      return "Error: $e\n" "Stacktrace: $s";
+      return '''
+Error: $e
+Stacktrace: $s
+''';
     }
   }
 
@@ -121,7 +127,7 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
         .run(command, args)
         .then<String>((ProcessResult result) => result.stdout.toString())
         .then<String>(
-            (String stdout) => stdout.isEmpty ? "Nothing to show" : stdout)
+            (String stdout) => stdout.isEmpty ? 'Nothing to show' : stdout)
         .catchError((dynamic e) => e.toString());
   }
 }

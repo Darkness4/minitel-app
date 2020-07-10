@@ -12,8 +12,8 @@ class CampusWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CookieManager cookieManager = CookieManager();
-    for (final Cookie cookie in portailEMSEcookies) {
+    final cookieManager = CookieManager();
+    for (final cookie in portailEMSEcookies) {
       cookieManager.setCookie('https://emse.fr',
           "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
       cookieManager.setCookie('https://campus.emse.fr',
@@ -24,7 +24,7 @@ class CampusWebView extends StatelessWidget {
           "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
       cookieManager.setCookie('https://cas.emse.fr',
           "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
-      cookieManager.setCookie("https://shibbo2.emse.fr",
+      cookieManager.setCookie('https://shibbo2.emse.fr',
           "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
     }
     return const ScaffoldWebView(

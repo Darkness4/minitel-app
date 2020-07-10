@@ -21,7 +21,7 @@ abstract class APStatus with _$APStatus {
     int snmpAvailable;
     int utilization5G;
     int utilization2G;
-    int users = 0;
+    var users = 0;
 
     for (final item in host.items) {
       if (item.name.contains('AP Hostname')) {

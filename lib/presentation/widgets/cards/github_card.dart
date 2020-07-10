@@ -71,7 +71,7 @@ class GithubCard extends StatelessWidget {
               alignment: Alignment.center,
               height: 100,
               child: Text(
-                "Version v${release.tag_name}",
+                'Version v${release.tag_name}',
                 style: Theme.of(context)
                     .textTheme
                     .headline4
@@ -89,7 +89,7 @@ class GithubCard extends StatelessWidget {
                 textColor: Colors.blue,
                 onPressed: () => LaunchURLUtils.launchURL(release.html_url),
                 child: const Text(
-                  "See More...",
+                  'See More...',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

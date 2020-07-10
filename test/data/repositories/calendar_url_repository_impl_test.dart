@@ -15,7 +15,7 @@ void main() {
   MockLocalDataSource mockLocalDataSource;
   const tUser = 'User';
   const tPswd = 'Pwsd';
-  const tRemoteUrl = "https://localhost/";
+  const tRemoteUrl = 'https://localhost/';
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
@@ -58,8 +58,8 @@ void main() {
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
         when(mockRemoteDataSource.getCalendarURL(
-          username: anyNamed("username"),
-          password: anyNamed("password"),
+          username: anyNamed('username'),
+          password: anyNamed('password'),
         )).thenAnswer((_) async => null);
         when(mockLocalDataSource.saveCalendarURL(any))
             .thenAnswer((_) async => null);
@@ -122,8 +122,8 @@ void main() {
         () async {
           // arrange
           when(mockRemoteDataSource.getCalendarURL(
-            username: anyNamed("username"),
-            password: anyNamed("password"),
+            username: anyNamed('username'),
+            password: anyNamed('password'),
           )).thenAnswer((_) async => throw ServerException());
           // act
           final call = repository.get;

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal/portal_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal_login/portal_login_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal_status/portal_status_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/calendar_status/calendar_status_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/imprimante_status/imprimante_status_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/portail_emse_status/portail_emse_status_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/portal_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/portal_login/portal_login_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/stormshield_status/stormshield_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/pages/portal/apps_screen.dart';
 import 'package:minitel_toolbox/presentation/pages/portal/login_screen.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
@@ -22,16 +25,25 @@ class PortalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: MultiBlocProvider(
+      child: MultiCubitProvider(
         providers: [
-          BlocProvider<PortalLoginBloc>(
-            create: (_) => sl<PortalLoginBloc>(),
+          CubitProvider<PortalLoginCubit>(
+            create: (_) => sl<PortalLoginCubit>(),
           ),
-          BlocProvider<PortalBloc>(
-            create: (_) => sl<PortalBloc>(),
+          CubitProvider<PortalCubit>(
+            create: (_) => sl<PortalCubit>()..autoLogin(),
           ),
-          BlocProvider<PortalStatusBloc>(
-            create: (_) => sl<PortalStatusBloc>(),
+          CubitProvider<StormshieldStatusCubit>(
+            create: (_) => sl<StormshieldStatusCubit>(),
+          ),
+          CubitProvider<ImprimanteStatusCubit>(
+            create: (_) => sl<ImprimanteStatusCubit>(),
+          ),
+          CubitProvider<CalendarStatusCubit>(
+            create: (_) => sl<CalendarStatusCubit>(),
+          ),
+          CubitProvider<PortailEmseStatusCubit>(
+            create: (_) => sl<PortailEmseStatusCubit>(),
           ),
         ],
         child: Scaffold(
@@ -42,9 +54,9 @@ class PortalPage extends StatelessWidget {
                   : Colors.black,
               foregroundColor: Theme.of(context).accentColor,
             ),
-            child: MultiBlocListener(
+            child: MultiCubitListener(
               listeners: [
-                BlocListener<PortalLoginBloc, PortalLoginState>(
+                CubitListener<PortalLoginCubit, PortalLoginState>(
                   listener: (context, state) {
                     if (state.isSubmitting) {
                       _onPortalLoginSubmit(context);
@@ -55,12 +67,15 @@ class PortalPage extends StatelessWidget {
                     }
                   },
                 ),
-                BlocListener<PortalBloc, PortalState>(
+                CubitListener<PortalCubit, PortalState>(
                   listener: (context, state) {
                     if (state.isLoaded) {
+                      context.cubit<ImprimanteStatusCubit>().refresh();
+                      context.cubit<PortailEmseStatusCubit>().refresh();
+                      context.cubit<CalendarStatusCubit>().refresh();
                       context
-                          .bloc<PortalStatusBloc>()
-                          .add(RefreshEvent(state.selectedUrl));
+                          .cubit<StormshieldStatusCubit>()
+                          .refresh(state.selectedUrl);
                     }
                     if (state.autoLogin && state.isLoaded) {
                       _onAutoLogin(context, state);
@@ -90,14 +105,14 @@ class PortalPage extends StatelessWidget {
                             Icons.vpn_key,
                             key: Key(Keys.loginTab),
                           ),
-                          text: "Login",
+                          text: 'Login',
                         ),
                         Tab(
                           icon: Icon(
                             Icons.apps,
                             key: Key(Keys.appsTab),
                           ),
-                          text: "Apps",
+                          text: 'Apps',
                         ),
                       ],
                     ),
@@ -111,7 +126,8 @@ class PortalPage extends StatelessWidget {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: BlocBuilder<PortalLoginBloc, PortalLoginState>(
+          floatingActionButton:
+              CubitBuilder<PortalLoginCubit, PortalLoginState>(
             builder: (BuildContext context, PortalLoginState state) {
               if (state.isSubmitting) {
                 return const CircularProgressIndicator();
@@ -120,14 +136,14 @@ class PortalPage extends StatelessWidget {
                   key: const Key(Keys.loginButton),
                   onPressed: () {
                     if (formKey.currentState.validate()) {
-                      final portalState = context.bloc<PortalBloc>().state;
+                      final portalState = context.cubit<PortalCubit>().state;
                       if (portalState.isValidUid) {
-                        context.bloc<PortalLoginBloc>().add(LoginEvent(
+                        context.cubit<PortalLoginCubit>().login(
                               pswd: portalState.pswd,
                               selectedTime: portalState.selectedTime,
                               selectedUrl: portalState.selectedUrl,
                               uid: portalState.uid,
-                            ));
+                            );
                       }
                     }
                   },
@@ -148,14 +164,27 @@ class PortalPage extends StatelessWidget {
   }
 
   void _onAutoLogin(BuildContext context, PortalState state) {
-    context.bloc<PortalLoginBloc>().add(
-          LoginEvent(
-            uid: state.uid,
-            pswd: state.pswd,
-            selectedUrl: state.selectedUrl,
-            selectedTime: state.selectedTime,
-          ),
+    context.cubit<PortalLoginCubit>().login(
+          uid: state.uid,
+          pswd: state.pswd,
+          selectedUrl: state.selectedUrl,
+          selectedTime: state.selectedTime,
         );
+  }
+
+  void _onPortalLoginFailure(BuildContext context, PortalLoginState state) {
+    final portalState = context.cubit<PortalCubit>().state;
+
+    final selectedUrl = portalState.selectedUrl;
+    context.cubit<ImprimanteStatusCubit>().refresh();
+    context.cubit<StormshieldStatusCubit>().refresh(selectedUrl);
+    context.cubit<CalendarStatusCubit>().refresh();
+    context.cubit<PortailEmseStatusCubit>().refresh();
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(content: Text(state.error.toString())),
+      );
   }
 
   void _onPortalLoginSubmit(BuildContext context) {
@@ -165,34 +194,25 @@ class PortalPage extends StatelessWidget {
         const SnackBar(content: Text('Requested')),
       );
 
-    final portalBlocState = context.bloc<PortalBloc>().state;
+    final portalState = context.cubit<PortalCubit>().state;
 
-    context.bloc<PortalBloc>().add(RememberLoginEvent(
-          autoLogin: portalBlocState.autoLogin,
-          pswd: portalBlocState.pswd,
-          rememberMe: portalBlocState.rememberMe,
-          selectedTime: portalBlocState.selectedTime,
-          selectedUrl: portalBlocState.selectedUrl,
-          uid: portalBlocState.uid,
-        ));
-  }
-
-  void _onPortalLoginFailure(BuildContext context, PortalLoginState state) {
-    final portalBlocState = context.bloc<PortalBloc>().state;
-
-    final selectedUrl = portalBlocState.selectedUrl;
-    context.bloc<PortalStatusBloc>().add(RefreshEvent(selectedUrl));
-    Scaffold.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(content: Text(state.error.toString())),
-      );
+    context.cubit<PortalCubit>().rememberLogin(
+          autoLogin: portalState.autoLogin,
+          pswd: portalState.pswd,
+          rememberMe: portalState.rememberMe,
+          selectedTime: portalState.selectedTime,
+          selectedUrl: portalState.selectedUrl,
+          uid: portalState.uid,
+        );
   }
 
   void _onPortalLoginSuccess(BuildContext context) {
-    final portalBlocState = context.bloc<PortalBloc>().state;
+    final portalState = context.cubit<PortalCubit>().state;
 
-    final selectedUrl = portalBlocState.selectedUrl;
-    context.bloc<PortalStatusBloc>().add(RefreshEvent(selectedUrl));
+    final selectedUrl = portalState.selectedUrl;
+    context.cubit<ImprimanteStatusCubit>().refresh();
+    context.cubit<StormshieldStatusCubit>().refresh(selectedUrl);
+    context.cubit<CalendarStatusCubit>().refresh();
+    context.cubit<PortailEmseStatusCubit>().refresh();
   }
 }
