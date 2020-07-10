@@ -29,10 +29,10 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(
-      mockHttpClient.send(any),
-    ).thenAnswer((_) async => http.StreamedResponse(
-          Stream.value(utf8.encode(fixture(
-              'datasources/stormshield_remote_data_source/response_fetch.html'))),
+      mockHttpClient.post('https://$tSelectedUrl/auth/login.html'),
+    ).thenAnswer((_) async => http.Response(
+          fixture(
+              'datasources/stormshield_remote_data_source/response_fetch.html'),
           200,
           headers: Map<String, String>.from(json.decode(fixture(
                   'datasources/stormshield_remote_data_source/response_fetch.json'))
@@ -58,22 +58,21 @@ void main() {
   void setUpMockHttpClientFailure404() {
     when(mockHttpClient.get(any))
         .thenAnswer((_) async => http.Response('Something went wrong', 404));
+    when(mockHttpClient.post(any))
+        .thenAnswer((_) async => http.Response('Something went wrong', 404));
     when(mockHttpClient.post(
       any,
       body: anyNamed('body'),
       headers: anyNamed('headers'),
     )).thenAnswer((_) async => http.Response('Something went wrong', 404));
-    when(mockHttpClient.send(any)).thenAnswer((_) async =>
-        http.StreamedResponse(
-            Stream.value(utf8.encode('Something went wrong')), 404));
   }
 
   void setUpMockHttpClientBadLogin() {
     when(
-      mockHttpClient.send(any),
-    ).thenAnswer((_) async => http.StreamedResponse(
-          Stream.value(utf8.encode(fixture(
-              'datasources/stormshield_remote_data_source/response_fetch.html'))),
+      mockHttpClient.post(any),
+    ).thenAnswer((_) async => http.Response(
+          fixture(
+              'datasources/stormshield_remote_data_source/response_fetch.html'),
           200,
           headers: Map<String, String>.from(json.decode(fixture(
                   'datasources/stormshield_remote_data_source/response_fetch.json'))
@@ -195,13 +194,8 @@ void main() {
         // act
         await dataSource.fetchStatus(tSelectedUrl);
         // assert
-        final verification = verify(await mockHttpClient.send(
-          captureThat(isA<http.Request>()),
-        ));
-
-        final request = verification.captured.first as http.Request;
-        expect(request.url.toString(),
-            equals('https://$tSelectedUrl/auth/login.html'));
+        verify(
+            await mockHttpClient.post('https://$tSelectedUrl/auth/login.html'));
       },
     );
 

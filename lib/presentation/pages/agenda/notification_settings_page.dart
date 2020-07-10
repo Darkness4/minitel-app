@@ -82,7 +82,7 @@ class _NotificationSettingsScreenState
                         inputFormatters: <TextInputFormatter>[
                           WhitelistingTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(2),
-                          FilteringTextInputFormatter.singleLineFormatter,
+                          BlacklistingTextInputFormatter.singleLineFormatter,
                         ],
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
@@ -100,7 +100,7 @@ class _NotificationSettingsScreenState
                         inputFormatters: <TextInputFormatter>[
                           WhitelistingTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(3),
-                          FilteringTextInputFormatter.singleLineFormatter,
+                          BlacklistingTextInputFormatter.singleLineFormatter,
                         ],
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,

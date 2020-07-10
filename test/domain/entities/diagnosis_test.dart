@@ -125,15 +125,15 @@ testValue
 
   group('clear', () {
     test(
-      'should throw UnimplementedError',
+      'should reset all Completer',
       () async {
         // arrange
         final diagnosis = Diagnosis()
           ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
         // act
-        final call = diagnosis.clear;
+        diagnosis.clear();
         // assert
-        expect(call, throwsA(isInstanceOf<UnimplementedError>()));
+        expect(diagnosis[DiagnosisKeys.ip].isCompleted, false);
       },
     );
   });

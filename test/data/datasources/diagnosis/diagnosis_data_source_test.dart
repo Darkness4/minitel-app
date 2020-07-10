@@ -54,7 +54,7 @@ void main() {
         verify(mockStormshieldRemoteDataSource
             .fetchStatus(MyIPAdresses.gatewayIP));
         verify(mockStormshieldRemoteDataSource
-            .fetchStatus(MyIPAdresses.stormshieldIP));
+            .fetchStatus(MyIPAdresses.stormshield));
         expect(await result[DiagnosisKeys.ip].future, equals('0.1.0.1'));
         expect(await result[DiagnosisKeys.ipAddr].future, equals('MOCK'));
         expect(await result[DiagnosisKeys.httpResponseStormshieldPublic].future,
@@ -83,7 +83,7 @@ void main() {
         verify(mockStormshieldRemoteDataSource
             .fetchStatus(MyIPAdresses.gatewayIP));
         verify(mockStormshieldRemoteDataSource
-            .fetchStatus(MyIPAdresses.stormshieldIP));
+            .fetchStatus(MyIPAdresses.stormshield));
         expect(
             await result[DiagnosisKeys.nsLookupEmse].future, contains('MOCK'));
         expect(await result[DiagnosisKeys.ip].future, equals('0.1.0.1'));

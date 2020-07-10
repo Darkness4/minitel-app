@@ -46,7 +46,7 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
       headers: {HttpHeaders.cookieHeader: 'lang=us; disclaimer=1;'},
     );
     if (response.statusCode == HttpStatus.ok) {
-      if (response.body.contains('title_error')) {
+      if (response.body != null && response.body.contains('title_error')) {
         throw ClientException('Bad Username or Password');
       }
     } else {
@@ -57,7 +57,7 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
 
   @override
   Future<String> fetchStatus(String selectedUrl) async {
-    final url = 'https://$selectedUrl/auth/xvpns.html';
+    final url = 'https://$selectedUrl/auth/login.html';
     final exp = RegExp(r'<span id="l_rtime">([^<]*)<\/span>');
 
     final response = await client.post(url);

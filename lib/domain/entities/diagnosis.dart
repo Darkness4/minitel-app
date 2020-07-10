@@ -42,7 +42,7 @@ class Diagnosis with MapMixin<String, Completer<String>> {
   }
 
   @override
-  Future<void> clear() async {
+  void clear() {
     _internal.clear();
     _internal.addAll({
       DiagnosisKeys.ip: Completer<String>(),
