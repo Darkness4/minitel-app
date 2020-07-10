@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
-import 'package:minitel_toolbox/presentation/blocs/theme/theme_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/theme/theme_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/drawer_styles.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
@@ -178,34 +178,36 @@ class MainDrawer extends StatelessWidget {
           const ListTile(
             title: Text('Theme'),
           ),
-          BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Radio(
-                  value: 'Dark',
-                  groupValue: state.value,
-                  onChanged: (String _) async {
-                    context.bloc<ThemeBloc>().add(const ThemeToDark());
-                  },
-                ),
-                Radio(
-                  value: 'Adaptive',
-                  groupValue: state.value,
-                  onChanged: (String _) async {
-                    context.bloc<ThemeBloc>().add(const ThemeToAdaptive());
-                  },
-                ),
-                Radio(
-                  value: 'Light',
-                  groupValue: state.value,
-                  onChanged: (String _) async {
-                    context.bloc<ThemeBloc>().add(const ThemeToLight());
-                  },
-                ),
-              ],
-            );
-          }),
+          CubitBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Radio(
+                    value: 'Dark',
+                    groupValue: state.value,
+                    onChanged: (String _) {
+                      context.cubit<ThemeCubit>().toDark();
+                    },
+                  ),
+                  Radio(
+                    value: 'Adaptive',
+                    groupValue: state.value,
+                    onChanged: (String _) {
+                      context.cubit<ThemeCubit>().toAdaptive();
+                    },
+                  ),
+                  Radio(
+                    value: 'Light',
+                    groupValue: state.value,
+                    onChanged: (String _) {
+                      context.cubit<ThemeCubit>().toLight();
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const <Widget>[

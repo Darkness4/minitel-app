@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal/imprimante_status/imprimante_status_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/imprimante_status/imprimante_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 
 class ImprimanteStatusWidget extends StatelessWidget {

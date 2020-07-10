@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
-import 'package:minitel_toolbox/presentation/blocs/notification_settings/notification_settings_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
 
 class NotificationSettingsPage extends StatelessWidget {
   const NotificationSettingsPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NotificationSettingsBloc>(
+    return CubitProvider<NotificationSettingsCubit>(
       create: (context) =>
-          sl<NotificationSettingsBloc>()..add(const NotificationSettingsLoad()),
+          sl<NotificationSettingsCubit>()..notificationSettingsLoad(),
       child: const NotificationSettingsScreen(),
     );
   }
@@ -30,7 +30,7 @@ class _NotificationSettingsScreenState
     extends State<NotificationSettingsScreen> {
   TextEditingController _rangeTextController;
   TextEditingController _earlyTextController;
-  NotificationSettingsBloc _notificationSettingsBloc;
+  NotificationSettingsCubit _notificationSettingsCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _NotificationSettingsScreenState
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child:
-            BlocConsumer<NotificationSettingsBloc, NotificationSettingsState>(
+            CubitConsumer<NotificationSettingsCubit, NotificationSettingsState>(
           listener: (context, state) {
             if (state.isSaved) {
               Scaffold.of(context).showSnackBar(const SnackBar(
@@ -136,7 +136,7 @@ class _NotificationSettingsScreenState
   void initState() {
     super.initState();
 
-    _notificationSettingsBloc = context.bloc<NotificationSettingsBloc>();
+    _notificationSettingsCubit = context.cubit<NotificationSettingsCubit>();
 
     _rangeTextController = TextEditingController();
     _earlyTextController = TextEditingController();
@@ -148,25 +148,25 @@ class _NotificationSettingsScreenState
   void _onEarlyChanged() {
     if (_earlyTextController.text.length < 3 &&
         _earlyTextController.text != '') {
-      _notificationSettingsBloc.add(EarlyChanged(
-          Duration(minutes: int.parse(_earlyTextController.text))));
+      _notificationSettingsCubit.earlyChanged(
+          Duration(minutes: int.parse(_earlyTextController.text)));
     }
   }
 
   void _onRangeChanged() {
     if (_rangeTextController.text.length < 4 &&
         _rangeTextController.text != '') {
-      _notificationSettingsBloc.add(
-          RangeChanged(Duration(days: int.parse(_rangeTextController.text))));
+      _notificationSettingsCubit
+          .rangeChanged(Duration(days: int.parse(_rangeTextController.text)));
     }
   }
 
   void _onEnablingChanged(bool value) {
-    _notificationSettingsBloc.add(EnablingChanged(value));
+    _notificationSettingsCubit.enablingChanged(value);
   }
 
   void _onSave() {
-    _notificationSettingsBloc.add(SaveNotificationSettings(
-        _notificationSettingsBloc.state.notificationSettings));
+    _notificationSettingsCubit.saveNotificationSettings(
+        _notificationSettingsCubit.state.notificationSettings);
   }
 }

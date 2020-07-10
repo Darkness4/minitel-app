@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
-import 'package:minitel_toolbox/presentation/blocs/github_releases/github_releases_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/github_releases/github_releases_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:minitel_toolbox/presentation/widgets/cards/github_card.dart';
 
@@ -77,12 +77,12 @@ class GithubScreen extends StatelessWidget {
     return buildBody(context);
   }
 
-  BlocProvider<GithubReleasesBloc> buildBody(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<GithubReleasesBloc>()
-        ..add(const GetReleasesEvent(ApiKeys.githubRepo)),
+  Widget buildBody(BuildContext context) {
+    return CubitProvider(
+      create: (_) =>
+          sl<GithubReleasesCubit>()..getReleases((ApiKeys.githubRepo)),
       child: Center(
-        child: BlocBuilder<GithubReleasesBloc, GithubReleasesState>(
+        child: CubitBuilder<GithubReleasesCubit, GithubReleasesState>(
           builder: (BuildContext context, GithubReleasesState state) {
             return state.when(
               initial: () =>

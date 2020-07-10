@@ -22,15 +22,15 @@ import 'package:ntlm/ntlm.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:flutter_local_notifications/src/notification_details.dart';
 import 'package:minitel_toolbox/data/datasources/emse/portail_emse_remote_data_source.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal/portail_emse_status/portail_emse_status_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/portail_emse_status/portail_emse_status_cubit.dart';
 import 'package:minitel_toolbox/core/process/process_manager.dart';
 import 'package:minitel_toolbox/data/repositories/releases_repository_impl.dart';
 import 'package:minitel_toolbox/domain/repositories/releases_repository.dart';
-import 'package:minitel_toolbox/presentation/blocs/report_status/report_status_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/report_status/report_status_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:minitel_toolbox/data/datasources/slack/slack_remote_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/emse/stormshield_remote_data_source.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal/stormshield_status/stormshield_status_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/stormshield_status/stormshield_status_cubit.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_local_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_remote_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/zabbix/zabbix_remote_data_source.dart';
@@ -41,30 +41,30 @@ import 'package:minitel_toolbox/domain/repositories/calendar_url_repository.dart
 import 'package:minitel_toolbox/data/datasources/diagnosis/diagnosis_data_source.dart';
 import 'package:minitel_toolbox/data/repositories/diagnosis_repository_impl.dart';
 import 'package:minitel_toolbox/domain/repositories/diagnosis_repository.dart';
-import 'package:minitel_toolbox/presentation/blocs/github_releases/github_releases_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/github_releases/github_releases_cubit.dart';
 import 'package:minitel_toolbox/data/repositories/icalendar_repository_impl.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
 import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal/imprimante_status/imprimante_status_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/imprimante_status/imprimante_status_cubit.dart';
 import 'package:minitel_toolbox/data/datasources/settings/login_settings_data_source.dart';
 import 'package:minitel_toolbox/data/repositories/login_settings_repository_impl.dart';
 import 'package:minitel_toolbox/domain/repositories/login_settings_repository.dart';
 import 'package:minitel_toolbox/data/datasources/settings/notification_settings_data_source.dart';
 import 'package:minitel_toolbox/data/repositories/notification_settings_repository_impl.dart';
 import 'package:minitel_toolbox/domain/repositories/notification_settings_repository.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal/portal_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal_login/portal_login_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/portal_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/portal_login/portal_login_cubit.dart';
 import 'package:minitel_toolbox/data/repositories/post_repository_impl.dart';
 import 'package:minitel_toolbox/domain/repositories/post_repository.dart';
-import 'package:minitel_toolbox/presentation/blocs/report/report_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/twitter_feed/twitter_feed_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/report/report_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/twitter_feed/twitter_feed_cubit.dart';
 import 'package:minitel_toolbox/data/repositories/zabbix_hosts_repository_impl.dart';
 import 'package:minitel_toolbox/domain/repositories/zabbix_hosts_repository.dart';
-import 'package:minitel_toolbox/presentation/blocs/agenda/agenda_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/portal/calendar_status/calendar_status_cubit.dart';
-import 'package:minitel_toolbox/presentation/blocs/diagnosis/diagnosis_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/notification_settings/notification_settings_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/zabbix_hosts/zabbix_hosts_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/agenda/agenda_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/portal/calendar_status/calendar_status_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/diagnosis/diagnosis_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/zabbix_hosts/zabbix_hosts_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
@@ -104,7 +104,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         remoteDataSource: g<GithubRemoteDataSource>(),
         networkInfo: g<NetworkInfo>(),
       ));
-  g.registerFactory<ReportStatusBloc>(() => ReportStatusBloc());
+  g.registerFactory<ReportStatusCubit>(() => ReportStatusCubit());
   final sharedPreferences = await externalsModule.prefs;
   g.registerFactory<SharedPreferences>(() => sharedPreferences);
   g.registerLazySingleton<SlackRemoteDataSource>(() =>
@@ -142,8 +142,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   g.registerLazySingleton<DiagnosisRepository>(() => DiagnosisRepositoryImpl(
       diagnosisDataSource: g<DiagnosisDataSource>(),
       networkInfo: g<NetworkInfo>()));
-  g.registerFactory<GithubReleasesBloc>(
-      () => GithubReleasesBloc(repository: g<ReleasesRepository>()));
+  g.registerFactory<GithubReleasesCubit>(
+      () => GithubReleasesCubit(repository: g<ReleasesRepository>()));
   g.registerLazySingleton<ICalendarRepository>(() => ICalendarRepositoryImpl(
         localDataSource: g<ICalendarLocalDataSource>(),
         remoteDataSource: g<ICalendarRemoteDataSource>(),
@@ -166,9 +166,9 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   g.registerLazySingleton<NotificationSettingsRepository>(() =>
       NotificationSettingsRepositoryImpl(
           localDataSource: g<NotificationSettingsDataSource>()));
-  g.registerFactory<PortalBloc>(
-      () => PortalBloc(loginSetingsRepository: g<LoginSettingsRepository>()));
-  g.registerFactory<PortalLoginBloc>(() => PortalLoginBloc(
+  g.registerFactory<PortalCubit>(
+      () => PortalCubit(loginSetingsRepository: g<LoginSettingsRepository>()));
+  g.registerFactory<PortalLoginCubit>(() => PortalLoginCubit(
         stormshieldRemoteDataSource: g<StormshieldRemoteDataSource>(),
         iCalendarRepository: g<ICalendarRepository>(),
         imprimanteRemoteDataSource: g<ImprimanteRemoteDataSource>(),
@@ -179,25 +179,25 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         remoteDataSource: g<TwitterRemoteDataSource>(),
         networkInfo: g<NetworkInfo>(),
       ));
-  g.registerFactory<ReportBloc>(
-      () => ReportBloc(slackRemoteDataSource: g<SlackRemoteDataSource>()));
-  g.registerFactory<TwitterFeedBloc>(
-      () => TwitterFeedBloc(repository: g<PostRepository>()));
+  g.registerFactory<ReportCubit>(
+      () => ReportCubit(slackRemoteDataSource: g<SlackRemoteDataSource>()));
+  g.registerFactory<TwitterFeedCubit>(
+      () => TwitterFeedCubit(repository: g<PostRepository>()));
   g.registerLazySingleton<ZabbixHostsRepository>(() =>
       ZabbixHostsRepositoryImpl(remoteDataSource: g<ZabbixRemoteDataSource>()));
-  g.registerFactory<AgendaBloc>(() => AgendaBloc(
+  g.registerFactory<AgendaCubit>(() => AgendaCubit(
         flutterLocalNotificationsPlugin: g<FlutterLocalNotificationsPlugin>(),
         notificationDetails: g<NotificationDetails>(),
         iCalendarRepository: g<ICalendarRepository>(),
       ));
   g.registerFactory<CalendarStatusCubit>(
       () => CalendarStatusCubit(g<CalendarURLRepository>()));
-  g.registerFactory<DiagnosisBloc>(
-      () => DiagnosisBloc(diagnosisRepository: g<DiagnosisRepository>()));
-  g.registerFactory<NotificationSettingsBloc>(() => NotificationSettingsBloc(
+  g.registerFactory<DiagnosisCubit>(
+      () => DiagnosisCubit(diagnosisRepository: g<DiagnosisRepository>()));
+  g.registerFactory<NotificationSettingsCubit>(() => NotificationSettingsCubit(
       repository: g<NotificationSettingsRepository>()));
-  g.registerFactory<ZabbixHostsBloc>(
-      () => ZabbixHostsBloc(repository: g<ZabbixHostsRepository>()));
+  g.registerFactory<ZabbixHostsCubit>(
+      () => ZabbixHostsCubit(repository: g<ZabbixHostsRepository>()));
 }
 
 class _$ExternalsModule extends ExternalsModule {}

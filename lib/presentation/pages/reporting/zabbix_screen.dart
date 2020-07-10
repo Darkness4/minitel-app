@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minitel_toolbox/presentation/widgets/cards/zabbix_widgets/zabbix_widgets.dart';
+import 'package:minitel_toolbox/presentation/widgets/cards/zabbix_widgets/ap_card.dart';
+import 'package:minitel_toolbox/presentation/widgets/cards/zabbix_widgets/servers_card.dart';
+import 'package:minitel_toolbox/presentation/widgets/cards/zabbix_widgets/switches_card.dart';
 
 class ZabbixScreen extends StatelessWidget {
   const ZabbixScreen({

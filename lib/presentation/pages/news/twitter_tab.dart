@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
-import 'package:minitel_toolbox/presentation/blocs/twitter_feed/twitter_feed_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/twitter_feed/twitter_feed_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:minitel_toolbox/presentation/widgets/cards/twitter_card.dart';
 
@@ -37,11 +37,11 @@ class TwitterScreen extends StatelessWidget {
     return buildBody(context);
   }
 
-  BlocProvider<TwitterFeedBloc> buildBody(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<TwitterFeedBloc>()..add(const GetFeedEvent()),
+  Widget buildBody(BuildContext context) {
+    return CubitProvider(
+      create: (_) => sl<TwitterFeedCubit>()..getFeed(),
       child: Center(
-        child: BlocBuilder<TwitterFeedBloc, TwitterFeedState>(
+        child: CubitBuilder<TwitterFeedCubit, TwitterFeedState>(
           builder: (BuildContext context, TwitterFeedState state) {
             return state.when(
               initial: () =>

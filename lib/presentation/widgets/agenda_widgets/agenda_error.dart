@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
-import 'package:minitel_toolbox/presentation/blocs/agenda/agenda_bloc.dart';
-import 'package:minitel_toolbox/presentation/blocs/notification_settings/notification_settings_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/agenda/agenda_cubit.dart';
+import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 
 class ErrorAgendaWidget extends StatefulWidget {
@@ -111,15 +111,16 @@ class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {
             backgroundColor: Colors.red,
             elevation: 10.0,
             onPressed: () {
-              final notifState = context.bloc<NotificationSettingsBloc>().state;
+              final notifState =
+                  context.cubit<NotificationSettingsCubit>().state;
 
               final notificationSettings = notifState.notificationSettings;
 
-              context.bloc<AgendaBloc>().add(AgendaDownload(
+              context.cubit<AgendaCubit>().agendaDownload(
                     uid: _uidController.text,
                     pswd: _pswdController.text,
                     notificationSettings: notificationSettings,
-                  ));
+                  );
             },
             label: Text(
               AppLoc.of(context).portal.login,

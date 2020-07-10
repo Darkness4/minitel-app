@@ -34,7 +34,6 @@ dependencies:
   ntlm: ^1.2.0 # MrBBot
   http: ^0.12.1 # Dart Team
   flutter_secure_storage: ^3.3.3 # German Saprykin
-  flutter_bloc: ^5.0.1 # bloclibrary.dev
   freezed_annotation: ^0.11.0
   get_it: ^4.0.2 # fluttercommunity.dev
   flutter_markdown: ^0.4.2

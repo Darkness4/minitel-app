@@ -29,8 +29,9 @@ void main() {
       (_) async => http.Response(
         fixture('datasources/calendar_url_remote_data_source/response0.html'),
         200,
-        headers: Map<String, String>.from((json.decode(fixture(
-            'datasources/calendar_url_remote_data_source/response0.json')))),
+        headers: Map<String, String>.from(json.decode(fixture(
+                'datasources/calendar_url_remote_data_source/response0.json'))
+            as Map<String, dynamic>),
       ),
     );
 
@@ -53,7 +54,8 @@ void main() {
         fixture('datasources/calendar_url_remote_data_source/response1.html'),
         200,
         headers: Map<String, String>.from(json.decode(fixture(
-            'datasources/calendar_url_remote_data_source/response1.json'))),
+                'datasources/calendar_url_remote_data_source/response1.json'))
+            as Map<String, dynamic>),
       ),
     );
 
@@ -63,7 +65,8 @@ void main() {
             'datasources/calendar_url_remote_data_source/response2.html'))),
         200,
         headers: Map<String, String>.from(json.decode(fixture(
-            'datasources/calendar_url_remote_data_source/response2.json'))),
+                'datasources/calendar_url_remote_data_source/response2.json'))
+            as Map<String, dynamic>),
       ),
     );
 
@@ -79,7 +82,8 @@ void main() {
           fixture('datasources/calendar_url_remote_data_source/response3.html'),
           200,
           headers: Map<String, String>.from(json.decode(fixture(
-              'datasources/calendar_url_remote_data_source/response3.json'))),
+                  'datasources/calendar_url_remote_data_source/response3.json'))
+              as Map<String, dynamic>),
         ));
   }
 
@@ -102,7 +106,8 @@ void main() {
         fixture('datasources/calendar_url_remote_data_source/response0.html'),
         200,
         headers: Map<String, String>.from(json.decode(fixture(
-            'datasources/calendar_url_remote_data_source/response0.json'))),
+                'datasources/calendar_url_remote_data_source/response0.json'))
+            as Map<String, dynamic>),
       ),
     );
 
@@ -125,7 +130,8 @@ void main() {
         fixture('datasources/calendar_url_remote_data_source/response1.html'),
         200,
         headers: Map<String, String>.from(json.decode(fixture(
-            'datasources/calendar_url_remote_data_source/response1.json')))
+                'datasources/calendar_url_remote_data_source/response1.json'))
+            as Map<String, dynamic>)
           ..remove(HttpHeaders.locationHeader),
       ),
     );

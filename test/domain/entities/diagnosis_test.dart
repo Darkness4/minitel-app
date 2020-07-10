@@ -89,7 +89,7 @@ testValue
         // arrange
         final diagnosis = Diagnosis();
         // act
-        await (diagnosis[DiagnosisKeys.ip].complete(Future.value('testValue')));
+        diagnosis[DiagnosisKeys.ip].complete(Future.value('testValue'));
         // assert
         expect(await diagnosis[DiagnosisKeys.ip].future, equals('testValue'));
       },

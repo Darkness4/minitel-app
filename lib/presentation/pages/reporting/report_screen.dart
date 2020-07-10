@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:minitel_toolbox/core/constants/launch_url.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
-import 'package:minitel_toolbox/presentation/blocs/report_status/report_status_bloc.dart';
+import 'package:minitel_toolbox/presentation/cubits/reporting/report_status/report_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:minitel_toolbox/presentation/widgets/cards/doc_card.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReportScreen extends StatelessWidget {
   const ReportScreen({Key key}) : super(key: key);
@@ -93,7 +93,7 @@ class __ReportCardState extends State<_ReportCard> {
   TextEditingController _nameController;
   FocusScopeNode _formNode;
 
-  ReportStatusBloc _reportStatusBloc;
+  ReportStatusCubit _reportStatusCubit;
 
   @override
   void initState() {
@@ -102,7 +102,7 @@ class __ReportCardState extends State<_ReportCard> {
     _roomController = TextEditingController();
     _nameController = TextEditingController();
     _formNode = FocusScopeNode();
-    _reportStatusBloc = context.bloc<ReportStatusBloc>();
+    _reportStatusCubit = context.cubit<ReportStatusCubit>();
 
     _titleController.addListener(_onTitleChanged);
     _descriptionController.addListener(_onDescriptionChanged);
@@ -122,19 +122,19 @@ class __ReportCardState extends State<_ReportCard> {
   }
 
   void _onTitleChanged() {
-    _reportStatusBloc.add(TitleChanged(_titleController.text));
+    _reportStatusCubit.titleChanged(_titleController.text);
   }
 
   void _onRoomChanged() {
-    _reportStatusBloc.add(RoomChanged(_roomController.text));
+    _reportStatusCubit.roomChanged(_roomController.text);
   }
 
   void _onDescriptionChanged() {
-    _reportStatusBloc.add(DescriptionChanged(_descriptionController.text));
+    _reportStatusCubit.descriptionChanged(_descriptionController.text);
   }
 
   void _onNameChanged() {
-    _reportStatusBloc.add(NameChanged(_nameController.text));
+    _reportStatusCubit.nameChanged(_nameController.text);
   }
 
   @override
