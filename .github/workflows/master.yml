@@ -129,6 +129,7 @@ jobs:
   aab-build:
     name: Build AAB
     runs-on: ubuntu-latest
+    container: gmemstr/flutter-fastlane-android:29.0
     steps:
       - uses: actions/checkout@master
       - name: Setup Java 8
@@ -164,7 +165,6 @@ jobs:
           name: release-aab
           path: build/app/outputs/bundle/release
       - name: Deploy to Play Store
-        uses: docker://gmemstr/flutter-fastlane-android:29.0
         env:
           SUPPLY_JSON_KEY_DATA: ${{ secrets.SUPPLY_JSON_KEY_DATA }}
         run: cd android && fastlane deploy
