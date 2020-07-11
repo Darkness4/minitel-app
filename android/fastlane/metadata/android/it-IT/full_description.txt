@@ -1,0 +1,11 @@
+Minitel Toolbox offre una suite di strumenti per facilitare l'accesso a Internet presso l'École des Mines de St-Etienne, nel nostro caro George Charpak Campus.
+
+➤ Caratteristiche e funzioni
+
+•   Autenticazione a Stormshield/Portal/Gateway + connessione automatica al portale EMSE.
+•   Novità su Facebook e cambio di applicazioni
+•   Ordine del giorno con notifiche regolabili
+•   Accesso rapido a Sogo, EMSE GCP Printer e Minitel Wiki.
+•   Segnalazione rapida a Minitel con diagnosi completa.
+•   Documentazione della rete e diagnosi incluse nell'applicazione.
+•   Documentazione della configurazione della stampante, importazione di e-mail, Dual Boot e VM incluse nell'applicazione.

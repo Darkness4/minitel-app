@@ -57,6 +57,9 @@ class PortalPage extends StatelessWidget {
             child: MultiCubitListener(
               listeners: [
                 CubitListener<PortalLoginCubit, PortalLoginState>(
+                  listenWhen: (previous, current) {
+                    return previous != current;
+                  },
                   listener: (context, state) {
                     if (state.isSubmitting) {
                       _onPortalLoginSubmit(context);
@@ -68,15 +71,10 @@ class PortalPage extends StatelessWidget {
                   },
                 ),
                 CubitListener<PortalCubit, PortalState>(
+                  listenWhen: (previous, current) {
+                    return previous != current;
+                  },
                   listener: (context, state) {
-                    if (state.isLoaded) {
-                      context.cubit<ImprimanteStatusCubit>().refresh();
-                      context.cubit<PortailEmseStatusCubit>().refresh();
-                      context.cubit<CalendarStatusCubit>().refresh();
-                      context
-                          .cubit<StormshieldStatusCubit>()
-                          .refresh(state.selectedUrl);
-                    }
                     if (state.autoLogin && state.isLoaded) {
                       _onAutoLogin(context, state);
                     }

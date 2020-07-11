@@ -81,3 +81,4 @@ ios/Flutter/flutter_export_environment.sh
 **/test_driver/screenshots/*
 
 .flutter-plugins-dependencies
+services-account.json

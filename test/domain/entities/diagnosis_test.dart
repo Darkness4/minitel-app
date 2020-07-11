@@ -82,32 +82,6 @@ testValue
     );
   });
 
-  group('operator []=', () {
-    test(
-      'should run and return a valid String with a valid key',
-      () async {
-        // arrange
-        final diagnosis = Diagnosis();
-        // act
-        diagnosis[DiagnosisKeys.ip].complete(Future.value('testValue'));
-        // assert
-        expect(await diagnosis[DiagnosisKeys.ip].future, equals('testValue'));
-      },
-    );
-
-    test(
-      'should run and throws',
-      () async {
-        // arrange
-        final diagnosis = Diagnosis();
-        // act
-        final result = diagnosis['Test'];
-        // assert
-        expect(result, isNull);
-      },
-    );
-  });
-
   group('operator []', () {
     test(
       'should return a valid String',
@@ -149,22 +123,6 @@ testValue
         final keys = diagnosis.keys;
         // assert
         expect(keys, contains(DiagnosisKeys.ip));
-      },
-    );
-  });
-
-  group('remove', () {
-    test(
-      'should remove a item in diagnosis',
-      () async {
-        // arrange
-        final diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
-        // act
-        final call = diagnosis.remove;
-        // assert
-        expect(() async => call(DiagnosisKeys.ip),
-            throwsA(isInstanceOf<UnimplementedError>()));
       },
     );
   });
