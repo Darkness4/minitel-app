@@ -87,7 +87,7 @@ jobs:
           name: screenshots
           path: test_driver/screenshots
   apk-build:
-    name: Build APK and Deploy
+    name: Build APK
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -127,7 +127,7 @@ jobs:
           name: release-apks
           path: build/app/outputs/apk/release
   aab-build:
-    name: Build AAB
+    name: Build AAB and Deploy
     runs-on: ubuntu-latest
     container: gmemstr/flutter-fastlane-android:29.0
     steps:
