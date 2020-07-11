@@ -167,12 +167,13 @@ jobs:
         with:
           name: release-aab
           path: build/app/outputs/bundle/release
-      - name: Bundle Install
-        run: cd android && bundle install
       - name: Deploy to Play Store
         env:
           SUPPLY_JSON_KEY_DATA: ${{ secrets.SUPPLY_JSON_KEY_DATA }}
-        run: bundle exec fastlane deploy
+        run: |
+          cd android
+          bundle install
+          bundle exec fastlane deploy
   # web-build:
   #   name: Build and Deploy Web
   #   runs-on: ubuntu-latest
