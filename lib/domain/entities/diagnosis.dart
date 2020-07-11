@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 
 @injectable
-class Diagnosis with MapMixin<String, Completer<String>> {
+class Diagnosis extends UnmodifiableMapBase<String, Completer<String>> {
   final _internal = <String, Completer<String>>{
     DiagnosisKeys.ip: Completer<String>(),
     DiagnosisKeys.ipAddr: Completer<String>(),
@@ -28,18 +28,11 @@ class Diagnosis with MapMixin<String, Completer<String>> {
     DiagnosisKeys.httpResponseStormshieldLocal: Completer<String>(),
   };
 
-  Future<String> getReport() async {
-    final buffer = StringBuffer();
+  @override
+  Iterable<String> get keys => _internal.keys;
 
-    for (final entry in _internal.entries) {
-      buffer.writeln('---${entry.key}---');
-      if (entry.value.isCompleted) {
-        buffer.writeln('${await entry.value.future}');
-      }
-      buffer.writeln('---END ${entry.key}---\n');
-    }
-    return buffer.toString();
-  }
+  @override
+  Completer<String> operator [](Object key) => _internal[key];
 
   @override
   void clear() {
@@ -67,23 +60,18 @@ class Diagnosis with MapMixin<String, Completer<String>> {
     });
   }
 
-  @override
-  Completer<String> operator [](Object key) => _internal[key];
+  Future<String> getReport() async {
+    final buffer = StringBuffer();
 
-  @override
-  void operator []=(String key, Completer<String> value) {
-    if (_internal.containsKey(key)) {
-      _internal[key] = value;
-    } else {
-      throw ArgumentError.value(key, 'key', 'Cannot set value.');
+    for (final entry in _internal.entries) {
+      buffer.writeln('---${entry.key}---');
+      if (entry.value.isCompleted) {
+        buffer.writeln('${await entry.value.future}');
+      }
+      buffer.writeln('---END ${entry.key}---\n');
     }
+    return buffer.toString();
   }
-
-  @override
-  Iterable<String> get keys => _internal.keys;
-
-  @override
-  Completer<String> remove(Object key) => throw UnimplementedError();
 
   Future<Map<String, String>> waitAll() async {
     final map = <String, String>{};
