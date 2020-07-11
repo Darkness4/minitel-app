@@ -87,7 +87,7 @@ jobs:
           name: screenshots
           path: test_driver/screenshots
   apk-build:
-    name: Build APK and Deploy
+    name: Build APK
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -127,15 +127,18 @@ jobs:
           name: release-apks
           path: build/app/outputs/apk/release
   aab-build:
-    name: Build AAB
+    name: Build AAB and Deploy
     runs-on: ubuntu-latest
-    container: gmemstr/flutter-fastlane-android:29.0
     steps:
       - uses: actions/checkout@master
       - name: Setup Java 8
         uses: actions/setup-java@master
         with:
           java-version: '8.x'
+      - name: Setup Ruby 2.7.1
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.1
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
@@ -164,10 +167,12 @@ jobs:
         with:
           name: release-aab
           path: build/app/outputs/bundle/release
+      - name: Bundle Install
+        run: cd android && bundle install
       - name: Deploy to Play Store
         env:
           SUPPLY_JSON_KEY_DATA: ${{ secrets.SUPPLY_JSON_KEY_DATA }}
-        run: cd android && fastlane deploy
+        run: bundle exec fastlane deploy
   # web-build:
   #   name: Build and Deploy Web
   #   runs-on: ubuntu-latest
