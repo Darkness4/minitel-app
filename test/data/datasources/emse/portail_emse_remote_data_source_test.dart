@@ -301,10 +301,9 @@ void main() {
         final result =
             await dataSource.login(username: tUser, password: tPassword);
         // assert
-        final verification = verify(mockListCookies.addAll(
-          captureThat(isA<List<Cookie>>()),
-        ));
-        final actualCookies = verification.captured.first as List<Cookie>;
+        final verification = verify(mockListCookies.addAll(captureAny));
+        final actualCookies =
+            (verification.captured.first as Iterable<Cookie>).toList();
         final expectedCookies = <Cookie>[];
         expectedCookies.addAll(Map<String, String>.from(json.decode(fixture(
                     'datasources/portail_emse_remote_data_source/response0.json'))

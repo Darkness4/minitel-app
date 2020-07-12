@@ -41,7 +41,7 @@ class NotificationSettingsDataSourceImpl
 
   @override
   Future<void> saveNotificationSettings(NotificationSettings settings) {
-    return Future.wait<bool>([
+    return Future.wait([
       prefs.setInt(CacheKeys.early, settings.early.inMinutes),
       prefs.setInt(CacheKeys.range, settings.range.inDays),
       prefs.setBool(CacheKeys.enabled, settings.enabled),
