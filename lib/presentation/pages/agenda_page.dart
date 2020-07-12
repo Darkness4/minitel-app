@@ -10,8 +10,8 @@ import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/cubits/agenda/agenda_cubit.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
+import 'package:minitel_toolbox/presentation/pages/agenda/agenda_widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/presentation/pages/agenda/notification_settings_page.dart';
-import 'package:minitel_toolbox/presentation/widgets/agenda_widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/presentation/widgets/drawers/main_drawer.dart';
 
 class AgendaPage extends StatelessWidget {

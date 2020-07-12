@@ -4,7 +4,7 @@ import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 import 'package:minitel_toolbox/presentation/cubits/reporting/diagnosis/diagnosis_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
-import 'package:minitel_toolbox/presentation/widgets/cards/log_card.dart';
+import 'package:minitel_toolbox/presentation/pages/reporting/report_widgets/log_card.dart';
 
 class DiagnoseScreen extends StatelessWidget {
   const DiagnoseScreen({Key key}) : super(key: key);

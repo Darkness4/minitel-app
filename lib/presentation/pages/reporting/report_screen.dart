@@ -8,7 +8,7 @@ import 'package:minitel_toolbox/core/validators/validators.dart';
 import 'package:minitel_toolbox/presentation/cubits/reporting/report_status/report_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
-import 'package:minitel_toolbox/presentation/widgets/cards/doc_card.dart';
+import 'package:minitel_toolbox/presentation/pages/reporting/report_widgets/doc_card.dart';
 
 class ReportScreen extends StatelessWidget {
   const ReportScreen({Key key}) : super(key: key);

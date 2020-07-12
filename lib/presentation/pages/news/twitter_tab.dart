@@ -4,7 +4,7 @@ import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/twitter_feed/twitter_feed_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
-import 'package:minitel_toolbox/presentation/widgets/cards/twitter_card.dart';
+import 'package:minitel_toolbox/presentation/pages/news/news_widget/twitter_card.dart';
 
 class ErrorDisplay extends StatelessWidget {
   final String message;
