@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
@@ -43,11 +43,11 @@ Widget _buildMyApp(BuildContext context, ThemeState state) {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CubitProvider<ThemeCubit>(
+    return BlocProvider<ThemeCubit>(
       create: (_) => ThemeCubit(
         prefs: sl<SharedPreferences>(),
       ),
-      child: const CubitBuilder<ThemeCubit, ThemeState>(
+      child: const BlocBuilder<ThemeCubit, ThemeState>(
         builder: _buildMyApp,
       ),
     );

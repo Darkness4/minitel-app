@@ -50,53 +50,62 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
     final referee = Uri.encodeComponent('https://portail.emse.fr/ics/');
 
     // GET CAS
-    final responseCAS =
-        await client.get('https://cas.emse.fr/login?service=$referee');
+    String lt;
+    Cookie jSessionID;
+    {
+      final response =
+          await client.get('https://cas.emse.fr/login?service=$referee');
 
-    if (responseCAS.statusCode != HttpStatus.ok) {
-      throw ServerException('HTTP Error: ${responseCAS.statusCode}');
+      if (response.statusCode != HttpStatus.ok) {
+        throw ServerException('HTTP Error: ${response.statusCode}');
+      }
+
+      lt = RegExp('name="lt" value="([^"]*)"')
+          .firstMatch(response.body)
+          ?.group(1);
+
+      jSessionID = response.headers.parseSetCookie().firstWhere(
+            (cookie) => cookie.name == 'JSESSIONID',
+            orElse: () => null,
+          );
     }
-
-    final lt = RegExp('name="lt" value="([^"]*)"')
-        .firstMatch(responseCAS.body)
-        .group(1);
-
-    final jSessionID = responseCAS.headers
-        .parseSetCookie()
-        .firstWhere((cookie) => cookie.name == 'JSESSIONID');
 
     // POST CAS
-    final data = <String, String>{
-      'username': username,
-      'password': password,
-      'lt': lt,
-      'execution': 'e1s1',
-      '_eventId': 'submit',
-    };
-    final responsePOST = await client.post(
-        'https://cas.emse.fr/login;jsessionid=${jSessionID.value}?service=$referee',
-        body: data,
-        headers: {
-          HttpHeaders.refererHeader:
-              'https://cas.emse.fr/login?service=$referee'
-        });
+    String location;
+    {
+      final data = <String, String>{
+        'username': username,
+        'password': password,
+        'lt': lt,
+        'execution': 'e1s1',
+        '_eventId': 'submit',
+      };
+      final response = await client.post(
+          'https://cas.emse.fr/login;jsessionid=${jSessionID.value}?service=$referee',
+          body: data,
+          headers: {
+            HttpHeaders.refererHeader:
+                'https://cas.emse.fr/login?service=$referee'
+          });
 
-    if (!responsePOST.headers.containsKey(HttpHeaders.locationHeader)) {
-      throw ClientException('Location was not found, probably a Bad login');
+      if (!response.headers.containsKey(HttpHeaders.locationHeader)) {
+        throw ClientException('Location was not found, probably a Bad login');
+      }
+
+      location = response.headers[HttpHeaders.locationHeader];
     }
 
-    final location = responsePOST.headers[HttpHeaders.locationHeader];
-
     // GET CAS
-    final request = http.Request('GET', Uri.parse(location))
-      ..followRedirects = false;
-    final responseFinal = await client.send(request);
+    {
+      final request = http.Request('GET', Uri.parse(location))
+        ..followRedirects = false;
 
-    final phpSessionIDCAS = responseFinal.headers
-        .parseSetCookie()
-        .firstWhere((cookie) => cookie.name == 'PHPSESSID');
+      final response = await client.send(request);
 
-    // Cookie
-    return phpSessionIDCAS;
+      return response.headers.parseSetCookie().firstWhere(
+            (cookie) => cookie.name == 'PHPSESSID',
+            orElse: () => null,
+          );
+    }
   }
 }

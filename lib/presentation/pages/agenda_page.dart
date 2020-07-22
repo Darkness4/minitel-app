@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
@@ -10,8 +10,8 @@ import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/cubits/agenda/agenda_cubit.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
+import 'package:minitel_toolbox/presentation/pages/agenda/agenda_widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/presentation/pages/agenda/notification_settings_page.dart';
-import 'package:minitel_toolbox/presentation/widgets/agenda_widgets/agenda_widgets.dart';
 import 'package:minitel_toolbox/presentation/widgets/drawers/main_drawer.dart';
 
 class AgendaPage extends StatelessWidget {
@@ -21,13 +21,13 @@ class AgendaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiCubitProvider(
+    return MultiBlocProvider(
       providers: [
-        CubitProvider<NotificationSettingsCubit>(
+        BlocProvider<NotificationSettingsCubit>(
           create: (_) =>
               sl<NotificationSettingsCubit>()..notificationSettingsLoad(),
         ),
-        CubitProvider<AgendaCubit>(
+        BlocProvider<AgendaCubit>(
           create: (context) => sl<AgendaCubit>(),
         ),
       ],
@@ -49,19 +49,19 @@ class AgendaPage extends StatelessWidget {
           ],
         ),
         body: Center(
-          child: CubitListener<NotificationSettingsCubit,
+          child: BlocListener<NotificationSettingsCubit,
               NotificationSettingsState>(
             listener: (context, state) {
               if (state.isLoaded) {
-                final agendaState = context.cubit<AgendaCubit>().state;
+                final agendaState = context.bloc<AgendaCubit>().state;
                 if (agendaState is AgendaInitial) {
                   context
-                      .cubit<AgendaCubit>()
+                      .bloc<AgendaCubit>()
                       .agendaLoad(state.notificationSettings);
                 }
               }
             },
-            child: CubitBuilder<AgendaCubit, AgendaState>(
+            child: BlocBuilder<AgendaCubit, AgendaState>(
               builder: (context, state) {
                 return state.when(
                   initial: () => const CircularProgressIndicator(

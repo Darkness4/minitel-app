@@ -74,7 +74,6 @@ linter:
     - no_adjacent_strings_in_list
     - prefer_void_to_null
     - always_require_non_null_named_parameters
-    - non_constant_identifier_names
     - directives_ordering
     - only_throw_errors
     - prefer_adjacent_string_concatenation

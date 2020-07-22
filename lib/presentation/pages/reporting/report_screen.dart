@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:minitel_toolbox/core/constants/launch_url.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
@@ -8,7 +8,7 @@ import 'package:minitel_toolbox/core/validators/validators.dart';
 import 'package:minitel_toolbox/presentation/cubits/reporting/report_status/report_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
-import 'package:minitel_toolbox/presentation/widgets/cards/doc_card.dart';
+import 'package:minitel_toolbox/presentation/pages/reporting/report_widgets/doc_card.dart';
 
 class ReportScreen extends StatelessWidget {
   const ReportScreen({Key key}) : super(key: key);
@@ -102,7 +102,7 @@ class __ReportCardState extends State<_ReportCard> {
     _roomController = TextEditingController();
     _nameController = TextEditingController();
     _formNode = FocusScopeNode();
-    _reportStatusCubit = context.cubit<ReportStatusCubit>();
+    _reportStatusCubit = context.bloc<ReportStatusCubit>();
 
     _titleController.addListener(_onTitleChanged);
     _descriptionController.addListener(_onDescriptionChanged);

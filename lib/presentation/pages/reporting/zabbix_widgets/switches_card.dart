@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
-import 'package:minitel_toolbox/domain/entities/zabbix/servers/server_status.dart';
+import 'package:minitel_toolbox/domain/entities/zabbix/switch/switch_status.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_interface.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/cubits/reporting/zabbix_hosts/zabbix_hosts_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/text_styles.dart';
 
-class ServersCard extends StatelessWidget {
-  const ServersCard({
+class SwitchesCard extends StatelessWidget {
+  const SwitchesCard({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CubitProvider<ZabbixHostsCubit>(
+      child: BlocProvider<ZabbixHostsCubit>(
         create: (_) =>
-            sl<ZabbixHostsCubit>()..getZabbixHosts(ApiKeys.zabbixServers),
-        child: CubitBuilder<ZabbixHostsCubit, ZabbixHostsState>(
+            sl<ZabbixHostsCubit>()..getZabbixHosts(ApiKeys.zabbixSwitches),
+        child: BlocBuilder<ZabbixHostsCubit, ZabbixHostsState>(
           builder: (context, state) {
             return state.when(
               initial: () => const CircularProgressIndicator(),
@@ -28,7 +28,7 @@ class ServersCard extends StatelessWidget {
                 return Wrap(
                   alignment: WrapAlignment.center,
                   children: <Widget>[
-                    for (final host in hosts) _ServerBody(host),
+                    for (final host in hosts) _SwitchBody(host),
                   ],
                 );
               },
@@ -46,21 +46,23 @@ class ServersCard extends StatelessWidget {
   }
 }
 
-class _ServerBody extends StatelessWidget {
-  final ServerStatus _status;
+class _SwitchBody extends StatelessWidget {
+  final SwitchStatus _status;
   final String _hostname;
   final List<ZabbixInterface> _interfaces;
 
-  _ServerBody(
+  _SwitchBody(
     ZabbixHost host, {
     Key key,
-  })  : _status = ServerStatus.fromHost(host),
+  })  : _status = SwitchStatus.fromHost(host),
         _hostname = host.host,
         _interfaces = host.interfaces,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final statistics = _status.count();
+
     return Card(
       elevation: 2.0,
       child: Padding(
@@ -71,21 +73,35 @@ class _ServerBody extends StatelessWidget {
               _hostname,
               style: Theme.of(context).textTheme.headline6,
             ),
+            Text(
+              _status.description,
+              style: Theme.of(context).textTheme.subtitle2,
+            ),
             for (final ZabbixInterface interface in _interfaces)
               Text('IP : ${interface.ip}'),
-            Text(
-              _status.icmpAvailable == 1 ? 'ICMP Available' : 'Errors',
-              style: Theme.of(context).textTheme.bodyText2.apply(
-                    fontWeightDelta: 4,
-                    color:
-                        _status.icmpAvailable == 1 ? Colors.green : Colors.red,
-                  ),
-            ),
             Text(
               'Ping : ${_status.pingResponseTime * 1e3} ms',
               style: Theme.of(context).textTheme.bodyText2.apply(
                   color:
                       _status.pingResponseTime < 5 ? Colors.green : Colors.red),
+            ),
+            Text(
+              _status.snmpAvailable == 1 ? 'SNMP Available' : 'Errors',
+              style: Theme.of(context).textTheme.bodyText2.apply(
+                    fontWeightDelta: 4,
+                    color:
+                        _status.snmpAvailable == 1 ? Colors.green : Colors.red,
+                  ),
+            ),
+            Text(
+              'Uptime: ${_status.uptime.inDays} Days '
+              '${_status.uptime.inHours.remainder(24)} Hours '
+              '${_status.uptime.inMinutes.remainder(60)} Minutes '
+              '${_status.uptime.inSeconds.remainder(60)} Seconds',
+            ),
+            Text(
+              statistics.toString(),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
         ),

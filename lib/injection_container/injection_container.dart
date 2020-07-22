@@ -11,7 +11,7 @@ import 'package:injectable/injectable.dart';
 import 'package:ntlm/ntlm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'injection_container.iconfig.dart';
+import 'injection_container.config.dart';
 
 final GetIt sl = GetIt.instance;
 

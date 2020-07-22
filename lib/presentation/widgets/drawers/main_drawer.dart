@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
@@ -178,7 +178,7 @@ class MainDrawer extends StatelessWidget {
           const ListTile(
             title: Text('Theme'),
           ),
-          CubitBuilder<ThemeCubit, ThemeState>(
+          BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, state) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -187,21 +187,21 @@ class MainDrawer extends StatelessWidget {
                     value: 'Dark',
                     groupValue: state.value,
                     onChanged: (String _) {
-                      context.cubit<ThemeCubit>().toDark();
+                      context.bloc<ThemeCubit>().toDark();
                     },
                   ),
                   Radio(
                     value: 'Adaptive',
                     groupValue: state.value,
                     onChanged: (String _) {
-                      context.cubit<ThemeCubit>().toAdaptive();
+                      context.bloc<ThemeCubit>().toAdaptive();
                     },
                   ),
                   Radio(
                     value: 'Light',
                     groupValue: state.value,
                     onChanged: (String _) {
-                      context.cubit<ThemeCubit>().toLight();
+                      context.bloc<ThemeCubit>().toLight();
                     },
                   ),
                 ],

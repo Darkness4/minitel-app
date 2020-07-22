@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/github_releases/github_releases_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
-import 'package:minitel_toolbox/presentation/widgets/cards/github_card.dart';
+import 'package:minitel_toolbox/presentation/pages/news/news_widget/github_card.dart';
 
 class ErrorDisplay extends StatelessWidget {
   final String message;
@@ -78,11 +78,11 @@ class GithubScreen extends StatelessWidget {
   }
 
   Widget buildBody(BuildContext context) {
-    return CubitProvider(
+    return BlocProvider(
       create: (_) =>
           sl<GithubReleasesCubit>()..getReleases((ApiKeys.githubRepo)),
       child: Center(
-        child: CubitBuilder<GithubReleasesCubit, GithubReleasesState>(
+        child: BlocBuilder<GithubReleasesCubit, GithubReleasesState>(
           builder: (BuildContext context, GithubReleasesState state) {
             return state.when(
               initial: () =>

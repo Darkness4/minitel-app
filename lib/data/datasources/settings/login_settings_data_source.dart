@@ -23,7 +23,7 @@ class LoginSettingsDataSourceImpl implements LoginSettingsDataSource {
 
   @override
   Future<void> clear() {
-    return Future.wait<dynamic>([
+    return Future.wait([
       prefs.remove('rememberMe'),
       prefs.remove('autoLogin'),
       prefs.remove('uid'),
@@ -55,7 +55,7 @@ class LoginSettingsDataSourceImpl implements LoginSettingsDataSource {
 
   @override
   Future<void> save(LoginSettings settings) {
-    return Future.wait<dynamic>([
+    return Future.wait([
       prefs.setBool('rememberMe', true),
       prefs.setBool('autoLogin', settings.autoLogin),
       prefs.setString('uid', settings.uid),

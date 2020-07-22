@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/twitter_feed/twitter_feed_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
-import 'package:minitel_toolbox/presentation/widgets/cards/twitter_card.dart';
+import 'package:minitel_toolbox/presentation/pages/news/news_widget/twitter_card.dart';
 
 class ErrorDisplay extends StatelessWidget {
   final String message;
@@ -38,10 +38,10 @@ class TwitterScreen extends StatelessWidget {
   }
 
   Widget buildBody(BuildContext context) {
-    return CubitProvider(
+    return BlocProvider(
       create: (_) => sl<TwitterFeedCubit>()..getFeed(),
       child: Center(
-        child: CubitBuilder<TwitterFeedCubit, TwitterFeedState>(
+        child: BlocBuilder<TwitterFeedCubit, TwitterFeedState>(
           builder: (BuildContext context, TwitterFeedState state) {
             return state.when(
               initial: () =>

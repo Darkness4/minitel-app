@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -122,12 +120,11 @@ Stacktrace: $s
     }
   }
 
-  Future<String> _run(String command, List<String> args) async {
+  Future<String> _run(String command, List<String> args) {
     return processManager
         .run(command, args)
-        .then<String>((ProcessResult result) => result.stdout.toString())
-        .then<String>(
-            (String stdout) => stdout.isEmpty ? 'Nothing to show' : stdout)
+        .then((result) => result.stdout.toString())
+        .then((stdout) => stdout.isEmpty ? 'Nothing to show' : stdout)
         .catchError((dynamic e) => e.toString());
   }
 }

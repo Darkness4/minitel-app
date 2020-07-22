@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/presentation/cubits/agenda/agenda_cubit.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
@@ -112,11 +112,11 @@ class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {
             elevation: 10.0,
             onPressed: () {
               final notifState =
-                  context.cubit<NotificationSettingsCubit>().state;
+                  context.bloc<NotificationSettingsCubit>().state;
 
               final notificationSettings = notifState.notificationSettings;
 
-              context.cubit<AgendaCubit>().agendaDownload(
+              context.bloc<AgendaCubit>().agendaDownload(
                     uid: _uidController.text,
                     pswd: _pswdController.text,
                     notificationSettings: notificationSettings,

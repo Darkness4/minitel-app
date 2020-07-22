@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'diagnosis_cubit.dart';
 
@@ -12,24 +12,28 @@ T _$identity<T>(T value) => value;
 class _$DiagnosisStateTearOff {
   const _$DiagnosisStateTearOff();
 
+// ignore: unused_element
   DiagnosisInitial initial(Diagnosis diagnosis) {
     return DiagnosisInitial(
       diagnosis,
     );
   }
 
+// ignore: unused_element
   DiagnosisLoading loading(Diagnosis diagnosis) {
     return DiagnosisLoading(
       diagnosis,
     );
   }
 
+// ignore: unused_element
   DiagnosisLoaded loaded(Diagnosis diagnosis) {
     return DiagnosisLoaded(
       diagnosis,
     );
   }
 
+// ignore: unused_element
   DiagnosisError error(@nullable Diagnosis diagnosis,
       {@required Exception error}) {
     return DiagnosisError(
