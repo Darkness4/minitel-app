@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/validators/validators.dart';
@@ -30,7 +30,7 @@ class _AutoLoginSelectorWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(AppLoc.of(context).portal.autoLogin),
-        CubitBuilder<PortalCubit, PortalState>(
+        BlocBuilder<PortalCubit, PortalState>(
           builder: (context, state) {
             return Checkbox(
               key: const Key(Keys.autoLoginButton),
@@ -45,9 +45,9 @@ class _AutoLoginSelectorWidget extends StatelessWidget {
 
   void _onAutoLoginChanged(BuildContext context, bool autoLogin) {
     if (autoLogin) {
-      context.cubit<PortalCubit>().rememberMeChanged(true);
+      context.bloc<PortalCubit>().rememberMeChanged(true);
     }
-    context.cubit<PortalCubit>().autoLoginChanged(autoLogin);
+    context.bloc<PortalCubit>().autoLoginChanged(autoLogin);
   }
 }
 
@@ -63,14 +63,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return RefreshIndicator(
       onRefresh: () async {
         final portalState = _portalCubit.state;
-        context.cubit<ImprimanteStatusCubit>().refresh();
-        context.cubit<PortailEmseStatusCubit>().refresh();
+        context.bloc<ImprimanteStatusCubit>().refresh();
+        context.bloc<PortailEmseStatusCubit>().refresh();
 
         return Future.wait([
           context
-              .cubit<StormshieldStatusCubit>()
+              .bloc<StormshieldStatusCubit>()
               .refresh(portalState.selectedUrl),
-          context.cubit<CalendarStatusCubit>().refresh(),
+          context.bloc<CalendarStatusCubit>().refresh(),
         ]);
       },
       child: ListView(
@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     key: widget.formKey,
                     child: FocusScope(
                       node: formFocusScopeNode,
-                      child: CubitListener<PortalCubit, PortalState>(
+                      child: BlocListener<PortalCubit, PortalState>(
                         listener: (context, state) {
                           if (state.isLoaded &&
                               (_uidController.text == null ||
@@ -185,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _portalCubit = context.cubit<PortalCubit>();
+    _portalCubit = context.bloc<PortalCubit>();
 
     // Remember credentials
     _portalCubit.autoLogin();
@@ -216,7 +216,7 @@ class _RememberMeSelectorWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(AppLoc.of(context).portal.rememberMe),
-        CubitBuilder<PortalCubit, PortalState>(
+        BlocBuilder<PortalCubit, PortalState>(
           builder: (context, state) {
             return Checkbox(
               key: const Key(Keys.rememberMeButton),
@@ -232,9 +232,9 @@ class _RememberMeSelectorWidget extends StatelessWidget {
 
   void _onRememberMeChanged(BuildContext context, bool rememberMe) {
     if (!rememberMe) {
-      context.cubit<PortalCubit>().autoLoginChanged(false);
+      context.bloc<PortalCubit>().autoLoginChanged(false);
     }
-    context.cubit<PortalCubit>().rememberMeChanged(rememberMe);
+    context.bloc<PortalCubit>().rememberMeChanged(rememberMe);
   }
 }
 
@@ -247,7 +247,7 @@ class _TimeSelectorWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Text(AppLoc.of(context).portal.authTime),
-          CubitBuilder<PortalCubit, PortalState>(
+          BlocBuilder<PortalCubit, PortalState>(
             builder: (context, state) {
               return DropdownButton<String>(
                 key: const Key(Keys.timeDropdown),
@@ -270,7 +270,7 @@ class _TimeSelectorWidget extends StatelessWidget {
   }
 
   void _onSelectedTimeChanged(BuildContext context, String selectedTime) {
-    context.cubit<PortalCubit>().selectedTimeChanged(selectedTime);
+    context.bloc<PortalCubit>().selectedTimeChanged(selectedTime);
   }
 }
 
@@ -283,7 +283,7 @@ class _UrlSelectorWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Text(AppLoc.of(context).portal.domainNameHeader),
-          CubitBuilder<PortalCubit, PortalState>(builder: (context, state) {
+          BlocBuilder<PortalCubit, PortalState>(builder: (context, state) {
             return DropdownButton<String>(
               key: const Key(Keys.nameServerDropdown),
               value: state.selectedUrl,
@@ -304,6 +304,6 @@ class _UrlSelectorWidget extends StatelessWidget {
   }
 
   void _onSelectedUrlChanged(BuildContext context, String selectedUrl) {
-    context.cubit<PortalCubit>().selectedUrlChanged(selectedUrl);
+    context.bloc<PortalCubit>().selectedUrlChanged(selectedUrl);
   }
 }

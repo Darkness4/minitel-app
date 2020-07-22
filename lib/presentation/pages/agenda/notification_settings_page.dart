@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
@@ -10,7 +10,7 @@ class NotificationSettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CubitProvider<NotificationSettingsCubit>(
+    return BlocProvider<NotificationSettingsCubit>(
       create: (context) =>
           sl<NotificationSettingsCubit>()..notificationSettingsLoad(),
       child: const NotificationSettingsScreen(),
@@ -41,7 +41,7 @@ class _NotificationSettingsScreenState
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child:
-            CubitConsumer<NotificationSettingsCubit, NotificationSettingsState>(
+            BlocConsumer<NotificationSettingsCubit, NotificationSettingsState>(
           listener: (context, state) {
             if (state.isSaved) {
               Scaffold.of(context).showSnackBar(const SnackBar(
@@ -136,7 +136,7 @@ class _NotificationSettingsScreenState
   void initState() {
     super.initState();
 
-    _notificationSettingsCubit = context.cubit<NotificationSettingsCubit>();
+    _notificationSettingsCubit = context.bloc<NotificationSettingsCubit>();
 
     _rangeTextController = TextEditingController();
     _earlyTextController = TextEditingController();

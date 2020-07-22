@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:minitel_toolbox/core/constants/launch_url.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
@@ -102,7 +102,7 @@ class __ReportCardState extends State<_ReportCard> {
     _roomController = TextEditingController();
     _nameController = TextEditingController();
     _formNode = FocusScopeNode();
-    _reportStatusCubit = context.cubit<ReportStatusCubit>();
+    _reportStatusCubit = context.bloc<ReportStatusCubit>();
 
     _titleController.addListener(_onTitleChanged);
     _descriptionController.addListener(_onDescriptionChanged);

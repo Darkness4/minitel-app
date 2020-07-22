@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'imprimante_status_cubit.dart';
 
@@ -12,20 +12,24 @@ T _$identity<T>(T value) => value;
 class _$ImprimanteStatusStateTearOff {
   const _$ImprimanteStatusStateTearOff();
 
+// ignore: unused_element
   ImprimanteStatusInitial initial() {
     return const ImprimanteStatusInitial();
   }
 
+// ignore: unused_element
   ImprimanteStatusLoading loading() {
     return const ImprimanteStatusLoading();
   }
 
+// ignore: unused_element
   ImprimanteStatusError error(Exception e) {
     return ImprimanteStatusError(
       e,
     );
   }
 
+// ignore: unused_element
   ImprimanteStatusLoaded loaded(bool success) {
     return ImprimanteStatusLoaded(
       success,

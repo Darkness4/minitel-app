@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 import 'package:minitel_toolbox/presentation/cubits/reporting/diagnosis/diagnosis_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
@@ -12,7 +12,7 @@ class DiagnoseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
-      child: CubitBuilder<DiagnosisCubit, DiagnosisState>(
+      child: BlocBuilder<DiagnosisCubit, DiagnosisState>(
         builder: (context, state) {
           final children2 = <Widget>[
             if (state is DiagnosisError)

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/core/routes/routes.dart';
@@ -37,16 +37,16 @@ class ReportingPageState extends State<ReportingPage>
 
   @override
   Widget build(BuildContext context) {
-    return MultiCubitProvider(
+    return MultiBlocProvider(
       providers: [
-        CubitProvider(create: (_) => sl<ReportCubit>()),
-        CubitProvider(create: (_) => sl<DiagnosisCubit>()),
-        CubitProvider(create: (_) => sl<ReportStatusCubit>()),
+        BlocProvider(create: (_) => sl<ReportCubit>()),
+        BlocProvider(create: (_) => sl<DiagnosisCubit>()),
+        BlocProvider(create: (_) => sl<ReportStatusCubit>()),
       ],
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
-          body: CubitListener<ReportCubit, ReportState>(
+          body: BlocListener<ReportCubit, ReportState>(
             listener: (context, state) {
               if (state is ReportDone) {
                 if (state.status != null) {
@@ -79,7 +79,7 @@ class ReportingPageState extends State<ReportingPage>
                 _shareButton(context),
                 _mailButton(context),
                 _reportButton(context),
-                CubitBuilder<DiagnosisCubit, DiagnosisState>(
+                BlocBuilder<DiagnosisCubit, DiagnosisState>(
                   builder: _diagnosisButton,
                 ),
               ],
@@ -116,7 +116,7 @@ class ReportingPageState extends State<ReportingPage>
               _animationController.reverse();
             }
 
-            context.cubit<DiagnosisCubit>().diagnosisRun();
+            context.bloc<DiagnosisCubit>().diagnosisRun();
             _percentageDiagnoseProgress.value = 0;
             _timer?.cancel();
             _timer = Timer.periodic(
@@ -201,10 +201,10 @@ class ReportingPageState extends State<ReportingPage>
         end: 0.5,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.cubit<ReportStatusCubit>().state;
-          final diagnosisState = context.cubit<DiagnosisCubit>().state;
+          final reportStatusState = context.bloc<ReportStatusCubit>().state;
+          final diagnosisState = context.bloc<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.cubit<ReportCubit>().reportToMail(
+            context.bloc<ReportCubit>().reportToMail(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,
@@ -240,10 +240,10 @@ class ReportingPageState extends State<ReportingPage>
         end: 0.25,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.cubit<ReportStatusCubit>().state;
-          final diagnosisState = context.cubit<DiagnosisCubit>().state;
+          final reportStatusState = context.bloc<ReportStatusCubit>().state;
+          final diagnosisState = context.bloc<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.cubit<ReportCubit>().reportToSlack(
+            context.bloc<ReportCubit>().reportToSlack(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,
@@ -266,10 +266,10 @@ class ReportingPageState extends State<ReportingPage>
         AppLoc.of(context).reporting.share,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.cubit<ReportStatusCubit>().state;
-          final diagnosisState = context.cubit<DiagnosisCubit>().state;
+          final reportStatusState = context.bloc<ReportStatusCubit>().state;
+          final diagnosisState = context.bloc<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.cubit<ReportCubit>().reportToShare(
+            context.bloc<ReportCubit>().reportToShare(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,

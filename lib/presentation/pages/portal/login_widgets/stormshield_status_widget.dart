@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/presentation/cubits/portal/stormshield_status/stormshield_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
@@ -11,7 +11,7 @@ class StormshieldStatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CubitBuilder<StormshieldStatusCubit, StormshieldStatusState>(
+    return BlocBuilder<StormshieldStatusCubit, StormshieldStatusState>(
       builder: (context, state) {
         return state.when(
           initial: () {

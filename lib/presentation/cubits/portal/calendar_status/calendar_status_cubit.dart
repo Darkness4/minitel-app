@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cubit/cubit.dart';
+import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/domain/repositories/calendar_url_repository.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/ap/ap_status.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
@@ -16,9 +16,9 @@ class AccessPointsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CubitProvider<ZabbixHostsCubit>(
+      child: BlocProvider<ZabbixHostsCubit>(
         create: (_) => sl<ZabbixHostsCubit>()..getZabbixHosts(ApiKeys.zabbixAP),
-        child: CubitBuilder<ZabbixHostsCubit, ZabbixHostsState>(
+        child: BlocBuilder<ZabbixHostsCubit, ZabbixHostsState>(
           builder: (context, state) {
             return state.when(
               initial: () => const CircularProgressIndicator(),

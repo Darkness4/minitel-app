@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
 import 'package:minitel_toolbox/presentation/cubits/portal/portail_emse_status/portail_emse_status_cubit.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
@@ -17,7 +17,7 @@ class PortailEmseStatusWidget extends StatelessWidget {
           '${AppLoc.of(context).portal.apps.portal}: ',
           style: const TextStyle(fontSize: 20),
         ),
-        CubitBuilder<PortailEmseStatusCubit, PortailEmseStatusState>(
+        BlocBuilder<PortailEmseStatusCubit, PortailEmseStatusState>(
           builder: (context, state) {
             return state.maybeWhen(
               loaded: (success) {
