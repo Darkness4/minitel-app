@@ -20,10 +20,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'beta'
-      - name: Upgrade flutter to beta latest
+          channel: 'stable'
+      - name: Upgrade flutter to stable latest
         run: |
-          flutter channel beta
+          flutter channel stable
           flutter upgrade
           flutter --version
       - run: flutter pub get
@@ -52,10 +52,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'beta'
-      - name: Upgrade flutter to beta latest
+          channel: 'stable'
+      - name: Upgrade flutter to stable latest
         run: |
-          flutter channel beta
+          flutter channel stable
           flutter upgrade
           flutter --version
       - name: Inject env variables
@@ -93,10 +93,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'beta'
-      - name: Upgrade flutter to beta latest
+          channel: 'stable'
+      - name: Upgrade flutter to stable latest
         run: |
-          flutter channel beta
+          flutter channel stable
           flutter upgrade
           flutter --version
       - name: Inject env variables
@@ -133,10 +133,10 @@ jobs:
       - name: Flutter action
         uses: subosito/flutter-action@master
         with:
-          channel: 'beta'
-      - name: Upgrade flutter to beta latest
+          channel: 'stable'
+      - name: Upgrade flutter to stable latest
         run: |
-          flutter channel beta
+          flutter channel stable
           flutter upgrade
           flutter --version
       - name: Inject env variables
