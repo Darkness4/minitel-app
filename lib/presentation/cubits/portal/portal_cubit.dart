@@ -26,8 +26,8 @@ class PortalCubit extends Cubit<PortalState> {
   }
 
   /// Load settings
-  Future<void> autoLogin() async {
-    emit(PortalState.loading());
+  Future<void> loadSettings() async {
+    emit(state.loading());
 
     try {
       final settings = await loginSetingsRepository.load();
@@ -46,8 +46,12 @@ class PortalCubit extends Cubit<PortalState> {
         emit(state.update(isLoaded: true));
       }
     } catch (e) {
-      emit(PortalState.failure().copyWith(isLoaded: true));
+      emit(state.failure());
     }
+  }
+
+  void autoLogged() {
+    emit(state.copyWith(hasAutoLogged: true));
   }
 
   void pswdChanged(String pswd) {

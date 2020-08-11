@@ -187,11 +187,14 @@ Future<GetIt> $initGetIt(
       () => TwitterFeedCubit(repository: get<PostRepository>()));
   gh.lazySingleton<ZabbixHostsRepository>(() => ZabbixHostsRepositoryImpl(
       remoteDataSource: get<ZabbixRemoteDataSource>()));
-  gh.factory<AgendaCubit>(() => AgendaCubit(
-        flutterLocalNotificationsPlugin: get<FlutterLocalNotificationsPlugin>(),
-        notificationDetails: get<NotificationDetails>(),
-        iCalendarRepository: get<ICalendarRepository>(),
-      ));
+  gh.factoryParam<AgendaCubit, NotificationSettingsCubit, dynamic>(
+      (notificationSettingsCubit, _) => AgendaCubit(
+            flutterLocalNotificationsPlugin:
+                get<FlutterLocalNotificationsPlugin>(),
+            notificationDetails: get<NotificationDetails>(),
+            iCalendarRepository: get<ICalendarRepository>(),
+            notificationSettingsCubit: notificationSettingsCubit,
+          ));
   gh.factory<CalendarStatusCubit>(
       () => CalendarStatusCubit(get<CalendarURLRepository>()));
   gh.factory<DiagnosisCubit>(

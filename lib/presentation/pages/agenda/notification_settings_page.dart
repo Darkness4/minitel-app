@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +13,7 @@ class NotificationSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NotificationSettingsCubit>(
-      create: (context) =>
-          sl<NotificationSettingsCubit>()..notificationSettingsLoad(),
+      create: (context) => sl<NotificationSettingsCubit>(),
       child: const NotificationSettingsScreen(),
     );
   }
@@ -31,6 +32,7 @@ class _NotificationSettingsScreenState
   TextEditingController _rangeTextController;
   TextEditingController _earlyTextController;
   NotificationSettingsCubit _notificationSettingsCubit;
+  StreamSubscription<NotificationSettingsState> _subscription;
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +49,6 @@ class _NotificationSettingsScreenState
               Scaffold.of(context).showSnackBar(const SnackBar(
                 content: Text('Data saved.'),
               ));
-            } else if (state.isLoaded) {
-              _rangeTextController.text =
-                  state.notificationSettings.range.inDays.toString();
-              _earlyTextController.text =
-                  state.notificationSettings.early.inMinutes.toString();
             }
           },
           builder: (context, state) {
@@ -129,6 +126,7 @@ class _NotificationSettingsScreenState
   void dispose() {
     _rangeTextController.dispose();
     _earlyTextController.dispose();
+    _subscription?.cancel();
     super.dispose();
   }
 
@@ -143,6 +141,17 @@ class _NotificationSettingsScreenState
 
     _rangeTextController.addListener(_onRangeChanged);
     _earlyTextController.addListener(_onEarlyChanged);
+
+    _subscription = _notificationSettingsCubit.listen((state) {
+      if (state.isLoaded) {
+        _rangeTextController.text =
+            state.notificationSettings.range.inDays.toString();
+        _earlyTextController.text =
+            state.notificationSettings.early.inMinutes.toString();
+      }
+    });
+
+    _notificationSettingsCubit.notificationSettingsLoad();
   }
 
   void _onEarlyChanged() {

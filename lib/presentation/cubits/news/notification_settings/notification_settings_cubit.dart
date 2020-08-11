@@ -40,7 +40,7 @@ class NotificationSettingsCubit extends Cubit<NotificationSettingsState> {
     }
   }
 
-  void notificationSettingsLoad() {
+  Future<void> notificationSettingsLoad() async {
     try {
       final settings = repository.load();
       emit(state.update(
@@ -50,10 +50,18 @@ class NotificationSettingsCubit extends Cubit<NotificationSettingsState> {
         isLoaded: true,
       ));
     } catch (e) {
-      saveNotificationSettings(state.notificationSettings);
-      emit(state.update(
-        isLoaded: true,
-      ));
+      try {
+        await repository.save(state.notificationSettings);
+        emit(state.copyWith(
+          isSaved: true,
+          isLoaded: true,
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          isSaved: false,
+          isLoaded: true,
+        ));
+      }
     }
   }
 }

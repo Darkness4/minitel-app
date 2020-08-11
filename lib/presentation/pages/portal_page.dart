@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minitel_toolbox/core/constants/localizations.dart';
@@ -15,11 +17,20 @@ import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:minitel_toolbox/presentation/widgets/backgrounds.dart';
 import 'package:minitel_toolbox/presentation/widgets/drawers/main_drawer.dart';
 
-class PortalPage extends StatelessWidget {
+class PortalPage extends StatefulWidget {
   final String title;
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  PortalPage({Key key, this.title}) : super(key: key);
+  const PortalPage({Key key, this.title}) : super(key: key);
+
+  @override
+  _PortalPageState createState() => _PortalPageState();
+}
+
+class _PortalPageState extends State<PortalPage> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  StreamSubscription<PortalState> _subscription;
+  PortalCubit _portalCubit;
+  PortalLoginCubit _portalLoginCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +39,10 @@ class PortalPage extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<PortalLoginCubit>(
-            create: (_) => sl<PortalLoginCubit>(),
+            create: (_) => _portalLoginCubit,
           ),
           BlocProvider<PortalCubit>(
-            create: (_) => sl<PortalCubit>()..autoLogin(),
+            create: (_) => _portalCubit,
           ),
           BlocProvider<StormshieldStatusCubit>(
             create: (_) => sl<StormshieldStatusCubit>(),
@@ -72,16 +83,6 @@ class PortalPage extends StatelessWidget {
                 ),
                 BlocListener<PortalCubit, PortalState>(
                   listenWhen: (previous, current) {
-                    return previous != current;
-                  },
-                  listener: (context, state) {
-                    if (state.autoLogin && state.isLoaded) {
-                      _onAutoLogin(context, state);
-                    }
-                  },
-                ),
-                BlocListener<PortalCubit, PortalState>(
-                  listenWhen: (previous, current) {
                     return previous.isLoaded != current.isLoaded;
                   },
                   listener: (context, state) {
@@ -102,7 +103,7 @@ class PortalPage extends StatelessWidget {
                 headerSliverBuilder:
                     (BuildContext context, bool innerBoxIsScrolled) => <Widget>[
                   SliverAppBar(
-                    title: Text(title),
+                    title: Text(widget.title),
                     pinned: true,
                     floating: true,
                     forceElevated: true,
@@ -170,6 +171,37 @@ class PortalPage extends StatelessWidget {
     );
   }
 
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _portalCubit = sl<PortalCubit>();
+    _portalLoginCubit = sl<PortalLoginCubit>();
+
+    _subscription = _portalCubit.listen((state) {
+      if (state.autoLogin && !state.hasAutoLogged) {
+        _onAutoLogin(context, state);
+        _portalCubit.autoLogged();
+      }
+    });
+
+    _portalCubit.loadSettings();
+    super.initState();
+  }
+
+  void _onAutoLogin(BuildContext context, PortalState state) {
+    _portalLoginCubit.login(
+      uid: state.uid,
+      pswd: state.pswd,
+      selectedUrl: state.selectedUrl,
+      selectedTime: state.selectedTime,
+    );
+  }
+
   void _onPortalLoaded(BuildContext context) {
     final portalState = context.bloc<PortalCubit>().state;
 
@@ -178,15 +210,6 @@ class PortalPage extends StatelessWidget {
     context.bloc<StormshieldStatusCubit>().refresh(selectedUrl);
     context.bloc<CalendarStatusCubit>().refresh();
     context.bloc<PortailEmseStatusCubit>().refresh();
-  }
-
-  void _onAutoLogin(BuildContext context, PortalState state) {
-    context.bloc<PortalLoginCubit>().login(
-          uid: state.uid,
-          pswd: state.pswd,
-          selectedUrl: state.selectedUrl,
-          selectedTime: state.selectedTime,
-        );
   }
 
   void _onPortalLoginFailure(BuildContext context, PortalLoginState state) {
