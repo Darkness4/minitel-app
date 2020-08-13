@@ -23,7 +23,8 @@ class _$PortalStateTearOff {
       @required bool isValidUid,
       @required bool isLoaded,
       @required bool isLoading,
-      @required bool isError}) {
+      @required bool isError,
+      @required bool hasAutoLogged}) {
     return _PortalState(
       rememberMe: rememberMe,
       autoLogin: autoLogin,
@@ -35,6 +36,7 @@ class _$PortalStateTearOff {
       isLoaded: isLoaded,
       isLoading: isLoading,
       isError: isError,
+      hasAutoLogged: hasAutoLogged,
     );
   }
 }
@@ -55,6 +57,7 @@ mixin _$PortalState {
   bool get isLoaded;
   bool get isLoading;
   bool get isError;
+  bool get hasAutoLogged;
 
   $PortalStateCopyWith<PortalState> get copyWith;
 }
@@ -73,7 +76,8 @@ abstract class $PortalStateCopyWith<$Res> {
       bool isValidUid,
       bool isLoaded,
       bool isLoading,
-      bool isError});
+      bool isError,
+      bool hasAutoLogged});
 }
 
 class _$PortalStateCopyWithImpl<$Res> implements $PortalStateCopyWith<$Res> {
@@ -95,6 +99,7 @@ class _$PortalStateCopyWithImpl<$Res> implements $PortalStateCopyWith<$Res> {
     Object isLoaded = freezed,
     Object isLoading = freezed,
     Object isError = freezed,
+    Object hasAutoLogged = freezed,
   }) {
     return _then(_value.copyWith(
       rememberMe:
@@ -112,6 +117,9 @@ class _$PortalStateCopyWithImpl<$Res> implements $PortalStateCopyWith<$Res> {
       isLoaded: isLoaded == freezed ? _value.isLoaded : isLoaded as bool,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       isError: isError == freezed ? _value.isError : isError as bool,
+      hasAutoLogged: hasAutoLogged == freezed
+          ? _value.hasAutoLogged
+          : hasAutoLogged as bool,
     ));
   }
 }
@@ -132,7 +140,8 @@ abstract class _$PortalStateCopyWith<$Res>
       bool isValidUid,
       bool isLoaded,
       bool isLoading,
-      bool isError});
+      bool isError,
+      bool hasAutoLogged});
 }
 
 class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
@@ -156,6 +165,7 @@ class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
     Object isLoaded = freezed,
     Object isLoading = freezed,
     Object isError = freezed,
+    Object hasAutoLogged = freezed,
   }) {
     return _then(_PortalState(
       rememberMe:
@@ -173,6 +183,9 @@ class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
       isLoaded: isLoaded == freezed ? _value.isLoaded : isLoaded as bool,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       isError: isError == freezed ? _value.isError : isError as bool,
+      hasAutoLogged: hasAutoLogged == freezed
+          ? _value.hasAutoLogged
+          : hasAutoLogged as bool,
     ));
   }
 }
@@ -188,7 +201,8 @@ class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
       @required this.isValidUid,
       @required this.isLoaded,
       @required this.isLoading,
-      @required this.isError})
+      @required this.isError,
+      @required this.hasAutoLogged})
       : assert(rememberMe != null),
         assert(autoLogin != null),
         assert(selectedTime != null),
@@ -196,7 +210,8 @@ class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
         assert(isValidUid != null),
         assert(isLoaded != null),
         assert(isLoading != null),
-        assert(isError != null);
+        assert(isError != null),
+        assert(hasAutoLogged != null);
 
   @override
   final bool rememberMe;
@@ -220,10 +235,12 @@ class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
   final bool isLoading;
   @override
   final bool isError;
+  @override
+  final bool hasAutoLogged;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PortalState(rememberMe: $rememberMe, autoLogin: $autoLogin, uid: $uid, selectedTime: $selectedTime, selectedUrl: $selectedUrl, pswd: $pswd, isValidUid: $isValidUid, isLoaded: $isLoaded, isLoading: $isLoading, isError: $isError)';
+    return 'PortalState(rememberMe: $rememberMe, autoLogin: $autoLogin, uid: $uid, selectedTime: $selectedTime, selectedUrl: $selectedUrl, pswd: $pswd, isValidUid: $isValidUid, isLoaded: $isLoaded, isLoading: $isLoading, isError: $isError, hasAutoLogged: $hasAutoLogged)';
   }
 
   @override
@@ -240,7 +257,8 @@ class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
       ..add(DiagnosticsProperty('isValidUid', isValidUid))
       ..add(DiagnosticsProperty('isLoaded', isLoaded))
       ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('isError', isError));
+      ..add(DiagnosticsProperty('isError', isError))
+      ..add(DiagnosticsProperty('hasAutoLogged', hasAutoLogged));
   }
 
   @override
@@ -273,7 +291,11 @@ class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
             (identical(other.isError, isError) ||
-                const DeepCollectionEquality().equals(other.isError, isError)));
+                const DeepCollectionEquality()
+                    .equals(other.isError, isError)) &&
+            (identical(other.hasAutoLogged, hasAutoLogged) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasAutoLogged, hasAutoLogged)));
   }
 
   @override
@@ -288,7 +310,8 @@ class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
       const DeepCollectionEquality().hash(isValidUid) ^
       const DeepCollectionEquality().hash(isLoaded) ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(isError);
+      const DeepCollectionEquality().hash(isError) ^
+      const DeepCollectionEquality().hash(hasAutoLogged);
 
   @override
   _$PortalStateCopyWith<_PortalState> get copyWith =>
@@ -306,7 +329,8 @@ abstract class _PortalState implements PortalState {
       @required bool isValidUid,
       @required bool isLoaded,
       @required bool isLoading,
-      @required bool isError}) = _$_PortalState;
+      @required bool isError,
+      @required bool hasAutoLogged}) = _$_PortalState;
 
   @override
   bool get rememberMe;
@@ -330,6 +354,8 @@ abstract class _PortalState implements PortalState {
   bool get isLoading;
   @override
   bool get isError;
+  @override
+  bool get hasAutoLogged;
   @override
   _$PortalStateCopyWith<_PortalState> get copyWith;
 }

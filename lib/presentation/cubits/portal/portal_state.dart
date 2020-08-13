@@ -13,22 +13,8 @@ abstract class PortalState with _$PortalState {
     @required bool isLoaded,
     @required bool isLoading,
     @required bool isError,
+    @required bool hasAutoLogged,
   }) = _PortalState;
-
-  factory PortalState.failure() {
-    return const PortalState(
-      rememberMe: false,
-      autoLogin: false,
-      uid: '',
-      selectedTime: '4 hours',
-      selectedUrl: MyIPAdresses.stormshieldIP,
-      pswd: '',
-      isError: true,
-      isLoading: false,
-      isLoaded: false,
-      isValidUid: false,
-    );
-  }
 
   factory PortalState.initial() {
     return const PortalState(
@@ -42,11 +28,29 @@ abstract class PortalState with _$PortalState {
       isLoading: false,
       isLoaded: false,
       isValidUid: false,
+      hasAutoLogged: false,
+    );
+  }
+}
+
+extension PortalStateX on PortalState {
+  PortalState failure() {
+    return copyWith(
+      rememberMe: false,
+      autoLogin: false,
+      uid: '',
+      selectedTime: '4 hours',
+      selectedUrl: MyIPAdresses.stormshieldIP,
+      pswd: '',
+      isError: true,
+      isLoading: false,
+      isLoaded: true,
+      isValidUid: false,
     );
   }
 
-  factory PortalState.loading() {
-    return const PortalState(
+  PortalState loading() {
+    return copyWith(
       rememberMe: false,
       autoLogin: false,
       uid: '',
@@ -59,9 +63,7 @@ abstract class PortalState with _$PortalState {
       isValidUid: true,
     );
   }
-}
 
-extension PortalStateX on PortalState {
   PortalState update({
     bool rememberMe,
     bool autoLogin,
@@ -71,6 +73,7 @@ extension PortalStateX on PortalState {
     String pswd,
     bool isLoaded,
     bool isValidUid,
+    bool hasAutoLogged,
   }) {
     return copyWith(
       rememberMe: rememberMe ?? this.rememberMe,
@@ -83,6 +86,7 @@ extension PortalStateX on PortalState {
       isLoading: false,
       isLoaded: isLoaded ?? this.isLoaded,
       isValidUid: isValidUid ?? this.isValidUid,
+      hasAutoLogged: hasAutoLogged ?? this.hasAutoLogged,
     );
   }
 }

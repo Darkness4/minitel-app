@@ -21,88 +21,95 @@ class AgendaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<NotificationSettingsCubit>(
-          create: (_) =>
-              sl<NotificationSettingsCubit>()..notificationSettingsLoad(),
-        ),
-        BlocProvider<AgendaCubit>(
-          create: (context) => sl<AgendaCubit>(),
-        ),
-      ],
-      child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          title: Text(title),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                Navigator.of(context).push<void>(
-                  MaterialPageRoute(
-                    builder: (context) => const NotificationSettingsPage(),
-                  ),
-                );
-              },
-            )
-          ],
-        ),
-        body: Center(
-          child: BlocListener<NotificationSettingsCubit,
-              NotificationSettingsState>(
-            listener: (context, state) {
-              if (state.isLoaded) {
-                final agendaState = context.bloc<AgendaCubit>().state;
-                if (agendaState is AgendaInitial) {
-                  context
-                      .bloc<AgendaCubit>()
-                      .agendaLoad(state.notificationSettings);
-                }
-              }
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: AppBar(
+        title: Text(title),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (context) => const NotificationSettingsPage(),
+                ),
+              );
             },
-            child: BlocBuilder<AgendaCubit, AgendaState>(
-              builder: (context, state) {
-                return state.when(
-                  initial: () => const CircularProgressIndicator(
-                      backgroundColor: Colors.white),
-                  loading: () => const CircularProgressIndicator(
-                      backgroundColor: Colors.white),
-                  error: (exception) => ErrorAgendaWidget(exception),
-                  loaded: (events) => StreamBuilder<List<Widget>>(
-                    stream: _listEventCards(context, events),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<Widget>> snapshot) {
-                      if (snapshot.hasData) {
-                        return OrientationBuilder(
-                          builder:
-                              (BuildContext context, Orientation orientation) {
-                            return PageView(
-                              controller: PageController(
-                                  viewportFraction:
-                                      _viewportFraction(orientation, context)),
-                              pageSnapping: _pageSnapping(context),
-                              children: snapshot.data,
-                            );
-                          },
-                        );
-                      } else {
-                        return const CircularProgressIndicator(
-                          backgroundColor: Colors.white,
-                        );
-                      }
-                    },
-                  ),
-                );
-              },
-            ),
+          )
+        ],
+      ),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<AgendaCubit>(
+            create: (context) =>
+                sl<AgendaCubit>(param1: sl<NotificationSettingsCubit>()),
           ),
-        ),
-        drawer: const MainDrawer(
-          currentRoutePaths: RoutePaths.agenda,
-        ),
+        ],
+        child: const AgendaContent(),
+      ),
+      drawer: const MainDrawer(
+        currentRoutePaths: RoutePaths.agenda,
       ),
     );
+  }
+}
+
+class AgendaContent extends StatelessWidget {
+  const AgendaContent({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: BlocBuilder<AgendaCubit, AgendaState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () =>
+                const CircularProgressIndicator(backgroundColor: Colors.white),
+            loading: () =>
+                const CircularProgressIndicator(backgroundColor: Colors.white),
+            error: (exception) => ErrorAgendaWidget(exception),
+            loaded: (events) => StreamBuilder<List<Widget>>(
+              stream: _listEventCards(context, events),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
+                if (snapshot.hasData) {
+                  return OrientationBuilder(
+                    builder: (BuildContext context, Orientation orientation) {
+                      return PageView(
+                        controller: PageController(
+                            viewportFraction:
+                                _viewportFraction(orientation, context)),
+                        pageSnapping: _pageSnapping(context),
+                        children: snapshot.data,
+                      );
+                    },
+                  );
+                } else {
+                  return const CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                  );
+                }
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  bool _pageSnapping(BuildContext context) {
+    return MediaQuery.of(context).size.shortestSide < 600;
+  }
+
+  double _viewportFraction(Orientation orientation, BuildContext context) {
+    if (orientation == Orientation.portrait &&
+        MediaQuery.of(context).size.shortestSide < 600) {
+      return 0.9;
+    } else {
+      return 0.7;
+    }
   }
 
   Stream<List<Widget>> _listEventCards(
@@ -172,19 +179,6 @@ class AgendaPage extends StatelessWidget {
         monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
         monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
       }
-    }
-  }
-
-  bool _pageSnapping(BuildContext context) {
-    return MediaQuery.of(context).size.shortestSide < 600;
-  }
-
-  double _viewportFraction(Orientation orientation, BuildContext context) {
-    if (orientation == Orientation.portrait &&
-        MediaQuery.of(context).size.shortestSide < 600) {
-      return 0.9;
-    } else {
-      return 0.7;
     }
   }
 }

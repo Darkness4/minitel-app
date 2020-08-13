@@ -188,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _portalCubit = context.bloc<PortalCubit>();
 
     // Remember credentials
-    _portalCubit.autoLogin();
+    _portalCubit.loadSettings();
 
     _uidController = TextEditingController();
     _pswdController = TextEditingController();
