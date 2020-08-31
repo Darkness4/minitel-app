@@ -6,7 +6,6 @@ dart_files=(
   "$localizations.dart"
   "$localizations/about.dart"
   "$localizations/agenda.dart"
-  "$localizations/docs.dart"
   "$localizations/news.dart"
   "$localizations/portal.dart"
   "$localizations/reporting.dart"
