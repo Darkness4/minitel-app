@@ -40,7 +40,7 @@ class ImprimanteRemoteDataSourceImpl implements ImprimanteRemoteDataSource {
         return cookies;
       } else {
         throw ServerException(
-            'Cannot fetch Imprimante: ${response.statusCode} ${response.reasonPhrase}\n${response.body}');
+            'Cannot fetch Imprimante: ${response.statusCode} ${response.reasonPhrase}');
       }
     } on ServerException {
       rethrow;

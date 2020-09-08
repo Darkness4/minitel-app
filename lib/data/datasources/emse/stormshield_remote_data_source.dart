@@ -51,7 +51,7 @@ class StormshieldRemoteDataSourceImpl implements StormshieldRemoteDataSource {
       }
     } else {
       throw ServerException(
-          'HttpError: ${response.statusCode} ${response.reasonPhrase}\n${response.body}');
+          'HttpError: ${response.statusCode} ${response.reasonPhrase}');
     }
   }
 
