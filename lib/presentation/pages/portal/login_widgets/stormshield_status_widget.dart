@@ -72,39 +72,33 @@ class StormshieldStatusWidget extends StatelessWidget {
             );
           },
           loaded: (status) {
-            final duration = Duration(seconds: int.parse(status));
-            if (duration.inSeconds < 300) {
-              status =
-                  AppLoc.of(context).portal.statusInSeconds(duration.inSeconds);
-            } else if (duration.inMinutes < 60) {
-              status =
-                  AppLoc.of(context).portal.statusInMinutes(duration.inMinutes);
-            } else {
-              status = AppLoc.of(context)
-                  .portal
-                  .statusInHM(duration.inHours, duration.inMinutes % 60);
+            try {
+              final duration = Duration(seconds: int.parse(status));
+              if (duration.inSeconds < 300) {
+                status = AppLoc.of(context)
+                    .portal
+                    .statusInSeconds(duration.inSeconds);
+              } else if (duration.inMinutes < 60) {
+                status = AppLoc.of(context)
+                    .portal
+                    .statusInMinutes(duration.inMinutes);
+              } else {
+                status = AppLoc.of(context)
+                    .portal
+                    .statusInHM(duration.inHours, duration.inMinutes % 60);
+              }
+            } on FormatException catch (e) {
+              print(e);
             }
 
-            return Column(
-              children: <Widget>[
-                LinearProgressIndicator(
-                  value: Duration(seconds: int.parse(status)).inSeconds / 28800,
-                  backgroundColor: Theme.of(context).backgroundColor,
-                ),
-                Text(
-                  status,
-                  key: const Key(Keys.gatewayText),
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                LinearProgressIndicator(
-                  value: Duration(seconds: int.parse(status)).inSeconds / 28800,
-                  backgroundColor: Theme.of(context).backgroundColor,
-                ),
-              ],
+            return Text(
+              status,
+              key: const Key(Keys.gatewayText),
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontWeight: FontWeight.bold,
+              ),
+              overflow: TextOverflow.ellipsis,
             );
           },
         );
