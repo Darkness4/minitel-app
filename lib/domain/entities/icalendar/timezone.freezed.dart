@@ -9,6 +9,7 @@ part of 'timezone.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$TimezoneTearOff {
   const _$TimezoneTearOff();
 
@@ -25,9 +26,11 @@ class _$TimezoneTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $Timezone = _$TimezoneTearOff();
 
+/// @nodoc
 mixin _$Timezone {
   String get tzid;
   TimezoneDescription get daylight;
@@ -36,6 +39,7 @@ mixin _$Timezone {
   $TimezoneCopyWith<Timezone> get copyWith;
 }
 
+/// @nodoc
 abstract class $TimezoneCopyWith<$Res> {
   factory $TimezoneCopyWith(Timezone value, $Res Function(Timezone) then) =
       _$TimezoneCopyWithImpl<$Res>;
@@ -48,6 +52,7 @@ abstract class $TimezoneCopyWith<$Res> {
   $TimezoneDescriptionCopyWith<$Res> get standard;
 }
 
+/// @nodoc
 class _$TimezoneCopyWithImpl<$Res> implements $TimezoneCopyWith<$Res> {
   _$TimezoneCopyWithImpl(this._value, this._then);
 
@@ -93,6 +98,7 @@ class _$TimezoneCopyWithImpl<$Res> implements $TimezoneCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$TimezoneCopyWith<$Res> implements $TimezoneCopyWith<$Res> {
   factory _$TimezoneCopyWith(_Timezone value, $Res Function(_Timezone) then) =
       __$TimezoneCopyWithImpl<$Res>;
@@ -108,6 +114,7 @@ abstract class _$TimezoneCopyWith<$Res> implements $TimezoneCopyWith<$Res> {
   $TimezoneDescriptionCopyWith<$Res> get standard;
 }
 
+/// @nodoc
 class __$TimezoneCopyWithImpl<$Res> extends _$TimezoneCopyWithImpl<$Res>
     implements _$TimezoneCopyWith<$Res> {
   __$TimezoneCopyWithImpl(_Timezone _value, $Res Function(_Timezone) _then)
@@ -134,6 +141,7 @@ class __$TimezoneCopyWithImpl<$Res> extends _$TimezoneCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
   const _$_Timezone({this.tzid, this.daylight, this.standard});
 
@@ -201,6 +209,7 @@ abstract class _Timezone implements Timezone {
   _$TimezoneCopyWith<_Timezone> get copyWith;
 }
 
+/// @nodoc
 class _$TimezoneDescriptionTearOff {
   const _$TimezoneDescriptionTearOff();
 
@@ -221,9 +230,11 @@ class _$TimezoneDescriptionTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $TimezoneDescription = _$TimezoneDescriptionTearOff();
 
+/// @nodoc
 mixin _$TimezoneDescription {
   DateTime get dtstart;
   String get tzOffsetTo;
@@ -234,6 +245,7 @@ mixin _$TimezoneDescription {
   $TimezoneDescriptionCopyWith<TimezoneDescription> get copyWith;
 }
 
+/// @nodoc
 abstract class $TimezoneDescriptionCopyWith<$Res> {
   factory $TimezoneDescriptionCopyWith(
           TimezoneDescription value, $Res Function(TimezoneDescription) then) =
@@ -246,6 +258,7 @@ abstract class $TimezoneDescriptionCopyWith<$Res> {
       String tzName});
 }
 
+/// @nodoc
 class _$TimezoneDescriptionCopyWithImpl<$Res>
     implements $TimezoneDescriptionCopyWith<$Res> {
   _$TimezoneDescriptionCopyWithImpl(this._value, this._then);
@@ -275,6 +288,7 @@ class _$TimezoneDescriptionCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$TimezoneDescriptionCopyWith<$Res>
     implements $TimezoneDescriptionCopyWith<$Res> {
   factory _$TimezoneDescriptionCopyWith(_TimezoneDescription value,
@@ -289,6 +303,7 @@ abstract class _$TimezoneDescriptionCopyWith<$Res>
       String tzName});
 }
 
+/// @nodoc
 class __$TimezoneDescriptionCopyWithImpl<$Res>
     extends _$TimezoneDescriptionCopyWithImpl<$Res>
     implements _$TimezoneDescriptionCopyWith<$Res> {
@@ -320,6 +335,7 @@ class __$TimezoneDescriptionCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_TimezoneDescription
     with DiagnosticableTreeMixin
     implements _TimezoneDescription {

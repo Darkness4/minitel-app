@@ -9,6 +9,7 @@ part of 'agenda_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AgendaStateTearOff {
   const _$AgendaStateTearOff();
 
@@ -37,9 +38,11 @@ class _$AgendaStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AgendaState = _$AgendaStateTearOff();
 
+/// @nodoc
 mixin _$AgendaState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$AgendaState {
   });
 }
 
+/// @nodoc
 abstract class $AgendaStateCopyWith<$Res> {
   factory $AgendaStateCopyWith(
           AgendaState value, $Res Function(AgendaState) then) =
       _$AgendaStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AgendaStateCopyWithImpl<$Res> implements $AgendaStateCopyWith<$Res> {
   _$AgendaStateCopyWithImpl(this._value, this._then);
 
@@ -87,12 +92,14 @@ class _$AgendaStateCopyWithImpl<$Res> implements $AgendaStateCopyWith<$Res> {
   final $Res Function(AgendaState) _then;
 }
 
+/// @nodoc
 abstract class $AgendaInitialCopyWith<$Res> {
   factory $AgendaInitialCopyWith(
           AgendaInitial value, $Res Function(AgendaInitial) then) =
       _$AgendaInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AgendaInitialCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
     implements $AgendaInitialCopyWith<$Res> {
   _$AgendaInitialCopyWithImpl(
@@ -103,6 +110,7 @@ class _$AgendaInitialCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
   AgendaInitial get _value => super._value as AgendaInitial;
 }
 
+/// @nodoc
 class _$AgendaInitial with DiagnosticableTreeMixin implements AgendaInitial {
   const _$AgendaInitial();
 
@@ -192,12 +200,14 @@ abstract class AgendaInitial implements AgendaState {
   const factory AgendaInitial() = _$AgendaInitial;
 }
 
+/// @nodoc
 abstract class $AgendaLoadingCopyWith<$Res> {
   factory $AgendaLoadingCopyWith(
           AgendaLoading value, $Res Function(AgendaLoading) then) =
       _$AgendaLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AgendaLoadingCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
     implements $AgendaLoadingCopyWith<$Res> {
   _$AgendaLoadingCopyWithImpl(
@@ -208,6 +218,7 @@ class _$AgendaLoadingCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
   AgendaLoading get _value => super._value as AgendaLoading;
 }
 
+/// @nodoc
 class _$AgendaLoading with DiagnosticableTreeMixin implements AgendaLoading {
   const _$AgendaLoading();
 
@@ -297,6 +308,7 @@ abstract class AgendaLoading implements AgendaState {
   const factory AgendaLoading() = _$AgendaLoading;
 }
 
+/// @nodoc
 abstract class $AgendaErrorCopyWith<$Res> {
   factory $AgendaErrorCopyWith(
           AgendaError value, $Res Function(AgendaError) then) =
@@ -304,6 +316,7 @@ abstract class $AgendaErrorCopyWith<$Res> {
   $Res call({Exception exception});
 }
 
+/// @nodoc
 class _$AgendaErrorCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
     implements $AgendaErrorCopyWith<$Res> {
   _$AgendaErrorCopyWithImpl(
@@ -323,6 +336,7 @@ class _$AgendaErrorCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$AgendaError with DiagnosticableTreeMixin implements AgendaError {
   const _$AgendaError(this.exception) : assert(exception != null);
 
@@ -429,6 +443,7 @@ abstract class AgendaError implements AgendaState {
   $AgendaErrorCopyWith<AgendaError> get copyWith;
 }
 
+/// @nodoc
 abstract class $AgendaLoadedCopyWith<$Res> {
   factory $AgendaLoadedCopyWith(
           AgendaLoaded value, $Res Function(AgendaLoaded) then) =
@@ -436,6 +451,7 @@ abstract class $AgendaLoadedCopyWith<$Res> {
   $Res call({List<Event> events});
 }
 
+/// @nodoc
 class _$AgendaLoadedCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
     implements $AgendaLoadedCopyWith<$Res> {
   _$AgendaLoadedCopyWithImpl(
@@ -455,6 +471,7 @@ class _$AgendaLoadedCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$AgendaLoaded with DiagnosticableTreeMixin implements AgendaLoaded {
   const _$AgendaLoaded(this.events) : assert(events != null);
 

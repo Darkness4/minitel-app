@@ -9,6 +9,7 @@ part of 'notification_settings_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$NotificationSettingsStateTearOff {
   const _$NotificationSettingsStateTearOff();
 
@@ -25,9 +26,11 @@ class _$NotificationSettingsStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $NotificationSettingsState = _$NotificationSettingsStateTearOff();
 
+/// @nodoc
 mixin _$NotificationSettingsState {
   @nullable
   NotificationSettings get notificationSettings;
@@ -39,6 +42,7 @@ mixin _$NotificationSettingsState {
   $NotificationSettingsStateCopyWith<NotificationSettingsState> get copyWith;
 }
 
+/// @nodoc
 abstract class $NotificationSettingsStateCopyWith<$Res> {
   factory $NotificationSettingsStateCopyWith(NotificationSettingsState value,
           $Res Function(NotificationSettingsState) then) =
@@ -51,6 +55,7 @@ abstract class $NotificationSettingsStateCopyWith<$Res> {
   $NotificationSettingsCopyWith<$Res> get notificationSettings;
 }
 
+/// @nodoc
 class _$NotificationSettingsStateCopyWithImpl<$Res>
     implements $NotificationSettingsStateCopyWith<$Res> {
   _$NotificationSettingsStateCopyWithImpl(this._value, this._then);
@@ -86,6 +91,7 @@ class _$NotificationSettingsStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$NotificationSettingsStateCopyWith<$Res>
     implements $NotificationSettingsStateCopyWith<$Res> {
   factory _$NotificationSettingsStateCopyWith(_NotificationSettingsState value,
@@ -101,6 +107,7 @@ abstract class _$NotificationSettingsStateCopyWith<$Res>
   $NotificationSettingsCopyWith<$Res> get notificationSettings;
 }
 
+/// @nodoc
 class __$NotificationSettingsStateCopyWithImpl<$Res>
     extends _$NotificationSettingsStateCopyWithImpl<$Res>
     implements _$NotificationSettingsStateCopyWith<$Res> {
@@ -128,6 +135,7 @@ class __$NotificationSettingsStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_NotificationSettingsState
     with DiagnosticableTreeMixin
     implements _NotificationSettingsState {

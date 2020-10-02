@@ -9,6 +9,7 @@ part of 'report_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ReportStatusStateTearOff {
   const _$ReportStatusStateTearOff();
 
@@ -33,9 +34,11 @@ class _$ReportStatusStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ReportStatusState = _$ReportStatusStateTearOff();
 
+/// @nodoc
 mixin _$ReportStatusState {
   @nullable
   String get name;
@@ -52,6 +55,7 @@ mixin _$ReportStatusState {
   $ReportStatusStateCopyWith<ReportStatusState> get copyWith;
 }
 
+/// @nodoc
 abstract class $ReportStatusStateCopyWith<$Res> {
   factory $ReportStatusStateCopyWith(
           ReportStatusState value, $Res Function(ReportStatusState) then) =
@@ -66,6 +70,7 @@ abstract class $ReportStatusStateCopyWith<$Res> {
       bool isValidRoom});
 }
 
+/// @nodoc
 class _$ReportStatusStateCopyWithImpl<$Res>
     implements $ReportStatusStateCopyWith<$Res> {
   _$ReportStatusStateCopyWithImpl(this._value, this._then);
@@ -100,6 +105,7 @@ class _$ReportStatusStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$ReportStatusStateCopyWith<$Res>
     implements $ReportStatusStateCopyWith<$Res> {
   factory _$ReportStatusStateCopyWith(
@@ -116,6 +122,7 @@ abstract class _$ReportStatusStateCopyWith<$Res>
       bool isValidRoom});
 }
 
+/// @nodoc
 class __$ReportStatusStateCopyWithImpl<$Res>
     extends _$ReportStatusStateCopyWithImpl<$Res>
     implements _$ReportStatusStateCopyWith<$Res> {
@@ -152,6 +159,7 @@ class __$ReportStatusStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_ReportStatusState
     with DiagnosticableTreeMixin
     implements _ReportStatusState {

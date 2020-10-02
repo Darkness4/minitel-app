@@ -9,6 +9,7 @@ part of 'portail_emse_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PortailEmseStatusStateTearOff {
   const _$PortailEmseStatusStateTearOff();
 
@@ -37,9 +38,11 @@ class _$PortailEmseStatusStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PortailEmseStatusState = _$PortailEmseStatusStateTearOff();
 
+/// @nodoc
 mixin _$PortailEmseStatusState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$PortailEmseStatusState {
   });
 }
 
+/// @nodoc
 abstract class $PortailEmseStatusStateCopyWith<$Res> {
   factory $PortailEmseStatusStateCopyWith(PortailEmseStatusState value,
           $Res Function(PortailEmseStatusState) then) =
       _$PortailEmseStatusStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$PortailEmseStatusStateCopyWithImpl<$Res>
     implements $PortailEmseStatusStateCopyWith<$Res> {
   _$PortailEmseStatusStateCopyWithImpl(this._value, this._then);
@@ -88,12 +93,14 @@ class _$PortailEmseStatusStateCopyWithImpl<$Res>
   final $Res Function(PortailEmseStatusState) _then;
 }
 
+/// @nodoc
 abstract class $PortailEmseStatusInitialCopyWith<$Res> {
   factory $PortailEmseStatusInitialCopyWith(PortailEmseStatusInitial value,
           $Res Function(PortailEmseStatusInitial) then) =
       _$PortailEmseStatusInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$PortailEmseStatusInitialCopyWithImpl<$Res>
     extends _$PortailEmseStatusStateCopyWithImpl<$Res>
     implements $PortailEmseStatusInitialCopyWith<$Res> {
@@ -106,6 +113,7 @@ class _$PortailEmseStatusInitialCopyWithImpl<$Res>
       super._value as PortailEmseStatusInitial;
 }
 
+/// @nodoc
 class _$PortailEmseStatusInitial implements PortailEmseStatusInitial {
   const _$PortailEmseStatusInitial();
 
@@ -189,12 +197,14 @@ abstract class PortailEmseStatusInitial implements PortailEmseStatusState {
   const factory PortailEmseStatusInitial() = _$PortailEmseStatusInitial;
 }
 
+/// @nodoc
 abstract class $PortailEmseStatusLoadingCopyWith<$Res> {
   factory $PortailEmseStatusLoadingCopyWith(PortailEmseStatusLoading value,
           $Res Function(PortailEmseStatusLoading) then) =
       _$PortailEmseStatusLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$PortailEmseStatusLoadingCopyWithImpl<$Res>
     extends _$PortailEmseStatusStateCopyWithImpl<$Res>
     implements $PortailEmseStatusLoadingCopyWith<$Res> {
@@ -207,6 +217,7 @@ class _$PortailEmseStatusLoadingCopyWithImpl<$Res>
       super._value as PortailEmseStatusLoading;
 }
 
+/// @nodoc
 class _$PortailEmseStatusLoading implements PortailEmseStatusLoading {
   const _$PortailEmseStatusLoading();
 
@@ -290,6 +301,7 @@ abstract class PortailEmseStatusLoading implements PortailEmseStatusState {
   const factory PortailEmseStatusLoading() = _$PortailEmseStatusLoading;
 }
 
+/// @nodoc
 abstract class $PortailEmseStatusErrorCopyWith<$Res> {
   factory $PortailEmseStatusErrorCopyWith(PortailEmseStatusError value,
           $Res Function(PortailEmseStatusError) then) =
@@ -297,6 +309,7 @@ abstract class $PortailEmseStatusErrorCopyWith<$Res> {
   $Res call({Exception e});
 }
 
+/// @nodoc
 class _$PortailEmseStatusErrorCopyWithImpl<$Res>
     extends _$PortailEmseStatusStateCopyWithImpl<$Res>
     implements $PortailEmseStatusErrorCopyWith<$Res> {
@@ -317,6 +330,7 @@ class _$PortailEmseStatusErrorCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$PortailEmseStatusError implements PortailEmseStatusError {
   const _$PortailEmseStatusError(this.e) : assert(e != null);
 
@@ -415,6 +429,7 @@ abstract class PortailEmseStatusError implements PortailEmseStatusState {
   $PortailEmseStatusErrorCopyWith<PortailEmseStatusError> get copyWith;
 }
 
+/// @nodoc
 abstract class $PortailEmseStatusLoadedCopyWith<$Res> {
   factory $PortailEmseStatusLoadedCopyWith(PortailEmseStatusLoaded value,
           $Res Function(PortailEmseStatusLoaded) then) =
@@ -422,6 +437,7 @@ abstract class $PortailEmseStatusLoadedCopyWith<$Res> {
   $Res call({bool status});
 }
 
+/// @nodoc
 class _$PortailEmseStatusLoadedCopyWithImpl<$Res>
     extends _$PortailEmseStatusStateCopyWithImpl<$Res>
     implements $PortailEmseStatusLoadedCopyWith<$Res> {
@@ -442,6 +458,7 @@ class _$PortailEmseStatusLoadedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$PortailEmseStatusLoaded implements PortailEmseStatusLoaded {
   const _$PortailEmseStatusLoaded(this.status) : assert(status != null);
 

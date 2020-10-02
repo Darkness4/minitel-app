@@ -9,6 +9,7 @@ part of 'stormshield_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$StormshieldStatusStateTearOff {
   const _$StormshieldStatusStateTearOff();
 
@@ -37,9 +38,11 @@ class _$StormshieldStatusStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $StormshieldStatusState = _$StormshieldStatusStateTearOff();
 
+/// @nodoc
 mixin _$StormshieldStatusState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$StormshieldStatusState {
   });
 }
 
+/// @nodoc
 abstract class $StormshieldStatusStateCopyWith<$Res> {
   factory $StormshieldStatusStateCopyWith(StormshieldStatusState value,
           $Res Function(StormshieldStatusState) then) =
       _$StormshieldStatusStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$StormshieldStatusStateCopyWithImpl<$Res>
     implements $StormshieldStatusStateCopyWith<$Res> {
   _$StormshieldStatusStateCopyWithImpl(this._value, this._then);
@@ -88,12 +93,14 @@ class _$StormshieldStatusStateCopyWithImpl<$Res>
   final $Res Function(StormshieldStatusState) _then;
 }
 
+/// @nodoc
 abstract class $StormshieldStatusInitialCopyWith<$Res> {
   factory $StormshieldStatusInitialCopyWith(StormshieldStatusInitial value,
           $Res Function(StormshieldStatusInitial) then) =
       _$StormshieldStatusInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$StormshieldStatusInitialCopyWithImpl<$Res>
     extends _$StormshieldStatusStateCopyWithImpl<$Res>
     implements $StormshieldStatusInitialCopyWith<$Res> {
@@ -106,6 +113,7 @@ class _$StormshieldStatusInitialCopyWithImpl<$Res>
       super._value as StormshieldStatusInitial;
 }
 
+/// @nodoc
 class _$StormshieldStatusInitial implements StormshieldStatusInitial {
   const _$StormshieldStatusInitial();
 
@@ -189,12 +197,14 @@ abstract class StormshieldStatusInitial implements StormshieldStatusState {
   const factory StormshieldStatusInitial() = _$StormshieldStatusInitial;
 }
 
+/// @nodoc
 abstract class $StormshieldStatusLoadingCopyWith<$Res> {
   factory $StormshieldStatusLoadingCopyWith(StormshieldStatusLoading value,
           $Res Function(StormshieldStatusLoading) then) =
       _$StormshieldStatusLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$StormshieldStatusLoadingCopyWithImpl<$Res>
     extends _$StormshieldStatusStateCopyWithImpl<$Res>
     implements $StormshieldStatusLoadingCopyWith<$Res> {
@@ -207,6 +217,7 @@ class _$StormshieldStatusLoadingCopyWithImpl<$Res>
       super._value as StormshieldStatusLoading;
 }
 
+/// @nodoc
 class _$StormshieldStatusLoading implements StormshieldStatusLoading {
   const _$StormshieldStatusLoading();
 
@@ -290,6 +301,7 @@ abstract class StormshieldStatusLoading implements StormshieldStatusState {
   const factory StormshieldStatusLoading() = _$StormshieldStatusLoading;
 }
 
+/// @nodoc
 abstract class $StormshieldStatusErrorCopyWith<$Res> {
   factory $StormshieldStatusErrorCopyWith(StormshieldStatusError value,
           $Res Function(StormshieldStatusError) then) =
@@ -297,6 +309,7 @@ abstract class $StormshieldStatusErrorCopyWith<$Res> {
   $Res call({Exception e});
 }
 
+/// @nodoc
 class _$StormshieldStatusErrorCopyWithImpl<$Res>
     extends _$StormshieldStatusStateCopyWithImpl<$Res>
     implements $StormshieldStatusErrorCopyWith<$Res> {
@@ -317,6 +330,7 @@ class _$StormshieldStatusErrorCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$StormshieldStatusError implements StormshieldStatusError {
   const _$StormshieldStatusError(this.e) : assert(e != null);
 
@@ -415,6 +429,7 @@ abstract class StormshieldStatusError implements StormshieldStatusState {
   $StormshieldStatusErrorCopyWith<StormshieldStatusError> get copyWith;
 }
 
+/// @nodoc
 abstract class $StormshieldStatusLoadedCopyWith<$Res> {
   factory $StormshieldStatusLoadedCopyWith(StormshieldStatusLoaded value,
           $Res Function(StormshieldStatusLoaded) then) =
@@ -422,6 +437,7 @@ abstract class $StormshieldStatusLoadedCopyWith<$Res> {
   $Res call({String status});
 }
 
+/// @nodoc
 class _$StormshieldStatusLoadedCopyWithImpl<$Res>
     extends _$StormshieldStatusStateCopyWithImpl<$Res>
     implements $StormshieldStatusLoadedCopyWith<$Res> {
@@ -442,6 +458,7 @@ class _$StormshieldStatusLoadedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$StormshieldStatusLoaded implements StormshieldStatusLoaded {
   const _$StormshieldStatusLoaded(this.status) : assert(status != null);
 

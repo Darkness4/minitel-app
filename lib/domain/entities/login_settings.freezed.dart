@@ -9,6 +9,7 @@ part of 'login_settings.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$LoginSettingsTearOff {
   const _$LoginSettingsTearOff();
 
@@ -31,9 +32,11 @@ class _$LoginSettingsTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $LoginSettings = _$LoginSettingsTearOff();
 
+/// @nodoc
 mixin _$LoginSettings {
   @nullable
   bool get rememberMe;
@@ -51,6 +54,7 @@ mixin _$LoginSettings {
   $LoginSettingsCopyWith<LoginSettings> get copyWith;
 }
 
+/// @nodoc
 abstract class $LoginSettingsCopyWith<$Res> {
   factory $LoginSettingsCopyWith(
           LoginSettings value, $Res Function(LoginSettings) then) =
@@ -64,6 +68,7 @@ abstract class $LoginSettingsCopyWith<$Res> {
       @nullable String pswd});
 }
 
+/// @nodoc
 class _$LoginSettingsCopyWithImpl<$Res>
     implements $LoginSettingsCopyWith<$Res> {
   _$LoginSettingsCopyWithImpl(this._value, this._then);
@@ -96,6 +101,7 @@ class _$LoginSettingsCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$LoginSettingsCopyWith<$Res>
     implements $LoginSettingsCopyWith<$Res> {
   factory _$LoginSettingsCopyWith(
@@ -111,6 +117,7 @@ abstract class _$LoginSettingsCopyWith<$Res>
       @nullable String pswd});
 }
 
+/// @nodoc
 class __$LoginSettingsCopyWithImpl<$Res>
     extends _$LoginSettingsCopyWithImpl<$Res>
     implements _$LoginSettingsCopyWith<$Res> {
@@ -145,6 +152,7 @@ class __$LoginSettingsCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_LoginSettings implements _LoginSettings {
   const _$_LoginSettings(
       {@nullable this.rememberMe = false,

@@ -12,6 +12,7 @@ ZabbixItem _$ZabbixItemFromJson(Map<String, dynamic> json) {
   return _ZabbixItem.fromJson(json);
 }
 
+/// @nodoc
 class _$ZabbixItemTearOff {
   const _$ZabbixItemTearOff();
 
@@ -34,11 +35,18 @@ class _$ZabbixItemTearOff {
       snmp_oid: snmp_oid,
     );
   }
+
+// ignore: unused_element
+  ZabbixItem fromJson(Map<String, Object> json) {
+    return ZabbixItem.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ZabbixItem = _$ZabbixItemTearOff();
 
+/// @nodoc
 mixin _$ZabbixItem {
   @JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
   String get type;
@@ -53,6 +61,7 @@ mixin _$ZabbixItem {
   $ZabbixItemCopyWith<ZabbixItem> get copyWith;
 }
 
+/// @nodoc
 abstract class $ZabbixItemCopyWith<$Res> {
   factory $ZabbixItemCopyWith(
           ZabbixItem value, $Res Function(ZabbixItem) then) =
@@ -68,6 +77,7 @@ abstract class $ZabbixItemCopyWith<$Res> {
       String snmp_oid});
 }
 
+/// @nodoc
 class _$ZabbixItemCopyWithImpl<$Res> implements $ZabbixItemCopyWith<$Res> {
   _$ZabbixItemCopyWithImpl(this._value, this._then);
 
@@ -95,6 +105,7 @@ class _$ZabbixItemCopyWithImpl<$Res> implements $ZabbixItemCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$ZabbixItemCopyWith<$Res> implements $ZabbixItemCopyWith<$Res> {
   factory _$ZabbixItemCopyWith(
           _ZabbixItem value, $Res Function(_ZabbixItem) then) =
@@ -111,6 +122,7 @@ abstract class _$ZabbixItemCopyWith<$Res> implements $ZabbixItemCopyWith<$Res> {
       String snmp_oid});
 }
 
+/// @nodoc
 class __$ZabbixItemCopyWithImpl<$Res> extends _$ZabbixItemCopyWithImpl<$Res>
     implements _$ZabbixItemCopyWith<$Res> {
   __$ZabbixItemCopyWithImpl(
@@ -141,6 +153,8 @@ class __$ZabbixItemCopyWithImpl<$Res> extends _$ZabbixItemCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$_ZabbixItem implements _ZabbixItem {
   const _$_ZabbixItem(
       {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)

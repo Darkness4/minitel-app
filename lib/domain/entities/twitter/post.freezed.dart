@@ -9,6 +9,7 @@ part of 'post.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PostTearOff {
   const _$PostTearOff();
 
@@ -33,9 +34,11 @@ class _$PostTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $Post = _$PostTearOff();
 
+/// @nodoc
 mixin _$Post {
   @nullable
   String get text;
@@ -55,6 +58,7 @@ mixin _$Post {
   $PostCopyWith<Post> get copyWith;
 }
 
+/// @nodoc
 abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
       _$PostCopyWithImpl<$Res>;
@@ -68,6 +72,7 @@ abstract class $PostCopyWith<$Res> {
       @nullable DateTime created_at});
 }
 
+/// @nodoc
 class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
   _$PostCopyWithImpl(this._value, this._then);
 
@@ -101,6 +106,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   factory _$PostCopyWith(_Post value, $Res Function(_Post) then) =
       __$PostCopyWithImpl<$Res>;
@@ -115,6 +121,7 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       @nullable DateTime created_at});
 }
 
+/// @nodoc
 class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
     implements _$PostCopyWith<$Res> {
   __$PostCopyWithImpl(_Post _value, $Res Function(_Post) _then)
@@ -149,6 +156,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_Post with DiagnosticableTreeMixin implements _Post {
   const _$_Post(
       {@required @nullable this.text,

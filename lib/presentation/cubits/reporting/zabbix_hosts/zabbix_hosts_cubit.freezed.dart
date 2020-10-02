@@ -9,6 +9,7 @@ part of 'zabbix_hosts_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ZabbixHostsStateTearOff {
   const _$ZabbixHostsStateTearOff();
 
@@ -37,9 +38,11 @@ class _$ZabbixHostsStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ZabbixHostsState = _$ZabbixHostsStateTearOff();
 
+/// @nodoc
 mixin _$ZabbixHostsState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$ZabbixHostsState {
   });
 }
 
+/// @nodoc
 abstract class $ZabbixHostsStateCopyWith<$Res> {
   factory $ZabbixHostsStateCopyWith(
           ZabbixHostsState value, $Res Function(ZabbixHostsState) then) =
       _$ZabbixHostsStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ZabbixHostsStateCopyWithImpl<$Res>
     implements $ZabbixHostsStateCopyWith<$Res> {
   _$ZabbixHostsStateCopyWithImpl(this._value, this._then);
@@ -88,12 +93,14 @@ class _$ZabbixHostsStateCopyWithImpl<$Res>
   final $Res Function(ZabbixHostsState) _then;
 }
 
+/// @nodoc
 abstract class $ZabbixHostsStateInitialCopyWith<$Res> {
   factory $ZabbixHostsStateInitialCopyWith(ZabbixHostsStateInitial value,
           $Res Function(ZabbixHostsStateInitial) then) =
       _$ZabbixHostsStateInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ZabbixHostsStateInitialCopyWithImpl<$Res>
     extends _$ZabbixHostsStateCopyWithImpl<$Res>
     implements $ZabbixHostsStateInitialCopyWith<$Res> {
@@ -105,6 +112,7 @@ class _$ZabbixHostsStateInitialCopyWithImpl<$Res>
   ZabbixHostsStateInitial get _value => super._value as ZabbixHostsStateInitial;
 }
 
+/// @nodoc
 class _$ZabbixHostsStateInitial
     with DiagnosticableTreeMixin
     implements ZabbixHostsStateInitial {
@@ -196,12 +204,14 @@ abstract class ZabbixHostsStateInitial implements ZabbixHostsState {
   const factory ZabbixHostsStateInitial() = _$ZabbixHostsStateInitial;
 }
 
+/// @nodoc
 abstract class $ZabbixHostsStateLoadingCopyWith<$Res> {
   factory $ZabbixHostsStateLoadingCopyWith(ZabbixHostsStateLoading value,
           $Res Function(ZabbixHostsStateLoading) then) =
       _$ZabbixHostsStateLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ZabbixHostsStateLoadingCopyWithImpl<$Res>
     extends _$ZabbixHostsStateCopyWithImpl<$Res>
     implements $ZabbixHostsStateLoadingCopyWith<$Res> {
@@ -213,6 +223,7 @@ class _$ZabbixHostsStateLoadingCopyWithImpl<$Res>
   ZabbixHostsStateLoading get _value => super._value as ZabbixHostsStateLoading;
 }
 
+/// @nodoc
 class _$ZabbixHostsStateLoading
     with DiagnosticableTreeMixin
     implements ZabbixHostsStateLoading {
@@ -304,6 +315,7 @@ abstract class ZabbixHostsStateLoading implements ZabbixHostsState {
   const factory ZabbixHostsStateLoading() = _$ZabbixHostsStateLoading;
 }
 
+/// @nodoc
 abstract class $ZabbixHostsStateLoadedCopyWith<$Res> {
   factory $ZabbixHostsStateLoadedCopyWith(ZabbixHostsStateLoaded value,
           $Res Function(ZabbixHostsStateLoaded) then) =
@@ -311,6 +323,7 @@ abstract class $ZabbixHostsStateLoadedCopyWith<$Res> {
   $Res call({List<ZabbixHost> hosts});
 }
 
+/// @nodoc
 class _$ZabbixHostsStateLoadedCopyWithImpl<$Res>
     extends _$ZabbixHostsStateCopyWithImpl<$Res>
     implements $ZabbixHostsStateLoadedCopyWith<$Res> {
@@ -331,6 +344,7 @@ class _$ZabbixHostsStateLoadedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$ZabbixHostsStateLoaded
     with DiagnosticableTreeMixin
     implements ZabbixHostsStateLoaded {
@@ -440,6 +454,7 @@ abstract class ZabbixHostsStateLoaded implements ZabbixHostsState {
   $ZabbixHostsStateLoadedCopyWith<ZabbixHostsStateLoaded> get copyWith;
 }
 
+/// @nodoc
 abstract class $ZabbixHostsStateErrorCopyWith<$Res> {
   factory $ZabbixHostsStateErrorCopyWith(ZabbixHostsStateError value,
           $Res Function(ZabbixHostsStateError) then) =
@@ -447,6 +462,7 @@ abstract class $ZabbixHostsStateErrorCopyWith<$Res> {
   $Res call({Exception error});
 }
 
+/// @nodoc
 class _$ZabbixHostsStateErrorCopyWithImpl<$Res>
     extends _$ZabbixHostsStateCopyWithImpl<$Res>
     implements $ZabbixHostsStateErrorCopyWith<$Res> {
@@ -467,6 +483,7 @@ class _$ZabbixHostsStateErrorCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$ZabbixHostsStateError
     with DiagnosticableTreeMixin
     implements ZabbixHostsStateError {

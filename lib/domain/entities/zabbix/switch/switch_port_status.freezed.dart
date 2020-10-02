@@ -9,6 +9,7 @@ part of 'switch_port_status.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$SwitchPortStatusTearOff {
   const _$SwitchPortStatusTearOff();
 
@@ -21,9 +22,11 @@ class _$SwitchPortStatusTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $SwitchPortStatus = _$SwitchPortStatusTearOff();
 
+/// @nodoc
 mixin _$SwitchPortStatus {
   int get speed;
   int get operStatus;
@@ -31,6 +34,7 @@ mixin _$SwitchPortStatus {
   $SwitchPortStatusCopyWith<SwitchPortStatus> get copyWith;
 }
 
+/// @nodoc
 abstract class $SwitchPortStatusCopyWith<$Res> {
   factory $SwitchPortStatusCopyWith(
           SwitchPortStatus value, $Res Function(SwitchPortStatus) then) =
@@ -38,6 +42,7 @@ abstract class $SwitchPortStatusCopyWith<$Res> {
   $Res call({int speed, int operStatus});
 }
 
+/// @nodoc
 class _$SwitchPortStatusCopyWithImpl<$Res>
     implements $SwitchPortStatusCopyWith<$Res> {
   _$SwitchPortStatusCopyWithImpl(this._value, this._then);
@@ -58,6 +63,7 @@ class _$SwitchPortStatusCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$SwitchPortStatusCopyWith<$Res>
     implements $SwitchPortStatusCopyWith<$Res> {
   factory _$SwitchPortStatusCopyWith(
@@ -67,6 +73,7 @@ abstract class _$SwitchPortStatusCopyWith<$Res>
   $Res call({int speed, int operStatus});
 }
 
+/// @nodoc
 class __$SwitchPortStatusCopyWithImpl<$Res>
     extends _$SwitchPortStatusCopyWithImpl<$Res>
     implements _$SwitchPortStatusCopyWith<$Res> {
@@ -89,6 +96,7 @@ class __$SwitchPortStatusCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_SwitchPortStatus implements _SwitchPortStatus {
   const _$_SwitchPortStatus({this.speed, this.operStatus});
 

@@ -9,6 +9,7 @@ part of 'parsed_calendar.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ParsedCalendarTearOff {
   const _$ParsedCalendarTearOff();
 
@@ -29,9 +30,11 @@ class _$ParsedCalendarTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ParsedCalendar = _$ParsedCalendarTearOff();
 
+/// @nodoc
 mixin _$ParsedCalendar {
   @nullable
   String get version;
@@ -47,6 +50,7 @@ mixin _$ParsedCalendar {
   $ParsedCalendarCopyWith<ParsedCalendar> get copyWith;
 }
 
+/// @nodoc
 abstract class $ParsedCalendarCopyWith<$Res> {
   factory $ParsedCalendarCopyWith(
           ParsedCalendar value, $Res Function(ParsedCalendar) then) =
@@ -61,6 +65,7 @@ abstract class $ParsedCalendarCopyWith<$Res> {
   $TimezoneCopyWith<$Res> get timezone;
 }
 
+/// @nodoc
 class _$ParsedCalendarCopyWithImpl<$Res>
     implements $ParsedCalendarCopyWith<$Res> {
   _$ParsedCalendarCopyWithImpl(this._value, this._then);
@@ -97,6 +102,7 @@ class _$ParsedCalendarCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$ParsedCalendarCopyWith<$Res>
     implements $ParsedCalendarCopyWith<$Res> {
   factory _$ParsedCalendarCopyWith(
@@ -114,6 +120,7 @@ abstract class _$ParsedCalendarCopyWith<$Res>
   $TimezoneCopyWith<$Res> get timezone;
 }
 
+/// @nodoc
 class __$ParsedCalendarCopyWithImpl<$Res>
     extends _$ParsedCalendarCopyWithImpl<$Res>
     implements _$ParsedCalendarCopyWith<$Res> {
@@ -142,6 +149,7 @@ class __$ParsedCalendarCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_ParsedCalendar implements _ParsedCalendar {
   const _$_ParsedCalendar(
       {@required @nullable this.version,

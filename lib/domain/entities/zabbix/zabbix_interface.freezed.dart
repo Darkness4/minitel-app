@@ -12,6 +12,7 @@ ZabbixInterface _$ZabbixInterfaceFromJson(Map<String, dynamic> json) {
   return _ZabbixInterface.fromJson(json);
 }
 
+/// @nodoc
 class _$ZabbixInterfaceTearOff {
   const _$ZabbixInterfaceTearOff();
 
@@ -21,11 +22,18 @@ class _$ZabbixInterfaceTearOff {
       ip: ip,
     );
   }
+
+// ignore: unused_element
+  ZabbixInterface fromJson(Map<String, Object> json) {
+    return ZabbixInterface.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ZabbixInterface = _$ZabbixInterfaceTearOff();
 
+/// @nodoc
 mixin _$ZabbixInterface {
   @nullable
   String get ip;
@@ -34,6 +42,7 @@ mixin _$ZabbixInterface {
   $ZabbixInterfaceCopyWith<ZabbixInterface> get copyWith;
 }
 
+/// @nodoc
 abstract class $ZabbixInterfaceCopyWith<$Res> {
   factory $ZabbixInterfaceCopyWith(
           ZabbixInterface value, $Res Function(ZabbixInterface) then) =
@@ -41,6 +50,7 @@ abstract class $ZabbixInterfaceCopyWith<$Res> {
   $Res call({@nullable String ip});
 }
 
+/// @nodoc
 class _$ZabbixInterfaceCopyWithImpl<$Res>
     implements $ZabbixInterfaceCopyWith<$Res> {
   _$ZabbixInterfaceCopyWithImpl(this._value, this._then);
@@ -59,6 +69,7 @@ class _$ZabbixInterfaceCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$ZabbixInterfaceCopyWith<$Res>
     implements $ZabbixInterfaceCopyWith<$Res> {
   factory _$ZabbixInterfaceCopyWith(
@@ -68,6 +79,7 @@ abstract class _$ZabbixInterfaceCopyWith<$Res>
   $Res call({@nullable String ip});
 }
 
+/// @nodoc
 class __$ZabbixInterfaceCopyWithImpl<$Res>
     extends _$ZabbixInterfaceCopyWithImpl<$Res>
     implements _$ZabbixInterfaceCopyWith<$Res> {
@@ -89,6 +101,8 @@ class __$ZabbixInterfaceCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$_ZabbixInterface implements _ZabbixInterface {
   const _$_ZabbixInterface({@required @nullable this.ip});
 

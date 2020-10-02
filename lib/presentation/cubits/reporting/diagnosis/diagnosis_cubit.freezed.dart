@@ -9,6 +9,7 @@ part of 'diagnosis_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$DiagnosisStateTearOff {
   const _$DiagnosisStateTearOff();
 
@@ -43,9 +44,11 @@ class _$DiagnosisStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $DiagnosisState = _$DiagnosisStateTearOff();
 
+/// @nodoc
 mixin _$DiagnosisState {
   Diagnosis get diagnosis;
 
@@ -83,6 +86,7 @@ mixin _$DiagnosisState {
   $DiagnosisStateCopyWith<DiagnosisState> get copyWith;
 }
 
+/// @nodoc
 abstract class $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisStateCopyWith(
           DiagnosisState value, $Res Function(DiagnosisState) then) =
@@ -90,6 +94,7 @@ abstract class $DiagnosisStateCopyWith<$Res> {
   $Res call({Diagnosis diagnosis});
 }
 
+/// @nodoc
 class _$DiagnosisStateCopyWithImpl<$Res>
     implements $DiagnosisStateCopyWith<$Res> {
   _$DiagnosisStateCopyWithImpl(this._value, this._then);
@@ -109,6 +114,7 @@ class _$DiagnosisStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class $DiagnosisInitialCopyWith<$Res>
     implements $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisInitialCopyWith(
@@ -118,6 +124,7 @@ abstract class $DiagnosisInitialCopyWith<$Res>
   $Res call({Diagnosis diagnosis});
 }
 
+/// @nodoc
 class _$DiagnosisInitialCopyWithImpl<$Res>
     extends _$DiagnosisStateCopyWithImpl<$Res>
     implements $DiagnosisInitialCopyWith<$Res> {
@@ -138,6 +145,7 @@ class _$DiagnosisInitialCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$DiagnosisInitial
     with DiagnosticableTreeMixin
     implements DiagnosisInitial {
@@ -248,6 +256,7 @@ abstract class DiagnosisInitial implements DiagnosisState {
   $DiagnosisInitialCopyWith<DiagnosisInitial> get copyWith;
 }
 
+/// @nodoc
 abstract class $DiagnosisLoadingCopyWith<$Res>
     implements $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisLoadingCopyWith(
@@ -257,6 +266,7 @@ abstract class $DiagnosisLoadingCopyWith<$Res>
   $Res call({Diagnosis diagnosis});
 }
 
+/// @nodoc
 class _$DiagnosisLoadingCopyWithImpl<$Res>
     extends _$DiagnosisStateCopyWithImpl<$Res>
     implements $DiagnosisLoadingCopyWith<$Res> {
@@ -277,6 +287,7 @@ class _$DiagnosisLoadingCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$DiagnosisLoading
     with DiagnosticableTreeMixin
     implements DiagnosisLoading {
@@ -387,6 +398,7 @@ abstract class DiagnosisLoading implements DiagnosisState {
   $DiagnosisLoadingCopyWith<DiagnosisLoading> get copyWith;
 }
 
+/// @nodoc
 abstract class $DiagnosisLoadedCopyWith<$Res>
     implements $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisLoadedCopyWith(
@@ -396,6 +408,7 @@ abstract class $DiagnosisLoadedCopyWith<$Res>
   $Res call({Diagnosis diagnosis});
 }
 
+/// @nodoc
 class _$DiagnosisLoadedCopyWithImpl<$Res>
     extends _$DiagnosisStateCopyWithImpl<$Res>
     implements $DiagnosisLoadedCopyWith<$Res> {
@@ -416,6 +429,7 @@ class _$DiagnosisLoadedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$DiagnosisLoaded
     with DiagnosticableTreeMixin
     implements DiagnosisLoaded {
@@ -526,6 +540,7 @@ abstract class DiagnosisLoaded implements DiagnosisState {
   $DiagnosisLoadedCopyWith<DiagnosisLoaded> get copyWith;
 }
 
+/// @nodoc
 abstract class $DiagnosisErrorCopyWith<$Res>
     implements $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisErrorCopyWith(
@@ -535,6 +550,7 @@ abstract class $DiagnosisErrorCopyWith<$Res>
   $Res call({@nullable Diagnosis diagnosis, Exception error});
 }
 
+/// @nodoc
 class _$DiagnosisErrorCopyWithImpl<$Res>
     extends _$DiagnosisStateCopyWithImpl<$Res>
     implements $DiagnosisErrorCopyWith<$Res> {
@@ -557,6 +573,7 @@ class _$DiagnosisErrorCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
   const _$DiagnosisError(@nullable this.diagnosis, {@required this.error})
       : assert(error != null);

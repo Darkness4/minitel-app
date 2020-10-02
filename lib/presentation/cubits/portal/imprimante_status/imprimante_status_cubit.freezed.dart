@@ -9,6 +9,7 @@ part of 'imprimante_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ImprimanteStatusStateTearOff {
   const _$ImprimanteStatusStateTearOff();
 
@@ -37,9 +38,11 @@ class _$ImprimanteStatusStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ImprimanteStatusState = _$ImprimanteStatusStateTearOff();
 
+/// @nodoc
 mixin _$ImprimanteStatusState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$ImprimanteStatusState {
   });
 }
 
+/// @nodoc
 abstract class $ImprimanteStatusStateCopyWith<$Res> {
   factory $ImprimanteStatusStateCopyWith(ImprimanteStatusState value,
           $Res Function(ImprimanteStatusState) then) =
       _$ImprimanteStatusStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ImprimanteStatusStateCopyWithImpl<$Res>
     implements $ImprimanteStatusStateCopyWith<$Res> {
   _$ImprimanteStatusStateCopyWithImpl(this._value, this._then);
@@ -88,12 +93,14 @@ class _$ImprimanteStatusStateCopyWithImpl<$Res>
   final $Res Function(ImprimanteStatusState) _then;
 }
 
+/// @nodoc
 abstract class $ImprimanteStatusInitialCopyWith<$Res> {
   factory $ImprimanteStatusInitialCopyWith(ImprimanteStatusInitial value,
           $Res Function(ImprimanteStatusInitial) then) =
       _$ImprimanteStatusInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ImprimanteStatusInitialCopyWithImpl<$Res>
     extends _$ImprimanteStatusStateCopyWithImpl<$Res>
     implements $ImprimanteStatusInitialCopyWith<$Res> {
@@ -105,6 +112,7 @@ class _$ImprimanteStatusInitialCopyWithImpl<$Res>
   ImprimanteStatusInitial get _value => super._value as ImprimanteStatusInitial;
 }
 
+/// @nodoc
 class _$ImprimanteStatusInitial implements ImprimanteStatusInitial {
   const _$ImprimanteStatusInitial();
 
@@ -188,12 +196,14 @@ abstract class ImprimanteStatusInitial implements ImprimanteStatusState {
   const factory ImprimanteStatusInitial() = _$ImprimanteStatusInitial;
 }
 
+/// @nodoc
 abstract class $ImprimanteStatusLoadingCopyWith<$Res> {
   factory $ImprimanteStatusLoadingCopyWith(ImprimanteStatusLoading value,
           $Res Function(ImprimanteStatusLoading) then) =
       _$ImprimanteStatusLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ImprimanteStatusLoadingCopyWithImpl<$Res>
     extends _$ImprimanteStatusStateCopyWithImpl<$Res>
     implements $ImprimanteStatusLoadingCopyWith<$Res> {
@@ -205,6 +215,7 @@ class _$ImprimanteStatusLoadingCopyWithImpl<$Res>
   ImprimanteStatusLoading get _value => super._value as ImprimanteStatusLoading;
 }
 
+/// @nodoc
 class _$ImprimanteStatusLoading implements ImprimanteStatusLoading {
   const _$ImprimanteStatusLoading();
 
@@ -288,6 +299,7 @@ abstract class ImprimanteStatusLoading implements ImprimanteStatusState {
   const factory ImprimanteStatusLoading() = _$ImprimanteStatusLoading;
 }
 
+/// @nodoc
 abstract class $ImprimanteStatusErrorCopyWith<$Res> {
   factory $ImprimanteStatusErrorCopyWith(ImprimanteStatusError value,
           $Res Function(ImprimanteStatusError) then) =
@@ -295,6 +307,7 @@ abstract class $ImprimanteStatusErrorCopyWith<$Res> {
   $Res call({Exception e});
 }
 
+/// @nodoc
 class _$ImprimanteStatusErrorCopyWithImpl<$Res>
     extends _$ImprimanteStatusStateCopyWithImpl<$Res>
     implements $ImprimanteStatusErrorCopyWith<$Res> {
@@ -315,6 +328,7 @@ class _$ImprimanteStatusErrorCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$ImprimanteStatusError implements ImprimanteStatusError {
   const _$ImprimanteStatusError(this.e) : assert(e != null);
 
@@ -413,6 +427,7 @@ abstract class ImprimanteStatusError implements ImprimanteStatusState {
   $ImprimanteStatusErrorCopyWith<ImprimanteStatusError> get copyWith;
 }
 
+/// @nodoc
 abstract class $ImprimanteStatusLoadedCopyWith<$Res> {
   factory $ImprimanteStatusLoadedCopyWith(ImprimanteStatusLoaded value,
           $Res Function(ImprimanteStatusLoaded) then) =
@@ -420,6 +435,7 @@ abstract class $ImprimanteStatusLoadedCopyWith<$Res> {
   $Res call({bool success});
 }
 
+/// @nodoc
 class _$ImprimanteStatusLoadedCopyWithImpl<$Res>
     extends _$ImprimanteStatusStateCopyWithImpl<$Res>
     implements $ImprimanteStatusLoadedCopyWith<$Res> {
@@ -440,6 +456,7 @@ class _$ImprimanteStatusLoadedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$ImprimanteStatusLoaded implements ImprimanteStatusLoaded {
   const _$ImprimanteStatusLoaded(this.success) : assert(success != null);
 

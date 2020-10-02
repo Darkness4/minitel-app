@@ -12,6 +12,7 @@ GithubAsset _$GithubAssetFromJson(Map<String, dynamic> json) {
   return _GithubAsset.fromJson(json);
 }
 
+/// @nodoc
 class _$GithubAssetTearOff {
   const _$GithubAssetTearOff();
 
@@ -46,11 +47,18 @@ class _$GithubAssetTearOff {
       uploader: uploader,
     );
   }
+
+// ignore: unused_element
+  GithubAsset fromJson(Map<String, Object> json) {
+    return GithubAsset.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $GithubAsset = _$GithubAssetTearOff();
 
+/// @nodoc
 mixin _$GithubAsset {
   @nullable
   String get url;
@@ -83,6 +91,7 @@ mixin _$GithubAsset {
   $GithubAssetCopyWith<GithubAsset> get copyWith;
 }
 
+/// @nodoc
 abstract class $GithubAssetCopyWith<$Res> {
   factory $GithubAssetCopyWith(
           GithubAsset value, $Res Function(GithubAsset) then) =
@@ -105,6 +114,7 @@ abstract class $GithubAssetCopyWith<$Res> {
   $GithubUserCopyWith<$Res> get uploader;
 }
 
+/// @nodoc
 class _$GithubAssetCopyWithImpl<$Res> implements $GithubAssetCopyWith<$Res> {
   _$GithubAssetCopyWithImpl(this._value, this._then);
 
@@ -164,6 +174,7 @@ class _$GithubAssetCopyWithImpl<$Res> implements $GithubAssetCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$GithubAssetCopyWith<$Res>
     implements $GithubAssetCopyWith<$Res> {
   factory _$GithubAssetCopyWith(
@@ -189,6 +200,7 @@ abstract class _$GithubAssetCopyWith<$Res>
   $GithubUserCopyWith<$Res> get uploader;
 }
 
+/// @nodoc
 class __$GithubAssetCopyWithImpl<$Res> extends _$GithubAssetCopyWithImpl<$Res>
     implements _$GithubAssetCopyWith<$Res> {
   __$GithubAssetCopyWithImpl(
@@ -241,6 +253,8 @@ class __$GithubAssetCopyWithImpl<$Res> extends _$GithubAssetCopyWithImpl<$Res>
 }
 
 @JsonSerializable(explicitToJson: true)
+
+/// @nodoc
 class _$_GithubAsset implements _GithubAsset {
   const _$_GithubAsset(
       {@required @nullable this.url,

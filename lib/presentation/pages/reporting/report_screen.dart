@@ -145,7 +145,7 @@ class __ReportCardState extends State<_ReportCard> {
         padding: const EdgeInsets.all(15),
         child: Form(
           key: _formKey,
-          autovalidate: true,
+          autovalidateMode: AutovalidateMode.always,
           child: FocusScope(
             node: _formNode,
             child: Column(
@@ -159,7 +159,7 @@ class __ReportCardState extends State<_ReportCard> {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                         textInputAction: TextInputAction.next,
                         inputFormatters: <TextInputFormatter>[
-                          WhitelistingTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(4),
                         ],
                         keyboardType: TextInputType.number,
@@ -167,7 +167,7 @@ class __ReportCardState extends State<_ReportCard> {
                           labelText: AppLoc.of(context).reporting.chamberLabel,
                           hintText: AppLoc.of(context).reporting.chamberHint,
                         ),
-                        autovalidate: true,
+                        autovalidateMode: AutovalidateMode.always,
                         onFieldSubmitted: (_) => _formNode.nextFocus(),
                         validator: (String value) {
                           if (value.isEmpty) {
@@ -191,7 +191,7 @@ class __ReportCardState extends State<_ReportCard> {
                           labelText: AppLoc.of(context).reporting.idLabel,
                           hintText: AppLoc.of(context).reporting.idHint,
                         ),
-                        autovalidate: true,
+                        autovalidateMode: AutovalidateMode.always,
                         onFieldSubmitted: (_) => _formNode.nextFocus(),
                         validator: (String value) {
                           if (value.isEmpty) {
@@ -213,7 +213,7 @@ class __ReportCardState extends State<_ReportCard> {
                     hintText: AppLoc.of(context).reporting.titleHint,
                   ),
                   onFieldSubmitted: (_) => _formNode.nextFocus(),
-                  autovalidate: true,
+                  autovalidateMode: AutovalidateMode.always,
                   validator: (String value) {
                     if (value.isEmpty) {
                       return AppLoc.of(context).reporting.notEmpty;

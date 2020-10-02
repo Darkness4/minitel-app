@@ -9,6 +9,7 @@ part of 'calendar_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$CalendarStatusStateTearOff {
   const _$CalendarStatusStateTearOff();
 
@@ -37,9 +38,11 @@ class _$CalendarStatusStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $CalendarStatusState = _$CalendarStatusStateTearOff();
 
+/// @nodoc
 mixin _$CalendarStatusState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$CalendarStatusState {
   });
 }
 
+/// @nodoc
 abstract class $CalendarStatusStateCopyWith<$Res> {
   factory $CalendarStatusStateCopyWith(
           CalendarStatusState value, $Res Function(CalendarStatusState) then) =
       _$CalendarStatusStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$CalendarStatusStateCopyWithImpl<$Res>
     implements $CalendarStatusStateCopyWith<$Res> {
   _$CalendarStatusStateCopyWithImpl(this._value, this._then);
@@ -88,12 +93,14 @@ class _$CalendarStatusStateCopyWithImpl<$Res>
   final $Res Function(CalendarStatusState) _then;
 }
 
+/// @nodoc
 abstract class $CalendarStatusInitialCopyWith<$Res> {
   factory $CalendarStatusInitialCopyWith(CalendarStatusInitial value,
           $Res Function(CalendarStatusInitial) then) =
       _$CalendarStatusInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$CalendarStatusInitialCopyWithImpl<$Res>
     extends _$CalendarStatusStateCopyWithImpl<$Res>
     implements $CalendarStatusInitialCopyWith<$Res> {
@@ -105,6 +112,7 @@ class _$CalendarStatusInitialCopyWithImpl<$Res>
   CalendarStatusInitial get _value => super._value as CalendarStatusInitial;
 }
 
+/// @nodoc
 class _$CalendarStatusInitial implements CalendarStatusInitial {
   const _$CalendarStatusInitial();
 
@@ -188,12 +196,14 @@ abstract class CalendarStatusInitial implements CalendarStatusState {
   const factory CalendarStatusInitial() = _$CalendarStatusInitial;
 }
 
+/// @nodoc
 abstract class $CalendarStatusLoadingCopyWith<$Res> {
   factory $CalendarStatusLoadingCopyWith(CalendarStatusLoading value,
           $Res Function(CalendarStatusLoading) then) =
       _$CalendarStatusLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$CalendarStatusLoadingCopyWithImpl<$Res>
     extends _$CalendarStatusStateCopyWithImpl<$Res>
     implements $CalendarStatusLoadingCopyWith<$Res> {
@@ -205,6 +215,7 @@ class _$CalendarStatusLoadingCopyWithImpl<$Res>
   CalendarStatusLoading get _value => super._value as CalendarStatusLoading;
 }
 
+/// @nodoc
 class _$CalendarStatusLoading implements CalendarStatusLoading {
   const _$CalendarStatusLoading();
 
@@ -288,6 +299,7 @@ abstract class CalendarStatusLoading implements CalendarStatusState {
   const factory CalendarStatusLoading() = _$CalendarStatusLoading;
 }
 
+/// @nodoc
 abstract class $CalendarStatusErrorCopyWith<$Res> {
   factory $CalendarStatusErrorCopyWith(
           CalendarStatusError value, $Res Function(CalendarStatusError) then) =
@@ -295,6 +307,7 @@ abstract class $CalendarStatusErrorCopyWith<$Res> {
   $Res call({Exception e});
 }
 
+/// @nodoc
 class _$CalendarStatusErrorCopyWithImpl<$Res>
     extends _$CalendarStatusStateCopyWithImpl<$Res>
     implements $CalendarStatusErrorCopyWith<$Res> {
@@ -315,6 +328,7 @@ class _$CalendarStatusErrorCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$CalendarStatusError implements CalendarStatusError {
   const _$CalendarStatusError(this.e) : assert(e != null);
 
@@ -412,6 +426,7 @@ abstract class CalendarStatusError implements CalendarStatusState {
   $CalendarStatusErrorCopyWith<CalendarStatusError> get copyWith;
 }
 
+/// @nodoc
 abstract class $CalendarStatusLoadedCopyWith<$Res> {
   factory $CalendarStatusLoadedCopyWith(CalendarStatusLoaded value,
           $Res Function(CalendarStatusLoaded) then) =
@@ -419,6 +434,7 @@ abstract class $CalendarStatusLoadedCopyWith<$Res> {
   $Res call({bool status});
 }
 
+/// @nodoc
 class _$CalendarStatusLoadedCopyWithImpl<$Res>
     extends _$CalendarStatusStateCopyWithImpl<$Res>
     implements $CalendarStatusLoadedCopyWith<$Res> {
@@ -439,6 +455,7 @@ class _$CalendarStatusLoadedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$CalendarStatusLoaded implements CalendarStatusLoaded {
   const _$CalendarStatusLoaded(this.status) : assert(status != null);
 

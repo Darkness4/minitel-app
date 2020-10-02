@@ -9,6 +9,7 @@ part of 'report_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ReportStateTearOff {
   const _$ReportStateTearOff();
 
@@ -37,9 +38,11 @@ class _$ReportStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ReportState = _$ReportStateTearOff();
 
+/// @nodoc
 mixin _$ReportState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$ReportState {
   });
 }
 
+/// @nodoc
 abstract class $ReportStateCopyWith<$Res> {
   factory $ReportStateCopyWith(
           ReportState value, $Res Function(ReportState) then) =
       _$ReportStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ReportStateCopyWithImpl<$Res> implements $ReportStateCopyWith<$Res> {
   _$ReportStateCopyWithImpl(this._value, this._then);
 
@@ -87,12 +92,14 @@ class _$ReportStateCopyWithImpl<$Res> implements $ReportStateCopyWith<$Res> {
   final $Res Function(ReportState) _then;
 }
 
+/// @nodoc
 abstract class $ReportInitialCopyWith<$Res> {
   factory $ReportInitialCopyWith(
           ReportInitial value, $Res Function(ReportInitial) then) =
       _$ReportInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ReportInitialCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
     implements $ReportInitialCopyWith<$Res> {
   _$ReportInitialCopyWithImpl(
@@ -103,6 +110,7 @@ class _$ReportInitialCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
   ReportInitial get _value => super._value as ReportInitial;
 }
 
+/// @nodoc
 class _$ReportInitial with DiagnosticableTreeMixin implements ReportInitial {
   const _$ReportInitial();
 
@@ -192,12 +200,14 @@ abstract class ReportInitial implements ReportState {
   const factory ReportInitial() = _$ReportInitial;
 }
 
+/// @nodoc
 abstract class $ReportLoadingCopyWith<$Res> {
   factory $ReportLoadingCopyWith(
           ReportLoading value, $Res Function(ReportLoading) then) =
       _$ReportLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ReportLoadingCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
     implements $ReportLoadingCopyWith<$Res> {
   _$ReportLoadingCopyWithImpl(
@@ -208,6 +218,7 @@ class _$ReportLoadingCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
   ReportLoading get _value => super._value as ReportLoading;
 }
 
+/// @nodoc
 class _$ReportLoading with DiagnosticableTreeMixin implements ReportLoading {
   const _$ReportLoading();
 
@@ -297,6 +308,7 @@ abstract class ReportLoading implements ReportState {
   const factory ReportLoading() = _$ReportLoading;
 }
 
+/// @nodoc
 abstract class $ReportDoneCopyWith<$Res> {
   factory $ReportDoneCopyWith(
           ReportDone value, $Res Function(ReportDone) then) =
@@ -304,6 +316,7 @@ abstract class $ReportDoneCopyWith<$Res> {
   $Res call({@nullable String status});
 }
 
+/// @nodoc
 class _$ReportDoneCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
     implements $ReportDoneCopyWith<$Res> {
   _$ReportDoneCopyWithImpl(ReportDone _value, $Res Function(ReportDone) _then)
@@ -322,6 +335,7 @@ class _$ReportDoneCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$ReportDone with DiagnosticableTreeMixin implements ReportDone {
   const _$ReportDone(@nullable this.status);
 
@@ -429,6 +443,7 @@ abstract class ReportDone implements ReportState {
   $ReportDoneCopyWith<ReportDone> get copyWith;
 }
 
+/// @nodoc
 abstract class $ReportErrorCopyWith<$Res> {
   factory $ReportErrorCopyWith(
           ReportError value, $Res Function(ReportError) then) =
@@ -436,6 +451,7 @@ abstract class $ReportErrorCopyWith<$Res> {
   $Res call({Exception error});
 }
 
+/// @nodoc
 class _$ReportErrorCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
     implements $ReportErrorCopyWith<$Res> {
   _$ReportErrorCopyWithImpl(
@@ -455,6 +471,7 @@ class _$ReportErrorCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$ReportError with DiagnosticableTreeMixin implements ReportError {
   const _$ReportError(this.error) : assert(error != null);
 
