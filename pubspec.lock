@@ -8,13 +8,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.0"
-  alt_http:
-    dependency: "direct main"
-    description:
-      name: alt_http
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
   analyzer:
     dependency: "direct dev"
     description:
