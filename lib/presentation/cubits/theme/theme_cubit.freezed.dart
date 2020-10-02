@@ -9,6 +9,7 @@ part of 'theme_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ThemeStateTearOff {
   const _$ThemeStateTearOff();
 
@@ -22,9 +23,11 @@ class _$ThemeStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ThemeState = _$ThemeStateTearOff();
 
+/// @nodoc
 mixin _$ThemeState {
   ThemeData get themeData;
   ThemeData get darkThemeData;
@@ -33,6 +36,7 @@ mixin _$ThemeState {
   $ThemeStateCopyWith<ThemeState> get copyWith;
 }
 
+/// @nodoc
 abstract class $ThemeStateCopyWith<$Res> {
   factory $ThemeStateCopyWith(
           ThemeState value, $Res Function(ThemeState) then) =
@@ -40,6 +44,7 @@ abstract class $ThemeStateCopyWith<$Res> {
   $Res call({ThemeData themeData, ThemeData darkThemeData, String value});
 }
 
+/// @nodoc
 class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
   _$ThemeStateCopyWithImpl(this._value, this._then);
 
@@ -64,6 +69,7 @@ class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$ThemeStateCopyWith<$Res> implements $ThemeStateCopyWith<$Res> {
   factory _$ThemeStateCopyWith(
           _ThemeState value, $Res Function(_ThemeState) then) =
@@ -72,6 +78,7 @@ abstract class _$ThemeStateCopyWith<$Res> implements $ThemeStateCopyWith<$Res> {
   $Res call({ThemeData themeData, ThemeData darkThemeData, String value});
 }
 
+/// @nodoc
 class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
     implements _$ThemeStateCopyWith<$Res> {
   __$ThemeStateCopyWithImpl(
@@ -97,6 +104,7 @@ class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_ThemeState extends _ThemeState with DiagnosticableTreeMixin {
   const _$_ThemeState(this.themeData, this.darkThemeData, this.value)
       : assert(themeData != null),

@@ -12,6 +12,7 @@ ZabbixHost _$ZabbixHostFromJson(Map<String, dynamic> json) {
   return _ZabbixHost.fromJson(json);
 }
 
+/// @nodoc
 class _$ZabbixHostTearOff {
   const _$ZabbixHostTearOff();
 
@@ -28,11 +29,18 @@ class _$ZabbixHostTearOff {
       interfaces: interfaces,
     );
   }
+
+// ignore: unused_element
+  ZabbixHost fromJson(Map<String, Object> json) {
+    return ZabbixHost.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ZabbixHost = _$ZabbixHostTearOff();
 
+/// @nodoc
 mixin _$ZabbixHost {
   @nullable
   String get hostid;
@@ -47,6 +55,7 @@ mixin _$ZabbixHost {
   $ZabbixHostCopyWith<ZabbixHost> get copyWith;
 }
 
+/// @nodoc
 abstract class $ZabbixHostCopyWith<$Res> {
   factory $ZabbixHostCopyWith(
           ZabbixHost value, $Res Function(ZabbixHost) then) =
@@ -58,6 +67,7 @@ abstract class $ZabbixHostCopyWith<$Res> {
       @nullable List<ZabbixInterface> interfaces});
 }
 
+/// @nodoc
 class _$ZabbixHostCopyWithImpl<$Res> implements $ZabbixHostCopyWith<$Res> {
   _$ZabbixHostCopyWithImpl(this._value, this._then);
 
@@ -83,6 +93,7 @@ class _$ZabbixHostCopyWithImpl<$Res> implements $ZabbixHostCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$ZabbixHostCopyWith<$Res> implements $ZabbixHostCopyWith<$Res> {
   factory _$ZabbixHostCopyWith(
           _ZabbixHost value, $Res Function(_ZabbixHost) then) =
@@ -95,6 +106,7 @@ abstract class _$ZabbixHostCopyWith<$Res> implements $ZabbixHostCopyWith<$Res> {
       @nullable List<ZabbixInterface> interfaces});
 }
 
+/// @nodoc
 class __$ZabbixHostCopyWithImpl<$Res> extends _$ZabbixHostCopyWithImpl<$Res>
     implements _$ZabbixHostCopyWith<$Res> {
   __$ZabbixHostCopyWithImpl(
@@ -123,6 +135,8 @@ class __$ZabbixHostCopyWithImpl<$Res> extends _$ZabbixHostCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$_ZabbixHost implements _ZabbixHost {
   const _$_ZabbixHost(
       {@required @nullable this.hostid,

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:alt_http/alt_http.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -28,7 +27,7 @@ abstract class ExternalsModule {
       FlutterLocalNotificationsPlugin();
 
   @lazySingleton
-  http.Client get httpClient => io_client.IOClient(AltHttpClient()
+  http.Client get httpClient => io_client.IOClient(HttpClient()
     ..badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true));
 

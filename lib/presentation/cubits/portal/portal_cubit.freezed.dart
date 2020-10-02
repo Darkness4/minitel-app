@@ -9,6 +9,7 @@ part of 'portal_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PortalStateTearOff {
   const _$PortalStateTearOff();
 
@@ -41,9 +42,11 @@ class _$PortalStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PortalState = _$PortalStateTearOff();
 
+/// @nodoc
 mixin _$PortalState {
   bool get rememberMe;
   bool get autoLogin;
@@ -62,6 +65,7 @@ mixin _$PortalState {
   $PortalStateCopyWith<PortalState> get copyWith;
 }
 
+/// @nodoc
 abstract class $PortalStateCopyWith<$Res> {
   factory $PortalStateCopyWith(
           PortalState value, $Res Function(PortalState) then) =
@@ -80,6 +84,7 @@ abstract class $PortalStateCopyWith<$Res> {
       bool hasAutoLogged});
 }
 
+/// @nodoc
 class _$PortalStateCopyWithImpl<$Res> implements $PortalStateCopyWith<$Res> {
   _$PortalStateCopyWithImpl(this._value, this._then);
 
@@ -124,6 +129,7 @@ class _$PortalStateCopyWithImpl<$Res> implements $PortalStateCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$PortalStateCopyWith<$Res>
     implements $PortalStateCopyWith<$Res> {
   factory _$PortalStateCopyWith(
@@ -144,6 +150,7 @@ abstract class _$PortalStateCopyWith<$Res>
       bool hasAutoLogged});
 }
 
+/// @nodoc
 class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
     implements _$PortalStateCopyWith<$Res> {
   __$PortalStateCopyWithImpl(
@@ -190,6 +197,7 @@ class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
   const _$_PortalState(
       {@required this.rememberMe,

@@ -9,6 +9,7 @@ part of 'notifications.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$NotificationSettingsTearOff {
   const _$NotificationSettingsTearOff();
 
@@ -25,9 +26,11 @@ class _$NotificationSettingsTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $NotificationSettings = _$NotificationSettingsTearOff();
 
+/// @nodoc
 mixin _$NotificationSettings {
   @nullable
   Duration get early;
@@ -39,6 +42,7 @@ mixin _$NotificationSettings {
   $NotificationSettingsCopyWith<NotificationSettings> get copyWith;
 }
 
+/// @nodoc
 abstract class $NotificationSettingsCopyWith<$Res> {
   factory $NotificationSettingsCopyWith(NotificationSettings value,
           $Res Function(NotificationSettings) then) =
@@ -49,6 +53,7 @@ abstract class $NotificationSettingsCopyWith<$Res> {
       @nullable bool enabled});
 }
 
+/// @nodoc
 class _$NotificationSettingsCopyWithImpl<$Res>
     implements $NotificationSettingsCopyWith<$Res> {
   _$NotificationSettingsCopyWithImpl(this._value, this._then);
@@ -71,6 +76,7 @@ class _$NotificationSettingsCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$NotificationSettingsCopyWith<$Res>
     implements $NotificationSettingsCopyWith<$Res> {
   factory _$NotificationSettingsCopyWith(_NotificationSettings value,
@@ -83,6 +89,7 @@ abstract class _$NotificationSettingsCopyWith<$Res>
       @nullable bool enabled});
 }
 
+/// @nodoc
 class __$NotificationSettingsCopyWithImpl<$Res>
     extends _$NotificationSettingsCopyWithImpl<$Res>
     implements _$NotificationSettingsCopyWith<$Res> {
@@ -107,6 +114,7 @@ class __$NotificationSettingsCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_NotificationSettings implements _NotificationSettings {
   const _$_NotificationSettings(
       {@nullable this.early = const Duration(minutes: 10),

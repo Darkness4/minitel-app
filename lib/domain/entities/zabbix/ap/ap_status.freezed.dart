@@ -9,6 +9,7 @@ part of 'ap_status.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$APStatusTearOff {
   const _$APStatusTearOff();
 
@@ -31,9 +32,11 @@ class _$APStatusTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $APStatus = _$APStatusTearOff();
 
+/// @nodoc
 mixin _$APStatus {
   @nullable
   String get hostname;
@@ -51,6 +54,7 @@ mixin _$APStatus {
   $APStatusCopyWith<APStatus> get copyWith;
 }
 
+/// @nodoc
 abstract class $APStatusCopyWith<$Res> {
   factory $APStatusCopyWith(APStatus value, $Res Function(APStatus) then) =
       _$APStatusCopyWithImpl<$Res>;
@@ -63,6 +67,7 @@ abstract class $APStatusCopyWith<$Res> {
       @nullable int snmpAvailable});
 }
 
+/// @nodoc
 class _$APStatusCopyWithImpl<$Res> implements $APStatusCopyWith<$Res> {
   _$APStatusCopyWithImpl(this._value, this._then);
 
@@ -96,6 +101,7 @@ class _$APStatusCopyWithImpl<$Res> implements $APStatusCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$APStatusCopyWith<$Res> implements $APStatusCopyWith<$Res> {
   factory _$APStatusCopyWith(_APStatus value, $Res Function(_APStatus) then) =
       __$APStatusCopyWithImpl<$Res>;
@@ -109,6 +115,7 @@ abstract class _$APStatusCopyWith<$Res> implements $APStatusCopyWith<$Res> {
       @nullable int snmpAvailable});
 }
 
+/// @nodoc
 class __$APStatusCopyWithImpl<$Res> extends _$APStatusCopyWithImpl<$Res>
     implements _$APStatusCopyWith<$Res> {
   __$APStatusCopyWithImpl(_APStatus _value, $Res Function(_APStatus) _then)
@@ -143,6 +150,7 @@ class __$APStatusCopyWithImpl<$Res> extends _$APStatusCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_APStatus implements _APStatus {
   const _$_APStatus(
       {@required @nullable this.hostname,

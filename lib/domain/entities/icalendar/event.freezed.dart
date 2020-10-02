@@ -9,6 +9,7 @@ part of 'event.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$EventTearOff {
   const _$EventTearOff();
 
@@ -33,9 +34,11 @@ class _$EventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $Event = _$EventTearOff();
 
+/// @nodoc
 mixin _$Event {
   @nullable
   DateTime get dtend;
@@ -55,6 +58,7 @@ mixin _$Event {
   $EventCopyWith<Event> get copyWith;
 }
 
+/// @nodoc
 abstract class $EventCopyWith<$Res> {
   factory $EventCopyWith(Event value, $Res Function(Event) then) =
       _$EventCopyWithImpl<$Res>;
@@ -68,6 +72,7 @@ abstract class $EventCopyWith<$Res> {
       @nullable DateTime dtstart});
 }
 
+/// @nodoc
 class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
   _$EventCopyWithImpl(this._value, this._then);
 
@@ -98,6 +103,7 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
   factory _$EventCopyWith(_Event value, $Res Function(_Event) then) =
       __$EventCopyWithImpl<$Res>;
@@ -112,6 +118,7 @@ abstract class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       @nullable DateTime dtstart});
 }
 
+/// @nodoc
 class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
     implements _$EventCopyWith<$Res> {
   __$EventCopyWithImpl(_Event _value, $Res Function(_Event) _then)
@@ -143,6 +150,7 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_Event with DiagnosticableTreeMixin implements _Event {
   const _$_Event(
       {@required @nullable this.dtend,

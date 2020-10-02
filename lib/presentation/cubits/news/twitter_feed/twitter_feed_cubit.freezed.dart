@@ -9,6 +9,7 @@ part of 'twitter_feed_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$TwitterFeedStateTearOff {
   const _$TwitterFeedStateTearOff();
 
@@ -37,9 +38,11 @@ class _$TwitterFeedStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $TwitterFeedState = _$TwitterFeedStateTearOff();
 
+/// @nodoc
 mixin _$TwitterFeedState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$TwitterFeedState {
   });
 }
 
+/// @nodoc
 abstract class $TwitterFeedStateCopyWith<$Res> {
   factory $TwitterFeedStateCopyWith(
           TwitterFeedState value, $Res Function(TwitterFeedState) then) =
       _$TwitterFeedStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$TwitterFeedStateCopyWithImpl<$Res>
     implements $TwitterFeedStateCopyWith<$Res> {
   _$TwitterFeedStateCopyWithImpl(this._value, this._then);
@@ -88,12 +93,14 @@ class _$TwitterFeedStateCopyWithImpl<$Res>
   final $Res Function(TwitterFeedState) _then;
 }
 
+/// @nodoc
 abstract class $TwitterFeedStateInitialCopyWith<$Res> {
   factory $TwitterFeedStateInitialCopyWith(TwitterFeedStateInitial value,
           $Res Function(TwitterFeedStateInitial) then) =
       _$TwitterFeedStateInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$TwitterFeedStateInitialCopyWithImpl<$Res>
     extends _$TwitterFeedStateCopyWithImpl<$Res>
     implements $TwitterFeedStateInitialCopyWith<$Res> {
@@ -105,6 +112,7 @@ class _$TwitterFeedStateInitialCopyWithImpl<$Res>
   TwitterFeedStateInitial get _value => super._value as TwitterFeedStateInitial;
 }
 
+/// @nodoc
 class _$TwitterFeedStateInitial
     with DiagnosticableTreeMixin
     implements TwitterFeedStateInitial {
@@ -196,12 +204,14 @@ abstract class TwitterFeedStateInitial implements TwitterFeedState {
   const factory TwitterFeedStateInitial() = _$TwitterFeedStateInitial;
 }
 
+/// @nodoc
 abstract class $TwitterFeedStateLoadingCopyWith<$Res> {
   factory $TwitterFeedStateLoadingCopyWith(TwitterFeedStateLoading value,
           $Res Function(TwitterFeedStateLoading) then) =
       _$TwitterFeedStateLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$TwitterFeedStateLoadingCopyWithImpl<$Res>
     extends _$TwitterFeedStateCopyWithImpl<$Res>
     implements $TwitterFeedStateLoadingCopyWith<$Res> {
@@ -213,6 +223,7 @@ class _$TwitterFeedStateLoadingCopyWithImpl<$Res>
   TwitterFeedStateLoading get _value => super._value as TwitterFeedStateLoading;
 }
 
+/// @nodoc
 class _$TwitterFeedStateLoading
     with DiagnosticableTreeMixin
     implements TwitterFeedStateLoading {
@@ -304,6 +315,7 @@ abstract class TwitterFeedStateLoading implements TwitterFeedState {
   const factory TwitterFeedStateLoading() = _$TwitterFeedStateLoading;
 }
 
+/// @nodoc
 abstract class $TwitterFeedStateLoadedCopyWith<$Res> {
   factory $TwitterFeedStateLoadedCopyWith(TwitterFeedStateLoaded value,
           $Res Function(TwitterFeedStateLoaded) then) =
@@ -311,6 +323,7 @@ abstract class $TwitterFeedStateLoadedCopyWith<$Res> {
   $Res call({List<Post> feed});
 }
 
+/// @nodoc
 class _$TwitterFeedStateLoadedCopyWithImpl<$Res>
     extends _$TwitterFeedStateCopyWithImpl<$Res>
     implements $TwitterFeedStateLoadedCopyWith<$Res> {
@@ -331,6 +344,7 @@ class _$TwitterFeedStateLoadedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$TwitterFeedStateLoaded
     with DiagnosticableTreeMixin
     implements TwitterFeedStateLoaded {
@@ -440,6 +454,7 @@ abstract class TwitterFeedStateLoaded implements TwitterFeedState {
   $TwitterFeedStateLoadedCopyWith<TwitterFeedStateLoaded> get copyWith;
 }
 
+/// @nodoc
 abstract class $TwitterFeedStateErrorCopyWith<$Res> {
   factory $TwitterFeedStateErrorCopyWith(TwitterFeedStateError value,
           $Res Function(TwitterFeedStateError) then) =
@@ -447,6 +462,7 @@ abstract class $TwitterFeedStateErrorCopyWith<$Res> {
   $Res call({Exception error});
 }
 
+/// @nodoc
 class _$TwitterFeedStateErrorCopyWithImpl<$Res>
     extends _$TwitterFeedStateCopyWithImpl<$Res>
     implements $TwitterFeedStateErrorCopyWith<$Res> {
@@ -467,6 +483,7 @@ class _$TwitterFeedStateErrorCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$TwitterFeedStateError
     with DiagnosticableTreeMixin
     implements TwitterFeedStateError {

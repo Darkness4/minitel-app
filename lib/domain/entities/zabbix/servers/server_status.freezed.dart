@@ -9,6 +9,7 @@ part of 'server_status.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ServerStatusTearOff {
   const _$ServerStatusTearOff();
 
@@ -23,9 +24,11 @@ class _$ServerStatusTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ServerStatus = _$ServerStatusTearOff();
 
+/// @nodoc
 mixin _$ServerStatus {
   @nullable
   double get pingResponseTime;
@@ -35,6 +38,7 @@ mixin _$ServerStatus {
   $ServerStatusCopyWith<ServerStatus> get copyWith;
 }
 
+/// @nodoc
 abstract class $ServerStatusCopyWith<$Res> {
   factory $ServerStatusCopyWith(
           ServerStatus value, $Res Function(ServerStatus) then) =
@@ -42,6 +46,7 @@ abstract class $ServerStatusCopyWith<$Res> {
   $Res call({@nullable double pingResponseTime, @nullable int icmpAvailable});
 }
 
+/// @nodoc
 class _$ServerStatusCopyWithImpl<$Res> implements $ServerStatusCopyWith<$Res> {
   _$ServerStatusCopyWithImpl(this._value, this._then);
 
@@ -65,6 +70,7 @@ class _$ServerStatusCopyWithImpl<$Res> implements $ServerStatusCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$ServerStatusCopyWith<$Res>
     implements $ServerStatusCopyWith<$Res> {
   factory _$ServerStatusCopyWith(
@@ -74,6 +80,7 @@ abstract class _$ServerStatusCopyWith<$Res>
   $Res call({@nullable double pingResponseTime, @nullable int icmpAvailable});
 }
 
+/// @nodoc
 class __$ServerStatusCopyWithImpl<$Res> extends _$ServerStatusCopyWithImpl<$Res>
     implements _$ServerStatusCopyWith<$Res> {
   __$ServerStatusCopyWithImpl(
@@ -99,6 +106,7 @@ class __$ServerStatusCopyWithImpl<$Res> extends _$ServerStatusCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_ServerStatus implements _ServerStatus {
   const _$_ServerStatus(
       {@required @nullable this.pingResponseTime,

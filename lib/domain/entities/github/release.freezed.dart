@@ -12,6 +12,7 @@ GithubRelease _$GithubReleaseFromJson(Map<String, dynamic> json) {
   return _GithubRelease.fromJson(json);
 }
 
+/// @nodoc
 class _$GithubReleaseTearOff {
   const _$GithubReleaseTearOff();
 
@@ -56,11 +57,18 @@ class _$GithubReleaseTearOff {
       assets: assets,
     );
   }
+
+// ignore: unused_element
+  GithubRelease fromJson(Map<String, Object> json) {
+    return GithubRelease.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $GithubRelease = _$GithubReleaseTearOff();
 
+/// @nodoc
 mixin _$GithubRelease {
   @nullable
   String get url;
@@ -103,6 +111,7 @@ mixin _$GithubRelease {
   $GithubReleaseCopyWith<GithubRelease> get copyWith;
 }
 
+/// @nodoc
 abstract class $GithubReleaseCopyWith<$Res> {
   factory $GithubReleaseCopyWith(
           GithubRelease value, $Res Function(GithubRelease) then) =
@@ -130,6 +139,7 @@ abstract class $GithubReleaseCopyWith<$Res> {
   $GithubUserCopyWith<$Res> get author;
 }
 
+/// @nodoc
 class _$GithubReleaseCopyWithImpl<$Res>
     implements $GithubReleaseCopyWith<$Res> {
   _$GithubReleaseCopyWithImpl(this._value, this._then);
@@ -202,6 +212,7 @@ class _$GithubReleaseCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$GithubReleaseCopyWith<$Res>
     implements $GithubReleaseCopyWith<$Res> {
   factory _$GithubReleaseCopyWith(
@@ -232,6 +243,7 @@ abstract class _$GithubReleaseCopyWith<$Res>
   $GithubUserCopyWith<$Res> get author;
 }
 
+/// @nodoc
 class __$GithubReleaseCopyWithImpl<$Res>
     extends _$GithubReleaseCopyWithImpl<$Res>
     implements _$GithubReleaseCopyWith<$Res> {
@@ -297,6 +309,8 @@ class __$GithubReleaseCopyWithImpl<$Res>
 }
 
 @JsonSerializable(explicitToJson: true)
+
+/// @nodoc
 class _$_GithubRelease implements _GithubRelease {
   const _$_GithubRelease(
       {@required @nullable this.url,

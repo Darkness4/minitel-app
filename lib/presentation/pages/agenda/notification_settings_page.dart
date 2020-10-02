@@ -77,7 +77,7 @@ class _NotificationSettingsScreenState
                     Expanded(
                       child: TextField(
                         inputFormatters: <TextInputFormatter>[
-                          WhitelistingTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(2),
                           FilteringTextInputFormatter.singleLineFormatter,
                         ],
@@ -95,7 +95,7 @@ class _NotificationSettingsScreenState
                     Expanded(
                       child: TextField(
                         inputFormatters: <TextInputFormatter>[
-                          WhitelistingTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(3),
                           FilteringTextInputFormatter.singleLineFormatter,
                         ],

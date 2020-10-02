@@ -9,6 +9,7 @@ part of 'portal_login_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PortalLoginStateTearOff {
   const _$PortalLoginStateTearOff();
 
@@ -27,9 +28,11 @@ class _$PortalLoginStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PortalLoginState = _$PortalLoginStateTearOff();
 
+/// @nodoc
 mixin _$PortalLoginState {
   bool get isSubmitting;
   bool get isSuccess;
@@ -39,6 +42,7 @@ mixin _$PortalLoginState {
   $PortalLoginStateCopyWith<PortalLoginState> get copyWith;
 }
 
+/// @nodoc
 abstract class $PortalLoginStateCopyWith<$Res> {
   factory $PortalLoginStateCopyWith(
           PortalLoginState value, $Res Function(PortalLoginState) then) =
@@ -47,6 +51,7 @@ abstract class $PortalLoginStateCopyWith<$Res> {
       {bool isSubmitting, bool isSuccess, bool isFailure, Exception error});
 }
 
+/// @nodoc
 class _$PortalLoginStateCopyWithImpl<$Res>
     implements $PortalLoginStateCopyWith<$Res> {
   _$PortalLoginStateCopyWithImpl(this._value, this._then);
@@ -72,6 +77,7 @@ class _$PortalLoginStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$PortalLoginStateCopyWith<$Res>
     implements $PortalLoginStateCopyWith<$Res> {
   factory _$PortalLoginStateCopyWith(
@@ -82,6 +88,7 @@ abstract class _$PortalLoginStateCopyWith<$Res>
       {bool isSubmitting, bool isSuccess, bool isFailure, Exception error});
 }
 
+/// @nodoc
 class __$PortalLoginStateCopyWithImpl<$Res>
     extends _$PortalLoginStateCopyWithImpl<$Res>
     implements _$PortalLoginStateCopyWith<$Res> {
@@ -109,6 +116,7 @@ class __$PortalLoginStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_PortalLoginState
     with DiagnosticableTreeMixin
     implements _PortalLoginState {

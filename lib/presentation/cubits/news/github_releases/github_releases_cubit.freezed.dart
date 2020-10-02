@@ -9,6 +9,7 @@ part of 'github_releases_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$GithubReleasesStateTearOff {
   const _$GithubReleasesStateTearOff();
 
@@ -37,9 +38,11 @@ class _$GithubReleasesStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $GithubReleasesState = _$GithubReleasesStateTearOff();
 
+/// @nodoc
 mixin _$GithubReleasesState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -73,12 +76,14 @@ mixin _$GithubReleasesState {
   });
 }
 
+/// @nodoc
 abstract class $GithubReleasesStateCopyWith<$Res> {
   factory $GithubReleasesStateCopyWith(
           GithubReleasesState value, $Res Function(GithubReleasesState) then) =
       _$GithubReleasesStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$GithubReleasesStateCopyWithImpl<$Res>
     implements $GithubReleasesStateCopyWith<$Res> {
   _$GithubReleasesStateCopyWithImpl(this._value, this._then);
@@ -88,12 +93,14 @@ class _$GithubReleasesStateCopyWithImpl<$Res>
   final $Res Function(GithubReleasesState) _then;
 }
 
+/// @nodoc
 abstract class $GithubReleasesStateInitialCopyWith<$Res> {
   factory $GithubReleasesStateInitialCopyWith(GithubReleasesStateInitial value,
           $Res Function(GithubReleasesStateInitial) then) =
       _$GithubReleasesStateInitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$GithubReleasesStateInitialCopyWithImpl<$Res>
     extends _$GithubReleasesStateCopyWithImpl<$Res>
     implements $GithubReleasesStateInitialCopyWith<$Res> {
@@ -106,6 +113,7 @@ class _$GithubReleasesStateInitialCopyWithImpl<$Res>
       super._value as GithubReleasesStateInitial;
 }
 
+/// @nodoc
 class _$GithubReleasesStateInitial
     with DiagnosticableTreeMixin
     implements GithubReleasesStateInitial {
@@ -197,12 +205,14 @@ abstract class GithubReleasesStateInitial implements GithubReleasesState {
   const factory GithubReleasesStateInitial() = _$GithubReleasesStateInitial;
 }
 
+/// @nodoc
 abstract class $GithubReleasesStateLoadingCopyWith<$Res> {
   factory $GithubReleasesStateLoadingCopyWith(GithubReleasesStateLoading value,
           $Res Function(GithubReleasesStateLoading) then) =
       _$GithubReleasesStateLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$GithubReleasesStateLoadingCopyWithImpl<$Res>
     extends _$GithubReleasesStateCopyWithImpl<$Res>
     implements $GithubReleasesStateLoadingCopyWith<$Res> {
@@ -215,6 +225,7 @@ class _$GithubReleasesStateLoadingCopyWithImpl<$Res>
       super._value as GithubReleasesStateLoading;
 }
 
+/// @nodoc
 class _$GithubReleasesStateLoading
     with DiagnosticableTreeMixin
     implements GithubReleasesStateLoading {
@@ -306,6 +317,7 @@ abstract class GithubReleasesStateLoading implements GithubReleasesState {
   const factory GithubReleasesStateLoading() = _$GithubReleasesStateLoading;
 }
 
+/// @nodoc
 abstract class $GithubReleasesStateLoadedCopyWith<$Res> {
   factory $GithubReleasesStateLoadedCopyWith(GithubReleasesStateLoaded value,
           $Res Function(GithubReleasesStateLoaded) then) =
@@ -313,6 +325,7 @@ abstract class $GithubReleasesStateLoadedCopyWith<$Res> {
   $Res call({List<GithubRelease> releases});
 }
 
+/// @nodoc
 class _$GithubReleasesStateLoadedCopyWithImpl<$Res>
     extends _$GithubReleasesStateCopyWithImpl<$Res>
     implements $GithubReleasesStateLoadedCopyWith<$Res> {
@@ -334,6 +347,7 @@ class _$GithubReleasesStateLoadedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$GithubReleasesStateLoaded
     with DiagnosticableTreeMixin
     implements GithubReleasesStateLoaded {
@@ -444,6 +458,7 @@ abstract class GithubReleasesStateLoaded implements GithubReleasesState {
   $GithubReleasesStateLoadedCopyWith<GithubReleasesStateLoaded> get copyWith;
 }
 
+/// @nodoc
 abstract class $GithubReleasesStateErrorCopyWith<$Res> {
   factory $GithubReleasesStateErrorCopyWith(GithubReleasesStateError value,
           $Res Function(GithubReleasesStateError) then) =
@@ -451,6 +466,7 @@ abstract class $GithubReleasesStateErrorCopyWith<$Res> {
   $Res call({Exception error});
 }
 
+/// @nodoc
 class _$GithubReleasesStateErrorCopyWithImpl<$Res>
     extends _$GithubReleasesStateCopyWithImpl<$Res>
     implements $GithubReleasesStateErrorCopyWith<$Res> {
@@ -472,6 +488,7 @@ class _$GithubReleasesStateErrorCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$GithubReleasesStateError
     with DiagnosticableTreeMixin
     implements GithubReleasesStateError {

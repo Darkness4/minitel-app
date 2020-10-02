@@ -12,6 +12,7 @@ GithubUser _$GithubUserFromJson(Map<String, dynamic> json) {
   return _GithubUser.fromJson(json);
 }
 
+/// @nodoc
 class _$GithubUserTearOff {
   const _$GithubUserTearOff();
 
@@ -82,11 +83,18 @@ class _$GithubUserTearOff {
       updated_at: updated_at,
     );
   }
+
+// ignore: unused_element
+  GithubUser fromJson(Map<String, Object> json) {
+    return GithubUser.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $GithubUser = _$GithubUserTearOff();
 
+/// @nodoc
 mixin _$GithubUser {
   @nullable
   String get login;
@@ -155,6 +163,7 @@ mixin _$GithubUser {
   $GithubUserCopyWith<GithubUser> get copyWith;
 }
 
+/// @nodoc
 abstract class $GithubUserCopyWith<$Res> {
   factory $GithubUserCopyWith(
           GithubUser value, $Res Function(GithubUser) then) =
@@ -193,6 +202,7 @@ abstract class $GithubUserCopyWith<$Res> {
       @nullable DateTime updated_at});
 }
 
+/// @nodoc
 class _$GithubUserCopyWithImpl<$Res> implements $GithubUserCopyWith<$Res> {
   _$GithubUserCopyWithImpl(this._value, this._then);
 
@@ -289,6 +299,7 @@ class _$GithubUserCopyWithImpl<$Res> implements $GithubUserCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$GithubUserCopyWith<$Res> implements $GithubUserCopyWith<$Res> {
   factory _$GithubUserCopyWith(
           _GithubUser value, $Res Function(_GithubUser) then) =
@@ -328,6 +339,7 @@ abstract class _$GithubUserCopyWith<$Res> implements $GithubUserCopyWith<$Res> {
       @nullable DateTime updated_at});
 }
 
+/// @nodoc
 class __$GithubUserCopyWithImpl<$Res> extends _$GithubUserCopyWithImpl<$Res>
     implements _$GithubUserCopyWith<$Res> {
   __$GithubUserCopyWithImpl(
@@ -427,6 +439,8 @@ class __$GithubUserCopyWithImpl<$Res> extends _$GithubUserCopyWithImpl<$Res>
 }
 
 @JsonSerializable(explicitToJson: true)
+
+/// @nodoc
 class _$_GithubUser implements _GithubUser {
   const _$_GithubUser(
       {@required @nullable this.login,
