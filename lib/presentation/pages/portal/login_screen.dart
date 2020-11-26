@@ -45,9 +45,9 @@ class _AutoLoginSelectorWidget extends StatelessWidget {
 
   void _onAutoLoginChanged(BuildContext context, bool autoLogin) {
     if (autoLogin) {
-      context.bloc<PortalCubit>().rememberMeChanged(true);
+      context.read<PortalCubit>().rememberMeChanged(true);
     }
-    context.bloc<PortalCubit>().autoLoginChanged(autoLogin);
+    context.read<PortalCubit>().autoLoginChanged(autoLogin);
   }
 }
 
@@ -63,14 +63,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return RefreshIndicator(
       onRefresh: () async {
         final portalState = _portalCubit.state;
-        context.bloc<ImprimanteStatusCubit>().refresh();
-        context.bloc<PortailEmseStatusCubit>().refresh();
+        context.read<ImprimanteStatusCubit>().refresh();
+        context.read<PortailEmseStatusCubit>().refresh();
 
         return Future.wait([
           context
-              .bloc<StormshieldStatusCubit>()
+              .read<StormshieldStatusCubit>()
               .refresh(portalState.selectedUrl),
-          context.bloc<CalendarStatusCubit>().refresh(),
+          context.read<CalendarStatusCubit>().refresh(),
         ]);
       },
       child: ListView(
@@ -185,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _portalCubit = context.bloc<PortalCubit>();
+    _portalCubit = context.read<PortalCubit>();
 
     // Remember credentials
     _portalCubit.loadSettings();
@@ -232,9 +232,9 @@ class _RememberMeSelectorWidget extends StatelessWidget {
 
   void _onRememberMeChanged(BuildContext context, bool rememberMe) {
     if (!rememberMe) {
-      context.bloc<PortalCubit>().autoLoginChanged(false);
+      context.read<PortalCubit>().autoLoginChanged(false);
     }
-    context.bloc<PortalCubit>().rememberMeChanged(rememberMe);
+    context.read<PortalCubit>().rememberMeChanged(rememberMe);
   }
 }
 
@@ -270,7 +270,7 @@ class _TimeSelectorWidget extends StatelessWidget {
   }
 
   void _onSelectedTimeChanged(BuildContext context, String selectedTime) {
-    context.bloc<PortalCubit>().selectedTimeChanged(selectedTime);
+    context.read<PortalCubit>().selectedTimeChanged(selectedTime);
   }
 }
 
@@ -304,6 +304,6 @@ class _UrlSelectorWidget extends StatelessWidget {
   }
 
   void _onSelectedUrlChanged(BuildContext context, String selectedUrl) {
-    context.bloc<PortalCubit>().selectedUrlChanged(selectedUrl);
+    context.read<PortalCubit>().selectedUrlChanged(selectedUrl);
   }
 }

@@ -16,7 +16,6 @@ void main() {
   MockStormshieldRemoteDataSource mockStormshieldRemoteDataSource;
   MockInternetAddressManager mockInternetAddressManager;
   MockProcessManager mockProcessManager;
-  MockConnectivity mockConnectivity;
   DiagnosisDataSource dataSource;
   Diagnosis mockDiagnosis;
 
@@ -24,13 +23,11 @@ void main() {
     mockStormshieldRemoteDataSource = MockStormshieldRemoteDataSource();
     mockInternetAddressManager = MockInternetAddressManager();
     mockProcessManager = MockProcessManager();
-    mockConnectivity = MockConnectivity();
     mockDiagnosis = Diagnosis();
     dataSource = DiagnosisDataSourceImpl(
       diagnosis: mockDiagnosis,
       internetAddressManager: mockInternetAddressManager,
       processManager: mockProcessManager,
-      connectivity: mockConnectivity,
       stormshieldRemoteDataSource: mockStormshieldRemoteDataSource,
     );
   });
@@ -47,7 +44,6 @@ void main() {
             .thenAnswer((_) async => 'MOCK');
         when(mockInternetAddressManager.lookup(any))
             .thenAnswer((_) async => [tIpAddress]);
-        when(mockConnectivity.getWifiIP()).thenAnswer((_) async => '0.1.0.1');
         // act
         final result = dataSource.diagnose();
         // assert
@@ -55,7 +51,6 @@ void main() {
             .fetchStatus(MyIPAdresses.gatewayIP));
         verify(mockStormshieldRemoteDataSource
             .fetchStatus(MyIPAdresses.stormshield));
-        expect(await result[DiagnosisKeys.ip].future, equals('0.1.0.1'));
         expect(await result[DiagnosisKeys.ipAddr].future, equals('MOCK'));
         expect(await result[DiagnosisKeys.httpResponseStormshieldPublic].future,
             equals('MOCK'));
@@ -76,7 +71,6 @@ void main() {
             .thenAnswer((_) async => 'MOCK');
         when(mockInternetAddressManager.lookup(any))
             .thenAnswer((_) async => throw const SocketException('MOCK'));
-        when(mockConnectivity.getWifiIP()).thenAnswer((_) async => '0.1.0.1');
         // act
         final result = dataSource.diagnose();
         // assert
@@ -86,7 +80,6 @@ void main() {
             .fetchStatus(MyIPAdresses.stormshield));
         expect(
             await result[DiagnosisKeys.nsLookupEmse].future, contains('MOCK'));
-        expect(await result[DiagnosisKeys.ip].future, equals('0.1.0.1'));
         expect(await result[DiagnosisKeys.ipAddr].future, equals('MOCK'));
         expect(await result[DiagnosisKeys.httpResponseStormshieldPublic].future,
             equals('MOCK'));

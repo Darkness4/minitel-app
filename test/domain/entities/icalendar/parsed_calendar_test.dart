@@ -1,15 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
+import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar_builder.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/timezone.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() {
+  tz.initializeTimeZones();
+
   group('parse', () {
     final tEventModel = Event(
-      dtend: DateTime.parse('20200127T100000'),
-      dtstamp: DateTime.parse('20200127T100000'),
+      dtend: tz.TZDateTime.parse(
+          tz.getLocation('Europe/Paris'), '20200127T100000'),
+      dtstamp: tz.TZDateTime.parse(
+          tz.getLocation('Europe/Paris'), '20200127T100000'),
       description: 'Description',
-      dtstart: DateTime.parse('20200127T100000'),
+      dtstart: tz.TZDateTime.parse(
+          tz.getLocation('Europe/Paris'), '20200127T100000'),
       location: 'Location',
       summary: 'Summary',
       uid: 'Uid',
@@ -32,7 +40,7 @@ void main() {
           tzOffsetFrom: '+0200',
           tzOffsetTo: '+0100',
         ),
-        tzid: 'Europe/Paris',
+        tzid: tz.getLocation('Europe/Paris'),
       ),
       version: '2.0',
       events: [
@@ -79,51 +87,12 @@ END:VEVENT
 END:VCALENDAR
 ''';
         // act
-        final result = await ParsedCalendar.parse(Stream.value(value));
+        final builder = ParsedCalendarBuilder();
+        await builder.fromStream(Stream.value(value));
+        final result = builder.build();
         // assert
         expect(result, equals(tParsedCalendarModel));
       },
     );
-  });
-  group('sortedEvents', () {
-    test('should return a sorted by datetime events', () {
-      // Arrange
-      final tDateTimeEarliest = DateTime.now();
-      final tDateTimeLatest = DateTime.now().add(const Duration(days: 5));
-      const tTimezone = Timezone(
-        daylight: TimezoneDescription(),
-        standard: TimezoneDescription(),
-        tzid: 'tzid',
-      );
-      final tEventEarly = Event(
-        description: 'description',
-        dtend: tDateTimeEarliest,
-        dtstamp: tDateTimeEarliest,
-        dtstart: tDateTimeEarliest,
-        location: 'location',
-        summary: 'summary',
-        uid: '123',
-      );
-      final tEventLate = Event(
-        description: 'description',
-        dtend: tDateTimeLatest,
-        dtstamp: tDateTimeLatest,
-        dtstart: tDateTimeLatest,
-        location: 'location',
-        summary: 'summary',
-        uid: '123',
-      );
-      final tParsedCalendar = ParsedCalendar(
-        calscale: 'calscale',
-        events: [tEventLate, tEventEarly],
-        prodID: 'prodID',
-        timezone: tTimezone,
-        version: 'version',
-      );
-      // Act
-      final result = tParsedCalendar.sortedByDTStart.toList();
-      // Assert
-      expect(result, orderedEquals(<Event>[tEventEarly, tEventLate]));
-    });
   });
 }

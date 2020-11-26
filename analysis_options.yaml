@@ -7,6 +7,10 @@ analyzer:
   language:
     strict-inference: true
     strict-raw-types: true
+  exclude:
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
+    - '**/*.config.dart'
 
 # All rules: https://github.com/dart-lang/linter/blob/master/example/all.yaml
 linter:

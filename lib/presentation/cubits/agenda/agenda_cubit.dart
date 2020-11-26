@@ -6,10 +6,10 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
-import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
+import 'package:dartx/dartx.dart';
 
 part 'agenda_cubit.freezed.dart';
 part 'agenda_state.dart';
@@ -50,7 +50,8 @@ class AgendaCubit extends Cubit<AgendaState> {
 
       await flutterLocalNotificationsPlugin.cancelAll();
 
-      final events = parsedCalendar.sortedByDTStart
+      final events = parsedCalendar.events
+          .sortedBy((e) => e.dtstart)
           .where((event) => event.dtstart.isAfter(DateTime.now()))
           .toList();
 
@@ -62,6 +63,7 @@ class AgendaCubit extends Cubit<AgendaState> {
               notificationSettings: notificationSettings,
               notificationDetails: notificationDetails,
             )));
+        print('Scheduled ${events.length} !');
       }
     } on Exception catch (e) {
       emit(AgendaState.error(e));

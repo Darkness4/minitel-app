@@ -3,30 +3,31 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
+import 'package:timezone/timezone.dart';
 
 part 'event.freezed.dart';
 
 @freezed
 abstract class Event with _$Event {
   const factory Event({
-    @required @nullable DateTime dtend,
+    @required @nullable TZDateTime dtend,
     @required @nullable String uid,
-    @required @nullable DateTime dtstamp,
+    @required @nullable TZDateTime dtstamp,
     @required @nullable String location,
     @required @nullable String description,
     @required @nullable String summary,
-    @required @nullable DateTime dtstart,
+    @required @nullable TZDateTime dtstart,
   }) = _Event;
 
-  factory Event.fromMap(Map<String, dynamic> json) {
+  factory Event.fromMap(Map<String, dynamic> json, Location location) {
     return Event(
-      dtend: DateTime.parse(json['DTEND'] as String),
+      dtend: TZDateTime.parse(location, json['DTEND'] as String),
       uid: json['UID'] as String,
-      dtstamp: DateTime.parse(json['DTSTAMP'] as String),
+      dtstamp: TZDateTime.parse(location, json['DTSTAMP'] as String),
       location: json['LOCATION'] as String,
       description: json['DESCRIPTION'] as String,
       summary: json['SUMMARY'] as String,
-      dtstart: DateTime.parse(json['DTSTART'] as String),
+      dtstart: TZDateTime.parse(location, json['DTSTART'] as String),
     );
   }
 }
@@ -36,7 +37,7 @@ extension EventUtils on Event {
     @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
     @required NotificationSettings notificationSettings,
     @required NotificationDetails notificationDetails,
-  }) {
+  }) async {
     final dt = dtstart;
     final now = DateTime.now();
 
@@ -52,20 +53,17 @@ extension EventUtils on Event {
           '$dtend';
       final scheduleDate = dt.subtract(notificationSettings.early);
 
-      return flutterLocalNotificationsPlugin.schedule(
-        id,
-        summary,
-        body,
-        scheduleDate,
-        notificationDetails,
-        payload: '$summary;'
-            '$description\n'
-            '$location\n'
-            '$dtstart'
-            ' - '
-            '$dtend',
-      );
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+          id, summary, body, scheduleDate, notificationDetails,
+          payload: '$summary;'
+              '$description\n'
+              '$location\n'
+              '$dtstart'
+              ' - '
+              '$dtend',
+          androidAllowWhileIdle: true,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime);
     }
-    return Future.value();
   }
 }

@@ -5,7 +5,7 @@ repository: https://github.com/Darkness4/minitel-app
 documentation: https://github.com/Darkness4/minitel-app/wiki
 issue_tracker: https://github.com/Darkness4/minitel-app/issues
 author: Nguyen Marc <nguyen_marc@live.fr>
-version: 2.1.6+24
+version: 2.2.0+25
 
 environment:
   sdk: '>=2.9.0 <3.0.0'
@@ -18,29 +18,30 @@ dependencies:
   webview_flutter:
     git:
       url: git://github.com/Darkness4/plugins.git
-      ref: 444290abf05b5ca7d51318442d82b72ece347ea7
+      ref: 3f3ac3fb1f0114b1f5fd7cfe5a16238ca10bc843
       path: packages/webview_flutter
-  connectivity: '>=0.4.9 <2.0.0'
+  connectivity: ^2.0.2
   share: '>=0.6.4+3 <2.0.0'
   package_info: '>=0.4.1 <2.0.0'
   shared_preferences: '>=0.5.8 <2.0.0'
-  url_launcher: ^5.5.2
-  path_provider: ^1.6.14
+  url_launcher: ^5.7.10
+  path_provider: ^1.6.24
   sticky_headers: ^0.1.8+1 # Flutter Community
-  flutter_local_notifications: ^1.4.4+4 # Michael Bui
+  flutter_local_notifications: ^3.0.1+6 # Michael Bui
   intl: ^0.16.1
   ntlm: ^1.3.0 # MrBBot
   http: ^0.12.2 # Dart Team
-  flutter_secure_storage: ^3.3.3 # German Saprykin
+  flutter_secure_storage: ^3.3.5 # German Saprykin
   freezed_annotation: ^0.12.0
-  get_it: ^4.0.0 # fluttercommunity.dev
-  flutter_markdown: ^0.4.4
-  google_fonts: ^1.1.0 # material.io
+  get_it: ^5.0.1 # fluttercommunity.dev
+  flutter_markdown: ^0.5.1
+  google_fonts: ^1.1.1 # material.io
   rxdart: ^0.24.1
   dartx: ^0.5.0
-  injectable: ^1.0.4
-  flutter_bloc: ^6.0.5
+  injectable: ^1.0.5
+  flutter_bloc: ^6.1.1
   bloc:
+  timezone:
 
 dev_dependencies:
   flutter_test:
@@ -49,14 +50,14 @@ dev_dependencies:
     sdk: flutter
   test:
   matcher:
-  analyzer: '0.39.15'
-  build_runner: ^1.10.0
-  mockito: ^4.1.1
-  flutter_launcher_icons: ^0.8.0
+  analyzer: ^0.39.17
+  build_runner: ^1.10.2
+  mockito: ^4.1.3
+  flutter_launcher_icons: ^0.8.1
   intl_translation: ^0.17.10+1
-  freezed: ^0.12.1
+  freezed: ^0.12.2
   json_serializable: ^3.4.1
-  injectable_generator: ^1.0.4
+  injectable_generator: ^1.0.5
   pedantic: ^1.9.0
 
 flutter_icons:

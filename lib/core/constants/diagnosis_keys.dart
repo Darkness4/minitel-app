@@ -1,5 +1,4 @@
 class DiagnosisKeys {
-  static const String ip = 'IP';
   static const String ipAddr = 'ip addr';
   static const String arp = 'Address Resolution Protocol (SU + Busy)';
   static const String tracerouteGoogle = 'Traceroute Google (Superuser)';

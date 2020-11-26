@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
+import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar_builder.dart';
 
 abstract class ICalendarLocalDataSource {
   /// Save iCalendar to cache
@@ -46,7 +47,9 @@ class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
 }
 
 extension on Stream<String> {
-  Future<ParsedCalendar> toParsedCalendar() {
-    return ParsedCalendar.parse(this);
+  Future<ParsedCalendar> toParsedCalendar() async {
+    final builder = ParsedCalendarBuilder();
+    await builder.fromStream(this);
+    return builder.build();
   }
 }

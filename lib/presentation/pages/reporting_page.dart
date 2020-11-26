@@ -116,7 +116,7 @@ class ReportingPageState extends State<ReportingPage>
               _animationController.reverse();
             }
 
-            context.bloc<DiagnosisCubit>().diagnosisRun();
+            context.read<DiagnosisCubit>().diagnosisRun();
             _percentageDiagnoseProgress.value = 0;
             _timer?.cancel();
             _timer = Timer.periodic(
@@ -201,10 +201,10 @@ class ReportingPageState extends State<ReportingPage>
         end: 0.5,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.bloc<ReportStatusCubit>().state;
-          final diagnosisState = context.bloc<DiagnosisCubit>().state;
+          final reportStatusState = context.read<ReportStatusCubit>().state;
+          final diagnosisState = context.read<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.bloc<ReportCubit>().reportToMail(
+            context.read<ReportCubit>().reportToMail(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,
@@ -240,10 +240,10 @@ class ReportingPageState extends State<ReportingPage>
         end: 0.25,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.bloc<ReportStatusCubit>().state;
-          final diagnosisState = context.bloc<DiagnosisCubit>().state;
+          final reportStatusState = context.read<ReportStatusCubit>().state;
+          final diagnosisState = context.read<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.bloc<ReportCubit>().reportToSlack(
+            context.read<ReportCubit>().reportToSlack(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,
@@ -266,10 +266,10 @@ class ReportingPageState extends State<ReportingPage>
         AppLoc.of(context).reporting.share,
         controller: _animationController,
         onPressed: () {
-          final reportStatusState = context.bloc<ReportStatusCubit>().state;
-          final diagnosisState = context.bloc<DiagnosisCubit>().state;
+          final reportStatusState = context.read<ReportStatusCubit>().state;
+          final diagnosisState = context.read<DiagnosisCubit>().state;
           if (diagnosisState is DiagnosisLoaded && reportStatusState.isValid) {
-            context.bloc<ReportCubit>().reportToShare(
+            context.read<ReportCubit>().reportToShare(
                   description: reportStatusState.description,
                   name: reportStatusState.name,
                   room: reportStatusState.room,

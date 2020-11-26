@@ -134,7 +134,7 @@ class _NotificationSettingsScreenState
   void initState() {
     super.initState();
 
-    _notificationSettingsCubit = context.bloc<NotificationSettingsCubit>();
+    _notificationSettingsCubit = context.read<NotificationSettingsCubit>();
 
     _rangeTextController = TextEditingController();
     _earlyTextController = TextEditingController();

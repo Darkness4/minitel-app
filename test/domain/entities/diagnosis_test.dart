@@ -8,8 +8,7 @@ void main() {
       'should return a valid String',
       () async {
         // arrange
-        final diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
+        final diagnosis = Diagnosis();
         // act
         final result = await diagnosis.getReport();
         // assert
@@ -17,10 +16,6 @@ void main() {
           result,
           equals(
             '''
----IP---
-testValue
----END IP---
-
 ---ip addr---
 ---END ip addr---
 
@@ -88,9 +83,9 @@ testValue
       () async {
         // arrange
         final diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
+          ..[DiagnosisKeys.arp].complete(Future.value('testValue'));
         // act
-        final result = await diagnosis[DiagnosisKeys.ip].future;
+        final result = await diagnosis[DiagnosisKeys.arp].future;
         // assert
         expect(result, equals('testValue'));
       },
@@ -103,11 +98,11 @@ testValue
       () async {
         // arrange
         final diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
+          ..[DiagnosisKeys.arp].complete(Future.value('testValue'));
         // act
         diagnosis.clear();
         // assert
-        expect(diagnosis[DiagnosisKeys.ip].isCompleted, false);
+        expect(diagnosis[DiagnosisKeys.arp].isCompleted, false);
       },
     );
   });
@@ -118,11 +113,11 @@ testValue
       () async {
         // arrange
         final diagnosis = Diagnosis()
-          ..[DiagnosisKeys.ip].complete(Future.value('testValue'));
+          ..[DiagnosisKeys.arp].complete(Future.value('testValue'));
         // act
         final keys = diagnosis.keys;
         // assert
-        expect(keys, contains(DiagnosisKeys.ip));
+        expect(keys, contains(DiagnosisKeys.arp));
       },
     );
   });

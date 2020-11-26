@@ -102,7 +102,7 @@ class __ReportCardState extends State<_ReportCard> {
     _roomController = TextEditingController();
     _nameController = TextEditingController();
     _formNode = FocusScopeNode();
-    _reportStatusCubit = context.bloc<ReportStatusCubit>();
+    _reportStatusCubit = context.read<ReportStatusCubit>();
 
     _titleController.addListener(_onTitleChanged);
     _descriptionController.addListener(_onDescriptionChanged);

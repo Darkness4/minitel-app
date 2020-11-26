@@ -144,9 +144,9 @@ class _PortalPageState extends State<PortalPage> {
                   key: const Key(Keys.loginButton),
                   onPressed: () {
                     if (formKey.currentState.validate()) {
-                      final portalState = context.bloc<PortalCubit>().state;
+                      final portalState = context.read<PortalCubit>().state;
                       if (portalState.isValidUid) {
-                        context.bloc<PortalLoginCubit>().login(
+                        context.read<PortalLoginCubit>().login(
                               pswd: portalState.pswd,
                               selectedTime: portalState.selectedTime,
                               selectedUrl: portalState.selectedUrl,
@@ -203,23 +203,23 @@ class _PortalPageState extends State<PortalPage> {
   }
 
   void _onPortalLoaded(BuildContext context) {
-    final portalState = context.bloc<PortalCubit>().state;
+    final portalState = context.read<PortalCubit>().state;
 
     final selectedUrl = portalState.selectedUrl;
-    context.bloc<ImprimanteStatusCubit>().refresh();
-    context.bloc<StormshieldStatusCubit>().refresh(selectedUrl);
-    context.bloc<CalendarStatusCubit>().refresh();
-    context.bloc<PortailEmseStatusCubit>().refresh();
+    context.read<ImprimanteStatusCubit>().refresh();
+    context.read<StormshieldStatusCubit>().refresh(selectedUrl);
+    context.read<CalendarStatusCubit>().refresh();
+    context.read<PortailEmseStatusCubit>().refresh();
   }
 
   void _onPortalLoginFailure(BuildContext context, PortalLoginState state) {
-    final portalState = context.bloc<PortalCubit>().state;
+    final portalState = context.read<PortalCubit>().state;
 
     final selectedUrl = portalState.selectedUrl;
-    context.bloc<ImprimanteStatusCubit>().refresh();
-    context.bloc<StormshieldStatusCubit>().refresh(selectedUrl);
-    context.bloc<CalendarStatusCubit>().refresh();
-    context.bloc<PortailEmseStatusCubit>().refresh();
+    context.read<ImprimanteStatusCubit>().refresh();
+    context.read<StormshieldStatusCubit>().refresh(selectedUrl);
+    context.read<CalendarStatusCubit>().refresh();
+    context.read<PortailEmseStatusCubit>().refresh();
     Scaffold.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(
@@ -234,9 +234,9 @@ class _PortalPageState extends State<PortalPage> {
         const SnackBar(content: Text('Requested')),
       );
 
-    final portalState = context.bloc<PortalCubit>().state;
+    final portalState = context.read<PortalCubit>().state;
 
-    context.bloc<PortalCubit>().rememberLogin(
+    context.read<PortalCubit>().rememberLogin(
           autoLogin: portalState.autoLogin,
           pswd: portalState.pswd,
           rememberMe: portalState.rememberMe,
@@ -247,12 +247,12 @@ class _PortalPageState extends State<PortalPage> {
   }
 
   void _onPortalLoginSuccess(BuildContext context) {
-    final portalState = context.bloc<PortalCubit>().state;
+    final portalState = context.read<PortalCubit>().state;
 
     final selectedUrl = portalState.selectedUrl;
-    context.bloc<ImprimanteStatusCubit>().refresh();
-    context.bloc<StormshieldStatusCubit>().refresh(selectedUrl);
-    context.bloc<CalendarStatusCubit>().refresh();
-    context.bloc<PortailEmseStatusCubit>().refresh();
+    context.read<ImprimanteStatusCubit>().refresh();
+    context.read<StormshieldStatusCubit>().refresh(selectedUrl);
+    context.read<CalendarStatusCubit>().refresh();
+    context.read<PortailEmseStatusCubit>().refresh();
   }
 }

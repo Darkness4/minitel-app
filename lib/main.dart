@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -11,11 +13,16 @@ import 'package:minitel_toolbox/injection_container/injection_container.dart'
 import 'package:minitel_toolbox/presentation/cubits/theme/theme_cubit.dart';
 import 'package:minitel_toolbox/presentation/router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+import 'package:webview_flutter/webview_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
   await di.init();
   await initializeFlutterLocalNotificationPlugin();
+  if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   runApp(MyApp());
 }
 
@@ -57,10 +64,8 @@ class MyApp extends StatelessWidget {
 Future<void> initializeFlutterLocalNotificationPlugin() async {
   const _initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/launcher_icon');
-  const _initializationSettingsIOS = IOSInitializationSettings();
   const initializationSettings = InitializationSettings(
-    _initializationSettingsAndroid,
-    _initializationSettingsIOS,
+    android: _initializationSettingsAndroid,
   );
   await sl<FlutterLocalNotificationsPlugin>()
       .initialize(initializationSettings);

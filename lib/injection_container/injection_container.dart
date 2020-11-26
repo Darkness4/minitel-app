@@ -33,14 +33,13 @@ abstract class ExternalsModule {
 
   @lazySingleton
   NotificationDetails get notificationDetails => const NotificationDetails(
-        AndroidNotificationDetails(
+        android: AndroidNotificationDetails(
           'minitel_channel',
           'Minitel Channel',
           'Notification channel for the Minitel App',
-          importance: Importance.Max,
-          priority: Priority.High,
+          importance: Importance.max,
+          priority: Priority.high,
         ),
-        IOSNotificationDetails(),
       );
 
   @lazySingleton

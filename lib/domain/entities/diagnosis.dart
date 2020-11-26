@@ -7,7 +7,6 @@ import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 @injectable
 class Diagnosis extends UnmodifiableMapBase<String, Completer<String>> {
   final _internal = <String, Completer<String>>{
-    DiagnosisKeys.ip: Completer<String>(),
     DiagnosisKeys.ipAddr: Completer<String>(),
     DiagnosisKeys.arp: Completer<String>(),
     DiagnosisKeys.tracerouteGoogle: Completer<String>(),
@@ -38,7 +37,6 @@ class Diagnosis extends UnmodifiableMapBase<String, Completer<String>> {
   void clear() {
     _internal.clear();
     _internal.addAll({
-      DiagnosisKeys.ip: Completer<String>(),
       DiagnosisKeys.ipAddr: Completer<String>(),
       DiagnosisKeys.arp: Completer<String>(),
       DiagnosisKeys.tracerouteGoogle: Completer<String>(),
