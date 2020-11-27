@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
 import 'package:minitel_toolbox/presentation/cubits/reporting/diagnosis/diagnosis_cubit.dart';
-import 'package:minitel_toolbox/presentation/shared/app_colors.dart';
 import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:minitel_toolbox/presentation/pages/reporting/report_widgets/log_card.dart';
 
@@ -28,45 +26,17 @@ class DiagnoseScreen extends StatelessWidget {
             if (state is DiagnosisLoading ||
                 state is DiagnosisLoaded ||
                 state is DiagnosisInitial)
-              Center(
-                child: Chip(
-                  elevation: 2.0,
-                  backgroundColor: MinitelColors.reportPrimaryColor,
-                  label: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: FutureBuilder<String>(
-                      future: state.diagnosis[DiagnosisKeys.ip].future,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> ipSnapshot) {
-                        var output = '${DiagnosisKeys.ip}: ';
-                        output += ipSnapshot.hasData ? ipSnapshot.data : '';
-                        return Text(
-                          output,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        );
-                      },
-                    ),
+              for (final entry in state.diagnosis.entries)
+                FutureBuilder<String>(
+                  future: entry.value.future,
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) =>
+                          LogCard(
+                    _reportData(snapshot),
+                    title: entry.key,
+                    key: Key(Keys.diagnosisEntry(entry.key)),
                   ),
                 ),
-              ),
-            if (state is DiagnosisLoading ||
-                state is DiagnosisLoaded ||
-                state is DiagnosisInitial)
-              for (final entry in state.diagnosis.entries)
-                if (entry.key != DiagnosisKeys.ip) // Ignore them
-                  FutureBuilder<String>(
-                    future: entry.value.future,
-                    builder: (BuildContext context,
-                            AsyncSnapshot<String> snapshot) =>
-                        LogCard(
-                      _reportData(snapshot),
-                      title: entry.key,
-                      key: Key(Keys.diagnosisEntry(entry.key)),
-                    ),
-                  ),
           ];
           return ListView(
             key: const Key(Keys.diagnosisList),

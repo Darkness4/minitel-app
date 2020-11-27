@@ -15,7 +15,7 @@ class _$TimezoneTearOff {
 
 // ignore: unused_element
   _Timezone call(
-      {String tzid,
+      {Location tzid,
       TimezoneDescription daylight,
       TimezoneDescription standard}) {
     return _Timezone(
@@ -32,7 +32,7 @@ const $Timezone = _$TimezoneTearOff();
 
 /// @nodoc
 mixin _$Timezone {
-  String get tzid;
+  Location get tzid;
   TimezoneDescription get daylight;
   TimezoneDescription get standard;
 
@@ -44,7 +44,7 @@ abstract class $TimezoneCopyWith<$Res> {
   factory $TimezoneCopyWith(Timezone value, $Res Function(Timezone) then) =
       _$TimezoneCopyWithImpl<$Res>;
   $Res call(
-      {String tzid,
+      {Location tzid,
       TimezoneDescription daylight,
       TimezoneDescription standard});
 
@@ -67,7 +67,7 @@ class _$TimezoneCopyWithImpl<$Res> implements $TimezoneCopyWith<$Res> {
     Object standard = freezed,
   }) {
     return _then(_value.copyWith(
-      tzid: tzid == freezed ? _value.tzid : tzid as String,
+      tzid: tzid == freezed ? _value.tzid : tzid as Location,
       daylight: daylight == freezed
           ? _value.daylight
           : daylight as TimezoneDescription,
@@ -104,7 +104,7 @@ abstract class _$TimezoneCopyWith<$Res> implements $TimezoneCopyWith<$Res> {
       __$TimezoneCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String tzid,
+      {Location tzid,
       TimezoneDescription daylight,
       TimezoneDescription standard});
 
@@ -130,7 +130,7 @@ class __$TimezoneCopyWithImpl<$Res> extends _$TimezoneCopyWithImpl<$Res>
     Object standard = freezed,
   }) {
     return _then(_Timezone(
-      tzid: tzid == freezed ? _value.tzid : tzid as String,
+      tzid: tzid == freezed ? _value.tzid : tzid as Location,
       daylight: daylight == freezed
           ? _value.daylight
           : daylight as TimezoneDescription,
@@ -146,7 +146,7 @@ class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
   const _$_Timezone({this.tzid, this.daylight, this.standard});
 
   @override
-  final String tzid;
+  final Location tzid;
   @override
   final TimezoneDescription daylight;
   @override
@@ -195,12 +195,12 @@ class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
 
 abstract class _Timezone implements Timezone {
   const factory _Timezone(
-      {String tzid,
+      {Location tzid,
       TimezoneDescription daylight,
       TimezoneDescription standard}) = _$_Timezone;
 
   @override
-  String get tzid;
+  Location get tzid;
   @override
   TimezoneDescription get daylight;
   @override

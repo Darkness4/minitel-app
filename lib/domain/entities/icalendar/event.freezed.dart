@@ -15,13 +15,13 @@ class _$EventTearOff {
 
 // ignore: unused_element
   _Event call(
-      {@required @nullable DateTime dtend,
+      {@required @nullable TZDateTime dtend,
       @required @nullable String uid,
-      @required @nullable DateTime dtstamp,
+      @required @nullable TZDateTime dtstamp,
       @required @nullable String location,
       @required @nullable String description,
       @required @nullable String summary,
-      @required @nullable DateTime dtstart}) {
+      @required @nullable TZDateTime dtstart}) {
     return _Event(
       dtend: dtend,
       uid: uid,
@@ -41,11 +41,11 @@ const $Event = _$EventTearOff();
 /// @nodoc
 mixin _$Event {
   @nullable
-  DateTime get dtend;
+  TZDateTime get dtend;
   @nullable
   String get uid;
   @nullable
-  DateTime get dtstamp;
+  TZDateTime get dtstamp;
   @nullable
   String get location;
   @nullable
@@ -53,7 +53,7 @@ mixin _$Event {
   @nullable
   String get summary;
   @nullable
-  DateTime get dtstart;
+  TZDateTime get dtstart;
 
   $EventCopyWith<Event> get copyWith;
 }
@@ -63,13 +63,13 @@ abstract class $EventCopyWith<$Res> {
   factory $EventCopyWith(Event value, $Res Function(Event) then) =
       _$EventCopyWithImpl<$Res>;
   $Res call(
-      {@nullable DateTime dtend,
+      {@nullable TZDateTime dtend,
       @nullable String uid,
-      @nullable DateTime dtstamp,
+      @nullable TZDateTime dtstamp,
       @nullable String location,
       @nullable String description,
       @nullable String summary,
-      @nullable DateTime dtstart});
+      @nullable TZDateTime dtstart});
 }
 
 /// @nodoc
@@ -91,14 +91,14 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
     Object dtstart = freezed,
   }) {
     return _then(_value.copyWith(
-      dtend: dtend == freezed ? _value.dtend : dtend as DateTime,
+      dtend: dtend == freezed ? _value.dtend : dtend as TZDateTime,
       uid: uid == freezed ? _value.uid : uid as String,
-      dtstamp: dtstamp == freezed ? _value.dtstamp : dtstamp as DateTime,
+      dtstamp: dtstamp == freezed ? _value.dtstamp : dtstamp as TZDateTime,
       location: location == freezed ? _value.location : location as String,
       description:
           description == freezed ? _value.description : description as String,
       summary: summary == freezed ? _value.summary : summary as String,
-      dtstart: dtstart == freezed ? _value.dtstart : dtstart as DateTime,
+      dtstart: dtstart == freezed ? _value.dtstart : dtstart as TZDateTime,
     ));
   }
 }
@@ -109,13 +109,13 @@ abstract class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       __$EventCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable DateTime dtend,
+      {@nullable TZDateTime dtend,
       @nullable String uid,
-      @nullable DateTime dtstamp,
+      @nullable TZDateTime dtstamp,
       @nullable String location,
       @nullable String description,
       @nullable String summary,
-      @nullable DateTime dtstart});
+      @nullable TZDateTime dtstart});
 }
 
 /// @nodoc
@@ -138,14 +138,14 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
     Object dtstart = freezed,
   }) {
     return _then(_Event(
-      dtend: dtend == freezed ? _value.dtend : dtend as DateTime,
+      dtend: dtend == freezed ? _value.dtend : dtend as TZDateTime,
       uid: uid == freezed ? _value.uid : uid as String,
-      dtstamp: dtstamp == freezed ? _value.dtstamp : dtstamp as DateTime,
+      dtstamp: dtstamp == freezed ? _value.dtstamp : dtstamp as TZDateTime,
       location: location == freezed ? _value.location : location as String,
       description:
           description == freezed ? _value.description : description as String,
       summary: summary == freezed ? _value.summary : summary as String,
-      dtstart: dtstart == freezed ? _value.dtstart : dtstart as DateTime,
+      dtstart: dtstart == freezed ? _value.dtstart : dtstart as TZDateTime,
     ));
   }
 }
@@ -163,13 +163,13 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 
   @override
   @nullable
-  final DateTime dtend;
+  final TZDateTime dtend;
   @override
   @nullable
   final String uid;
   @override
   @nullable
-  final DateTime dtstamp;
+  final TZDateTime dtstamp;
   @override
   @nullable
   final String location;
@@ -181,7 +181,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
   final String summary;
   @override
   @nullable
-  final DateTime dtstart;
+  final TZDateTime dtstart;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -244,23 +244,23 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 
 abstract class _Event implements Event {
   const factory _Event(
-      {@required @nullable DateTime dtend,
+      {@required @nullable TZDateTime dtend,
       @required @nullable String uid,
-      @required @nullable DateTime dtstamp,
+      @required @nullable TZDateTime dtstamp,
       @required @nullable String location,
       @required @nullable String description,
       @required @nullable String summary,
-      @required @nullable DateTime dtstart}) = _$_Event;
+      @required @nullable TZDateTime dtstart}) = _$_Event;
 
   @override
   @nullable
-  DateTime get dtend;
+  TZDateTime get dtend;
   @override
   @nullable
   String get uid;
   @override
   @nullable
-  DateTime get dtstamp;
+  TZDateTime get dtstamp;
   @override
   @nullable
   String get location;
@@ -272,7 +272,7 @@ abstract class _Event implements Event {
   String get summary;
   @override
   @nullable
-  DateTime get dtstart;
+  TZDateTime get dtstart;
   @override
   _$EventCopyWith<_Event> get copyWith;
 }

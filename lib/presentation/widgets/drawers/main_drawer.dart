@@ -187,21 +187,21 @@ class MainDrawer extends StatelessWidget {
                     value: 'Dark',
                     groupValue: state.value,
                     onChanged: (String _) {
-                      context.bloc<ThemeCubit>().toDark();
+                      context.read<ThemeCubit>().toDark();
                     },
                   ),
                   Radio(
                     value: 'Adaptive',
                     groupValue: state.value,
                     onChanged: (String _) {
-                      context.bloc<ThemeCubit>().toAdaptive();
+                      context.read<ThemeCubit>().toAdaptive();
                     },
                   ),
                   Radio(
                     value: 'Light',
                     groupValue: state.value,
                     onChanged: (String _) {
-                      context.bloc<ThemeCubit>().toLight();
+                      context.read<ThemeCubit>().toLight();
                     },
                   ),
                 ],

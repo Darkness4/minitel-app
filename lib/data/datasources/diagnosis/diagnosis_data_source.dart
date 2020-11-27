@@ -1,4 +1,3 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
@@ -20,14 +19,12 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
   final ProcessManager processManager;
   final InternetAddressManager internetAddressManager;
   final StormshieldRemoteDataSource stormshieldRemoteDataSource;
-  final Connectivity connectivity;
 
   static const String _argsPing = '-c 4 -w 5 -W 5';
 
   const DiagnosisDataSourceImpl({
     @required this.diagnosis,
     @required this.processManager,
-    @required this.connectivity,
     @required this.internetAddressManager,
     @required this.stormshieldRemoteDataSource,
   });
@@ -35,9 +32,6 @@ class DiagnosisDataSourceImpl implements DiagnosisDataSource {
   @override
   Diagnosis diagnose({Duration timeLimit = const Duration(minutes: 1)}) {
     diagnosis.clear();
-    diagnosis[DiagnosisKeys.ip].complete(connectivity
-        .getWifiIP()
-        .timeout(timeLimit, onTimeout: () => 'Timed out.'));
     diagnosis[DiagnosisKeys.ipAddr].complete(_run('/system/bin/ip', ['a'])
         .timeout(timeLimit, onTimeout: () => 'Timed out.'));
     diagnosis[DiagnosisKeys.arp].complete(

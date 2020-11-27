@@ -6,8 +6,9 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_source.dart';
-import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
+import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar_builder.dart';
 import 'package:mockito/mockito.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 import '../../../fixtures/fixture_reader.dart';
 
@@ -26,6 +27,7 @@ void main() {
     dataSource = ICalendarLocalDataSourceImpl(
       fileManager: mockFileManager,
     );
+    tz.initializeTimeZones();
   });
 
   group('getParsedCalendar', () {
@@ -42,10 +44,11 @@ void main() {
         // assert
         final expectedICalendar = Stream.value(utf8.encode(fixture(
             'datasources/icalendar_data_source/773debe2a985c93f612e72894e4e11b900b64419.ics')));
-        final expectedParsedCalendarModel =
-            ParsedCalendar.parse(expectedICalendar.transform(utf8.decoder));
+        final builder = ParsedCalendarBuilder();
+        await builder.fromStream(expectedICalendar.transform(utf8.decoder));
+        final expectedParsedCalendarModel = builder.build();
         verify(mockFile.openRead());
-        expect(result, equals(await expectedParsedCalendarModel));
+        expect(result, equals(expectedParsedCalendarModel));
       },
     );
 

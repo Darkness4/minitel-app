@@ -139,7 +139,6 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<DiagnosisDataSource>(() => DiagnosisDataSourceImpl(
         diagnosis: get<Diagnosis>(),
         processManager: get<ProcessManager>(),
-        connectivity: get<Connectivity>(),
         internetAddressManager: get<InternetAddressManager>(),
         stormshieldRemoteDataSource: get<StormshieldRemoteDataSource>(),
       ));

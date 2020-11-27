@@ -4,14 +4,19 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:mockito/mockito.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() {
+  tz.initializeTimeZones();
+
   group('addToNotification', () {
     test(
       'should schedule with a future event',
       () async {
         // arrange
-        final tDateTime = DateTime.now().add(const Duration(days: 5));
+        final tDateTime = tz.TZDateTime.now(tz.getLocation('America/Detroit'))
+            .add(const Duration(days: 5));
         const tNotificationSettings = NotificationSettings(
           early: Duration(seconds: 1),
           enabled: true,
@@ -37,15 +42,18 @@ void main() {
         );
         // assert
         final verification =
-            verify(mockFlutterLocalNotificationsPlugin.schedule(
+            verify(mockFlutterLocalNotificationsPlugin.zonedSchedule(
           any,
           tEvent.summary,
           any,
-          captureThat(isA<DateTime>()),
+          captureThat(isA<tz.TZDateTime>()),
           any,
           payload: anyNamed('payload'),
+          androidAllowWhileIdle: anyNamed('androidAllowWhileIdle'),
+          uiLocalNotificationDateInterpretation:
+              anyNamed('uiLocalNotificationDateInterpretation'),
         ));
-        final catchedDateTime = verification.captured.first as DateTime;
+        final catchedDateTime = verification.captured.first as tz.TZDateTime;
         expect(
             catchedDateTime.toString(),
             equals(tEvent.dtstart
@@ -58,7 +66,8 @@ void main() {
       "shouldn't schedule with a out of range event",
       () async {
         // arrange
-        final tDateTime = DateTime.now().add(const Duration(days: 999));
+        final tDateTime = tz.TZDateTime.now(tz.getLocation('America/Detroit'))
+            .add(const Duration(days: 999));
         const tNotificationSettings = NotificationSettings(
           early: Duration(seconds: 1),
           enabled: true,
@@ -90,10 +99,13 @@ void main() {
 
   group('fromMap', () {
     final tEvent = Event(
-      dtend: DateTime.parse('20200127T100000'),
-      dtstamp: DateTime.parse('20200127T100000'),
+      dtend: tz.TZDateTime.parse(
+          tz.getLocation('America/Detroit'), '20200127T100000'),
+      dtstamp: tz.TZDateTime.parse(
+          tz.getLocation('America/Detroit'), '20200127T100000'),
       description: 'description',
-      dtstart: DateTime.parse('20200127T100000'),
+      dtstart: tz.TZDateTime.parse(
+          tz.getLocation('America/Detroit'), '20200127T100000'),
       location: 'Location',
       summary: 'Summary',
       uid: '5e41428d0e0d5',
@@ -112,7 +124,8 @@ void main() {
           'DTSTART': '20200127T100000',
         };
         // act
-        final result = Event.fromMap(jsonMap);
+        final result =
+            Event.fromMap(jsonMap, tz.getLocation('America/Detroit'));
         // assert
         expect(result, tEvent);
       },

@@ -112,11 +112,11 @@ class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {
             elevation: 10.0,
             onPressed: () {
               final notifState =
-                  context.bloc<NotificationSettingsCubit>().state;
+                  context.read<NotificationSettingsCubit>().state;
 
               final notificationSettings = notifState.notificationSettings;
 
-              context.bloc<AgendaCubit>().agendaDownload(
+              context.read<AgendaCubit>().agendaDownload(
                     uid: _uidController.text,
                     pswd: _pswdController.text,
                     notificationSettings: notificationSettings,
