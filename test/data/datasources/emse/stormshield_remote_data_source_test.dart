@@ -29,7 +29,7 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(
-      mockHttpClient.post(Uri.parse('https://$tSelectedUrl/auth/login.html')),
+      mockHttpClient.post(Uri.https(tSelectedUrl, 'auth/login.html')),
     ).thenAnswer((_) async => http.Response(
           fixture(
               'datasources/stormshield_remote_data_source/response_fetch.html'),
@@ -41,7 +41,7 @@ void main() {
 
     when(
       mockHttpClient.post(
-        Uri.parse('https://$tSelectedUrl/auth/plain.html'),
+        Uri.https(tSelectedUrl, 'auth/plain.html'),
         body: anyNamed('body'),
         headers: anyNamed('headers'),
       ),
@@ -135,7 +135,7 @@ void main() {
         );
         // assert
         verify(mockHttpClient.post(
-          argThat(equals('https://$tSelectedUrl/auth/plain.html')),
+          argThat(equals(Uri.https(tSelectedUrl, 'auth/plain.html'))),
           body: {
             'uid': tUser,
             'time': tSelectedTime.toString(),

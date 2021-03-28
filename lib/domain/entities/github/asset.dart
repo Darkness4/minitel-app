@@ -13,7 +13,7 @@ class GithubAsset with _$GithubAsset {
     required int id,
     required String node_id,
     required String name,
-    required String label,
+    required String? label,
     required String state,
     required String content_type,
     required int size,

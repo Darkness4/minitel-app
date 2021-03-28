@@ -61,6 +61,7 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
+        when(mockRemoteDataSource.diagnose()).thenReturn(tDiagnosisModel);
         // act
         await repository.diagnose();
         // assert

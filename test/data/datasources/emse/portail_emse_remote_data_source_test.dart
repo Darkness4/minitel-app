@@ -14,7 +14,19 @@ import 'package:mockito/mockito.dart';
 import '../../../fixtures/fixture_reader.dart';
 import 'portail_emse_remote_data_source_test.mocks.dart';
 
-@GenerateMocks([CookieManager, http.Client])
+class MockCookieManager extends Mock implements CookieManager {
+  @override
+  List<Cookie> get imprimanteCookies =>
+      super.noSuchMethod(Invocation.getter(#imprimanteCookies),
+          returnValue: <Cookie>[]) as List<Cookie>;
+
+  @override
+  List<Cookie> get portailCookies =>
+      super.noSuchMethod(Invocation.getter(#portailCookies),
+          returnValue: <Cookie>[]) as List<Cookie>;
+}
+
+@GenerateMocks([http.Client])
 void main() {
   late PortailEMSERemoteDataSource dataSource;
   late MockClient mockHttpClient;

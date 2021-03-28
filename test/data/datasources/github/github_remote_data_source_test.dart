@@ -25,7 +25,7 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(mockHttpClient.get(
-      argThat(startsWith('https://api.github.com/repos/')),
+      Uri.parse('https://api.github.com/repos/$tRepo/releases'),
     )).thenAnswer((_) async => http.Response(
           fixture(
               'datasources/github_remote_data_source/releases_response.json'),

@@ -26,7 +26,7 @@ class _$GithubAssetTearOff {
       required int id,
       required String node_id,
       required String name,
-      required String label,
+      required String? label,
       required String state,
       required String content_type,
       required int size,
@@ -66,7 +66,7 @@ mixin _$GithubAsset {
   int get id => throw _privateConstructorUsedError;
   String get node_id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get label => throw _privateConstructorUsedError;
+  String? get label => throw _privateConstructorUsedError;
   String get state => throw _privateConstructorUsedError;
   String get content_type => throw _privateConstructorUsedError;
   int get size => throw _privateConstructorUsedError;
@@ -92,7 +92,7 @@ abstract class $GithubAssetCopyWith<$Res> {
       int id,
       String node_id,
       String name,
-      String label,
+      String? label,
       String state,
       String content_type,
       int size,
@@ -152,7 +152,7 @@ class _$GithubAssetCopyWithImpl<$Res> implements $GithubAssetCopyWith<$Res> {
       label: label == freezed
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       state: state == freezed
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -205,7 +205,7 @@ abstract class _$GithubAssetCopyWith<$Res>
       int id,
       String node_id,
       String name,
-      String label,
+      String? label,
       String state,
       String content_type,
       int size,
@@ -268,7 +268,7 @@ class __$GithubAssetCopyWithImpl<$Res> extends _$GithubAssetCopyWithImpl<$Res>
       label: label == freezed
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       state: state == freezed
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -334,7 +334,7 @@ class _$_GithubAsset implements _GithubAsset {
   @override
   final String name;
   @override
-  final String label;
+  final String? label;
   @override
   final String state;
   @override
@@ -429,7 +429,7 @@ abstract class _GithubAsset implements GithubAsset {
       required int id,
       required String node_id,
       required String name,
-      required String label,
+      required String? label,
       required String state,
       required String content_type,
       required int size,
@@ -452,7 +452,7 @@ abstract class _GithubAsset implements GithubAsset {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  String get label => throw _privateConstructorUsedError;
+  String? get label => throw _privateConstructorUsedError;
   @override
   String get state => throw _privateConstructorUsedError;
   @override

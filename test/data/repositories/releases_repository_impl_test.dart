@@ -90,6 +90,9 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
+        when(mockRemoteDataSource.fetchReleases(any))
+            .thenAnswer((_) async => []);
+
         // act
         await repository.get(tRepo);
         // assert

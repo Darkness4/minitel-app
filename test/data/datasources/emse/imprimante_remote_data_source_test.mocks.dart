@@ -2,7 +2,6 @@
 // in minitel_toolbox/test/data/datasources/emse/imprimante_remote_data_source_test.dart.
 // Do not manually edit this file.
 
-import 'dart:_http' as _i11;
 import 'dart:async' as _i6;
 import 'dart:convert' as _i9;
 import 'dart:typed_data' as _i4;
@@ -11,7 +10,6 @@ import 'package:http/src/base_request.dart' as _i7;
 import 'package:http/src/multipart_request.dart' as _i8;
 import 'package:http/src/response.dart' as _i3;
 import 'package:http/src/streamed_response.dart' as _i2;
-import 'package:minitel_toolbox/core/cookies/cookie_manager.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ntlm/src/http.dart' as _i5;
 
@@ -135,22 +133,4 @@ class MockNTLMClient extends _i1.Mock implements _i5.NTLMClient {
               Invocation.method(#readBytes, [url], {#headers: headers}),
               returnValue: Future.value(_FakeUint8List()))
           as _i6.Future<_i4.Uint8List>);
-}
-
-/// A class which mocks [CookieManager].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockCookieManager extends _i1.Mock implements _i10.CookieManager {
-  MockCookieManager() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  List<_i11.Cookie> get imprimanteCookies =>
-      (super.noSuchMethod(Invocation.getter(#imprimanteCookies),
-          returnValue: <_i11.Cookie>[]) as List<_i11.Cookie>);
-  @override
-  List<_i11.Cookie> get portailCookies =>
-      (super.noSuchMethod(Invocation.getter(#portailCookies),
-          returnValue: <_i11.Cookie>[]) as List<_i11.Cookie>);
 }

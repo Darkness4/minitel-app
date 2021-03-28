@@ -15,7 +15,19 @@ import 'package:ntlm/ntlm.dart';
 import '../../../fixtures/fixture_reader.dart';
 import 'imprimante_remote_data_source_test.mocks.dart';
 
-@GenerateMocks([NTLMClient, CookieManager])
+class MockCookieManager extends Mock implements CookieManager {
+  @override
+  List<Cookie> get imprimanteCookies =>
+      super.noSuchMethod(Invocation.getter(#imprimanteCookies),
+          returnValue: <Cookie>[]) as List<Cookie>;
+
+  @override
+  List<Cookie> get portailCookies =>
+      super.noSuchMethod(Invocation.getter(#portailCookies),
+          returnValue: <Cookie>[]) as List<Cookie>;
+}
+
+@GenerateMocks([NTLMClient])
 void main() {
   late ImprimanteRemoteDataSource dataSource;
   late MockNTLMClient mockNTLMClient;
@@ -34,6 +46,8 @@ void main() {
       ntlmClient: mockNTLMClient,
       cookieManager: mockCookieManager,
     );
+    when(mockNTLMClient.password = any).thenReturn(null);
+    when(mockNTLMClient.username = any).thenReturn(null);
   });
 
   void setUpMockHttpClientSuccess200() {
@@ -67,10 +81,7 @@ void main() {
         // act
         await dataSource.login(username: tUser, password: tPassword);
         // assert
-        verify(mockNTLMClient.get(
-          Uri.parse('http://192.168.130.2/watchdoc/'),
-          headers: anyNamed('headers'),
-        ));
+        verify(mockNTLMClient.get(Uri.parse('http://192.168.130.2/watchdoc/')));
       },
     );
 

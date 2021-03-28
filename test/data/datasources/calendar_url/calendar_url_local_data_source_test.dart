@@ -42,7 +42,7 @@ void main() {
       'should throw a CacheExeption when there is not a cached value',
       () async {
         // arrange
-        when<dynamic>(mockPrefs.get(any)).thenReturn(null);
+        when<dynamic>(mockPrefs.getString(any)).thenReturn(null);
         // act
         final call = dataSource.getLastCalendarURL;
         // assert
@@ -58,6 +58,9 @@ void main() {
     test(
       'should call SharedPreferences to cache the data',
       () async {
+        // arrange
+        when<dynamic>(mockPrefs.setString(any, any))
+            .thenAnswer((realInvocation) async => true);
         // act
         await dataSource.saveCalendarURL(tCalendarUrl);
         // assert

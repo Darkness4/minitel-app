@@ -77,6 +77,11 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
+        when(mockCalendarURLRepository.get(
+                username: anyNamed('username'), password: anyNamed('password')))
+            .thenAnswer((_) async => '');
+        when(mockRemoteDataSource.streamICalendar(any))
+            .thenAnswer((_) => const Stream.empty());
         // act
         await repository.download(username: tUser, password: tPswd);
         // assert

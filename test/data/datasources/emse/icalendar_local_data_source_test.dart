@@ -14,6 +14,25 @@ import 'package:timezone/data/latest.dart' as tz;
 import '../../../fixtures/fixture_reader.dart';
 import 'icalendar_local_data_source_test.mocks.dart';
 
+class MockFile extends Mock implements File {
+  @override
+  bool existsSync() =>
+      super.noSuchMethod(Invocation.method(#existsSync, []), returnValue: false)
+          as bool;
+
+  @override
+  Stream<List<int>> openRead([int? start, int? end]) =>
+      super.noSuchMethod(Invocation.method(#openRead, [start, end]),
+          returnValue: const Stream<List<int>>.empty()) as Stream<List<int>>;
+
+  @override
+  IOSink openWrite(
+          {FileMode mode = FileMode.write, Encoding encoding = utf8}) =>
+      super.noSuchMethod(
+          Invocation.method(#openWrite, [], {#mode: mode, #encoding: encoding}),
+          returnValue: MockIOSink()) as IOSink;
+}
+
 @GenerateMocks([FileManager, IOSink])
 void main() {
   late ICalendarLocalDataSource dataSource;
@@ -88,5 +107,3 @@ void main() {
     );
   });
 }
-
-class MockFile extends Mock implements File {}

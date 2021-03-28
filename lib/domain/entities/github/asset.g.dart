@@ -13,7 +13,7 @@ _$_GithubAsset _$_$_GithubAssetFromJson(Map<String, dynamic> json) {
     id: json['id'] as int,
     node_id: json['node_id'] as String,
     name: json['name'] as String,
-    label: json['label'] as String,
+    label: json['label'] as String?,
     state: json['state'] as String,
     content_type: json['content_type'] as String,
     size: json['size'] as int,

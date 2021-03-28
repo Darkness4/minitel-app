@@ -26,7 +26,7 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(mockHttpClient.post(
-      argThat(startsWith('${ApiKeys.zabbixPath}/api_jsonrpc.php')),
+      Uri.parse('${ApiKeys.zabbixPath}/api_jsonrpc.php'),
       body: anyNamed('body'),
       headers: anyNamed('headers'),
     )).thenAnswer((_) async => http.Response(

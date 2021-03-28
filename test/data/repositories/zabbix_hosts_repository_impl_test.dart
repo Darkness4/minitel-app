@@ -40,7 +40,7 @@ void main() {
         when(mockRemoteDataSource.fetchZabbixHosts(tGroupids))
             .thenAnswer((_) async => tListZabbixHostModel);
         // act
-        final result = repository.get(tGroupids);
+        final result = await repository.get(tGroupids);
         // assert
         verify(mockRemoteDataSource.fetchZabbixHosts(tGroupids));
         expect(result, equals(tListZabbixHost));

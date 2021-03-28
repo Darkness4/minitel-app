@@ -50,7 +50,7 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        await dataSource.streamICalendar(tURL).drain<String>();
+        await dataSource.streamICalendar(tURL).toList();
         // assert
         final verification = verify(
           mockHttpClient.send(captureThat(isA<http.BaseRequest>())),
@@ -83,8 +83,7 @@ void main() {
         // act
         final call = dataSource.streamICalendar;
         // assert
-        expect(
-            () => call(tURL).drain<String>(), throwsA(isA<ServerException>()));
+        expect(() => call(tURL).toList(), throwsA(isA<ServerException>()));
       },
     );
 
@@ -96,8 +95,7 @@ void main() {
         // act
         final call = dataSource.streamICalendar;
         // assert
-        expect(
-            () => call(tURL).drain<String>(), throwsA(isA<ServerException>()));
+        expect(() => call(tURL).toList(), throwsA(isA<ServerException>()));
       },
     );
   });

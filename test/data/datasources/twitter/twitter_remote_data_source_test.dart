@@ -39,8 +39,8 @@ void main() {
           200,
         ));
     when(mockHttpClient.get(
-      argThat(startsWith(
-          'https://api.twitter.com/1.1/statuses/user_timeline.json')),
+      Uri.parse(
+          'https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361'),
       headers: anyNamed('headers'),
     )).thenAnswer((_) async => http.Response(
           fixture('datasources/twitter_remote_data_source/feed_response.json'),
@@ -79,8 +79,8 @@ void main() {
         await dataSource.fetchAllPosts();
         // assert
         verify(mockHttpClient.get(
-          argThat(startsWith(
-              'https://api.twitter.com/1.1/statuses/user_timeline.json')),
+          Uri.parse(
+              'https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361'),
           headers: {
             HttpHeaders.authorizationHeader: 'Bearer token',
           },

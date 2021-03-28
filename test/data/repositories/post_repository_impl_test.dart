@@ -77,6 +77,7 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
+        when(mockRemoteDataSource.fetchAllPosts()).thenAnswer((_) async => []);
         // act
         await repository.fetchAll();
         // assert
