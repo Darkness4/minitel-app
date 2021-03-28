@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "intl_translation might be deprecated (< Flutter v2). This could fail."
+
 arb_files=(
   assets/l10n/intl_messages.arb
   assets/l10n/intl_en.arb
