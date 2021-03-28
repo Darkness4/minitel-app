@@ -47,6 +47,8 @@ dependencies:
 dev_dependencies:
   analyzer:
   build_runner:
+  # flutter_driver:
+  #   sdk: flutter
   flutter_launcher_icons: ^0.9.0
   flutter_test:
     sdk: flutter
