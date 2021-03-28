@@ -8,22 +8,25 @@ import 'package:minitel_toolbox/core/cookies/cookie_manager.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ntlm/ntlm.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'imprimante_remote_data_source_test.mocks.dart';
 
+@GenerateMocks([NTLMClient, CookieManager])
 void main() {
-  ImprimanteRemoteDataSource dataSource;
-  MockNTLMClient mockNTLMClient;
-  MockListCookies mockListCookies;
-  MockCookieManager mockCookieManager;
+  late ImprimanteRemoteDataSource dataSource;
+  late MockNTLMClient mockNTLMClient;
+  late List<Cookie> mockListCookies;
+  late MockCookieManager mockCookieManager;
   const tUser = 'marc.nguyen';
   const tPassword = 'abcdefgh';
 
   setUp(() {
     mockNTLMClient = MockNTLMClient();
-    mockListCookies = MockListCookies();
+    mockListCookies = [];
     mockCookieManager = MockCookieManager();
 
     when(mockCookieManager.imprimanteCookies).thenReturn(mockListCookies);
@@ -35,7 +38,7 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(
-      mockNTLMClient.get('http://192.168.130.2/watchdoc/'),
+      mockNTLMClient.get(Uri.parse('http://192.168.130.2/watchdoc/')),
     ).thenAnswer((_) async => Response(
           fixture('datasources/imprimante_remote_data_source/response0.html'),
           200,
@@ -43,7 +46,6 @@ void main() {
                   'datasources/imprimante_remote_data_source/response0.json'))
               as Map<String, dynamic>),
         ));
-    when(mockListCookies.addAll(any)).thenReturn(null);
   }
 
   void setUpMockHttpClientFailure404() {
@@ -66,7 +68,7 @@ void main() {
         await dataSource.login(username: tUser, password: tPassword);
         // assert
         verify(mockNTLMClient.get(
-          'http://192.168.130.2/watchdoc/',
+          Uri.parse('http://192.168.130.2/watchdoc/'),
           headers: anyNamed('headers'),
         ));
       },
@@ -85,12 +87,9 @@ void main() {
                 'datasources/imprimante_remote_data_source/response0.json'))
             as Map<String, dynamic>);
 
-        final verification =
-            verify(mockListCookies.addAll(captureThat(isA<List<Cookie>>())));
-        final actualCookies = verification.captured.first as List<Cookie>;
         final expectedCookies = headers.parseSetCookie();
         expect(cookies, equals(mockListCookies));
-        expect(actualCookies.map((e) => e.toString()),
+        expect(cookies.map((e) => e.toString()),
             equals(expectedCookies.map((e) => e.toString())));
       },
     );
@@ -122,9 +121,3 @@ void main() {
     );
   });
 }
-
-class MockCookieManager extends Mock implements CookieManager {}
-
-class MockListCookies extends Mock implements List<Cookie> {}
-
-class MockNTLMClient extends Mock implements NTLMClient {}

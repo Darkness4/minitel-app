@@ -10,8 +10,8 @@ class GithubCard extends StatelessWidget {
   final double elevation;
 
   const GithubCard({
-    @required this.release,
-    Key key,
+    required this.release,
+    Key? key,
     this.elevation = 4.0,
   }) : super(key: key);
 
@@ -30,7 +30,7 @@ class GithubCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Image.network(
-                    release.author.avatar_url,
+                    release.author.avatar_url!,
                     fit: BoxFit.cover,
                     height: 60,
                     width: 60,
@@ -46,10 +46,10 @@ class GithubCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context)
                             .textTheme
-                            .headline5
+                            .headline5!
                             .copyWith(height: 1),
                       ),
-                      Text(release.author.login),
+                      Text(release.author.login!),
                     ],
                   ),
                 ),
@@ -74,7 +74,7 @@ class GithubCard extends StatelessWidget {
                 'Version v${release.tag_name}',
                 style: Theme.of(context)
                     .textTheme
-                    .headline4
+                    .headline4!
                     .apply(color: Colors.white),
               ),
             ),
@@ -85,8 +85,7 @@ class GithubCard extends StatelessWidget {
             Container(
               alignment: Alignment.centerRight,
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: FlatButton(
-                textColor: Colors.blue,
+              child: TextButton(
                 onPressed: () => LaunchURLUtils.launchURL(release.html_url),
                 child: const Text(
                   'See More...',
@@ -98,8 +97,7 @@ class GithubCard extends StatelessWidget {
               alignment: WrapAlignment.center,
               children: <Widget>[
                 for (final GithubAsset asset in release.assets)
-                  OutlineButton(
-                    textColor: Theme.of(context).primaryColor,
+                  OutlinedButton(
                     onPressed: () =>
                         LaunchURLUtils.launchURL(asset.browser_download_url),
                     child: Text(asset.name),

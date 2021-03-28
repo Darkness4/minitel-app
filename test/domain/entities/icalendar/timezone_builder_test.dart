@@ -3,7 +3,7 @@ import 'package:minitel_toolbox/domain/entities/icalendar/timezone.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/timezone_builder.dart';
 
 void main() {
-  TimezoneDescriptionBuilder tDaylight;
+  late TimezoneDescriptionBuilder tDaylight;
 
   setUp(() {
     tDaylight = TimezoneDescriptionBuilder()

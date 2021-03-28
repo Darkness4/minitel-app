@@ -14,7 +14,6 @@ import 'package:minitel_toolbox/presentation/cubits/theme/theme_cubit.dart';
 import 'package:minitel_toolbox/presentation/router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 import 'package:webview_flutter/webview_flutter.dart';
 
 Future<void> main() async {

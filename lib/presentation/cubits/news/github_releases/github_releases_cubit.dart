@@ -15,9 +15,8 @@ class GithubReleasesCubit extends Cubit<GithubReleasesState> {
   final ReleasesRepository repository;
 
   GithubReleasesCubit({
-    @required this.repository,
-  })  : assert(repository != null),
-        super(const GithubReleasesState.initial());
+    required this.repository,
+  }) : super(const GithubReleasesState.initial());
 
   Future<void> getReleases(String repo) async {
     emit(const GithubReleasesState.loading());

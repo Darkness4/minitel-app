@@ -8,7 +8,7 @@ import 'package:minitel_toolbox/injection_container/injection_container.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
 
 class NotificationSettingsPage extends StatelessWidget {
-  const NotificationSettingsPage({Key key}) : super(key: key);
+  const NotificationSettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class NotificationSettingsPage extends StatelessWidget {
 }
 
 class NotificationSettingsScreen extends StatefulWidget {
-  const NotificationSettingsScreen({Key key}) : super(key: key);
+  const NotificationSettingsScreen({Key? key}) : super(key: key);
 
   @override
   _NotificationSettingsScreenState createState() =>
@@ -29,10 +29,10 @@ class NotificationSettingsScreen extends StatefulWidget {
 
 class _NotificationSettingsScreenState
     extends State<NotificationSettingsScreen> {
-  TextEditingController _rangeTextController;
-  TextEditingController _earlyTextController;
-  NotificationSettingsCubit _notificationSettingsCubit;
-  StreamSubscription<NotificationSettingsState> _subscription;
+  late TextEditingController _rangeTextController;
+  late TextEditingController _earlyTextController;
+  late NotificationSettingsCubit _notificationSettingsCubit;
+  late StreamSubscription<NotificationSettingsState> _subscription;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _NotificationSettingsScreenState
             BlocConsumer<NotificationSettingsCubit, NotificationSettingsState>(
           listener: (context, state) {
             if (state.isSaved) {
-              Scaffold.of(context).showSnackBar(const SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text('Data saved.'),
               ));
             }
@@ -107,9 +107,7 @@ class _NotificationSettingsScreenState
                     Text(AppLoc.of(context).agenda.notificationSettings.range2),
                   ],
                 ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  colorBrightness: Brightness.dark,
+                ElevatedButton(
                   onPressed: _onSave,
                   child:
                       Text(AppLoc.of(context).agenda.notificationSettings.save),
@@ -126,7 +124,7 @@ class _NotificationSettingsScreenState
   void dispose() {
     _rangeTextController.dispose();
     _earlyTextController.dispose();
-    _subscription?.cancel();
+    _subscription.cancel();
     super.dispose();
   }
 
@@ -142,7 +140,7 @@ class _NotificationSettingsScreenState
     _rangeTextController.addListener(_onRangeChanged);
     _earlyTextController.addListener(_onEarlyChanged);
 
-    _subscription = _notificationSettingsCubit.listen((state) {
+    _subscription = _notificationSettingsCubit.stream.listen((state) {
       if (state.isLoaded) {
         _rangeTextController.text =
             state.notificationSettings.range.inDays.toString();

@@ -10,7 +10,7 @@ import 'package:minitel_toolbox/presentation/shared/text_styles.dart';
 
 class SwitchesCard extends StatelessWidget {
   const SwitchesCard({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -53,7 +53,7 @@ class _SwitchBody extends StatelessWidget {
 
   _SwitchBody(
     ZabbixHost host, {
-    Key key,
+    Key? key,
   })  : _status = SwitchStatus.fromHost(host),
         _hostname = host.host,
         _interfaces = host.interfaces,
@@ -81,13 +81,13 @@ class _SwitchBody extends StatelessWidget {
               Text('IP : ${interface.ip}'),
             Text(
               'Ping : ${_status.pingResponseTime * 1e3} ms',
-              style: Theme.of(context).textTheme.bodyText2.apply(
+              style: Theme.of(context).textTheme.bodyText2!.apply(
                   color:
                       _status.pingResponseTime < 5 ? Colors.green : Colors.red),
             ),
             Text(
               _status.snmpAvailable == 1 ? 'SNMP Available' : 'Errors',
-              style: Theme.of(context).textTheme.bodyText2.apply(
+              style: Theme.of(context).textTheme.bodyText2!.apply(
                     fontWeightDelta: 4,
                     color:
                         _status.snmpAvailable == 1 ? Colors.green : Colors.red,

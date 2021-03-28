@@ -17,7 +17,7 @@ import 'package:minitel_toolbox/presentation/widgets/drawers/main_drawer.dart';
 class AgendaPage extends StatelessWidget {
   final String title;
 
-  const AgendaPage({Key key, this.title}) : super(key: key);
+  const AgendaPage({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class AgendaPage extends StatelessWidget {
 
 class AgendaContent extends StatelessWidget {
   const AgendaContent({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -82,7 +82,7 @@ class AgendaContent extends StatelessWidget {
                             viewportFraction:
                                 _viewportFraction(orientation, context)),
                         pageSnapping: _pageSnapping(context),
-                        children: snapshot.data,
+                        children: snapshot.data!,
                       );
                     },
                   );
@@ -117,7 +117,7 @@ class AgendaContent extends StatelessWidget {
     var monthlyWidgets = <Widget>[];
     var dailyEvents = <Widget>[];
     final monthPages = <Widget>[];
-    DateTime oldDt;
+    DateTime? oldDt;
 
     if (events.isEmpty) {
       yield <Widget>[
@@ -144,11 +144,11 @@ class AgendaContent extends StatelessWidget {
         // New Month
         if (dt.month != oldDt?.month) {
           if (dailyEvents.isNotEmpty) {
-            monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
+            monthlyWidgets.add(DayWidget(oldDt!, dailyEvents));
           }
           // Return the last month
           if (monthlyWidgets.isNotEmpty) {
-            monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
+            monthPages.add(MonthPage(oldDt!.month, monthlyWidgets));
           }
           oldDt = dt;
 
@@ -163,7 +163,7 @@ class AgendaContent extends StatelessWidget {
         if (dt.day != oldDt?.day) {
           // Return the last day
           if (dailyEvents.isNotEmpty) {
-            monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
+            monthlyWidgets.add(DayWidget(oldDt!, dailyEvents));
           }
 
           oldDt = dt;
@@ -176,7 +176,7 @@ class AgendaContent extends StatelessWidget {
 
       // Return the last day
       if (dailyEvents.isNotEmpty && monthlyWidgets.isNotEmpty) {
-        monthlyWidgets.add(DayWidget(oldDt, dailyEvents));
+        monthlyWidgets.add(DayWidget(oldDt!, dailyEvents));
         monthPages.add(MonthPage(oldDt.month, monthlyWidgets));
       }
     }

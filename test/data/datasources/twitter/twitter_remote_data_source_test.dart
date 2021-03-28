@@ -8,17 +8,20 @@ import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'twitter_remote_data_source_test.mocks.dart';
 
+@GenerateMocks([http.Client])
 void main() {
-  TwitterRemoteDataSourceImpl dataSource;
-  MockHttpClient mockHttpClient;
-  StringBuffer tokenBuffer;
+  late TwitterRemoteDataSourceImpl dataSource;
+  late MockClient mockHttpClient;
+  late StringBuffer tokenBuffer;
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
+    mockHttpClient = MockClient();
     tokenBuffer = StringBuffer();
     dataSource = TwitterRemoteDataSourceImpl(
       client: mockHttpClient,
@@ -28,7 +31,7 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(mockHttpClient.post(
-      'https://api.twitter.com/oauth2/token',
+      Uri.parse('https://api.twitter.com/oauth2/token'),
       headers: anyNamed('headers'),
       body: anyNamed('body'),
     )).thenAnswer((_) async => http.Response(
@@ -122,7 +125,7 @@ void main() {
         final authorization = base64.encode(
             utf8.encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}'));
         verify(mockHttpClient.post(
-          'https://api.twitter.com/oauth2/token',
+          Uri.parse('https://api.twitter.com/oauth2/token'),
           headers: {
             HttpHeaders.authorizationHeader: 'Basic $authorization',
           },
@@ -156,5 +159,3 @@ void main() {
     );
   });
 }
-
-class MockHttpClient extends Mock implements http.Client {}

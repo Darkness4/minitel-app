@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
@@ -17,7 +16,7 @@ abstract class ZabbixRemoteDataSource {
 class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
   final http.Client clientNoCheck;
 
-  const ZabbixRemoteDataSourceImpl({@required this.clientNoCheck});
+  const ZabbixRemoteDataSourceImpl({required this.clientNoCheck});
 
   @override
   Future<List<ZabbixHost>> fetchZabbixHosts(int groupids) async {
@@ -49,7 +48,7 @@ class ZabbixRemoteDataSourceImpl implements ZabbixRemoteDataSource {
 
     try {
       final response = await clientNoCheck.post(
-        '${ApiKeys.zabbixPath}/api_jsonrpc.php',
+        Uri.parse('${ApiKeys.zabbixPath}/api_jsonrpc.php'),
         headers: {'Content-Type': 'application/json-rpc'},
         body: dataEncoded,
       );

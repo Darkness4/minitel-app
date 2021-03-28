@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +13,7 @@ abstract class ICalendarRemoteDataSource {
 class ICalendarRemoteDataSourceImpl implements ICalendarRemoteDataSource {
   final http.Client client;
 
-  const ICalendarRemoteDataSourceImpl({@required this.client});
+  const ICalendarRemoteDataSourceImpl({required this.client});
 
   /// HTTP GET the .ics from url
   @override

@@ -3,11 +3,17 @@ import 'package:minitel_toolbox/data/datasources/settings/notification_settings_
 import 'package:minitel_toolbox/data/repositories/notification_settings_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/notification_settings_repository.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'notification_settings_repository_impl_test.mocks.dart';
+
+@GenerateMocks([], customMocks: [
+  MockSpec<NotificationSettingsDataSource>(as: #MockLocalDataSource)
+])
 void main() {
-  NotificationSettingsRepository repository;
-  MockLocalDataSource mockLocalDataSource;
+  late NotificationSettingsRepository repository;
+  late MockLocalDataSource mockLocalDataSource;
   const tNotificationSettingsModel = NotificationSettings();
 
   setUp(() {
@@ -48,6 +54,3 @@ void main() {
     );
   });
 }
-
-class MockLocalDataSource extends Mock
-    implements NotificationSettingsDataSource {}

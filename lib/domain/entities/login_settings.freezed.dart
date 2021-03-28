@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'login_settings.dart';
 
@@ -9,18 +9,20 @@ part of 'login_settings.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$LoginSettingsTearOff {
   const _$LoginSettingsTearOff();
 
-// ignore: unused_element
   _LoginSettings call(
-      {@nullable bool rememberMe = false,
-      @nullable bool autoLogin = false,
-      @nullable String uid = '',
-      @nullable String selectedTime = '4 hours',
-      @nullable String selectedUrl = MyIPAdresses.stormshieldIP,
-      @nullable String pswd = ''}) {
+      {bool rememberMe = false,
+      bool autoLogin = false,
+      String uid = '',
+      String selectedTime = '4 hours',
+      String selectedUrl = MyIPAdresses.stormshieldIP,
+      String pswd = ''}) {
     return _LoginSettings(
       rememberMe: rememberMe,
       autoLogin: autoLogin,
@@ -33,25 +35,20 @@ class _$LoginSettingsTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $LoginSettings = _$LoginSettingsTearOff();
 
 /// @nodoc
 mixin _$LoginSettings {
-  @nullable
-  bool get rememberMe;
-  @nullable
-  bool get autoLogin;
-  @nullable
-  String get uid;
-  @nullable
-  String get selectedTime;
-  @nullable
-  String get selectedUrl;
-  @nullable
-  String get pswd;
+  bool get rememberMe => throw _privateConstructorUsedError;
+  bool get autoLogin => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+  String get selectedTime => throw _privateConstructorUsedError;
+  String get selectedUrl => throw _privateConstructorUsedError;
+  String get pswd => throw _privateConstructorUsedError;
 
-  $LoginSettingsCopyWith<LoginSettings> get copyWith;
+  @JsonKey(ignore: true)
+  $LoginSettingsCopyWith<LoginSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -60,12 +57,12 @@ abstract class $LoginSettingsCopyWith<$Res> {
           LoginSettings value, $Res Function(LoginSettings) then) =
       _$LoginSettingsCopyWithImpl<$Res>;
   $Res call(
-      {@nullable bool rememberMe,
-      @nullable bool autoLogin,
-      @nullable String uid,
-      @nullable String selectedTime,
-      @nullable String selectedUrl,
-      @nullable String pswd});
+      {bool rememberMe,
+      bool autoLogin,
+      String uid,
+      String selectedTime,
+      String selectedUrl,
+      String pswd});
 }
 
 /// @nodoc
@@ -79,24 +76,38 @@ class _$LoginSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object rememberMe = freezed,
-    Object autoLogin = freezed,
-    Object uid = freezed,
-    Object selectedTime = freezed,
-    Object selectedUrl = freezed,
-    Object pswd = freezed,
+    Object? rememberMe = freezed,
+    Object? autoLogin = freezed,
+    Object? uid = freezed,
+    Object? selectedTime = freezed,
+    Object? selectedUrl = freezed,
+    Object? pswd = freezed,
   }) {
     return _then(_value.copyWith(
-      rememberMe:
-          rememberMe == freezed ? _value.rememberMe : rememberMe as bool,
-      autoLogin: autoLogin == freezed ? _value.autoLogin : autoLogin as bool,
-      uid: uid == freezed ? _value.uid : uid as String,
+      rememberMe: rememberMe == freezed
+          ? _value.rememberMe
+          : rememberMe // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoLogin: autoLogin == freezed
+          ? _value.autoLogin
+          : autoLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       selectedTime: selectedTime == freezed
           ? _value.selectedTime
-          : selectedTime as String,
-      selectedUrl:
-          selectedUrl == freezed ? _value.selectedUrl : selectedUrl as String,
-      pswd: pswd == freezed ? _value.pswd : pswd as String,
+          : selectedTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedUrl: selectedUrl == freezed
+          ? _value.selectedUrl
+          : selectedUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      pswd: pswd == freezed
+          ? _value.pswd
+          : pswd // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -109,12 +120,12 @@ abstract class _$LoginSettingsCopyWith<$Res>
       __$LoginSettingsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable bool rememberMe,
-      @nullable bool autoLogin,
-      @nullable String uid,
-      @nullable String selectedTime,
-      @nullable String selectedUrl,
-      @nullable String pswd});
+      {bool rememberMe,
+      bool autoLogin,
+      String uid,
+      String selectedTime,
+      String selectedUrl,
+      String pswd});
 }
 
 /// @nodoc
@@ -130,24 +141,38 @@ class __$LoginSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object rememberMe = freezed,
-    Object autoLogin = freezed,
-    Object uid = freezed,
-    Object selectedTime = freezed,
-    Object selectedUrl = freezed,
-    Object pswd = freezed,
+    Object? rememberMe = freezed,
+    Object? autoLogin = freezed,
+    Object? uid = freezed,
+    Object? selectedTime = freezed,
+    Object? selectedUrl = freezed,
+    Object? pswd = freezed,
   }) {
     return _then(_LoginSettings(
-      rememberMe:
-          rememberMe == freezed ? _value.rememberMe : rememberMe as bool,
-      autoLogin: autoLogin == freezed ? _value.autoLogin : autoLogin as bool,
-      uid: uid == freezed ? _value.uid : uid as String,
+      rememberMe: rememberMe == freezed
+          ? _value.rememberMe
+          : rememberMe // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoLogin: autoLogin == freezed
+          ? _value.autoLogin
+          : autoLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       selectedTime: selectedTime == freezed
           ? _value.selectedTime
-          : selectedTime as String,
-      selectedUrl:
-          selectedUrl == freezed ? _value.selectedUrl : selectedUrl as String,
-      pswd: pswd == freezed ? _value.pswd : pswd as String,
+          : selectedTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedUrl: selectedUrl == freezed
+          ? _value.selectedUrl
+          : selectedUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      pswd: pswd == freezed
+          ? _value.pswd
+          : pswd // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -155,36 +180,30 @@ class __$LoginSettingsCopyWithImpl<$Res>
 /// @nodoc
 class _$_LoginSettings implements _LoginSettings {
   const _$_LoginSettings(
-      {@nullable this.rememberMe = false,
-      @nullable this.autoLogin = false,
-      @nullable this.uid = '',
-      @nullable this.selectedTime = '4 hours',
-      @nullable this.selectedUrl = MyIPAdresses.stormshieldIP,
-      @nullable this.pswd = ''});
+      {this.rememberMe = false,
+      this.autoLogin = false,
+      this.uid = '',
+      this.selectedTime = '4 hours',
+      this.selectedUrl = MyIPAdresses.stormshieldIP,
+      this.pswd = ''});
 
   @JsonKey(defaultValue: false)
   @override
-  @nullable
   final bool rememberMe;
   @JsonKey(defaultValue: false)
   @override
-  @nullable
   final bool autoLogin;
   @JsonKey(defaultValue: '')
   @override
-  @nullable
   final String uid;
   @JsonKey(defaultValue: '4 hours')
   @override
-  @nullable
   final String selectedTime;
   @JsonKey(defaultValue: MyIPAdresses.stormshieldIP)
   @override
-  @nullable
   final String selectedUrl;
   @JsonKey(defaultValue: '')
   @override
-  @nullable
   final String pswd;
 
   @override
@@ -224,6 +243,7 @@ class _$_LoginSettings implements _LoginSettings {
       const DeepCollectionEquality().hash(selectedUrl) ^
       const DeepCollectionEquality().hash(pswd);
 
+  @JsonKey(ignore: true)
   @override
   _$LoginSettingsCopyWith<_LoginSettings> get copyWith =>
       __$LoginSettingsCopyWithImpl<_LoginSettings>(this, _$identity);
@@ -231,31 +251,27 @@ class _$_LoginSettings implements _LoginSettings {
 
 abstract class _LoginSettings implements LoginSettings {
   const factory _LoginSettings(
-      {@nullable bool rememberMe,
-      @nullable bool autoLogin,
-      @nullable String uid,
-      @nullable String selectedTime,
-      @nullable String selectedUrl,
-      @nullable String pswd}) = _$_LoginSettings;
+      {bool rememberMe,
+      bool autoLogin,
+      String uid,
+      String selectedTime,
+      String selectedUrl,
+      String pswd}) = _$_LoginSettings;
 
   @override
-  @nullable
-  bool get rememberMe;
+  bool get rememberMe => throw _privateConstructorUsedError;
   @override
-  @nullable
-  bool get autoLogin;
+  bool get autoLogin => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get uid;
+  String get uid => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get selectedTime;
+  String get selectedTime => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get selectedUrl;
+  String get selectedUrl => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get pswd;
+  String get pswd => throw _privateConstructorUsedError;
   @override
-  _$LoginSettingsCopyWith<_LoginSettings> get copyWith;
+  @JsonKey(ignore: true)
+  _$LoginSettingsCopyWith<_LoginSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }

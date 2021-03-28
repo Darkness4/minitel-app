@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'zabbix_host.dart';
 
@@ -8,6 +8,10 @@ part of 'zabbix_host.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 ZabbixHost _$ZabbixHostFromJson(Map<String, dynamic> json) {
   return _ZabbixHost.fromJson(json);
 }
@@ -16,12 +20,11 @@ ZabbixHost _$ZabbixHostFromJson(Map<String, dynamic> json) {
 class _$ZabbixHostTearOff {
   const _$ZabbixHostTearOff();
 
-// ignore: unused_element
   _ZabbixHost call(
-      {@required @nullable String hostid,
-      @required @nullable String host,
-      @required @nullable List<ZabbixItem> items,
-      @required @nullable List<ZabbixInterface> interfaces}) {
+      {required String hostid,
+      required String host,
+      required List<ZabbixItem> items,
+      required List<ZabbixInterface> interfaces}) {
     return _ZabbixHost(
       hostid: hostid,
       host: host,
@@ -30,29 +33,25 @@ class _$ZabbixHostTearOff {
     );
   }
 
-// ignore: unused_element
   ZabbixHost fromJson(Map<String, Object> json) {
     return ZabbixHost.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ZabbixHost = _$ZabbixHostTearOff();
 
 /// @nodoc
 mixin _$ZabbixHost {
-  @nullable
-  String get hostid;
-  @nullable
-  String get host;
-  @nullable
-  List<ZabbixItem> get items;
-  @nullable
-  List<ZabbixInterface> get interfaces;
+  String get hostid => throw _privateConstructorUsedError;
+  String get host => throw _privateConstructorUsedError;
+  List<ZabbixItem> get items => throw _privateConstructorUsedError;
+  List<ZabbixInterface> get interfaces => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
-  $ZabbixHostCopyWith<ZabbixHost> get copyWith;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ZabbixHostCopyWith<ZabbixHost> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -61,10 +60,10 @@ abstract class $ZabbixHostCopyWith<$Res> {
           ZabbixHost value, $Res Function(ZabbixHost) then) =
       _$ZabbixHostCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String hostid,
-      @nullable String host,
-      @nullable List<ZabbixItem> items,
-      @nullable List<ZabbixInterface> interfaces});
+      {String hostid,
+      String host,
+      List<ZabbixItem> items,
+      List<ZabbixInterface> interfaces});
 }
 
 /// @nodoc
@@ -77,18 +76,28 @@ class _$ZabbixHostCopyWithImpl<$Res> implements $ZabbixHostCopyWith<$Res> {
 
   @override
   $Res call({
-    Object hostid = freezed,
-    Object host = freezed,
-    Object items = freezed,
-    Object interfaces = freezed,
+    Object? hostid = freezed,
+    Object? host = freezed,
+    Object? items = freezed,
+    Object? interfaces = freezed,
   }) {
     return _then(_value.copyWith(
-      hostid: hostid == freezed ? _value.hostid : hostid as String,
-      host: host == freezed ? _value.host : host as String,
-      items: items == freezed ? _value.items : items as List<ZabbixItem>,
+      hostid: hostid == freezed
+          ? _value.hostid
+          : hostid // ignore: cast_nullable_to_non_nullable
+              as String,
+      host: host == freezed
+          ? _value.host
+          : host // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<ZabbixItem>,
       interfaces: interfaces == freezed
           ? _value.interfaces
-          : interfaces as List<ZabbixInterface>,
+          : interfaces // ignore: cast_nullable_to_non_nullable
+              as List<ZabbixInterface>,
     ));
   }
 }
@@ -100,10 +109,10 @@ abstract class _$ZabbixHostCopyWith<$Res> implements $ZabbixHostCopyWith<$Res> {
       __$ZabbixHostCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String hostid,
-      @nullable String host,
-      @nullable List<ZabbixItem> items,
-      @nullable List<ZabbixInterface> interfaces});
+      {String hostid,
+      String host,
+      List<ZabbixItem> items,
+      List<ZabbixInterface> interfaces});
 }
 
 /// @nodoc
@@ -118,18 +127,28 @@ class __$ZabbixHostCopyWithImpl<$Res> extends _$ZabbixHostCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object hostid = freezed,
-    Object host = freezed,
-    Object items = freezed,
-    Object interfaces = freezed,
+    Object? hostid = freezed,
+    Object? host = freezed,
+    Object? items = freezed,
+    Object? interfaces = freezed,
   }) {
     return _then(_ZabbixHost(
-      hostid: hostid == freezed ? _value.hostid : hostid as String,
-      host: host == freezed ? _value.host : host as String,
-      items: items == freezed ? _value.items : items as List<ZabbixItem>,
+      hostid: hostid == freezed
+          ? _value.hostid
+          : hostid // ignore: cast_nullable_to_non_nullable
+              as String,
+      host: host == freezed
+          ? _value.host
+          : host // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: items == freezed
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<ZabbixItem>,
       interfaces: interfaces == freezed
           ? _value.interfaces
-          : interfaces as List<ZabbixInterface>,
+          : interfaces // ignore: cast_nullable_to_non_nullable
+              as List<ZabbixInterface>,
     ));
   }
 }
@@ -139,25 +158,21 @@ class __$ZabbixHostCopyWithImpl<$Res> extends _$ZabbixHostCopyWithImpl<$Res>
 /// @nodoc
 class _$_ZabbixHost implements _ZabbixHost {
   const _$_ZabbixHost(
-      {@required @nullable this.hostid,
-      @required @nullable this.host,
-      @required @nullable this.items,
-      @required @nullable this.interfaces});
+      {required this.hostid,
+      required this.host,
+      required this.items,
+      required this.interfaces});
 
   factory _$_ZabbixHost.fromJson(Map<String, dynamic> json) =>
       _$_$_ZabbixHostFromJson(json);
 
   @override
-  @nullable
   final String hostid;
   @override
-  @nullable
   final String host;
   @override
-  @nullable
   final List<ZabbixItem> items;
   @override
-  @nullable
   final List<ZabbixInterface> interfaces;
 
   @override
@@ -188,6 +203,7 @@ class _$_ZabbixHost implements _ZabbixHost {
       const DeepCollectionEquality().hash(items) ^
       const DeepCollectionEquality().hash(interfaces);
 
+  @JsonKey(ignore: true)
   @override
   _$ZabbixHostCopyWith<_ZabbixHost> get copyWith =>
       __$ZabbixHostCopyWithImpl<_ZabbixHost>(this, _$identity);
@@ -200,26 +216,24 @@ class _$_ZabbixHost implements _ZabbixHost {
 
 abstract class _ZabbixHost implements ZabbixHost {
   const factory _ZabbixHost(
-      {@required @nullable String hostid,
-      @required @nullable String host,
-      @required @nullable List<ZabbixItem> items,
-      @required @nullable List<ZabbixInterface> interfaces}) = _$_ZabbixHost;
+      {required String hostid,
+      required String host,
+      required List<ZabbixItem> items,
+      required List<ZabbixInterface> interfaces}) = _$_ZabbixHost;
 
   factory _ZabbixHost.fromJson(Map<String, dynamic> json) =
       _$_ZabbixHost.fromJson;
 
   @override
-  @nullable
-  String get hostid;
+  String get hostid => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get host;
+  String get host => throw _privateConstructorUsedError;
   @override
-  @nullable
-  List<ZabbixItem> get items;
+  List<ZabbixItem> get items => throw _privateConstructorUsedError;
   @override
-  @nullable
-  List<ZabbixInterface> get interfaces;
+  List<ZabbixInterface> get interfaces => throw _privateConstructorUsedError;
   @override
-  _$ZabbixHostCopyWith<_ZabbixHost> get copyWith;
+  @JsonKey(ignore: true)
+  _$ZabbixHostCopyWith<_ZabbixHost> get copyWith =>
+      throw _privateConstructorUsedError;
 }

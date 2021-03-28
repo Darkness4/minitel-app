@@ -13,9 +13,9 @@ class PostRepositoryImpl implements PostRepository {
   final NetworkInfo networkInfo;
 
   const PostRepositoryImpl({
-    this.localDataSource,
-    this.remoteDataSource,
-    this.networkInfo,
+    required this.localDataSource,
+    required this.remoteDataSource,
+    required this.networkInfo,
   });
 
   @override

@@ -28,7 +28,7 @@ class AppLoc {
 
   static Future<AppLoc> load(Locale locale) {
     final name =
-        locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+        locale.countryCode!.isEmpty ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
@@ -37,7 +37,7 @@ class AppLoc {
   }
 
   static AppLoc of(BuildContext context) {
-    return Localizations.of<AppLoc>(context, AppLoc);
+    return Localizations.of<AppLoc>(context, AppLoc)!;
   }
 }
 

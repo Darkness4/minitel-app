@@ -6,7 +6,7 @@ import 'package:minitel_toolbox/presentation/shared/keys.dart';
 
 class CalendarStatusWidget extends StatelessWidget {
   const CalendarStatusWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

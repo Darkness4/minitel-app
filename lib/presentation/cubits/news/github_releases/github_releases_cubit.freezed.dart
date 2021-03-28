@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'github_releases_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'github_releases_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$GithubReleasesStateTearOff {
   const _$GithubReleasesStateTearOff();
 
-// ignore: unused_element
   GithubReleasesStateInitial initial() {
     return const GithubReleasesStateInitial();
   }
 
-// ignore: unused_element
   GithubReleasesStateLoading loading() {
     return const GithubReleasesStateLoading();
   }
 
-// ignore: unused_element
   GithubReleasesStateLoaded loaded(List<GithubRelease> releases) {
     return GithubReleasesStateLoaded(
       releases,
     );
   }
 
-// ignore: unused_element
   GithubReleasesStateError error(Exception error) {
     return GithubReleasesStateError(
       error,
@@ -39,41 +38,44 @@ class _$GithubReleasesStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $GithubReleasesState = _$GithubReleasesStateTearOff();
 
 /// @nodoc
 mixin _$GithubReleasesState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<GithubRelease> releases),
-    @required Result error(Exception error),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<GithubRelease> releases) loaded,
+    required TResult Function(Exception error) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<GithubRelease> releases),
-    Result error(Exception error),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<GithubRelease> releases)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(GithubReleasesStateInitial value),
-    @required Result loading(GithubReleasesStateLoading value),
-    @required Result loaded(GithubReleasesStateLoaded value),
-    @required Result error(GithubReleasesStateError value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(GithubReleasesStateInitial value) initial,
+    required TResult Function(GithubReleasesStateLoading value) loading,
+    required TResult Function(GithubReleasesStateLoaded value) loaded,
+    required TResult Function(GithubReleasesStateError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(GithubReleasesStateInitial value),
-    Result loading(GithubReleasesStateLoading value),
-    Result loaded(GithubReleasesStateLoaded value),
-    Result error(GithubReleasesStateError value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GithubReleasesStateInitial value)? initial,
+    TResult Function(GithubReleasesStateLoading value)? loading,
+    TResult Function(GithubReleasesStateLoaded value)? loaded,
+    TResult Function(GithubReleasesStateError value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -140,29 +142,24 @@ class _$GithubReleasesStateInitial
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<GithubRelease> releases),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<GithubRelease> releases) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<GithubRelease> releases),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<GithubRelease> releases)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -171,29 +168,24 @@ class _$GithubReleasesStateInitial
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(GithubReleasesStateInitial value),
-    @required Result loading(GithubReleasesStateLoading value),
-    @required Result loaded(GithubReleasesStateLoaded value),
-    @required Result error(GithubReleasesStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(GithubReleasesStateInitial value) initial,
+    required TResult Function(GithubReleasesStateLoading value) loading,
+    required TResult Function(GithubReleasesStateLoaded value) loaded,
+    required TResult Function(GithubReleasesStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(GithubReleasesStateInitial value),
-    Result loading(GithubReleasesStateLoading value),
-    Result loaded(GithubReleasesStateLoaded value),
-    Result error(GithubReleasesStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GithubReleasesStateInitial value)? initial,
+    TResult Function(GithubReleasesStateLoading value)? loading,
+    TResult Function(GithubReleasesStateLoaded value)? loaded,
+    TResult Function(GithubReleasesStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -252,29 +244,24 @@ class _$GithubReleasesStateLoading
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<GithubRelease> releases),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<GithubRelease> releases) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<GithubRelease> releases),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<GithubRelease> releases)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -283,29 +270,24 @@ class _$GithubReleasesStateLoading
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(GithubReleasesStateInitial value),
-    @required Result loading(GithubReleasesStateLoading value),
-    @required Result loaded(GithubReleasesStateLoaded value),
-    @required Result error(GithubReleasesStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(GithubReleasesStateInitial value) initial,
+    required TResult Function(GithubReleasesStateLoading value) loading,
+    required TResult Function(GithubReleasesStateLoaded value) loaded,
+    required TResult Function(GithubReleasesStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(GithubReleasesStateInitial value),
-    Result loading(GithubReleasesStateLoading value),
-    Result loaded(GithubReleasesStateLoaded value),
-    Result error(GithubReleasesStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GithubReleasesStateInitial value)? initial,
+    TResult Function(GithubReleasesStateLoading value)? loading,
+    TResult Function(GithubReleasesStateLoaded value)? loaded,
+    TResult Function(GithubReleasesStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -339,10 +321,13 @@ class _$GithubReleasesStateLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object releases = freezed,
+    Object? releases = freezed,
   }) {
     return _then(GithubReleasesStateLoaded(
-      releases == freezed ? _value.releases : releases as List<GithubRelease>,
+      releases == freezed
+          ? _value.releases
+          : releases // ignore: cast_nullable_to_non_nullable
+              as List<GithubRelease>,
     ));
   }
 }
@@ -351,7 +336,7 @@ class _$GithubReleasesStateLoadedCopyWithImpl<$Res>
 class _$GithubReleasesStateLoaded
     with DiagnosticableTreeMixin
     implements GithubReleasesStateLoaded {
-  const _$GithubReleasesStateLoaded(this.releases) : assert(releases != null);
+  const _$GithubReleasesStateLoaded(this.releases);
 
   @override
   final List<GithubRelease> releases;
@@ -382,6 +367,7 @@ class _$GithubReleasesStateLoaded
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(releases);
 
+  @JsonKey(ignore: true)
   @override
   $GithubReleasesStateLoadedCopyWith<GithubReleasesStateLoaded> get copyWith =>
       _$GithubReleasesStateLoadedCopyWithImpl<GithubReleasesStateLoaded>(
@@ -389,29 +375,24 @@ class _$GithubReleasesStateLoaded
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<GithubRelease> releases),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<GithubRelease> releases) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loaded(releases);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<GithubRelease> releases),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<GithubRelease> releases)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(releases);
     }
@@ -420,29 +401,24 @@ class _$GithubReleasesStateLoaded
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(GithubReleasesStateInitial value),
-    @required Result loading(GithubReleasesStateLoading value),
-    @required Result loaded(GithubReleasesStateLoaded value),
-    @required Result error(GithubReleasesStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(GithubReleasesStateInitial value) initial,
+    required TResult Function(GithubReleasesStateLoading value) loading,
+    required TResult Function(GithubReleasesStateLoaded value) loaded,
+    required TResult Function(GithubReleasesStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(GithubReleasesStateInitial value),
-    Result loading(GithubReleasesStateLoading value),
-    Result loaded(GithubReleasesStateLoaded value),
-    Result error(GithubReleasesStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GithubReleasesStateInitial value)? initial,
+    TResult Function(GithubReleasesStateLoading value)? loading,
+    TResult Function(GithubReleasesStateLoaded value)? loaded,
+    TResult Function(GithubReleasesStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -454,8 +430,10 @@ abstract class GithubReleasesStateLoaded implements GithubReleasesState {
   const factory GithubReleasesStateLoaded(List<GithubRelease> releases) =
       _$GithubReleasesStateLoaded;
 
-  List<GithubRelease> get releases;
-  $GithubReleasesStateLoadedCopyWith<GithubReleasesStateLoaded> get copyWith;
+  List<GithubRelease> get releases => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GithubReleasesStateLoadedCopyWith<GithubReleasesStateLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -480,10 +458,13 @@ class _$GithubReleasesStateErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object error = freezed,
+    Object? error = freezed,
   }) {
     return _then(GithubReleasesStateError(
-      error == freezed ? _value.error : error as Exception,
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
@@ -492,7 +473,7 @@ class _$GithubReleasesStateErrorCopyWithImpl<$Res>
 class _$GithubReleasesStateError
     with DiagnosticableTreeMixin
     implements GithubReleasesStateError {
-  const _$GithubReleasesStateError(this.error) : assert(error != null);
+  const _$GithubReleasesStateError(this.error);
 
   @override
   final Exception error;
@@ -522,6 +503,7 @@ class _$GithubReleasesStateError
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
+  @JsonKey(ignore: true)
   @override
   $GithubReleasesStateErrorCopyWith<GithubReleasesStateError> get copyWith =>
       _$GithubReleasesStateErrorCopyWithImpl<GithubReleasesStateError>(
@@ -529,29 +511,24 @@ class _$GithubReleasesStateError
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<GithubRelease> releases),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<GithubRelease> releases) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return error(this.error);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<GithubRelease> releases),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<GithubRelease> releases)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this.error);
     }
@@ -560,29 +537,24 @@ class _$GithubReleasesStateError
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(GithubReleasesStateInitial value),
-    @required Result loading(GithubReleasesStateLoading value),
-    @required Result loaded(GithubReleasesStateLoaded value),
-    @required Result error(GithubReleasesStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(GithubReleasesStateInitial value) initial,
+    required TResult Function(GithubReleasesStateLoading value) loading,
+    required TResult Function(GithubReleasesStateLoaded value) loaded,
+    required TResult Function(GithubReleasesStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(GithubReleasesStateInitial value),
-    Result loading(GithubReleasesStateLoading value),
-    Result loaded(GithubReleasesStateLoaded value),
-    Result error(GithubReleasesStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GithubReleasesStateInitial value)? initial,
+    TResult Function(GithubReleasesStateLoading value)? loading,
+    TResult Function(GithubReleasesStateLoaded value)? loaded,
+    TResult Function(GithubReleasesStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -594,6 +566,8 @@ abstract class GithubReleasesStateError implements GithubReleasesState {
   const factory GithubReleasesStateError(Exception error) =
       _$GithubReleasesStateError;
 
-  Exception get error;
-  $GithubReleasesStateErrorCopyWith<GithubReleasesStateError> get copyWith;
+  Exception get error => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GithubReleasesStateErrorCopyWith<GithubReleasesStateError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

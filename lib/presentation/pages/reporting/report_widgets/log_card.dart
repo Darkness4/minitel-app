@@ -9,8 +9,8 @@ class LogCard extends StatelessWidget {
 
   const LogCard(
     this.text, {
-    @required this.title,
-    Key key,
+    required this.title,
+    Key? key,
     this.elevation = 3,
   }) : super(key: key);
 

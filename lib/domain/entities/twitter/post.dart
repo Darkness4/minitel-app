@@ -5,22 +5,22 @@ import 'package:intl/intl.dart';
 part 'post.freezed.dart';
 
 @freezed
-abstract class Post with _$Post {
+class Post with _$Post {
   const factory Post({
-    @required @nullable String text,
-    @required @nullable String id_str,
-    @required @nullable String user_name,
-    @required @nullable String screen_name,
-    @required @nullable Uri profile_image_url_https,
-    @required @nullable Uri url,
-    @required @nullable DateTime created_at,
+    required String text,
+    required String id_str,
+    required String user_name,
+    required String screen_name,
+    required Uri profile_image_url_https,
+    required Uri url,
+    required DateTime created_at,
   }) = _Post;
 
   factory Post.fromMap(Map<String, dynamic> json) {
     return Post(
-      text: json['text'] as String ?? '',
+      text: json['text'] as String? ?? '',
       id_str: json['id_str'] as String,
-      user_name: json['user']['name'] as String ?? '',
+      user_name: json['user']['name'] as String? ?? '',
       profile_image_url_https:
           Uri.parse(json['user']['profile_image_url_https'] as String),
       screen_name: json['user']['screen_name'] as String,

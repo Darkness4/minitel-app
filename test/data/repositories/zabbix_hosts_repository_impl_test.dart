@@ -3,11 +3,17 @@ import 'package:minitel_toolbox/data/datasources/zabbix/zabbix_remote_data_sourc
 import 'package:minitel_toolbox/data/repositories/zabbix_hosts_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 import 'package:minitel_toolbox/domain/repositories/zabbix_hosts_repository.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'zabbix_hosts_repository_impl_test.mocks.dart';
+
+@GenerateMocks([], customMocks: [
+  MockSpec<ZabbixRemoteDataSource>(as: #MockRemoteDataSource),
+])
 void main() {
-  ZabbixHostsRepository repository;
-  MockRemoteDataSource mockRemoteDataSource;
+  late ZabbixHostsRepository repository;
+  late MockRemoteDataSource mockRemoteDataSource;
   const tListZabbixHostModel = <ZabbixHost>[
     ZabbixHost(
       host: 'host',
@@ -42,5 +48,3 @@ void main() {
     );
   });
 }
-
-class MockRemoteDataSource extends Mock implements ZabbixRemoteDataSource {}

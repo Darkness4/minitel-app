@@ -2,31 +2,18 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:minitel_toolbox/presentation/widgets/app_lists_widgets.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 class PortailWebView extends StatelessWidget {
   final List<Cookie> portailEMSEcookies;
 
-  const PortailWebView({@required this.portailEMSEcookies, Key key})
+  const PortailWebView({required this.portailEMSEcookies, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cookieManager = CookieManager();
-    for (final cookie in portailEMSEcookies) {
-      cookieManager.setCookie('https://emse.fr',
-          "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
-      cookieManager.setCookie('https://campus.emse.fr',
-          "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
-      cookieManager.setCookie('https://promethee.emse.fr',
-          "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
-      cookieManager.setCookie('https://portail.emse.fr',
-          "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
-      cookieManager.setCookie('https://cas.emse.fr',
-          "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
-      cookieManager.setCookie('https://shibbo2.emse.fr',
-          "${cookie.name}=${cookie.value}; secure; domain=${cookie.domain ?? ""}");
-    }
+    final cookieManager = WebviewCookieManager();
+    cookieManager.setCookies(portailEMSEcookies);
     return const ScaffoldWebView(
       backgroundColor: Colors.deepPurple,
       initialUrl: 'https://portail.emse.fr/',

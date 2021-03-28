@@ -6,17 +6,17 @@ import 'package:minitel_toolbox/domain/entities/icalendar/timezone_builder.dart'
 import 'package:timezone/timezone.dart';
 
 class ParsedCalendarBuilder {
-  String version;
-  String prodID;
-  String calscale;
+  String? version;
+  String? prodID;
+  String? calscale;
   final TimezoneBuilder timezone = TimezoneBuilder();
   final List<Event> events = <Event>[];
 
   ParsedCalendar build() {
     return ParsedCalendar(
-      version: version,
-      prodID: prodID,
-      calscale: calscale,
+      version: version!,
+      prodID: prodID!,
+      calscale: calscale!,
       timezone: timezone.build(),
       events: events,
     );
@@ -37,7 +37,7 @@ class ParsedCalendarBuilder {
         continue; // Skip BEGIN:VEVENT
       }
       if (line[0] == 'END' && line[1] == 'VEVENT') {
-        events.add(Event.fromMap(vEvent, timezone.tzid));
+        events.add(Event.fromMap(vEvent, timezone.tzid!));
         mode = ICalSection.None;
         continue; // Skip END:VEVENT
       }

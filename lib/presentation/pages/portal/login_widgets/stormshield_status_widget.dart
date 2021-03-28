@@ -6,7 +6,7 @@ import 'package:minitel_toolbox/presentation/shared/keys.dart';
 
 class StormshieldStatusWidget extends StatelessWidget {
   const StormshieldStatusWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'zabbix_interface.dart';
 
@@ -8,6 +8,10 @@ part of 'zabbix_interface.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 ZabbixInterface _$ZabbixInterfaceFromJson(Map<String, dynamic> json) {
   return _ZabbixInterface.fromJson(json);
 }
@@ -16,30 +20,28 @@ ZabbixInterface _$ZabbixInterfaceFromJson(Map<String, dynamic> json) {
 class _$ZabbixInterfaceTearOff {
   const _$ZabbixInterfaceTearOff();
 
-// ignore: unused_element
-  _ZabbixInterface call({@required @nullable String ip}) {
+  _ZabbixInterface call({required String ip}) {
     return _ZabbixInterface(
       ip: ip,
     );
   }
 
-// ignore: unused_element
   ZabbixInterface fromJson(Map<String, Object> json) {
     return ZabbixInterface.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ZabbixInterface = _$ZabbixInterfaceTearOff();
 
 /// @nodoc
 mixin _$ZabbixInterface {
-  @nullable
-  String get ip;
+  String get ip => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
-  $ZabbixInterfaceCopyWith<ZabbixInterface> get copyWith;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ZabbixInterfaceCopyWith<ZabbixInterface> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -47,7 +49,7 @@ abstract class $ZabbixInterfaceCopyWith<$Res> {
   factory $ZabbixInterfaceCopyWith(
           ZabbixInterface value, $Res Function(ZabbixInterface) then) =
       _$ZabbixInterfaceCopyWithImpl<$Res>;
-  $Res call({@nullable String ip});
+  $Res call({String ip});
 }
 
 /// @nodoc
@@ -61,10 +63,13 @@ class _$ZabbixInterfaceCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object ip = freezed,
+    Object? ip = freezed,
   }) {
     return _then(_value.copyWith(
-      ip: ip == freezed ? _value.ip : ip as String,
+      ip: ip == freezed
+          ? _value.ip
+          : ip // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -76,7 +81,7 @@ abstract class _$ZabbixInterfaceCopyWith<$Res>
           _ZabbixInterface value, $Res Function(_ZabbixInterface) then) =
       __$ZabbixInterfaceCopyWithImpl<$Res>;
   @override
-  $Res call({@nullable String ip});
+  $Res call({String ip});
 }
 
 /// @nodoc
@@ -92,10 +97,13 @@ class __$ZabbixInterfaceCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object ip = freezed,
+    Object? ip = freezed,
   }) {
     return _then(_ZabbixInterface(
-      ip: ip == freezed ? _value.ip : ip as String,
+      ip: ip == freezed
+          ? _value.ip
+          : ip // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -104,13 +112,12 @@ class __$ZabbixInterfaceCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_ZabbixInterface implements _ZabbixInterface {
-  const _$_ZabbixInterface({@required @nullable this.ip});
+  const _$_ZabbixInterface({required this.ip});
 
   factory _$_ZabbixInterface.fromJson(Map<String, dynamic> json) =>
       _$_$_ZabbixInterfaceFromJson(json);
 
   @override
-  @nullable
   final String ip;
 
   @override
@@ -130,6 +137,7 @@ class _$_ZabbixInterface implements _ZabbixInterface {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(ip);
 
+  @JsonKey(ignore: true)
   @override
   _$ZabbixInterfaceCopyWith<_ZabbixInterface> get copyWith =>
       __$ZabbixInterfaceCopyWithImpl<_ZabbixInterface>(this, _$identity);
@@ -141,15 +149,15 @@ class _$_ZabbixInterface implements _ZabbixInterface {
 }
 
 abstract class _ZabbixInterface implements ZabbixInterface {
-  const factory _ZabbixInterface({@required @nullable String ip}) =
-      _$_ZabbixInterface;
+  const factory _ZabbixInterface({required String ip}) = _$_ZabbixInterface;
 
   factory _ZabbixInterface.fromJson(Map<String, dynamic> json) =
       _$_ZabbixInterface.fromJson;
 
   @override
-  @nullable
-  String get ip;
+  String get ip => throw _privateConstructorUsedError;
   @override
-  _$ZabbixInterfaceCopyWith<_ZabbixInterface> get copyWith;
+  @JsonKey(ignore: true)
+  _$ZabbixInterfaceCopyWith<_ZabbixInterface> get copyWith =>
+      throw _privateConstructorUsedError;
 }

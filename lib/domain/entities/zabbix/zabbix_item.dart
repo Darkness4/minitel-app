@@ -27,15 +27,15 @@ List<String> ZabbixItemType = <String>[
 
 /// This is used to store data from a host.
 @freezed
-abstract class ZabbixItem with _$ZabbixItem {
+class ZabbixItem with _$ZabbixItem {
   const factory ZabbixItem({
-    @JsonKey(fromJson: _typeFromJson, toJson: _typeToJson) String type,
+    @JsonKey(fromJson: _typeFromJson, toJson: _typeToJson) required String type,
     @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
-        int value_type,
-    String name,
-    String lastvalue,
-    String units,
-    String snmp_oid,
+        required int value_type,
+    required String name,
+    required String lastvalue,
+    required String units,
+    required String snmp_oid,
   }) = _ZabbixItem;
 
   factory ZabbixItem.fromJson(Map<String, dynamic> json) =>

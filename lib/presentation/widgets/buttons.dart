@@ -12,10 +12,10 @@ class AnimatedFloatingButton extends StatelessWidget {
 
   const AnimatedFloatingButton(
     this.text, {
-    @required this.controller,
-    @required this.child,
-    @required this.onPressed,
-    Key key,
+    required this.controller,
+    required this.child,
+    required this.onPressed,
+    Key? key,
     this.start = 0.0,
     this.end = 1.0,
   }) : super(key: key);

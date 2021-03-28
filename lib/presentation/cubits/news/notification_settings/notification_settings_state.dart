@@ -1,11 +1,11 @@
 part of 'notification_settings_cubit.dart';
 
 @freezed
-abstract class NotificationSettingsState with _$NotificationSettingsState {
+class NotificationSettingsState with _$NotificationSettingsState {
   const factory NotificationSettingsState({
-    @required @nullable NotificationSettings notificationSettings,
-    @required @nullable bool isSaved,
-    @required @nullable bool isLoaded,
+    required NotificationSettings notificationSettings,
+    required bool isSaved,
+    required bool isLoaded,
   }) = _NotificationSettingsState;
 
   factory NotificationSettingsState.initial() {
@@ -23,10 +23,10 @@ abstract class NotificationSettingsState with _$NotificationSettingsState {
 
 extension NotificationSettingsStateX on NotificationSettingsState {
   NotificationSettingsState update({
-    Duration early,
-    Duration range,
-    bool enabled,
-    bool isLoaded,
+    Duration? early,
+    Duration? range,
+    bool? enabled,
+    bool? isLoaded,
   }) {
     return copyWith(
       notificationSettings: notificationSettings.copyWith(

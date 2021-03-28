@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'calendar_status_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'calendar_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$CalendarStatusStateTearOff {
   const _$CalendarStatusStateTearOff();
 
-// ignore: unused_element
   CalendarStatusInitial initial() {
     return const CalendarStatusInitial();
   }
 
-// ignore: unused_element
   CalendarStatusLoading loading() {
     return const CalendarStatusLoading();
   }
 
-// ignore: unused_element
   CalendarStatusError error(Exception e) {
     return CalendarStatusError(
       e,
     );
   }
 
-// ignore: unused_element
   CalendarStatusLoaded loaded(bool status) {
     return CalendarStatusLoaded(
       status,
@@ -39,41 +38,44 @@ class _$CalendarStatusStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $CalendarStatusState = _$CalendarStatusStateTearOff();
 
 /// @nodoc
 mixin _$CalendarStatusState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(CalendarStatusInitial value),
-    @required Result loading(CalendarStatusLoading value),
-    @required Result error(CalendarStatusError value),
-    @required Result loaded(CalendarStatusLoaded value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(CalendarStatusInitial value) initial,
+    required TResult Function(CalendarStatusLoading value) loading,
+    required TResult Function(CalendarStatusError value) error,
+    required TResult Function(CalendarStatusLoaded value) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(CalendarStatusInitial value),
-    Result loading(CalendarStatusLoading value),
-    Result error(CalendarStatusError value),
-    Result loaded(CalendarStatusLoaded value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CalendarStatusInitial value)? initial,
+    TResult Function(CalendarStatusLoading value)? loading,
+    TResult Function(CalendarStatusError value)? error,
+    TResult Function(CalendarStatusLoaded value)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -131,29 +133,24 @@ class _$CalendarStatusInitial implements CalendarStatusInitial {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -162,29 +159,24 @@ class _$CalendarStatusInitial implements CalendarStatusInitial {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(CalendarStatusInitial value),
-    @required Result loading(CalendarStatusLoading value),
-    @required Result error(CalendarStatusError value),
-    @required Result loaded(CalendarStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(CalendarStatusInitial value) initial,
+    required TResult Function(CalendarStatusLoading value) loading,
+    required TResult Function(CalendarStatusError value) error,
+    required TResult Function(CalendarStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(CalendarStatusInitial value),
-    Result loading(CalendarStatusLoading value),
-    Result error(CalendarStatusError value),
-    Result loaded(CalendarStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CalendarStatusInitial value)? initial,
+    TResult Function(CalendarStatusLoading value)? loading,
+    TResult Function(CalendarStatusError value)? error,
+    TResult Function(CalendarStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -234,29 +226,24 @@ class _$CalendarStatusLoading implements CalendarStatusLoading {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -265,29 +252,24 @@ class _$CalendarStatusLoading implements CalendarStatusLoading {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(CalendarStatusInitial value),
-    @required Result loading(CalendarStatusLoading value),
-    @required Result error(CalendarStatusError value),
-    @required Result loaded(CalendarStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(CalendarStatusInitial value) initial,
+    required TResult Function(CalendarStatusLoading value) loading,
+    required TResult Function(CalendarStatusError value) error,
+    required TResult Function(CalendarStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(CalendarStatusInitial value),
-    Result loading(CalendarStatusLoading value),
-    Result error(CalendarStatusError value),
-    Result loaded(CalendarStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CalendarStatusInitial value)? initial,
+    TResult Function(CalendarStatusLoading value)? loading,
+    TResult Function(CalendarStatusError value)? error,
+    TResult Function(CalendarStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -320,17 +302,20 @@ class _$CalendarStatusErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object e = freezed,
+    Object? e = freezed,
   }) {
     return _then(CalendarStatusError(
-      e == freezed ? _value.e : e as Exception,
+      e == freezed
+          ? _value.e
+          : e // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
 
 /// @nodoc
 class _$CalendarStatusError implements CalendarStatusError {
-  const _$CalendarStatusError(this.e) : assert(e != null);
+  const _$CalendarStatusError(this.e);
 
   @override
   final Exception e;
@@ -352,35 +337,31 @@ class _$CalendarStatusError implements CalendarStatusError {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(e);
 
+  @JsonKey(ignore: true)
   @override
   $CalendarStatusErrorCopyWith<CalendarStatusError> get copyWith =>
       _$CalendarStatusErrorCopyWithImpl<CalendarStatusError>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(e);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(e);
     }
@@ -389,29 +370,24 @@ class _$CalendarStatusError implements CalendarStatusError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(CalendarStatusInitial value),
-    @required Result loading(CalendarStatusLoading value),
-    @required Result error(CalendarStatusError value),
-    @required Result loaded(CalendarStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(CalendarStatusInitial value) initial,
+    required TResult Function(CalendarStatusLoading value) loading,
+    required TResult Function(CalendarStatusError value) error,
+    required TResult Function(CalendarStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(CalendarStatusInitial value),
-    Result loading(CalendarStatusLoading value),
-    Result error(CalendarStatusError value),
-    Result loaded(CalendarStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CalendarStatusInitial value)? initial,
+    TResult Function(CalendarStatusLoading value)? loading,
+    TResult Function(CalendarStatusError value)? error,
+    TResult Function(CalendarStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -422,8 +398,10 @@ class _$CalendarStatusError implements CalendarStatusError {
 abstract class CalendarStatusError implements CalendarStatusState {
   const factory CalendarStatusError(Exception e) = _$CalendarStatusError;
 
-  Exception get e;
-  $CalendarStatusErrorCopyWith<CalendarStatusError> get copyWith;
+  Exception get e => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CalendarStatusErrorCopyWith<CalendarStatusError> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -447,17 +425,20 @@ class _$CalendarStatusLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object status = freezed,
+    Object? status = freezed,
   }) {
     return _then(CalendarStatusLoaded(
-      status == freezed ? _value.status : status as bool,
+      status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$CalendarStatusLoaded implements CalendarStatusLoaded {
-  const _$CalendarStatusLoaded(this.status) : assert(status != null);
+  const _$CalendarStatusLoaded(this.status);
 
   @override
   final bool status;
@@ -479,6 +460,7 @@ class _$CalendarStatusLoaded implements CalendarStatusLoaded {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(status);
 
+  @JsonKey(ignore: true)
   @override
   $CalendarStatusLoadedCopyWith<CalendarStatusLoaded> get copyWith =>
       _$CalendarStatusLoadedCopyWithImpl<CalendarStatusLoaded>(
@@ -486,29 +468,24 @@ class _$CalendarStatusLoaded implements CalendarStatusLoaded {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(status);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(status);
     }
@@ -517,29 +494,24 @@ class _$CalendarStatusLoaded implements CalendarStatusLoaded {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(CalendarStatusInitial value),
-    @required Result loading(CalendarStatusLoading value),
-    @required Result error(CalendarStatusError value),
-    @required Result loaded(CalendarStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(CalendarStatusInitial value) initial,
+    required TResult Function(CalendarStatusLoading value) loading,
+    required TResult Function(CalendarStatusError value) error,
+    required TResult Function(CalendarStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(CalendarStatusInitial value),
-    Result loading(CalendarStatusLoading value),
-    Result error(CalendarStatusError value),
-    Result loaded(CalendarStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CalendarStatusInitial value)? initial,
+    TResult Function(CalendarStatusLoading value)? loading,
+    TResult Function(CalendarStatusError value)? error,
+    TResult Function(CalendarStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -550,6 +522,8 @@ class _$CalendarStatusLoaded implements CalendarStatusLoaded {
 abstract class CalendarStatusLoaded implements CalendarStatusState {
   const factory CalendarStatusLoaded(bool status) = _$CalendarStatusLoaded;
 
-  bool get status;
-  $CalendarStatusLoadedCopyWith<CalendarStatusLoaded> get copyWith;
+  bool get status => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CalendarStatusLoadedCopyWith<CalendarStatusLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }

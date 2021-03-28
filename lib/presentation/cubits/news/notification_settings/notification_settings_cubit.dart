@@ -15,9 +15,8 @@ class NotificationSettingsCubit extends Cubit<NotificationSettingsState> {
   final NotificationSettingsRepository repository;
 
   NotificationSettingsCubit({
-    @required this.repository,
-  })  : assert(repository != null),
-        super(NotificationSettingsState.initial());
+    required this.repository,
+  }) : super(NotificationSettingsState.initial());
 
   void earlyChanged(Duration early) {
     emit(state.update(early: early));

@@ -5,22 +5,22 @@ part 'asset.freezed.dart';
 part 'asset.g.dart';
 
 @freezed
-abstract class GithubAsset with _$GithubAsset {
+class GithubAsset with _$GithubAsset {
   @JsonSerializable(explicitToJson: true)
   const factory GithubAsset({
-    @required @nullable String url,
-    @required @nullable String browser_download_url,
-    @required @nullable int id,
-    @required @nullable String node_id,
-    @required @nullable String name,
-    @required @nullable String label,
-    @required @nullable String state,
-    @required @nullable String content_type,
-    @required @nullable int size,
-    @required @nullable int download_count,
-    @required @nullable DateTime created_at,
-    @required @nullable DateTime updated_at,
-    @required @nullable GithubUser uploader,
+    required String url,
+    required String browser_download_url,
+    required int id,
+    required String node_id,
+    required String name,
+    required String label,
+    required String state,
+    required String content_type,
+    required int size,
+    required int download_count,
+    required DateTime created_at,
+    required DateTime updated_at,
+    required GithubUser uploader,
   }) = _GithubAsset;
 
   factory GithubAsset.fromJson(Map<String, dynamic> json) =>

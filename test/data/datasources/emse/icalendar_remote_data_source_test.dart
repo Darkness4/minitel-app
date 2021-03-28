@@ -5,18 +5,21 @@ import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_remote_data_source.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'icalendar_remote_data_source_test.mocks.dart';
 
+@GenerateMocks([http.Client])
 void main() {
-  ICalendarRemoteDataSource dataSource;
-  MockHttpClient mockHttpClient;
+  late ICalendarRemoteDataSource dataSource;
+  late MockClient mockHttpClient;
   const tURL =
       'https://portail.emse.fr/ics/773debe2a985c93f612e72894e4e11b900b64419.ics';
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
+    mockHttpClient = MockClient();
     dataSource = ICalendarRemoteDataSourceImpl(client: mockHttpClient);
   });
 
@@ -99,5 +102,3 @@ void main() {
     );
   });
 }
-
-class MockHttpClient extends Mock implements http.Client {}

@@ -2,13 +2,13 @@ import 'package:minitel_toolbox/domain/entities/icalendar/timezone.dart';
 import 'package:timezone/timezone.dart';
 
 class TimezoneBuilder {
-  Location tzid;
+  Location? tzid;
   final daylight = TimezoneDescriptionBuilder();
   final standard = TimezoneDescriptionBuilder();
 
   Timezone build() {
     return Timezone(
-      tzid: tzid,
+      tzid: tzid!,
       daylight: daylight.build(),
       standard: standard.build(),
     );
@@ -16,19 +16,19 @@ class TimezoneBuilder {
 }
 
 class TimezoneDescriptionBuilder {
-  DateTime dtstart;
-  String tzOffsetTo;
-  String tzOffsetFrom;
-  String rRule;
-  String tzName;
+  DateTime? dtstart;
+  String? tzOffsetTo;
+  String? tzOffsetFrom;
+  String? rRule;
+  String? tzName;
 
   TimezoneDescription build() {
     return TimezoneDescription(
-      dtstart: dtstart,
-      rRule: rRule,
-      tzName: tzName,
-      tzOffsetFrom: tzOffsetFrom,
-      tzOffsetTo: tzOffsetTo,
+      dtstart: dtstart!,
+      rRule: rRule!,
+      tzName: tzName!,
+      tzOffsetFrom: tzOffsetFrom!,
+      tzOffsetTo: tzOffsetTo!,
     );
   }
 

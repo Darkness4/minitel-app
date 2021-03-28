@@ -13,9 +13,9 @@ class ReleasesRepositoryImpl implements ReleasesRepository {
   final NetworkInfo networkInfo;
 
   const ReleasesRepositoryImpl({
-    this.localDataSource,
-    this.remoteDataSource,
-    this.networkInfo,
+    required this.localDataSource,
+    required this.remoteDataSource,
+    required this.networkInfo,
   });
 
   @override

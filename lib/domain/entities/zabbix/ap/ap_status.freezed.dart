@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'ap_status.dart';
 
@@ -9,18 +9,20 @@ part of 'ap_status.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$APStatusTearOff {
   const _$APStatusTearOff();
 
-// ignore: unused_element
   _APStatus call(
-      {@required @nullable String hostname,
-      @required @nullable Duration uptime,
-      @required @nullable int utilization5G,
-      @required @nullable int utilization2G,
-      @required @nullable int users,
-      @required @nullable int snmpAvailable}) {
+      {required String hostname,
+      required Duration uptime,
+      required int utilization5G,
+      required int utilization2G,
+      required int users,
+      required int snmpAvailable}) {
     return _APStatus(
       hostname: hostname,
       uptime: uptime,
@@ -33,25 +35,20 @@ class _$APStatusTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $APStatus = _$APStatusTearOff();
 
 /// @nodoc
 mixin _$APStatus {
-  @nullable
-  String get hostname;
-  @nullable
-  Duration get uptime;
-  @nullable
-  int get utilization5G;
-  @nullable
-  int get utilization2G;
-  @nullable
-  int get users;
-  @nullable
-  int get snmpAvailable;
+  String get hostname => throw _privateConstructorUsedError;
+  Duration get uptime => throw _privateConstructorUsedError;
+  int get utilization5G => throw _privateConstructorUsedError;
+  int get utilization2G => throw _privateConstructorUsedError;
+  int get users => throw _privateConstructorUsedError;
+  int get snmpAvailable => throw _privateConstructorUsedError;
 
-  $APStatusCopyWith<APStatus> get copyWith;
+  @JsonKey(ignore: true)
+  $APStatusCopyWith<APStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -59,12 +56,12 @@ abstract class $APStatusCopyWith<$Res> {
   factory $APStatusCopyWith(APStatus value, $Res Function(APStatus) then) =
       _$APStatusCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String hostname,
-      @nullable Duration uptime,
-      @nullable int utilization5G,
-      @nullable int utilization2G,
-      @nullable int users,
-      @nullable int snmpAvailable});
+      {String hostname,
+      Duration uptime,
+      int utilization5G,
+      int utilization2G,
+      int users,
+      int snmpAvailable});
 }
 
 /// @nodoc
@@ -77,26 +74,38 @@ class _$APStatusCopyWithImpl<$Res> implements $APStatusCopyWith<$Res> {
 
   @override
   $Res call({
-    Object hostname = freezed,
-    Object uptime = freezed,
-    Object utilization5G = freezed,
-    Object utilization2G = freezed,
-    Object users = freezed,
-    Object snmpAvailable = freezed,
+    Object? hostname = freezed,
+    Object? uptime = freezed,
+    Object? utilization5G = freezed,
+    Object? utilization2G = freezed,
+    Object? users = freezed,
+    Object? snmpAvailable = freezed,
   }) {
     return _then(_value.copyWith(
-      hostname: hostname == freezed ? _value.hostname : hostname as String,
-      uptime: uptime == freezed ? _value.uptime : uptime as Duration,
+      hostname: hostname == freezed
+          ? _value.hostname
+          : hostname // ignore: cast_nullable_to_non_nullable
+              as String,
+      uptime: uptime == freezed
+          ? _value.uptime
+          : uptime // ignore: cast_nullable_to_non_nullable
+              as Duration,
       utilization5G: utilization5G == freezed
           ? _value.utilization5G
-          : utilization5G as int,
+          : utilization5G // ignore: cast_nullable_to_non_nullable
+              as int,
       utilization2G: utilization2G == freezed
           ? _value.utilization2G
-          : utilization2G as int,
-      users: users == freezed ? _value.users : users as int,
+          : utilization2G // ignore: cast_nullable_to_non_nullable
+              as int,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as int,
       snmpAvailable: snmpAvailable == freezed
           ? _value.snmpAvailable
-          : snmpAvailable as int,
+          : snmpAvailable // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -107,12 +116,12 @@ abstract class _$APStatusCopyWith<$Res> implements $APStatusCopyWith<$Res> {
       __$APStatusCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String hostname,
-      @nullable Duration uptime,
-      @nullable int utilization5G,
-      @nullable int utilization2G,
-      @nullable int users,
-      @nullable int snmpAvailable});
+      {String hostname,
+      Duration uptime,
+      int utilization5G,
+      int utilization2G,
+      int users,
+      int snmpAvailable});
 }
 
 /// @nodoc
@@ -126,26 +135,38 @@ class __$APStatusCopyWithImpl<$Res> extends _$APStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object hostname = freezed,
-    Object uptime = freezed,
-    Object utilization5G = freezed,
-    Object utilization2G = freezed,
-    Object users = freezed,
-    Object snmpAvailable = freezed,
+    Object? hostname = freezed,
+    Object? uptime = freezed,
+    Object? utilization5G = freezed,
+    Object? utilization2G = freezed,
+    Object? users = freezed,
+    Object? snmpAvailable = freezed,
   }) {
     return _then(_APStatus(
-      hostname: hostname == freezed ? _value.hostname : hostname as String,
-      uptime: uptime == freezed ? _value.uptime : uptime as Duration,
+      hostname: hostname == freezed
+          ? _value.hostname
+          : hostname // ignore: cast_nullable_to_non_nullable
+              as String,
+      uptime: uptime == freezed
+          ? _value.uptime
+          : uptime // ignore: cast_nullable_to_non_nullable
+              as Duration,
       utilization5G: utilization5G == freezed
           ? _value.utilization5G
-          : utilization5G as int,
+          : utilization5G // ignore: cast_nullable_to_non_nullable
+              as int,
       utilization2G: utilization2G == freezed
           ? _value.utilization2G
-          : utilization2G as int,
-      users: users == freezed ? _value.users : users as int,
+          : utilization2G // ignore: cast_nullable_to_non_nullable
+              as int,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as int,
       snmpAvailable: snmpAvailable == freezed
           ? _value.snmpAvailable
-          : snmpAvailable as int,
+          : snmpAvailable // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -153,30 +174,24 @@ class __$APStatusCopyWithImpl<$Res> extends _$APStatusCopyWithImpl<$Res>
 /// @nodoc
 class _$_APStatus implements _APStatus {
   const _$_APStatus(
-      {@required @nullable this.hostname,
-      @required @nullable this.uptime,
-      @required @nullable this.utilization5G,
-      @required @nullable this.utilization2G,
-      @required @nullable this.users,
-      @required @nullable this.snmpAvailable});
+      {required this.hostname,
+      required this.uptime,
+      required this.utilization5G,
+      required this.utilization2G,
+      required this.users,
+      required this.snmpAvailable});
 
   @override
-  @nullable
   final String hostname;
   @override
-  @nullable
   final Duration uptime;
   @override
-  @nullable
   final int utilization5G;
   @override
-  @nullable
   final int utilization2G;
   @override
-  @nullable
   final int users;
   @override
-  @nullable
   final int snmpAvailable;
 
   @override
@@ -216,6 +231,7 @@ class _$_APStatus implements _APStatus {
       const DeepCollectionEquality().hash(users) ^
       const DeepCollectionEquality().hash(snmpAvailable);
 
+  @JsonKey(ignore: true)
   @override
   _$APStatusCopyWith<_APStatus> get copyWith =>
       __$APStatusCopyWithImpl<_APStatus>(this, _$identity);
@@ -223,31 +239,27 @@ class _$_APStatus implements _APStatus {
 
 abstract class _APStatus implements APStatus {
   const factory _APStatus(
-      {@required @nullable String hostname,
-      @required @nullable Duration uptime,
-      @required @nullable int utilization5G,
-      @required @nullable int utilization2G,
-      @required @nullable int users,
-      @required @nullable int snmpAvailable}) = _$_APStatus;
+      {required String hostname,
+      required Duration uptime,
+      required int utilization5G,
+      required int utilization2G,
+      required int users,
+      required int snmpAvailable}) = _$_APStatus;
 
   @override
-  @nullable
-  String get hostname;
+  String get hostname => throw _privateConstructorUsedError;
   @override
-  @nullable
-  Duration get uptime;
+  Duration get uptime => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get utilization5G;
+  int get utilization5G => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get utilization2G;
+  int get utilization2G => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get users;
+  int get users => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get snmpAvailable;
+  int get snmpAvailable => throw _privateConstructorUsedError;
   @override
-  _$APStatusCopyWith<_APStatus> get copyWith;
+  @JsonKey(ignore: true)
+  _$APStatusCopyWith<_APStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }

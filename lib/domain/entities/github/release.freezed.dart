@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'release.dart';
 
@@ -8,6 +8,10 @@ part of 'release.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 GithubRelease _$GithubReleaseFromJson(Map<String, dynamic> json) {
   return _GithubRelease.fromJson(json);
 }
@@ -16,26 +20,25 @@ GithubRelease _$GithubReleaseFromJson(Map<String, dynamic> json) {
 class _$GithubReleaseTearOff {
   const _$GithubReleaseTearOff();
 
-// ignore: unused_element
   _GithubRelease call(
-      {@required @nullable String url,
-      @required @nullable String html_url,
-      @required @nullable String assets_url,
-      @required @nullable String upload_url,
-      @required @nullable String tarball_url,
-      @required @nullable String zipball_url,
-      @required @nullable int id,
-      @required @nullable String node_id,
-      @required @nullable String tag_name,
-      @required @nullable String target_commitish,
-      @required @nullable String name,
-      @required @nullable String body,
-      @required @nullable bool draft,
-      @required @nullable bool prerelease,
-      @required @nullable DateTime created_at,
-      @required @nullable DateTime published_at,
-      @required @nullable GithubUser author,
-      @required @nullable List<GithubAsset> assets}) {
+      {required String url,
+      required String html_url,
+      required String assets_url,
+      required String upload_url,
+      required String tarball_url,
+      required String zipball_url,
+      required int id,
+      required String node_id,
+      required String tag_name,
+      required String target_commitish,
+      required String name,
+      required String body,
+      required bool draft,
+      required bool prerelease,
+      required DateTime created_at,
+      required DateTime published_at,
+      required GithubUser author,
+      required List<GithubAsset> assets}) {
     return _GithubRelease(
       url: url,
       html_url: html_url,
@@ -58,57 +61,39 @@ class _$GithubReleaseTearOff {
     );
   }
 
-// ignore: unused_element
   GithubRelease fromJson(Map<String, Object> json) {
     return GithubRelease.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $GithubRelease = _$GithubReleaseTearOff();
 
 /// @nodoc
 mixin _$GithubRelease {
-  @nullable
-  String get url;
-  @nullable
-  String get html_url;
-  @nullable
-  String get assets_url;
-  @nullable
-  String get upload_url;
-  @nullable
-  String get tarball_url;
-  @nullable
-  String get zipball_url;
-  @nullable
-  int get id;
-  @nullable
-  String get node_id;
-  @nullable
-  String get tag_name;
-  @nullable
-  String get target_commitish;
-  @nullable
-  String get name;
-  @nullable
-  String get body;
-  @nullable
-  bool get draft;
-  @nullable
-  bool get prerelease;
-  @nullable
-  DateTime get created_at;
-  @nullable
-  DateTime get published_at;
-  @nullable
-  GithubUser get author;
-  @nullable
-  List<GithubAsset> get assets;
+  String get url => throw _privateConstructorUsedError;
+  String get html_url => throw _privateConstructorUsedError;
+  String get assets_url => throw _privateConstructorUsedError;
+  String get upload_url => throw _privateConstructorUsedError;
+  String get tarball_url => throw _privateConstructorUsedError;
+  String get zipball_url => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get node_id => throw _privateConstructorUsedError;
+  String get tag_name => throw _privateConstructorUsedError;
+  String get target_commitish => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get body => throw _privateConstructorUsedError;
+  bool get draft => throw _privateConstructorUsedError;
+  bool get prerelease => throw _privateConstructorUsedError;
+  DateTime get created_at => throw _privateConstructorUsedError;
+  DateTime get published_at => throw _privateConstructorUsedError;
+  GithubUser get author => throw _privateConstructorUsedError;
+  List<GithubAsset> get assets => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
-  $GithubReleaseCopyWith<GithubRelease> get copyWith;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GithubReleaseCopyWith<GithubRelease> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -117,24 +102,24 @@ abstract class $GithubReleaseCopyWith<$Res> {
           GithubRelease value, $Res Function(GithubRelease) then) =
       _$GithubReleaseCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String url,
-      @nullable String html_url,
-      @nullable String assets_url,
-      @nullable String upload_url,
-      @nullable String tarball_url,
-      @nullable String zipball_url,
-      @nullable int id,
-      @nullable String node_id,
-      @nullable String tag_name,
-      @nullable String target_commitish,
-      @nullable String name,
-      @nullable String body,
-      @nullable bool draft,
-      @nullable bool prerelease,
-      @nullable DateTime created_at,
-      @nullable DateTime published_at,
-      @nullable GithubUser author,
-      @nullable List<GithubAsset> assets});
+      {String url,
+      String html_url,
+      String assets_url,
+      String upload_url,
+      String tarball_url,
+      String zipball_url,
+      int id,
+      String node_id,
+      String tag_name,
+      String target_commitish,
+      String name,
+      String body,
+      bool draft,
+      bool prerelease,
+      DateTime created_at,
+      DateTime published_at,
+      GithubUser author,
+      List<GithubAsset> assets});
 
   $GithubUserCopyWith<$Res> get author;
 }
@@ -150,62 +135,103 @@ class _$GithubReleaseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object url = freezed,
-    Object html_url = freezed,
-    Object assets_url = freezed,
-    Object upload_url = freezed,
-    Object tarball_url = freezed,
-    Object zipball_url = freezed,
-    Object id = freezed,
-    Object node_id = freezed,
-    Object tag_name = freezed,
-    Object target_commitish = freezed,
-    Object name = freezed,
-    Object body = freezed,
-    Object draft = freezed,
-    Object prerelease = freezed,
-    Object created_at = freezed,
-    Object published_at = freezed,
-    Object author = freezed,
-    Object assets = freezed,
+    Object? url = freezed,
+    Object? html_url = freezed,
+    Object? assets_url = freezed,
+    Object? upload_url = freezed,
+    Object? tarball_url = freezed,
+    Object? zipball_url = freezed,
+    Object? id = freezed,
+    Object? node_id = freezed,
+    Object? tag_name = freezed,
+    Object? target_commitish = freezed,
+    Object? name = freezed,
+    Object? body = freezed,
+    Object? draft = freezed,
+    Object? prerelease = freezed,
+    Object? created_at = freezed,
+    Object? published_at = freezed,
+    Object? author = freezed,
+    Object? assets = freezed,
   }) {
     return _then(_value.copyWith(
-      url: url == freezed ? _value.url : url as String,
-      html_url: html_url == freezed ? _value.html_url : html_url as String,
-      assets_url:
-          assets_url == freezed ? _value.assets_url : assets_url as String,
-      upload_url:
-          upload_url == freezed ? _value.upload_url : upload_url as String,
-      tarball_url:
-          tarball_url == freezed ? _value.tarball_url : tarball_url as String,
-      zipball_url:
-          zipball_url == freezed ? _value.zipball_url : zipball_url as String,
-      id: id == freezed ? _value.id : id as int,
-      node_id: node_id == freezed ? _value.node_id : node_id as String,
-      tag_name: tag_name == freezed ? _value.tag_name : tag_name as String,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      html_url: html_url == freezed
+          ? _value.html_url
+          : html_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      assets_url: assets_url == freezed
+          ? _value.assets_url
+          : assets_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      upload_url: upload_url == freezed
+          ? _value.upload_url
+          : upload_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      tarball_url: tarball_url == freezed
+          ? _value.tarball_url
+          : tarball_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      zipball_url: zipball_url == freezed
+          ? _value.zipball_url
+          : zipball_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      node_id: node_id == freezed
+          ? _value.node_id
+          : node_id // ignore: cast_nullable_to_non_nullable
+              as String,
+      tag_name: tag_name == freezed
+          ? _value.tag_name
+          : tag_name // ignore: cast_nullable_to_non_nullable
+              as String,
       target_commitish: target_commitish == freezed
           ? _value.target_commitish
-          : target_commitish as String,
-      name: name == freezed ? _value.name : name as String,
-      body: body == freezed ? _value.body : body as String,
-      draft: draft == freezed ? _value.draft : draft as bool,
-      prerelease:
-          prerelease == freezed ? _value.prerelease : prerelease as bool,
-      created_at:
-          created_at == freezed ? _value.created_at : created_at as DateTime,
+          : target_commitish // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      draft: draft == freezed
+          ? _value.draft
+          : draft // ignore: cast_nullable_to_non_nullable
+              as bool,
+      prerelease: prerelease == freezed
+          ? _value.prerelease
+          : prerelease // ignore: cast_nullable_to_non_nullable
+              as bool,
+      created_at: created_at == freezed
+          ? _value.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       published_at: published_at == freezed
           ? _value.published_at
-          : published_at as DateTime,
-      author: author == freezed ? _value.author : author as GithubUser,
-      assets: assets == freezed ? _value.assets : assets as List<GithubAsset>,
+          : published_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      author: author == freezed
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as GithubUser,
+      assets: assets == freezed
+          ? _value.assets
+          : assets // ignore: cast_nullable_to_non_nullable
+              as List<GithubAsset>,
     ));
   }
 
   @override
   $GithubUserCopyWith<$Res> get author {
-    if (_value.author == null) {
-      return null;
-    }
     return $GithubUserCopyWith<$Res>(_value.author, (value) {
       return _then(_value.copyWith(author: value));
     });
@@ -220,24 +246,24 @@ abstract class _$GithubReleaseCopyWith<$Res>
       __$GithubReleaseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String url,
-      @nullable String html_url,
-      @nullable String assets_url,
-      @nullable String upload_url,
-      @nullable String tarball_url,
-      @nullable String zipball_url,
-      @nullable int id,
-      @nullable String node_id,
-      @nullable String tag_name,
-      @nullable String target_commitish,
-      @nullable String name,
-      @nullable String body,
-      @nullable bool draft,
-      @nullable bool prerelease,
-      @nullable DateTime created_at,
-      @nullable DateTime published_at,
-      @nullable GithubUser author,
-      @nullable List<GithubAsset> assets});
+      {String url,
+      String html_url,
+      String assets_url,
+      String upload_url,
+      String tarball_url,
+      String zipball_url,
+      int id,
+      String node_id,
+      String tag_name,
+      String target_commitish,
+      String name,
+      String body,
+      bool draft,
+      bool prerelease,
+      DateTime created_at,
+      DateTime published_at,
+      GithubUser author,
+      List<GithubAsset> assets});
 
   @override
   $GithubUserCopyWith<$Res> get author;
@@ -256,54 +282,98 @@ class __$GithubReleaseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object url = freezed,
-    Object html_url = freezed,
-    Object assets_url = freezed,
-    Object upload_url = freezed,
-    Object tarball_url = freezed,
-    Object zipball_url = freezed,
-    Object id = freezed,
-    Object node_id = freezed,
-    Object tag_name = freezed,
-    Object target_commitish = freezed,
-    Object name = freezed,
-    Object body = freezed,
-    Object draft = freezed,
-    Object prerelease = freezed,
-    Object created_at = freezed,
-    Object published_at = freezed,
-    Object author = freezed,
-    Object assets = freezed,
+    Object? url = freezed,
+    Object? html_url = freezed,
+    Object? assets_url = freezed,
+    Object? upload_url = freezed,
+    Object? tarball_url = freezed,
+    Object? zipball_url = freezed,
+    Object? id = freezed,
+    Object? node_id = freezed,
+    Object? tag_name = freezed,
+    Object? target_commitish = freezed,
+    Object? name = freezed,
+    Object? body = freezed,
+    Object? draft = freezed,
+    Object? prerelease = freezed,
+    Object? created_at = freezed,
+    Object? published_at = freezed,
+    Object? author = freezed,
+    Object? assets = freezed,
   }) {
     return _then(_GithubRelease(
-      url: url == freezed ? _value.url : url as String,
-      html_url: html_url == freezed ? _value.html_url : html_url as String,
-      assets_url:
-          assets_url == freezed ? _value.assets_url : assets_url as String,
-      upload_url:
-          upload_url == freezed ? _value.upload_url : upload_url as String,
-      tarball_url:
-          tarball_url == freezed ? _value.tarball_url : tarball_url as String,
-      zipball_url:
-          zipball_url == freezed ? _value.zipball_url : zipball_url as String,
-      id: id == freezed ? _value.id : id as int,
-      node_id: node_id == freezed ? _value.node_id : node_id as String,
-      tag_name: tag_name == freezed ? _value.tag_name : tag_name as String,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      html_url: html_url == freezed
+          ? _value.html_url
+          : html_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      assets_url: assets_url == freezed
+          ? _value.assets_url
+          : assets_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      upload_url: upload_url == freezed
+          ? _value.upload_url
+          : upload_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      tarball_url: tarball_url == freezed
+          ? _value.tarball_url
+          : tarball_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      zipball_url: zipball_url == freezed
+          ? _value.zipball_url
+          : zipball_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      node_id: node_id == freezed
+          ? _value.node_id
+          : node_id // ignore: cast_nullable_to_non_nullable
+              as String,
+      tag_name: tag_name == freezed
+          ? _value.tag_name
+          : tag_name // ignore: cast_nullable_to_non_nullable
+              as String,
       target_commitish: target_commitish == freezed
           ? _value.target_commitish
-          : target_commitish as String,
-      name: name == freezed ? _value.name : name as String,
-      body: body == freezed ? _value.body : body as String,
-      draft: draft == freezed ? _value.draft : draft as bool,
-      prerelease:
-          prerelease == freezed ? _value.prerelease : prerelease as bool,
-      created_at:
-          created_at == freezed ? _value.created_at : created_at as DateTime,
+          : target_commitish // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      draft: draft == freezed
+          ? _value.draft
+          : draft // ignore: cast_nullable_to_non_nullable
+              as bool,
+      prerelease: prerelease == freezed
+          ? _value.prerelease
+          : prerelease // ignore: cast_nullable_to_non_nullable
+              as bool,
+      created_at: created_at == freezed
+          ? _value.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       published_at: published_at == freezed
           ? _value.published_at
-          : published_at as DateTime,
-      author: author == freezed ? _value.author : author as GithubUser,
-      assets: assets == freezed ? _value.assets : assets as List<GithubAsset>,
+          : published_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      author: author == freezed
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as GithubUser,
+      assets: assets == freezed
+          ? _value.assets
+          : assets // ignore: cast_nullable_to_non_nullable
+              as List<GithubAsset>,
     ));
   }
 }
@@ -313,81 +383,63 @@ class __$GithubReleaseCopyWithImpl<$Res>
 /// @nodoc
 class _$_GithubRelease implements _GithubRelease {
   const _$_GithubRelease(
-      {@required @nullable this.url,
-      @required @nullable this.html_url,
-      @required @nullable this.assets_url,
-      @required @nullable this.upload_url,
-      @required @nullable this.tarball_url,
-      @required @nullable this.zipball_url,
-      @required @nullable this.id,
-      @required @nullable this.node_id,
-      @required @nullable this.tag_name,
-      @required @nullable this.target_commitish,
-      @required @nullable this.name,
-      @required @nullable this.body,
-      @required @nullable this.draft,
-      @required @nullable this.prerelease,
-      @required @nullable this.created_at,
-      @required @nullable this.published_at,
-      @required @nullable this.author,
-      @required @nullable this.assets});
+      {required this.url,
+      required this.html_url,
+      required this.assets_url,
+      required this.upload_url,
+      required this.tarball_url,
+      required this.zipball_url,
+      required this.id,
+      required this.node_id,
+      required this.tag_name,
+      required this.target_commitish,
+      required this.name,
+      required this.body,
+      required this.draft,
+      required this.prerelease,
+      required this.created_at,
+      required this.published_at,
+      required this.author,
+      required this.assets});
 
   factory _$_GithubRelease.fromJson(Map<String, dynamic> json) =>
       _$_$_GithubReleaseFromJson(json);
 
   @override
-  @nullable
   final String url;
   @override
-  @nullable
   final String html_url;
   @override
-  @nullable
   final String assets_url;
   @override
-  @nullable
   final String upload_url;
   @override
-  @nullable
   final String tarball_url;
   @override
-  @nullable
   final String zipball_url;
   @override
-  @nullable
   final int id;
   @override
-  @nullable
   final String node_id;
   @override
-  @nullable
   final String tag_name;
   @override
-  @nullable
   final String target_commitish;
   @override
-  @nullable
   final String name;
   @override
-  @nullable
   final String body;
   @override
-  @nullable
   final bool draft;
   @override
-  @nullable
   final bool prerelease;
   @override
-  @nullable
   final DateTime created_at;
   @override
-  @nullable
   final DateTime published_at;
   @override
-  @nullable
   final GithubUser author;
   @override
-  @nullable
   final List<GithubAsset> assets;
 
   @override
@@ -470,6 +522,7 @@ class _$_GithubRelease implements _GithubRelease {
       const DeepCollectionEquality().hash(author) ^
       const DeepCollectionEquality().hash(assets);
 
+  @JsonKey(ignore: true)
   @override
   _$GithubReleaseCopyWith<_GithubRelease> get copyWith =>
       __$GithubReleaseCopyWithImpl<_GithubRelease>(this, _$identity);
@@ -482,82 +535,66 @@ class _$_GithubRelease implements _GithubRelease {
 
 abstract class _GithubRelease implements GithubRelease {
   const factory _GithubRelease(
-      {@required @nullable String url,
-      @required @nullable String html_url,
-      @required @nullable String assets_url,
-      @required @nullable String upload_url,
-      @required @nullable String tarball_url,
-      @required @nullable String zipball_url,
-      @required @nullable int id,
-      @required @nullable String node_id,
-      @required @nullable String tag_name,
-      @required @nullable String target_commitish,
-      @required @nullable String name,
-      @required @nullable String body,
-      @required @nullable bool draft,
-      @required @nullable bool prerelease,
-      @required @nullable DateTime created_at,
-      @required @nullable DateTime published_at,
-      @required @nullable GithubUser author,
-      @required @nullable List<GithubAsset> assets}) = _$_GithubRelease;
+      {required String url,
+      required String html_url,
+      required String assets_url,
+      required String upload_url,
+      required String tarball_url,
+      required String zipball_url,
+      required int id,
+      required String node_id,
+      required String tag_name,
+      required String target_commitish,
+      required String name,
+      required String body,
+      required bool draft,
+      required bool prerelease,
+      required DateTime created_at,
+      required DateTime published_at,
+      required GithubUser author,
+      required List<GithubAsset> assets}) = _$_GithubRelease;
 
   factory _GithubRelease.fromJson(Map<String, dynamic> json) =
       _$_GithubRelease.fromJson;
 
   @override
-  @nullable
-  String get url;
+  String get url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get html_url;
+  String get html_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get assets_url;
+  String get assets_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get upload_url;
+  String get upload_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get tarball_url;
+  String get tarball_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get zipball_url;
+  String get zipball_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get id;
+  int get id => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get node_id;
+  String get node_id => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get tag_name;
+  String get tag_name => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get target_commitish;
+  String get target_commitish => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get body;
+  String get body => throw _privateConstructorUsedError;
   @override
-  @nullable
-  bool get draft;
+  bool get draft => throw _privateConstructorUsedError;
   @override
-  @nullable
-  bool get prerelease;
+  bool get prerelease => throw _privateConstructorUsedError;
   @override
-  @nullable
-  DateTime get created_at;
+  DateTime get created_at => throw _privateConstructorUsedError;
   @override
-  @nullable
-  DateTime get published_at;
+  DateTime get published_at => throw _privateConstructorUsedError;
   @override
-  @nullable
-  GithubUser get author;
+  GithubUser get author => throw _privateConstructorUsedError;
   @override
-  @nullable
-  List<GithubAsset> get assets;
+  List<GithubAsset> get assets => throw _privateConstructorUsedError;
   @override
-  _$GithubReleaseCopyWith<_GithubRelease> get copyWith;
+  @JsonKey(ignore: true)
+  _$GithubReleaseCopyWith<_GithubRelease> get copyWith =>
+      throw _privateConstructorUsedError;
 }

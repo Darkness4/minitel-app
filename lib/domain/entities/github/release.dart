@@ -6,27 +6,27 @@ part 'release.freezed.dart';
 part 'release.g.dart';
 
 @freezed
-abstract class GithubRelease with _$GithubRelease {
+class GithubRelease with _$GithubRelease {
   @JsonSerializable(explicitToJson: true)
   const factory GithubRelease({
-    @required @nullable String url,
-    @required @nullable String html_url,
-    @required @nullable String assets_url,
-    @required @nullable String upload_url,
-    @required @nullable String tarball_url,
-    @required @nullable String zipball_url,
-    @required @nullable int id,
-    @required @nullable String node_id,
-    @required @nullable String tag_name,
-    @required @nullable String target_commitish,
-    @required @nullable String name,
-    @required @nullable String body,
-    @required @nullable bool draft,
-    @required @nullable bool prerelease,
-    @required @nullable DateTime created_at,
-    @required @nullable DateTime published_at,
-    @required @nullable GithubUser author,
-    @required @nullable List<GithubAsset> assets,
+    required String url,
+    required String html_url,
+    required String assets_url,
+    required String upload_url,
+    required String tarball_url,
+    required String zipball_url,
+    required int id,
+    required String node_id,
+    required String tag_name,
+    required String target_commitish,
+    required String name,
+    required String body,
+    required bool draft,
+    required bool prerelease,
+    required DateTime created_at,
+    required DateTime published_at,
+    required GithubUser author,
+    required List<GithubAsset> assets,
   }) = _GithubRelease;
 
   factory GithubRelease.fromJson(Map<String, dynamic> json) =>

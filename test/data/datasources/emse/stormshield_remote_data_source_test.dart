@@ -1,27 +1,27 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/emse/stormshield_remote_data_source.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'stormshield_remote_data_source_test.mocks.dart';
 
-class MockListCookies extends Mock implements List<Cookie> {}
-
+@GenerateMocks([http.Client])
 void main() {
-  StormshieldRemoteDataSource dataSource;
-  MockHttpClient mockHttpClient;
+  late StormshieldRemoteDataSource dataSource;
+  late MockClient mockHttpClient;
   const tUser = 'marc.nguyen';
   const tPassword = 'abcdefgh';
   const tSelectedUrl = '1.1.1.1';
   const tSelectedTime = 240;
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
+    mockHttpClient = MockClient();
     dataSource = StormshieldRemoteDataSourceImpl(
       client: mockHttpClient,
     );
@@ -29,7 +29,7 @@ void main() {
 
   void setUpMockHttpClientSuccess200() {
     when(
-      mockHttpClient.post('https://$tSelectedUrl/auth/login.html'),
+      mockHttpClient.post(Uri.parse('https://$tSelectedUrl/auth/login.html')),
     ).thenAnswer((_) async => http.Response(
           fixture(
               'datasources/stormshield_remote_data_source/response_fetch.html'),
@@ -41,7 +41,7 @@ void main() {
 
     when(
       mockHttpClient.post(
-        'https://$tSelectedUrl/auth/plain.html',
+        Uri.parse('https://$tSelectedUrl/auth/plain.html'),
         body: anyNamed('body'),
         headers: anyNamed('headers'),
       ),
@@ -81,7 +81,7 @@ void main() {
 
     when(
       mockHttpClient.post(
-        'https://$tSelectedUrl/auth/plain.html',
+        Uri.parse('https://$tSelectedUrl/auth/plain.html'),
         body: anyNamed('body'),
         headers: anyNamed('headers'),
       ),
@@ -96,7 +96,7 @@ void main() {
 
   void setUpMockHttpClientNotLoggedIn() {
     when(
-      mockHttpClient.post('https://$tSelectedUrl/auth/login.html'),
+      mockHttpClient.post(Uri.parse('https://$tSelectedUrl/auth/login.html')),
     ).thenAnswer((_) async => http.Response(
           fixture(
               'datasources/stormshield_remote_data_source/not_logged_in.html'),
@@ -106,7 +106,7 @@ void main() {
 
     when(
       mockHttpClient.post(
-        'https://$tSelectedUrl/auth/plain.html',
+        Uri.parse('https://$tSelectedUrl/auth/plain.html'),
         body: anyNamed('body'),
         headers: anyNamed('headers'),
       ),
@@ -194,8 +194,8 @@ void main() {
         // act
         await dataSource.fetchStatus(tSelectedUrl);
         // assert
-        verify(
-            await mockHttpClient.post('https://$tSelectedUrl/auth/login.html'));
+        verify(await mockHttpClient
+            .post(Uri.parse('https://$tSelectedUrl/auth/login.html')));
       },
     );
 
@@ -236,5 +236,3 @@ void main() {
     );
   });
 }
-
-class MockHttpClient extends Mock implements http.Client {}

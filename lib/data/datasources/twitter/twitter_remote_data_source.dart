@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
@@ -19,20 +18,19 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
   final StringBuffer tokenBuffer;
 
   const TwitterRemoteDataSourceImpl({
-    @required this.client,
-    @required this.tokenBuffer,
+    required this.client,
+    required this.tokenBuffer,
   });
 
   @override
   Future<List<Post>> fetchAllPosts() async {
     final token = await getBearerToken();
-    if (token != null) {
-      tokenBuffer.clear();
-      tokenBuffer.write(token);
-    }
+    tokenBuffer.clear();
+    tokenBuffer.write(token);
 
     final response = await client.get(
-      'https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361',
+      Uri.parse(
+          'https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1050346583085199361'),
       headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
     );
 
@@ -51,7 +49,7 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
     final authorization = base64.encode(
         utf8.encode('${ApiKeys.consumerKey}:${ApiKeys.consumerSecret}'));
     final response = await client.post(
-      'https://api.twitter.com/oauth2/token',
+      Uri.parse('https://api.twitter.com/oauth2/token'),
       headers: {
         HttpHeaders.authorizationHeader: 'Basic $authorization',
       },
@@ -60,10 +58,9 @@ class TwitterRemoteDataSourceImpl implements TwitterRemoteDataSource {
 
     if (response.statusCode == HttpStatus.ok) {
       final token = json.decode(response.body)['access_token'] as String;
-      if (token != null) {
-        tokenBuffer.clear();
-        tokenBuffer.write(token);
-      }
+      tokenBuffer.clear();
+      tokenBuffer.write(token);
+
       return tokenBuffer.toString();
     } else {
       throw ServerException(

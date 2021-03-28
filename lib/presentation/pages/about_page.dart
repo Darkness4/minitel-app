@@ -9,8 +9,8 @@ import 'package:package_info/package_info.dart';
 class AboutPage extends StatelessWidget {
   final String title;
   const AboutPage({
-    @required this.title,
-    Key key,
+    required this.title,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -108,9 +108,8 @@ SOFTWARE.
                       case ConnectionState.waiting:
                         return const Text('Awaiting result...');
                       case ConnectionState.done:
-                        return Text(packageInfo.data.version);
+                        return Text(packageInfo.data!.version);
                     }
-                    return null; // unreachable
                   },
                 ),
                 onTap: () {},

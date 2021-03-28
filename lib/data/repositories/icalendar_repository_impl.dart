@@ -1,5 +1,4 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
@@ -17,10 +16,10 @@ class ICalendarRepositoryImpl implements ICalendarRepository {
   final NetworkInfo networkInfo;
 
   const ICalendarRepositoryImpl({
-    @required this.localDataSource,
-    @required this.remoteDataSource,
-    @required this.calendarURLRepository,
-    @required this.networkInfo,
+    required this.localDataSource,
+    required this.remoteDataSource,
+    required this.calendarURLRepository,
+    required this.networkInfo,
   });
 
   @override
@@ -29,8 +28,8 @@ class ICalendarRepositoryImpl implements ICalendarRepository {
 
   @override
   Future<void> download({
-    @required String username,
-    @required String password,
+    required String username,
+    required String password,
   }) async {
     if (await networkInfo.result != ConnectivityResult.none) {
       final url = await calendarURLRepository.get(

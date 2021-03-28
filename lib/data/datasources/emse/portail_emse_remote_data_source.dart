@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/cookies/cookie_manager.dart';
@@ -12,7 +11,8 @@ abstract class PortailEMSERemoteDataSource {
   List<Cookie> get cookies;
 
   /// Login to portail EMSE
-  Future<List<Cookie>> login({String username, String password});
+  Future<List<Cookie>> login(
+      {required String username, required String password});
 }
 
 /// HTTP requests handler for EMSE Portal
@@ -22,22 +22,23 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
   final CookieManager cookieManager;
 
   const PortailEMSERemoteDataSourceImpl({
-    @required this.client,
-    @required this.cookieManager,
+    required this.client,
+    required this.cookieManager,
   });
 
   @override
   List<Cookie> get cookies => cookieManager.portailCookies;
 
   @override
-  Future<List<Cookie>> login({String username, String password}) async {
+  Future<List<Cookie>> login(
+      {required String username, required String password}) async {
     String action;
     String lt;
     Cookie jSessionIDCampus;
     try {
       {
-        final response = await client.get(
-            'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin');
+        final response = await client.get(Uri.parse(
+            'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin'));
         cookies.clear();
 
         if (response.statusCode != HttpStatus.ok) {
@@ -46,13 +47,15 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
         }
 
         lt = RegExp('name="lt" value="([^"]*)"')
-            .firstMatch(response.body)
-            ?.group(1);
-        action = RegExp('action="([^"]*)"').firstMatch(response.body)?.group(1);
+            .firstMatch(response.body)!
+            .group(1)!;
+        action =
+            RegExp('action="([^"]*)"').firstMatch(response.body)!.group(1)!;
 
         jSessionIDCampus = response.headers.parseSetCookie().firstWhere(
               (Cookie cookie) => cookie.name == 'JSESSIONID',
-              orElse: () => null,
+              orElse: () =>
+                  throw ServerException('JSESSIONID Cookie not found.'),
             );
       }
 
@@ -82,7 +85,8 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
               'HTTP Status Code : ${response.statusCode} ${response.reasonPhrase}');
         }
 
-        if (!response.headers[HttpHeaders.setCookieHeader].contains('AGIMUS')) {
+        if (!response.headers[HttpHeaders.setCookieHeader]!
+            .contains('AGIMUS')) {
           throw ClientException(
               'AGIMUS not found. Maybe bad username or password.');
         }
@@ -90,18 +94,18 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
         final listCookies = response.headers.parseSetCookie();
         agimus = listCookies.firstWhere(
           (cookie) => cookie.name == 'AGIMUS',
-          orElse: () => null,
+          orElse: () => throw ServerException('AGIMUS Cookie not found.'),
         );
         casPrivacy = listCookies.firstWhere(
           (cookie) => cookie.name == 'CASPRIVACY',
-          orElse: () => null,
+          orElse: () => throw ServerException('CASPRIVACY Cookie not found.'),
         );
         casGC = listCookies.firstWhere(
           (cookie) => cookie.name == 'CASTGC',
-          orElse: () => null,
+          orElse: () => throw ServerException('CASTGC Cookie not found.'),
         );
 
-        location = response.headers[HttpHeaders.locationHeader];
+        location = response.headers[HttpHeaders.locationHeader]!;
       }
 
       Cookie casAuth;
@@ -122,16 +126,16 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
 
         casAuth = response.headers.parseSetCookie().firstWhere(
               (cookie) => cookie.name == 'CASAuth',
-              orElse: () => null,
+              orElse: () => throw ServerException('CASAuth Cookie not found.'),
             );
-        location = response.headers[HttpHeaders.locationHeader];
+        location = response.headers[HttpHeaders.locationHeader]!;
       }
 
       Cookie laravelToken;
       Cookie xsrfToken;
       Cookie portailEntEmseSession;
       {
-        final response = await client.get(location, headers: {
+        final response = await client.get(Uri.parse(location), headers: {
           HttpHeaders.cookieHeader: '${agimus.name}=${agimus.value}; '
               '${casAuth.name}=${casAuth.value}'
         });
@@ -144,15 +148,17 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
         final listCookies = response.headers.parseSetCookie();
         laravelToken = listCookies.firstWhere(
           (cookie) => cookie.name == 'laravel_token',
-          orElse: () => null,
+          orElse: () =>
+              throw ServerException('laravel_token Cookie not found.'),
         );
         xsrfToken = listCookies.firstWhere(
           (cookie) => cookie.name == 'XSRF-TOKEN',
-          orElse: () => null,
+          orElse: () => throw ServerException('XSRF-TOKEN Cookie not found.'),
         );
         portailEntEmseSession = listCookies.firstWhere(
           (cookie) => cookie.name == 'portail_ent_emse_session',
-          orElse: () => null,
+          orElse: () => throw ServerException(
+              'portail_ent_emse_session Cookie not found.'),
         );
       }
 
@@ -162,7 +168,7 @@ class PortailEMSERemoteDataSourceImpl implements PortailEMSERemoteDataSource {
         laravelToken,
         xsrfToken,
         portailEntEmseSession,
-      ].where((e) => e != null));
+      ]);
 
       return cookies;
     } on Exception {

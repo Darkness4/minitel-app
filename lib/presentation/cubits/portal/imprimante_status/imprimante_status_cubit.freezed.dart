@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'imprimante_status_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'imprimante_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ImprimanteStatusStateTearOff {
   const _$ImprimanteStatusStateTearOff();
 
-// ignore: unused_element
   ImprimanteStatusInitial initial() {
     return const ImprimanteStatusInitial();
   }
 
-// ignore: unused_element
   ImprimanteStatusLoading loading() {
     return const ImprimanteStatusLoading();
   }
 
-// ignore: unused_element
   ImprimanteStatusError error(Exception e) {
     return ImprimanteStatusError(
       e,
     );
   }
 
-// ignore: unused_element
   ImprimanteStatusLoaded loaded(bool success) {
     return ImprimanteStatusLoaded(
       success,
@@ -39,41 +38,44 @@ class _$ImprimanteStatusStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ImprimanteStatusState = _$ImprimanteStatusStateTearOff();
 
 /// @nodoc
 mixin _$ImprimanteStatusState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool success),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool success) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool success),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool success)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ImprimanteStatusInitial value),
-    @required Result loading(ImprimanteStatusLoading value),
-    @required Result error(ImprimanteStatusError value),
-    @required Result loaded(ImprimanteStatusLoaded value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(ImprimanteStatusInitial value) initial,
+    required TResult Function(ImprimanteStatusLoading value) loading,
+    required TResult Function(ImprimanteStatusError value) error,
+    required TResult Function(ImprimanteStatusLoaded value) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ImprimanteStatusInitial value),
-    Result loading(ImprimanteStatusLoading value),
-    Result error(ImprimanteStatusError value),
-    Result loaded(ImprimanteStatusLoaded value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ImprimanteStatusInitial value)? initial,
+    TResult Function(ImprimanteStatusLoading value)? loading,
+    TResult Function(ImprimanteStatusError value)? error,
+    TResult Function(ImprimanteStatusLoaded value)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -131,29 +133,24 @@ class _$ImprimanteStatusInitial implements ImprimanteStatusInitial {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool success),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool success) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool success),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool success)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -162,29 +159,24 @@ class _$ImprimanteStatusInitial implements ImprimanteStatusInitial {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ImprimanteStatusInitial value),
-    @required Result loading(ImprimanteStatusLoading value),
-    @required Result error(ImprimanteStatusError value),
-    @required Result loaded(ImprimanteStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ImprimanteStatusInitial value) initial,
+    required TResult Function(ImprimanteStatusLoading value) loading,
+    required TResult Function(ImprimanteStatusError value) error,
+    required TResult Function(ImprimanteStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ImprimanteStatusInitial value),
-    Result loading(ImprimanteStatusLoading value),
-    Result error(ImprimanteStatusError value),
-    Result loaded(ImprimanteStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ImprimanteStatusInitial value)? initial,
+    TResult Function(ImprimanteStatusLoading value)? loading,
+    TResult Function(ImprimanteStatusError value)? error,
+    TResult Function(ImprimanteStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -234,29 +226,24 @@ class _$ImprimanteStatusLoading implements ImprimanteStatusLoading {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool success),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool success) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool success),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool success)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -265,29 +252,24 @@ class _$ImprimanteStatusLoading implements ImprimanteStatusLoading {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ImprimanteStatusInitial value),
-    @required Result loading(ImprimanteStatusLoading value),
-    @required Result error(ImprimanteStatusError value),
-    @required Result loaded(ImprimanteStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ImprimanteStatusInitial value) initial,
+    required TResult Function(ImprimanteStatusLoading value) loading,
+    required TResult Function(ImprimanteStatusError value) error,
+    required TResult Function(ImprimanteStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ImprimanteStatusInitial value),
-    Result loading(ImprimanteStatusLoading value),
-    Result error(ImprimanteStatusError value),
-    Result loaded(ImprimanteStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ImprimanteStatusInitial value)? initial,
+    TResult Function(ImprimanteStatusLoading value)? loading,
+    TResult Function(ImprimanteStatusError value)? error,
+    TResult Function(ImprimanteStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -320,17 +302,20 @@ class _$ImprimanteStatusErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object e = freezed,
+    Object? e = freezed,
   }) {
     return _then(ImprimanteStatusError(
-      e == freezed ? _value.e : e as Exception,
+      e == freezed
+          ? _value.e
+          : e // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
 
 /// @nodoc
 class _$ImprimanteStatusError implements ImprimanteStatusError {
-  const _$ImprimanteStatusError(this.e) : assert(e != null);
+  const _$ImprimanteStatusError(this.e);
 
   @override
   final Exception e;
@@ -352,6 +337,7 @@ class _$ImprimanteStatusError implements ImprimanteStatusError {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(e);
 
+  @JsonKey(ignore: true)
   @override
   $ImprimanteStatusErrorCopyWith<ImprimanteStatusError> get copyWith =>
       _$ImprimanteStatusErrorCopyWithImpl<ImprimanteStatusError>(
@@ -359,29 +345,24 @@ class _$ImprimanteStatusError implements ImprimanteStatusError {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool success),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool success) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(e);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool success),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool success)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(e);
     }
@@ -390,29 +371,24 @@ class _$ImprimanteStatusError implements ImprimanteStatusError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ImprimanteStatusInitial value),
-    @required Result loading(ImprimanteStatusLoading value),
-    @required Result error(ImprimanteStatusError value),
-    @required Result loaded(ImprimanteStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ImprimanteStatusInitial value) initial,
+    required TResult Function(ImprimanteStatusLoading value) loading,
+    required TResult Function(ImprimanteStatusError value) error,
+    required TResult Function(ImprimanteStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ImprimanteStatusInitial value),
-    Result loading(ImprimanteStatusLoading value),
-    Result error(ImprimanteStatusError value),
-    Result loaded(ImprimanteStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ImprimanteStatusInitial value)? initial,
+    TResult Function(ImprimanteStatusLoading value)? loading,
+    TResult Function(ImprimanteStatusError value)? error,
+    TResult Function(ImprimanteStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -423,8 +399,10 @@ class _$ImprimanteStatusError implements ImprimanteStatusError {
 abstract class ImprimanteStatusError implements ImprimanteStatusState {
   const factory ImprimanteStatusError(Exception e) = _$ImprimanteStatusError;
 
-  Exception get e;
-  $ImprimanteStatusErrorCopyWith<ImprimanteStatusError> get copyWith;
+  Exception get e => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ImprimanteStatusErrorCopyWith<ImprimanteStatusError> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -448,17 +426,20 @@ class _$ImprimanteStatusLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object success = freezed,
+    Object? success = freezed,
   }) {
     return _then(ImprimanteStatusLoaded(
-      success == freezed ? _value.success : success as bool,
+      success == freezed
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$ImprimanteStatusLoaded implements ImprimanteStatusLoaded {
-  const _$ImprimanteStatusLoaded(this.success) : assert(success != null);
+  const _$ImprimanteStatusLoaded(this.success);
 
   @override
   final bool success;
@@ -480,6 +461,7 @@ class _$ImprimanteStatusLoaded implements ImprimanteStatusLoaded {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(success);
 
+  @JsonKey(ignore: true)
   @override
   $ImprimanteStatusLoadedCopyWith<ImprimanteStatusLoaded> get copyWith =>
       _$ImprimanteStatusLoadedCopyWithImpl<ImprimanteStatusLoaded>(
@@ -487,29 +469,24 @@ class _$ImprimanteStatusLoaded implements ImprimanteStatusLoaded {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool success),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool success) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(success);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool success),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool success)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(success);
     }
@@ -518,29 +495,24 @@ class _$ImprimanteStatusLoaded implements ImprimanteStatusLoaded {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ImprimanteStatusInitial value),
-    @required Result loading(ImprimanteStatusLoading value),
-    @required Result error(ImprimanteStatusError value),
-    @required Result loaded(ImprimanteStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ImprimanteStatusInitial value) initial,
+    required TResult Function(ImprimanteStatusLoading value) loading,
+    required TResult Function(ImprimanteStatusError value) error,
+    required TResult Function(ImprimanteStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ImprimanteStatusInitial value),
-    Result loading(ImprimanteStatusLoading value),
-    Result error(ImprimanteStatusError value),
-    Result loaded(ImprimanteStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ImprimanteStatusInitial value)? initial,
+    TResult Function(ImprimanteStatusLoading value)? loading,
+    TResult Function(ImprimanteStatusError value)? error,
+    TResult Function(ImprimanteStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -551,6 +523,8 @@ class _$ImprimanteStatusLoaded implements ImprimanteStatusLoaded {
 abstract class ImprimanteStatusLoaded implements ImprimanteStatusState {
   const factory ImprimanteStatusLoaded(bool success) = _$ImprimanteStatusLoaded;
 
-  bool get success;
-  $ImprimanteStatusLoadedCopyWith<ImprimanteStatusLoaded> get copyWith;
+  bool get success => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ImprimanteStatusLoadedCopyWith<ImprimanteStatusLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }

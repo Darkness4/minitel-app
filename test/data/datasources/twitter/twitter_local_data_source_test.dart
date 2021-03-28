@@ -6,14 +6,17 @@ import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_local_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'twitter_local_data_source_test.mocks.dart';
 
+@GenerateMocks([FileManager])
 void main() {
-  TwitterLocalDataSource dataSource;
-  MockFile mockFile;
-  MockFileManager mockFileManager;
+  late TwitterLocalDataSource dataSource;
+  late MockFile mockFile;
+  late MockFileManager mockFileManager;
 
   setUp(() {
     mockFile = MockFile();
@@ -50,7 +53,7 @@ void main() {
       'should throw a CacheException when there is not a cached value',
       () async {
         // arrange
-        when(mockFile.readAsStringSync()).thenReturn(null);
+        when(mockFile.readAsStringSync()).thenReturn('');
         when(mockFile.existsSync()).thenReturn(false);
         // act
         final call = dataSource.fetchAllPosts;
@@ -84,5 +87,3 @@ void main() {
 }
 
 class MockFile extends Mock implements File {}
-
-class MockFileManager extends Mock implements FileManager {}

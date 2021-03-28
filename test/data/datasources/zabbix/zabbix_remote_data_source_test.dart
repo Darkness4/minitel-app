@@ -8,16 +8,19 @@ import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/zabbix/zabbix_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'zabbix_remote_data_source_test.mocks.dart';
 
+@GenerateMocks([http.Client])
 void main() {
-  ZabbixRemoteDataSource dataSource;
-  MockHttpClient mockHttpClient;
+  late ZabbixRemoteDataSource dataSource;
+  late MockClient mockHttpClient;
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
+    mockHttpClient = MockClient();
     dataSource = ZabbixRemoteDataSourceImpl(clientNoCheck: mockHttpClient);
   });
 
@@ -85,7 +88,7 @@ void main() {
   group('fetchZabbixHosts', () {
     // arrange
     const tGroupIds = 17;
-    final Map<String, Object> tData = <String, dynamic>{
+    final tData = <String, dynamic>{
       'jsonrpc': '2.0',
       'method': 'host.get',
       'params': <String, dynamic>{
@@ -126,7 +129,7 @@ void main() {
         await dataSource.fetchZabbixHosts(tGroupIds);
         // assert
         verify(mockHttpClient.post(
-          '${ApiKeys.zabbixPath}/api_jsonrpc.php',
+          Uri.parse('${ApiKeys.zabbixPath}/api_jsonrpc.php'),
           headers: {'Content-Type': 'application/json-rpc'},
           body: tDataEncoded,
         ));
@@ -195,5 +198,3 @@ void main() {
     );
   });
 }
-
-class MockHttpClient extends Mock implements http.Client {}

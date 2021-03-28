@@ -16,7 +16,7 @@ import 'portal_apps/sogo.dart';
 
 /// Fragment listing in a [GridView] multiple supported Apps.
 class AppsScreen extends StatelessWidget {
-  const AppsScreen({Key key}) : super(key: key);
+  const AppsScreen({Key? key}) : super(key: key);
 
   static const List<Widget> cards = [
     _PortailCard(),
@@ -48,7 +48,7 @@ class AppsScreen extends StatelessWidget {
 
 /// [Card] responsible for the Imprimante App.
 class _ImprimanteCard extends StatelessWidget {
-  const _ImprimanteCard({Key key}) : super(key: key);
+  const _ImprimanteCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _ImprimanteCard extends StatelessWidget {
                   AppLoc.of(context).portal.apps.printer,
                   style: Theme.of(context)
                       .textTheme
-                      .headline4
+                      .headline4!
                       .apply(fontWeightDelta: 4),
                 ),
               ),
@@ -92,7 +92,7 @@ class _ImprimanteCard extends StatelessWidget {
 }
 
 class _PortailCard extends StatelessWidget {
-  const _PortailCard({Key key}) : super(key: key);
+  const _PortailCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +122,7 @@ class _PortailCard extends StatelessWidget {
                 AppLoc.of(context).portal.apps.portal,
                 style: Theme.of(context)
                     .textTheme
-                    .headline4
+                    .headline4!
                     .apply(fontWeightDelta: 4),
               ),
             ),
@@ -134,7 +134,7 @@ class _PortailCard extends StatelessWidget {
 }
 
 class _CampusCard extends StatelessWidget {
-  const _CampusCard({Key key}) : super(key: key);
+  const _CampusCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +164,7 @@ class _CampusCard extends StatelessWidget {
                 'Campus',
                 style: Theme.of(context)
                     .textTheme
-                    .headline4
+                    .headline4!
                     .apply(fontWeightDelta: 4),
               ),
             ),
@@ -176,7 +176,7 @@ class _CampusCard extends StatelessWidget {
 }
 
 class _PrometheeCard extends StatelessWidget {
-  const _PrometheeCard({Key key}) : super(key: key);
+  const _PrometheeCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +208,7 @@ class _PrometheeCard extends StatelessWidget {
                 'Promethee',
                 style: Theme.of(context)
                     .textTheme
-                    .headline4
+                    .headline4!
                     .apply(fontWeightDelta: 4),
               ),
             ),
@@ -221,7 +221,7 @@ class _PrometheeCard extends StatelessWidget {
 
 /// [Card] responsible for the Sogo App.
 class _SogoCard extends StatelessWidget {
-  const _SogoCard({Key key}) : super(key: key);
+  const _SogoCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -239,7 +239,7 @@ class _SogoCard extends StatelessWidget {
 }
 
 class _WikiMinitelCard extends StatelessWidget {
-  const _WikiMinitelCard({Key key}) : super(key: key);
+  const _WikiMinitelCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -263,7 +263,7 @@ class _WikiMinitelCard extends StatelessWidget {
                 'Wiki',
                 style: Theme.of(context)
                     .textTheme
-                    .headline4
+                    .headline4!
                     .apply(fontWeightDelta: 4),
               ),
             ),

@@ -22,7 +22,7 @@ class DayWidget extends StatelessWidget {
           color: Color.lerp(
             Colors.transparent,
             Theme.of(context).brightness == Brightness.light
-                ? MinitelColors.monthColorPalette[dt.month].withOpacity(0.9)
+                ? MinitelColors.monthColorPalette[dt.month]!.withOpacity(0.9)
                 : Theme.of(context).primaryColor,
             stuckAmount,
           ),
@@ -33,7 +33,7 @@ class DayWidget extends StatelessWidget {
               DateFormat.MMMMEEEEd(AppLoc.of(context).localeName).format(dt),
               style: Theme.of(context)
                   .textTheme
-                  .headline5
+                  .headline5!
                   .apply(color: Colors.white),
             ),
           ),
@@ -51,19 +51,19 @@ class DayWidget extends StatelessWidget {
 class EventCard extends StatelessWidget {
   final Event event;
 
-  const EventCard(this.event, {Key key}) : super(key: key);
+  const EventCard(this.event, {Key? key}) : super(key: key);
 
   Color _getCardColor(BuildContext context) {
     if (Theme.of(context).brightness == Brightness.light) {
       final upper = event.summary.toLowerCase();
       if (upper.contains('examen')) {
-        return Colors.red[200];
+        return Colors.red[200]!;
       } else if (upper.contains('tp')) {
-        return Colors.orange[200];
+        return Colors.orange[200]!;
       } else if (upper.contains('td')) {
-        return Colors.green[200];
+        return Colors.green[200]!;
       } else if (upper.contains('tutorat')) {
-        return Colors.blue[200];
+        return Colors.blue[200]!;
       } else if (upper.contains('sport') ||
           upper.contains('vacance') ||
           upper.contains('férié')) {
@@ -74,13 +74,13 @@ class EventCard extends StatelessWidget {
     } else {
       final upper = event.summary.toLowerCase();
       if (upper.contains('examen')) {
-        return Colors.red[900].withOpacity(0.5);
+        return Colors.red[900]!.withOpacity(0.5);
       } else if (upper.contains('tp')) {
-        return Colors.orange[900].withOpacity(0.5);
+        return Colors.orange[900]!.withOpacity(0.5);
       } else if (upper.contains('td')) {
-        return Colors.green[900].withOpacity(0.5);
+        return Colors.green[900]!.withOpacity(0.5);
       } else if (upper.contains('tutorat')) {
-        return Colors.blue[900].withOpacity(0.5);
+        return Colors.blue[900]!.withOpacity(0.5);
       } else if (upper.contains('sport') ||
           upper.contains('vacance') ||
           upper.contains('férié')) {

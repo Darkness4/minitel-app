@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'switch_port_status.dart';
 
@@ -9,12 +9,14 @@ part of 'switch_port_status.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$SwitchPortStatusTearOff {
   const _$SwitchPortStatusTearOff();
 
-// ignore: unused_element
-  _SwitchPortStatus call({int speed, int operStatus}) {
+  _SwitchPortStatus call({required int speed, required int operStatus}) {
     return _SwitchPortStatus(
       speed: speed,
       operStatus: operStatus,
@@ -23,15 +25,16 @@ class _$SwitchPortStatusTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $SwitchPortStatus = _$SwitchPortStatusTearOff();
 
 /// @nodoc
 mixin _$SwitchPortStatus {
-  int get speed;
-  int get operStatus;
+  int get speed => throw _privateConstructorUsedError;
+  int get operStatus => throw _privateConstructorUsedError;
 
-  $SwitchPortStatusCopyWith<SwitchPortStatus> get copyWith;
+  @JsonKey(ignore: true)
+  $SwitchPortStatusCopyWith<SwitchPortStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -53,12 +56,18 @@ class _$SwitchPortStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object speed = freezed,
-    Object operStatus = freezed,
+    Object? speed = freezed,
+    Object? operStatus = freezed,
   }) {
     return _then(_value.copyWith(
-      speed: speed == freezed ? _value.speed : speed as int,
-      operStatus: operStatus == freezed ? _value.operStatus : operStatus as int,
+      speed: speed == freezed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
+              as int,
+      operStatus: operStatus == freezed
+          ? _value.operStatus
+          : operStatus // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -86,19 +95,25 @@ class __$SwitchPortStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object speed = freezed,
-    Object operStatus = freezed,
+    Object? speed = freezed,
+    Object? operStatus = freezed,
   }) {
     return _then(_SwitchPortStatus(
-      speed: speed == freezed ? _value.speed : speed as int,
-      operStatus: operStatus == freezed ? _value.operStatus : operStatus as int,
+      speed: speed == freezed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
+              as int,
+      operStatus: operStatus == freezed
+          ? _value.operStatus
+          : operStatus // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 class _$_SwitchPortStatus implements _SwitchPortStatus {
-  const _$_SwitchPortStatus({this.speed, this.operStatus});
+  const _$_SwitchPortStatus({required this.speed, required this.operStatus});
 
   @override
   final int speed;
@@ -127,19 +142,22 @@ class _$_SwitchPortStatus implements _SwitchPortStatus {
       const DeepCollectionEquality().hash(speed) ^
       const DeepCollectionEquality().hash(operStatus);
 
+  @JsonKey(ignore: true)
   @override
   _$SwitchPortStatusCopyWith<_SwitchPortStatus> get copyWith =>
       __$SwitchPortStatusCopyWithImpl<_SwitchPortStatus>(this, _$identity);
 }
 
 abstract class _SwitchPortStatus implements SwitchPortStatus {
-  const factory _SwitchPortStatus({int speed, int operStatus}) =
-      _$_SwitchPortStatus;
+  const factory _SwitchPortStatus(
+      {required int speed, required int operStatus}) = _$_SwitchPortStatus;
 
   @override
-  int get speed;
+  int get speed => throw _privateConstructorUsedError;
   @override
-  int get operStatus;
+  int get operStatus => throw _privateConstructorUsedError;
   @override
-  _$SwitchPortStatusCopyWith<_SwitchPortStatus> get copyWith;
+  @JsonKey(ignore: true)
+  _$SwitchPortStatusCopyWith<_SwitchPortStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }

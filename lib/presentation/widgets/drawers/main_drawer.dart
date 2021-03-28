@@ -10,7 +10,7 @@ import 'package:minitel_toolbox/presentation/shared/keys.dart';
 
 class MainDrawer extends StatelessWidget {
   final String currentRoutePaths;
-  const MainDrawer({@required this.currentRoutePaths});
+  const MainDrawer({required this.currentRoutePaths});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class MainDrawer extends StatelessWidget {
               selected: currentRoutePaths == RoutePaths.authentication,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name !=
+                if (ModalRoute.of(context)!.settings.name !=
                     RoutePaths.authentication) {
                   Navigator.of(context)
                       .pushReplacementNamed(RoutePaths.authentication);
@@ -75,7 +75,7 @@ class MainDrawer extends StatelessWidget {
               selected: currentRoutePaths == RoutePaths.news,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.news) {
+                if (ModalRoute.of(context)!.settings.name != RoutePaths.news) {
                   Navigator.of(context).pushReplacementNamed(RoutePaths.news);
                 }
               },
@@ -96,7 +96,8 @@ class MainDrawer extends StatelessWidget {
               selected: currentRoutePaths == RoutePaths.agenda,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.agenda) {
+                if (ModalRoute.of(context)!.settings.name !=
+                    RoutePaths.agenda) {
                   Navigator.of(context).pushReplacementNamed(RoutePaths.agenda);
                 }
               },
@@ -124,7 +125,7 @@ class MainDrawer extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name !=
+                if (ModalRoute.of(context)!.settings.name !=
                     RoutePaths.reporting) {
                   Navigator.of(context)
                       .pushReplacementNamed(RoutePaths.reporting);
@@ -147,7 +148,7 @@ class MainDrawer extends StatelessWidget {
               selected: currentRoutePaths == RoutePaths.docs,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.docs) {
+                if (ModalRoute.of(context)!.settings.name != RoutePaths.docs) {
                   Navigator.of(context).pushNamed(RoutePaths.docs);
                 }
               },
@@ -168,7 +169,7 @@ class MainDrawer extends StatelessWidget {
               selected: currentRoutePaths == RoutePaths.about,
               onTap: () {
                 Navigator.pop(context); // Close Drawer
-                if (ModalRoute.of(context).settings.name != RoutePaths.about) {
+                if (ModalRoute.of(context)!.settings.name != RoutePaths.about) {
                   Navigator.of(context).pushNamed(RoutePaths.about);
                 }
               },
@@ -186,21 +187,21 @@ class MainDrawer extends StatelessWidget {
                   Radio(
                     value: 'Dark',
                     groupValue: state.value,
-                    onChanged: (String _) {
+                    onChanged: (String? _) {
                       context.read<ThemeCubit>().toDark();
                     },
                   ),
                   Radio(
                     value: 'Adaptive',
                     groupValue: state.value,
-                    onChanged: (String _) {
+                    onChanged: (String? _) {
                       context.read<ThemeCubit>().toAdaptive();
                     },
                   ),
                   Radio(
                     value: 'Light',
                     groupValue: state.value,
-                    onChanged: (String _) {
+                    onChanged: (String? _) {
                       context.read<ThemeCubit>().toLight();
                     },
                   ),

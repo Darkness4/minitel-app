@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/constants/app_constants.dart';
@@ -9,15 +8,20 @@ import 'package:minitel_toolbox/core/internet_address/internet_address_manager.d
 import 'package:minitel_toolbox/core/process/process_manager.dart';
 import 'package:minitel_toolbox/data/datasources/diagnosis/diagnosis_data_source.dart';
 import 'package:minitel_toolbox/data/datasources/emse/stormshield_remote_data_source.dart';
-import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
+import 'package:minitel_toolbox/data/database/diagnosis.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'diagnosis_data_source_test.mocks.dart';
+
+@GenerateMocks(
+    [StormshieldRemoteDataSource, InternetAddressManager, ProcessManager])
 void main() {
-  MockStormshieldRemoteDataSource mockStormshieldRemoteDataSource;
-  MockInternetAddressManager mockInternetAddressManager;
-  MockProcessManager mockProcessManager;
-  DiagnosisDataSource dataSource;
-  Diagnosis mockDiagnosis;
+  late MockStormshieldRemoteDataSource mockStormshieldRemoteDataSource;
+  late MockInternetAddressManager mockInternetAddressManager;
+  late MockProcessManager mockProcessManager;
+  late DiagnosisDataSource dataSource;
+  late Diagnosis mockDiagnosis;
 
   setUp(() {
     mockStormshieldRemoteDataSource = MockStormshieldRemoteDataSource();
@@ -51,11 +55,12 @@ void main() {
             .fetchStatus(MyIPAdresses.gatewayIP));
         verify(mockStormshieldRemoteDataSource
             .fetchStatus(MyIPAdresses.stormshield));
-        expect(await result[DiagnosisKeys.ipAddr].future, equals('MOCK'));
-        expect(await result[DiagnosisKeys.httpResponseStormshieldPublic].future,
+        expect(await result[DiagnosisKeys.ipAddr]!.future, equals('MOCK'));
+        expect(
+            await result[DiagnosisKeys.httpResponseStormshieldPublic]!.future,
             equals('MOCK'));
         expect(
-            await result[DiagnosisKeys.nsLookupEmse].future,
+            await result[DiagnosisKeys.nsLookupEmse]!.future,
             equals(
                 'Host: ${tIpAddress.host}\nLookup: ${tIpAddress.address}\n'));
       },
@@ -79,21 +84,12 @@ void main() {
         verify(mockStormshieldRemoteDataSource
             .fetchStatus(MyIPAdresses.stormshield));
         expect(
-            await result[DiagnosisKeys.nsLookupEmse].future, contains('MOCK'));
-        expect(await result[DiagnosisKeys.ipAddr].future, equals('MOCK'));
-        expect(await result[DiagnosisKeys.httpResponseStormshieldPublic].future,
+            await result[DiagnosisKeys.nsLookupEmse]!.future, contains('MOCK'));
+        expect(await result[DiagnosisKeys.ipAddr]!.future, equals('MOCK'));
+        expect(
+            await result[DiagnosisKeys.httpResponseStormshieldPublic]!.future,
             equals('MOCK'));
       },
     );
   });
 }
-
-class MockStormshieldRemoteDataSource extends Mock
-    implements StormshieldRemoteDataSource {}
-
-class MockProcessManager extends Mock implements ProcessManager {}
-
-class MockInternetAddressManager extends Mock
-    implements InternetAddressManager {}
-
-class MockConnectivity extends Mock implements Connectivity {}

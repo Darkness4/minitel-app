@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'diagnosis_cubit.dart';
 
@@ -9,34 +9,32 @@ part of 'diagnosis_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$DiagnosisStateTearOff {
   const _$DiagnosisStateTearOff();
 
-// ignore: unused_element
   DiagnosisInitial initial(Diagnosis diagnosis) {
     return DiagnosisInitial(
       diagnosis,
     );
   }
 
-// ignore: unused_element
   DiagnosisLoading loading(Diagnosis diagnosis) {
     return DiagnosisLoading(
       diagnosis,
     );
   }
 
-// ignore: unused_element
   DiagnosisLoaded loaded(Diagnosis diagnosis) {
     return DiagnosisLoaded(
       diagnosis,
     );
   }
 
-// ignore: unused_element
-  DiagnosisError error(@nullable Diagnosis diagnosis,
-      {@required Exception error}) {
+  DiagnosisError error(Diagnosis? diagnosis, {required Exception error}) {
     return DiagnosisError(
       diagnosis,
       error: error,
@@ -45,45 +43,44 @@ class _$DiagnosisStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $DiagnosisState = _$DiagnosisStateTearOff();
 
 /// @nodoc
 mixin _$DiagnosisState {
-  Diagnosis get diagnosis;
-
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(Diagnosis diagnosis),
-    @required Result loading(Diagnosis diagnosis),
-    @required Result loaded(Diagnosis diagnosis),
-    @required Result error(@nullable Diagnosis diagnosis, Exception error),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function(Diagnosis diagnosis) initial,
+    required TResult Function(Diagnosis diagnosis) loading,
+    required TResult Function(Diagnosis diagnosis) loaded,
+    required TResult Function(Diagnosis? diagnosis, Exception error) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(Diagnosis diagnosis),
-    Result loading(Diagnosis diagnosis),
-    Result loaded(Diagnosis diagnosis),
-    Result error(@nullable Diagnosis diagnosis, Exception error),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Diagnosis diagnosis)? initial,
+    TResult Function(Diagnosis diagnosis)? loading,
+    TResult Function(Diagnosis diagnosis)? loaded,
+    TResult Function(Diagnosis? diagnosis, Exception error)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(DiagnosisInitial value),
-    @required Result loading(DiagnosisLoading value),
-    @required Result loaded(DiagnosisLoaded value),
-    @required Result error(DiagnosisError value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(DiagnosisInitial value) initial,
+    required TResult Function(DiagnosisLoading value) loading,
+    required TResult Function(DiagnosisLoaded value) loaded,
+    required TResult Function(DiagnosisError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(DiagnosisInitial value),
-    Result loading(DiagnosisLoading value),
-    Result loaded(DiagnosisLoaded value),
-    Result error(DiagnosisError value),
-    @required Result orElse(),
-  });
-
-  $DiagnosisStateCopyWith<DiagnosisState> get copyWith;
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DiagnosisInitial value)? initial,
+    TResult Function(DiagnosisLoading value)? loading,
+    TResult Function(DiagnosisLoaded value)? loaded,
+    TResult Function(DiagnosisError value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -91,7 +88,6 @@ abstract class $DiagnosisStateCopyWith<$Res> {
   factory $DiagnosisStateCopyWith(
           DiagnosisState value, $Res Function(DiagnosisState) then) =
       _$DiagnosisStateCopyWithImpl<$Res>;
-  $Res call({Diagnosis diagnosis});
 }
 
 /// @nodoc
@@ -102,25 +98,13 @@ class _$DiagnosisStateCopyWithImpl<$Res>
   final DiagnosisState _value;
   // ignore: unused_field
   final $Res Function(DiagnosisState) _then;
-
-  @override
-  $Res call({
-    Object diagnosis = freezed,
-  }) {
-    return _then(_value.copyWith(
-      diagnosis:
-          diagnosis == freezed ? _value.diagnosis : diagnosis as Diagnosis,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class $DiagnosisInitialCopyWith<$Res>
-    implements $DiagnosisStateCopyWith<$Res> {
+abstract class $DiagnosisInitialCopyWith<$Res> {
   factory $DiagnosisInitialCopyWith(
           DiagnosisInitial value, $Res Function(DiagnosisInitial) then) =
       _$DiagnosisInitialCopyWithImpl<$Res>;
-  @override
   $Res call({Diagnosis diagnosis});
 }
 
@@ -137,10 +121,13 @@ class _$DiagnosisInitialCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object diagnosis = freezed,
+    Object? diagnosis = freezed,
   }) {
     return _then(DiagnosisInitial(
-      diagnosis == freezed ? _value.diagnosis : diagnosis as Diagnosis,
+      diagnosis == freezed
+          ? _value.diagnosis
+          : diagnosis // ignore: cast_nullable_to_non_nullable
+              as Diagnosis,
     ));
   }
 }
@@ -149,7 +136,7 @@ class _$DiagnosisInitialCopyWithImpl<$Res>
 class _$DiagnosisInitial
     with DiagnosticableTreeMixin
     implements DiagnosisInitial {
-  const _$DiagnosisInitial(this.diagnosis) : assert(diagnosis != null);
+  const _$DiagnosisInitial(this.diagnosis);
 
   @override
   final Diagnosis diagnosis;
@@ -180,35 +167,31 @@ class _$DiagnosisInitial
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(diagnosis);
 
+  @JsonKey(ignore: true)
   @override
   $DiagnosisInitialCopyWith<DiagnosisInitial> get copyWith =>
       _$DiagnosisInitialCopyWithImpl<DiagnosisInitial>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(Diagnosis diagnosis),
-    @required Result loading(Diagnosis diagnosis),
-    @required Result loaded(Diagnosis diagnosis),
-    @required Result error(@nullable Diagnosis diagnosis, Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function(Diagnosis diagnosis) initial,
+    required TResult Function(Diagnosis diagnosis) loading,
+    required TResult Function(Diagnosis diagnosis) loaded,
+    required TResult Function(Diagnosis? diagnosis, Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return initial(diagnosis);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(Diagnosis diagnosis),
-    Result loading(Diagnosis diagnosis),
-    Result loaded(Diagnosis diagnosis),
-    Result error(@nullable Diagnosis diagnosis, Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Diagnosis diagnosis)? initial,
+    TResult Function(Diagnosis diagnosis)? loading,
+    TResult Function(Diagnosis diagnosis)? loaded,
+    TResult Function(Diagnosis? diagnosis, Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(diagnosis);
     }
@@ -217,29 +200,24 @@ class _$DiagnosisInitial
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(DiagnosisInitial value),
-    @required Result loading(DiagnosisLoading value),
-    @required Result loaded(DiagnosisLoaded value),
-    @required Result error(DiagnosisError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DiagnosisInitial value) initial,
+    required TResult Function(DiagnosisLoading value) loading,
+    required TResult Function(DiagnosisLoaded value) loaded,
+    required TResult Function(DiagnosisError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(DiagnosisInitial value),
-    Result loading(DiagnosisLoading value),
-    Result loaded(DiagnosisLoaded value),
-    Result error(DiagnosisError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DiagnosisInitial value)? initial,
+    TResult Function(DiagnosisLoading value)? loading,
+    TResult Function(DiagnosisLoaded value)? loaded,
+    TResult Function(DiagnosisError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -250,19 +228,17 @@ class _$DiagnosisInitial
 abstract class DiagnosisInitial implements DiagnosisState {
   const factory DiagnosisInitial(Diagnosis diagnosis) = _$DiagnosisInitial;
 
-  @override
-  Diagnosis get diagnosis;
-  @override
-  $DiagnosisInitialCopyWith<DiagnosisInitial> get copyWith;
+  Diagnosis get diagnosis => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DiagnosisInitialCopyWith<DiagnosisInitial> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DiagnosisLoadingCopyWith<$Res>
-    implements $DiagnosisStateCopyWith<$Res> {
+abstract class $DiagnosisLoadingCopyWith<$Res> {
   factory $DiagnosisLoadingCopyWith(
           DiagnosisLoading value, $Res Function(DiagnosisLoading) then) =
       _$DiagnosisLoadingCopyWithImpl<$Res>;
-  @override
   $Res call({Diagnosis diagnosis});
 }
 
@@ -279,10 +255,13 @@ class _$DiagnosisLoadingCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object diagnosis = freezed,
+    Object? diagnosis = freezed,
   }) {
     return _then(DiagnosisLoading(
-      diagnosis == freezed ? _value.diagnosis : diagnosis as Diagnosis,
+      diagnosis == freezed
+          ? _value.diagnosis
+          : diagnosis // ignore: cast_nullable_to_non_nullable
+              as Diagnosis,
     ));
   }
 }
@@ -291,7 +270,7 @@ class _$DiagnosisLoadingCopyWithImpl<$Res>
 class _$DiagnosisLoading
     with DiagnosticableTreeMixin
     implements DiagnosisLoading {
-  const _$DiagnosisLoading(this.diagnosis) : assert(diagnosis != null);
+  const _$DiagnosisLoading(this.diagnosis);
 
   @override
   final Diagnosis diagnosis;
@@ -322,35 +301,31 @@ class _$DiagnosisLoading
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(diagnosis);
 
+  @JsonKey(ignore: true)
   @override
   $DiagnosisLoadingCopyWith<DiagnosisLoading> get copyWith =>
       _$DiagnosisLoadingCopyWithImpl<DiagnosisLoading>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(Diagnosis diagnosis),
-    @required Result loading(Diagnosis diagnosis),
-    @required Result loaded(Diagnosis diagnosis),
-    @required Result error(@nullable Diagnosis diagnosis, Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function(Diagnosis diagnosis) initial,
+    required TResult Function(Diagnosis diagnosis) loading,
+    required TResult Function(Diagnosis diagnosis) loaded,
+    required TResult Function(Diagnosis? diagnosis, Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loading(diagnosis);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(Diagnosis diagnosis),
-    Result loading(Diagnosis diagnosis),
-    Result loaded(Diagnosis diagnosis),
-    Result error(@nullable Diagnosis diagnosis, Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Diagnosis diagnosis)? initial,
+    TResult Function(Diagnosis diagnosis)? loading,
+    TResult Function(Diagnosis diagnosis)? loaded,
+    TResult Function(Diagnosis? diagnosis, Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(diagnosis);
     }
@@ -359,29 +334,24 @@ class _$DiagnosisLoading
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(DiagnosisInitial value),
-    @required Result loading(DiagnosisLoading value),
-    @required Result loaded(DiagnosisLoaded value),
-    @required Result error(DiagnosisError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DiagnosisInitial value) initial,
+    required TResult Function(DiagnosisLoading value) loading,
+    required TResult Function(DiagnosisLoaded value) loaded,
+    required TResult Function(DiagnosisError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(DiagnosisInitial value),
-    Result loading(DiagnosisLoading value),
-    Result loaded(DiagnosisLoaded value),
-    Result error(DiagnosisError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DiagnosisInitial value)? initial,
+    TResult Function(DiagnosisLoading value)? loading,
+    TResult Function(DiagnosisLoaded value)? loaded,
+    TResult Function(DiagnosisError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -392,19 +362,17 @@ class _$DiagnosisLoading
 abstract class DiagnosisLoading implements DiagnosisState {
   const factory DiagnosisLoading(Diagnosis diagnosis) = _$DiagnosisLoading;
 
-  @override
-  Diagnosis get diagnosis;
-  @override
-  $DiagnosisLoadingCopyWith<DiagnosisLoading> get copyWith;
+  Diagnosis get diagnosis => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DiagnosisLoadingCopyWith<DiagnosisLoading> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DiagnosisLoadedCopyWith<$Res>
-    implements $DiagnosisStateCopyWith<$Res> {
+abstract class $DiagnosisLoadedCopyWith<$Res> {
   factory $DiagnosisLoadedCopyWith(
           DiagnosisLoaded value, $Res Function(DiagnosisLoaded) then) =
       _$DiagnosisLoadedCopyWithImpl<$Res>;
-  @override
   $Res call({Diagnosis diagnosis});
 }
 
@@ -421,10 +389,13 @@ class _$DiagnosisLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object diagnosis = freezed,
+    Object? diagnosis = freezed,
   }) {
     return _then(DiagnosisLoaded(
-      diagnosis == freezed ? _value.diagnosis : diagnosis as Diagnosis,
+      diagnosis == freezed
+          ? _value.diagnosis
+          : diagnosis // ignore: cast_nullable_to_non_nullable
+              as Diagnosis,
     ));
   }
 }
@@ -433,7 +404,7 @@ class _$DiagnosisLoadedCopyWithImpl<$Res>
 class _$DiagnosisLoaded
     with DiagnosticableTreeMixin
     implements DiagnosisLoaded {
-  const _$DiagnosisLoaded(this.diagnosis) : assert(diagnosis != null);
+  const _$DiagnosisLoaded(this.diagnosis);
 
   @override
   final Diagnosis diagnosis;
@@ -464,35 +435,31 @@ class _$DiagnosisLoaded
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(diagnosis);
 
+  @JsonKey(ignore: true)
   @override
   $DiagnosisLoadedCopyWith<DiagnosisLoaded> get copyWith =>
       _$DiagnosisLoadedCopyWithImpl<DiagnosisLoaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(Diagnosis diagnosis),
-    @required Result loading(Diagnosis diagnosis),
-    @required Result loaded(Diagnosis diagnosis),
-    @required Result error(@nullable Diagnosis diagnosis, Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function(Diagnosis diagnosis) initial,
+    required TResult Function(Diagnosis diagnosis) loading,
+    required TResult Function(Diagnosis diagnosis) loaded,
+    required TResult Function(Diagnosis? diagnosis, Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loaded(diagnosis);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(Diagnosis diagnosis),
-    Result loading(Diagnosis diagnosis),
-    Result loaded(Diagnosis diagnosis),
-    Result error(@nullable Diagnosis diagnosis, Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Diagnosis diagnosis)? initial,
+    TResult Function(Diagnosis diagnosis)? loading,
+    TResult Function(Diagnosis diagnosis)? loaded,
+    TResult Function(Diagnosis? diagnosis, Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(diagnosis);
     }
@@ -501,29 +468,24 @@ class _$DiagnosisLoaded
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(DiagnosisInitial value),
-    @required Result loading(DiagnosisLoading value),
-    @required Result loaded(DiagnosisLoaded value),
-    @required Result error(DiagnosisError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DiagnosisInitial value) initial,
+    required TResult Function(DiagnosisLoading value) loading,
+    required TResult Function(DiagnosisLoaded value) loaded,
+    required TResult Function(DiagnosisError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(DiagnosisInitial value),
-    Result loading(DiagnosisLoading value),
-    Result loaded(DiagnosisLoaded value),
-    Result error(DiagnosisError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DiagnosisInitial value)? initial,
+    TResult Function(DiagnosisLoading value)? loading,
+    TResult Function(DiagnosisLoaded value)? loaded,
+    TResult Function(DiagnosisError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -534,20 +496,18 @@ class _$DiagnosisLoaded
 abstract class DiagnosisLoaded implements DiagnosisState {
   const factory DiagnosisLoaded(Diagnosis diagnosis) = _$DiagnosisLoaded;
 
-  @override
-  Diagnosis get diagnosis;
-  @override
-  $DiagnosisLoadedCopyWith<DiagnosisLoaded> get copyWith;
+  Diagnosis get diagnosis => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DiagnosisLoadedCopyWith<DiagnosisLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DiagnosisErrorCopyWith<$Res>
-    implements $DiagnosisStateCopyWith<$Res> {
+abstract class $DiagnosisErrorCopyWith<$Res> {
   factory $DiagnosisErrorCopyWith(
           DiagnosisError value, $Res Function(DiagnosisError) then) =
       _$DiagnosisErrorCopyWithImpl<$Res>;
-  @override
-  $Res call({@nullable Diagnosis diagnosis, Exception error});
+  $Res call({Diagnosis? diagnosis, Exception error});
 }
 
 /// @nodoc
@@ -563,24 +523,28 @@ class _$DiagnosisErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object diagnosis = freezed,
-    Object error = freezed,
+    Object? diagnosis = freezed,
+    Object? error = freezed,
   }) {
     return _then(DiagnosisError(
-      diagnosis == freezed ? _value.diagnosis : diagnosis as Diagnosis,
-      error: error == freezed ? _value.error : error as Exception,
+      diagnosis == freezed
+          ? _value.diagnosis
+          : diagnosis // ignore: cast_nullable_to_non_nullable
+              as Diagnosis?,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
 
 /// @nodoc
 class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
-  const _$DiagnosisError(@nullable this.diagnosis, {@required this.error})
-      : assert(error != null);
+  const _$DiagnosisError(this.diagnosis, {required this.error});
 
   @override
-  @nullable
-  final Diagnosis diagnosis;
+  final Diagnosis? diagnosis;
   @override
   final Exception error;
 
@@ -615,35 +579,31 @@ class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
       const DeepCollectionEquality().hash(diagnosis) ^
       const DeepCollectionEquality().hash(error);
 
+  @JsonKey(ignore: true)
   @override
   $DiagnosisErrorCopyWith<DiagnosisError> get copyWith =>
       _$DiagnosisErrorCopyWithImpl<DiagnosisError>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(Diagnosis diagnosis),
-    @required Result loading(Diagnosis diagnosis),
-    @required Result loaded(Diagnosis diagnosis),
-    @required Result error(@nullable Diagnosis diagnosis, Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function(Diagnosis diagnosis) initial,
+    required TResult Function(Diagnosis diagnosis) loading,
+    required TResult Function(Diagnosis diagnosis) loaded,
+    required TResult Function(Diagnosis? diagnosis, Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return error(diagnosis, this.error);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(Diagnosis diagnosis),
-    Result loading(Diagnosis diagnosis),
-    Result loaded(Diagnosis diagnosis),
-    Result error(@nullable Diagnosis diagnosis, Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Diagnosis diagnosis)? initial,
+    TResult Function(Diagnosis diagnosis)? loading,
+    TResult Function(Diagnosis diagnosis)? loaded,
+    TResult Function(Diagnosis? diagnosis, Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(diagnosis, this.error);
     }
@@ -652,29 +612,24 @@ class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(DiagnosisInitial value),
-    @required Result loading(DiagnosisLoading value),
-    @required Result loaded(DiagnosisLoaded value),
-    @required Result error(DiagnosisError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DiagnosisInitial value) initial,
+    required TResult Function(DiagnosisLoading value) loading,
+    required TResult Function(DiagnosisLoaded value) loaded,
+    required TResult Function(DiagnosisError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(DiagnosisInitial value),
-    Result loading(DiagnosisLoading value),
-    Result loaded(DiagnosisLoaded value),
-    Result error(DiagnosisError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DiagnosisInitial value)? initial,
+    TResult Function(DiagnosisLoading value)? loading,
+    TResult Function(DiagnosisLoaded value)? loaded,
+    TResult Function(DiagnosisError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -683,13 +638,12 @@ class _$DiagnosisError with DiagnosticableTreeMixin implements DiagnosisError {
 }
 
 abstract class DiagnosisError implements DiagnosisState {
-  const factory DiagnosisError(@nullable Diagnosis diagnosis,
-      {@required Exception error}) = _$DiagnosisError;
+  const factory DiagnosisError(Diagnosis? diagnosis,
+      {required Exception error}) = _$DiagnosisError;
 
-  @override
-  @nullable
-  Diagnosis get diagnosis;
-  Exception get error;
-  @override
-  $DiagnosisErrorCopyWith<DiagnosisError> get copyWith;
+  Diagnosis? get diagnosis => throw _privateConstructorUsedError;
+  Exception get error => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DiagnosisErrorCopyWith<DiagnosisError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

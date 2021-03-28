@@ -10,15 +10,12 @@ _$_ZabbixHost _$_$_ZabbixHostFromJson(Map<String, dynamic> json) {
   return _$_ZabbixHost(
     hostid: json['hostid'] as String,
     host: json['host'] as String,
-    items: (json['items'] as List)
-        ?.map((e) =>
-            e == null ? null : ZabbixItem.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    interfaces: (json['interfaces'] as List)
-        ?.map((e) => e == null
-            ? null
-            : ZabbixInterface.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    items: (json['items'] as List<dynamic>)
+        .map((e) => ZabbixItem.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    interfaces: (json['interfaces'] as List<dynamic>)
+        .map((e) => ZabbixInterface.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

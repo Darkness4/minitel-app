@@ -21,7 +21,7 @@ import 'package:minitel_toolbox/presentation/widgets/drawers/main_drawer.dart';
 class ReportingPage extends StatefulWidget {
   final String title;
 
-  const ReportingPage({Key key, this.title}) : super(key: key);
+  const ReportingPage({Key? key, required this.title}) : super(key: key);
 
   @override
   ReportingPageState createState() => ReportingPageState();
@@ -32,8 +32,8 @@ class ReportingPageState extends State<ReportingPage>
   final ValueNotifier<double> _percentageDiagnoseProgress =
       ValueNotifier<double>(0.0);
 
-  AnimationController _animationController;
-  Timer _timer;
+  late AnimationController _animationController;
+  Timer? _timer;
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +49,9 @@ class ReportingPageState extends State<ReportingPage>
           body: BlocListener<ReportCubit, ReportState>(
             listener: (context, state) {
               if (state is ReportDone) {
-                if (state.status != null) {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text(state.status),
-                  ));
-                }
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(state.status),
+                ));
               }
             },
             child: NestedScrollView(
@@ -102,7 +100,7 @@ class ReportingPageState extends State<ReportingPage>
   @override
   void dispose() {
     _timer?.cancel();
-    _animationController?.dispose();
+    _animationController.dispose();
     _percentageDiagnoseProgress.dispose();
     super.dispose();
   }
@@ -128,7 +126,7 @@ class ReportingPageState extends State<ReportingPage>
         child: _diagnosisIcon(context, state),
       );
 
-  Widget _diagnosisIcon(BuildContext context, DiagnosisState state) {
+  Widget? _diagnosisIcon(BuildContext context, DiagnosisState state) {
     if (state is DiagnosisInitial || state is DiagnosisError) {
       return const Icon(
         Icons.zoom_in,
@@ -221,15 +219,15 @@ class ReportingPageState extends State<ReportingPage>
   void _showNotValidSnackbar(
       ReportStatusState reportStatusState, BuildContext context) {
     if (!reportStatusState.isValidName) {
-      Scaffold.of(context).showSnackBar(const SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Identity is not valid.'),
       ));
     } else if (!reportStatusState.isValidRoom) {
-      Scaffold.of(context).showSnackBar(const SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Room is not valid.'),
       ));
     } else if (!reportStatusState.isValidTitle) {
-      Scaffold.of(context).showSnackBar(const SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Title is not valid.'),
       ));
     }

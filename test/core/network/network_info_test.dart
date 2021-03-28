@@ -4,8 +4,8 @@ import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:mockito/mockito.dart';
 
 void main() {
-  NetworkInfoImpl networkInfo;
-  MockDataConnectionChecker mockDataConnectionChecker;
+  late NetworkInfoImpl networkInfo;
+  late MockDataConnectionChecker mockDataConnectionChecker;
 
   setUp(() {
     mockDataConnectionChecker = MockDataConnectionChecker();

@@ -6,17 +6,20 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/github/github_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'github_remote_data_source_test.mocks.dart';
 
+@GenerateMocks([http.Client])
 void main() {
-  GithubRemoteDataSource dataSource;
-  MockHttpClient mockHttpClient;
+  late GithubRemoteDataSource dataSource;
+  late MockClient mockHttpClient;
   const tRepo = 'Darkness4/minitel-app';
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
+    mockHttpClient = MockClient();
     dataSource = GithubRemoteDataSourceImpl(client: mockHttpClient);
   });
 
@@ -55,7 +58,7 @@ void main() {
         await dataSource.fetchReleases(tRepo);
         // assert
         verify(mockHttpClient.get(
-          'https://api.github.com/repos/$tRepo/releases',
+          Uri.parse('https://api.github.com/repos/$tRepo/releases'),
         ));
       },
     );
@@ -85,5 +88,3 @@ void main() {
     );
   });
 }
-
-class MockHttpClient extends Mock implements http.Client {}

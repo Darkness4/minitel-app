@@ -13,7 +13,7 @@ class MonthHeader extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Text(
           text,
-          style: Theme.of(context).textTheme.headline3.copyWith(
+          style: Theme.of(context).textTheme.headline3!.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
@@ -27,7 +27,7 @@ class MonthPage extends StatelessWidget {
   final int _month;
   final List<Widget> _monthlyWidgets;
 
-  const MonthPage(this._month, this._monthlyWidgets, {Key key})
+  const MonthPage(this._month, this._monthlyWidgets, {Key? key})
       : super(key: key);
 
   @override

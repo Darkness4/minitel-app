@@ -10,7 +10,7 @@ import 'package:minitel_toolbox/presentation/shared/text_styles.dart';
 
 class ServersCard extends StatelessWidget {
   const ServersCard({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -53,7 +53,7 @@ class _ServerBody extends StatelessWidget {
 
   _ServerBody(
     ZabbixHost host, {
-    Key key,
+    Key? key,
   })  : _status = ServerStatus.fromHost(host),
         _hostname = host.host,
         _interfaces = host.interfaces,
@@ -75,7 +75,7 @@ class _ServerBody extends StatelessWidget {
               Text('IP : ${interface.ip}'),
             Text(
               _status.icmpAvailable == 1 ? 'ICMP Available' : 'Errors',
-              style: Theme.of(context).textTheme.bodyText2.apply(
+              style: Theme.of(context).textTheme.bodyText2!.apply(
                     fontWeightDelta: 4,
                     color:
                         _status.icmpAvailable == 1 ? Colors.green : Colors.red,
@@ -83,7 +83,7 @@ class _ServerBody extends StatelessWidget {
             ),
             Text(
               'Ping : ${_status.pingResponseTime * 1e3} ms',
-              style: Theme.of(context).textTheme.bodyText2.apply(
+              style: Theme.of(context).textTheme.bodyText2!.apply(
                   color:
                       _status.pingResponseTime < 5 ? Colors.green : Colors.red),
             ),

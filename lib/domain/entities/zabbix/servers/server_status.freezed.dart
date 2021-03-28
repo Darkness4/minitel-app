@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'server_status.dart';
 
@@ -9,14 +9,15 @@ part of 'server_status.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ServerStatusTearOff {
   const _$ServerStatusTearOff();
 
-// ignore: unused_element
   _ServerStatus call(
-      {@required @nullable double pingResponseTime,
-      @required @nullable int icmpAvailable}) {
+      {required double pingResponseTime, required int icmpAvailable}) {
     return _ServerStatus(
       pingResponseTime: pingResponseTime,
       icmpAvailable: icmpAvailable,
@@ -25,17 +26,16 @@ class _$ServerStatusTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ServerStatus = _$ServerStatusTearOff();
 
 /// @nodoc
 mixin _$ServerStatus {
-  @nullable
-  double get pingResponseTime;
-  @nullable
-  int get icmpAvailable;
+  double get pingResponseTime => throw _privateConstructorUsedError;
+  int get icmpAvailable => throw _privateConstructorUsedError;
 
-  $ServerStatusCopyWith<ServerStatus> get copyWith;
+  @JsonKey(ignore: true)
+  $ServerStatusCopyWith<ServerStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -43,7 +43,7 @@ abstract class $ServerStatusCopyWith<$Res> {
   factory $ServerStatusCopyWith(
           ServerStatus value, $Res Function(ServerStatus) then) =
       _$ServerStatusCopyWithImpl<$Res>;
-  $Res call({@nullable double pingResponseTime, @nullable int icmpAvailable});
+  $Res call({double pingResponseTime, int icmpAvailable});
 }
 
 /// @nodoc
@@ -56,16 +56,18 @@ class _$ServerStatusCopyWithImpl<$Res> implements $ServerStatusCopyWith<$Res> {
 
   @override
   $Res call({
-    Object pingResponseTime = freezed,
-    Object icmpAvailable = freezed,
+    Object? pingResponseTime = freezed,
+    Object? icmpAvailable = freezed,
   }) {
     return _then(_value.copyWith(
       pingResponseTime: pingResponseTime == freezed
           ? _value.pingResponseTime
-          : pingResponseTime as double,
+          : pingResponseTime // ignore: cast_nullable_to_non_nullable
+              as double,
       icmpAvailable: icmpAvailable == freezed
           ? _value.icmpAvailable
-          : icmpAvailable as int,
+          : icmpAvailable // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -77,7 +79,7 @@ abstract class _$ServerStatusCopyWith<$Res>
           _ServerStatus value, $Res Function(_ServerStatus) then) =
       __$ServerStatusCopyWithImpl<$Res>;
   @override
-  $Res call({@nullable double pingResponseTime, @nullable int icmpAvailable});
+  $Res call({double pingResponseTime, int icmpAvailable});
 }
 
 /// @nodoc
@@ -92,16 +94,18 @@ class __$ServerStatusCopyWithImpl<$Res> extends _$ServerStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object pingResponseTime = freezed,
-    Object icmpAvailable = freezed,
+    Object? pingResponseTime = freezed,
+    Object? icmpAvailable = freezed,
   }) {
     return _then(_ServerStatus(
       pingResponseTime: pingResponseTime == freezed
           ? _value.pingResponseTime
-          : pingResponseTime as double,
+          : pingResponseTime // ignore: cast_nullable_to_non_nullable
+              as double,
       icmpAvailable: icmpAvailable == freezed
           ? _value.icmpAvailable
-          : icmpAvailable as int,
+          : icmpAvailable // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -109,14 +113,11 @@ class __$ServerStatusCopyWithImpl<$Res> extends _$ServerStatusCopyWithImpl<$Res>
 /// @nodoc
 class _$_ServerStatus implements _ServerStatus {
   const _$_ServerStatus(
-      {@required @nullable this.pingResponseTime,
-      @required @nullable this.icmpAvailable});
+      {required this.pingResponseTime, required this.icmpAvailable});
 
   @override
-  @nullable
   final double pingResponseTime;
   @override
-  @nullable
   final int icmpAvailable;
 
   @override
@@ -142,6 +143,7 @@ class _$_ServerStatus implements _ServerStatus {
       const DeepCollectionEquality().hash(pingResponseTime) ^
       const DeepCollectionEquality().hash(icmpAvailable);
 
+  @JsonKey(ignore: true)
   @override
   _$ServerStatusCopyWith<_ServerStatus> get copyWith =>
       __$ServerStatusCopyWithImpl<_ServerStatus>(this, _$identity);
@@ -149,15 +151,15 @@ class _$_ServerStatus implements _ServerStatus {
 
 abstract class _ServerStatus implements ServerStatus {
   const factory _ServerStatus(
-      {@required @nullable double pingResponseTime,
-      @required @nullable int icmpAvailable}) = _$_ServerStatus;
+      {required double pingResponseTime,
+      required int icmpAvailable}) = _$_ServerStatus;
 
   @override
-  @nullable
-  double get pingResponseTime;
+  double get pingResponseTime => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get icmpAvailable;
+  int get icmpAvailable => throw _privateConstructorUsedError;
   @override
-  _$ServerStatusCopyWith<_ServerStatus> get copyWith;
+  @JsonKey(ignore: true)
+  _$ServerStatusCopyWith<_ServerStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }

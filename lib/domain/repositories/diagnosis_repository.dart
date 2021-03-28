@@ -1,4 +1,4 @@
-import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
+import 'package:minitel_toolbox/data/database/diagnosis.dart';
 
 abstract class DiagnosisRepository {
   /// Run diagnosis suite

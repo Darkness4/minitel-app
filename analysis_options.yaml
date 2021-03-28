@@ -11,6 +11,7 @@ analyzer:
     - '**/*.g.dart'
     - '**/*.freezed.dart'
     - '**/*.config.dart'
+    - '**/*.mocks.dart'
 
 # All rules: https://github.com/dart-lang/linter/blob/master/example/all.yaml
 linter:

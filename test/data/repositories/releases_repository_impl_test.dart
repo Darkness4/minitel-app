@@ -6,28 +6,40 @@ import 'package:minitel_toolbox/data/datasources/github/github_local_data_source
 import 'package:minitel_toolbox/data/datasources/github/github_remote_data_source.dart';
 import 'package:minitel_toolbox/data/repositories/releases_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/github/release.dart';
+import 'package:minitel_toolbox/domain/entities/github/user.dart';
 import 'package:minitel_toolbox/domain/repositories/releases_repository.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'releases_repository_impl_test.mocks.dart';
+
+@GenerateMocks([
+  NetworkInfo,
+  GithubUser,
+  DateTime,
+], customMocks: [
+  MockSpec<GithubRemoteDataSource>(as: #MockRemoteDataSource),
+  MockSpec<GithubLocalDataSource>(as: #MockLocalDataSource)
+])
 void main() {
-  ReleasesRepository repository;
-  MockRemoteDataSource mockRemoteDataSource;
-  MockNetworkInfo mockNetworkInfo;
-  MockLocalDataSource mockLocalDataSource;
-  const tListGithubReleaseModel = <GithubRelease>[
+  late ReleasesRepository repository;
+  late MockRemoteDataSource mockRemoteDataSource;
+  late MockNetworkInfo mockNetworkInfo;
+  late MockLocalDataSource mockLocalDataSource;
+  final tListGithubReleaseModel = <GithubRelease>[
     GithubRelease(
       assets: [],
       assets_url: 'assets_url',
-      author: null,
+      author: MockGithubUser(),
       body: 'body',
-      created_at: null,
+      created_at: MockDateTime(),
       draft: false,
       html_url: 'html_url',
       id: 0,
       name: 'name',
       node_id: 'node_id',
       prerelease: false,
-      published_at: null,
+      published_at: MockDateTime(),
       tag_name: 'tag_name',
       tarball_url: 'tarball_url',
       target_commitish: 'target_commitish',
@@ -166,9 +178,3 @@ void main() {
     });
   });
 }
-
-class MockRemoteDataSource extends Mock implements GithubRemoteDataSource {}
-
-class MockLocalDataSource extends Mock implements GithubLocalDataSource {}
-
-class MockNetworkInfo extends Mock implements NetworkInfo {}

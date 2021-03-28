@@ -4,23 +4,23 @@ import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 part 'ap_status.freezed.dart';
 
 @freezed
-abstract class APStatus with _$APStatus {
+class APStatus with _$APStatus {
   const factory APStatus({
-    @required @nullable String hostname,
-    @required @nullable Duration uptime,
-    @required @nullable int utilization5G,
-    @required @nullable int utilization2G,
-    @required @nullable int users,
-    @required @nullable int snmpAvailable,
+    required String hostname,
+    required Duration uptime,
+    required int utilization5G,
+    required int utilization2G,
+    required int users,
+    required int snmpAvailable,
   }) = _APStatus;
 
   factory APStatus.fromHost(ZabbixHost host) {
     // Data to fill
-    String hostname;
-    Duration uptime;
-    int snmpAvailable;
-    int utilization5G;
-    int utilization2G;
+    String? hostname;
+    Duration? uptime;
+    var snmpAvailable = 0;
+    var utilization5G = 0;
+    var utilization2G = 0;
     var users = 0;
 
     for (final item in host.items) {
@@ -40,8 +40,8 @@ abstract class APStatus with _$APStatus {
     }
     return APStatus(
       snmpAvailable: snmpAvailable,
-      hostname: hostname,
-      uptime: uptime,
+      hostname: hostname!,
+      uptime: uptime!,
       utilization5G: utilization5G,
       utilization2G: utilization2G,
       users: users,

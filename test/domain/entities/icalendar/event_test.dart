@@ -3,10 +3,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
+import 'event_test.mocks.dart';
+
+@GenerateMocks([FlutterLocalNotificationsPlugin, NotificationDetails])
 void main() {
   tz.initializeTimeZones();
 
@@ -132,8 +136,3 @@ void main() {
     );
   });
 }
-
-class MockFlutterLocalNotificationsPlugin extends Mock
-    implements FlutterLocalNotificationsPlugin {}
-
-class MockNotificationDetails extends Mock implements NotificationDetails {}

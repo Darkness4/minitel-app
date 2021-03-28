@@ -1,19 +1,19 @@
 part of 'portal_cubit.dart';
 
 @freezed
-abstract class PortalState with _$PortalState {
+class PortalState with _$PortalState {
   const factory PortalState({
-    @required bool rememberMe,
-    @required bool autoLogin,
-    @nullable @required String uid,
-    @required String selectedTime,
-    @required String selectedUrl,
-    @nullable @required String pswd,
-    @required bool isValidUid,
-    @required bool isLoaded,
-    @required bool isLoading,
-    @required bool isError,
-    @required bool hasAutoLogged,
+    required bool rememberMe,
+    required bool autoLogin,
+    required String uid,
+    required String selectedTime,
+    required String selectedUrl,
+    required String pswd,
+    required bool isValidUid,
+    required bool isLoaded,
+    required bool isLoading,
+    required bool isError,
+    required bool hasAutoLogged,
   }) = _PortalState;
 
   factory PortalState.initial() {
@@ -65,15 +65,15 @@ extension PortalStateX on PortalState {
   }
 
   PortalState update({
-    bool rememberMe,
-    bool autoLogin,
-    String uid,
-    String selectedTime,
-    String selectedUrl,
-    String pswd,
-    bool isLoaded,
-    bool isValidUid,
-    bool hasAutoLogged,
+    bool? rememberMe,
+    bool? autoLogin,
+    String? uid,
+    String? selectedTime,
+    String? selectedUrl,
+    String? pswd,
+    bool? isLoaded,
+    bool? isValidUid,
+    bool? hasAutoLogged,
   }) {
     return copyWith(
       rememberMe: rememberMe ?? this.rememberMe,

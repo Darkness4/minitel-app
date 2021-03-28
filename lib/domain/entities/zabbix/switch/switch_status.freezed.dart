@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'switch_status.dart';
 
@@ -9,18 +9,20 @@ part of 'switch_status.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$SwitchStatusTearOff {
   const _$SwitchStatusTearOff();
 
-// ignore: unused_element
   _SwitchStatus call(
-      {@required @nullable Map<int, SwitchPortStatus> ports,
-      @required @nullable String description,
-      @required @nullable String hostname,
-      @required @nullable Duration uptime,
-      @required @nullable double pingResponseTime,
-      @required @nullable int snmpAvailable}) {
+      {required Map<int, SwitchPortStatus> ports,
+      required String description,
+      required String hostname,
+      required Duration uptime,
+      required double pingResponseTime,
+      required int snmpAvailable}) {
     return _SwitchStatus(
       ports: ports,
       description: description,
@@ -33,25 +35,20 @@ class _$SwitchStatusTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $SwitchStatus = _$SwitchStatusTearOff();
 
 /// @nodoc
 mixin _$SwitchStatus {
-  @nullable
-  Map<int, SwitchPortStatus> get ports;
-  @nullable
-  String get description;
-  @nullable
-  String get hostname;
-  @nullable
-  Duration get uptime;
-  @nullable
-  double get pingResponseTime;
-  @nullable
-  int get snmpAvailable;
+  Map<int, SwitchPortStatus> get ports => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  String get hostname => throw _privateConstructorUsedError;
+  Duration get uptime => throw _privateConstructorUsedError;
+  double get pingResponseTime => throw _privateConstructorUsedError;
+  int get snmpAvailable => throw _privateConstructorUsedError;
 
-  $SwitchStatusCopyWith<SwitchStatus> get copyWith;
+  @JsonKey(ignore: true)
+  $SwitchStatusCopyWith<SwitchStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -60,12 +57,12 @@ abstract class $SwitchStatusCopyWith<$Res> {
           SwitchStatus value, $Res Function(SwitchStatus) then) =
       _$SwitchStatusCopyWithImpl<$Res>;
   $Res call(
-      {@nullable Map<int, SwitchPortStatus> ports,
-      @nullable String description,
-      @nullable String hostname,
-      @nullable Duration uptime,
-      @nullable double pingResponseTime,
-      @nullable int snmpAvailable});
+      {Map<int, SwitchPortStatus> ports,
+      String description,
+      String hostname,
+      Duration uptime,
+      double pingResponseTime,
+      int snmpAvailable});
 }
 
 /// @nodoc
@@ -78,26 +75,38 @@ class _$SwitchStatusCopyWithImpl<$Res> implements $SwitchStatusCopyWith<$Res> {
 
   @override
   $Res call({
-    Object ports = freezed,
-    Object description = freezed,
-    Object hostname = freezed,
-    Object uptime = freezed,
-    Object pingResponseTime = freezed,
-    Object snmpAvailable = freezed,
+    Object? ports = freezed,
+    Object? description = freezed,
+    Object? hostname = freezed,
+    Object? uptime = freezed,
+    Object? pingResponseTime = freezed,
+    Object? snmpAvailable = freezed,
   }) {
     return _then(_value.copyWith(
-      ports:
-          ports == freezed ? _value.ports : ports as Map<int, SwitchPortStatus>,
-      description:
-          description == freezed ? _value.description : description as String,
-      hostname: hostname == freezed ? _value.hostname : hostname as String,
-      uptime: uptime == freezed ? _value.uptime : uptime as Duration,
+      ports: ports == freezed
+          ? _value.ports
+          : ports // ignore: cast_nullable_to_non_nullable
+              as Map<int, SwitchPortStatus>,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      hostname: hostname == freezed
+          ? _value.hostname
+          : hostname // ignore: cast_nullable_to_non_nullable
+              as String,
+      uptime: uptime == freezed
+          ? _value.uptime
+          : uptime // ignore: cast_nullable_to_non_nullable
+              as Duration,
       pingResponseTime: pingResponseTime == freezed
           ? _value.pingResponseTime
-          : pingResponseTime as double,
+          : pingResponseTime // ignore: cast_nullable_to_non_nullable
+              as double,
       snmpAvailable: snmpAvailable == freezed
           ? _value.snmpAvailable
-          : snmpAvailable as int,
+          : snmpAvailable // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -110,12 +119,12 @@ abstract class _$SwitchStatusCopyWith<$Res>
       __$SwitchStatusCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable Map<int, SwitchPortStatus> ports,
-      @nullable String description,
-      @nullable String hostname,
-      @nullable Duration uptime,
-      @nullable double pingResponseTime,
-      @nullable int snmpAvailable});
+      {Map<int, SwitchPortStatus> ports,
+      String description,
+      String hostname,
+      Duration uptime,
+      double pingResponseTime,
+      int snmpAvailable});
 }
 
 /// @nodoc
@@ -130,26 +139,38 @@ class __$SwitchStatusCopyWithImpl<$Res> extends _$SwitchStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object ports = freezed,
-    Object description = freezed,
-    Object hostname = freezed,
-    Object uptime = freezed,
-    Object pingResponseTime = freezed,
-    Object snmpAvailable = freezed,
+    Object? ports = freezed,
+    Object? description = freezed,
+    Object? hostname = freezed,
+    Object? uptime = freezed,
+    Object? pingResponseTime = freezed,
+    Object? snmpAvailable = freezed,
   }) {
     return _then(_SwitchStatus(
-      ports:
-          ports == freezed ? _value.ports : ports as Map<int, SwitchPortStatus>,
-      description:
-          description == freezed ? _value.description : description as String,
-      hostname: hostname == freezed ? _value.hostname : hostname as String,
-      uptime: uptime == freezed ? _value.uptime : uptime as Duration,
+      ports: ports == freezed
+          ? _value.ports
+          : ports // ignore: cast_nullable_to_non_nullable
+              as Map<int, SwitchPortStatus>,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      hostname: hostname == freezed
+          ? _value.hostname
+          : hostname // ignore: cast_nullable_to_non_nullable
+              as String,
+      uptime: uptime == freezed
+          ? _value.uptime
+          : uptime // ignore: cast_nullable_to_non_nullable
+              as Duration,
       pingResponseTime: pingResponseTime == freezed
           ? _value.pingResponseTime
-          : pingResponseTime as double,
+          : pingResponseTime // ignore: cast_nullable_to_non_nullable
+              as double,
       snmpAvailable: snmpAvailable == freezed
           ? _value.snmpAvailable
-          : snmpAvailable as int,
+          : snmpAvailable // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -157,30 +178,24 @@ class __$SwitchStatusCopyWithImpl<$Res> extends _$SwitchStatusCopyWithImpl<$Res>
 /// @nodoc
 class _$_SwitchStatus implements _SwitchStatus {
   const _$_SwitchStatus(
-      {@required @nullable this.ports,
-      @required @nullable this.description,
-      @required @nullable this.hostname,
-      @required @nullable this.uptime,
-      @required @nullable this.pingResponseTime,
-      @required @nullable this.snmpAvailable});
+      {required this.ports,
+      required this.description,
+      required this.hostname,
+      required this.uptime,
+      required this.pingResponseTime,
+      required this.snmpAvailable});
 
   @override
-  @nullable
   final Map<int, SwitchPortStatus> ports;
   @override
-  @nullable
   final String description;
   @override
-  @nullable
   final String hostname;
   @override
-  @nullable
   final Duration uptime;
   @override
-  @nullable
   final double pingResponseTime;
   @override
-  @nullable
   final int snmpAvailable;
 
   @override
@@ -220,6 +235,7 @@ class _$_SwitchStatus implements _SwitchStatus {
       const DeepCollectionEquality().hash(pingResponseTime) ^
       const DeepCollectionEquality().hash(snmpAvailable);
 
+  @JsonKey(ignore: true)
   @override
   _$SwitchStatusCopyWith<_SwitchStatus> get copyWith =>
       __$SwitchStatusCopyWithImpl<_SwitchStatus>(this, _$identity);
@@ -227,31 +243,27 @@ class _$_SwitchStatus implements _SwitchStatus {
 
 abstract class _SwitchStatus implements SwitchStatus {
   const factory _SwitchStatus(
-      {@required @nullable Map<int, SwitchPortStatus> ports,
-      @required @nullable String description,
-      @required @nullable String hostname,
-      @required @nullable Duration uptime,
-      @required @nullable double pingResponseTime,
-      @required @nullable int snmpAvailable}) = _$_SwitchStatus;
+      {required Map<int, SwitchPortStatus> ports,
+      required String description,
+      required String hostname,
+      required Duration uptime,
+      required double pingResponseTime,
+      required int snmpAvailable}) = _$_SwitchStatus;
 
   @override
-  @nullable
-  Map<int, SwitchPortStatus> get ports;
+  Map<int, SwitchPortStatus> get ports => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get description;
+  String get description => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get hostname;
+  String get hostname => throw _privateConstructorUsedError;
   @override
-  @nullable
-  Duration get uptime;
+  Duration get uptime => throw _privateConstructorUsedError;
   @override
-  @nullable
-  double get pingResponseTime;
+  double get pingResponseTime => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get snmpAvailable;
+  int get snmpAvailable => throw _privateConstructorUsedError;
   @override
-  _$SwitchStatusCopyWith<_SwitchStatus> get copyWith;
+  @JsonKey(ignore: true)
+  _$SwitchStatusCopyWith<_SwitchStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }
