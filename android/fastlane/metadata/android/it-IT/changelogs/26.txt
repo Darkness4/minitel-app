@@ -1,0 +1,4 @@
+Aggiornamento a Flutter 2.
+
+L'applicazione potrebbe essere leggermente instabile.
+Puoi segnalare problemi seguendo questo link: https://github.com/Darkness4/minitel-app/issues.

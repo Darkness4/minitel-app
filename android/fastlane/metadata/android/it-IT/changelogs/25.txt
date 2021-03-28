@@ -1,4 +1,0 @@
-Aggiornamento delle dipendenze principali.
-
-- La logica di notifica è stata aggiornata. Il fuso orario è ora accurato al 100%.
-- Pulizia del codice
