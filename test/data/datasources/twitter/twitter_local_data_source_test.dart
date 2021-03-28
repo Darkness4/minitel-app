@@ -6,20 +6,46 @@ import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/data/datasources/twitter/twitter_local_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'twitter_local_data_source_test.mocks.dart';
 
+class MockFile extends Mock implements File {
+  @override
+  bool existsSync() =>
+      super.noSuchMethod(Invocation.method(#existsSync, []), returnValue: false)
+          as bool;
+
+  @override
+  String readAsStringSync({Encoding encoding = utf8}) =>
+      super.noSuchMethod(Invocation.method(#readAsStringSync, []),
+          returnValue: '') as String;
+
+  @override
+  Future<File> writeAsString(String? contents,
+          {FileMode mode = FileMode.write,
+          Encoding encoding = utf8,
+          bool flush = false}) =>
+      super.noSuchMethod(
+          Invocation.method(#writeAsString, [contents],
+              {#mode: mode, #encoding: encoding, #flush: flush}),
+          returnValue: Future.value(this)) as Future<File>;
+}
+
+@GenerateMocks([FileManager])
 void main() {
-  TwitterLocalDataSource dataSource;
-  MockFile mockFile;
-  MockFileManager mockFileManager;
+  late TwitterLocalDataSource dataSource;
+  late MockFile mockFile;
+  late MockFileManager mockFileManager;
 
   setUp(() {
     mockFile = MockFile();
     mockFileManager = MockFileManager();
 
     when(mockFileManager.feedFile).thenAnswer((_) async => mockFile);
+    when(mockFile.writeAsString(any)).thenAnswer((_) async => mockFile);
     dataSource = TwitterLocalDataSourceImpl(
       fileManager: mockFileManager,
     );
@@ -50,7 +76,7 @@ void main() {
       'should throw a CacheException when there is not a cached value',
       () async {
         // arrange
-        when(mockFile.readAsStringSync()).thenReturn(null);
+        when(mockFile.readAsStringSync()).thenReturn('');
         when(mockFile.existsSync()).thenReturn(false);
         // act
         final call = dataSource.fetchAllPosts;
@@ -82,7 +108,3 @@ void main() {
     );
   });
 }
-
-class MockFile extends Mock implements File {}
-
-class MockFileManager extends Mock implements FileManager {}

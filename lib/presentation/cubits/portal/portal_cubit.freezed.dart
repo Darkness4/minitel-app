@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'portal_cubit.dart';
 
@@ -9,23 +9,25 @@ part of 'portal_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$PortalStateTearOff {
   const _$PortalStateTearOff();
 
-// ignore: unused_element
   _PortalState call(
-      {@required bool rememberMe,
-      @required bool autoLogin,
-      @required @nullable String uid,
-      @required String selectedTime,
-      @required String selectedUrl,
-      @required @nullable String pswd,
-      @required bool isValidUid,
-      @required bool isLoaded,
-      @required bool isLoading,
-      @required bool isError,
-      @required bool hasAutoLogged}) {
+      {required bool rememberMe,
+      required bool autoLogin,
+      required String uid,
+      required String selectedTime,
+      required String selectedUrl,
+      required String pswd,
+      required bool isValidUid,
+      required bool isLoaded,
+      required bool isLoading,
+      required bool isError,
+      required bool hasAutoLogged}) {
     return _PortalState(
       rememberMe: rememberMe,
       autoLogin: autoLogin,
@@ -43,26 +45,25 @@ class _$PortalStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $PortalState = _$PortalStateTearOff();
 
 /// @nodoc
 mixin _$PortalState {
-  bool get rememberMe;
-  bool get autoLogin;
-  @nullable
-  String get uid;
-  String get selectedTime;
-  String get selectedUrl;
-  @nullable
-  String get pswd;
-  bool get isValidUid;
-  bool get isLoaded;
-  bool get isLoading;
-  bool get isError;
-  bool get hasAutoLogged;
+  bool get rememberMe => throw _privateConstructorUsedError;
+  bool get autoLogin => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+  String get selectedTime => throw _privateConstructorUsedError;
+  String get selectedUrl => throw _privateConstructorUsedError;
+  String get pswd => throw _privateConstructorUsedError;
+  bool get isValidUid => throw _privateConstructorUsedError;
+  bool get isLoaded => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isError => throw _privateConstructorUsedError;
+  bool get hasAutoLogged => throw _privateConstructorUsedError;
 
-  $PortalStateCopyWith<PortalState> get copyWith;
+  @JsonKey(ignore: true)
+  $PortalStateCopyWith<PortalState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -73,10 +74,10 @@ abstract class $PortalStateCopyWith<$Res> {
   $Res call(
       {bool rememberMe,
       bool autoLogin,
-      @nullable String uid,
+      String uid,
       String selectedTime,
       String selectedUrl,
-      @nullable String pswd,
+      String pswd,
       bool isValidUid,
       bool isLoaded,
       bool isLoading,
@@ -94,37 +95,63 @@ class _$PortalStateCopyWithImpl<$Res> implements $PortalStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object rememberMe = freezed,
-    Object autoLogin = freezed,
-    Object uid = freezed,
-    Object selectedTime = freezed,
-    Object selectedUrl = freezed,
-    Object pswd = freezed,
-    Object isValidUid = freezed,
-    Object isLoaded = freezed,
-    Object isLoading = freezed,
-    Object isError = freezed,
-    Object hasAutoLogged = freezed,
+    Object? rememberMe = freezed,
+    Object? autoLogin = freezed,
+    Object? uid = freezed,
+    Object? selectedTime = freezed,
+    Object? selectedUrl = freezed,
+    Object? pswd = freezed,
+    Object? isValidUid = freezed,
+    Object? isLoaded = freezed,
+    Object? isLoading = freezed,
+    Object? isError = freezed,
+    Object? hasAutoLogged = freezed,
   }) {
     return _then(_value.copyWith(
-      rememberMe:
-          rememberMe == freezed ? _value.rememberMe : rememberMe as bool,
-      autoLogin: autoLogin == freezed ? _value.autoLogin : autoLogin as bool,
-      uid: uid == freezed ? _value.uid : uid as String,
+      rememberMe: rememberMe == freezed
+          ? _value.rememberMe
+          : rememberMe // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoLogin: autoLogin == freezed
+          ? _value.autoLogin
+          : autoLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       selectedTime: selectedTime == freezed
           ? _value.selectedTime
-          : selectedTime as String,
-      selectedUrl:
-          selectedUrl == freezed ? _value.selectedUrl : selectedUrl as String,
-      pswd: pswd == freezed ? _value.pswd : pswd as String,
-      isValidUid:
-          isValidUid == freezed ? _value.isValidUid : isValidUid as bool,
-      isLoaded: isLoaded == freezed ? _value.isLoaded : isLoaded as bool,
-      isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      isError: isError == freezed ? _value.isError : isError as bool,
+          : selectedTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedUrl: selectedUrl == freezed
+          ? _value.selectedUrl
+          : selectedUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      pswd: pswd == freezed
+          ? _value.pswd
+          : pswd // ignore: cast_nullable_to_non_nullable
+              as String,
+      isValidUid: isValidUid == freezed
+          ? _value.isValidUid
+          : isValidUid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoaded: isLoaded == freezed
+          ? _value.isLoaded
+          : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isError: isError == freezed
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasAutoLogged: hasAutoLogged == freezed
           ? _value.hasAutoLogged
-          : hasAutoLogged as bool,
+          : hasAutoLogged // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -139,10 +166,10 @@ abstract class _$PortalStateCopyWith<$Res>
   $Res call(
       {bool rememberMe,
       bool autoLogin,
-      @nullable String uid,
+      String uid,
       String selectedTime,
       String selectedUrl,
-      @nullable String pswd,
+      String pswd,
       bool isValidUid,
       bool isLoaded,
       bool isLoading,
@@ -162,37 +189,63 @@ class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object rememberMe = freezed,
-    Object autoLogin = freezed,
-    Object uid = freezed,
-    Object selectedTime = freezed,
-    Object selectedUrl = freezed,
-    Object pswd = freezed,
-    Object isValidUid = freezed,
-    Object isLoaded = freezed,
-    Object isLoading = freezed,
-    Object isError = freezed,
-    Object hasAutoLogged = freezed,
+    Object? rememberMe = freezed,
+    Object? autoLogin = freezed,
+    Object? uid = freezed,
+    Object? selectedTime = freezed,
+    Object? selectedUrl = freezed,
+    Object? pswd = freezed,
+    Object? isValidUid = freezed,
+    Object? isLoaded = freezed,
+    Object? isLoading = freezed,
+    Object? isError = freezed,
+    Object? hasAutoLogged = freezed,
   }) {
     return _then(_PortalState(
-      rememberMe:
-          rememberMe == freezed ? _value.rememberMe : rememberMe as bool,
-      autoLogin: autoLogin == freezed ? _value.autoLogin : autoLogin as bool,
-      uid: uid == freezed ? _value.uid : uid as String,
+      rememberMe: rememberMe == freezed
+          ? _value.rememberMe
+          : rememberMe // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoLogin: autoLogin == freezed
+          ? _value.autoLogin
+          : autoLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       selectedTime: selectedTime == freezed
           ? _value.selectedTime
-          : selectedTime as String,
-      selectedUrl:
-          selectedUrl == freezed ? _value.selectedUrl : selectedUrl as String,
-      pswd: pswd == freezed ? _value.pswd : pswd as String,
-      isValidUid:
-          isValidUid == freezed ? _value.isValidUid : isValidUid as bool,
-      isLoaded: isLoaded == freezed ? _value.isLoaded : isLoaded as bool,
-      isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      isError: isError == freezed ? _value.isError : isError as bool,
+          : selectedTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedUrl: selectedUrl == freezed
+          ? _value.selectedUrl
+          : selectedUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      pswd: pswd == freezed
+          ? _value.pswd
+          : pswd // ignore: cast_nullable_to_non_nullable
+              as String,
+      isValidUid: isValidUid == freezed
+          ? _value.isValidUid
+          : isValidUid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoaded: isLoaded == freezed
+          ? _value.isLoaded
+          : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isError: isError == freezed
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasAutoLogged: hasAutoLogged == freezed
           ? _value.hasAutoLogged
-          : hasAutoLogged as bool,
+          : hasAutoLogged // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -200,40 +253,29 @@ class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
   const _$_PortalState(
-      {@required this.rememberMe,
-      @required this.autoLogin,
-      @required @nullable this.uid,
-      @required this.selectedTime,
-      @required this.selectedUrl,
-      @required @nullable this.pswd,
-      @required this.isValidUid,
-      @required this.isLoaded,
-      @required this.isLoading,
-      @required this.isError,
-      @required this.hasAutoLogged})
-      : assert(rememberMe != null),
-        assert(autoLogin != null),
-        assert(selectedTime != null),
-        assert(selectedUrl != null),
-        assert(isValidUid != null),
-        assert(isLoaded != null),
-        assert(isLoading != null),
-        assert(isError != null),
-        assert(hasAutoLogged != null);
+      {required this.rememberMe,
+      required this.autoLogin,
+      required this.uid,
+      required this.selectedTime,
+      required this.selectedUrl,
+      required this.pswd,
+      required this.isValidUid,
+      required this.isLoaded,
+      required this.isLoading,
+      required this.isError,
+      required this.hasAutoLogged});
 
   @override
   final bool rememberMe;
   @override
   final bool autoLogin;
   @override
-  @nullable
   final String uid;
   @override
   final String selectedTime;
   @override
   final String selectedUrl;
   @override
-  @nullable
   final String pswd;
   @override
   final bool isValidUid;
@@ -321,6 +363,7 @@ class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
       const DeepCollectionEquality().hash(isError) ^
       const DeepCollectionEquality().hash(hasAutoLogged);
 
+  @JsonKey(ignore: true)
   @override
   _$PortalStateCopyWith<_PortalState> get copyWith =>
       __$PortalStateCopyWithImpl<_PortalState>(this, _$identity);
@@ -328,42 +371,42 @@ class _$_PortalState with DiagnosticableTreeMixin implements _PortalState {
 
 abstract class _PortalState implements PortalState {
   const factory _PortalState(
-      {@required bool rememberMe,
-      @required bool autoLogin,
-      @required @nullable String uid,
-      @required String selectedTime,
-      @required String selectedUrl,
-      @required @nullable String pswd,
-      @required bool isValidUid,
-      @required bool isLoaded,
-      @required bool isLoading,
-      @required bool isError,
-      @required bool hasAutoLogged}) = _$_PortalState;
+      {required bool rememberMe,
+      required bool autoLogin,
+      required String uid,
+      required String selectedTime,
+      required String selectedUrl,
+      required String pswd,
+      required bool isValidUid,
+      required bool isLoaded,
+      required bool isLoading,
+      required bool isError,
+      required bool hasAutoLogged}) = _$_PortalState;
 
   @override
-  bool get rememberMe;
+  bool get rememberMe => throw _privateConstructorUsedError;
   @override
-  bool get autoLogin;
+  bool get autoLogin => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get uid;
+  String get uid => throw _privateConstructorUsedError;
   @override
-  String get selectedTime;
+  String get selectedTime => throw _privateConstructorUsedError;
   @override
-  String get selectedUrl;
+  String get selectedUrl => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get pswd;
+  String get pswd => throw _privateConstructorUsedError;
   @override
-  bool get isValidUid;
+  bool get isValidUid => throw _privateConstructorUsedError;
   @override
-  bool get isLoaded;
+  bool get isLoaded => throw _privateConstructorUsedError;
   @override
-  bool get isLoading;
+  bool get isLoading => throw _privateConstructorUsedError;
   @override
-  bool get isError;
+  bool get isError => throw _privateConstructorUsedError;
   @override
-  bool get hasAutoLogged;
+  bool get hasAutoLogged => throw _privateConstructorUsedError;
   @override
-  _$PortalStateCopyWith<_PortalState> get copyWith;
+  @JsonKey(ignore: true)
+  _$PortalStateCopyWith<_PortalState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -6,13 +6,22 @@ import 'package:minitel_toolbox/data/datasources/calendar_url/calendar_url_local
 import 'package:minitel_toolbox/data/datasources/calendar_url/calendar_url_remote_data_source.dart';
 import 'package:minitel_toolbox/data/repositories/calendar_url_repository_impl.dart';
 import 'package:minitel_toolbox/domain/repositories/calendar_url_repository.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'calendar_url_repository_impl_test.mocks.dart';
+
+@GenerateMocks([
+  NetworkInfo
+], customMocks: [
+  MockSpec<CalendarURLRemoteDataSource>(as: #MockRemoteDataSource),
+  MockSpec<CalendarURLLocalDataSource>(as: #MockLocalDataSource)
+])
 void main() {
-  CalendarURLRepository repository;
-  MockRemoteDataSource mockRemoteDataSource;
-  MockNetworkInfo mockNetworkInfo;
-  MockLocalDataSource mockLocalDataSource;
+  late CalendarURLRepository repository;
+  late MockRemoteDataSource mockRemoteDataSource;
+  late MockNetworkInfo mockNetworkInfo;
+  late MockLocalDataSource mockLocalDataSource;
   const tUser = 'User';
   const tPswd = 'Pwsd';
   const tRemoteUrl = 'https://localhost/';
@@ -60,9 +69,9 @@ void main() {
         when(mockRemoteDataSource.getCalendarURL(
           username: anyNamed('username'),
           password: anyNamed('password'),
-        )).thenAnswer((_) async => null);
+        )).thenAnswer((_) async => '');
         when(mockLocalDataSource.saveCalendarURL(any))
-            .thenAnswer((_) async => null);
+            .thenAnswer((_) async => '');
         // act
         await repository.get(username: tUser, password: tPswd);
         // assert
@@ -80,7 +89,7 @@ void main() {
             password: tPswd,
           )).thenAnswer((_) async => tRemoteUrl);
           when(mockLocalDataSource.saveCalendarURL(any))
-              .thenAnswer((_) async => null);
+              .thenAnswer((_) async {});
           // act
           final result = await repository.get(
             username: tUser,
@@ -105,7 +114,7 @@ void main() {
             password: tPswd,
           )).thenAnswer((_) async => tRemoteUrl);
           when(mockLocalDataSource.saveCalendarURL(any))
-              .thenAnswer((_) async => null);
+              .thenAnswer((_) async {});
           // act
           await repository.get(
             username: tUser,
@@ -202,10 +211,3 @@ void main() {
     });
   });
 }
-
-class MockRemoteDataSource extends Mock implements CalendarURLRemoteDataSource {
-}
-
-class MockLocalDataSource extends Mock implements CalendarURLLocalDataSource {}
-
-class MockNetworkInfo extends Mock implements NetworkInfo {}

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'timezone.dart';
 
@@ -9,15 +9,17 @@ part of 'timezone.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$TimezoneTearOff {
   const _$TimezoneTearOff();
 
-// ignore: unused_element
   _Timezone call(
-      {Location tzid,
-      TimezoneDescription daylight,
-      TimezoneDescription standard}) {
+      {required Location tzid,
+      required TimezoneDescription daylight,
+      required TimezoneDescription standard}) {
     return _Timezone(
       tzid: tzid,
       daylight: daylight,
@@ -27,16 +29,17 @@ class _$TimezoneTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Timezone = _$TimezoneTearOff();
 
 /// @nodoc
 mixin _$Timezone {
-  Location get tzid;
-  TimezoneDescription get daylight;
-  TimezoneDescription get standard;
+  Location get tzid => throw _privateConstructorUsedError;
+  TimezoneDescription get daylight => throw _privateConstructorUsedError;
+  TimezoneDescription get standard => throw _privateConstructorUsedError;
 
-  $TimezoneCopyWith<Timezone> get copyWith;
+  @JsonKey(ignore: true)
+  $TimezoneCopyWith<Timezone> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -62,26 +65,28 @@ class _$TimezoneCopyWithImpl<$Res> implements $TimezoneCopyWith<$Res> {
 
   @override
   $Res call({
-    Object tzid = freezed,
-    Object daylight = freezed,
-    Object standard = freezed,
+    Object? tzid = freezed,
+    Object? daylight = freezed,
+    Object? standard = freezed,
   }) {
     return _then(_value.copyWith(
-      tzid: tzid == freezed ? _value.tzid : tzid as Location,
+      tzid: tzid == freezed
+          ? _value.tzid
+          : tzid // ignore: cast_nullable_to_non_nullable
+              as Location,
       daylight: daylight == freezed
           ? _value.daylight
-          : daylight as TimezoneDescription,
+          : daylight // ignore: cast_nullable_to_non_nullable
+              as TimezoneDescription,
       standard: standard == freezed
           ? _value.standard
-          : standard as TimezoneDescription,
+          : standard // ignore: cast_nullable_to_non_nullable
+              as TimezoneDescription,
     ));
   }
 
   @override
   $TimezoneDescriptionCopyWith<$Res> get daylight {
-    if (_value.daylight == null) {
-      return null;
-    }
     return $TimezoneDescriptionCopyWith<$Res>(_value.daylight, (value) {
       return _then(_value.copyWith(daylight: value));
     });
@@ -89,9 +94,6 @@ class _$TimezoneCopyWithImpl<$Res> implements $TimezoneCopyWith<$Res> {
 
   @override
   $TimezoneDescriptionCopyWith<$Res> get standard {
-    if (_value.standard == null) {
-      return null;
-    }
     return $TimezoneDescriptionCopyWith<$Res>(_value.standard, (value) {
       return _then(_value.copyWith(standard: value));
     });
@@ -125,25 +127,31 @@ class __$TimezoneCopyWithImpl<$Res> extends _$TimezoneCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object tzid = freezed,
-    Object daylight = freezed,
-    Object standard = freezed,
+    Object? tzid = freezed,
+    Object? daylight = freezed,
+    Object? standard = freezed,
   }) {
     return _then(_Timezone(
-      tzid: tzid == freezed ? _value.tzid : tzid as Location,
+      tzid: tzid == freezed
+          ? _value.tzid
+          : tzid // ignore: cast_nullable_to_non_nullable
+              as Location,
       daylight: daylight == freezed
           ? _value.daylight
-          : daylight as TimezoneDescription,
+          : daylight // ignore: cast_nullable_to_non_nullable
+              as TimezoneDescription,
       standard: standard == freezed
           ? _value.standard
-          : standard as TimezoneDescription,
+          : standard // ignore: cast_nullable_to_non_nullable
+              as TimezoneDescription,
     ));
   }
 }
 
 /// @nodoc
-class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
-  const _$_Timezone({this.tzid, this.daylight, this.standard});
+class _$_Timezone implements _Timezone {
+  const _$_Timezone(
+      {required this.tzid, required this.daylight, required this.standard});
 
   @override
   final Location tzid;
@@ -153,18 +161,8 @@ class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
   final TimezoneDescription standard;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Timezone(tzid: $tzid, daylight: $daylight, standard: $standard)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Timezone'))
-      ..add(DiagnosticsProperty('tzid', tzid))
-      ..add(DiagnosticsProperty('daylight', daylight))
-      ..add(DiagnosticsProperty('standard', standard));
   }
 
   @override
@@ -188,6 +186,7 @@ class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
       const DeepCollectionEquality().hash(daylight) ^
       const DeepCollectionEquality().hash(standard);
 
+  @JsonKey(ignore: true)
   @override
   _$TimezoneCopyWith<_Timezone> get copyWith =>
       __$TimezoneCopyWithImpl<_Timezone>(this, _$identity);
@@ -195,31 +194,32 @@ class _$_Timezone with DiagnosticableTreeMixin implements _Timezone {
 
 abstract class _Timezone implements Timezone {
   const factory _Timezone(
-      {Location tzid,
-      TimezoneDescription daylight,
-      TimezoneDescription standard}) = _$_Timezone;
+      {required Location tzid,
+      required TimezoneDescription daylight,
+      required TimezoneDescription standard}) = _$_Timezone;
 
   @override
-  Location get tzid;
+  Location get tzid => throw _privateConstructorUsedError;
   @override
-  TimezoneDescription get daylight;
+  TimezoneDescription get daylight => throw _privateConstructorUsedError;
   @override
-  TimezoneDescription get standard;
+  TimezoneDescription get standard => throw _privateConstructorUsedError;
   @override
-  _$TimezoneCopyWith<_Timezone> get copyWith;
+  @JsonKey(ignore: true)
+  _$TimezoneCopyWith<_Timezone> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$TimezoneDescriptionTearOff {
   const _$TimezoneDescriptionTearOff();
 
-// ignore: unused_element
   _TimezoneDescription call(
-      {DateTime dtstart,
-      String tzOffsetTo,
-      String tzOffsetFrom,
-      String rRule,
-      String tzName}) {
+      {required DateTime dtstart,
+      required String tzOffsetTo,
+      required String tzOffsetFrom,
+      required String rRule,
+      required String tzName}) {
     return _TimezoneDescription(
       dtstart: dtstart,
       tzOffsetTo: tzOffsetTo,
@@ -231,18 +231,19 @@ class _$TimezoneDescriptionTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $TimezoneDescription = _$TimezoneDescriptionTearOff();
 
 /// @nodoc
 mixin _$TimezoneDescription {
-  DateTime get dtstart;
-  String get tzOffsetTo;
-  String get tzOffsetFrom;
-  String get rRule;
-  String get tzName;
+  DateTime get dtstart => throw _privateConstructorUsedError;
+  String get tzOffsetTo => throw _privateConstructorUsedError;
+  String get tzOffsetFrom => throw _privateConstructorUsedError;
+  String get rRule => throw _privateConstructorUsedError;
+  String get tzName => throw _privateConstructorUsedError;
 
-  $TimezoneDescriptionCopyWith<TimezoneDescription> get copyWith;
+  @JsonKey(ignore: true)
+  $TimezoneDescriptionCopyWith<TimezoneDescription> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -269,21 +270,33 @@ class _$TimezoneDescriptionCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object dtstart = freezed,
-    Object tzOffsetTo = freezed,
-    Object tzOffsetFrom = freezed,
-    Object rRule = freezed,
-    Object tzName = freezed,
+    Object? dtstart = freezed,
+    Object? tzOffsetTo = freezed,
+    Object? tzOffsetFrom = freezed,
+    Object? rRule = freezed,
+    Object? tzName = freezed,
   }) {
     return _then(_value.copyWith(
-      dtstart: dtstart == freezed ? _value.dtstart : dtstart as DateTime,
-      tzOffsetTo:
-          tzOffsetTo == freezed ? _value.tzOffsetTo : tzOffsetTo as String,
+      dtstart: dtstart == freezed
+          ? _value.dtstart
+          : dtstart // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      tzOffsetTo: tzOffsetTo == freezed
+          ? _value.tzOffsetTo
+          : tzOffsetTo // ignore: cast_nullable_to_non_nullable
+              as String,
       tzOffsetFrom: tzOffsetFrom == freezed
           ? _value.tzOffsetFrom
-          : tzOffsetFrom as String,
-      rRule: rRule == freezed ? _value.rRule : rRule as String,
-      tzName: tzName == freezed ? _value.tzName : tzName as String,
+          : tzOffsetFrom // ignore: cast_nullable_to_non_nullable
+              as String,
+      rRule: rRule == freezed
+          ? _value.rRule
+          : rRule // ignore: cast_nullable_to_non_nullable
+              as String,
+      tzName: tzName == freezed
+          ? _value.tzName
+          : tzName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -316,35 +329,45 @@ class __$TimezoneDescriptionCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object dtstart = freezed,
-    Object tzOffsetTo = freezed,
-    Object tzOffsetFrom = freezed,
-    Object rRule = freezed,
-    Object tzName = freezed,
+    Object? dtstart = freezed,
+    Object? tzOffsetTo = freezed,
+    Object? tzOffsetFrom = freezed,
+    Object? rRule = freezed,
+    Object? tzName = freezed,
   }) {
     return _then(_TimezoneDescription(
-      dtstart: dtstart == freezed ? _value.dtstart : dtstart as DateTime,
-      tzOffsetTo:
-          tzOffsetTo == freezed ? _value.tzOffsetTo : tzOffsetTo as String,
+      dtstart: dtstart == freezed
+          ? _value.dtstart
+          : dtstart // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      tzOffsetTo: tzOffsetTo == freezed
+          ? _value.tzOffsetTo
+          : tzOffsetTo // ignore: cast_nullable_to_non_nullable
+              as String,
       tzOffsetFrom: tzOffsetFrom == freezed
           ? _value.tzOffsetFrom
-          : tzOffsetFrom as String,
-      rRule: rRule == freezed ? _value.rRule : rRule as String,
-      tzName: tzName == freezed ? _value.tzName : tzName as String,
+          : tzOffsetFrom // ignore: cast_nullable_to_non_nullable
+              as String,
+      rRule: rRule == freezed
+          ? _value.rRule
+          : rRule // ignore: cast_nullable_to_non_nullable
+              as String,
+      tzName: tzName == freezed
+          ? _value.tzName
+          : tzName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
-class _$_TimezoneDescription
-    with DiagnosticableTreeMixin
-    implements _TimezoneDescription {
+class _$_TimezoneDescription implements _TimezoneDescription {
   const _$_TimezoneDescription(
-      {this.dtstart,
-      this.tzOffsetTo,
-      this.tzOffsetFrom,
-      this.rRule,
-      this.tzName});
+      {required this.dtstart,
+      required this.tzOffsetTo,
+      required this.tzOffsetFrom,
+      required this.rRule,
+      required this.tzName});
 
   @override
   final DateTime dtstart;
@@ -358,20 +381,8 @@ class _$_TimezoneDescription
   final String tzName;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TimezoneDescription(dtstart: $dtstart, tzOffsetTo: $tzOffsetTo, tzOffsetFrom: $tzOffsetFrom, rRule: $rRule, tzName: $tzName)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TimezoneDescription'))
-      ..add(DiagnosticsProperty('dtstart', dtstart))
-      ..add(DiagnosticsProperty('tzOffsetTo', tzOffsetTo))
-      ..add(DiagnosticsProperty('tzOffsetFrom', tzOffsetFrom))
-      ..add(DiagnosticsProperty('rRule', rRule))
-      ..add(DiagnosticsProperty('tzName', tzName));
   }
 
   @override
@@ -402,6 +413,7 @@ class _$_TimezoneDescription
       const DeepCollectionEquality().hash(rRule) ^
       const DeepCollectionEquality().hash(tzName);
 
+  @JsonKey(ignore: true)
   @override
   _$TimezoneDescriptionCopyWith<_TimezoneDescription> get copyWith =>
       __$TimezoneDescriptionCopyWithImpl<_TimezoneDescription>(
@@ -410,22 +422,24 @@ class _$_TimezoneDescription
 
 abstract class _TimezoneDescription implements TimezoneDescription {
   const factory _TimezoneDescription(
-      {DateTime dtstart,
-      String tzOffsetTo,
-      String tzOffsetFrom,
-      String rRule,
-      String tzName}) = _$_TimezoneDescription;
+      {required DateTime dtstart,
+      required String tzOffsetTo,
+      required String tzOffsetFrom,
+      required String rRule,
+      required String tzName}) = _$_TimezoneDescription;
 
   @override
-  DateTime get dtstart;
+  DateTime get dtstart => throw _privateConstructorUsedError;
   @override
-  String get tzOffsetTo;
+  String get tzOffsetTo => throw _privateConstructorUsedError;
   @override
-  String get tzOffsetFrom;
+  String get tzOffsetFrom => throw _privateConstructorUsedError;
   @override
-  String get rRule;
+  String get rRule => throw _privateConstructorUsedError;
   @override
-  String get tzName;
+  String get tzName => throw _privateConstructorUsedError;
   @override
-  _$TimezoneDescriptionCopyWith<_TimezoneDescription> get copyWith;
+  @JsonKey(ignore: true)
+  _$TimezoneDescriptionCopyWith<_TimezoneDescription> get copyWith =>
+      throw _privateConstructorUsedError;
 }

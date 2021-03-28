@@ -17,9 +17,8 @@ class PortalCubit extends Cubit<PortalState> {
   final LoginSettingsRepository loginSetingsRepository;
 
   PortalCubit({
-    @required this.loginSetingsRepository,
-  })  : assert(loginSetingsRepository != null),
-        super(PortalState.initial());
+    required this.loginSetingsRepository,
+  }) : super(PortalState.initial());
 
   void autoLoginChanged(bool autoLogin) {
     emit(state.update(autoLogin: autoLogin));
@@ -32,7 +31,7 @@ class PortalCubit extends Cubit<PortalState> {
     try {
       final settings = await loginSetingsRepository.load();
 
-      if (settings.rememberMe ?? false) {
+      if (settings.rememberMe) {
         emit(state.update(
           rememberMe: settings.rememberMe,
           autoLogin: settings.autoLogin,
@@ -60,12 +59,12 @@ class PortalCubit extends Cubit<PortalState> {
 
   /// Save settings
   Future<void> rememberLogin({
-    @required String uid,
-    @required String pswd,
-    @required String selectedUrl,
-    @required String selectedTime,
-    @required bool rememberMe,
-    @required bool autoLogin,
+    required String uid,
+    required String pswd,
+    required String selectedUrl,
+    required String selectedTime,
+    required bool rememberMe,
+    required bool autoLogin,
   }) async {
     if (rememberMe) {
       await loginSetingsRepository.save(LoginSettings(

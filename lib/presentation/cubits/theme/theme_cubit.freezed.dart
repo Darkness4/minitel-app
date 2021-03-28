@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'theme_cubit.dart';
 
@@ -9,11 +9,13 @@ part of 'theme_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ThemeStateTearOff {
   const _$ThemeStateTearOff();
 
-// ignore: unused_element
   _ThemeState call(ThemeData themeData, ThemeData darkThemeData, String value) {
     return _ThemeState(
       themeData,
@@ -24,16 +26,17 @@ class _$ThemeStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ThemeState = _$ThemeStateTearOff();
 
 /// @nodoc
 mixin _$ThemeState {
-  ThemeData get themeData;
-  ThemeData get darkThemeData;
-  String get value;
+  ThemeData get themeData => throw _privateConstructorUsedError;
+  ThemeData get darkThemeData => throw _privateConstructorUsedError;
+  String get value => throw _privateConstructorUsedError;
 
-  $ThemeStateCopyWith<ThemeState> get copyWith;
+  @JsonKey(ignore: true)
+  $ThemeStateCopyWith<ThemeState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -54,17 +57,23 @@ class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object themeData = freezed,
-    Object darkThemeData = freezed,
-    Object value = freezed,
+    Object? themeData = freezed,
+    Object? darkThemeData = freezed,
+    Object? value = freezed,
   }) {
     return _then(_value.copyWith(
-      themeData:
-          themeData == freezed ? _value.themeData : themeData as ThemeData,
+      themeData: themeData == freezed
+          ? _value.themeData
+          : themeData // ignore: cast_nullable_to_non_nullable
+              as ThemeData,
       darkThemeData: darkThemeData == freezed
           ? _value.darkThemeData
-          : darkThemeData as ThemeData,
-      value: value == freezed ? _value.value : value as String,
+          : darkThemeData // ignore: cast_nullable_to_non_nullable
+              as ThemeData,
+      value: value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -90,16 +99,23 @@ class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object themeData = freezed,
-    Object darkThemeData = freezed,
-    Object value = freezed,
+    Object? themeData = freezed,
+    Object? darkThemeData = freezed,
+    Object? value = freezed,
   }) {
     return _then(_ThemeState(
-      themeData == freezed ? _value.themeData : themeData as ThemeData,
+      themeData == freezed
+          ? _value.themeData
+          : themeData // ignore: cast_nullable_to_non_nullable
+              as ThemeData,
       darkThemeData == freezed
           ? _value.darkThemeData
-          : darkThemeData as ThemeData,
-      value == freezed ? _value.value : value as String,
+          : darkThemeData // ignore: cast_nullable_to_non_nullable
+              as ThemeData,
+      value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -107,10 +123,7 @@ class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_ThemeState extends _ThemeState with DiagnosticableTreeMixin {
   const _$_ThemeState(this.themeData, this.darkThemeData, this.value)
-      : assert(themeData != null),
-        assert(darkThemeData != null),
-        assert(value != null),
-        super._();
+      : super._();
 
   @override
   final ThemeData themeData;
@@ -155,23 +168,26 @@ class _$_ThemeState extends _ThemeState with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(darkThemeData) ^
       const DeepCollectionEquality().hash(value);
 
+  @JsonKey(ignore: true)
   @override
   _$ThemeStateCopyWith<_ThemeState> get copyWith =>
       __$ThemeStateCopyWithImpl<_ThemeState>(this, _$identity);
 }
 
 abstract class _ThemeState extends ThemeState {
-  const _ThemeState._() : super._();
   const factory _ThemeState(
           ThemeData themeData, ThemeData darkThemeData, String value) =
       _$_ThemeState;
+  const _ThemeState._() : super._();
 
   @override
-  ThemeData get themeData;
+  ThemeData get themeData => throw _privateConstructorUsedError;
   @override
-  ThemeData get darkThemeData;
+  ThemeData get darkThemeData => throw _privateConstructorUsedError;
   @override
-  String get value;
+  String get value => throw _privateConstructorUsedError;
   @override
-  _$ThemeStateCopyWith<_ThemeState> get copyWith;
+  @JsonKey(ignore: true)
+  _$ThemeStateCopyWith<_ThemeState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

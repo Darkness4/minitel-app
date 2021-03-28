@@ -11,7 +11,7 @@ import 'package:minitel_toolbox/presentation/shared/keys.dart';
 import 'package:minitel_toolbox/presentation/pages/reporting/report_widgets/doc_card.dart';
 
 class ReportScreen extends StatelessWidget {
-  const ReportScreen({Key key}) : super(key: key);
+  const ReportScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class ReportScreen extends StatelessWidget {
 /// Shows all possible ways of communication to Minitel.
 class _ContactsCard extends StatelessWidget {
   const _ContactsCard({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -49,8 +49,7 @@ class _ContactsCard extends StatelessWidget {
           'Contacts',
           style: Theme.of(context).textTheme.headline5,
         ),
-        OutlineButton(
-          textColor: Theme.of(context).accentColor,
+        OutlinedButton(
           onPressed: LaunchURLConstants.messengerMarcNGUYEN,
           child: Text(
             'Facebook: Minitel Ismin',
@@ -58,8 +57,7 @@ class _ContactsCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        OutlineButton(
-          textColor: Theme.of(context).accentColor,
+        OutlinedButton(
           onPressed: LaunchURLConstants.mailToMinitel,
           child: Text(
             'Mail: minitelismin@gmail.com',
@@ -79,7 +77,7 @@ class _ContactsCard extends StatelessWidget {
 
 /// This is the form needed to be filled.
 class _ReportCard extends StatefulWidget {
-  const _ReportCard({Key key}) : super(key: key);
+  const _ReportCard({Key? key}) : super(key: key);
 
   @override
   __ReportCardState createState() => __ReportCardState();
@@ -87,13 +85,13 @@ class _ReportCard extends StatefulWidget {
 
 class __ReportCardState extends State<_ReportCard> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _titleController;
-  TextEditingController _descriptionController;
-  TextEditingController _roomController;
-  TextEditingController _nameController;
-  FocusScopeNode _formNode;
+  late TextEditingController _titleController;
+  late TextEditingController _descriptionController;
+  late TextEditingController _roomController;
+  late TextEditingController _nameController;
+  late FocusScopeNode _formNode;
 
-  ReportStatusCubit _reportStatusCubit;
+  late ReportStatusCubit _reportStatusCubit;
 
   @override
   void initState() {
@@ -169,10 +167,10 @@ class __ReportCardState extends State<_ReportCard> {
                         ),
                         autovalidateMode: AutovalidateMode.always,
                         onFieldSubmitted: (_) => _formNode.nextFocus(),
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value?.isEmpty ?? true) {
                             return AppLoc.of(context).reporting.notEmpty;
-                          } else if (value.containsNoNumbers) {
+                          } else if (value!.containsNoNumbers) {
                             return AppLoc.of(context)
                                 .reporting
                                 .mustOnlyBeNumbers;
@@ -193,8 +191,8 @@ class __ReportCardState extends State<_ReportCard> {
                         ),
                         autovalidateMode: AutovalidateMode.always,
                         onFieldSubmitted: (_) => _formNode.nextFocus(),
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value?.isEmpty ?? true) {
                             return AppLoc.of(context).reporting.notEmpty;
                           }
                           return null;
@@ -214,8 +212,8 @@ class __ReportCardState extends State<_ReportCard> {
                   ),
                   onFieldSubmitted: (_) => _formNode.nextFocus(),
                   autovalidateMode: AutovalidateMode.always,
-                  validator: (String value) {
-                    if (value.isEmpty) {
+                  validator: (String? value) {
+                    if (value?.isEmpty ?? true) {
                       return AppLoc.of(context).reporting.notEmpty;
                     }
                     return null;
@@ -246,7 +244,7 @@ class __ReportCardState extends State<_ReportCard> {
 /// Shows how to fill a report.
 class _TutorialCard extends StatelessWidget {
   const _TutorialCard({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

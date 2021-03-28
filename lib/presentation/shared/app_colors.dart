@@ -21,12 +21,12 @@ class MinitelColors {
     DateTime.march: Colors.purple,
     DateTime.april: Colors.indigo,
     DateTime.may: Colors.blue,
-    DateTime.june: Colors.lightBlue[900],
+    DateTime.june: Colors.lightBlue[900]!,
     DateTime.july: Colors.green,
-    DateTime.august: Colors.lime[900],
+    DateTime.august: Colors.lime[900]!,
     DateTime.september: Colors.lightGreen,
-    DateTime.october: Colors.orange[900],
-    DateTime.november: Colors.deepOrange[900],
+    DateTime.october: Colors.orange[900]!,
+    DateTime.november: Colors.deepOrange[900]!,
     DateTime.december: Colors.brown,
   };
 }

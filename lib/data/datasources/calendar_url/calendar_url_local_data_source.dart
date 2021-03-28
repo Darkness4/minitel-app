@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
@@ -17,7 +16,7 @@ abstract class CalendarURLLocalDataSource {
 class CalendarURLLocalDataSourceImpl implements CalendarURLLocalDataSource {
   final SharedPreferences prefs;
 
-  const CalendarURLLocalDataSourceImpl({@required this.prefs});
+  const CalendarURLLocalDataSourceImpl({required this.prefs});
 
   /// Get from SharedPrefs the url to get the ical
   @override

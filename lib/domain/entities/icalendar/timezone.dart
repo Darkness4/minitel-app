@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:timezone/timezone.dart';
 
@@ -6,21 +5,21 @@ part 'timezone.freezed.dart';
 
 /// Timezone field from icalendar
 @freezed
-abstract class Timezone with _$Timezone {
+class Timezone with _$Timezone {
   const factory Timezone({
-    Location tzid,
-    TimezoneDescription daylight,
-    TimezoneDescription standard,
+    required Location tzid,
+    required TimezoneDescription daylight,
+    required TimezoneDescription standard,
   }) = _Timezone;
 }
 
 @freezed
-abstract class TimezoneDescription with _$TimezoneDescription {
+class TimezoneDescription with _$TimezoneDescription {
   const factory TimezoneDescription({
-    DateTime dtstart,
-    String tzOffsetTo,
-    String tzOffsetFrom,
-    String rRule,
-    String tzName,
+    required DateTime dtstart,
+    required String tzOffsetTo,
+    required String tzOffsetFrom,
+    required String rRule,
+    required String tzName,
   }) = _TimezoneDescription;
 }

@@ -9,9 +9,9 @@ class TwitterCard extends StatelessWidget {
   final Widget picture;
 
   const TwitterCard({
-    @required this.post,
-    @required this.picture,
-    Key key,
+    required this.post,
+    required this.picture,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class TwitterCard extends StatelessWidget {
                             'Minitel Ismin',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline5
+                                .headline5!
                                 .copyWith(height: 1),
                           ),
                           Text(
@@ -72,8 +72,7 @@ class TwitterCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: FlatButton(
-                    textColor: Colors.blue,
+                  child: TextButton(
                     onPressed: () =>
                         LaunchURLUtils.launchURL(post.url.toString()),
                     child: Text(AppLoc.of(context).news.seeTwitter),

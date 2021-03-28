@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
@@ -18,16 +17,16 @@ class NotificationSettingsDataSourceImpl
     implements NotificationSettingsDataSource {
   final SharedPreferences prefs;
 
-  const NotificationSettingsDataSourceImpl({@required this.prefs});
+  const NotificationSettingsDataSourceImpl({required this.prefs});
 
   @override
   NotificationSettings loadNotificationSettings() {
     if (prefs.containsKey(CacheKeys.early) &&
         prefs.containsKey(CacheKeys.range) &&
         prefs.containsKey(CacheKeys.enabled)) {
-      final earlyMinutes = prefs.getInt(CacheKeys.early);
-      final rangeDays = prefs.getInt(CacheKeys.range);
-      final enabled = prefs.getBool(CacheKeys.enabled);
+      final earlyMinutes = prefs.getInt(CacheKeys.early)!;
+      final rangeDays = prefs.getInt(CacheKeys.range)!;
+      final enabled = prefs.getBool(CacheKeys.enabled)!;
 
       return NotificationSettings(
         early: Duration(minutes: earlyMinutes),

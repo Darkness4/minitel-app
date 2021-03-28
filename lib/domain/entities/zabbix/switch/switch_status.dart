@@ -6,39 +6,36 @@ import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 part 'switch_status.freezed.dart';
 
 @freezed
-abstract class SwitchStatus with _$SwitchStatus {
+class SwitchStatus with _$SwitchStatus {
   const factory SwitchStatus({
-    @required @nullable Map<int, SwitchPortStatus> ports,
-    @required @nullable String description,
-    @required @nullable String hostname,
-    @required @nullable Duration uptime,
-    @required @nullable double pingResponseTime,
-    @required @nullable int snmpAvailable,
+    required Map<int, SwitchPortStatus> ports,
+    required String description,
+    required String hostname,
+    required Duration uptime,
+    required double pingResponseTime,
+    required int snmpAvailable,
   }) = _SwitchStatus;
 
   factory SwitchStatus.fromHost(ZabbixHost host) {
     // Data to fill
-    final ports = <int, SwitchPortStatus>{};
-    String description;
-    String hostname;
-    Duration uptime;
-    double pingResponseTime;
-    int snmpAvailable;
+    final ports = <int, SwitchPortStatusBuilder>{};
+    String? description;
+    String? hostname;
+    Duration? uptime;
+    double? pingResponseTime;
+    int? snmpAvailable;
 
     for (final item in host.items) {
-      if (item.snmp_oid != null &&
-          item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
+      if (item.snmp_oid.contains(SwitchPortStatus.speedOid)) {
         final port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.speedOid}.', ''));
-        ports[port] ??= const SwitchPortStatus();
-        ports[port] = ports[port].copyWith(speed: int.parse(item.lastvalue));
-      } else if (item.snmp_oid != null &&
-          item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
+        ports.putIfAbsent(port, () => SwitchPortStatusBuilder());
+        ports[port]!.speed = int.parse(item.lastvalue);
+      } else if (item.snmp_oid.contains(SwitchPortStatus.operStatusOid)) {
         final port = int.parse(
             item.snmp_oid.replaceAll('${SwitchPortStatus.operStatusOid}.', ''));
-        ports[port] ??= const SwitchPortStatus();
-        ports[port] =
-            ports[port].copyWith(operStatus: int.parse(item.lastvalue));
+        ports.putIfAbsent(port, () => SwitchPortStatusBuilder());
+        ports[port]!.operStatus = int.parse(item.lastvalue);
       } else if (item.name.contains('Device description')) {
         description = item.lastvalue;
       } else if (item.name.contains('Device name')) {
@@ -53,14 +50,19 @@ abstract class SwitchStatus with _$SwitchStatus {
     }
 
     return SwitchStatus(
-      snmpAvailable: snmpAvailable,
-      description: description,
-      hostname: hostname,
-      pingResponseTime: pingResponseTime,
-      ports: ports,
-      uptime: uptime,
+      snmpAvailable: snmpAvailable!,
+      description: description!,
+      hostname: hostname!,
+      pingResponseTime: pingResponseTime!,
+      ports: ports.build(),
+      uptime: uptime!,
     );
   }
+}
+
+extension on Map<int, SwitchPortStatusBuilder> {
+  Map<int, SwitchPortStatus> build() =>
+      map((key, value) => MapEntry(key, value.build()));
 }
 
 extension SwitchStatusUtils on SwitchStatus {

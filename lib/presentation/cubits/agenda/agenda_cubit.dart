@@ -9,7 +9,6 @@ import 'package:minitel_toolbox/domain/entities/icalendar/event.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
 import 'package:minitel_toolbox/presentation/cubits/news/notification_settings/notification_settings_cubit.dart';
-import 'package:dartx/dartx.dart';
 
 part 'agenda_cubit.freezed.dart';
 part 'agenda_state.dart';
@@ -19,28 +18,24 @@ class AgendaCubit extends Cubit<AgendaState> {
   final ICalendarRepository iCalendarRepository;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   final NotificationDetails notificationDetails;
-  final NotificationSettingsCubit notificationSettingsCubit;
-  StreamSubscription<NotificationSettingsState> subscription;
+  final NotificationSettingsCubit? notificationSettingsCubit;
+  late StreamSubscription<NotificationSettingsState> subscription;
 
   AgendaCubit({
-    @required this.flutterLocalNotificationsPlugin,
-    @required this.notificationDetails,
-    @required this.iCalendarRepository,
-    @factoryParam @required this.notificationSettingsCubit,
-  })  : assert(flutterLocalNotificationsPlugin != null),
-        assert(notificationDetails != null),
-        assert(iCalendarRepository != null),
-        assert(notificationSettingsCubit != null),
-        super(const AgendaState.initial()) {
+    required this.flutterLocalNotificationsPlugin,
+    required this.notificationDetails,
+    required this.iCalendarRepository,
+    @factoryParam required this.notificationSettingsCubit,
+  }) : super(const AgendaState.initial()) {
     subscription =
-        notificationSettingsCubit.listen((notificationSettingsState) {
+        notificationSettingsCubit!.stream.listen((notificationSettingsState) {
       if (notificationSettingsState.isLoaded) {
         if (state is AgendaInitial) {
           agendaLoad(notificationSettingsState.notificationSettings);
         }
       }
     });
-    notificationSettingsCubit.notificationSettingsLoad();
+    notificationSettingsCubit!.notificationSettingsLoad();
   }
 
   Future<void> agendaLoad(NotificationSettings notificationSettings) async {
@@ -51,8 +46,8 @@ class AgendaCubit extends Cubit<AgendaState> {
       await flutterLocalNotificationsPlugin.cancelAll();
 
       final events = parsedCalendar.events
-          .sortedBy((e) => e.dtstart)
-          .where((event) => event.dtstart.isAfter(DateTime.now()))
+          .sortedBy<DateTime>((Event e) => e.dtstart)
+          .where((Event e) => e.dtstart.isAfter(DateTime.now()))
           .toList();
 
       emit(AgendaState.loaded(events));
@@ -71,9 +66,9 @@ class AgendaCubit extends Cubit<AgendaState> {
   }
 
   Future<void> agendaDownload({
-    @required String uid,
-    @required String pswd,
-    @required NotificationSettings notificationSettings,
+    required String uid,
+    required String pswd,
+    required NotificationSettings notificationSettings,
   }) async {
     emit(const AgendaState.loading());
     try {
@@ -89,7 +84,7 @@ class AgendaCubit extends Cubit<AgendaState> {
 
   @override
   Future<void> close() {
-    subscription?.cancel();
+    subscription.cancel();
     return super.close();
   }
 }

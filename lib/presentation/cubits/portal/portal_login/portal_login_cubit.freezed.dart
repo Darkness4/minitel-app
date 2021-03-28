@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'portal_login_cubit.dart';
 
@@ -9,16 +9,18 @@ part of 'portal_login_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$PortalLoginStateTearOff {
   const _$PortalLoginStateTearOff();
 
-// ignore: unused_element
   _PortalLoginState call(
-      {@required bool isSubmitting,
-      @required bool isSuccess,
-      @required bool isFailure,
-      Exception error}) {
+      {required bool isSubmitting,
+      required bool isSuccess,
+      required bool isFailure,
+      Exception? error}) {
     return _PortalLoginState(
       isSubmitting: isSubmitting,
       isSuccess: isSuccess,
@@ -29,17 +31,18 @@ class _$PortalLoginStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $PortalLoginState = _$PortalLoginStateTearOff();
 
 /// @nodoc
 mixin _$PortalLoginState {
-  bool get isSubmitting;
-  bool get isSuccess;
-  bool get isFailure;
-  Exception get error;
+  bool get isSubmitting => throw _privateConstructorUsedError;
+  bool get isSuccess => throw _privateConstructorUsedError;
+  bool get isFailure => throw _privateConstructorUsedError;
+  Exception? get error => throw _privateConstructorUsedError;
 
-  $PortalLoginStateCopyWith<PortalLoginState> get copyWith;
+  @JsonKey(ignore: true)
+  $PortalLoginStateCopyWith<PortalLoginState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -48,7 +51,7 @@ abstract class $PortalLoginStateCopyWith<$Res> {
           PortalLoginState value, $Res Function(PortalLoginState) then) =
       _$PortalLoginStateCopyWithImpl<$Res>;
   $Res call(
-      {bool isSubmitting, bool isSuccess, bool isFailure, Exception error});
+      {bool isSubmitting, bool isSuccess, bool isFailure, Exception? error});
 }
 
 /// @nodoc
@@ -62,17 +65,28 @@ class _$PortalLoginStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object isSubmitting = freezed,
-    Object isSuccess = freezed,
-    Object isFailure = freezed,
-    Object error = freezed,
+    Object? isSubmitting = freezed,
+    Object? isSuccess = freezed,
+    Object? isFailure = freezed,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
-      isSubmitting:
-          isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
-      isSuccess: isSuccess == freezed ? _value.isSuccess : isSuccess as bool,
-      isFailure: isFailure == freezed ? _value.isFailure : isFailure as bool,
-      error: error == freezed ? _value.error : error as Exception,
+      isSubmitting: isSubmitting == freezed
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: isSuccess == freezed
+          ? _value.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFailure: isFailure == freezed
+          ? _value.isFailure
+          : isFailure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception?,
     ));
   }
 }
@@ -85,7 +99,7 @@ abstract class _$PortalLoginStateCopyWith<$Res>
       __$PortalLoginStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {bool isSubmitting, bool isSuccess, bool isFailure, Exception error});
+      {bool isSubmitting, bool isSuccess, bool isFailure, Exception? error});
 }
 
 /// @nodoc
@@ -101,17 +115,28 @@ class __$PortalLoginStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object isSubmitting = freezed,
-    Object isSuccess = freezed,
-    Object isFailure = freezed,
-    Object error = freezed,
+    Object? isSubmitting = freezed,
+    Object? isSuccess = freezed,
+    Object? isFailure = freezed,
+    Object? error = freezed,
   }) {
     return _then(_PortalLoginState(
-      isSubmitting:
-          isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
-      isSuccess: isSuccess == freezed ? _value.isSuccess : isSuccess as bool,
-      isFailure: isFailure == freezed ? _value.isFailure : isFailure as bool,
-      error: error == freezed ? _value.error : error as Exception,
+      isSubmitting: isSubmitting == freezed
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: isSuccess == freezed
+          ? _value.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFailure: isFailure == freezed
+          ? _value.isFailure
+          : isFailure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception?,
     ));
   }
 }
@@ -121,13 +146,10 @@ class _$_PortalLoginState
     with DiagnosticableTreeMixin
     implements _PortalLoginState {
   const _$_PortalLoginState(
-      {@required this.isSubmitting,
-      @required this.isSuccess,
-      @required this.isFailure,
-      this.error})
-      : assert(isSubmitting != null),
-        assert(isSuccess != null),
-        assert(isFailure != null);
+      {required this.isSubmitting,
+      required this.isSuccess,
+      required this.isFailure,
+      this.error});
 
   @override
   final bool isSubmitting;
@@ -136,7 +158,7 @@ class _$_PortalLoginState
   @override
   final bool isFailure;
   @override
-  final Exception error;
+  final Exception? error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -179,6 +201,7 @@ class _$_PortalLoginState
       const DeepCollectionEquality().hash(isFailure) ^
       const DeepCollectionEquality().hash(error);
 
+  @JsonKey(ignore: true)
   @override
   _$PortalLoginStateCopyWith<_PortalLoginState> get copyWith =>
       __$PortalLoginStateCopyWithImpl<_PortalLoginState>(this, _$identity);
@@ -186,19 +209,21 @@ class _$_PortalLoginState
 
 abstract class _PortalLoginState implements PortalLoginState {
   const factory _PortalLoginState(
-      {@required bool isSubmitting,
-      @required bool isSuccess,
-      @required bool isFailure,
-      Exception error}) = _$_PortalLoginState;
+      {required bool isSubmitting,
+      required bool isSuccess,
+      required bool isFailure,
+      Exception? error}) = _$_PortalLoginState;
 
   @override
-  bool get isSubmitting;
+  bool get isSubmitting => throw _privateConstructorUsedError;
   @override
-  bool get isSuccess;
+  bool get isSuccess => throw _privateConstructorUsedError;
   @override
-  bool get isFailure;
+  bool get isFailure => throw _privateConstructorUsedError;
   @override
-  Exception get error;
+  Exception? get error => throw _privateConstructorUsedError;
   @override
-  _$PortalLoginStateCopyWith<_PortalLoginState> get copyWith;
+  @JsonKey(ignore: true)
+  _$PortalLoginStateCopyWith<_PortalLoginState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

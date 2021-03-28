@@ -29,38 +29,69 @@ void main() {
           interfaces: [],
           items: [
             ZabbixItem(
+              type: '6',
+              value_type: 3,
+              name: 'Interface Slot: 0 Port: 0 Gigabit - Level: Speed',
+              units: 'bps',
               lastvalue: '10',
               snmp_oid: '${SwitchPortStatus.speedOid}.0',
             ),
             ZabbixItem(
+              type: '6',
+              value_type: 3,
+              name:
+                  'Interface Slot: 0 Port: 0 Gigabit - Level: Operational status',
+              units: 'bps',
               lastvalue: '1',
               snmp_oid: '${SwitchPortStatus.operStatusOid}.0',
             ),
             ZabbixItem(
+              type: '6',
+              value_type: 1,
+              units: '',
               name: 'Device description',
               lastvalue: 'description',
               snmp_oid: '',
             ),
             ZabbixItem(
+              type: '6',
+              value_type: 1,
+              units: '',
               name: 'Device name',
               lastvalue: 'hostname',
+              snmp_oid: '1.3.6.1.2.1.1.5.0',
+            ),
+            ZabbixItem(
+              type: '3',
+              value_type: 0,
+              units: 's',
+              name: 'ICMP response time',
+              lastvalue: '1.0',
               snmp_oid: '',
             ),
             ZabbixItem(
-              name: 'ICMP response time',
-              lastvalue: '1.0',
-            ),
-            ZabbixItem(
+              type: '6',
+              value_type: 3,
+              units: '',
               name: 'Device uptime',
               lastvalue: '1',
+              snmp_oid: '1.3.6.1.2.1.1.3.0',
             ),
             ZabbixItem(
+              type: '5',
+              value_type: 1,
+              units: '',
               name: 'SNMP availability',
               lastvalue: '1',
+              snmp_oid: '',
             ),
             ZabbixItem(
+              type: 'Trash',
+              value_type: -1,
+              units: 'Trash',
               name: 'Trash',
               lastvalue: 'Trash',
+              snmp_oid: 'Trash',
             ),
           ],
         );
@@ -99,24 +130,31 @@ void main() {
             ),
             1: SwitchPortStatus(
               operStatus: 2,
+              speed: 0,
             ),
             2: SwitchPortStatus(
               operStatus: 3,
+              speed: 0,
             ),
             3: SwitchPortStatus(
               operStatus: 4,
+              speed: 0,
             ),
             4: SwitchPortStatus(
               operStatus: 5,
+              speed: 0,
             ),
             5: SwitchPortStatus(
               operStatus: 6,
+              speed: 0,
             ),
             6: SwitchPortStatus(
               operStatus: 7,
+              speed: 0,
             ),
             7: SwitchPortStatus(
               operStatus: 0,
+              speed: 0,
             ),
           },
           pingResponseTime: 1.0,

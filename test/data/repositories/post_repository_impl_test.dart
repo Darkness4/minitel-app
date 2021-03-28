@@ -7,22 +7,33 @@ import 'package:minitel_toolbox/data/datasources/twitter/twitter_remote_data_sou
 import 'package:minitel_toolbox/data/repositories/post_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/twitter/post.dart';
 import 'package:minitel_toolbox/domain/repositories/post_repository.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'post_repository_impl_test.mocks.dart';
+
+@GenerateMocks([
+  NetworkInfo,
+  Uri,
+  DateTime
+], customMocks: [
+  MockSpec<TwitterRemoteDataSource>(as: #MockRemoteDataSource),
+  MockSpec<TwitterLocalDataSource>(as: #MockLocalDataSource)
+])
 void main() {
-  PostRepository repository;
-  MockRemoteDataSource mockRemoteDataSource;
-  MockNetworkInfo mockNetworkInfo;
-  MockLocalDataSource mockLocalDataSource;
-  const tPosts = <Post>[
+  late PostRepository repository;
+  late MockRemoteDataSource mockRemoteDataSource;
+  late MockNetworkInfo mockNetworkInfo;
+  late MockLocalDataSource mockLocalDataSource;
+  final tPosts = <Post>[
     Post(
       text: 'text',
       id_str: 'id_str',
       user_name: 'user_name',
       screen_name: 'screen_name',
-      profile_image_url_https: null,
-      url: null,
-      created_at: null,
+      profile_image_url_https: MockUri(),
+      url: MockUri(),
+      created_at: MockDateTime(),
     ),
   ];
 
@@ -66,6 +77,7 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
+        when(mockRemoteDataSource.fetchAllPosts()).thenAnswer((_) async => []);
         // act
         await repository.fetchAll();
         // assert
@@ -153,9 +165,3 @@ void main() {
     });
   });
 }
-
-class MockRemoteDataSource extends Mock implements TwitterRemoteDataSource {}
-
-class MockLocalDataSource extends Mock implements TwitterLocalDataSource {}
-
-class MockNetworkInfo extends Mock implements NetworkInfo {}

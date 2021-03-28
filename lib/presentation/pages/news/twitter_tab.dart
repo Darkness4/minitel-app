@@ -9,8 +9,8 @@ import 'package:minitel_toolbox/presentation/pages/news/news_widget/twitter_card
 class ErrorDisplay extends StatelessWidget {
   final String message;
   const ErrorDisplay({
-    @required this.message,
-    Key key,
+    required this.message,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class ErrorDisplay extends StatelessWidget {
 }
 
 class TwitterScreen extends StatelessWidget {
-  const TwitterScreen({Key key}) : super(key: key);
+  const TwitterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +61,8 @@ class TwitterScreen extends StatelessWidget {
 class FeedDisplay extends StatelessWidget {
   final List<Post> feed;
   const FeedDisplay({
-    @required this.feed,
-    Key key,
+    required this.feed,
+    Key? key,
   }) : super(key: key);
 
   @override

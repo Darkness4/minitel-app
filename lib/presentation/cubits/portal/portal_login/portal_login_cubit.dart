@@ -22,21 +22,17 @@ class PortalLoginCubit extends Cubit<PortalLoginState> {
   final PortailEMSERemoteDataSource portailEMSERemoteDataSource;
 
   PortalLoginCubit({
-    @required this.stormshieldRemoteDataSource,
-    @required this.iCalendarRepository,
-    @required this.imprimanteRemoteDataSource,
-    @required this.portailEMSERemoteDataSource,
-  })  : assert(stormshieldRemoteDataSource != null),
-        assert(imprimanteRemoteDataSource != null),
-        assert(portailEMSERemoteDataSource != null),
-        assert(iCalendarRepository != null),
-        super(PortalLoginState.empty());
+    required this.stormshieldRemoteDataSource,
+    required this.iCalendarRepository,
+    required this.imprimanteRemoteDataSource,
+    required this.portailEMSERemoteDataSource,
+  }) : super(PortalLoginState.empty());
 
   Future<void> login({
-    @required String uid,
-    @required String pswd,
-    @required String selectedUrl,
-    @required String selectedTime,
+    required String uid,
+    required String pswd,
+    required String selectedUrl,
+    required String selectedTime,
   }) async {
     emit(PortalLoginState.loading());
     try {
@@ -45,7 +41,7 @@ class PortalLoginCubit extends Cubit<PortalLoginState> {
         uid: uid,
         pswd: pswd,
         selectedUrl: selectedUrl,
-        selectedTime: LoginConstants.timeMap[selectedTime],
+        selectedTime: LoginConstants.timeMap[selectedTime]!,
       );
 
       final responseICalendar = iCalendarRepository.download(

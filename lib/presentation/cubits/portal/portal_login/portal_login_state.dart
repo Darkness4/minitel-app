@@ -1,12 +1,12 @@
 part of 'portal_login_cubit.dart';
 
 @freezed
-abstract class PortalLoginState with _$PortalLoginState {
+class PortalLoginState with _$PortalLoginState {
   const factory PortalLoginState({
-    @required bool isSubmitting,
-    @required bool isSuccess,
-    @required bool isFailure,
-    Exception error,
+    required bool isSubmitting,
+    required bool isSuccess,
+    required bool isFailure,
+    Exception? error,
   }) = _PortalLoginState;
 
   factory PortalLoginState.empty() {

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/files/file_manager.dart';
@@ -19,7 +18,7 @@ abstract class ICalendarLocalDataSource {
 class ICalendarLocalDataSourceImpl implements ICalendarLocalDataSource {
   final FileManager fileManager;
 
-  const ICalendarLocalDataSourceImpl({@required this.fileManager});
+  const ICalendarLocalDataSourceImpl({required this.fileManager});
 
   /// Get the calendar from url and save the .ics (and the url)
   @override

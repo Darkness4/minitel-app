@@ -10,8 +10,8 @@ import 'package:minitel_toolbox/presentation/pages/news/news_widget/github_card.
 class ErrorDisplay extends StatelessWidget {
   final String message;
   const ErrorDisplay({
-    @required this.message,
-    Key key,
+    required this.message,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -34,8 +34,8 @@ class GithubReleasesDisplay extends StatelessWidget {
   final List<GithubRelease> releases;
 
   const GithubReleasesDisplay({
-    @required this.releases,
-    Key key,
+    required this.releases,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -71,7 +71,7 @@ class GithubReleasesDisplay extends StatelessWidget {
 }
 
 class GithubScreen extends StatelessWidget {
-  const GithubScreen({Key key}) : super(key: key);
+  const GithubScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return buildBody(context);

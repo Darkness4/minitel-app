@@ -8,7 +8,7 @@ class NotificationSettingsRepositoryImpl
     implements NotificationSettingsRepository {
   final NotificationSettingsDataSource localDataSource;
 
-  const NotificationSettingsRepositoryImpl({this.localDataSource});
+  const NotificationSettingsRepositoryImpl({required this.localDataSource});
 
   @override
   NotificationSettings load() => localDataSource.loadNotificationSettings();

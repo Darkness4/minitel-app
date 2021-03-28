@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'notification_settings_cubit.dart';
 
@@ -9,15 +9,17 @@ part of 'notification_settings_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$NotificationSettingsStateTearOff {
   const _$NotificationSettingsStateTearOff();
 
-// ignore: unused_element
   _NotificationSettingsState call(
-      {@required @nullable NotificationSettings notificationSettings,
-      @required @nullable bool isSaved,
-      @required @nullable bool isLoaded}) {
+      {required NotificationSettings notificationSettings,
+      required bool isSaved,
+      required bool isLoaded}) {
     return _NotificationSettingsState(
       notificationSettings: notificationSettings,
       isSaved: isSaved,
@@ -27,19 +29,18 @@ class _$NotificationSettingsStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $NotificationSettingsState = _$NotificationSettingsStateTearOff();
 
 /// @nodoc
 mixin _$NotificationSettingsState {
-  @nullable
-  NotificationSettings get notificationSettings;
-  @nullable
-  bool get isSaved;
-  @nullable
-  bool get isLoaded;
+  NotificationSettings get notificationSettings =>
+      throw _privateConstructorUsedError;
+  bool get isSaved => throw _privateConstructorUsedError;
+  bool get isLoaded => throw _privateConstructorUsedError;
 
-  $NotificationSettingsStateCopyWith<NotificationSettingsState> get copyWith;
+  @JsonKey(ignore: true)
+  $NotificationSettingsStateCopyWith<NotificationSettingsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -48,9 +49,7 @@ abstract class $NotificationSettingsStateCopyWith<$Res> {
           $Res Function(NotificationSettingsState) then) =
       _$NotificationSettingsStateCopyWithImpl<$Res>;
   $Res call(
-      {@nullable NotificationSettings notificationSettings,
-      @nullable bool isSaved,
-      @nullable bool isLoaded});
+      {NotificationSettings notificationSettings, bool isSaved, bool isLoaded});
 
   $NotificationSettingsCopyWith<$Res> get notificationSettings;
 }
@@ -66,24 +65,28 @@ class _$NotificationSettingsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object notificationSettings = freezed,
-    Object isSaved = freezed,
-    Object isLoaded = freezed,
+    Object? notificationSettings = freezed,
+    Object? isSaved = freezed,
+    Object? isLoaded = freezed,
   }) {
     return _then(_value.copyWith(
       notificationSettings: notificationSettings == freezed
           ? _value.notificationSettings
-          : notificationSettings as NotificationSettings,
-      isSaved: isSaved == freezed ? _value.isSaved : isSaved as bool,
-      isLoaded: isLoaded == freezed ? _value.isLoaded : isLoaded as bool,
+          : notificationSettings // ignore: cast_nullable_to_non_nullable
+              as NotificationSettings,
+      isSaved: isSaved == freezed
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoaded: isLoaded == freezed
+          ? _value.isLoaded
+          : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
   @override
   $NotificationSettingsCopyWith<$Res> get notificationSettings {
-    if (_value.notificationSettings == null) {
-      return null;
-    }
     return $NotificationSettingsCopyWith<$Res>(_value.notificationSettings,
         (value) {
       return _then(_value.copyWith(notificationSettings: value));
@@ -99,9 +102,7 @@ abstract class _$NotificationSettingsStateCopyWith<$Res>
       __$NotificationSettingsStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable NotificationSettings notificationSettings,
-      @nullable bool isSaved,
-      @nullable bool isLoaded});
+      {NotificationSettings notificationSettings, bool isSaved, bool isLoaded});
 
   @override
   $NotificationSettingsCopyWith<$Res> get notificationSettings;
@@ -121,16 +122,23 @@ class __$NotificationSettingsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object notificationSettings = freezed,
-    Object isSaved = freezed,
-    Object isLoaded = freezed,
+    Object? notificationSettings = freezed,
+    Object? isSaved = freezed,
+    Object? isLoaded = freezed,
   }) {
     return _then(_NotificationSettingsState(
       notificationSettings: notificationSettings == freezed
           ? _value.notificationSettings
-          : notificationSettings as NotificationSettings,
-      isSaved: isSaved == freezed ? _value.isSaved : isSaved as bool,
-      isLoaded: isLoaded == freezed ? _value.isLoaded : isLoaded as bool,
+          : notificationSettings // ignore: cast_nullable_to_non_nullable
+              as NotificationSettings,
+      isSaved: isSaved == freezed
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoaded: isLoaded == freezed
+          ? _value.isLoaded
+          : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -140,18 +148,15 @@ class _$_NotificationSettingsState
     with DiagnosticableTreeMixin
     implements _NotificationSettingsState {
   const _$_NotificationSettingsState(
-      {@required @nullable this.notificationSettings,
-      @required @nullable this.isSaved,
-      @required @nullable this.isLoaded});
+      {required this.notificationSettings,
+      required this.isSaved,
+      required this.isLoaded});
 
   @override
-  @nullable
   final NotificationSettings notificationSettings;
   @override
-  @nullable
   final bool isSaved;
   @override
-  @nullable
   final bool isLoaded;
 
   @override
@@ -191,6 +196,7 @@ class _$_NotificationSettingsState
       const DeepCollectionEquality().hash(isSaved) ^
       const DeepCollectionEquality().hash(isLoaded);
 
+  @JsonKey(ignore: true)
   @override
   _$NotificationSettingsStateCopyWith<_NotificationSettingsState>
       get copyWith =>
@@ -200,19 +206,19 @@ class _$_NotificationSettingsState
 
 abstract class _NotificationSettingsState implements NotificationSettingsState {
   const factory _NotificationSettingsState(
-      {@required @nullable NotificationSettings notificationSettings,
-      @required @nullable bool isSaved,
-      @required @nullable bool isLoaded}) = _$_NotificationSettingsState;
+      {required NotificationSettings notificationSettings,
+      required bool isSaved,
+      required bool isLoaded}) = _$_NotificationSettingsState;
 
   @override
-  @nullable
-  NotificationSettings get notificationSettings;
+  NotificationSettings get notificationSettings =>
+      throw _privateConstructorUsedError;
   @override
-  @nullable
-  bool get isSaved;
+  bool get isSaved => throw _privateConstructorUsedError;
   @override
-  @nullable
-  bool get isLoaded;
+  bool get isLoaded => throw _privateConstructorUsedError;
   @override
-  _$NotificationSettingsStateCopyWith<_NotificationSettingsState> get copyWith;
+  @JsonKey(ignore: true)
+  _$NotificationSettingsStateCopyWith<_NotificationSettingsState>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/servers/server_status.dart';
 import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
@@ -14,23 +16,35 @@ void main() {
       'should return a valid model',
       () async {
         // arrange
-        const tZabbixHost = ZabbixHost(
+        final tZabbixHost = ZabbixHost(
           host: 'host',
           hostid: 'hostid',
           interfaces: [],
           items: [
-            ZabbixItem(
-              name: 'ICMP response time',
-              lastvalue: '1.0',
-            ),
-            ZabbixItem(
-              name: 'ICMP ping',
-              lastvalue: '1',
-            ),
-            ZabbixItem(
-              name: 'Trash',
-              lastvalue: 'Trash',
-            ),
+            ZabbixItem.fromJson(jsonDecode('''{
+              "type": "3",
+              "value_type": "3",
+              "name": "ICMP ping",
+              "units": "",
+              "snmp_oid": "",
+              "lastvalue": "1"
+            }''') as Map<String, dynamic>),
+            ZabbixItem.fromJson(jsonDecode('''{
+              "type": "3",
+              "value_type": "0",
+              "name": "ICMP loss",
+              "units": "%",
+              "snmp_oid": "",
+              "lastvalue": "0.0000"
+            }''') as Map<String, dynamic>),
+            ZabbixItem.fromJson(jsonDecode('''{
+              "type": "3",
+              "value_type": "0",
+              "name": "ICMP response time",
+              "units": "s",
+              "snmp_oid": "",
+              "lastvalue": "1.0"
+            }''') as Map<String, dynamic>),
           ],
         );
         // act

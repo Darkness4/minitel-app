@@ -1,4 +1,0 @@
-Major dependencies update.
-
--  Notification logic has been updated. Timezone are now 100% accurate.
--  Code cleaning

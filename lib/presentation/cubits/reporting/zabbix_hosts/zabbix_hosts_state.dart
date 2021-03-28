@@ -1,7 +1,7 @@
 part of 'zabbix_hosts_cubit.dart';
 
 @freezed
-abstract class ZabbixHostsState with _$ZabbixHostsState {
+class ZabbixHostsState with _$ZabbixHostsState {
   const factory ZabbixHostsState.initial() = ZabbixHostsStateInitial;
   const factory ZabbixHostsState.loading() = ZabbixHostsStateLoading;
   const factory ZabbixHostsState.loaded(List<ZabbixHost> hosts) =

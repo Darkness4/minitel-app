@@ -7,16 +7,38 @@ import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/files/file_manager.dart';
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar_builder.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 import '../../../fixtures/fixture_reader.dart';
+import 'icalendar_local_data_source_test.mocks.dart';
 
+class MockFile extends Mock implements File {
+  @override
+  bool existsSync() =>
+      super.noSuchMethod(Invocation.method(#existsSync, []), returnValue: false)
+          as bool;
+
+  @override
+  Stream<List<int>> openRead([int? start, int? end]) =>
+      super.noSuchMethod(Invocation.method(#openRead, [start, end]),
+          returnValue: const Stream<List<int>>.empty()) as Stream<List<int>>;
+
+  @override
+  IOSink openWrite(
+          {FileMode mode = FileMode.write, Encoding encoding = utf8}) =>
+      super.noSuchMethod(
+          Invocation.method(#openWrite, [], {#mode: mode, #encoding: encoding}),
+          returnValue: MockIOSink()) as IOSink;
+}
+
+@GenerateMocks([FileManager, IOSink])
 void main() {
-  ICalendarLocalDataSource dataSource;
-  MockFile mockFile;
-  MockFileManager mockFileManager;
-  MockIOSink mockIOSink;
+  late ICalendarLocalDataSource dataSource;
+  late MockFile mockFile;
+  late MockFileManager mockFileManager;
+  late MockIOSink mockIOSink;
 
   setUp(() {
     mockFile = MockFile();
@@ -76,7 +98,7 @@ void main() {
         // arrange
         when(mockFile.openWrite()).thenReturn(mockIOSink);
         when(mockIOSink.write(any)).thenReturn(null);
-        when(mockIOSink.close()).thenReturn(null);
+        when(mockIOSink.close()).thenAnswer((realInvocation) async => null);
         // act
         await dataSource.cacheICalendar(tICalendar);
         // assert
@@ -85,9 +107,3 @@ void main() {
     );
   });
 }
-
-class MockFile extends Mock implements File {}
-
-class MockFileManager extends Mock implements FileManager {}
-
-class MockIOSink extends Mock implements IOSink {}

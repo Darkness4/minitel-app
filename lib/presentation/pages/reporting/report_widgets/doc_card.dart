@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DocCard extends StatelessWidget {
@@ -7,7 +6,7 @@ class DocCard extends StatelessWidget {
   final double intPadding;
 
   const DocCard({
-    @required this.children,
+    required this.children,
     this.elevation = 4.0,
     this.intPadding = 15.0,
   });

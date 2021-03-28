@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
@@ -16,13 +15,13 @@ abstract class GithubRemoteDataSource {
 class GithubRemoteDataSourceImpl implements GithubRemoteDataSource {
   final http.Client client;
 
-  const GithubRemoteDataSourceImpl({@required this.client});
+  const GithubRemoteDataSourceImpl({required this.client});
 
   /// [repo] = author/repo
   @override
   Future<List<GithubRelease>> fetchReleases(String repo) async {
-    final response =
-        await client.get('https://api.github.com/repos/$repo/releases');
+    final response = await client
+        .get(Uri.parse('https://api.github.com/repos/$repo/releases'));
 
     if (response.statusCode == HttpStatus.ok) {
       return (json.decode(response.body) as List<dynamic>)

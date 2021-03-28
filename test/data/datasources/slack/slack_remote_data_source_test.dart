@@ -2,20 +2,24 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:minitel_toolbox/core/datetime/datetime_manager.dart';
 import 'package:minitel_toolbox/data/datasources/slack/slack_remote_data_source.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:http/http.dart' as http;
 
+import 'slack_remote_data_source_test.mocks.dart';
+
+@GenerateMocks([http.Client, DateTimeManager])
 void main() {
-  SlackRemoteDataSource dataSource;
-  MockHttpClient mockHttpClient;
-  MockDateTimeManager mockDateTimeManager;
+  late SlackRemoteDataSource dataSource;
+  late MockClient mockHttpClient;
+  late MockDateTimeManager mockDateTimeManager;
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
+    mockHttpClient = MockClient();
     mockDateTimeManager = MockDateTimeManager();
     dataSource = SlackRemoteDataSourceImpl(
       client: mockHttpClient,
@@ -64,7 +68,7 @@ void main() {
         );
         // assert
         verify(mockHttpClient.post(
-          'https://slack.com/api/chat.postMessage',
+          Uri.parse('https://slack.com/api/chat.postMessage'),
           body: json.encode(tData),
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
@@ -76,7 +80,3 @@ void main() {
     );
   });
 }
-
-class MockHttpClient extends Mock implements http.Client {}
-
-class MockDateTimeManager extends Mock implements DateTimeManager {}

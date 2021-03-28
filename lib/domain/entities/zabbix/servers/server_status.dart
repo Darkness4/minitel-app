@@ -4,16 +4,16 @@ import 'package:minitel_toolbox/domain/entities/zabbix/zabbix_host.dart';
 part 'server_status.freezed.dart';
 
 @freezed
-abstract class ServerStatus with _$ServerStatus {
+class ServerStatus with _$ServerStatus {
   const factory ServerStatus({
-    @required @nullable double pingResponseTime,
-    @required @nullable int icmpAvailable,
+    required double pingResponseTime,
+    required int icmpAvailable,
   }) = _ServerStatus;
 
   factory ServerStatus.fromHost(ZabbixHost host) {
     // Data to fill
-    double pingResponseTime;
-    int icmpAvailable;
+    var pingResponseTime = 0.0;
+    var icmpAvailable = 0;
 
     for (final item in host.items) {
       if (item.name.contains('ICMP response time')) {

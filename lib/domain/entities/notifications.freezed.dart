@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'notifications.dart';
 
@@ -9,15 +9,17 @@ part of 'notifications.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$NotificationSettingsTearOff {
   const _$NotificationSettingsTearOff();
 
-// ignore: unused_element
   _NotificationSettings call(
-      {@nullable Duration early = const Duration(minutes: 10),
-      @nullable Duration range = const Duration(days: 30),
-      @nullable bool enabled = true}) {
+      {Duration early = const Duration(minutes: 10),
+      Duration range = const Duration(days: 30),
+      bool enabled = true}) {
     return _NotificationSettings(
       early: early,
       range: range,
@@ -27,19 +29,17 @@ class _$NotificationSettingsTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $NotificationSettings = _$NotificationSettingsTearOff();
 
 /// @nodoc
 mixin _$NotificationSettings {
-  @nullable
-  Duration get early;
-  @nullable
-  Duration get range;
-  @nullable
-  bool get enabled;
+  Duration get early => throw _privateConstructorUsedError;
+  Duration get range => throw _privateConstructorUsedError;
+  bool get enabled => throw _privateConstructorUsedError;
 
-  $NotificationSettingsCopyWith<NotificationSettings> get copyWith;
+  @JsonKey(ignore: true)
+  $NotificationSettingsCopyWith<NotificationSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -47,10 +47,7 @@ abstract class $NotificationSettingsCopyWith<$Res> {
   factory $NotificationSettingsCopyWith(NotificationSettings value,
           $Res Function(NotificationSettings) then) =
       _$NotificationSettingsCopyWithImpl<$Res>;
-  $Res call(
-      {@nullable Duration early,
-      @nullable Duration range,
-      @nullable bool enabled});
+  $Res call({Duration early, Duration range, bool enabled});
 }
 
 /// @nodoc
@@ -64,14 +61,23 @@ class _$NotificationSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object early = freezed,
-    Object range = freezed,
-    Object enabled = freezed,
+    Object? early = freezed,
+    Object? range = freezed,
+    Object? enabled = freezed,
   }) {
     return _then(_value.copyWith(
-      early: early == freezed ? _value.early : early as Duration,
-      range: range == freezed ? _value.range : range as Duration,
-      enabled: enabled == freezed ? _value.enabled : enabled as bool,
+      early: early == freezed
+          ? _value.early
+          : early // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      range: range == freezed
+          ? _value.range
+          : range // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      enabled: enabled == freezed
+          ? _value.enabled
+          : enabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -83,10 +89,7 @@ abstract class _$NotificationSettingsCopyWith<$Res>
           $Res Function(_NotificationSettings) then) =
       __$NotificationSettingsCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {@nullable Duration early,
-      @nullable Duration range,
-      @nullable bool enabled});
+  $Res call({Duration early, Duration range, bool enabled});
 }
 
 /// @nodoc
@@ -102,14 +105,23 @@ class __$NotificationSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object early = freezed,
-    Object range = freezed,
-    Object enabled = freezed,
+    Object? early = freezed,
+    Object? range = freezed,
+    Object? enabled = freezed,
   }) {
     return _then(_NotificationSettings(
-      early: early == freezed ? _value.early : early as Duration,
-      range: range == freezed ? _value.range : range as Duration,
-      enabled: enabled == freezed ? _value.enabled : enabled as bool,
+      early: early == freezed
+          ? _value.early
+          : early // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      range: range == freezed
+          ? _value.range
+          : range // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      enabled: enabled == freezed
+          ? _value.enabled
+          : enabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -117,21 +129,18 @@ class __$NotificationSettingsCopyWithImpl<$Res>
 /// @nodoc
 class _$_NotificationSettings implements _NotificationSettings {
   const _$_NotificationSettings(
-      {@nullable this.early = const Duration(minutes: 10),
-      @nullable this.range = const Duration(days: 30),
-      @nullable this.enabled = true});
+      {this.early = const Duration(minutes: 10),
+      this.range = const Duration(days: 30),
+      this.enabled = true});
 
   @JsonKey(defaultValue: const Duration(minutes: 10))
   @override
-  @nullable
   final Duration early;
   @JsonKey(defaultValue: const Duration(days: 30))
   @override
-  @nullable
   final Duration range;
   @JsonKey(defaultValue: true)
   @override
-  @nullable
   final bool enabled;
 
   @override
@@ -158,6 +167,7 @@ class _$_NotificationSettings implements _NotificationSettings {
       const DeepCollectionEquality().hash(range) ^
       const DeepCollectionEquality().hash(enabled);
 
+  @JsonKey(ignore: true)
   @override
   _$NotificationSettingsCopyWith<_NotificationSettings> get copyWith =>
       __$NotificationSettingsCopyWithImpl<_NotificationSettings>(
@@ -166,19 +176,16 @@ class _$_NotificationSettings implements _NotificationSettings {
 
 abstract class _NotificationSettings implements NotificationSettings {
   const factory _NotificationSettings(
-      {@nullable Duration early,
-      @nullable Duration range,
-      @nullable bool enabled}) = _$_NotificationSettings;
+      {Duration early, Duration range, bool enabled}) = _$_NotificationSettings;
 
   @override
-  @nullable
-  Duration get early;
+  Duration get early => throw _privateConstructorUsedError;
   @override
-  @nullable
-  Duration get range;
+  Duration get range => throw _privateConstructorUsedError;
   @override
-  @nullable
-  bool get enabled;
+  bool get enabled => throw _privateConstructorUsedError;
   @override
-  _$NotificationSettingsCopyWith<_NotificationSettings> get copyWith;
+  @JsonKey(ignore: true)
+  _$NotificationSettingsCopyWith<_NotificationSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }

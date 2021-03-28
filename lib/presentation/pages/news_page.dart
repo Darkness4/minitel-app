@@ -11,7 +11,7 @@ import 'news/twitter_tab.dart';
 class NewsPage extends StatelessWidget {
   final String title;
 
-  const NewsPage({Key key, this.title}) : super(key: key);
+  const NewsPage({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

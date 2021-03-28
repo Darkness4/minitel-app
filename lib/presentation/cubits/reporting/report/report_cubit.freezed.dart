@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'report_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'report_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ReportStateTearOff {
   const _$ReportStateTearOff();
 
-// ignore: unused_element
   ReportInitial initial() {
     return const ReportInitial();
   }
 
-// ignore: unused_element
   ReportLoading loading() {
     return const ReportLoading();
   }
 
-// ignore: unused_element
-  ReportDone done(@nullable String status) {
+  ReportDone done(String status) {
     return ReportDone(
       status,
     );
   }
 
-// ignore: unused_element
   ReportError error(Exception error) {
     return ReportError(
       error,
@@ -39,41 +38,44 @@ class _$ReportStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ReportState = _$ReportStateTearOff();
 
 /// @nodoc
 mixin _$ReportState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result done(@nullable String status),
-    @required Result error(Exception error),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String status) done,
+    required TResult Function(Exception error) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result done(@nullable String status),
-    Result error(Exception error),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String status)? done,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ReportInitial value),
-    @required Result loading(ReportLoading value),
-    @required Result done(ReportDone value),
-    @required Result error(ReportError value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(ReportInitial value) initial,
+    required TResult Function(ReportLoading value) loading,
+    required TResult Function(ReportDone value) done,
+    required TResult Function(ReportError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ReportInitial value),
-    Result loading(ReportLoading value),
-    Result done(ReportDone value),
-    Result error(ReportError value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ReportInitial value)? initial,
+    TResult Function(ReportLoading value)? loading,
+    TResult Function(ReportDone value)? done,
+    TResult Function(ReportError value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -135,29 +137,24 @@ class _$ReportInitial with DiagnosticableTreeMixin implements ReportInitial {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result done(@nullable String status),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String status) done,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(done != null);
-    assert(error != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result done(@nullable String status),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String status)? done,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -166,29 +163,24 @@ class _$ReportInitial with DiagnosticableTreeMixin implements ReportInitial {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ReportInitial value),
-    @required Result loading(ReportLoading value),
-    @required Result done(ReportDone value),
-    @required Result error(ReportError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ReportInitial value) initial,
+    required TResult Function(ReportLoading value) loading,
+    required TResult Function(ReportDone value) done,
+    required TResult Function(ReportError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(done != null);
-    assert(error != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ReportInitial value),
-    Result loading(ReportLoading value),
-    Result done(ReportDone value),
-    Result error(ReportError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ReportInitial value)? initial,
+    TResult Function(ReportLoading value)? loading,
+    TResult Function(ReportDone value)? done,
+    TResult Function(ReportError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -243,29 +235,24 @@ class _$ReportLoading with DiagnosticableTreeMixin implements ReportLoading {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result done(@nullable String status),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String status) done,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(done != null);
-    assert(error != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result done(@nullable String status),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String status)? done,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -274,29 +261,24 @@ class _$ReportLoading with DiagnosticableTreeMixin implements ReportLoading {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ReportInitial value),
-    @required Result loading(ReportLoading value),
-    @required Result done(ReportDone value),
-    @required Result error(ReportError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ReportInitial value) initial,
+    required TResult Function(ReportLoading value) loading,
+    required TResult Function(ReportDone value) done,
+    required TResult Function(ReportError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(done != null);
-    assert(error != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ReportInitial value),
-    Result loading(ReportLoading value),
-    Result done(ReportDone value),
-    Result error(ReportError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ReportInitial value)? initial,
+    TResult Function(ReportLoading value)? loading,
+    TResult Function(ReportDone value)? done,
+    TResult Function(ReportError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -313,7 +295,7 @@ abstract class $ReportDoneCopyWith<$Res> {
   factory $ReportDoneCopyWith(
           ReportDone value, $Res Function(ReportDone) then) =
       _$ReportDoneCopyWithImpl<$Res>;
-  $Res call({@nullable String status});
+  $Res call({String status});
 }
 
 /// @nodoc
@@ -327,20 +309,22 @@ class _$ReportDoneCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object status = freezed,
+    Object? status = freezed,
   }) {
     return _then(ReportDone(
-      status == freezed ? _value.status : status as String,
+      status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 class _$ReportDone with DiagnosticableTreeMixin implements ReportDone {
-  const _$ReportDone(@nullable this.status);
+  const _$ReportDone(this.status);
 
   @override
-  @nullable
   final String status;
 
   @override
@@ -368,35 +352,31 @@ class _$ReportDone with DiagnosticableTreeMixin implements ReportDone {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(status);
 
+  @JsonKey(ignore: true)
   @override
   $ReportDoneCopyWith<ReportDone> get copyWith =>
       _$ReportDoneCopyWithImpl<ReportDone>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result done(@nullable String status),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String status) done,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(done != null);
-    assert(error != null);
     return done(status);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result done(@nullable String status),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String status)? done,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (done != null) {
       return done(status);
     }
@@ -405,29 +385,24 @@ class _$ReportDone with DiagnosticableTreeMixin implements ReportDone {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ReportInitial value),
-    @required Result loading(ReportLoading value),
-    @required Result done(ReportDone value),
-    @required Result error(ReportError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ReportInitial value) initial,
+    required TResult Function(ReportLoading value) loading,
+    required TResult Function(ReportDone value) done,
+    required TResult Function(ReportError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(done != null);
-    assert(error != null);
     return done(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ReportInitial value),
-    Result loading(ReportLoading value),
-    Result done(ReportDone value),
-    Result error(ReportError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ReportInitial value)? initial,
+    TResult Function(ReportLoading value)? loading,
+    TResult Function(ReportDone value)? done,
+    TResult Function(ReportError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (done != null) {
       return done(this);
     }
@@ -436,11 +411,12 @@ class _$ReportDone with DiagnosticableTreeMixin implements ReportDone {
 }
 
 abstract class ReportDone implements ReportState {
-  const factory ReportDone(@nullable String status) = _$ReportDone;
+  const factory ReportDone(String status) = _$ReportDone;
 
-  @nullable
-  String get status;
-  $ReportDoneCopyWith<ReportDone> get copyWith;
+  String get status => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReportDoneCopyWith<ReportDone> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -463,17 +439,20 @@ class _$ReportErrorCopyWithImpl<$Res> extends _$ReportStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object error = freezed,
+    Object? error = freezed,
   }) {
     return _then(ReportError(
-      error == freezed ? _value.error : error as Exception,
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
 
 /// @nodoc
 class _$ReportError with DiagnosticableTreeMixin implements ReportError {
-  const _$ReportError(this.error) : assert(error != null);
+  const _$ReportError(this.error);
 
   @override
   final Exception error;
@@ -503,35 +482,31 @@ class _$ReportError with DiagnosticableTreeMixin implements ReportError {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
+  @JsonKey(ignore: true)
   @override
   $ReportErrorCopyWith<ReportError> get copyWith =>
       _$ReportErrorCopyWithImpl<ReportError>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result done(@nullable String status),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String status) done,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(done != null);
-    assert(error != null);
     return error(this.error);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result done(@nullable String status),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String status)? done,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this.error);
     }
@@ -540,29 +515,24 @@ class _$ReportError with DiagnosticableTreeMixin implements ReportError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ReportInitial value),
-    @required Result loading(ReportLoading value),
-    @required Result done(ReportDone value),
-    @required Result error(ReportError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ReportInitial value) initial,
+    required TResult Function(ReportLoading value) loading,
+    required TResult Function(ReportDone value) done,
+    required TResult Function(ReportError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(done != null);
-    assert(error != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ReportInitial value),
-    Result loading(ReportLoading value),
-    Result done(ReportDone value),
-    Result error(ReportError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ReportInitial value)? initial,
+    TResult Function(ReportLoading value)? loading,
+    TResult Function(ReportDone value)? done,
+    TResult Function(ReportError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -573,6 +543,8 @@ class _$ReportError with DiagnosticableTreeMixin implements ReportError {
 abstract class ReportError implements ReportState {
   const factory ReportError(Exception error) = _$ReportError;
 
-  Exception get error;
-  $ReportErrorCopyWith<ReportError> get copyWith;
+  Exception get error => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReportErrorCopyWith<ReportError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

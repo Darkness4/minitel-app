@@ -22,19 +22,12 @@ _$_GithubRelease _$_$_GithubReleaseFromJson(Map<String, dynamic> json) {
     body: json['body'] as String,
     draft: json['draft'] as bool,
     prerelease: json['prerelease'] as bool,
-    created_at: json['created_at'] == null
-        ? null
-        : DateTime.parse(json['created_at'] as String),
-    published_at: json['published_at'] == null
-        ? null
-        : DateTime.parse(json['published_at'] as String),
-    author: json['author'] == null
-        ? null
-        : GithubUser.fromJson(json['author'] as Map<String, dynamic>),
-    assets: (json['assets'] as List)
-        ?.map((e) =>
-            e == null ? null : GithubAsset.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    created_at: DateTime.parse(json['created_at'] as String),
+    published_at: DateTime.parse(json['published_at'] as String),
+    author: GithubUser.fromJson(json['author'] as Map<String, dynamic>),
+    assets: (json['assets'] as List<dynamic>)
+        .map((e) => GithubAsset.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -54,8 +47,8 @@ Map<String, dynamic> _$_$_GithubReleaseToJson(_$_GithubRelease instance) =>
       'body': instance.body,
       'draft': instance.draft,
       'prerelease': instance.prerelease,
-      'created_at': instance.created_at?.toIso8601String(),
-      'published_at': instance.published_at?.toIso8601String(),
-      'author': instance.author?.toJson(),
-      'assets': instance.assets?.map((e) => e?.toJson())?.toList(),
+      'created_at': instance.created_at.toIso8601String(),
+      'published_at': instance.published_at.toIso8601String(),
+      'author': instance.author.toJson(),
+      'assets': instance.assets.map((e) => e.toJson()).toList(),
     };

@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Minitel Toolbox', () {
-    FlutterDriver driver;
+    late FlutterDriver driver;
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
@@ -27,7 +27,7 @@ void main() {
 
     // Close the connection to the driver after the tests have completed.
     tearDownAll(() async {
-      await driver?.close();
+      await driver.close();
     });
 
     test('Check flutter driver health', () async {

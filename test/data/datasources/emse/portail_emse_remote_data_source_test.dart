@@ -8,21 +8,36 @@ import 'package:minitel_toolbox/core/cookies/cookie_manager.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 import 'package:minitel_toolbox/data/datasources/emse/portail_emse_remote_data_source.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'portail_emse_remote_data_source_test.mocks.dart';
 
+class MockCookieManager extends Mock implements CookieManager {
+  @override
+  List<Cookie> get imprimanteCookies =>
+      super.noSuchMethod(Invocation.getter(#imprimanteCookies),
+          returnValue: <Cookie>[]) as List<Cookie>;
+
+  @override
+  List<Cookie> get portailCookies =>
+      super.noSuchMethod(Invocation.getter(#portailCookies),
+          returnValue: <Cookie>[]) as List<Cookie>;
+}
+
+@GenerateMocks([http.Client])
 void main() {
-  PortailEMSERemoteDataSource dataSource;
-  MockHttpClient mockHttpClient;
-  MockListCookies mockListCookies;
-  MockCookieManager mockCookieManager;
+  late PortailEMSERemoteDataSource dataSource;
+  late MockClient mockHttpClient;
+  late List<Cookie> mockListCookies;
+  late MockCookieManager mockCookieManager;
   const tUser = 'marc.nguyen';
   const tPassword = 'abcdefgh';
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
-    mockListCookies = MockListCookies();
+    mockHttpClient = MockClient();
+    mockListCookies = [];
     mockCookieManager = MockCookieManager();
 
     when(mockCookieManager.portailCookies).thenReturn(mockListCookies);
@@ -33,12 +48,10 @@ void main() {
   });
 
   void setUpMockHttpClientSuccess200() {
-    when(mockListCookies.addAll(any)).thenReturn(null);
-
     when(
-      mockHttpClient.get(
+      mockHttpClient.get(Uri.parse(
         'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
-      ),
+      )),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
           200,
@@ -73,13 +86,13 @@ void main() {
               as Map<String, dynamic>),
         );
       } else {
-        return null;
+        return http.StreamedResponse(Stream.value([]), 404);
       }
     });
 
     when(
       mockHttpClient.get(
-        'https://portail.emse.fr/login',
+        Uri.parse('https://portail.emse.fr/login'),
         headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response(
@@ -92,12 +105,10 @@ void main() {
   }
 
   void setUpMockHttpClientBadLogin() {
-    when(mockListCookies.addAll(any)).thenReturn(null);
-
     when(
-      mockHttpClient.get(
+      mockHttpClient.get(Uri.parse(
         'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
-      ),
+      )),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
           200,
@@ -130,13 +141,13 @@ void main() {
               as Map<String, dynamic>),
         );
       } else {
-        return null;
+        return http.StreamedResponse(Stream.value([]), 404);
       }
     });
 
     when(
       mockHttpClient.get(
-        'https://portail.emse.fr/login',
+        Uri.parse('https://portail.emse.fr/login'),
         headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response(
@@ -149,18 +160,16 @@ void main() {
   }
 
   void setUpMockHttpClientFailure404Case1() {
-    when(mockHttpClient.get(
+    when(mockHttpClient.get(Uri.parse(
       'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
-    )).thenAnswer((_) async => http.Response('Something went wrong', 404));
+    ))).thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
   void setUpMockHttpClientFailure404Case2() {
-    when(mockListCookies.addAll(any)).thenReturn(null);
-
     when(
-      mockHttpClient.get(
+      mockHttpClient.get(Uri.parse(
         'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
-      ),
+      )),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
           200,
@@ -177,17 +186,16 @@ void main() {
         return http.StreamedResponse(
             Stream.value(utf8.encode('Something went wrong')), 404);
       } else {
-        return null;
+        return http.StreamedResponse(Stream.value([]), 404);
       }
     });
   }
 
   void setUpMockHttpClientFailure404Case3() {
-    when(mockListCookies.addAll(any)).thenReturn(null);
-
     when(
       mockHttpClient.get(
-        'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
+        Uri.parse(
+            'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin'),
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
@@ -216,16 +224,15 @@ void main() {
         return http.StreamedResponse(
             Stream.value(utf8.encode('Something went wrong')), 404);
       }
-      return null;
+      return http.StreamedResponse(Stream.value([]), 404);
     });
   }
 
   void setUpMockHttpClientFailure404Case4() {
-    when(mockListCookies.addAll(any)).thenReturn(null);
-
     when(
       mockHttpClient.get(
-        'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
+        Uri.parse(
+            'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin'),
       ),
     ).thenAnswer((_) async => http.Response(
           fixture('datasources/portail_emse_remote_data_source/response0.html'),
@@ -261,13 +268,13 @@ void main() {
               as Map<String, dynamic>),
         );
       } else {
-        return null;
+        return http.StreamedResponse(Stream.value([]), 404);
       }
     });
 
     when(
       mockHttpClient.get(
-        'https://portail.emse.fr/login',
+        Uri.parse('https://portail.emse.fr/login'),
         headers: anyNamed('headers'),
       ),
     ).thenAnswer((_) async => http.Response('Something went wrong', 404));
@@ -283,7 +290,8 @@ void main() {
         await dataSource.login(username: tUser, password: tPassword);
         // assert
         verify(mockHttpClient.get(
-          'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin',
+          Uri.parse(
+              'https://cas.emse.fr//login?service=https%3A%2F%2Fportail.emse.fr%2Flogin'),
           headers: anyNamed('headers'),
         ));
         verify(
@@ -301,9 +309,6 @@ void main() {
         final result =
             await dataSource.login(username: tUser, password: tPassword);
         // assert
-        final verification = verify(mockListCookies.addAll(captureAny));
-        final actualCookies =
-            (verification.captured.first as Iterable<Cookie>).toList();
         final expectedCookies = <Cookie>[];
         expectedCookies.addAll(Map<String, String>.from(json.decode(fixture(
                     'datasources/portail_emse_remote_data_source/response0.json'))
@@ -322,7 +327,7 @@ void main() {
                 as Map<String, dynamic>)
             .parseSetCookie());
         expect(expectedCookies.map((e) => e.toString()).toList(),
-            containsAll(actualCookies.map<String>((e) => e.toString())));
+            containsAll(result.map<String>((e) => e.toString())));
         expect(result, equals(mockListCookies));
       },
     );
@@ -393,9 +398,3 @@ void main() {
     );
   });
 }
-
-class MockCookieManager extends Mock implements CookieManager {}
-
-class MockHttpClient extends Mock implements http.Client {}
-
-class MockListCookies extends Mock implements List<Cookie> {}

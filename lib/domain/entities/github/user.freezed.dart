@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'user.dart';
 
@@ -8,6 +8,10 @@ part of 'user.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 GithubUser _$GithubUserFromJson(Map<String, dynamic> json) {
   return _GithubUser.fromJson(json);
 }
@@ -16,39 +20,38 @@ GithubUser _$GithubUserFromJson(Map<String, dynamic> json) {
 class _$GithubUserTearOff {
   const _$GithubUserTearOff();
 
-// ignore: unused_element
   _GithubUser call(
-      {@required @nullable String login,
-      @required @nullable int id,
-      @required @nullable String node_id,
-      @required @nullable String avatar_url,
-      @required @nullable String gravatar_id,
-      @required @nullable String url,
-      @required @nullable String html_url,
-      @required @nullable String followers_url,
-      @required @nullable String following_url,
-      @required @nullable String gists_url,
-      @required @nullable String starred_url,
-      @required @nullable String subscriptions_url,
-      @required @nullable String organizations_url,
-      @required @nullable String repos_url,
-      @required @nullable String events_url,
-      @required @nullable String received_events_url,
-      @required @nullable String type,
-      @required @nullable bool site_admin,
-      @required @nullable String name,
-      @required @nullable String company,
-      @required @nullable String blog,
-      @required @nullable String location,
-      @required @nullable String email,
-      @required @nullable bool hireable,
-      @required @nullable String bio,
-      @required @nullable int public_repos,
-      @required @nullable int public_gists,
-      @required @nullable int followers,
-      @required @nullable int following,
-      @required @nullable DateTime created_at,
-      @required @nullable DateTime updated_at}) {
+      {required String? login,
+      required int? id,
+      required String? node_id,
+      required String? avatar_url,
+      required String? gravatar_id,
+      required String? url,
+      required String? html_url,
+      required String? followers_url,
+      required String? following_url,
+      required String? gists_url,
+      required String? starred_url,
+      required String? subscriptions_url,
+      required String? organizations_url,
+      required String? repos_url,
+      required String? events_url,
+      required String? received_events_url,
+      required String? type,
+      required bool? site_admin,
+      required String? name,
+      required String? company,
+      required String? blog,
+      required String? location,
+      required String? email,
+      required bool? hireable,
+      required String? bio,
+      required int? public_repos,
+      required int? public_gists,
+      required int? followers,
+      required int? following,
+      required DateTime? created_at,
+      required DateTime? updated_at}) {
     return _GithubUser(
       login: login,
       id: id,
@@ -84,83 +87,52 @@ class _$GithubUserTearOff {
     );
   }
 
-// ignore: unused_element
   GithubUser fromJson(Map<String, Object> json) {
     return GithubUser.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $GithubUser = _$GithubUserTearOff();
 
 /// @nodoc
 mixin _$GithubUser {
-  @nullable
-  String get login;
-  @nullable
-  int get id;
-  @nullable
-  String get node_id;
-  @nullable
-  String get avatar_url;
-  @nullable
-  String get gravatar_id;
-  @nullable
-  String get url;
-  @nullable
-  String get html_url;
-  @nullable
-  String get followers_url;
-  @nullable
-  String get following_url;
-  @nullable
-  String get gists_url;
-  @nullable
-  String get starred_url;
-  @nullable
-  String get subscriptions_url;
-  @nullable
-  String get organizations_url;
-  @nullable
-  String get repos_url;
-  @nullable
-  String get events_url;
-  @nullable
-  String get received_events_url;
-  @nullable
-  String get type;
-  @nullable
-  bool get site_admin;
-  @nullable
-  String get name;
-  @nullable
-  String get company;
-  @nullable
-  String get blog;
-  @nullable
-  String get location;
-  @nullable
-  String get email;
-  @nullable
-  bool get hireable;
-  @nullable
-  String get bio;
-  @nullable
-  int get public_repos;
-  @nullable
-  int get public_gists;
-  @nullable
-  int get followers;
-  @nullable
-  int get following;
-  @nullable
-  DateTime get created_at;
-  @nullable
-  DateTime get updated_at;
+  String? get login => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get node_id => throw _privateConstructorUsedError;
+  String? get avatar_url => throw _privateConstructorUsedError;
+  String? get gravatar_id => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
+  String? get html_url => throw _privateConstructorUsedError;
+  String? get followers_url => throw _privateConstructorUsedError;
+  String? get following_url => throw _privateConstructorUsedError;
+  String? get gists_url => throw _privateConstructorUsedError;
+  String? get starred_url => throw _privateConstructorUsedError;
+  String? get subscriptions_url => throw _privateConstructorUsedError;
+  String? get organizations_url => throw _privateConstructorUsedError;
+  String? get repos_url => throw _privateConstructorUsedError;
+  String? get events_url => throw _privateConstructorUsedError;
+  String? get received_events_url => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  bool? get site_admin => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get company => throw _privateConstructorUsedError;
+  String? get blog => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  bool? get hireable => throw _privateConstructorUsedError;
+  String? get bio => throw _privateConstructorUsedError;
+  int? get public_repos => throw _privateConstructorUsedError;
+  int? get public_gists => throw _privateConstructorUsedError;
+  int? get followers => throw _privateConstructorUsedError;
+  int? get following => throw _privateConstructorUsedError;
+  DateTime? get created_at => throw _privateConstructorUsedError;
+  DateTime? get updated_at => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
-  $GithubUserCopyWith<GithubUser> get copyWith;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GithubUserCopyWith<GithubUser> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -169,37 +141,37 @@ abstract class $GithubUserCopyWith<$Res> {
           GithubUser value, $Res Function(GithubUser) then) =
       _$GithubUserCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String login,
-      @nullable int id,
-      @nullable String node_id,
-      @nullable String avatar_url,
-      @nullable String gravatar_id,
-      @nullable String url,
-      @nullable String html_url,
-      @nullable String followers_url,
-      @nullable String following_url,
-      @nullable String gists_url,
-      @nullable String starred_url,
-      @nullable String subscriptions_url,
-      @nullable String organizations_url,
-      @nullable String repos_url,
-      @nullable String events_url,
-      @nullable String received_events_url,
-      @nullable String type,
-      @nullable bool site_admin,
-      @nullable String name,
-      @nullable String company,
-      @nullable String blog,
-      @nullable String location,
-      @nullable String email,
-      @nullable bool hireable,
-      @nullable String bio,
-      @nullable int public_repos,
-      @nullable int public_gists,
-      @nullable int followers,
-      @nullable int following,
-      @nullable DateTime created_at,
-      @nullable DateTime updated_at});
+      {String? login,
+      int? id,
+      String? node_id,
+      String? avatar_url,
+      String? gravatar_id,
+      String? url,
+      String? html_url,
+      String? followers_url,
+      String? following_url,
+      String? gists_url,
+      String? starred_url,
+      String? subscriptions_url,
+      String? organizations_url,
+      String? repos_url,
+      String? events_url,
+      String? received_events_url,
+      String? type,
+      bool? site_admin,
+      String? name,
+      String? company,
+      String? blog,
+      String? location,
+      String? email,
+      bool? hireable,
+      String? bio,
+      int? public_repos,
+      int? public_gists,
+      int? followers,
+      int? following,
+      DateTime? created_at,
+      DateTime? updated_at});
 }
 
 /// @nodoc
@@ -212,89 +184,163 @@ class _$GithubUserCopyWithImpl<$Res> implements $GithubUserCopyWith<$Res> {
 
   @override
   $Res call({
-    Object login = freezed,
-    Object id = freezed,
-    Object node_id = freezed,
-    Object avatar_url = freezed,
-    Object gravatar_id = freezed,
-    Object url = freezed,
-    Object html_url = freezed,
-    Object followers_url = freezed,
-    Object following_url = freezed,
-    Object gists_url = freezed,
-    Object starred_url = freezed,
-    Object subscriptions_url = freezed,
-    Object organizations_url = freezed,
-    Object repos_url = freezed,
-    Object events_url = freezed,
-    Object received_events_url = freezed,
-    Object type = freezed,
-    Object site_admin = freezed,
-    Object name = freezed,
-    Object company = freezed,
-    Object blog = freezed,
-    Object location = freezed,
-    Object email = freezed,
-    Object hireable = freezed,
-    Object bio = freezed,
-    Object public_repos = freezed,
-    Object public_gists = freezed,
-    Object followers = freezed,
-    Object following = freezed,
-    Object created_at = freezed,
-    Object updated_at = freezed,
+    Object? login = freezed,
+    Object? id = freezed,
+    Object? node_id = freezed,
+    Object? avatar_url = freezed,
+    Object? gravatar_id = freezed,
+    Object? url = freezed,
+    Object? html_url = freezed,
+    Object? followers_url = freezed,
+    Object? following_url = freezed,
+    Object? gists_url = freezed,
+    Object? starred_url = freezed,
+    Object? subscriptions_url = freezed,
+    Object? organizations_url = freezed,
+    Object? repos_url = freezed,
+    Object? events_url = freezed,
+    Object? received_events_url = freezed,
+    Object? type = freezed,
+    Object? site_admin = freezed,
+    Object? name = freezed,
+    Object? company = freezed,
+    Object? blog = freezed,
+    Object? location = freezed,
+    Object? email = freezed,
+    Object? hireable = freezed,
+    Object? bio = freezed,
+    Object? public_repos = freezed,
+    Object? public_gists = freezed,
+    Object? followers = freezed,
+    Object? following = freezed,
+    Object? created_at = freezed,
+    Object? updated_at = freezed,
   }) {
     return _then(_value.copyWith(
-      login: login == freezed ? _value.login : login as String,
-      id: id == freezed ? _value.id : id as int,
-      node_id: node_id == freezed ? _value.node_id : node_id as String,
-      avatar_url:
-          avatar_url == freezed ? _value.avatar_url : avatar_url as String,
-      gravatar_id:
-          gravatar_id == freezed ? _value.gravatar_id : gravatar_id as String,
-      url: url == freezed ? _value.url : url as String,
-      html_url: html_url == freezed ? _value.html_url : html_url as String,
+      login: login == freezed
+          ? _value.login
+          : login // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      node_id: node_id == freezed
+          ? _value.node_id
+          : node_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar_url: avatar_url == freezed
+          ? _value.avatar_url
+          : avatar_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gravatar_id: gravatar_id == freezed
+          ? _value.gravatar_id
+          : gravatar_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      html_url: html_url == freezed
+          ? _value.html_url
+          : html_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       followers_url: followers_url == freezed
           ? _value.followers_url
-          : followers_url as String,
+          : followers_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       following_url: following_url == freezed
           ? _value.following_url
-          : following_url as String,
-      gists_url: gists_url == freezed ? _value.gists_url : gists_url as String,
-      starred_url:
-          starred_url == freezed ? _value.starred_url : starred_url as String,
+          : following_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gists_url: gists_url == freezed
+          ? _value.gists_url
+          : gists_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      starred_url: starred_url == freezed
+          ? _value.starred_url
+          : starred_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       subscriptions_url: subscriptions_url == freezed
           ? _value.subscriptions_url
-          : subscriptions_url as String,
+          : subscriptions_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       organizations_url: organizations_url == freezed
           ? _value.organizations_url
-          : organizations_url as String,
-      repos_url: repos_url == freezed ? _value.repos_url : repos_url as String,
-      events_url:
-          events_url == freezed ? _value.events_url : events_url as String,
+          : organizations_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repos_url: repos_url == freezed
+          ? _value.repos_url
+          : repos_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      events_url: events_url == freezed
+          ? _value.events_url
+          : events_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       received_events_url: received_events_url == freezed
           ? _value.received_events_url
-          : received_events_url as String,
-      type: type == freezed ? _value.type : type as String,
-      site_admin:
-          site_admin == freezed ? _value.site_admin : site_admin as bool,
-      name: name == freezed ? _value.name : name as String,
-      company: company == freezed ? _value.company : company as String,
-      blog: blog == freezed ? _value.blog : blog as String,
-      location: location == freezed ? _value.location : location as String,
-      email: email == freezed ? _value.email : email as String,
-      hireable: hireable == freezed ? _value.hireable : hireable as bool,
-      bio: bio == freezed ? _value.bio : bio as String,
-      public_repos:
-          public_repos == freezed ? _value.public_repos : public_repos as int,
-      public_gists:
-          public_gists == freezed ? _value.public_gists : public_gists as int,
-      followers: followers == freezed ? _value.followers : followers as int,
-      following: following == freezed ? _value.following : following as int,
-      created_at:
-          created_at == freezed ? _value.created_at : created_at as DateTime,
-      updated_at:
-          updated_at == freezed ? _value.updated_at : updated_at as DateTime,
+          : received_events_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      site_admin: site_admin == freezed
+          ? _value.site_admin
+          : site_admin // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      company: company == freezed
+          ? _value.company
+          : company // ignore: cast_nullable_to_non_nullable
+              as String?,
+      blog: blog == freezed
+          ? _value.blog
+          : blog // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hireable: hireable == freezed
+          ? _value.hireable
+          : hireable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      bio: bio == freezed
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
+      public_repos: public_repos == freezed
+          ? _value.public_repos
+          : public_repos // ignore: cast_nullable_to_non_nullable
+              as int?,
+      public_gists: public_gists == freezed
+          ? _value.public_gists
+          : public_gists // ignore: cast_nullable_to_non_nullable
+              as int?,
+      followers: followers == freezed
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as int?,
+      following: following == freezed
+          ? _value.following
+          : following // ignore: cast_nullable_to_non_nullable
+              as int?,
+      created_at: created_at == freezed
+          ? _value.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updated_at: updated_at == freezed
+          ? _value.updated_at
+          : updated_at // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -306,37 +352,37 @@ abstract class _$GithubUserCopyWith<$Res> implements $GithubUserCopyWith<$Res> {
       __$GithubUserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String login,
-      @nullable int id,
-      @nullable String node_id,
-      @nullable String avatar_url,
-      @nullable String gravatar_id,
-      @nullable String url,
-      @nullable String html_url,
-      @nullable String followers_url,
-      @nullable String following_url,
-      @nullable String gists_url,
-      @nullable String starred_url,
-      @nullable String subscriptions_url,
-      @nullable String organizations_url,
-      @nullable String repos_url,
-      @nullable String events_url,
-      @nullable String received_events_url,
-      @nullable String type,
-      @nullable bool site_admin,
-      @nullable String name,
-      @nullable String company,
-      @nullable String blog,
-      @nullable String location,
-      @nullable String email,
-      @nullable bool hireable,
-      @nullable String bio,
-      @nullable int public_repos,
-      @nullable int public_gists,
-      @nullable int followers,
-      @nullable int following,
-      @nullable DateTime created_at,
-      @nullable DateTime updated_at});
+      {String? login,
+      int? id,
+      String? node_id,
+      String? avatar_url,
+      String? gravatar_id,
+      String? url,
+      String? html_url,
+      String? followers_url,
+      String? following_url,
+      String? gists_url,
+      String? starred_url,
+      String? subscriptions_url,
+      String? organizations_url,
+      String? repos_url,
+      String? events_url,
+      String? received_events_url,
+      String? type,
+      bool? site_admin,
+      String? name,
+      String? company,
+      String? blog,
+      String? location,
+      String? email,
+      bool? hireable,
+      String? bio,
+      int? public_repos,
+      int? public_gists,
+      int? followers,
+      int? following,
+      DateTime? created_at,
+      DateTime? updated_at});
 }
 
 /// @nodoc
@@ -351,89 +397,163 @@ class __$GithubUserCopyWithImpl<$Res> extends _$GithubUserCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object login = freezed,
-    Object id = freezed,
-    Object node_id = freezed,
-    Object avatar_url = freezed,
-    Object gravatar_id = freezed,
-    Object url = freezed,
-    Object html_url = freezed,
-    Object followers_url = freezed,
-    Object following_url = freezed,
-    Object gists_url = freezed,
-    Object starred_url = freezed,
-    Object subscriptions_url = freezed,
-    Object organizations_url = freezed,
-    Object repos_url = freezed,
-    Object events_url = freezed,
-    Object received_events_url = freezed,
-    Object type = freezed,
-    Object site_admin = freezed,
-    Object name = freezed,
-    Object company = freezed,
-    Object blog = freezed,
-    Object location = freezed,
-    Object email = freezed,
-    Object hireable = freezed,
-    Object bio = freezed,
-    Object public_repos = freezed,
-    Object public_gists = freezed,
-    Object followers = freezed,
-    Object following = freezed,
-    Object created_at = freezed,
-    Object updated_at = freezed,
+    Object? login = freezed,
+    Object? id = freezed,
+    Object? node_id = freezed,
+    Object? avatar_url = freezed,
+    Object? gravatar_id = freezed,
+    Object? url = freezed,
+    Object? html_url = freezed,
+    Object? followers_url = freezed,
+    Object? following_url = freezed,
+    Object? gists_url = freezed,
+    Object? starred_url = freezed,
+    Object? subscriptions_url = freezed,
+    Object? organizations_url = freezed,
+    Object? repos_url = freezed,
+    Object? events_url = freezed,
+    Object? received_events_url = freezed,
+    Object? type = freezed,
+    Object? site_admin = freezed,
+    Object? name = freezed,
+    Object? company = freezed,
+    Object? blog = freezed,
+    Object? location = freezed,
+    Object? email = freezed,
+    Object? hireable = freezed,
+    Object? bio = freezed,
+    Object? public_repos = freezed,
+    Object? public_gists = freezed,
+    Object? followers = freezed,
+    Object? following = freezed,
+    Object? created_at = freezed,
+    Object? updated_at = freezed,
   }) {
     return _then(_GithubUser(
-      login: login == freezed ? _value.login : login as String,
-      id: id == freezed ? _value.id : id as int,
-      node_id: node_id == freezed ? _value.node_id : node_id as String,
-      avatar_url:
-          avatar_url == freezed ? _value.avatar_url : avatar_url as String,
-      gravatar_id:
-          gravatar_id == freezed ? _value.gravatar_id : gravatar_id as String,
-      url: url == freezed ? _value.url : url as String,
-      html_url: html_url == freezed ? _value.html_url : html_url as String,
+      login: login == freezed
+          ? _value.login
+          : login // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      node_id: node_id == freezed
+          ? _value.node_id
+          : node_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar_url: avatar_url == freezed
+          ? _value.avatar_url
+          : avatar_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gravatar_id: gravatar_id == freezed
+          ? _value.gravatar_id
+          : gravatar_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      html_url: html_url == freezed
+          ? _value.html_url
+          : html_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       followers_url: followers_url == freezed
           ? _value.followers_url
-          : followers_url as String,
+          : followers_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       following_url: following_url == freezed
           ? _value.following_url
-          : following_url as String,
-      gists_url: gists_url == freezed ? _value.gists_url : gists_url as String,
-      starred_url:
-          starred_url == freezed ? _value.starred_url : starred_url as String,
+          : following_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gists_url: gists_url == freezed
+          ? _value.gists_url
+          : gists_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      starred_url: starred_url == freezed
+          ? _value.starred_url
+          : starred_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       subscriptions_url: subscriptions_url == freezed
           ? _value.subscriptions_url
-          : subscriptions_url as String,
+          : subscriptions_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       organizations_url: organizations_url == freezed
           ? _value.organizations_url
-          : organizations_url as String,
-      repos_url: repos_url == freezed ? _value.repos_url : repos_url as String,
-      events_url:
-          events_url == freezed ? _value.events_url : events_url as String,
+          : organizations_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repos_url: repos_url == freezed
+          ? _value.repos_url
+          : repos_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      events_url: events_url == freezed
+          ? _value.events_url
+          : events_url // ignore: cast_nullable_to_non_nullable
+              as String?,
       received_events_url: received_events_url == freezed
           ? _value.received_events_url
-          : received_events_url as String,
-      type: type == freezed ? _value.type : type as String,
-      site_admin:
-          site_admin == freezed ? _value.site_admin : site_admin as bool,
-      name: name == freezed ? _value.name : name as String,
-      company: company == freezed ? _value.company : company as String,
-      blog: blog == freezed ? _value.blog : blog as String,
-      location: location == freezed ? _value.location : location as String,
-      email: email == freezed ? _value.email : email as String,
-      hireable: hireable == freezed ? _value.hireable : hireable as bool,
-      bio: bio == freezed ? _value.bio : bio as String,
-      public_repos:
-          public_repos == freezed ? _value.public_repos : public_repos as int,
-      public_gists:
-          public_gists == freezed ? _value.public_gists : public_gists as int,
-      followers: followers == freezed ? _value.followers : followers as int,
-      following: following == freezed ? _value.following : following as int,
-      created_at:
-          created_at == freezed ? _value.created_at : created_at as DateTime,
-      updated_at:
-          updated_at == freezed ? _value.updated_at : updated_at as DateTime,
+          : received_events_url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      site_admin: site_admin == freezed
+          ? _value.site_admin
+          : site_admin // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      company: company == freezed
+          ? _value.company
+          : company // ignore: cast_nullable_to_non_nullable
+              as String?,
+      blog: blog == freezed
+          ? _value.blog
+          : blog // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hireable: hireable == freezed
+          ? _value.hireable
+          : hireable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      bio: bio == freezed
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
+      public_repos: public_repos == freezed
+          ? _value.public_repos
+          : public_repos // ignore: cast_nullable_to_non_nullable
+              as int?,
+      public_gists: public_gists == freezed
+          ? _value.public_gists
+          : public_gists // ignore: cast_nullable_to_non_nullable
+              as int?,
+      followers: followers == freezed
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as int?,
+      following: following == freezed
+          ? _value.following
+          : following // ignore: cast_nullable_to_non_nullable
+              as int?,
+      created_at: created_at == freezed
+          ? _value.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updated_at: updated_at == freezed
+          ? _value.updated_at
+          : updated_at // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -443,134 +563,103 @@ class __$GithubUserCopyWithImpl<$Res> extends _$GithubUserCopyWithImpl<$Res>
 /// @nodoc
 class _$_GithubUser implements _GithubUser {
   const _$_GithubUser(
-      {@required @nullable this.login,
-      @required @nullable this.id,
-      @required @nullable this.node_id,
-      @required @nullable this.avatar_url,
-      @required @nullable this.gravatar_id,
-      @required @nullable this.url,
-      @required @nullable this.html_url,
-      @required @nullable this.followers_url,
-      @required @nullable this.following_url,
-      @required @nullable this.gists_url,
-      @required @nullable this.starred_url,
-      @required @nullable this.subscriptions_url,
-      @required @nullable this.organizations_url,
-      @required @nullable this.repos_url,
-      @required @nullable this.events_url,
-      @required @nullable this.received_events_url,
-      @required @nullable this.type,
-      @required @nullable this.site_admin,
-      @required @nullable this.name,
-      @required @nullable this.company,
-      @required @nullable this.blog,
-      @required @nullable this.location,
-      @required @nullable this.email,
-      @required @nullable this.hireable,
-      @required @nullable this.bio,
-      @required @nullable this.public_repos,
-      @required @nullable this.public_gists,
-      @required @nullable this.followers,
-      @required @nullable this.following,
-      @required @nullable this.created_at,
-      @required @nullable this.updated_at});
+      {required this.login,
+      required this.id,
+      required this.node_id,
+      required this.avatar_url,
+      required this.gravatar_id,
+      required this.url,
+      required this.html_url,
+      required this.followers_url,
+      required this.following_url,
+      required this.gists_url,
+      required this.starred_url,
+      required this.subscriptions_url,
+      required this.organizations_url,
+      required this.repos_url,
+      required this.events_url,
+      required this.received_events_url,
+      required this.type,
+      required this.site_admin,
+      required this.name,
+      required this.company,
+      required this.blog,
+      required this.location,
+      required this.email,
+      required this.hireable,
+      required this.bio,
+      required this.public_repos,
+      required this.public_gists,
+      required this.followers,
+      required this.following,
+      required this.created_at,
+      required this.updated_at});
 
   factory _$_GithubUser.fromJson(Map<String, dynamic> json) =>
       _$_$_GithubUserFromJson(json);
 
   @override
-  @nullable
-  final String login;
+  final String? login;
   @override
-  @nullable
-  final int id;
+  final int? id;
   @override
-  @nullable
-  final String node_id;
+  final String? node_id;
   @override
-  @nullable
-  final String avatar_url;
+  final String? avatar_url;
   @override
-  @nullable
-  final String gravatar_id;
+  final String? gravatar_id;
   @override
-  @nullable
-  final String url;
+  final String? url;
   @override
-  @nullable
-  final String html_url;
+  final String? html_url;
   @override
-  @nullable
-  final String followers_url;
+  final String? followers_url;
   @override
-  @nullable
-  final String following_url;
+  final String? following_url;
   @override
-  @nullable
-  final String gists_url;
+  final String? gists_url;
   @override
-  @nullable
-  final String starred_url;
+  final String? starred_url;
   @override
-  @nullable
-  final String subscriptions_url;
+  final String? subscriptions_url;
   @override
-  @nullable
-  final String organizations_url;
+  final String? organizations_url;
   @override
-  @nullable
-  final String repos_url;
+  final String? repos_url;
   @override
-  @nullable
-  final String events_url;
+  final String? events_url;
   @override
-  @nullable
-  final String received_events_url;
+  final String? received_events_url;
   @override
-  @nullable
-  final String type;
+  final String? type;
   @override
-  @nullable
-  final bool site_admin;
+  final bool? site_admin;
   @override
-  @nullable
-  final String name;
+  final String? name;
   @override
-  @nullable
-  final String company;
+  final String? company;
   @override
-  @nullable
-  final String blog;
+  final String? blog;
   @override
-  @nullable
-  final String location;
+  final String? location;
   @override
-  @nullable
-  final String email;
+  final String? email;
   @override
-  @nullable
-  final bool hireable;
+  final bool? hireable;
   @override
-  @nullable
-  final String bio;
+  final String? bio;
   @override
-  @nullable
-  final int public_repos;
+  final int? public_repos;
   @override
-  @nullable
-  final int public_gists;
+  final int? public_gists;
   @override
-  @nullable
-  final int followers;
+  final int? followers;
   @override
-  @nullable
-  final int following;
+  final int? following;
   @override
-  @nullable
-  final DateTime created_at;
+  final DateTime? created_at;
   @override
-  @nullable
-  final DateTime updated_at;
+  final DateTime? updated_at;
 
   @override
   String toString() {
@@ -692,6 +781,7 @@ class _$_GithubUser implements _GithubUser {
       const DeepCollectionEquality().hash(created_at) ^
       const DeepCollectionEquality().hash(updated_at);
 
+  @JsonKey(ignore: true)
   @override
   _$GithubUserCopyWith<_GithubUser> get copyWith =>
       __$GithubUserCopyWithImpl<_GithubUser>(this, _$identity);
@@ -704,134 +794,105 @@ class _$_GithubUser implements _GithubUser {
 
 abstract class _GithubUser implements GithubUser {
   const factory _GithubUser(
-      {@required @nullable String login,
-      @required @nullable int id,
-      @required @nullable String node_id,
-      @required @nullable String avatar_url,
-      @required @nullable String gravatar_id,
-      @required @nullable String url,
-      @required @nullable String html_url,
-      @required @nullable String followers_url,
-      @required @nullable String following_url,
-      @required @nullable String gists_url,
-      @required @nullable String starred_url,
-      @required @nullable String subscriptions_url,
-      @required @nullable String organizations_url,
-      @required @nullable String repos_url,
-      @required @nullable String events_url,
-      @required @nullable String received_events_url,
-      @required @nullable String type,
-      @required @nullable bool site_admin,
-      @required @nullable String name,
-      @required @nullable String company,
-      @required @nullable String blog,
-      @required @nullable String location,
-      @required @nullable String email,
-      @required @nullable bool hireable,
-      @required @nullable String bio,
-      @required @nullable int public_repos,
-      @required @nullable int public_gists,
-      @required @nullable int followers,
-      @required @nullable int following,
-      @required @nullable DateTime created_at,
-      @required @nullable DateTime updated_at}) = _$_GithubUser;
+      {required String? login,
+      required int? id,
+      required String? node_id,
+      required String? avatar_url,
+      required String? gravatar_id,
+      required String? url,
+      required String? html_url,
+      required String? followers_url,
+      required String? following_url,
+      required String? gists_url,
+      required String? starred_url,
+      required String? subscriptions_url,
+      required String? organizations_url,
+      required String? repos_url,
+      required String? events_url,
+      required String? received_events_url,
+      required String? type,
+      required bool? site_admin,
+      required String? name,
+      required String? company,
+      required String? blog,
+      required String? location,
+      required String? email,
+      required bool? hireable,
+      required String? bio,
+      required int? public_repos,
+      required int? public_gists,
+      required int? followers,
+      required int? following,
+      required DateTime? created_at,
+      required DateTime? updated_at}) = _$_GithubUser;
 
   factory _GithubUser.fromJson(Map<String, dynamic> json) =
       _$_GithubUser.fromJson;
 
   @override
-  @nullable
-  String get login;
+  String? get login => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get id;
+  int? get id => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get node_id;
+  String? get node_id => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get avatar_url;
+  String? get avatar_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get gravatar_id;
+  String? get gravatar_id => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get url;
+  String? get url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get html_url;
+  String? get html_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get followers_url;
+  String? get followers_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get following_url;
+  String? get following_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get gists_url;
+  String? get gists_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get starred_url;
+  String? get starred_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get subscriptions_url;
+  String? get subscriptions_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get organizations_url;
+  String? get organizations_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get repos_url;
+  String? get repos_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get events_url;
+  String? get events_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get received_events_url;
+  String? get received_events_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get type;
+  String? get type => throw _privateConstructorUsedError;
   @override
-  @nullable
-  bool get site_admin;
+  bool? get site_admin => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get company;
+  String? get company => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get blog;
+  String? get blog => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get location;
+  String? get location => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get email;
+  String? get email => throw _privateConstructorUsedError;
   @override
-  @nullable
-  bool get hireable;
+  bool? get hireable => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get bio;
+  String? get bio => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get public_repos;
+  int? get public_repos => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get public_gists;
+  int? get public_gists => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get followers;
+  int? get followers => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get following;
+  int? get following => throw _privateConstructorUsedError;
   @override
-  @nullable
-  DateTime get created_at;
+  DateTime? get created_at => throw _privateConstructorUsedError;
   @override
-  @nullable
-  DateTime get updated_at;
+  DateTime? get updated_at => throw _privateConstructorUsedError;
   @override
-  _$GithubUserCopyWith<_GithubUser> get copyWith;
+  @JsonKey(ignore: true)
+  _$GithubUserCopyWith<_GithubUser> get copyWith =>
+      throw _privateConstructorUsedError;
 }

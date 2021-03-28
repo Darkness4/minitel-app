@@ -4,13 +4,17 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/settings/login_settings_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/login_settings.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'login_settings_data_source_test.mocks.dart';
+
+@GenerateMocks([SharedPreferences, FlutterSecureStorage])
 void main() {
-  LoginSettingsDataSource dataSource;
-  MockSharedPreferences mockSharedPreferences;
-  MockFlutterSecureStorage mockFlutterSecureStorage;
+  late LoginSettingsDataSource dataSource;
+  late MockSharedPreferences mockSharedPreferences;
+  late MockFlutterSecureStorage mockFlutterSecureStorage;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
@@ -26,7 +30,7 @@ void main() {
       // arrange
       when(mockSharedPreferences.remove(any)).thenAnswer((_) async => true);
       when(mockFlutterSecureStorage.delete(key: anyNamed('key')))
-          .thenAnswer((_) async => null);
+          .thenAnswer((_) async {});
       // act
       await dataSource.clear();
       // assert
@@ -122,7 +126,7 @@ void main() {
             .thenAnswer((_) async => true);
         when(mockFlutterSecureStorage.write(
                 key: anyNamed('key'), value: anyNamed('value')))
-            .thenAnswer((_) async => null);
+            .thenAnswer((_) async {});
         // act
         await dataSource.save(tLoginSettingsModel);
         // assert
@@ -136,7 +140,3 @@ void main() {
     );
   });
 }
-
-class MockSharedPreferences extends Mock implements SharedPreferences {}
-
-class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}

@@ -1,4 +1,0 @@
-Mise à jour des dépendances majeures.
-
-- La logique de notification a été mise à jour. Les fuseaux horaires sont maintenant précis à 100%.
-- Nettoyage des codes

@@ -7,7 +7,7 @@ import 'package:minitel_toolbox/domain/repositories/login_settings_repository.da
 class LoginSettingsRepositoryImpl implements LoginSettingsRepository {
   final LoginSettingsDataSource localDataSource;
 
-  const LoginSettingsRepositoryImpl({this.localDataSource});
+  const LoginSettingsRepositoryImpl({required this.localDataSource});
 
   @override
   Future<void> clear() => localDataSource.clear();

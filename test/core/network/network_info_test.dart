@@ -1,15 +1,19 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'network_info_test.mocks.dart';
+
+@GenerateMocks([Connectivity])
 void main() {
-  NetworkInfoImpl networkInfo;
-  MockDataConnectionChecker mockDataConnectionChecker;
+  late NetworkInfoImpl networkInfo;
+  late MockConnectivity mockConnectivity;
 
   setUp(() {
-    mockDataConnectionChecker = MockDataConnectionChecker();
-    networkInfo = NetworkInfoImpl(mockDataConnectionChecker);
+    mockConnectivity = MockConnectivity();
+    networkInfo = NetworkInfoImpl(mockConnectivity);
   });
 
   group('networkInfo.result', () {
@@ -17,15 +21,13 @@ void main() {
       'is connected to Wifi',
       () async {
         // arrange
-        final mockedResult = Future.value(ConnectivityResult.wifi);
-
-        when(mockDataConnectionChecker.checkConnectivity())
-            .thenAnswer((_) => mockedResult);
+        when(mockConnectivity.checkConnectivity())
+            .thenAnswer((_) async => ConnectivityResult.wifi);
         // act
-        final result = networkInfo.result;
+        final result = await networkInfo.result;
         // assert
-        verify(mockDataConnectionChecker.checkConnectivity());
-        expect(result, mockedResult);
+        verify(mockConnectivity.checkConnectivity());
+        expect(result, ConnectivityResult.wifi);
       },
     );
 
@@ -33,15 +35,13 @@ void main() {
       'is connected to Mobile',
       () async {
         // arrange
-        final mockedResult = Future.value(ConnectivityResult.mobile);
-
-        when(mockDataConnectionChecker.checkConnectivity())
-            .thenAnswer((_) => mockedResult);
+        when(mockConnectivity.checkConnectivity())
+            .thenAnswer((_) async => ConnectivityResult.mobile);
         // act
-        final result = networkInfo.result;
+        final result = await networkInfo.result;
         // assert
-        verify(mockDataConnectionChecker.checkConnectivity());
-        expect(result, mockedResult);
+        verify(mockConnectivity.checkConnectivity());
+        expect(result, ConnectivityResult.mobile);
       },
     );
 
@@ -49,18 +49,14 @@ void main() {
       'is connected to None',
       () async {
         // arrange
-        final mockedResult = Future.value(ConnectivityResult.none);
-
-        when(mockDataConnectionChecker.checkConnectivity())
-            .thenAnswer((_) => mockedResult);
+        when(mockConnectivity.checkConnectivity())
+            .thenAnswer((_) async => ConnectivityResult.none);
         // act
-        final result = networkInfo.result;
+        final result = await networkInfo.result;
         // assert
-        verify(mockDataConnectionChecker.checkConnectivity());
-        expect(result, mockedResult);
+        verify(mockConnectivity.checkConnectivity());
+        expect(result, ConnectivityResult.none);
       },
     );
   });
 }
-
-class MockDataConnectionChecker extends Mock implements Connectivity {}

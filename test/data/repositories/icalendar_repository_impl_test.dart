@@ -8,16 +8,28 @@ import 'package:minitel_toolbox/data/datasources/emse/icalendar_local_data_sourc
 import 'package:minitel_toolbox/data/datasources/emse/icalendar_remote_data_source.dart';
 import 'package:minitel_toolbox/data/repositories/icalendar_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/icalendar/parsed_calendar.dart';
+import 'package:minitel_toolbox/domain/entities/icalendar/timezone.dart';
 import 'package:minitel_toolbox/domain/repositories/calendar_url_repository.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'icalendar_repository_impl_test.mocks.dart';
+
+@GenerateMocks([
+  NetworkInfo,
+  CalendarURLRepository,
+  Timezone
+], customMocks: [
+  MockSpec<ICalendarRemoteDataSource>(as: #MockRemoteDataSource),
+  MockSpec<ICalendarLocalDataSource>(as: #MockLocalDataSource)
+])
 void main() {
-  ICalendarRepository repository;
-  MockRemoteDataSource mockRemoteDataSource;
-  MockLocalDataSource mockLocalDataSource;
-  MockCalendarURLRepository mockCalendarURLRepository;
-  MockNetworkInfo mockNetworkInfo;
+  late ICalendarRepository repository;
+  late MockRemoteDataSource mockRemoteDataSource;
+  late MockLocalDataSource mockLocalDataSource;
+  late MockCalendarURLRepository mockCalendarURLRepository;
+  late MockNetworkInfo mockNetworkInfo;
   final tICalendar = Stream.value(utf8.encode('ICalendar'));
   const tUser = 'user';
   const tPswd = 'pswd';
@@ -65,6 +77,11 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
+        when(mockCalendarURLRepository.get(
+                username: anyNamed('username'), password: anyNamed('password')))
+            .thenAnswer((_) async => '');
+        when(mockRemoteDataSource.streamICalendar(any))
+            .thenAnswer((_) => const Stream.empty());
         // act
         await repository.download(username: tUser, password: tPswd);
         // assert
@@ -117,14 +134,14 @@ void main() {
   });
 
   group('parsedCalendar', () {
-    const tParsedCalendarModel = ParsedCalendar(
+    final tParsedCalendarModel = ParsedCalendar(
       calscale: 'calscale',
       events: [],
       prodID: 'prodID',
-      timezone: null,
+      timezone: MockTimezone(),
       version: 'version',
     );
-    const tParsedCalendar = tParsedCalendarModel;
+    final tParsedCalendar = tParsedCalendarModel;
     test(
       'should call localDataSource',
       () async {
@@ -141,11 +158,3 @@ void main() {
     );
   });
 }
-
-class MockRemoteDataSource extends Mock implements ICalendarRemoteDataSource {}
-
-class MockLocalDataSource extends Mock implements ICalendarLocalDataSource {}
-
-class MockCalendarURLRepository extends Mock implements CalendarURLRepository {}
-
-class MockNetworkInfo extends Mock implements NetworkInfo {}

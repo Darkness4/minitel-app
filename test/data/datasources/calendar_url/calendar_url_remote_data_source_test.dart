@@ -6,25 +6,28 @@ import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/calendar_url/calendar_url_remote_data_source.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'calendar_url_remote_data_source_test.mocks.dart';
 
+@GenerateMocks([http.Client])
 void main() {
-  CalendarURLRemoteDataSource dataSource;
-  MockHttpClient mockHttpClient;
+  late CalendarURLRemoteDataSource dataSource;
+  late MockClient mockHttpClient;
   const tUser = 'marc.nguyen';
   const tPassword = 'abcdefgh';
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
+    mockHttpClient = MockClient();
     dataSource = CalendarURLRemoteDataSourceImpl(client: mockHttpClient);
   });
 
   void setUpMockHttpClientSuccess200() {
     when(
-      mockHttpClient.get(
-          'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
+      mockHttpClient.get(Uri.parse(
+          'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}')),
     ).thenAnswer(
       (_) async => http.Response(
         fixture('datasources/calendar_url_remote_data_source/response0.html'),
@@ -45,7 +48,8 @@ void main() {
 
     when(
       mockHttpClient.post(
-        'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
+        Uri.parse(
+            'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
         body: data,
         headers: anyNamed('headers'),
       ),
@@ -72,7 +76,7 @@ void main() {
 
     when(
       mockHttpClient.get(
-        'https://portail.emse.fr/ics/',
+        Uri.parse('https://portail.emse.fr/ics/'),
         headers: {
           HttpHeaders.cookieHeader:
               'PHPSESSID=ST-40612-FcvunQKSxT4c0Cp9f0i7-cas1emsefr'
@@ -99,8 +103,8 @@ void main() {
 
   void setUpMockHttpClientBadLogin() {
     when(
-      mockHttpClient.get(
-          'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
+      mockHttpClient.get(Uri.parse(
+          'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}')),
     ).thenAnswer(
       (_) async => http.Response(
         fixture('datasources/calendar_url_remote_data_source/response0.html'),
@@ -121,7 +125,8 @@ void main() {
 
     when(
       mockHttpClient.post(
-        'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
+        Uri.parse(
+            'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
         body: data,
         headers: anyNamed('headers'),
       ),
@@ -147,11 +152,13 @@ void main() {
         await dataSource.getCalendarURL(username: tUser, password: tPassword);
         // assert
         verify(mockHttpClient.get(
-          'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
+          Uri.parse(
+              'https://cas.emse.fr/login?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
           headers: anyNamed('headers'),
         ));
         verify(mockHttpClient.post(
-          'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}',
+          Uri.parse(
+              'https://cas.emse.fr/login;jsessionid=2480F8BEBC9CA6A49A210B450AFEA2F9?service=${Uri.encodeComponent("https://portail.emse.fr/ics/")}'),
           body: anyNamed('body'),
           encoding: anyNamed('encoding'),
           headers: anyNamed('headers'),
@@ -168,7 +175,7 @@ void main() {
         );
         verify(
           mockHttpClient.get(
-            'https://portail.emse.fr/ics/',
+            Uri.parse('https://portail.emse.fr/ics/'),
             headers: anyNamed('headers'),
           ),
         );
@@ -217,5 +224,3 @@ void main() {
     );
   });
 }
-
-class MockHttpClient extends Mock implements http.Client {}

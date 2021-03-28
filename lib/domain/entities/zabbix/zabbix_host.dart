@@ -11,12 +11,12 @@ part 'zabbix_host.g.dart';
 /// It can be a physical server, a network switch, a virtual machine or some
 /// application.
 @freezed
-abstract class ZabbixHost with _$ZabbixHost {
+class ZabbixHost with _$ZabbixHost {
   const factory ZabbixHost({
-    @required @nullable String hostid,
-    @required @nullable String host,
-    @required @nullable List<ZabbixItem> items,
-    @required @nullable List<ZabbixInterface> interfaces,
+    required String hostid,
+    required String host,
+    required List<ZabbixItem> items,
+    required List<ZabbixInterface> interfaces,
   }) = _ZabbixHost;
 
   factory ZabbixHost.fromJson(Map<String, dynamic> json) =>

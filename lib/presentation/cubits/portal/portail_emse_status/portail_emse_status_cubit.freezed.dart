@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'portail_emse_status_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'portail_emse_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$PortailEmseStatusStateTearOff {
   const _$PortailEmseStatusStateTearOff();
 
-// ignore: unused_element
   PortailEmseStatusInitial initial() {
     return const PortailEmseStatusInitial();
   }
 
-// ignore: unused_element
   PortailEmseStatusLoading loading() {
     return const PortailEmseStatusLoading();
   }
 
-// ignore: unused_element
   PortailEmseStatusError error(Exception e) {
     return PortailEmseStatusError(
       e,
     );
   }
 
-// ignore: unused_element
   PortailEmseStatusLoaded loaded(bool status) {
     return PortailEmseStatusLoaded(
       status,
@@ -39,41 +38,44 @@ class _$PortailEmseStatusStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $PortailEmseStatusState = _$PortailEmseStatusStateTearOff();
 
 /// @nodoc
 mixin _$PortailEmseStatusState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(PortailEmseStatusInitial value),
-    @required Result loading(PortailEmseStatusLoading value),
-    @required Result error(PortailEmseStatusError value),
-    @required Result loaded(PortailEmseStatusLoaded value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(PortailEmseStatusInitial value) initial,
+    required TResult Function(PortailEmseStatusLoading value) loading,
+    required TResult Function(PortailEmseStatusError value) error,
+    required TResult Function(PortailEmseStatusLoaded value) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(PortailEmseStatusInitial value),
-    Result loading(PortailEmseStatusLoading value),
-    Result error(PortailEmseStatusError value),
-    Result loaded(PortailEmseStatusLoaded value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PortailEmseStatusInitial value)? initial,
+    TResult Function(PortailEmseStatusLoading value)? loading,
+    TResult Function(PortailEmseStatusError value)? error,
+    TResult Function(PortailEmseStatusLoaded value)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -132,29 +134,24 @@ class _$PortailEmseStatusInitial implements PortailEmseStatusInitial {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -163,29 +160,24 @@ class _$PortailEmseStatusInitial implements PortailEmseStatusInitial {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(PortailEmseStatusInitial value),
-    @required Result loading(PortailEmseStatusLoading value),
-    @required Result error(PortailEmseStatusError value),
-    @required Result loaded(PortailEmseStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(PortailEmseStatusInitial value) initial,
+    required TResult Function(PortailEmseStatusLoading value) loading,
+    required TResult Function(PortailEmseStatusError value) error,
+    required TResult Function(PortailEmseStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(PortailEmseStatusInitial value),
-    Result loading(PortailEmseStatusLoading value),
-    Result error(PortailEmseStatusError value),
-    Result loaded(PortailEmseStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PortailEmseStatusInitial value)? initial,
+    TResult Function(PortailEmseStatusLoading value)? loading,
+    TResult Function(PortailEmseStatusError value)? error,
+    TResult Function(PortailEmseStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -236,29 +228,24 @@ class _$PortailEmseStatusLoading implements PortailEmseStatusLoading {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -267,29 +254,24 @@ class _$PortailEmseStatusLoading implements PortailEmseStatusLoading {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(PortailEmseStatusInitial value),
-    @required Result loading(PortailEmseStatusLoading value),
-    @required Result error(PortailEmseStatusError value),
-    @required Result loaded(PortailEmseStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(PortailEmseStatusInitial value) initial,
+    required TResult Function(PortailEmseStatusLoading value) loading,
+    required TResult Function(PortailEmseStatusError value) error,
+    required TResult Function(PortailEmseStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(PortailEmseStatusInitial value),
-    Result loading(PortailEmseStatusLoading value),
-    Result error(PortailEmseStatusError value),
-    Result loaded(PortailEmseStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PortailEmseStatusInitial value)? initial,
+    TResult Function(PortailEmseStatusLoading value)? loading,
+    TResult Function(PortailEmseStatusError value)? error,
+    TResult Function(PortailEmseStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -322,17 +304,20 @@ class _$PortailEmseStatusErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object e = freezed,
+    Object? e = freezed,
   }) {
     return _then(PortailEmseStatusError(
-      e == freezed ? _value.e : e as Exception,
+      e == freezed
+          ? _value.e
+          : e // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
 
 /// @nodoc
 class _$PortailEmseStatusError implements PortailEmseStatusError {
-  const _$PortailEmseStatusError(this.e) : assert(e != null);
+  const _$PortailEmseStatusError(this.e);
 
   @override
   final Exception e;
@@ -354,6 +339,7 @@ class _$PortailEmseStatusError implements PortailEmseStatusError {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(e);
 
+  @JsonKey(ignore: true)
   @override
   $PortailEmseStatusErrorCopyWith<PortailEmseStatusError> get copyWith =>
       _$PortailEmseStatusErrorCopyWithImpl<PortailEmseStatusError>(
@@ -361,29 +347,24 @@ class _$PortailEmseStatusError implements PortailEmseStatusError {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(e);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(e);
     }
@@ -392,29 +373,24 @@ class _$PortailEmseStatusError implements PortailEmseStatusError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(PortailEmseStatusInitial value),
-    @required Result loading(PortailEmseStatusLoading value),
-    @required Result error(PortailEmseStatusError value),
-    @required Result loaded(PortailEmseStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(PortailEmseStatusInitial value) initial,
+    required TResult Function(PortailEmseStatusLoading value) loading,
+    required TResult Function(PortailEmseStatusError value) error,
+    required TResult Function(PortailEmseStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(PortailEmseStatusInitial value),
-    Result loading(PortailEmseStatusLoading value),
-    Result error(PortailEmseStatusError value),
-    Result loaded(PortailEmseStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PortailEmseStatusInitial value)? initial,
+    TResult Function(PortailEmseStatusLoading value)? loading,
+    TResult Function(PortailEmseStatusError value)? error,
+    TResult Function(PortailEmseStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -425,8 +401,10 @@ class _$PortailEmseStatusError implements PortailEmseStatusError {
 abstract class PortailEmseStatusError implements PortailEmseStatusState {
   const factory PortailEmseStatusError(Exception e) = _$PortailEmseStatusError;
 
-  Exception get e;
-  $PortailEmseStatusErrorCopyWith<PortailEmseStatusError> get copyWith;
+  Exception get e => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PortailEmseStatusErrorCopyWith<PortailEmseStatusError> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -450,17 +428,20 @@ class _$PortailEmseStatusLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object status = freezed,
+    Object? status = freezed,
   }) {
     return _then(PortailEmseStatusLoaded(
-      status == freezed ? _value.status : status as bool,
+      status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$PortailEmseStatusLoaded implements PortailEmseStatusLoaded {
-  const _$PortailEmseStatusLoaded(this.status) : assert(status != null);
+  const _$PortailEmseStatusLoaded(this.status);
 
   @override
   final bool status;
@@ -482,6 +463,7 @@ class _$PortailEmseStatusLoaded implements PortailEmseStatusLoaded {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(status);
 
+  @JsonKey(ignore: true)
   @override
   $PortailEmseStatusLoadedCopyWith<PortailEmseStatusLoaded> get copyWith =>
       _$PortailEmseStatusLoadedCopyWithImpl<PortailEmseStatusLoaded>(
@@ -489,29 +471,24 @@ class _$PortailEmseStatusLoaded implements PortailEmseStatusLoaded {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(bool status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(bool status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(status);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(bool status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(bool status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(status);
     }
@@ -520,29 +497,24 @@ class _$PortailEmseStatusLoaded implements PortailEmseStatusLoaded {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(PortailEmseStatusInitial value),
-    @required Result loading(PortailEmseStatusLoading value),
-    @required Result error(PortailEmseStatusError value),
-    @required Result loaded(PortailEmseStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(PortailEmseStatusInitial value) initial,
+    required TResult Function(PortailEmseStatusLoading value) loading,
+    required TResult Function(PortailEmseStatusError value) error,
+    required TResult Function(PortailEmseStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(PortailEmseStatusInitial value),
-    Result loading(PortailEmseStatusLoading value),
-    Result error(PortailEmseStatusError value),
-    Result loaded(PortailEmseStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PortailEmseStatusInitial value)? initial,
+    TResult Function(PortailEmseStatusLoading value)? loading,
+    TResult Function(PortailEmseStatusError value)? error,
+    TResult Function(PortailEmseStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -554,6 +526,8 @@ abstract class PortailEmseStatusLoaded implements PortailEmseStatusState {
   const factory PortailEmseStatusLoaded(bool status) =
       _$PortailEmseStatusLoaded;
 
-  bool get status;
-  $PortailEmseStatusLoadedCopyWith<PortailEmseStatusLoaded> get copyWith;
+  bool get status => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PortailEmseStatusLoadedCopyWith<PortailEmseStatusLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }

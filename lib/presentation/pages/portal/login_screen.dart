@@ -15,14 +15,14 @@ import 'package:minitel_toolbox/presentation/shared/keys.dart';
 class LoginScreen extends StatefulWidget {
   final GlobalKey<FormState> formKey;
 
-  const LoginScreen({@required this.formKey, Key key}) : super(key: key);
+  const LoginScreen({required this.formKey, Key? key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _AutoLoginSelectorWidget extends StatelessWidget {
-  const _AutoLoginSelectorWidget({Key key}) : super(key: key);
+  const _AutoLoginSelectorWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,8 @@ class _AutoLoginSelectorWidget extends StatelessWidget {
             return Checkbox(
               key: const Key(Keys.autoLoginButton),
               value: state.autoLogin,
-              onChanged: (autoLogin) => _onAutoLoginChanged(context, autoLogin),
+              onChanged: (autoLogin) =>
+                  _onAutoLoginChanged(context, autoLogin!),
             );
           },
         ),
@@ -52,11 +53,11 @@ class _AutoLoginSelectorWidget extends StatelessWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _uidController;
-  TextEditingController _pswdController;
-  FocusScopeNode formFocusScopeNode;
+  late TextEditingController _uidController;
+  late TextEditingController _pswdController;
+  late FocusScopeNode formFocusScopeNode;
 
-  PortalCubit _portalCubit;
+  late PortalCubit _portalCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
         context.read<ImprimanteStatusCubit>().refresh();
         context.read<PortailEmseStatusCubit>().refresh();
 
-        return Future.wait([
+        await Future.wait([
           context
               .read<StormshieldStatusCubit>()
               .refresh(portalState.selectedUrl),
@@ -95,10 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       node: formFocusScopeNode,
                       child: BlocListener<PortalCubit, PortalState>(
                         listener: (context, state) {
-                          if (state.isLoaded &&
-                              (_uidController.text == null ||
-                                  (_uidController.text != null &&
-                                      _uidController.text.isEmpty))) {
+                          if (state.isLoaded && _uidController.text.isEmpty) {
                             _uidController.text = _portalCubit.state.uid;
                             _pswdController.text = _portalCubit.state.pswd;
                           }
@@ -118,12 +116,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelText:
                                       AppLoc.of(context).portal.usernameLabel,
                                 ),
-                                validator: (String value) {
-                                  if (value.isEmpty) {
+                                validator: (String? value) {
+                                  if (value?.isEmpty ?? true) {
                                     return AppLoc.of(context)
                                         .reporting
                                         .notEmpty;
-                                  } else if (value.isNotValidEmseUsername) {
+                                  } else if (value?.isNotValidEmseUsername ??
+                                      false) {
                                     return AppLoc.of(context)
                                         .reporting
                                         .isNotValidUid;
@@ -145,8 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   prefixIcon: const Icon(Icons.vpn_key),
                                   labelText: AppLoc.of(context).portal.password,
                                 ),
-                                validator: (String value) {
-                                  if (value.isEmpty) {
+                                validator: (String? value) {
+                                  if (value?.isEmpty ?? true) {
                                     return AppLoc.of(context)
                                         .reporting
                                         .notEmpty;
@@ -208,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 class _RememberMeSelectorWidget extends StatelessWidget {
-  const _RememberMeSelectorWidget({Key key}) : super(key: key);
+  const _RememberMeSelectorWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +221,7 @@ class _RememberMeSelectorWidget extends StatelessWidget {
               key: const Key(Keys.rememberMeButton),
               value: state.rememberMe,
               onChanged: (rememberMe) =>
-                  _onRememberMeChanged(context, rememberMe),
+                  _onRememberMeChanged(context, rememberMe ?? false),
             );
           },
         ),
@@ -239,7 +238,7 @@ class _RememberMeSelectorWidget extends StatelessWidget {
 }
 
 class _TimeSelectorWidget extends StatelessWidget {
-  const _TimeSelectorWidget({Key key}) : super(key: key);
+  const _TimeSelectorWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -260,7 +259,7 @@ class _TimeSelectorWidget extends StatelessWidget {
                     ),
                 ],
                 onChanged: (selectedTime) =>
-                    _onSelectedTimeChanged(context, selectedTime),
+                    _onSelectedTimeChanged(context, selectedTime!),
               );
             },
           ),
@@ -275,7 +274,7 @@ class _TimeSelectorWidget extends StatelessWidget {
 }
 
 class _UrlSelectorWidget extends StatelessWidget {
-  const _UrlSelectorWidget({Key key}) : super(key: key);
+  const _UrlSelectorWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +294,7 @@ class _UrlSelectorWidget extends StatelessWidget {
                   )
               ],
               onChanged: (selectedUrl) =>
-                  _onSelectedUrlChanged(context, selectedUrl),
+                  _onSelectedUrlChanged(context, selectedUrl!),
             );
           })
         ],

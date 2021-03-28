@@ -8,7 +8,7 @@ class ZabbixHostsRepositoryImpl implements ZabbixHostsRepository {
   final ZabbixRemoteDataSource remoteDataSource;
 
   const ZabbixHostsRepositoryImpl({
-    this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
   @override

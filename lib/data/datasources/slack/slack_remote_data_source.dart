@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/api_keys.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +23,7 @@ abstract class SlackRemoteDataSource {
   /// ```
   Future<String> report(
     String text, {
-    Map<String, String> attachments,
+    Map<String, String>? attachments,
     String channel = 'projet_flutter_notif',
   });
 }
@@ -36,24 +35,24 @@ class SlackRemoteDataSourceImpl implements SlackRemoteDataSource {
   final DateTimeManager dateTimeManager;
 
   const SlackRemoteDataSourceImpl({
-    @required this.client,
-    @required this.dateTimeManager,
+    required this.client,
+    required this.dateTimeManager,
   });
 
   @override
   Future<String> report(
     String text, {
-    Map<String, String> attachments,
+    Map<String, String>? attachments,
     String channel = 'projet_flutter_notif',
   }) async {
     final _attachments = attachments?.entries
-        ?.map((e) => {
+        .map((e) => {
               'fallback': e.key,
               'title': e.key,
               'text': e.value,
               'footer': 'Slack API',
             })
-        ?.toList();
+        .toList();
 
     final data = <String, dynamic>{
       'text': '*--Report ${dateTimeManager.now()}--*\n'
@@ -63,7 +62,7 @@ class SlackRemoteDataSourceImpl implements SlackRemoteDataSource {
     };
 
     final response = await client.post(
-      'https://slack.com/api/chat.postMessage',
+      Uri.parse('https://slack.com/api/chat.postMessage'),
       body: json.encode(data),
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',

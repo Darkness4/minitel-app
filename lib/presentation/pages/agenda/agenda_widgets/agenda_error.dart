@@ -65,8 +65,8 @@ class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {
                           hintText: AppLoc.of(context).portal.usernameHint,
                           labelText: AppLoc.of(context).portal.usernameLabel,
                         ),
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value?.isEmpty ?? true) {
                             return AppLoc.of(context).reporting.notEmpty;
                           }
                           return null;
@@ -86,8 +86,8 @@ class _ErrorAgendaWidgetState extends State<ErrorAgendaWidget> {
                           prefixIcon: const Icon(Icons.vpn_key),
                           labelText: AppLoc.of(context).portal.password,
                         ),
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value?.isEmpty ?? true) {
                             return AppLoc.of(context).reporting.notEmpty;
                           }
                           return null;

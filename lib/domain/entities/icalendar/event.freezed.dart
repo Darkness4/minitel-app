@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'event.dart';
 
@@ -9,19 +9,21 @@ part of 'event.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$EventTearOff {
   const _$EventTearOff();
 
-// ignore: unused_element
   _Event call(
-      {@required @nullable TZDateTime dtend,
-      @required @nullable String uid,
-      @required @nullable TZDateTime dtstamp,
-      @required @nullable String location,
-      @required @nullable String description,
-      @required @nullable String summary,
-      @required @nullable TZDateTime dtstart}) {
+      {required TZDateTime dtend,
+      required String uid,
+      required TZDateTime dtstamp,
+      required String location,
+      required String description,
+      required String summary,
+      required TZDateTime dtstart}) {
     return _Event(
       dtend: dtend,
       uid: uid,
@@ -35,27 +37,20 @@ class _$EventTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Event = _$EventTearOff();
 
 /// @nodoc
 mixin _$Event {
-  @nullable
-  TZDateTime get dtend;
-  @nullable
-  String get uid;
-  @nullable
-  TZDateTime get dtstamp;
-  @nullable
-  String get location;
-  @nullable
-  String get description;
-  @nullable
-  String get summary;
-  @nullable
-  TZDateTime get dtstart;
+  TZDateTime get dtend => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+  TZDateTime get dtstamp => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  String get summary => throw _privateConstructorUsedError;
+  TZDateTime get dtstart => throw _privateConstructorUsedError;
 
-  $EventCopyWith<Event> get copyWith;
+  @JsonKey(ignore: true)
+  $EventCopyWith<Event> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -63,13 +58,13 @@ abstract class $EventCopyWith<$Res> {
   factory $EventCopyWith(Event value, $Res Function(Event) then) =
       _$EventCopyWithImpl<$Res>;
   $Res call(
-      {@nullable TZDateTime dtend,
-      @nullable String uid,
-      @nullable TZDateTime dtstamp,
-      @nullable String location,
-      @nullable String description,
-      @nullable String summary,
-      @nullable TZDateTime dtstart});
+      {TZDateTime dtend,
+      String uid,
+      TZDateTime dtstamp,
+      String location,
+      String description,
+      String summary,
+      TZDateTime dtstart});
 }
 
 /// @nodoc
@@ -82,23 +77,43 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
 
   @override
   $Res call({
-    Object dtend = freezed,
-    Object uid = freezed,
-    Object dtstamp = freezed,
-    Object location = freezed,
-    Object description = freezed,
-    Object summary = freezed,
-    Object dtstart = freezed,
+    Object? dtend = freezed,
+    Object? uid = freezed,
+    Object? dtstamp = freezed,
+    Object? location = freezed,
+    Object? description = freezed,
+    Object? summary = freezed,
+    Object? dtstart = freezed,
   }) {
     return _then(_value.copyWith(
-      dtend: dtend == freezed ? _value.dtend : dtend as TZDateTime,
-      uid: uid == freezed ? _value.uid : uid as String,
-      dtstamp: dtstamp == freezed ? _value.dtstamp : dtstamp as TZDateTime,
-      location: location == freezed ? _value.location : location as String,
-      description:
-          description == freezed ? _value.description : description as String,
-      summary: summary == freezed ? _value.summary : summary as String,
-      dtstart: dtstart == freezed ? _value.dtstart : dtstart as TZDateTime,
+      dtend: dtend == freezed
+          ? _value.dtend
+          : dtend // ignore: cast_nullable_to_non_nullable
+              as TZDateTime,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      dtstamp: dtstamp == freezed
+          ? _value.dtstamp
+          : dtstamp // ignore: cast_nullable_to_non_nullable
+              as TZDateTime,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      summary: summary == freezed
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String,
+      dtstart: dtstart == freezed
+          ? _value.dtstart
+          : dtstart // ignore: cast_nullable_to_non_nullable
+              as TZDateTime,
     ));
   }
 }
@@ -109,13 +124,13 @@ abstract class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       __$EventCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable TZDateTime dtend,
-      @nullable String uid,
-      @nullable TZDateTime dtstamp,
-      @nullable String location,
-      @nullable String description,
-      @nullable String summary,
-      @nullable TZDateTime dtstart});
+      {TZDateTime dtend,
+      String uid,
+      TZDateTime dtstamp,
+      String location,
+      String description,
+      String summary,
+      TZDateTime dtstart});
 }
 
 /// @nodoc
@@ -129,23 +144,43 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object dtend = freezed,
-    Object uid = freezed,
-    Object dtstamp = freezed,
-    Object location = freezed,
-    Object description = freezed,
-    Object summary = freezed,
-    Object dtstart = freezed,
+    Object? dtend = freezed,
+    Object? uid = freezed,
+    Object? dtstamp = freezed,
+    Object? location = freezed,
+    Object? description = freezed,
+    Object? summary = freezed,
+    Object? dtstart = freezed,
   }) {
     return _then(_Event(
-      dtend: dtend == freezed ? _value.dtend : dtend as TZDateTime,
-      uid: uid == freezed ? _value.uid : uid as String,
-      dtstamp: dtstamp == freezed ? _value.dtstamp : dtstamp as TZDateTime,
-      location: location == freezed ? _value.location : location as String,
-      description:
-          description == freezed ? _value.description : description as String,
-      summary: summary == freezed ? _value.summary : summary as String,
-      dtstart: dtstart == freezed ? _value.dtstart : dtstart as TZDateTime,
+      dtend: dtend == freezed
+          ? _value.dtend
+          : dtend // ignore: cast_nullable_to_non_nullable
+              as TZDateTime,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      dtstamp: dtstamp == freezed
+          ? _value.dtstamp
+          : dtstamp // ignore: cast_nullable_to_non_nullable
+              as TZDateTime,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      summary: summary == freezed
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String,
+      dtstart: dtstart == freezed
+          ? _value.dtstart
+          : dtstart // ignore: cast_nullable_to_non_nullable
+              as TZDateTime,
     ));
   }
 }
@@ -153,34 +188,27 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
 /// @nodoc
 class _$_Event with DiagnosticableTreeMixin implements _Event {
   const _$_Event(
-      {@required @nullable this.dtend,
-      @required @nullable this.uid,
-      @required @nullable this.dtstamp,
-      @required @nullable this.location,
-      @required @nullable this.description,
-      @required @nullable this.summary,
-      @required @nullable this.dtstart});
+      {required this.dtend,
+      required this.uid,
+      required this.dtstamp,
+      required this.location,
+      required this.description,
+      required this.summary,
+      required this.dtstart});
 
   @override
-  @nullable
   final TZDateTime dtend;
   @override
-  @nullable
   final String uid;
   @override
-  @nullable
   final TZDateTime dtstamp;
   @override
-  @nullable
   final String location;
   @override
-  @nullable
   final String description;
   @override
-  @nullable
   final String summary;
   @override
-  @nullable
   final TZDateTime dtstart;
 
   @override
@@ -237,6 +265,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
       const DeepCollectionEquality().hash(summary) ^
       const DeepCollectionEquality().hash(dtstart);
 
+  @JsonKey(ignore: true)
   @override
   _$EventCopyWith<_Event> get copyWith =>
       __$EventCopyWithImpl<_Event>(this, _$identity);
@@ -244,35 +273,29 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 
 abstract class _Event implements Event {
   const factory _Event(
-      {@required @nullable TZDateTime dtend,
-      @required @nullable String uid,
-      @required @nullable TZDateTime dtstamp,
-      @required @nullable String location,
-      @required @nullable String description,
-      @required @nullable String summary,
-      @required @nullable TZDateTime dtstart}) = _$_Event;
+      {required TZDateTime dtend,
+      required String uid,
+      required TZDateTime dtstamp,
+      required String location,
+      required String description,
+      required String summary,
+      required TZDateTime dtstart}) = _$_Event;
 
   @override
-  @nullable
-  TZDateTime get dtend;
+  TZDateTime get dtend => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get uid;
+  String get uid => throw _privateConstructorUsedError;
   @override
-  @nullable
-  TZDateTime get dtstamp;
+  TZDateTime get dtstamp => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get location;
+  String get location => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get description;
+  String get description => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get summary;
+  String get summary => throw _privateConstructorUsedError;
   @override
-  @nullable
-  TZDateTime get dtstart;
+  TZDateTime get dtstart => throw _privateConstructorUsedError;
   @override
-  _$EventCopyWith<_Event> get copyWith;
+  @JsonKey(ignore: true)
+  _$EventCopyWith<_Event> get copyWith => throw _privateConstructorUsedError;
 }

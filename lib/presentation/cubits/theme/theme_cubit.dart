@@ -14,7 +14,7 @@ part 'theme_state.dart';
 class ThemeCubit extends Cubit<ThemeState> {
   final SharedPreferences prefs;
 
-  ThemeCubit({@required this.prefs}) : super(prefs.initialTheme);
+  ThemeCubit({required this.prefs}) : super(prefs.initialTheme);
 
   Future<void> toDark() async {
     await prefs.setString('initial_theme', 'Dark');

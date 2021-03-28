@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'post.dart';
 
@@ -9,19 +9,21 @@ part of 'post.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$PostTearOff {
   const _$PostTearOff();
 
-// ignore: unused_element
   _Post call(
-      {@required @nullable String text,
-      @required @nullable String id_str,
-      @required @nullable String user_name,
-      @required @nullable String screen_name,
-      @required @nullable Uri profile_image_url_https,
-      @required @nullable Uri url,
-      @required @nullable DateTime created_at}) {
+      {required String text,
+      required String id_str,
+      required String user_name,
+      required String screen_name,
+      required Uri profile_image_url_https,
+      required Uri url,
+      required DateTime created_at}) {
     return _Post(
       text: text,
       id_str: id_str,
@@ -35,27 +37,20 @@ class _$PostTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Post = _$PostTearOff();
 
 /// @nodoc
 mixin _$Post {
-  @nullable
-  String get text;
-  @nullable
-  String get id_str;
-  @nullable
-  String get user_name;
-  @nullable
-  String get screen_name;
-  @nullable
-  Uri get profile_image_url_https;
-  @nullable
-  Uri get url;
-  @nullable
-  DateTime get created_at;
+  String get text => throw _privateConstructorUsedError;
+  String get id_str => throw _privateConstructorUsedError;
+  String get user_name => throw _privateConstructorUsedError;
+  String get screen_name => throw _privateConstructorUsedError;
+  Uri get profile_image_url_https => throw _privateConstructorUsedError;
+  Uri get url => throw _privateConstructorUsedError;
+  DateTime get created_at => throw _privateConstructorUsedError;
 
-  $PostCopyWith<Post> get copyWith;
+  @JsonKey(ignore: true)
+  $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -63,13 +58,13 @@ abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
       _$PostCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String text,
-      @nullable String id_str,
-      @nullable String user_name,
-      @nullable String screen_name,
-      @nullable Uri profile_image_url_https,
-      @nullable Uri url,
-      @nullable DateTime created_at});
+      {String text,
+      String id_str,
+      String user_name,
+      String screen_name,
+      Uri profile_image_url_https,
+      Uri url,
+      DateTime created_at});
 }
 
 /// @nodoc
@@ -82,26 +77,43 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
 
   @override
   $Res call({
-    Object text = freezed,
-    Object id_str = freezed,
-    Object user_name = freezed,
-    Object screen_name = freezed,
-    Object profile_image_url_https = freezed,
-    Object url = freezed,
-    Object created_at = freezed,
+    Object? text = freezed,
+    Object? id_str = freezed,
+    Object? user_name = freezed,
+    Object? screen_name = freezed,
+    Object? profile_image_url_https = freezed,
+    Object? url = freezed,
+    Object? created_at = freezed,
   }) {
     return _then(_value.copyWith(
-      text: text == freezed ? _value.text : text as String,
-      id_str: id_str == freezed ? _value.id_str : id_str as String,
-      user_name: user_name == freezed ? _value.user_name : user_name as String,
-      screen_name:
-          screen_name == freezed ? _value.screen_name : screen_name as String,
+      text: text == freezed
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      id_str: id_str == freezed
+          ? _value.id_str
+          : id_str // ignore: cast_nullable_to_non_nullable
+              as String,
+      user_name: user_name == freezed
+          ? _value.user_name
+          : user_name // ignore: cast_nullable_to_non_nullable
+              as String,
+      screen_name: screen_name == freezed
+          ? _value.screen_name
+          : screen_name // ignore: cast_nullable_to_non_nullable
+              as String,
       profile_image_url_https: profile_image_url_https == freezed
           ? _value.profile_image_url_https
-          : profile_image_url_https as Uri,
-      url: url == freezed ? _value.url : url as Uri,
-      created_at:
-          created_at == freezed ? _value.created_at : created_at as DateTime,
+          : profile_image_url_https // ignore: cast_nullable_to_non_nullable
+              as Uri,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as Uri,
+      created_at: created_at == freezed
+          ? _value.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -112,13 +124,13 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       __$PostCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String text,
-      @nullable String id_str,
-      @nullable String user_name,
-      @nullable String screen_name,
-      @nullable Uri profile_image_url_https,
-      @nullable Uri url,
-      @nullable DateTime created_at});
+      {String text,
+      String id_str,
+      String user_name,
+      String screen_name,
+      Uri profile_image_url_https,
+      Uri url,
+      DateTime created_at});
 }
 
 /// @nodoc
@@ -132,26 +144,43 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object text = freezed,
-    Object id_str = freezed,
-    Object user_name = freezed,
-    Object screen_name = freezed,
-    Object profile_image_url_https = freezed,
-    Object url = freezed,
-    Object created_at = freezed,
+    Object? text = freezed,
+    Object? id_str = freezed,
+    Object? user_name = freezed,
+    Object? screen_name = freezed,
+    Object? profile_image_url_https = freezed,
+    Object? url = freezed,
+    Object? created_at = freezed,
   }) {
     return _then(_Post(
-      text: text == freezed ? _value.text : text as String,
-      id_str: id_str == freezed ? _value.id_str : id_str as String,
-      user_name: user_name == freezed ? _value.user_name : user_name as String,
-      screen_name:
-          screen_name == freezed ? _value.screen_name : screen_name as String,
+      text: text == freezed
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      id_str: id_str == freezed
+          ? _value.id_str
+          : id_str // ignore: cast_nullable_to_non_nullable
+              as String,
+      user_name: user_name == freezed
+          ? _value.user_name
+          : user_name // ignore: cast_nullable_to_non_nullable
+              as String,
+      screen_name: screen_name == freezed
+          ? _value.screen_name
+          : screen_name // ignore: cast_nullable_to_non_nullable
+              as String,
       profile_image_url_https: profile_image_url_https == freezed
           ? _value.profile_image_url_https
-          : profile_image_url_https as Uri,
-      url: url == freezed ? _value.url : url as Uri,
-      created_at:
-          created_at == freezed ? _value.created_at : created_at as DateTime,
+          : profile_image_url_https // ignore: cast_nullable_to_non_nullable
+              as Uri,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as Uri,
+      created_at: created_at == freezed
+          ? _value.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -159,34 +188,27 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
 /// @nodoc
 class _$_Post with DiagnosticableTreeMixin implements _Post {
   const _$_Post(
-      {@required @nullable this.text,
-      @required @nullable this.id_str,
-      @required @nullable this.user_name,
-      @required @nullable this.screen_name,
-      @required @nullable this.profile_image_url_https,
-      @required @nullable this.url,
-      @required @nullable this.created_at});
+      {required this.text,
+      required this.id_str,
+      required this.user_name,
+      required this.screen_name,
+      required this.profile_image_url_https,
+      required this.url,
+      required this.created_at});
 
   @override
-  @nullable
   final String text;
   @override
-  @nullable
   final String id_str;
   @override
-  @nullable
   final String user_name;
   @override
-  @nullable
   final String screen_name;
   @override
-  @nullable
   final Uri profile_image_url_https;
   @override
-  @nullable
   final Uri url;
   @override
-  @nullable
   final DateTime created_at;
 
   @override
@@ -245,6 +267,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       const DeepCollectionEquality().hash(url) ^
       const DeepCollectionEquality().hash(created_at);
 
+  @JsonKey(ignore: true)
   @override
   _$PostCopyWith<_Post> get copyWith =>
       __$PostCopyWithImpl<_Post>(this, _$identity);
@@ -252,35 +275,29 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
 
 abstract class _Post implements Post {
   const factory _Post(
-      {@required @nullable String text,
-      @required @nullable String id_str,
-      @required @nullable String user_name,
-      @required @nullable String screen_name,
-      @required @nullable Uri profile_image_url_https,
-      @required @nullable Uri url,
-      @required @nullable DateTime created_at}) = _$_Post;
+      {required String text,
+      required String id_str,
+      required String user_name,
+      required String screen_name,
+      required Uri profile_image_url_https,
+      required Uri url,
+      required DateTime created_at}) = _$_Post;
 
   @override
-  @nullable
-  String get text;
+  String get text => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get id_str;
+  String get id_str => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get user_name;
+  String get user_name => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get screen_name;
+  String get screen_name => throw _privateConstructorUsedError;
   @override
-  @nullable
-  Uri get profile_image_url_https;
+  Uri get profile_image_url_https => throw _privateConstructorUsedError;
   @override
-  @nullable
-  Uri get url;
+  Uri get url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  DateTime get created_at;
+  DateTime get created_at => throw _privateConstructorUsedError;
   @override
-  _$PostCopyWith<_Post> get copyWith;
+  @JsonKey(ignore: true)
+  _$PostCopyWith<_Post> get copyWith => throw _privateConstructorUsedError;
 }

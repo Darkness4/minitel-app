@@ -5,7 +5,7 @@ import 'package:minitel_toolbox/presentation/pages/portal/login_widgets/portail_
 import 'package:minitel_toolbox/presentation/pages/portal/login_widgets/stormshield_status_widget.dart';
 
 class StatusCard extends StatelessWidget {
-  const StatusCard({Key key}) : super(key: key);
+  const StatusCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

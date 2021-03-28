@@ -15,9 +15,8 @@ class TwitterFeedCubit extends Cubit<TwitterFeedState> {
   final PostRepository repository;
 
   TwitterFeedCubit({
-    @required this.repository,
-  })  : assert(repository != null),
-        super(const TwitterFeedStateInitial());
+    required this.repository,
+  }) : super(const TwitterFeedStateInitial());
 
   Future<void> getFeed() async {
     emit(const TwitterFeedStateLoading());

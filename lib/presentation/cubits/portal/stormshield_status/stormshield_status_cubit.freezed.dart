@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'stormshield_status_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'stormshield_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$StormshieldStatusStateTearOff {
   const _$StormshieldStatusStateTearOff();
 
-// ignore: unused_element
   StormshieldStatusInitial initial() {
     return const StormshieldStatusInitial();
   }
 
-// ignore: unused_element
   StormshieldStatusLoading loading() {
     return const StormshieldStatusLoading();
   }
 
-// ignore: unused_element
   StormshieldStatusError error(Exception e) {
     return StormshieldStatusError(
       e,
     );
   }
 
-// ignore: unused_element
   StormshieldStatusLoaded loaded(String status) {
     return StormshieldStatusLoaded(
       status,
@@ -39,41 +38,44 @@ class _$StormshieldStatusStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $StormshieldStatusState = _$StormshieldStatusStateTearOff();
 
 /// @nodoc
 mixin _$StormshieldStatusState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(String status),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(String status) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(String status),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(String status)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(StormshieldStatusInitial value),
-    @required Result loading(StormshieldStatusLoading value),
-    @required Result error(StormshieldStatusError value),
-    @required Result loaded(StormshieldStatusLoaded value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(StormshieldStatusInitial value) initial,
+    required TResult Function(StormshieldStatusLoading value) loading,
+    required TResult Function(StormshieldStatusError value) error,
+    required TResult Function(StormshieldStatusLoaded value) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(StormshieldStatusInitial value),
-    Result loading(StormshieldStatusLoading value),
-    Result error(StormshieldStatusError value),
-    Result loaded(StormshieldStatusLoaded value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StormshieldStatusInitial value)? initial,
+    TResult Function(StormshieldStatusLoading value)? loading,
+    TResult Function(StormshieldStatusError value)? error,
+    TResult Function(StormshieldStatusLoaded value)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -132,29 +134,24 @@ class _$StormshieldStatusInitial implements StormshieldStatusInitial {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(String status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(String status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(String status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(String status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -163,29 +160,24 @@ class _$StormshieldStatusInitial implements StormshieldStatusInitial {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(StormshieldStatusInitial value),
-    @required Result loading(StormshieldStatusLoading value),
-    @required Result error(StormshieldStatusError value),
-    @required Result loaded(StormshieldStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(StormshieldStatusInitial value) initial,
+    required TResult Function(StormshieldStatusLoading value) loading,
+    required TResult Function(StormshieldStatusError value) error,
+    required TResult Function(StormshieldStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(StormshieldStatusInitial value),
-    Result loading(StormshieldStatusLoading value),
-    Result error(StormshieldStatusError value),
-    Result loaded(StormshieldStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StormshieldStatusInitial value)? initial,
+    TResult Function(StormshieldStatusLoading value)? loading,
+    TResult Function(StormshieldStatusError value)? error,
+    TResult Function(StormshieldStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -236,29 +228,24 @@ class _$StormshieldStatusLoading implements StormshieldStatusLoading {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(String status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(String status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(String status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(String status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -267,29 +254,24 @@ class _$StormshieldStatusLoading implements StormshieldStatusLoading {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(StormshieldStatusInitial value),
-    @required Result loading(StormshieldStatusLoading value),
-    @required Result error(StormshieldStatusError value),
-    @required Result loaded(StormshieldStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(StormshieldStatusInitial value) initial,
+    required TResult Function(StormshieldStatusLoading value) loading,
+    required TResult Function(StormshieldStatusError value) error,
+    required TResult Function(StormshieldStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(StormshieldStatusInitial value),
-    Result loading(StormshieldStatusLoading value),
-    Result error(StormshieldStatusError value),
-    Result loaded(StormshieldStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StormshieldStatusInitial value)? initial,
+    TResult Function(StormshieldStatusLoading value)? loading,
+    TResult Function(StormshieldStatusError value)? error,
+    TResult Function(StormshieldStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -322,17 +304,20 @@ class _$StormshieldStatusErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object e = freezed,
+    Object? e = freezed,
   }) {
     return _then(StormshieldStatusError(
-      e == freezed ? _value.e : e as Exception,
+      e == freezed
+          ? _value.e
+          : e // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
 
 /// @nodoc
 class _$StormshieldStatusError implements StormshieldStatusError {
-  const _$StormshieldStatusError(this.e) : assert(e != null);
+  const _$StormshieldStatusError(this.e);
 
   @override
   final Exception e;
@@ -354,6 +339,7 @@ class _$StormshieldStatusError implements StormshieldStatusError {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(e);
 
+  @JsonKey(ignore: true)
   @override
   $StormshieldStatusErrorCopyWith<StormshieldStatusError> get copyWith =>
       _$StormshieldStatusErrorCopyWithImpl<StormshieldStatusError>(
@@ -361,29 +347,24 @@ class _$StormshieldStatusError implements StormshieldStatusError {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(String status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(String status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(e);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(String status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(String status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(e);
     }
@@ -392,29 +373,24 @@ class _$StormshieldStatusError implements StormshieldStatusError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(StormshieldStatusInitial value),
-    @required Result loading(StormshieldStatusLoading value),
-    @required Result error(StormshieldStatusError value),
-    @required Result loaded(StormshieldStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(StormshieldStatusInitial value) initial,
+    required TResult Function(StormshieldStatusLoading value) loading,
+    required TResult Function(StormshieldStatusError value) error,
+    required TResult Function(StormshieldStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(StormshieldStatusInitial value),
-    Result loading(StormshieldStatusLoading value),
-    Result error(StormshieldStatusError value),
-    Result loaded(StormshieldStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StormshieldStatusInitial value)? initial,
+    TResult Function(StormshieldStatusLoading value)? loading,
+    TResult Function(StormshieldStatusError value)? error,
+    TResult Function(StormshieldStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -425,8 +401,10 @@ class _$StormshieldStatusError implements StormshieldStatusError {
 abstract class StormshieldStatusError implements StormshieldStatusState {
   const factory StormshieldStatusError(Exception e) = _$StormshieldStatusError;
 
-  Exception get e;
-  $StormshieldStatusErrorCopyWith<StormshieldStatusError> get copyWith;
+  Exception get e => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $StormshieldStatusErrorCopyWith<StormshieldStatusError> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -450,17 +428,20 @@ class _$StormshieldStatusLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object status = freezed,
+    Object? status = freezed,
   }) {
     return _then(StormshieldStatusLoaded(
-      status == freezed ? _value.status : status as String,
+      status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 class _$StormshieldStatusLoaded implements StormshieldStatusLoaded {
-  const _$StormshieldStatusLoaded(this.status) : assert(status != null);
+  const _$StormshieldStatusLoaded(this.status);
 
   @override
   final String status;
@@ -482,6 +463,7 @@ class _$StormshieldStatusLoaded implements StormshieldStatusLoaded {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(status);
 
+  @JsonKey(ignore: true)
   @override
   $StormshieldStatusLoadedCopyWith<StormshieldStatusLoaded> get copyWith =>
       _$StormshieldStatusLoadedCopyWithImpl<StormshieldStatusLoaded>(
@@ -489,29 +471,24 @@ class _$StormshieldStatusLoaded implements StormshieldStatusLoaded {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception e),
-    @required Result loaded(String status),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception e) error,
+    required TResult Function(String status) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(status);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception e),
-    Result loaded(String status),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception e)? error,
+    TResult Function(String status)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(status);
     }
@@ -520,29 +497,24 @@ class _$StormshieldStatusLoaded implements StormshieldStatusLoaded {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(StormshieldStatusInitial value),
-    @required Result loading(StormshieldStatusLoading value),
-    @required Result error(StormshieldStatusError value),
-    @required Result loaded(StormshieldStatusLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(StormshieldStatusInitial value) initial,
+    required TResult Function(StormshieldStatusLoading value) loading,
+    required TResult Function(StormshieldStatusError value) error,
+    required TResult Function(StormshieldStatusLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(StormshieldStatusInitial value),
-    Result loading(StormshieldStatusLoading value),
-    Result error(StormshieldStatusError value),
-    Result loaded(StormshieldStatusLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StormshieldStatusInitial value)? initial,
+    TResult Function(StormshieldStatusLoading value)? loading,
+    TResult Function(StormshieldStatusError value)? error,
+    TResult Function(StormshieldStatusLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -554,6 +526,8 @@ abstract class StormshieldStatusLoaded implements StormshieldStatusState {
   const factory StormshieldStatusLoaded(String status) =
       _$StormshieldStatusLoaded;
 
-  String get status;
-  $StormshieldStatusLoadedCopyWith<StormshieldStatusLoaded> get copyWith;
+  String get status => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $StormshieldStatusLoadedCopyWith<StormshieldStatusLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }

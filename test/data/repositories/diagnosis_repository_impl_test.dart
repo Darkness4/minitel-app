@@ -4,14 +4,22 @@ import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/core/network/network_info.dart';
 import 'package:minitel_toolbox/data/datasources/diagnosis/diagnosis_data_source.dart';
 import 'package:minitel_toolbox/data/repositories/diagnosis_repository_impl.dart';
-import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
+import 'package:minitel_toolbox/data/database/diagnosis.dart';
 import 'package:minitel_toolbox/domain/repositories/diagnosis_repository.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'diagnosis_repository_impl_test.mocks.dart';
+
+@GenerateMocks([
+  NetworkInfo
+], customMocks: [
+  MockSpec<DiagnosisDataSource>(as: #MockRemoteDataSource),
+])
 void main() {
-  DiagnosisRepository repository;
-  MockRemoteDataSource mockRemoteDataSource;
-  MockNetworkInfo mockNetworkInfo;
+  late DiagnosisRepository repository;
+  late MockRemoteDataSource mockRemoteDataSource;
+  late MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
@@ -53,6 +61,7 @@ void main() {
         // arrange
         when(mockNetworkInfo.result)
             .thenAnswer((_) async => ConnectivityResult.wifi);
+        when(mockRemoteDataSource.diagnose()).thenReturn(tDiagnosisModel);
         // act
         await repository.diagnose();
         // assert
@@ -103,7 +112,3 @@ void main() {
     });
   });
 }
-
-class MockRemoteDataSource extends Mock implements DiagnosisDataSource {}
-
-class MockNetworkInfo extends Mock implements NetworkInfo {}

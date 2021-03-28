@@ -3,14 +3,17 @@ import 'package:matcher/matcher.dart';
 import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/calendar_url/calendar_url_local_data_source.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../fixtures/fixture_reader.dart';
+import 'calendar_url_local_data_source_test.mocks.dart';
 
+@GenerateMocks([SharedPreferences])
 void main() {
-  CalendarURLLocalDataSource dataSource;
-  MockSharedPreferences mockPrefs;
+  late CalendarURLLocalDataSource dataSource;
+  late MockSharedPreferences mockPrefs;
 
   setUp(() {
     mockPrefs = MockSharedPreferences();
@@ -39,7 +42,7 @@ void main() {
       'should throw a CacheExeption when there is not a cached value',
       () async {
         // arrange
-        when<dynamic>(mockPrefs.get(any)).thenReturn(null);
+        when<dynamic>(mockPrefs.getString(any)).thenReturn(null);
         // act
         final call = dataSource.getLastCalendarURL;
         // assert
@@ -55,6 +58,9 @@ void main() {
     test(
       'should call SharedPreferences to cache the data',
       () async {
+        // arrange
+        when<dynamic>(mockPrefs.setString(any, any))
+            .thenAnswer((realInvocation) async => true);
         // act
         await dataSource.saveCalendarURL(tCalendarUrl);
         // assert
@@ -67,5 +73,3 @@ void main() {
     );
   });
 }
-
-class MockSharedPreferences extends Mock implements SharedPreferences {}

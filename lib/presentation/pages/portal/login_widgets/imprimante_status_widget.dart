@@ -6,7 +6,7 @@ import 'package:minitel_toolbox/presentation/shared/keys.dart';
 
 class ImprimanteStatusWidget extends StatelessWidget {
   const ImprimanteStatusWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

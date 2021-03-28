@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'asset.dart';
 
@@ -8,6 +8,10 @@ part of 'asset.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 GithubAsset _$GithubAssetFromJson(Map<String, dynamic> json) {
   return _GithubAsset.fromJson(json);
 }
@@ -16,21 +20,20 @@ GithubAsset _$GithubAssetFromJson(Map<String, dynamic> json) {
 class _$GithubAssetTearOff {
   const _$GithubAssetTearOff();
 
-// ignore: unused_element
   _GithubAsset call(
-      {@required @nullable String url,
-      @required @nullable String browser_download_url,
-      @required @nullable int id,
-      @required @nullable String node_id,
-      @required @nullable String name,
-      @required @nullable String label,
-      @required @nullable String state,
-      @required @nullable String content_type,
-      @required @nullable int size,
-      @required @nullable int download_count,
-      @required @nullable DateTime created_at,
-      @required @nullable DateTime updated_at,
-      @required @nullable GithubUser uploader}) {
+      {required String url,
+      required String browser_download_url,
+      required int id,
+      required String node_id,
+      required String name,
+      required String? label,
+      required String state,
+      required String content_type,
+      required int size,
+      required int download_count,
+      required DateTime created_at,
+      required DateTime updated_at,
+      required GithubUser uploader}) {
     return _GithubAsset(
       url: url,
       browser_download_url: browser_download_url,
@@ -48,47 +51,34 @@ class _$GithubAssetTearOff {
     );
   }
 
-// ignore: unused_element
   GithubAsset fromJson(Map<String, Object> json) {
     return GithubAsset.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $GithubAsset = _$GithubAssetTearOff();
 
 /// @nodoc
 mixin _$GithubAsset {
-  @nullable
-  String get url;
-  @nullable
-  String get browser_download_url;
-  @nullable
-  int get id;
-  @nullable
-  String get node_id;
-  @nullable
-  String get name;
-  @nullable
-  String get label;
-  @nullable
-  String get state;
-  @nullable
-  String get content_type;
-  @nullable
-  int get size;
-  @nullable
-  int get download_count;
-  @nullable
-  DateTime get created_at;
-  @nullable
-  DateTime get updated_at;
-  @nullable
-  GithubUser get uploader;
+  String get url => throw _privateConstructorUsedError;
+  String get browser_download_url => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get node_id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String? get label => throw _privateConstructorUsedError;
+  String get state => throw _privateConstructorUsedError;
+  String get content_type => throw _privateConstructorUsedError;
+  int get size => throw _privateConstructorUsedError;
+  int get download_count => throw _privateConstructorUsedError;
+  DateTime get created_at => throw _privateConstructorUsedError;
+  DateTime get updated_at => throw _privateConstructorUsedError;
+  GithubUser get uploader => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
-  $GithubAssetCopyWith<GithubAsset> get copyWith;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GithubAssetCopyWith<GithubAsset> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -97,19 +87,19 @@ abstract class $GithubAssetCopyWith<$Res> {
           GithubAsset value, $Res Function(GithubAsset) then) =
       _$GithubAssetCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String url,
-      @nullable String browser_download_url,
-      @nullable int id,
-      @nullable String node_id,
-      @nullable String name,
-      @nullable String label,
-      @nullable String state,
-      @nullable String content_type,
-      @nullable int size,
-      @nullable int download_count,
-      @nullable DateTime created_at,
-      @nullable DateTime updated_at,
-      @nullable GithubUser uploader});
+      {String url,
+      String browser_download_url,
+      int id,
+      String node_id,
+      String name,
+      String? label,
+      String state,
+      String content_type,
+      int size,
+      int download_count,
+      DateTime created_at,
+      DateTime updated_at,
+      GithubUser uploader});
 
   $GithubUserCopyWith<$Res> get uploader;
 }
@@ -124,50 +114,78 @@ class _$GithubAssetCopyWithImpl<$Res> implements $GithubAssetCopyWith<$Res> {
 
   @override
   $Res call({
-    Object url = freezed,
-    Object browser_download_url = freezed,
-    Object id = freezed,
-    Object node_id = freezed,
-    Object name = freezed,
-    Object label = freezed,
-    Object state = freezed,
-    Object content_type = freezed,
-    Object size = freezed,
-    Object download_count = freezed,
-    Object created_at = freezed,
-    Object updated_at = freezed,
-    Object uploader = freezed,
+    Object? url = freezed,
+    Object? browser_download_url = freezed,
+    Object? id = freezed,
+    Object? node_id = freezed,
+    Object? name = freezed,
+    Object? label = freezed,
+    Object? state = freezed,
+    Object? content_type = freezed,
+    Object? size = freezed,
+    Object? download_count = freezed,
+    Object? created_at = freezed,
+    Object? updated_at = freezed,
+    Object? uploader = freezed,
   }) {
     return _then(_value.copyWith(
-      url: url == freezed ? _value.url : url as String,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
       browser_download_url: browser_download_url == freezed
           ? _value.browser_download_url
-          : browser_download_url as String,
-      id: id == freezed ? _value.id : id as int,
-      node_id: node_id == freezed ? _value.node_id : node_id as String,
-      name: name == freezed ? _value.name : name as String,
-      label: label == freezed ? _value.label : label as String,
-      state: state == freezed ? _value.state : state as String,
+          : browser_download_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      node_id: node_id == freezed
+          ? _value.node_id
+          : node_id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      label: label == freezed
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String,
       content_type: content_type == freezed
           ? _value.content_type
-          : content_type as String,
-      size: size == freezed ? _value.size : size as int,
+          : content_type // ignore: cast_nullable_to_non_nullable
+              as String,
+      size: size == freezed
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int,
       download_count: download_count == freezed
           ? _value.download_count
-          : download_count as int,
-      created_at:
-          created_at == freezed ? _value.created_at : created_at as DateTime,
-      updated_at:
-          updated_at == freezed ? _value.updated_at : updated_at as DateTime,
-      uploader: uploader == freezed ? _value.uploader : uploader as GithubUser,
+          : download_count // ignore: cast_nullable_to_non_nullable
+              as int,
+      created_at: created_at == freezed
+          ? _value.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updated_at: updated_at == freezed
+          ? _value.updated_at
+          : updated_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      uploader: uploader == freezed
+          ? _value.uploader
+          : uploader // ignore: cast_nullable_to_non_nullable
+              as GithubUser,
     ));
   }
 
   @override
   $GithubUserCopyWith<$Res> get uploader {
-    if (_value.uploader == null) {
-      return null;
-    }
     return $GithubUserCopyWith<$Res>(_value.uploader, (value) {
       return _then(_value.copyWith(uploader: value));
     });
@@ -182,19 +200,19 @@ abstract class _$GithubAssetCopyWith<$Res>
       __$GithubAssetCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String url,
-      @nullable String browser_download_url,
-      @nullable int id,
-      @nullable String node_id,
-      @nullable String name,
-      @nullable String label,
-      @nullable String state,
-      @nullable String content_type,
-      @nullable int size,
-      @nullable int download_count,
-      @nullable DateTime created_at,
-      @nullable DateTime updated_at,
-      @nullable GithubUser uploader});
+      {String url,
+      String browser_download_url,
+      int id,
+      String node_id,
+      String name,
+      String? label,
+      String state,
+      String content_type,
+      int size,
+      int download_count,
+      DateTime created_at,
+      DateTime updated_at,
+      GithubUser uploader});
 
   @override
   $GithubUserCopyWith<$Res> get uploader;
@@ -212,42 +230,73 @@ class __$GithubAssetCopyWithImpl<$Res> extends _$GithubAssetCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object url = freezed,
-    Object browser_download_url = freezed,
-    Object id = freezed,
-    Object node_id = freezed,
-    Object name = freezed,
-    Object label = freezed,
-    Object state = freezed,
-    Object content_type = freezed,
-    Object size = freezed,
-    Object download_count = freezed,
-    Object created_at = freezed,
-    Object updated_at = freezed,
-    Object uploader = freezed,
+    Object? url = freezed,
+    Object? browser_download_url = freezed,
+    Object? id = freezed,
+    Object? node_id = freezed,
+    Object? name = freezed,
+    Object? label = freezed,
+    Object? state = freezed,
+    Object? content_type = freezed,
+    Object? size = freezed,
+    Object? download_count = freezed,
+    Object? created_at = freezed,
+    Object? updated_at = freezed,
+    Object? uploader = freezed,
   }) {
     return _then(_GithubAsset(
-      url: url == freezed ? _value.url : url as String,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
       browser_download_url: browser_download_url == freezed
           ? _value.browser_download_url
-          : browser_download_url as String,
-      id: id == freezed ? _value.id : id as int,
-      node_id: node_id == freezed ? _value.node_id : node_id as String,
-      name: name == freezed ? _value.name : name as String,
-      label: label == freezed ? _value.label : label as String,
-      state: state == freezed ? _value.state : state as String,
+          : browser_download_url // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      node_id: node_id == freezed
+          ? _value.node_id
+          : node_id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      label: label == freezed
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String,
       content_type: content_type == freezed
           ? _value.content_type
-          : content_type as String,
-      size: size == freezed ? _value.size : size as int,
+          : content_type // ignore: cast_nullable_to_non_nullable
+              as String,
+      size: size == freezed
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int,
       download_count: download_count == freezed
           ? _value.download_count
-          : download_count as int,
-      created_at:
-          created_at == freezed ? _value.created_at : created_at as DateTime,
-      updated_at:
-          updated_at == freezed ? _value.updated_at : updated_at as DateTime,
-      uploader: uploader == freezed ? _value.uploader : uploader as GithubUser,
+          : download_count // ignore: cast_nullable_to_non_nullable
+              as int,
+      created_at: created_at == freezed
+          ? _value.created_at
+          : created_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updated_at: updated_at == freezed
+          ? _value.updated_at
+          : updated_at // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      uploader: uploader == freezed
+          ? _value.uploader
+          : uploader // ignore: cast_nullable_to_non_nullable
+              as GithubUser,
     ));
   }
 }
@@ -257,61 +306,48 @@ class __$GithubAssetCopyWithImpl<$Res> extends _$GithubAssetCopyWithImpl<$Res>
 /// @nodoc
 class _$_GithubAsset implements _GithubAsset {
   const _$_GithubAsset(
-      {@required @nullable this.url,
-      @required @nullable this.browser_download_url,
-      @required @nullable this.id,
-      @required @nullable this.node_id,
-      @required @nullable this.name,
-      @required @nullable this.label,
-      @required @nullable this.state,
-      @required @nullable this.content_type,
-      @required @nullable this.size,
-      @required @nullable this.download_count,
-      @required @nullable this.created_at,
-      @required @nullable this.updated_at,
-      @required @nullable this.uploader});
+      {required this.url,
+      required this.browser_download_url,
+      required this.id,
+      required this.node_id,
+      required this.name,
+      required this.label,
+      required this.state,
+      required this.content_type,
+      required this.size,
+      required this.download_count,
+      required this.created_at,
+      required this.updated_at,
+      required this.uploader});
 
   factory _$_GithubAsset.fromJson(Map<String, dynamic> json) =>
       _$_$_GithubAssetFromJson(json);
 
   @override
-  @nullable
   final String url;
   @override
-  @nullable
   final String browser_download_url;
   @override
-  @nullable
   final int id;
   @override
-  @nullable
   final String node_id;
   @override
-  @nullable
   final String name;
   @override
-  @nullable
-  final String label;
+  final String? label;
   @override
-  @nullable
   final String state;
   @override
-  @nullable
   final String content_type;
   @override
-  @nullable
   final int size;
   @override
-  @nullable
   final int download_count;
   @override
-  @nullable
   final DateTime created_at;
   @override
-  @nullable
   final DateTime updated_at;
   @override
-  @nullable
   final GithubUser uploader;
 
   @override
@@ -375,6 +411,7 @@ class _$_GithubAsset implements _GithubAsset {
       const DeepCollectionEquality().hash(updated_at) ^
       const DeepCollectionEquality().hash(uploader);
 
+  @JsonKey(ignore: true)
   @override
   _$GithubAssetCopyWith<_GithubAsset> get copyWith =>
       __$GithubAssetCopyWithImpl<_GithubAsset>(this, _$identity);
@@ -387,62 +424,51 @@ class _$_GithubAsset implements _GithubAsset {
 
 abstract class _GithubAsset implements GithubAsset {
   const factory _GithubAsset(
-      {@required @nullable String url,
-      @required @nullable String browser_download_url,
-      @required @nullable int id,
-      @required @nullable String node_id,
-      @required @nullable String name,
-      @required @nullable String label,
-      @required @nullable String state,
-      @required @nullable String content_type,
-      @required @nullable int size,
-      @required @nullable int download_count,
-      @required @nullable DateTime created_at,
-      @required @nullable DateTime updated_at,
-      @required @nullable GithubUser uploader}) = _$_GithubAsset;
+      {required String url,
+      required String browser_download_url,
+      required int id,
+      required String node_id,
+      required String name,
+      required String? label,
+      required String state,
+      required String content_type,
+      required int size,
+      required int download_count,
+      required DateTime created_at,
+      required DateTime updated_at,
+      required GithubUser uploader}) = _$_GithubAsset;
 
   factory _GithubAsset.fromJson(Map<String, dynamic> json) =
       _$_GithubAsset.fromJson;
 
   @override
-  @nullable
-  String get url;
+  String get url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get browser_download_url;
+  String get browser_download_url => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get id;
+  int get id => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get node_id;
+  String get node_id => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get label;
+  String? get label => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get state;
+  String get state => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get content_type;
+  String get content_type => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get size;
+  int get size => throw _privateConstructorUsedError;
   @override
-  @nullable
-  int get download_count;
+  int get download_count => throw _privateConstructorUsedError;
   @override
-  @nullable
-  DateTime get created_at;
+  DateTime get created_at => throw _privateConstructorUsedError;
   @override
-  @nullable
-  DateTime get updated_at;
+  DateTime get updated_at => throw _privateConstructorUsedError;
   @override
-  @nullable
-  GithubUser get uploader;
+  GithubUser get uploader => throw _privateConstructorUsedError;
   @override
-  _$GithubAssetCopyWith<_GithubAsset> get copyWith;
+  @JsonKey(ignore: true)
+  _$GithubAssetCopyWith<_GithubAsset> get copyWith =>
+      throw _privateConstructorUsedError;
 }

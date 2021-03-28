@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'twitter_feed_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'twitter_feed_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$TwitterFeedStateTearOff {
   const _$TwitterFeedStateTearOff();
 
-// ignore: unused_element
   TwitterFeedStateInitial initial() {
     return const TwitterFeedStateInitial();
   }
 
-// ignore: unused_element
   TwitterFeedStateLoading loading() {
     return const TwitterFeedStateLoading();
   }
 
-// ignore: unused_element
   TwitterFeedStateLoaded loaded(List<Post> feed) {
     return TwitterFeedStateLoaded(
       feed,
     );
   }
 
-// ignore: unused_element
   TwitterFeedStateError error(Exception error) {
     return TwitterFeedStateError(
       error,
@@ -39,41 +38,44 @@ class _$TwitterFeedStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $TwitterFeedState = _$TwitterFeedStateTearOff();
 
 /// @nodoc
 mixin _$TwitterFeedState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<Post> feed),
-    @required Result error(Exception error),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Post> feed) loaded,
+    required TResult Function(Exception error) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<Post> feed),
-    Result error(Exception error),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Post> feed)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(TwitterFeedStateInitial value),
-    @required Result loading(TwitterFeedStateLoading value),
-    @required Result loaded(TwitterFeedStateLoaded value),
-    @required Result error(TwitterFeedStateError value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(TwitterFeedStateInitial value) initial,
+    required TResult Function(TwitterFeedStateLoading value) loading,
+    required TResult Function(TwitterFeedStateLoaded value) loaded,
+    required TResult Function(TwitterFeedStateError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(TwitterFeedStateInitial value),
-    Result loading(TwitterFeedStateLoading value),
-    Result loaded(TwitterFeedStateLoaded value),
-    Result error(TwitterFeedStateError value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TwitterFeedStateInitial value)? initial,
+    TResult Function(TwitterFeedStateLoading value)? loading,
+    TResult Function(TwitterFeedStateLoaded value)? loaded,
+    TResult Function(TwitterFeedStateError value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -139,29 +141,24 @@ class _$TwitterFeedStateInitial
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<Post> feed),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Post> feed) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<Post> feed),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Post> feed)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -170,29 +167,24 @@ class _$TwitterFeedStateInitial
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(TwitterFeedStateInitial value),
-    @required Result loading(TwitterFeedStateLoading value),
-    @required Result loaded(TwitterFeedStateLoaded value),
-    @required Result error(TwitterFeedStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(TwitterFeedStateInitial value) initial,
+    required TResult Function(TwitterFeedStateLoading value) loading,
+    required TResult Function(TwitterFeedStateLoaded value) loaded,
+    required TResult Function(TwitterFeedStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(TwitterFeedStateInitial value),
-    Result loading(TwitterFeedStateLoading value),
-    Result loaded(TwitterFeedStateLoaded value),
-    Result error(TwitterFeedStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TwitterFeedStateInitial value)? initial,
+    TResult Function(TwitterFeedStateLoading value)? loading,
+    TResult Function(TwitterFeedStateLoaded value)? loaded,
+    TResult Function(TwitterFeedStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -250,29 +242,24 @@ class _$TwitterFeedStateLoading
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<Post> feed),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Post> feed) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<Post> feed),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Post> feed)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -281,29 +268,24 @@ class _$TwitterFeedStateLoading
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(TwitterFeedStateInitial value),
-    @required Result loading(TwitterFeedStateLoading value),
-    @required Result loaded(TwitterFeedStateLoaded value),
-    @required Result error(TwitterFeedStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(TwitterFeedStateInitial value) initial,
+    required TResult Function(TwitterFeedStateLoading value) loading,
+    required TResult Function(TwitterFeedStateLoaded value) loaded,
+    required TResult Function(TwitterFeedStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(TwitterFeedStateInitial value),
-    Result loading(TwitterFeedStateLoading value),
-    Result loaded(TwitterFeedStateLoaded value),
-    Result error(TwitterFeedStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TwitterFeedStateInitial value)? initial,
+    TResult Function(TwitterFeedStateLoading value)? loading,
+    TResult Function(TwitterFeedStateLoaded value)? loaded,
+    TResult Function(TwitterFeedStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -336,10 +318,13 @@ class _$TwitterFeedStateLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object feed = freezed,
+    Object? feed = freezed,
   }) {
     return _then(TwitterFeedStateLoaded(
-      feed == freezed ? _value.feed : feed as List<Post>,
+      feed == freezed
+          ? _value.feed
+          : feed // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
     ));
   }
 }
@@ -348,7 +333,7 @@ class _$TwitterFeedStateLoadedCopyWithImpl<$Res>
 class _$TwitterFeedStateLoaded
     with DiagnosticableTreeMixin
     implements TwitterFeedStateLoaded {
-  const _$TwitterFeedStateLoaded(this.feed) : assert(feed != null);
+  const _$TwitterFeedStateLoaded(this.feed);
 
   @override
   final List<Post> feed;
@@ -378,6 +363,7 @@ class _$TwitterFeedStateLoaded
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(feed);
 
+  @JsonKey(ignore: true)
   @override
   $TwitterFeedStateLoadedCopyWith<TwitterFeedStateLoaded> get copyWith =>
       _$TwitterFeedStateLoadedCopyWithImpl<TwitterFeedStateLoaded>(
@@ -385,29 +371,24 @@ class _$TwitterFeedStateLoaded
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<Post> feed),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Post> feed) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loaded(feed);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<Post> feed),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Post> feed)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(feed);
     }
@@ -416,29 +397,24 @@ class _$TwitterFeedStateLoaded
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(TwitterFeedStateInitial value),
-    @required Result loading(TwitterFeedStateLoading value),
-    @required Result loaded(TwitterFeedStateLoaded value),
-    @required Result error(TwitterFeedStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(TwitterFeedStateInitial value) initial,
+    required TResult Function(TwitterFeedStateLoading value) loading,
+    required TResult Function(TwitterFeedStateLoaded value) loaded,
+    required TResult Function(TwitterFeedStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(TwitterFeedStateInitial value),
-    Result loading(TwitterFeedStateLoading value),
-    Result loaded(TwitterFeedStateLoaded value),
-    Result error(TwitterFeedStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TwitterFeedStateInitial value)? initial,
+    TResult Function(TwitterFeedStateLoading value)? loading,
+    TResult Function(TwitterFeedStateLoaded value)? loaded,
+    TResult Function(TwitterFeedStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -450,8 +426,10 @@ abstract class TwitterFeedStateLoaded implements TwitterFeedState {
   const factory TwitterFeedStateLoaded(List<Post> feed) =
       _$TwitterFeedStateLoaded;
 
-  List<Post> get feed;
-  $TwitterFeedStateLoadedCopyWith<TwitterFeedStateLoaded> get copyWith;
+  List<Post> get feed => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TwitterFeedStateLoadedCopyWith<TwitterFeedStateLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -475,10 +453,13 @@ class _$TwitterFeedStateErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object error = freezed,
+    Object? error = freezed,
   }) {
     return _then(TwitterFeedStateError(
-      error == freezed ? _value.error : error as Exception,
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
@@ -487,7 +468,7 @@ class _$TwitterFeedStateErrorCopyWithImpl<$Res>
 class _$TwitterFeedStateError
     with DiagnosticableTreeMixin
     implements TwitterFeedStateError {
-  const _$TwitterFeedStateError(this.error) : assert(error != null);
+  const _$TwitterFeedStateError(this.error);
 
   @override
   final Exception error;
@@ -517,6 +498,7 @@ class _$TwitterFeedStateError
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
+  @JsonKey(ignore: true)
   @override
   $TwitterFeedStateErrorCopyWith<TwitterFeedStateError> get copyWith =>
       _$TwitterFeedStateErrorCopyWithImpl<TwitterFeedStateError>(
@@ -524,29 +506,24 @@ class _$TwitterFeedStateError
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<Post> feed),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Post> feed) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return error(this.error);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<Post> feed),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Post> feed)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this.error);
     }
@@ -555,29 +532,24 @@ class _$TwitterFeedStateError
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(TwitterFeedStateInitial value),
-    @required Result loading(TwitterFeedStateLoading value),
-    @required Result loaded(TwitterFeedStateLoaded value),
-    @required Result error(TwitterFeedStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(TwitterFeedStateInitial value) initial,
+    required TResult Function(TwitterFeedStateLoading value) loading,
+    required TResult Function(TwitterFeedStateLoaded value) loaded,
+    required TResult Function(TwitterFeedStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(TwitterFeedStateInitial value),
-    Result loading(TwitterFeedStateLoading value),
-    Result loaded(TwitterFeedStateLoaded value),
-    Result error(TwitterFeedStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TwitterFeedStateInitial value)? initial,
+    TResult Function(TwitterFeedStateLoading value)? loading,
+    TResult Function(TwitterFeedStateLoaded value)? loaded,
+    TResult Function(TwitterFeedStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -589,6 +561,8 @@ abstract class TwitterFeedStateError implements TwitterFeedState {
   const factory TwitterFeedStateError(Exception error) =
       _$TwitterFeedStateError;
 
-  Exception get error;
-  $TwitterFeedStateErrorCopyWith<TwitterFeedStateError> get copyWith;
+  Exception get error => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TwitterFeedStateErrorCopyWith<TwitterFeedStateError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -10,7 +10,7 @@ import 'package:minitel_toolbox/presentation/shared/text_styles.dart';
 
 class AccessPointsCard extends StatelessWidget {
   const AccessPointsCard({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class _AccessPointBody extends StatelessWidget {
 
   _AccessPointBody(
     ZabbixHost host, {
-    Key key,
+    Key? key,
   })  : _status = APStatus.fromHost(host),
         _hostname = host.host,
         _interfaces = host.interfaces,
@@ -74,7 +74,7 @@ class _AccessPointBody extends StatelessWidget {
               Text('IP : ${interface.ip}'),
             Text(
               _status.snmpAvailable == 1 ? 'SNMP Available' : 'Errors',
-              style: Theme.of(context).textTheme.bodyText2.apply(
+              style: Theme.of(context).textTheme.bodyText2!.apply(
                     fontWeightDelta: 4,
                     color:
                         _status.snmpAvailable == 1 ? Colors.green : Colors.red,

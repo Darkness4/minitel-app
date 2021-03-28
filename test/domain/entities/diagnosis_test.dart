@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:minitel_toolbox/core/constants/diagnosis_keys.dart';
-import 'package:minitel_toolbox/domain/entities/diagnosis.dart';
+import 'package:minitel_toolbox/data/database/diagnosis.dart';
 
 void main() {
   group('getReport', () {
@@ -83,9 +83,9 @@ void main() {
       () async {
         // arrange
         final diagnosis = Diagnosis()
-          ..[DiagnosisKeys.arp].complete(Future.value('testValue'));
+          ..[DiagnosisKeys.arp]!.complete(Future.value('testValue'));
         // act
-        final result = await diagnosis[DiagnosisKeys.arp].future;
+        final result = await diagnosis[DiagnosisKeys.arp]!.future;
         // assert
         expect(result, equals('testValue'));
       },
@@ -98,11 +98,11 @@ void main() {
       () async {
         // arrange
         final diagnosis = Diagnosis()
-          ..[DiagnosisKeys.arp].complete(Future.value('testValue'));
+          ..[DiagnosisKeys.arp]!.complete(Future.value('testValue'));
         // act
         diagnosis.clear();
         // assert
-        expect(diagnosis[DiagnosisKeys.arp].isCompleted, false);
+        expect(diagnosis[DiagnosisKeys.arp]!.isCompleted, false);
       },
     );
   });
@@ -113,7 +113,7 @@ void main() {
       () async {
         // arrange
         final diagnosis = Diagnosis()
-          ..[DiagnosisKeys.arp].complete(Future.value('testValue'));
+          ..[DiagnosisKeys.arp]!.complete(Future.value('testValue'));
         // act
         final keys = diagnosis.keys;
         // assert

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'agenda_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'agenda_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$AgendaStateTearOff {
   const _$AgendaStateTearOff();
 
-// ignore: unused_element
   AgendaInitial initial() {
     return const AgendaInitial();
   }
 
-// ignore: unused_element
   AgendaLoading loading() {
     return const AgendaLoading();
   }
 
-// ignore: unused_element
   AgendaError error(Exception exception) {
     return AgendaError(
       exception,
     );
   }
 
-// ignore: unused_element
   AgendaLoaded loaded(List<Event> events) {
     return AgendaLoaded(
       events,
@@ -39,41 +38,44 @@ class _$AgendaStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $AgendaState = _$AgendaStateTearOff();
 
 /// @nodoc
 mixin _$AgendaState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception exception),
-    @required Result loaded(List<Event> events),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception exception) error,
+    required TResult Function(List<Event> events) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception exception),
-    Result loaded(List<Event> events),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception exception)? error,
+    TResult Function(List<Event> events)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(AgendaInitial value),
-    @required Result loading(AgendaLoading value),
-    @required Result error(AgendaError value),
-    @required Result loaded(AgendaLoaded value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(AgendaInitial value) initial,
+    required TResult Function(AgendaLoading value) loading,
+    required TResult Function(AgendaError value) error,
+    required TResult Function(AgendaLoaded value) loaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(AgendaInitial value),
-    Result loading(AgendaLoading value),
-    Result error(AgendaError value),
-    Result loaded(AgendaLoaded value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AgendaInitial value)? initial,
+    TResult Function(AgendaLoading value)? loading,
+    TResult Function(AgendaError value)? error,
+    TResult Function(AgendaLoaded value)? loaded,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -135,29 +137,24 @@ class _$AgendaInitial with DiagnosticableTreeMixin implements AgendaInitial {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception exception),
-    @required Result loaded(List<Event> events),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception exception) error,
+    required TResult Function(List<Event> events) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception exception),
-    Result loaded(List<Event> events),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception exception)? error,
+    TResult Function(List<Event> events)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -166,29 +163,24 @@ class _$AgendaInitial with DiagnosticableTreeMixin implements AgendaInitial {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(AgendaInitial value),
-    @required Result loading(AgendaLoading value),
-    @required Result error(AgendaError value),
-    @required Result loaded(AgendaLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(AgendaInitial value) initial,
+    required TResult Function(AgendaLoading value) loading,
+    required TResult Function(AgendaError value) error,
+    required TResult Function(AgendaLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(AgendaInitial value),
-    Result loading(AgendaLoading value),
-    Result error(AgendaError value),
-    Result loaded(AgendaLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AgendaInitial value)? initial,
+    TResult Function(AgendaLoading value)? loading,
+    TResult Function(AgendaError value)? error,
+    TResult Function(AgendaLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -243,29 +235,24 @@ class _$AgendaLoading with DiagnosticableTreeMixin implements AgendaLoading {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception exception),
-    @required Result loaded(List<Event> events),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception exception) error,
+    required TResult Function(List<Event> events) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception exception),
-    Result loaded(List<Event> events),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception exception)? error,
+    TResult Function(List<Event> events)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -274,29 +261,24 @@ class _$AgendaLoading with DiagnosticableTreeMixin implements AgendaLoading {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(AgendaInitial value),
-    @required Result loading(AgendaLoading value),
-    @required Result error(AgendaError value),
-    @required Result loaded(AgendaLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(AgendaInitial value) initial,
+    required TResult Function(AgendaLoading value) loading,
+    required TResult Function(AgendaError value) error,
+    required TResult Function(AgendaLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(AgendaInitial value),
-    Result loading(AgendaLoading value),
-    Result error(AgendaError value),
-    Result loaded(AgendaLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AgendaInitial value)? initial,
+    TResult Function(AgendaLoading value)? loading,
+    TResult Function(AgendaError value)? error,
+    TResult Function(AgendaLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -328,17 +310,20 @@ class _$AgendaErrorCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object exception = freezed,
+    Object? exception = freezed,
   }) {
     return _then(AgendaError(
-      exception == freezed ? _value.exception : exception as Exception,
+      exception == freezed
+          ? _value.exception
+          : exception // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
 
 /// @nodoc
 class _$AgendaError with DiagnosticableTreeMixin implements AgendaError {
-  const _$AgendaError(this.exception) : assert(exception != null);
+  const _$AgendaError(this.exception);
 
   @override
   final Exception exception;
@@ -369,35 +354,31 @@ class _$AgendaError with DiagnosticableTreeMixin implements AgendaError {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(exception);
 
+  @JsonKey(ignore: true)
   @override
   $AgendaErrorCopyWith<AgendaError> get copyWith =>
       _$AgendaErrorCopyWithImpl<AgendaError>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception exception),
-    @required Result loaded(List<Event> events),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception exception) error,
+    required TResult Function(List<Event> events) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(exception);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception exception),
-    Result loaded(List<Event> events),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception exception)? error,
+    TResult Function(List<Event> events)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(exception);
     }
@@ -406,29 +387,24 @@ class _$AgendaError with DiagnosticableTreeMixin implements AgendaError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(AgendaInitial value),
-    @required Result loading(AgendaLoading value),
-    @required Result error(AgendaError value),
-    @required Result loaded(AgendaLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(AgendaInitial value) initial,
+    required TResult Function(AgendaLoading value) loading,
+    required TResult Function(AgendaError value) error,
+    required TResult Function(AgendaLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(AgendaInitial value),
-    Result loading(AgendaLoading value),
-    Result error(AgendaError value),
-    Result loaded(AgendaLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AgendaInitial value)? initial,
+    TResult Function(AgendaLoading value)? loading,
+    TResult Function(AgendaError value)? error,
+    TResult Function(AgendaLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -439,8 +415,10 @@ class _$AgendaError with DiagnosticableTreeMixin implements AgendaError {
 abstract class AgendaError implements AgendaState {
   const factory AgendaError(Exception exception) = _$AgendaError;
 
-  Exception get exception;
-  $AgendaErrorCopyWith<AgendaError> get copyWith;
+  Exception get exception => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AgendaErrorCopyWith<AgendaError> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -463,17 +441,20 @@ class _$AgendaLoadedCopyWithImpl<$Res> extends _$AgendaStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object events = freezed,
+    Object? events = freezed,
   }) {
     return _then(AgendaLoaded(
-      events == freezed ? _value.events : events as List<Event>,
+      events == freezed
+          ? _value.events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<Event>,
     ));
   }
 }
 
 /// @nodoc
 class _$AgendaLoaded with DiagnosticableTreeMixin implements AgendaLoaded {
-  const _$AgendaLoaded(this.events) : assert(events != null);
+  const _$AgendaLoaded(this.events);
 
   @override
   final List<Event> events;
@@ -503,35 +484,31 @@ class _$AgendaLoaded with DiagnosticableTreeMixin implements AgendaLoaded {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(events);
 
+  @JsonKey(ignore: true)
   @override
   $AgendaLoadedCopyWith<AgendaLoaded> get copyWith =>
       _$AgendaLoadedCopyWithImpl<AgendaLoaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result error(Exception exception),
-    @required Result loaded(List<Event> events),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Exception exception) error,
+    required TResult Function(List<Event> events) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(events);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result error(Exception exception),
-    Result loaded(List<Event> events),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Exception exception)? error,
+    TResult Function(List<Event> events)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(events);
     }
@@ -540,29 +517,24 @@ class _$AgendaLoaded with DiagnosticableTreeMixin implements AgendaLoaded {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(AgendaInitial value),
-    @required Result loading(AgendaLoading value),
-    @required Result error(AgendaError value),
-    @required Result loaded(AgendaLoaded value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(AgendaInitial value) initial,
+    required TResult Function(AgendaLoading value) loading,
+    required TResult Function(AgendaError value) error,
+    required TResult Function(AgendaLoaded value) loaded,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(error != null);
-    assert(loaded != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(AgendaInitial value),
-    Result loading(AgendaLoading value),
-    Result error(AgendaError value),
-    Result loaded(AgendaLoaded value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AgendaInitial value)? initial,
+    TResult Function(AgendaLoading value)? loading,
+    TResult Function(AgendaError value)? error,
+    TResult Function(AgendaLoaded value)? loaded,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -573,6 +545,8 @@ class _$AgendaLoaded with DiagnosticableTreeMixin implements AgendaLoaded {
 abstract class AgendaLoaded implements AgendaState {
   const factory AgendaLoaded(List<Event> events) = _$AgendaLoaded;
 
-  List<Event> get events;
-  $AgendaLoadedCopyWith<AgendaLoaded> get copyWith;
+  List<Event> get events => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AgendaLoadedCopyWith<AgendaLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }

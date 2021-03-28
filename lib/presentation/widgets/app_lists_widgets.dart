@@ -6,18 +6,18 @@ import 'package:webview_flutter/webview_flutter.dart';
 class ScaffoldWebView extends StatelessWidget {
   final Color backgroundColor;
   final String initialUrl;
-  final dynamic Function(WebViewController, BuildContext) onWebViewCreated;
+  final dynamic Function(WebViewController, BuildContext)? onWebViewCreated;
 
   const ScaffoldWebView({
-    @required this.backgroundColor,
-    @required this.initialUrl,
-    Key key,
+    required this.backgroundColor,
+    required this.initialUrl,
+    Key? key,
     this.onWebViewCreated,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    WebViewController _controller;
+    late WebViewController _controller;
 
     return WillPopScope(
       onWillPop: () async {
@@ -45,8 +45,8 @@ class ScaffoldWebView extends StatelessWidget {
                 child: IconButton(
                   color: Colors.white,
                   icon: const Icon(Icons.public),
-                  onPressed: () async =>
-                      LaunchURLUtils.launchURL(await _controller.currentUrl()),
+                  onPressed: () async => LaunchURLUtils.launchURL(
+                      await _controller.currentUrl() ?? ''),
                   tooltip: 'Open in web browser',
                 ),
               ),
@@ -82,7 +82,7 @@ class ScaffoldWebView extends StatelessWidget {
             onWebViewCreated: (WebViewController wvc) {
               _controller = wvc;
               if (onWebViewCreated != null) {
-                onWebViewCreated(wvc, context);
+                onWebViewCreated!(wvc, context);
               }
             },
           ),

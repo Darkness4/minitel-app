@@ -4,12 +4,16 @@ import 'package:minitel_toolbox/core/constants/cache_keys.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
 import 'package:minitel_toolbox/data/datasources/settings/notification_settings_data_source.dart';
 import 'package:minitel_toolbox/domain/entities/notifications.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'notification_settings_data_source_test.mocks.dart';
+
+@GenerateMocks([SharedPreferences])
 void main() {
-  NotificationSettingsDataSource dataSource;
-  MockSharedPreferences mockSharedPreferences;
+  late NotificationSettingsDataSource dataSource;
+  late MockSharedPreferences mockSharedPreferences;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
@@ -87,5 +91,3 @@ void main() {
     );
   });
 }
-
-class MockSharedPreferences extends Mock implements SharedPreferences {}

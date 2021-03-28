@@ -31,7 +31,7 @@ class Diagnosis extends UnmodifiableMapBase<String, Completer<String>> {
   Iterable<String> get keys => _internal.keys;
 
   @override
-  Completer<String> operator [](Object key) => _internal[key];
+  Completer<String>? operator [](Object? key) => _internal[key];
 
   @override
   void clear() {

@@ -20,7 +20,7 @@ import 'package:minitel_toolbox/presentation/widgets/drawers/main_drawer.dart';
 class PortalPage extends StatefulWidget {
   final String title;
 
-  const PortalPage({Key key, this.title}) : super(key: key);
+  const PortalPage({Key? key, required this.title}) : super(key: key);
 
   @override
   _PortalPageState createState() => _PortalPageState();
@@ -28,9 +28,9 @@ class PortalPage extends StatefulWidget {
 
 class _PortalPageState extends State<PortalPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  StreamSubscription<PortalState> _subscription;
-  PortalCubit _portalCubit;
-  PortalLoginCubit _portalLoginCubit;
+  late StreamSubscription<PortalState> _subscription;
+  late PortalCubit _portalCubit;
+  late PortalLoginCubit _portalLoginCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +143,7 @@ class _PortalPageState extends State<PortalPage> {
                 return FloatingActionButton.extended(
                   key: const Key(Keys.loginButton),
                   onPressed: () {
-                    if (formKey.currentState.validate()) {
+                    if (formKey.currentState!.validate()) {
                       final portalState = context.read<PortalCubit>().state;
                       if (portalState.isValidUid) {
                         context.read<PortalLoginCubit>().login(
@@ -173,7 +173,7 @@ class _PortalPageState extends State<PortalPage> {
 
   @override
   void dispose() {
-    _subscription?.cancel();
+    _subscription.cancel();
     super.dispose();
   }
 
@@ -182,7 +182,7 @@ class _PortalPageState extends State<PortalPage> {
     _portalCubit = sl<PortalCubit>();
     _portalLoginCubit = sl<PortalLoginCubit>();
 
-    _subscription = _portalCubit.listen((state) {
+    _subscription = _portalCubit.stream.listen((state) {
       if (state.autoLogin && !state.hasAutoLogged) {
         _onAutoLogin(context, state);
         _portalCubit.autoLogged();
@@ -220,7 +220,7 @@ class _PortalPageState extends State<PortalPage> {
     context.read<StormshieldStatusCubit>().refresh(selectedUrl);
     context.read<CalendarStatusCubit>().refresh();
     context.read<PortailEmseStatusCubit>().refresh();
-    Scaffold.of(context)
+    ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(
         SnackBar(content: Text(state.error.toString())),
@@ -228,7 +228,7 @@ class _PortalPageState extends State<PortalPage> {
   }
 
   void _onPortalLoginSubmit(BuildContext context) {
-    Scaffold.of(context)
+    ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(
         const SnackBar(content: Text('Requested')),

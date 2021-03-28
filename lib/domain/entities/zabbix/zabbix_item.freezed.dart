@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'zabbix_item.dart';
 
@@ -8,6 +8,10 @@ part of 'zabbix_item.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 ZabbixItem _$ZabbixItemFromJson(Map<String, dynamic> json) {
   return _ZabbixItem.fromJson(json);
 }
@@ -16,16 +20,15 @@ ZabbixItem _$ZabbixItemFromJson(Map<String, dynamic> json) {
 class _$ZabbixItemTearOff {
   const _$ZabbixItemTearOff();
 
-// ignore: unused_element
   _ZabbixItem call(
       {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
-          String type,
+          required String type,
       @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
-          int value_type,
-      String name,
-      String lastvalue,
-      String units,
-      String snmp_oid}) {
+          required int value_type,
+      required String name,
+      required String lastvalue,
+      required String units,
+      required String snmp_oid}) {
     return _ZabbixItem(
       type: type,
       value_type: value_type,
@@ -36,29 +39,29 @@ class _$ZabbixItemTearOff {
     );
   }
 
-// ignore: unused_element
   ZabbixItem fromJson(Map<String, Object> json) {
     return ZabbixItem.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ZabbixItem = _$ZabbixItemTearOff();
 
 /// @nodoc
 mixin _$ZabbixItem {
   @JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
-  String get type;
+  String get type => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
-  int get value_type;
-  String get name;
-  String get lastvalue;
-  String get units;
-  String get snmp_oid;
+  int get value_type => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get lastvalue => throw _privateConstructorUsedError;
+  String get units => throw _privateConstructorUsedError;
+  String get snmp_oid => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
-  $ZabbixItemCopyWith<ZabbixItem> get copyWith;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ZabbixItemCopyWith<ZabbixItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -87,20 +90,38 @@ class _$ZabbixItemCopyWithImpl<$Res> implements $ZabbixItemCopyWith<$Res> {
 
   @override
   $Res call({
-    Object type = freezed,
-    Object value_type = freezed,
-    Object name = freezed,
-    Object lastvalue = freezed,
-    Object units = freezed,
-    Object snmp_oid = freezed,
+    Object? type = freezed,
+    Object? value_type = freezed,
+    Object? name = freezed,
+    Object? lastvalue = freezed,
+    Object? units = freezed,
+    Object? snmp_oid = freezed,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed ? _value.type : type as String,
-      value_type: value_type == freezed ? _value.value_type : value_type as int,
-      name: name == freezed ? _value.name : name as String,
-      lastvalue: lastvalue == freezed ? _value.lastvalue : lastvalue as String,
-      units: units == freezed ? _value.units : units as String,
-      snmp_oid: snmp_oid == freezed ? _value.snmp_oid : snmp_oid as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      value_type: value_type == freezed
+          ? _value.value_type
+          : value_type // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastvalue: lastvalue == freezed
+          ? _value.lastvalue
+          : lastvalue // ignore: cast_nullable_to_non_nullable
+              as String,
+      units: units == freezed
+          ? _value.units
+          : units // ignore: cast_nullable_to_non_nullable
+              as String,
+      snmp_oid: snmp_oid == freezed
+          ? _value.snmp_oid
+          : snmp_oid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -134,20 +155,38 @@ class __$ZabbixItemCopyWithImpl<$Res> extends _$ZabbixItemCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object type = freezed,
-    Object value_type = freezed,
-    Object name = freezed,
-    Object lastvalue = freezed,
-    Object units = freezed,
-    Object snmp_oid = freezed,
+    Object? type = freezed,
+    Object? value_type = freezed,
+    Object? name = freezed,
+    Object? lastvalue = freezed,
+    Object? units = freezed,
+    Object? snmp_oid = freezed,
   }) {
     return _then(_ZabbixItem(
-      type: type == freezed ? _value.type : type as String,
-      value_type: value_type == freezed ? _value.value_type : value_type as int,
-      name: name == freezed ? _value.name : name as String,
-      lastvalue: lastvalue == freezed ? _value.lastvalue : lastvalue as String,
-      units: units == freezed ? _value.units : units as String,
-      snmp_oid: snmp_oid == freezed ? _value.snmp_oid : snmp_oid as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      value_type: value_type == freezed
+          ? _value.value_type
+          : value_type // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastvalue: lastvalue == freezed
+          ? _value.lastvalue
+          : lastvalue // ignore: cast_nullable_to_non_nullable
+              as String,
+      units: units == freezed
+          ? _value.units
+          : units // ignore: cast_nullable_to_non_nullable
+              as String,
+      snmp_oid: snmp_oid == freezed
+          ? _value.snmp_oid
+          : snmp_oid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -158,13 +197,13 @@ class __$ZabbixItemCopyWithImpl<$Res> extends _$ZabbixItemCopyWithImpl<$Res>
 class _$_ZabbixItem implements _ZabbixItem {
   const _$_ZabbixItem(
       {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
-          this.type,
+          required this.type,
       @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
-          this.value_type,
-      this.name,
-      this.lastvalue,
-      this.units,
-      this.snmp_oid});
+          required this.value_type,
+      required this.name,
+      required this.lastvalue,
+      required this.units,
+      required this.snmp_oid});
 
   factory _$_ZabbixItem.fromJson(Map<String, dynamic> json) =>
       _$_$_ZabbixItemFromJson(json);
@@ -220,6 +259,7 @@ class _$_ZabbixItem implements _ZabbixItem {
       const DeepCollectionEquality().hash(units) ^
       const DeepCollectionEquality().hash(snmp_oid);
 
+  @JsonKey(ignore: true)
   @override
   _$ZabbixItemCopyWith<_ZabbixItem> get copyWith =>
       __$ZabbixItemCopyWithImpl<_ZabbixItem>(this, _$identity);
@@ -233,31 +273,33 @@ class _$_ZabbixItem implements _ZabbixItem {
 abstract class _ZabbixItem implements ZabbixItem {
   const factory _ZabbixItem(
       {@JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
-          String type,
+          required String type,
       @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
-          int value_type,
-      String name,
-      String lastvalue,
-      String units,
-      String snmp_oid}) = _$_ZabbixItem;
+          required int value_type,
+      required String name,
+      required String lastvalue,
+      required String units,
+      required String snmp_oid}) = _$_ZabbixItem;
 
   factory _ZabbixItem.fromJson(Map<String, dynamic> json) =
       _$_ZabbixItem.fromJson;
 
   @override
   @JsonKey(fromJson: _typeFromJson, toJson: _typeToJson)
-  String get type;
+  String get type => throw _privateConstructorUsedError;
   @override
   @JsonKey(fromJson: _valueTypeFromJson, toJson: _valueTypeToJson)
-  int get value_type;
+  int get value_type => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  String get lastvalue;
+  String get lastvalue => throw _privateConstructorUsedError;
   @override
-  String get units;
+  String get units => throw _privateConstructorUsedError;
   @override
-  String get snmp_oid;
+  String get snmp_oid => throw _privateConstructorUsedError;
   @override
-  _$ZabbixItemCopyWith<_ZabbixItem> get copyWith;
+  @JsonKey(ignore: true)
+  _$ZabbixItemCopyWith<_ZabbixItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }

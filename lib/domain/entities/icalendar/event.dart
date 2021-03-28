@@ -8,15 +8,15 @@ import 'package:timezone/timezone.dart';
 part 'event.freezed.dart';
 
 @freezed
-abstract class Event with _$Event {
+class Event with _$Event {
   const factory Event({
-    @required @nullable TZDateTime dtend,
-    @required @nullable String uid,
-    @required @nullable TZDateTime dtstamp,
-    @required @nullable String location,
-    @required @nullable String description,
-    @required @nullable String summary,
-    @required @nullable TZDateTime dtstart,
+    required TZDateTime dtend,
+    required String uid,
+    required TZDateTime dtstamp,
+    required String location,
+    required String description,
+    required String summary,
+    required TZDateTime dtstart,
   }) = _Event;
 
   factory Event.fromMap(Map<String, dynamic> json, Location location) {
@@ -34,9 +34,9 @@ abstract class Event with _$Event {
 
 extension EventUtils on Event {
   Future<void> addToNotification({
-    @required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-    @required NotificationSettings notificationSettings,
-    @required NotificationDetails notificationDetails,
+    required FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
+    required NotificationSettings notificationSettings,
+    required NotificationDetails notificationDetails,
   }) async {
     final dt = dtstart;
     final now = DateTime.now();

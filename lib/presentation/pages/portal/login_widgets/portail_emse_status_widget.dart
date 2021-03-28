@@ -6,7 +6,7 @@ import 'package:minitel_toolbox/presentation/shared/keys.dart';
 
 class PortailEmseStatusWidget extends StatelessWidget {
   const PortailEmseStatusWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -6,7 +6,7 @@ import 'zabbix_widgets/switches_card.dart';
 
 class ZabbixScreen extends StatelessWidget {
   const ZabbixScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

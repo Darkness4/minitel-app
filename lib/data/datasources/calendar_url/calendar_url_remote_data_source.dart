@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
@@ -10,8 +9,8 @@ import 'package:minitel_toolbox/core/utils/cookie_utils.dart';
 abstract class CalendarURLRemoteDataSource {
   /// Get .ics url from network.
   Future<String> getCalendarURL({
-    @required String username,
-    @required String password,
+    required String username,
+    required String password,
   });
 }
 
@@ -20,11 +19,12 @@ abstract class CalendarURLRemoteDataSource {
 class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
   final http.Client client;
 
-  const CalendarURLRemoteDataSourceImpl({@required this.client});
+  const CalendarURLRemoteDataSourceImpl({required this.client});
 
   /// Get from EMSE the url to get the ical
   @override
-  Future<String> getCalendarURL({String username, String password}) async {
+  Future<String> getCalendarURL(
+      {required String username, required String password}) async {
     final phpSessionIDCAS = await _fetchCasCookie(
       username: username,
       password: password,
@@ -35,38 +35,42 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
 
   Future<String> _fetchCalendarUrl(Cookie phpSessionIDCAS) async {
     final response = await client.get(
-      'https://portail.emse.fr/ics/',
+      Uri.parse('https://portail.emse.fr/ics/'),
       headers: {
         HttpHeaders.cookieHeader:
             '${phpSessionIDCAS.name}=${phpSessionIDCAS.value}'
       },
     );
+    if (response.statusCode != HttpStatus.ok) {
+      throw ServerException('HTTP Error: ${response.statusCode}');
+    }
     final calendarUrl = RegExp(r'https(.*)\.ics').stringMatch(response.body);
-    return calendarUrl;
+    return calendarUrl!;
   }
 
   /// Login through EMSE CAS Authentication
-  Future<Cookie> _fetchCasCookie({String username, String password}) async {
+  Future<Cookie> _fetchCasCookie(
+      {required String username, required String password}) async {
     final referee = Uri.encodeComponent('https://portail.emse.fr/ics/');
 
     // GET CAS
     String lt;
     Cookie jSessionID;
     {
-      final response =
-          await client.get('https://cas.emse.fr/login?service=$referee');
+      final response = await client
+          .get(Uri.parse('https://cas.emse.fr/login?service=$referee'));
 
       if (response.statusCode != HttpStatus.ok) {
         throw ServerException('HTTP Error: ${response.statusCode}');
       }
 
       lt = RegExp('name="lt" value="([^"]*)"')
-          .firstMatch(response.body)
-          ?.group(1);
+          .firstMatch(response.body)!
+          .group(1)!;
 
       jSessionID = response.headers.parseSetCookie().firstWhere(
             (cookie) => cookie.name == 'JSESSIONID',
-            orElse: () => null,
+            orElse: () => throw ServerException('JSESSIONID Cookie not found.'),
           );
     }
 
@@ -81,7 +85,8 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
         '_eventId': 'submit',
       };
       final response = await client.post(
-          'https://cas.emse.fr/login;jsessionid=${jSessionID.value}?service=$referee',
+          Uri.parse(
+              'https://cas.emse.fr/login;jsessionid=${jSessionID.value}?service=$referee'),
           body: data,
           headers: {
             HttpHeaders.refererHeader:
@@ -92,7 +97,7 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
         throw ClientException('Location was not found, probably a Bad login');
       }
 
-      location = response.headers[HttpHeaders.locationHeader];
+      location = response.headers[HttpHeaders.locationHeader]!;
     }
 
     // GET CAS
@@ -104,7 +109,7 @@ class CalendarURLRemoteDataSourceImpl implements CalendarURLRemoteDataSource {
 
       return response.headers.parseSetCookie().firstWhere(
             (cookie) => cookie.name == 'PHPSESSID',
-            orElse: () => null,
+            orElse: () => throw ServerException('PHPSESSID Cookie not found.'),
           );
     }
   }

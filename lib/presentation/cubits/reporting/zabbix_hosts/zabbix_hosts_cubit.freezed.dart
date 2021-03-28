@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'zabbix_hosts_cubit.dart';
 
@@ -9,28 +9,27 @@ part of 'zabbix_hosts_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ZabbixHostsStateTearOff {
   const _$ZabbixHostsStateTearOff();
 
-// ignore: unused_element
   ZabbixHostsStateInitial initial() {
     return const ZabbixHostsStateInitial();
   }
 
-// ignore: unused_element
   ZabbixHostsStateLoading loading() {
     return const ZabbixHostsStateLoading();
   }
 
-// ignore: unused_element
   ZabbixHostsStateLoaded loaded(List<ZabbixHost> hosts) {
     return ZabbixHostsStateLoaded(
       hosts,
     );
   }
 
-// ignore: unused_element
   ZabbixHostsStateError error(Exception error) {
     return ZabbixHostsStateError(
       error,
@@ -39,41 +38,44 @@ class _$ZabbixHostsStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ZabbixHostsState = _$ZabbixHostsStateTearOff();
 
 /// @nodoc
 mixin _$ZabbixHostsState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<ZabbixHost> hosts),
-    @required Result error(Exception error),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ZabbixHost> hosts) loaded,
+    required TResult Function(Exception error) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<ZabbixHost> hosts),
-    Result error(Exception error),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ZabbixHost> hosts)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ZabbixHostsStateInitial value),
-    @required Result loading(ZabbixHostsStateLoading value),
-    @required Result loaded(ZabbixHostsStateLoaded value),
-    @required Result error(ZabbixHostsStateError value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(ZabbixHostsStateInitial value) initial,
+    required TResult Function(ZabbixHostsStateLoading value) loading,
+    required TResult Function(ZabbixHostsStateLoaded value) loaded,
+    required TResult Function(ZabbixHostsStateError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ZabbixHostsStateInitial value),
-    Result loading(ZabbixHostsStateLoading value),
-    Result loaded(ZabbixHostsStateLoaded value),
-    Result error(ZabbixHostsStateError value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ZabbixHostsStateInitial value)? initial,
+    TResult Function(ZabbixHostsStateLoading value)? loading,
+    TResult Function(ZabbixHostsStateLoaded value)? loaded,
+    TResult Function(ZabbixHostsStateError value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -139,29 +141,24 @@ class _$ZabbixHostsStateInitial
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<ZabbixHost> hosts),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ZabbixHost> hosts) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<ZabbixHost> hosts),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ZabbixHost> hosts)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -170,29 +167,24 @@ class _$ZabbixHostsStateInitial
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ZabbixHostsStateInitial value),
-    @required Result loading(ZabbixHostsStateLoading value),
-    @required Result loaded(ZabbixHostsStateLoaded value),
-    @required Result error(ZabbixHostsStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ZabbixHostsStateInitial value) initial,
+    required TResult Function(ZabbixHostsStateLoading value) loading,
+    required TResult Function(ZabbixHostsStateLoaded value) loaded,
+    required TResult Function(ZabbixHostsStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ZabbixHostsStateInitial value),
-    Result loading(ZabbixHostsStateLoading value),
-    Result loaded(ZabbixHostsStateLoaded value),
-    Result error(ZabbixHostsStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ZabbixHostsStateInitial value)? initial,
+    TResult Function(ZabbixHostsStateLoading value)? loading,
+    TResult Function(ZabbixHostsStateLoaded value)? loaded,
+    TResult Function(ZabbixHostsStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -250,29 +242,24 @@ class _$ZabbixHostsStateLoading
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<ZabbixHost> hosts),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ZabbixHost> hosts) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<ZabbixHost> hosts),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ZabbixHost> hosts)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading();
     }
@@ -281,29 +268,24 @@ class _$ZabbixHostsStateLoading
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ZabbixHostsStateInitial value),
-    @required Result loading(ZabbixHostsStateLoading value),
-    @required Result loaded(ZabbixHostsStateLoaded value),
-    @required Result error(ZabbixHostsStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ZabbixHostsStateInitial value) initial,
+    required TResult Function(ZabbixHostsStateLoading value) loading,
+    required TResult Function(ZabbixHostsStateLoaded value) loaded,
+    required TResult Function(ZabbixHostsStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ZabbixHostsStateInitial value),
-    Result loading(ZabbixHostsStateLoading value),
-    Result loaded(ZabbixHostsStateLoaded value),
-    Result error(ZabbixHostsStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ZabbixHostsStateInitial value)? initial,
+    TResult Function(ZabbixHostsStateLoading value)? loading,
+    TResult Function(ZabbixHostsStateLoaded value)? loaded,
+    TResult Function(ZabbixHostsStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loading != null) {
       return loading(this);
     }
@@ -336,10 +318,13 @@ class _$ZabbixHostsStateLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object hosts = freezed,
+    Object? hosts = freezed,
   }) {
     return _then(ZabbixHostsStateLoaded(
-      hosts == freezed ? _value.hosts : hosts as List<ZabbixHost>,
+      hosts == freezed
+          ? _value.hosts
+          : hosts // ignore: cast_nullable_to_non_nullable
+              as List<ZabbixHost>,
     ));
   }
 }
@@ -348,7 +333,7 @@ class _$ZabbixHostsStateLoadedCopyWithImpl<$Res>
 class _$ZabbixHostsStateLoaded
     with DiagnosticableTreeMixin
     implements ZabbixHostsStateLoaded {
-  const _$ZabbixHostsStateLoaded(this.hosts) : assert(hosts != null);
+  const _$ZabbixHostsStateLoaded(this.hosts);
 
   @override
   final List<ZabbixHost> hosts;
@@ -378,6 +363,7 @@ class _$ZabbixHostsStateLoaded
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(hosts);
 
+  @JsonKey(ignore: true)
   @override
   $ZabbixHostsStateLoadedCopyWith<ZabbixHostsStateLoaded> get copyWith =>
       _$ZabbixHostsStateLoadedCopyWithImpl<ZabbixHostsStateLoaded>(
@@ -385,29 +371,24 @@ class _$ZabbixHostsStateLoaded
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<ZabbixHost> hosts),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ZabbixHost> hosts) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loaded(hosts);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<ZabbixHost> hosts),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ZabbixHost> hosts)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(hosts);
     }
@@ -416,29 +397,24 @@ class _$ZabbixHostsStateLoaded
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ZabbixHostsStateInitial value),
-    @required Result loading(ZabbixHostsStateLoading value),
-    @required Result loaded(ZabbixHostsStateLoaded value),
-    @required Result error(ZabbixHostsStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ZabbixHostsStateInitial value) initial,
+    required TResult Function(ZabbixHostsStateLoading value) loading,
+    required TResult Function(ZabbixHostsStateLoaded value) loaded,
+    required TResult Function(ZabbixHostsStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return loaded(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ZabbixHostsStateInitial value),
-    Result loading(ZabbixHostsStateLoading value),
-    Result loaded(ZabbixHostsStateLoaded value),
-    Result error(ZabbixHostsStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ZabbixHostsStateInitial value)? initial,
+    TResult Function(ZabbixHostsStateLoading value)? loading,
+    TResult Function(ZabbixHostsStateLoaded value)? loaded,
+    TResult Function(ZabbixHostsStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loaded != null) {
       return loaded(this);
     }
@@ -450,8 +426,10 @@ abstract class ZabbixHostsStateLoaded implements ZabbixHostsState {
   const factory ZabbixHostsStateLoaded(List<ZabbixHost> hosts) =
       _$ZabbixHostsStateLoaded;
 
-  List<ZabbixHost> get hosts;
-  $ZabbixHostsStateLoadedCopyWith<ZabbixHostsStateLoaded> get copyWith;
+  List<ZabbixHost> get hosts => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ZabbixHostsStateLoadedCopyWith<ZabbixHostsStateLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -475,10 +453,13 @@ class _$ZabbixHostsStateErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object error = freezed,
+    Object? error = freezed,
   }) {
     return _then(ZabbixHostsStateError(
-      error == freezed ? _value.error : error as Exception,
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception,
     ));
   }
 }
@@ -487,7 +468,7 @@ class _$ZabbixHostsStateErrorCopyWithImpl<$Res>
 class _$ZabbixHostsStateError
     with DiagnosticableTreeMixin
     implements ZabbixHostsStateError {
-  const _$ZabbixHostsStateError(this.error) : assert(error != null);
+  const _$ZabbixHostsStateError(this.error);
 
   @override
   final Exception error;
@@ -517,6 +498,7 @@ class _$ZabbixHostsStateError
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
+  @JsonKey(ignore: true)
   @override
   $ZabbixHostsStateErrorCopyWith<ZabbixHostsStateError> get copyWith =>
       _$ZabbixHostsStateErrorCopyWithImpl<ZabbixHostsStateError>(
@@ -524,29 +506,24 @@ class _$ZabbixHostsStateError
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loading(),
-    @required Result loaded(List<ZabbixHost> hosts),
-    @required Result error(Exception error),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ZabbixHost> hosts) loaded,
+    required TResult Function(Exception error) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return error(this.error);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loading(),
-    Result loaded(List<ZabbixHost> hosts),
-    Result error(Exception error),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ZabbixHost> hosts)? loaded,
+    TResult Function(Exception error)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this.error);
     }
@@ -555,29 +532,24 @@ class _$ZabbixHostsStateError
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(ZabbixHostsStateInitial value),
-    @required Result loading(ZabbixHostsStateLoading value),
-    @required Result loaded(ZabbixHostsStateLoaded value),
-    @required Result error(ZabbixHostsStateError value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ZabbixHostsStateInitial value) initial,
+    required TResult Function(ZabbixHostsStateLoading value) loading,
+    required TResult Function(ZabbixHostsStateLoaded value) loaded,
+    required TResult Function(ZabbixHostsStateError value) error,
   }) {
-    assert(initial != null);
-    assert(loading != null);
-    assert(loaded != null);
-    assert(error != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(ZabbixHostsStateInitial value),
-    Result loading(ZabbixHostsStateLoading value),
-    Result loaded(ZabbixHostsStateLoaded value),
-    Result error(ZabbixHostsStateError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ZabbixHostsStateInitial value)? initial,
+    TResult Function(ZabbixHostsStateLoading value)? loading,
+    TResult Function(ZabbixHostsStateLoaded value)? loaded,
+    TResult Function(ZabbixHostsStateError value)? error,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -589,6 +561,8 @@ abstract class ZabbixHostsStateError implements ZabbixHostsState {
   const factory ZabbixHostsStateError(Exception error) =
       _$ZabbixHostsStateError;
 
-  Exception get error;
-  $ZabbixHostsStateErrorCopyWith<ZabbixHostsStateError> get copyWith;
+  Exception get error => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ZabbixHostsStateErrorCopyWith<ZabbixHostsStateError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

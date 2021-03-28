@@ -15,9 +15,8 @@ class ZabbixHostsCubit extends Cubit<ZabbixHostsState> {
   final ZabbixHostsRepository repository;
 
   ZabbixHostsCubit({
-    @required this.repository,
-  })  : assert(repository != null),
-        super(const ZabbixHostsStateInitial());
+    required this.repository,
+  }) : super(const ZabbixHostsStateInitial());
 
   Future<void> getZabbixHosts(int groupids) async {
     emit(const ZabbixHostsStateLoading());

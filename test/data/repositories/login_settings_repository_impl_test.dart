@@ -3,11 +3,16 @@ import 'package:minitel_toolbox/data/datasources/settings/login_settings_data_so
 import 'package:minitel_toolbox/data/repositories/login_settings_repository_impl.dart';
 import 'package:minitel_toolbox/domain/entities/login_settings.dart';
 import 'package:minitel_toolbox/domain/repositories/login_settings_repository.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'login_settings_repository_impl_test.mocks.dart';
+
+@GenerateMocks([],
+    customMocks: [MockSpec<LoginSettingsDataSource>(as: #MockLocalDataSource)])
 void main() {
-  LoginSettingsRepository repository;
-  MockLocalDataSource mockLocalDataSource;
+  late LoginSettingsRepository repository;
+  late MockLocalDataSource mockLocalDataSource;
   const tLoginSettingsModel = LoginSettings();
 
   setUp(() {
@@ -59,5 +64,3 @@ void main() {
     );
   });
 }
-
-class MockLocalDataSource extends Mock implements LoginSettingsDataSource {}

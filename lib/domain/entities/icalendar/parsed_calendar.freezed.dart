@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'parsed_calendar.dart';
 
@@ -9,17 +9,19 @@ part of 'parsed_calendar.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ParsedCalendarTearOff {
   const _$ParsedCalendarTearOff();
 
-// ignore: unused_element
   _ParsedCalendar call(
-      {@required @nullable String version,
-      @required @nullable String prodID,
-      @required @nullable String calscale,
-      @required @nullable Timezone timezone,
-      @required @nullable List<Event> events}) {
+      {required String version,
+      required String prodID,
+      required String calscale,
+      required Timezone timezone,
+      required List<Event> events}) {
     return _ParsedCalendar(
       version: version,
       prodID: prodID,
@@ -31,23 +33,19 @@ class _$ParsedCalendarTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ParsedCalendar = _$ParsedCalendarTearOff();
 
 /// @nodoc
 mixin _$ParsedCalendar {
-  @nullable
-  String get version;
-  @nullable
-  String get prodID;
-  @nullable
-  String get calscale;
-  @nullable
-  Timezone get timezone;
-  @nullable
-  List<Event> get events;
+  String get version => throw _privateConstructorUsedError;
+  String get prodID => throw _privateConstructorUsedError;
+  String get calscale => throw _privateConstructorUsedError;
+  Timezone get timezone => throw _privateConstructorUsedError;
+  List<Event> get events => throw _privateConstructorUsedError;
 
-  $ParsedCalendarCopyWith<ParsedCalendar> get copyWith;
+  @JsonKey(ignore: true)
+  $ParsedCalendarCopyWith<ParsedCalendar> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -56,11 +54,11 @@ abstract class $ParsedCalendarCopyWith<$Res> {
           ParsedCalendar value, $Res Function(ParsedCalendar) then) =
       _$ParsedCalendarCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String version,
-      @nullable String prodID,
-      @nullable String calscale,
-      @nullable Timezone timezone,
-      @nullable List<Event> events});
+      {String version,
+      String prodID,
+      String calscale,
+      Timezone timezone,
+      List<Event> events});
 
   $TimezoneCopyWith<$Res> get timezone;
 }
@@ -76,26 +74,38 @@ class _$ParsedCalendarCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object version = freezed,
-    Object prodID = freezed,
-    Object calscale = freezed,
-    Object timezone = freezed,
-    Object events = freezed,
+    Object? version = freezed,
+    Object? prodID = freezed,
+    Object? calscale = freezed,
+    Object? timezone = freezed,
+    Object? events = freezed,
   }) {
     return _then(_value.copyWith(
-      version: version == freezed ? _value.version : version as String,
-      prodID: prodID == freezed ? _value.prodID : prodID as String,
-      calscale: calscale == freezed ? _value.calscale : calscale as String,
-      timezone: timezone == freezed ? _value.timezone : timezone as Timezone,
-      events: events == freezed ? _value.events : events as List<Event>,
+      version: version == freezed
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String,
+      prodID: prodID == freezed
+          ? _value.prodID
+          : prodID // ignore: cast_nullable_to_non_nullable
+              as String,
+      calscale: calscale == freezed
+          ? _value.calscale
+          : calscale // ignore: cast_nullable_to_non_nullable
+              as String,
+      timezone: timezone == freezed
+          ? _value.timezone
+          : timezone // ignore: cast_nullable_to_non_nullable
+              as Timezone,
+      events: events == freezed
+          ? _value.events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<Event>,
     ));
   }
 
   @override
   $TimezoneCopyWith<$Res> get timezone {
-    if (_value.timezone == null) {
-      return null;
-    }
     return $TimezoneCopyWith<$Res>(_value.timezone, (value) {
       return _then(_value.copyWith(timezone: value));
     });
@@ -110,11 +120,11 @@ abstract class _$ParsedCalendarCopyWith<$Res>
       __$ParsedCalendarCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String version,
-      @nullable String prodID,
-      @nullable String calscale,
-      @nullable Timezone timezone,
-      @nullable List<Event> events});
+      {String version,
+      String prodID,
+      String calscale,
+      Timezone timezone,
+      List<Event> events});
 
   @override
   $TimezoneCopyWith<$Res> get timezone;
@@ -133,18 +143,33 @@ class __$ParsedCalendarCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object version = freezed,
-    Object prodID = freezed,
-    Object calscale = freezed,
-    Object timezone = freezed,
-    Object events = freezed,
+    Object? version = freezed,
+    Object? prodID = freezed,
+    Object? calscale = freezed,
+    Object? timezone = freezed,
+    Object? events = freezed,
   }) {
     return _then(_ParsedCalendar(
-      version: version == freezed ? _value.version : version as String,
-      prodID: prodID == freezed ? _value.prodID : prodID as String,
-      calscale: calscale == freezed ? _value.calscale : calscale as String,
-      timezone: timezone == freezed ? _value.timezone : timezone as Timezone,
-      events: events == freezed ? _value.events : events as List<Event>,
+      version: version == freezed
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String,
+      prodID: prodID == freezed
+          ? _value.prodID
+          : prodID // ignore: cast_nullable_to_non_nullable
+              as String,
+      calscale: calscale == freezed
+          ? _value.calscale
+          : calscale // ignore: cast_nullable_to_non_nullable
+              as String,
+      timezone: timezone == freezed
+          ? _value.timezone
+          : timezone // ignore: cast_nullable_to_non_nullable
+              as Timezone,
+      events: events == freezed
+          ? _value.events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<Event>,
     ));
   }
 }
@@ -152,26 +177,21 @@ class __$ParsedCalendarCopyWithImpl<$Res>
 /// @nodoc
 class _$_ParsedCalendar implements _ParsedCalendar {
   const _$_ParsedCalendar(
-      {@required @nullable this.version,
-      @required @nullable this.prodID,
-      @required @nullable this.calscale,
-      @required @nullable this.timezone,
-      @required @nullable this.events});
+      {required this.version,
+      required this.prodID,
+      required this.calscale,
+      required this.timezone,
+      required this.events});
 
   @override
-  @nullable
   final String version;
   @override
-  @nullable
   final String prodID;
   @override
-  @nullable
   final String calscale;
   @override
-  @nullable
   final Timezone timezone;
   @override
-  @nullable
   final List<Event> events;
 
   @override
@@ -207,6 +227,7 @@ class _$_ParsedCalendar implements _ParsedCalendar {
       const DeepCollectionEquality().hash(timezone) ^
       const DeepCollectionEquality().hash(events);
 
+  @JsonKey(ignore: true)
   @override
   _$ParsedCalendarCopyWith<_ParsedCalendar> get copyWith =>
       __$ParsedCalendarCopyWithImpl<_ParsedCalendar>(this, _$identity);
@@ -214,27 +235,24 @@ class _$_ParsedCalendar implements _ParsedCalendar {
 
 abstract class _ParsedCalendar implements ParsedCalendar {
   const factory _ParsedCalendar(
-      {@required @nullable String version,
-      @required @nullable String prodID,
-      @required @nullable String calscale,
-      @required @nullable Timezone timezone,
-      @required @nullable List<Event> events}) = _$_ParsedCalendar;
+      {required String version,
+      required String prodID,
+      required String calscale,
+      required Timezone timezone,
+      required List<Event> events}) = _$_ParsedCalendar;
 
   @override
-  @nullable
-  String get version;
+  String get version => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get prodID;
+  String get prodID => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get calscale;
+  String get calscale => throw _privateConstructorUsedError;
   @override
-  @nullable
-  Timezone get timezone;
+  Timezone get timezone => throw _privateConstructorUsedError;
   @override
-  @nullable
-  List<Event> get events;
+  List<Event> get events => throw _privateConstructorUsedError;
   @override
-  _$ParsedCalendarCopyWith<_ParsedCalendar> get copyWith;
+  @JsonKey(ignore: true)
+  _$ParsedCalendarCopyWith<_ParsedCalendar> get copyWith =>
+      throw _privateConstructorUsedError;
 }

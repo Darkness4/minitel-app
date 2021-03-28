@@ -13,20 +13,14 @@ _$_GithubAsset _$_$_GithubAssetFromJson(Map<String, dynamic> json) {
     id: json['id'] as int,
     node_id: json['node_id'] as String,
     name: json['name'] as String,
-    label: json['label'] as String,
+    label: json['label'] as String?,
     state: json['state'] as String,
     content_type: json['content_type'] as String,
     size: json['size'] as int,
     download_count: json['download_count'] as int,
-    created_at: json['created_at'] == null
-        ? null
-        : DateTime.parse(json['created_at'] as String),
-    updated_at: json['updated_at'] == null
-        ? null
-        : DateTime.parse(json['updated_at'] as String),
-    uploader: json['uploader'] == null
-        ? null
-        : GithubUser.fromJson(json['uploader'] as Map<String, dynamic>),
+    created_at: DateTime.parse(json['created_at'] as String),
+    updated_at: DateTime.parse(json['updated_at'] as String),
+    uploader: GithubUser.fromJson(json['uploader'] as Map<String, dynamic>),
   );
 }
 
@@ -42,7 +36,7 @@ Map<String, dynamic> _$_$_GithubAssetToJson(_$_GithubAsset instance) =>
       'content_type': instance.content_type,
       'size': instance.size,
       'download_count': instance.download_count,
-      'created_at': instance.created_at?.toIso8601String(),
-      'updated_at': instance.updated_at?.toIso8601String(),
-      'uploader': instance.uploader?.toJson(),
+      'created_at': instance.created_at.toIso8601String(),
+      'updated_at': instance.updated_at.toIso8601String(),
+      'uploader': instance.uploader.toJson(),
     };

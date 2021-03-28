@@ -1,7 +1,7 @@
 part of 'theme_cubit.dart';
 
 @freezed
-abstract class ThemeState implements _$ThemeState {
+class ThemeState with _$ThemeState {
   const factory ThemeState(
     ThemeData themeData,
     ThemeData darkThemeData,

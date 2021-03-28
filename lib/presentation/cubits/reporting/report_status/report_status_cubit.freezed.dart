@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'report_status_cubit.dart';
 
@@ -9,19 +9,21 @@ part of 'report_status_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ReportStatusStateTearOff {
   const _$ReportStatusStateTearOff();
 
-// ignore: unused_element
   _ReportStatusState call(
-      {@required @nullable String name,
-      @required @nullable String room,
-      @required @nullable String title,
-      @required @nullable String description,
-      @required bool isValidName,
-      @required bool isValidTitle,
-      @required bool isValidRoom}) {
+      {required String name,
+      required String room,
+      required String title,
+      required String description,
+      required bool isValidName,
+      required bool isValidTitle,
+      required bool isValidRoom}) {
     return _ReportStatusState(
       name: name,
       room: room,
@@ -35,24 +37,21 @@ class _$ReportStatusStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ReportStatusState = _$ReportStatusStateTearOff();
 
 /// @nodoc
 mixin _$ReportStatusState {
-  @nullable
-  String get name;
-  @nullable
-  String get room;
-  @nullable
-  String get title;
-  @nullable
-  String get description;
-  bool get isValidName;
-  bool get isValidTitle;
-  bool get isValidRoom;
+  String get name => throw _privateConstructorUsedError;
+  String get room => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  bool get isValidName => throw _privateConstructorUsedError;
+  bool get isValidTitle => throw _privateConstructorUsedError;
+  bool get isValidRoom => throw _privateConstructorUsedError;
 
-  $ReportStatusStateCopyWith<ReportStatusState> get copyWith;
+  @JsonKey(ignore: true)
+  $ReportStatusStateCopyWith<ReportStatusState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -61,10 +60,10 @@ abstract class $ReportStatusStateCopyWith<$Res> {
           ReportStatusState value, $Res Function(ReportStatusState) then) =
       _$ReportStatusStateCopyWithImpl<$Res>;
   $Res call(
-      {@nullable String name,
-      @nullable String room,
-      @nullable String title,
-      @nullable String description,
+      {String name,
+      String room,
+      String title,
+      String description,
       bool isValidName,
       bool isValidTitle,
       bool isValidRoom});
@@ -81,26 +80,43 @@ class _$ReportStatusStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object name = freezed,
-    Object room = freezed,
-    Object title = freezed,
-    Object description = freezed,
-    Object isValidName = freezed,
-    Object isValidTitle = freezed,
-    Object isValidRoom = freezed,
+    Object? name = freezed,
+    Object? room = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? isValidName = freezed,
+    Object? isValidTitle = freezed,
+    Object? isValidRoom = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed ? _value.name : name as String,
-      room: room == freezed ? _value.room : room as String,
-      title: title == freezed ? _value.title : title as String,
-      description:
-          description == freezed ? _value.description : description as String,
-      isValidName:
-          isValidName == freezed ? _value.isValidName : isValidName as bool,
-      isValidTitle:
-          isValidTitle == freezed ? _value.isValidTitle : isValidTitle as bool,
-      isValidRoom:
-          isValidRoom == freezed ? _value.isValidRoom : isValidRoom as bool,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      room: room == freezed
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      isValidName: isValidName == freezed
+          ? _value.isValidName
+          : isValidName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidTitle: isValidTitle == freezed
+          ? _value.isValidTitle
+          : isValidTitle // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidRoom: isValidRoom == freezed
+          ? _value.isValidRoom
+          : isValidRoom // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -113,10 +129,10 @@ abstract class _$ReportStatusStateCopyWith<$Res>
       __$ReportStatusStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable String name,
-      @nullable String room,
-      @nullable String title,
-      @nullable String description,
+      {String name,
+      String room,
+      String title,
+      String description,
       bool isValidName,
       bool isValidTitle,
       bool isValidRoom});
@@ -135,26 +151,43 @@ class __$ReportStatusStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object name = freezed,
-    Object room = freezed,
-    Object title = freezed,
-    Object description = freezed,
-    Object isValidName = freezed,
-    Object isValidTitle = freezed,
-    Object isValidRoom = freezed,
+    Object? name = freezed,
+    Object? room = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? isValidName = freezed,
+    Object? isValidTitle = freezed,
+    Object? isValidRoom = freezed,
   }) {
     return _then(_ReportStatusState(
-      name: name == freezed ? _value.name : name as String,
-      room: room == freezed ? _value.room : room as String,
-      title: title == freezed ? _value.title : title as String,
-      description:
-          description == freezed ? _value.description : description as String,
-      isValidName:
-          isValidName == freezed ? _value.isValidName : isValidName as bool,
-      isValidTitle:
-          isValidTitle == freezed ? _value.isValidTitle : isValidTitle as bool,
-      isValidRoom:
-          isValidRoom == freezed ? _value.isValidRoom : isValidRoom as bool,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      room: room == freezed
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      isValidName: isValidName == freezed
+          ? _value.isValidName
+          : isValidName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidTitle: isValidTitle == freezed
+          ? _value.isValidTitle
+          : isValidTitle // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidRoom: isValidRoom == freezed
+          ? _value.isValidRoom
+          : isValidRoom // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -164,28 +197,21 @@ class _$_ReportStatusState
     with DiagnosticableTreeMixin
     implements _ReportStatusState {
   const _$_ReportStatusState(
-      {@required @nullable this.name,
-      @required @nullable this.room,
-      @required @nullable this.title,
-      @required @nullable this.description,
-      @required this.isValidName,
-      @required this.isValidTitle,
-      @required this.isValidRoom})
-      : assert(isValidName != null),
-        assert(isValidTitle != null),
-        assert(isValidRoom != null);
+      {required this.name,
+      required this.room,
+      required this.title,
+      required this.description,
+      required this.isValidName,
+      required this.isValidTitle,
+      required this.isValidRoom});
 
   @override
-  @nullable
   final String name;
   @override
-  @nullable
   final String room;
   @override
-  @nullable
   final String title;
   @override
-  @nullable
   final String description;
   @override
   final bool isValidName;
@@ -248,6 +274,7 @@ class _$_ReportStatusState
       const DeepCollectionEquality().hash(isValidTitle) ^
       const DeepCollectionEquality().hash(isValidRoom);
 
+  @JsonKey(ignore: true)
   @override
   _$ReportStatusStateCopyWith<_ReportStatusState> get copyWith =>
       __$ReportStatusStateCopyWithImpl<_ReportStatusState>(this, _$identity);
@@ -255,32 +282,30 @@ class _$_ReportStatusState
 
 abstract class _ReportStatusState implements ReportStatusState {
   const factory _ReportStatusState(
-      {@required @nullable String name,
-      @required @nullable String room,
-      @required @nullable String title,
-      @required @nullable String description,
-      @required bool isValidName,
-      @required bool isValidTitle,
-      @required bool isValidRoom}) = _$_ReportStatusState;
+      {required String name,
+      required String room,
+      required String title,
+      required String description,
+      required bool isValidName,
+      required bool isValidTitle,
+      required bool isValidRoom}) = _$_ReportStatusState;
 
   @override
-  @nullable
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get room;
+  String get room => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get description;
+  String get description => throw _privateConstructorUsedError;
   @override
-  bool get isValidName;
+  bool get isValidName => throw _privateConstructorUsedError;
   @override
-  bool get isValidTitle;
+  bool get isValidTitle => throw _privateConstructorUsedError;
   @override
-  bool get isValidRoom;
+  bool get isValidRoom => throw _privateConstructorUsedError;
   @override
-  _$ReportStatusStateCopyWith<_ReportStatusState> get copyWith;
+  @JsonKey(ignore: true)
+  _$ReportStatusStateCopyWith<_ReportStatusState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
