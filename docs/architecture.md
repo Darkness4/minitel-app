@@ -333,8 +333,6 @@ graph LR
   NotificationDetails
   end
 
-  subgraph Data Layer
-
   SharedPrefs --> CalendarURLLocalDS
   http.Client --> CalendarURLRemoteDS
   Diagnosis --> DiagnosisDS
@@ -360,6 +358,35 @@ graph LR
   TokenBuffer --> TwitterRemoteDS
   http.Client --> ZabbixRemoteDS
 
+  subgraph Data Layer
+  CalendarURLLocalDS
+  CalendarURLRemoteDS
+  DiagnosisDS
+  ICalendarLocalDS
+  ICalendarRemoteDS
+  ImprimanteRemoteDS
+  PortailEMSERemoteDS
+  StormshieldRemoteDS
+  GithubLocalDS
+  GithubRemoteDS
+  LoginSettingsDS
+  NotificationSettingsDS
+  SlackRemoteDS
+  TwitterLocalDS
+  TwitterRemoteDS
+  ZabbixRemoteDS
+
+  CalendarURLRepoImpl
+  DiagnosisRepoImpl
+  ICalendarRepoImpl
+  LoginSettingsRepoImpl
+  NotificationSettingsRepoImpl
+  PostRepoImpl
+  ReleasesRepoImpl
+  ZabbixHostsRepoImpl
+  end
+
+
   CalendarURLLocalDS --> CalendarURLRepoImpl
   CalendarURLRemoteDS --> CalendarURLRepoImpl
   NetworkInfo --> CalendarURLRepoImpl
@@ -367,7 +394,7 @@ graph LR
   NetworkInfo --> DiagnosisRepoImpl
   ICalendarLocalDS --> ICalendarRepoImpl
   ICalendarRemoteDS --> ICalendarRepoImpl
-  CalendarURLRepo --> ICalendarRepoImpl
+  CalendarURLRepo --- ICalendarRepoImpl
   NetworkInfo --> ICalendarRepoImpl
   LoginSettingsDS --> LoginSettingsRepoImpl
   NotificationSettingsDS --> NotificationSettingsRepoImpl
@@ -378,7 +405,6 @@ graph LR
   GithubRemoteDS --> ReleasesRepoImpl
   NetworkInfo --> ReleasesRepoImpl
   ZabbixRemoteDS --> ZabbixHostsRepoImpl
-  end
 
   CalendarURLRepoImpl -.->|implements| CalendarURLRepo
   DiagnosisRepoImpl -.->|implements| DiagnosisRepo
