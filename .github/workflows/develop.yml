@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - develop
+      - docs
 
 name: Develop Workflow
 jobs:
@@ -37,14 +38,23 @@ jobs:
         with:
           name: coverage
           path: coverage
-      - name: Deploy coverage
-        uses: JamesIves/github-pages-deploy-action@master
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BASE_BRANCH: develop
-          BRANCH: gh-pages
-          FOLDER: coverage
+      # - name: Deploy coverage
+      #   uses: JamesIves/github-pages-deploy-action@master
+      #   env:
+      #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     BASE_BRANCH: develop
+      #     BRANCH: gh-pages
+      #     FOLDER: coverage
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material pymdown-extensions mkdocs-mermaid2-plugin
+      - run: mkdocs gh-deploy --force
   # integration-tests:
   #   name: Integration tests
   #   runs-on: macOS-latest
