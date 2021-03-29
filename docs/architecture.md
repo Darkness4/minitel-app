@@ -405,6 +405,13 @@ graph LR
   GithubRemoteDS --> ReleasesRepoImpl
   NetworkInfo --> ReleasesRepoImpl
   ZabbixRemoteDS --> ZabbixHostsRepoImpl
+  SlackRemoteDS --> ReportToSlack
+  PortailEMSERemoteDS --> FetchPortailEmseCookies
+  PortailEMSERemoteDS --> LoginToPortailEmse
+  ImprimanteRemoteDS --> FetchPrinterCookies
+  ImprimanteRemoteDS --> LoginToPrinter
+  StormshieldRemoteDS --> FetchStormshieldStatus
+  StormshieldRemoteDS --> LoginToStormshield
 
   CalendarURLRepoImpl -.->|implements| CalendarURLRepo
   DiagnosisRepoImpl -.->|implements| DiagnosisRepo
@@ -424,6 +431,13 @@ graph LR
   PostRepo
   ReleasesRepo
   ZabbixHostsRepo
+  ReportToSlack
+  FetchPortailEmseCookies
+  FetchPrinterCookies
+  LoginToStormshield
+  LoginToPrinter
+  LoginToPortailEmse
+  FetchStormshieldStatus
   end
 
   ICalendarRepo --> AgendaCubit
@@ -434,16 +448,16 @@ graph LR
   NotificationSettingsRepo --> NotificationSettingsCubit
   PostRepo --> TwitterFeedCubit
   CalendarURLRepo --> CalendarStatusCubit
-  ImprimanteRemoteDS --> ImprimanteStatusCubit
-  PortailEMSERemoteDS --> PortailEmseStatusCubit
-  StormshieldRemoteDS --> PortalLoginCubit
+  FetchPrinterCookies --> ImprimanteStatusCubit
+  FetchPortailEmseCookies --> PortailEmseStatusCubit
+  LoginToStormshield --> PortalLoginCubit
   ICalendarRepo --> PortalLoginCubit
-  ImprimanteRemoteDS --> PortalLoginCubit
-  PortailEMSERemoteDS --> PortalLoginCubit
-  StormshieldRemoteDS --> StormshieldStatusCubit
+  LoginToPrinter --> PortalLoginCubit
+  LoginToPortailEmse --> PortalLoginCubit
+  FetchStormshieldStatus --> StormshieldStatusCubit
   LoginSettingsRepo --> PortalCubit
   DiagnosisRepo --> DiagnosisCubit
-  SlackRemoteDS --> ReportCubit
+  ReportToSlack --> ReportCubit
   ZabbixHostsRepo --> ZabbixHostsCubit
 
   subgraph Presentation Layer

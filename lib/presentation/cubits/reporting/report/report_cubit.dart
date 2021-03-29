@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/utils/launch_url_utils.dart';
-import 'package:minitel_toolbox/data/datasources/slack/slack_remote_data_source.dart';
 import 'package:minitel_toolbox/data/database/diagnosis.dart';
+import 'package:minitel_toolbox/domain/usecases/report_to_slack.dart';
 import 'package:share/share.dart';
 
 part 'report_cubit.freezed.dart';
@@ -14,9 +14,9 @@ part 'report_state.dart';
 
 @injectable
 class ReportCubit extends Cubit<ReportState> {
-  final SlackRemoteDataSource slackRemoteDataSource;
+  final ReportToSlack report;
 
-  ReportCubit({required this.slackRemoteDataSource})
+  ReportCubit({required this.report})
       : super(const ReportState.initial());
 
   void toInitState() {
@@ -60,7 +60,7 @@ class ReportCubit extends Cubit<ReportState> {
   }) async {
     emit(const ReportState.loading());
     try {
-      final status = await slackRemoteDataSource.report(
+      final status = await report(
         '*Chambre $room*\n'
         '*ID : $name*\n'
         '*$title*\n'

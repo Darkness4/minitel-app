@@ -6,26 +6,26 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:minitel_toolbox/core/constants/login_constants.dart';
 import 'package:minitel_toolbox/core/error/exceptions.dart';
-import 'package:minitel_toolbox/data/datasources/emse/imprimante_remote_data_source.dart';
-import 'package:minitel_toolbox/data/datasources/emse/portail_emse_remote_data_source.dart';
-import 'package:minitel_toolbox/data/datasources/emse/stormshield_remote_data_source.dart';
 import 'package:minitel_toolbox/domain/repositories/icalendar_repository.dart';
+import 'package:minitel_toolbox/domain/usecases/login_to_portail_emse.dart';
+import 'package:minitel_toolbox/domain/usecases/login_to_printer.dart';
+import 'package:minitel_toolbox/domain/usecases/login_to_stormshield.dart';
 
 part 'portal_login_cubit.freezed.dart';
 part 'portal_login_state.dart';
 
 @injectable
 class PortalLoginCubit extends Cubit<PortalLoginState> {
-  final StormshieldRemoteDataSource stormshieldRemoteDataSource;
+  final LoginToStormshield loginToStormshield;
   final ICalendarRepository iCalendarRepository;
-  final ImprimanteRemoteDataSource imprimanteRemoteDataSource;
-  final PortailEMSERemoteDataSource portailEMSERemoteDataSource;
+  final LoginToPrinter loginToPrinter;
+  final LoginToPortailEmse loginToPortailEmse;
 
   PortalLoginCubit({
-    required this.stormshieldRemoteDataSource,
+    required this.loginToStormshield,
     required this.iCalendarRepository,
-    required this.imprimanteRemoteDataSource,
-    required this.portailEMSERemoteDataSource,
+    required this.loginToPrinter,
+    required this.loginToPortailEmse,
   }) : super(PortalLoginState.empty());
 
   Future<void> login({
@@ -37,7 +37,7 @@ class PortalLoginCubit extends Cubit<PortalLoginState> {
     emit(PortalLoginState.loading());
     try {
       // First
-      final responseStormshield = stormshieldRemoteDataSource.login(
+      final responseStormshield = loginToStormshield(
         uid: uid,
         pswd: pswd,
         selectedUrl: selectedUrl,
@@ -49,12 +49,12 @@ class PortalLoginCubit extends Cubit<PortalLoginState> {
         password: pswd,
       );
 
-      final responsePortailEMSE = portailEMSERemoteDataSource.login(
+      final responsePortailEMSE = loginToPortailEmse(
         username: uid,
         password: pswd,
       );
 
-      final responseImprimante = imprimanteRemoteDataSource.login(
+      final responseImprimante = loginToPrinter(
         username: uid,
         password: pswd,
       );
