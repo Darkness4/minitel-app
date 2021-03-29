@@ -19,9 +19,9 @@ docs.github.com › managing-your-work-on-github › crea...) afin de voir si le
 
 Nous utilisons principalement le [Github Flow](https://guides.github.com/introduction/flow/). Voici toutes les étapes en détails :
 
-- Le dépôt est [*fork*](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) par le contributeur sur Github.
+- Le dépôt est [_fork_](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) par le contributeur sur Github.
 
-- Une fois *fork*, le contributeur clone ce dépôt sur son ordinateur.
+- Une fois _fork_, le contributeur clone ce dépôt sur son ordinateur.
 
 ```sh
 git clone git@github.com:[contributeur]/minitel-app.git  # SSH
@@ -41,7 +41,7 @@ git commit -m "[task_name] This has changed"
 git push
 ```
 
-  - Les push sont envoyés dans le dépôt du contributeur.
+- Les push sont envoyés dans le dépôt du contributeur.
 
 - Une fois le travail terminé, le contributeur voudra merge son dépôt distant `git@github.com:[contributeur]/minitel-app.git` vers `git@github.com:Darkness4/minitel-app.git`. Cependant, le dépôt distant du contributeur doit être mis à jour. Si la branche du contributeur s'appelait `fix-stuff` et la branche cible du dépôt original s'appelait `develop`, alors il faudra mettre à jour `fix-stuff` en faisant :
 
@@ -55,11 +55,6 @@ git merge upstream/develop
 git push
 ```
 
-``` python
-import tensorflow as tf
-```
-
 - Le contributeur peut alors ouvrir un [Pull Request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) et request un Code Review.
 
 - Les développeurs du projets pourra alors Code Review et merge.
-
