@@ -375,6 +375,7 @@ graph LR
   TwitterLocalDS
   TwitterRemoteDS
   ZabbixRemoteDS
+  Diagnosis
 
   CalendarURLRepoImpl
   DiagnosisRepoImpl
