@@ -1,0 +1,913 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-7.1.0" name="generator"/>
+<title>Architecture Logicielle - Minitel Toolbox Docs</title>
+<link href="../assets/stylesheets/main.33e2939f.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.ef6f36e2.min.css" rel="stylesheet"/>
+<meta content="#4cae4f" name="theme-color"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+</head>
+<body data-md-color-accent="teal" data-md-color-primary="green" data-md-color-scheme="slate" dir="ltr">
+<script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#architecture-logicielle">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Minitel Toolbox Docs" class="md-header__button md-logo" data-md-component="logo" href=".." title="Minitel Toolbox Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Minitel Toolbox Docs
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Architecture Logicielle
+            
+          </span>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Minitel Toolbox Docs" class="md-nav__button md-logo" data-md-component="logo" href=".." title="Minitel Toolbox Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    Minitel Toolbox Docs
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Architecture Logicielle
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Architecture Logicielle
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rappels-sur-dart-et-flutter">
+    Rappels sur Dart et Flutter
+  </a>
+<nav aria-label="Rappels sur Dart et Flutter" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#dart">
+    Dart
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#flutter">
+    Flutter
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#architecture-clean">
+    Architecture Clean
+  </a>
+<nav aria-label="Architecture Clean" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+    Description
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#exemple-dans-un-cas-reel">
+    Exemple dans un cas réel
+  </a>
+<nav aria-label="Exemple dans un cas réel" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#core">
+    Core
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-layer">
+    Data Layer
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#domain-layer">
+    Domain Layer
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#presentation-layer">
+    Presentation Layer
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#graphe-des-dependances">
+    Graphe des dépendances
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../features/">
+        Détails sur les fonctionnalités
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../cicd-deploy/">
+        Tests et Déploiements
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../github-workflow/">
+        Contribuer
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rappels-sur-dart-et-flutter">
+    Rappels sur Dart et Flutter
+  </a>
+<nav aria-label="Rappels sur Dart et Flutter" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#dart">
+    Dart
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#flutter">
+    Flutter
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#architecture-clean">
+    Architecture Clean
+  </a>
+<nav aria-label="Architecture Clean" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+    Description
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#exemple-dans-un-cas-reel">
+    Exemple dans un cas réel
+  </a>
+<nav aria-label="Exemple dans un cas réel" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#core">
+    Core
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-layer">
+    Data Layer
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#domain-layer">
+    Domain Layer
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#presentation-layer">
+    Presentation Layer
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#graphe-des-dependances">
+    Graphe des dépendances
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="architecture-logicielle">Architecture Logicielle</h1>
+<p><a href="https://resocoder.com/flutter-clean-architecture-tdd/"><strong>Basé sur ResoCoder et son Architecture Clean.</strong></a></p>
+<h2 id="rappels-sur-dart-et-flutter">Rappels sur Dart et Flutter</h2>
+<h3 id="dart">Dart</h3>
+<p>Dart est un langage de programmation développé par Google pour des applications cross-platform.</p>
+<p>Dart est un langage Orienté Objet basé sur les classes et avec ramasse-miettes.</p>
+<h3 id="flutter">Flutter</h3>
+<p>Flutter est un SDK base sur Dart pour <strong>UI</strong> développé par Google pour des applications cross-platform.</p>
+<p>Flutter est codé en C++ et utilise la libraire SKIA pour coder sur plusieurs moteurs de rendu (OpenGL ES, OpenGL, Vulkan et Meta).</p>
+<p>Flutter compile directement en code native pour le Runtime de Flutter et bytecode D8 pour Android-spécifique.</p>
+<p>Flutter fonctionne <strong>uniquement</strong> avec un arbre de <strong>widgets</strong>.</p>
+<h2 id="architecture-clean">Architecture Clean</h2>
+<h3 id="description">Description</h3>
+<p>L'architecture logicielle est Clean (avec un peu d'exceptions).</p>
+<p>L'architecture Clean se repose sur la dépendances des données, l'inversion de contrôle et les trois couches d'architecture classique.</p>
+<p><img alt="Clean Coder Blog" src="../assets/CleanArchitecture.jpg"/></p>
+<p>Les trois couches sont :</p>
+<ul>
+<li>La couche Data : Code IO (Networking, Cache, ...)</li>
+<li>La couche Domain : Code Métier (Usecases, Repositories, Entities)</li>
+<li>La couche Presentation : Code UI (Widgets, UI State Management, Router, ...)</li>
+</ul>
+<p><img alt="Flutter TDD Clean Architecture. Three years studying computer science… | by  Fakhira Devina | Medium" src="https://miro.medium.com/max/556/0*zUtZYiJ1bDTugOYY"/></p>
+<p>Les remote data sources dépendent d'un client.</p>
+<p>Les repositories dépendent des remote et local data sources.</p>
+<p>Les usecases dépendent des repositories.</p>
+<p>Les UI Logic Holders (Cubits ou BLoC dans ce projet) dépendent des usecases ou repositories.</p>
+<p>L'UI dépendent des UI Logic Holders.</p>
+<p><strong>La solution pour satisfaire ces dépendances est l'injection de dépendance via <code>get_it</code> et <code>injectable</code>.</strong></p>
+<h3 id="exemple-dans-un-cas-reel">Exemple dans un cas réel</h3>
+<h4 id="core">Core</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">///</span>
+<span class="c1">/// Core Layer</span>
+<span class="c1">///</span>
+
+<span class="c1">/// Global instance of get_it stored in `sl`</span>
+<span class="kd">final</span> <span class="n">GetIt</span> <span class="n">sl</span> <span class="o">=</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">instance</span><span class="p">;</span>
+
+<span class="nd">@injectableInit</span>
+<span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">init</span><span class="p">()</span> <span class="kd">async</span> <span class="o">=&gt;</span> <span class="n">$initGetIt</span><span class="p">(</span><span class="n">sl</span><span class="p">);</span>
+
+<span class="nd">@module</span>
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ExternalsModule</span> <span class="p">{</span>
+  <span class="c1">/// Inject http.Client provided by the following function</span>
+  <span class="nd">@lazySingleton</span>
+  <span class="n">http</span><span class="p">.</span><span class="n">Client</span> <span class="kd">get</span> <span class="n">httpClient</span> <span class="o">=&gt;</span> <span class="n">io_client</span><span class="p">.</span><span class="n">IOClient</span><span class="p">(</span><span class="n">HttpClient</span><span class="p">()</span>
+    <span class="p">..</span><span class="n">badCertificateCallback</span> <span class="o">=</span> <span class="c1">// Do not check for HTTPS</span>
+        <span class="p">((</span><span class="n">X509Certificate</span> <span class="n">cert</span><span class="p">,</span> <span class="kt">String</span> <span class="n">host</span><span class="p">,</span> <span class="kt">int</span> <span class="n">port</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">));</span>
+
+  <span class="c1">/// ... Other external dependencies injections</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Comme nous allons avoir besoin d'un client HTTP en dépendance, nous ajoutons l'injection manuelle du client.</p>
+<p>Normalement, nous aurions très bien pu écrire <code>http.Client get httpClient =&gt; http.Client()</code>, cependant, nous devons changer la configuration du client pour ignorer le certificat SSL. Par conséquent, la méthode <code>badCertificateCallback</code> retournera toujours <code>true</code> pour ignorer les certificats SSL.</p>
+<p>Le module <code>ExternalsModule</code> set pour les injections de dépendances externes au projets comme par exemple les clients HTTP, SharedPreferences, les fichiers, ...</p>
+<p>Le <code>@lazySingleton</code> fusionne deux patterns de programmation: <code>lazy</code> et <code>singleton</code>.</p>
+<ul>
+<li>
+<p><code>singleton</code> est assez similaire à une variable <em>globale</em> ou <em>static</em>. La différence entre <em>static</em>/<em>global</em> et un <em>singleton</em> est le cycle de vie. Une variable <em>static/globale</em> est instancié à la déclaration de la variable. Un singleton est instancié manuellement (via <em>initGetIt</em> par exemple) et préférentiellement au démarrage de l'application, en runtime.</p>
+</li>
+<li>
+<p><code>lazy</code> signifie "à l'appel" comparé à <code>eager</code> qui signifie "avant l'appel". <code>lazy</code> est du <em>Just-In-Time</em> et <code>eager</code> est du <em>Ahead-Of-Time</em>. Dans le contexte d'injection de dépendance, cela signifie que l'on instancie une variable à l'appel et non à la déclaration.</p>
+</li>
+<li><code>lazySingleton</code> signifie alors "instanciation unique et uniquement au premier appel de la variable". Si la variable est rappelé, alors, la même instance est réutilisé.</li>
+</ul>
+<p>Le <code>@lazySingleton</code> provient du paquet <em>Injectable</em>.</p>
+<p>Il existe trois modes d'injections :</p>
+<ul>
+<li><code>@injectable</code> : Utilise une nouvelle instance à chaque appel</li>
+<li><code>@singleton</code> : Instancie au démarrage de l'application et réutilise cette instance à chaque appel</li>
+<li><code>@lazySingleton</code> : Instancie au premier appel et réutilise cette instance à chaque appel</li>
+</ul>
+<p>Pour choisir quel mode il faut choisir, il faut se poser la question "Quel cycle de vie ?".</p>
+<p>Généralement, les singletons <strong>sont déconseillés</strong>, car leur cycle de vie est "globale" et l'application devient chargé.</p>
+<p>Les lazy singletons sont à utiliser selon le cycle de vie. Si nous souhaitons pouvoir stocker l'état de la classe durant toute l'application (cache, cookies, ...), alors <strong>lazySingleton</strong> est surement un bon choix. Sinon, toute classe dites Stateless (sans états mutables) peuvent être des lazySingletons. Cependant, il faut garder en tête la gestion de la mémoire.</p>
+<p><strong>En cas de doute, si stateless, mettre <code>@injectable</code>.</strong> Dans le projet, pratiquement tout est <code>@lazySingleton</code>, mais comme il s'agit d'une petite application, cela suffit.</p>
+<p>Les injectables sont à utiliser si la classe est réutilisé plusieurs fois, mais que l'état ne doit pas être stocké (en clair, une instanciation classique). Par exemple, les <strong>UI Logic Holder</strong> doivent être <em>injectable</em>, car, c'est mauvaise pratique de garder l'état d'une page en mémoire après l'avoir quitté.</p>
+<p><strong><em>Injectable</em> signifie pouvoir se faire injecter des dépendances et s'injecter dans d'autre classe.</strong></p>
+<h4 id="data-layer">Data Layer</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">///</span>
+<span class="c1">/// Data Layer</span>
+<span class="c1">///</span>
+
+<span class="c1">/// A prototype for the remote data source</span>
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">GithubRemoteDataSource</span> <span class="p">{</span>
+  <span class="c1">/// Fetch Releases from network</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">GithubRelease</span><span class="o">&gt;&gt;</span> <span class="n">fetchReleases</span><span class="p">(</span><span class="kt">String</span> <span class="n">repo</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">/// The implementation of the remote data source</span>
+<span class="nd">@LazySingleton</span><span class="p">(</span><span class="k">as</span><span class="o">:</span> <span class="n">GithubRemoteDataSource</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">GithubRemoteDataSource</span> <span class="kd">implements</span> <span class="n">GithubRemoteDataSource</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">http</span><span class="p">.</span><span class="n">Client</span> <span class="n">client</span><span class="p">;</span>
+
+  <span class="c1">// Dependency</span>
+  <span class="k">const</span> <span class="n">GithubRemoteDataSource</span><span class="p">({</span><span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">client</span><span class="p">});</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">GithubRelease</span><span class="o">&gt;&gt;</span> <span class="n">fetchReleases</span><span class="p">(</span><span class="kt">String</span> <span class="n">repo</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="c1">// ... Do</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">/// Inject to the domain layer</span>
+<span class="nd">@LazySingleton</span><span class="p">(</span><span class="k">as</span><span class="o">:</span> <span class="n">ReleasesRepository</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">ReleasesRepositoryImpl</span> <span class="kd">implements</span> <span class="n">ReleasesRepository</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">GithubLocalDataSource</span> <span class="n">localDataSource</span><span class="p">;</span>
+  <span class="kd">final</span> <span class="n">GithubRemoteDataSource</span> <span class="n">remoteDataSource</span><span class="p">;</span>
+  <span class="kd">final</span> <span class="n">NetworkInfo</span> <span class="n">networkInfo</span><span class="p">;</span>
+
+  <span class="c1">/// Dependencies</span>
+  <span class="k">const</span> <span class="n">ReleasesRepositoryImpl</span><span class="p">({</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">localDataSource</span><span class="p">,</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">remoteDataSource</span><span class="p">,</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">networkInfo</span><span class="p">,</span>
+  <span class="p">});</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">GithubRelease</span><span class="o">&gt;&gt;</span> <span class="kd">get</span><span class="p">(</span><span class="kt">String</span> <span class="n">repo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do</span>
+    <span class="c1">// ...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Nous faisons une couche d'abstraction pour le documentation. Cependant, cela n'est pas obligatoire.</p>
+<p>Ici, <strong><code>GithubRemoteDataSource</code></strong> dépend de <code>http.Client</code>.</p>
+<p>En utilisant <code>@LazySingleton(as: GithubRemoteDataSource)</code>, la classe est dite <em>Injectable</em> (annoté par <em>lazySingleton</em>, <em>singleton</em> ou <em>injectable</em>). Ayant une dépendance elle-même <em>Injectable</em>, celle-ci se verra automatiquement instancié et passé en paramètre.</p>
+<p>De même, toute présence de <code>GithubRemoteDataSource</code> en paramètre de classe <em>Injectable</em> se verra injecté une instance de <code>GithubRemoteDataSource</code>.</p>
+<p>Dans la couche Domain, il existe une couche d'abstraction. <strong>Dans la couche Data, nous implémentons cette couche abstraite.</strong></p>
+<p>Nous n'expliquerons pas <strong><code>async/await</code> et <code>Future</code></strong>, RTFM.</p>
+<h4 id="domain-layer">Domain Layer</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">///</span>
+<span class="c1">/// Domain Layer</span>
+<span class="c1">///</span>
+
+<span class="c1">/// Entities</span>
+<span class="nd">@freezed</span>
+<span class="kd">class</span> <span class="nc">GithubRelease</span> <span class="kd">with</span> <span class="n">_$GithubRelease</span> <span class="p">{</span>
+  <span class="nd">@JsonSerializable</span><span class="p">(</span><span class="nl">explicitToJson:</span> <span class="kc">true</span><span class="p">)</span>
+  <span class="k">const</span> <span class="kd">factory</span> <span class="n">GithubRelease</span><span class="p">({</span>
+    <span class="kd">required</span> <span class="kt">String</span> <span class="n">url</span><span class="p">,</span>
+    <span class="kd">required</span> <span class="kt">String</span> <span class="n">html_url</span><span class="p">,</span>
+    <span class="c1">/// ... datas</span>
+  <span class="p">})</span> <span class="o">=</span> <span class="n">_GithubRelease</span><span class="p">;</span>
+
+  <span class="kd">factory</span> <span class="n">GithubRelease</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">json</span><span class="p">)</span> <span class="o">=&gt;</span>
+      <span class="n">_$GithubReleaseFromJson</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">/// Repositories interfaces</span>
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ReleasesRepository</span> <span class="p">{</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">GithubRelease</span><span class="o">&gt;&gt;</span> <span class="kd">get</span><span class="p">(</span><span class="kt">String</span> <span class="n">repo</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Ici, la couche d'abstraction est <strong>vitale</strong> pour une séparation propre des responsabilités.</p>
+<p>La couche Domain ne contient que du code métier. Cela signifie <strong>aucune dépendance aux outils d'interfaçage (HTTP, SQL, ...).</strong> Par conséquent, le code est généralement en pure Dart.</p>
+<p>C'est également dans cette couche que tout "cas d'utilisation" est implémenté. Ici par exemple, il s'agit uniquement de "Récupérer les releases sur Github". Si le cas d'utilisation était plus compliqué, par exemple "Récupérer les releases sur Github ordonnée par ordre alphabétique", il faudrait créer un classe de type Usecase (voir <a href="https://resocoder.com/2019/08/29/flutter-tdd-clean-architecture-course-2-entities-use-cases/">cours de ResoCoder</a>).</p>
+<p><code>@freezed</code> est un moyen pour faire des data classes et des sealed classes. Voir <a href="https://pub.dev/packages/freezed">doc officielle de freezed</a>. Voir doc Kotlin sur la définition des <a href="https://kotlinlang.org/docs/sealed-classes.html">sealed classes</a> et <a href="https://kotlinlang.org/docs/data-classes.html">data classes</a>.</p>
+<h4 id="presentation-layer">Presentation Layer</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">///</span>
+<span class="c1">/// Presentation Layer</span>
+<span class="c1">///</span>
+
+<span class="c1">/// UI Logic Holder</span>
+<span class="nd">@injectable</span>
+<span class="kd">class</span> <span class="nc">GithubReleasesCubit</span> <span class="kd">extends</span> <span class="n">Cubit</span><span class="o">&lt;</span><span class="n">GithubReleasesState</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">ReleasesRepository</span> <span class="n">repository</span><span class="p">;</span>
+
+  <span class="n">GithubReleasesCubit</span><span class="p">({</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">repository</span><span class="p">,</span>
+  <span class="p">})</span> <span class="o">:</span> <span class="k">super</span><span class="p">(</span><span class="k">const</span> <span class="n">GithubReleasesState</span><span class="p">.</span><span class="n">initial</span><span class="p">());</span>
+
+  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">getReleases</span><span class="p">(</span><span class="kt">String</span> <span class="n">repo</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="n">emit</span><span class="p">(</span><span class="k">const</span> <span class="n">GithubReleasesState</span><span class="p">.</span><span class="n">loading</span><span class="p">());</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">final</span> <span class="n">releases</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">repository</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="n">repo</span><span class="p">);</span>
+      <span class="n">emit</span><span class="p">(</span><span class="n">GithubReleasesState</span><span class="p">.</span><span class="n">loaded</span><span class="p">(</span><span class="n">releases</span><span class="p">));</span>
+    <span class="p">}</span> <span class="kd">on</span> <span class="n">Exception</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">emit</span><span class="p">(</span><span class="n">GithubReleasesState</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">/// UI States</span>
+<span class="nd">@freezed</span>
+<span class="kd">class</span> <span class="nc">GithubReleasesState</span> <span class="kd">with</span> <span class="n">_$GithubReleasesState</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="kd">factory</span> <span class="n">GithubReleasesState</span><span class="p">.</span><span class="n">initial</span><span class="p">()</span> <span class="o">=</span> <span class="n">GithubReleasesStateInitial</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kd">factory</span> <span class="n">GithubReleasesState</span><span class="p">.</span><span class="n">loading</span><span class="p">()</span> <span class="o">=</span> <span class="n">GithubReleasesStateLoading</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kd">factory</span> <span class="n">GithubReleasesState</span><span class="p">.</span><span class="n">loaded</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">GithubRelease</span><span class="o">&gt;</span> <span class="n">releases</span><span class="p">)</span> <span class="o">=</span>
+      <span class="n">GithubReleasesStateLoaded</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kd">factory</span> <span class="n">GithubReleasesState</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">Exception</span> <span class="n">error</span><span class="p">)</span> <span class="o">=</span>
+      <span class="n">GithubReleasesStateError</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">/// UI</span>
+<span class="kd">class</span> <span class="nc">GithubScreen</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">GithubScreen</span><span class="p">({</span><span class="n">Key</span><span class="o">?</span> <span class="n">key</span><span class="p">})</span> <span class="o">:</span> <span class="k">super</span><span class="p">(</span><span class="nl">key:</span> <span class="n">key</span><span class="p">);</span>
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">buildBody</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Widget</span> <span class="n">buildBody</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">BlocProvider</span><span class="p">(</span>
+      <span class="c1">/// With get_it, inject the dependency GithubReleasesCubit</span>
+      <span class="c1">/// and call getReleases.</span>
+      <span class="nl">create:</span> <span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">=&gt;</span>
+          <span class="n">sl</span><span class="o">&lt;</span><span class="n">GithubReleasesCubit</span><span class="o">&gt;</span><span class="p">()..</span><span class="n">getReleases</span><span class="p">((</span><span class="n">ApiKeys</span><span class="p">.</span><span class="n">githubRepo</span><span class="p">)),</span>
+      <span class="nl">child:</span> <span class="n">Center</span><span class="p">(</span>
+        <span class="c1">/// Build the widget based on the UI State</span>
+        <span class="nl">child:</span> <span class="n">BlocBuilder</span><span class="o">&lt;</span><span class="n">GithubReleasesCubit</span><span class="p">,</span> <span class="n">GithubReleasesState</span><span class="o">&gt;</span><span class="p">(</span>
+          <span class="nl">builder:</span> <span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">GithubReleasesState</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">state</span><span class="p">.</span><span class="n">when</span><span class="p">(</span>
+              <span class="nl">initial:</span> <span class="p">()</span> <span class="o">=&gt;</span>
+                  <span class="k">const</span> <span class="n">CircularProgressIndicator</span><span class="p">(</span><span class="nl">key:</span> <span class="n">Key</span><span class="p">(</span><span class="n">Keys</span><span class="p">.</span><span class="n">newsLoading</span><span class="p">)),</span>
+              <span class="nl">loading:</span> <span class="p">()</span> <span class="o">=&gt;</span>
+                  <span class="k">const</span> <span class="n">CircularProgressIndicator</span><span class="p">(</span><span class="nl">key:</span> <span class="n">Key</span><span class="p">(</span><span class="n">Keys</span><span class="p">.</span><span class="n">newsLoading</span><span class="p">)),</span>
+              <span class="nl">loaded:</span> <span class="p">(</span><span class="n">releases</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">GithubReleasesDisplay</span><span class="p">(</span><span class="nl">releases:</span> <span class="n">releases</span><span class="p">),</span>
+              <span class="nl">error:</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">ErrorDisplay</span><span class="p">(</span><span class="nl">message:</span> <span class="n">error</span><span class="p">.</span><span class="n">toString</span><span class="p">()),</span>
+            <span class="p">);</span>
+          <span class="p">},</span>
+        <span class="p">),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">/// Show the releases on a list</span>
+<span class="kd">class</span> <span class="nc">GithubReleasesDisplay</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">GithubRelease</span><span class="o">&gt;</span> <span class="n">releases</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">GithubReleasesDisplay</span><span class="p">({</span>
+    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">releases</span><span class="p">,</span>
+    <span class="n">Key</span><span class="o">?</span> <span class="n">key</span><span class="p">,</span>
+  <span class="p">})</span> <span class="o">:</span> <span class="k">super</span><span class="p">(</span><span class="nl">key:</span> <span class="n">key</span><span class="p">);</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ListView</span><span class="p">.</span><span class="n">builder</span><span class="p">(</span>
+      <span class="nl">padding:</span> <span class="k">const</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">all</span><span class="p">(</span><span class="m">10.0</span><span class="p">),</span>
+      <span class="nl">key:</span> <span class="k">const</span> <span class="n">Key</span><span class="p">(</span><span class="n">Keys</span><span class="p">.</span><span class="n">githubList</span><span class="p">),</span>
+      <span class="nl">itemCount:</span> <span class="n">releases</span><span class="p">.</span><span class="n">length</span><span class="p">,</span>
+      <span class="nl">itemBuilder:</span> <span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">GithubCard</span><span class="p">(</span>
+        <span class="nl">release:</span> <span class="n">releases</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+        <span class="nl">key:</span> <span class="n">Key</span><span class="p">(</span><span class="n">Keys</span><span class="p">.</span><span class="n">githubItem</span><span class="p">(</span><span class="n">index</span><span class="p">)),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Voir <a href="https://pub.dev/packages/bloc">Cubit</a> et <a href="https://pub.dev/packages/flutter_bloc">Flutter Cubit</a>. Nous n'allons pas expliquer <strong>Stream/Observable/Rx</strong>, RTFM.</p>
+<p>En résumé, <strong>Cubit est un gestionnaire d'état observable.</strong> Un Cubit reçoit un flux d'évènement (<code>click button</code>, <code>load page</code>, ...) et en résulte en un état (<code>data fetched</code>, <code>page loaded</code>, <code>loading</code>, ...). Un cubit <strong>remplace un StatefulWidget</strong>. C'est-à-dire que dans ce projet, <strong>setState</strong> n'est pas utilisé.</p>
+<p>Un cubit est également une solution pour faire une machine d'état finie asynchrone sans se compliquer la vie.</p>
+<p>Nous utilisons un <code>BlocBuilder</code> pour afficher des widgets selon les états. Il existe d'autres observateurs comme le classique <code>.stream.listen(onData)</code> qui est l'observateur de Dart.</p>
+<h2 id="graphe-des-dependances">Graphe des dépendances</h2>
+<p>29-03-2021</p>
+<div class="mermaid">graph LR
+  subgraph Core Dependencies
+  SharedPrefs
+  http.Client
+  ProcessManager
+  InternetAddressManager
+  FileManager
+  CookieManager
+  SecureStorage
+  DateTimeManager
+  TokenBuffer
+  Connectivity
+  NetworkInfo
+  NTLMClient
+  FlutterLocalNotificationsPlugin
+  NotificationDetails
+  end
+
+  SharedPrefs --&gt; CalendarURLLocalDS
+  http.Client --&gt; CalendarURLRemoteDS
+  Diagnosis --&gt; DiagnosisDS
+  ProcessManager --&gt; DiagnosisDS
+  InternetAddressManager --&gt; DiagnosisDS
+  StormshieldRemoteDS --&gt; DiagnosisDS
+  FileManager --&gt; ICalendarLocalDS
+  http.Client --&gt; ICalendarRemoteDS
+  NTLMClient --&gt; ImprimanteRemoteDS
+  CookieManager --&gt; ImprimanteRemoteDS
+  http.Client --&gt; PortailEMSERemoteDS
+  CookieManager --&gt; PortailEMSERemoteDS
+  http.Client --&gt; StormshieldRemoteDS
+  FileManager --&gt; GithubLocalDS
+  http.Client --&gt; GithubRemoteDS
+  SharedPrefs --&gt; LoginSettingsDS
+  SecureStorage --&gt; LoginSettingsDS
+  SharedPrefs --&gt; NotificationSettingsDS
+  http.Client --&gt; SlackRemoteDS
+  DateTimeManager --&gt; SlackRemoteDS
+  FileManager --&gt; TwitterLocalDS
+  http.Client --&gt; TwitterRemoteDS
+  TokenBuffer --&gt; TwitterRemoteDS
+  http.Client --&gt; ZabbixRemoteDS
+
+  subgraph Data Layer
+  CalendarURLLocalDS
+  CalendarURLRemoteDS
+  DiagnosisDS
+  ICalendarLocalDS
+  ICalendarRemoteDS
+  ImprimanteRemoteDS
+  PortailEMSERemoteDS
+  StormshieldRemoteDS
+  GithubLocalDS
+  GithubRemoteDS
+  LoginSettingsDS
+  NotificationSettingsDS
+  SlackRemoteDS
+  TwitterLocalDS
+  TwitterRemoteDS
+  ZabbixRemoteDS
+  Diagnosis
+
+  CalendarURLRepoImpl
+  DiagnosisRepoImpl
+  ICalendarRepoImpl
+  LoginSettingsRepoImpl
+  NotificationSettingsRepoImpl
+  PostRepoImpl
+  ReleasesRepoImpl
+  ZabbixHostsRepoImpl
+  end
+
+
+  CalendarURLLocalDS --&gt; CalendarURLRepoImpl
+  CalendarURLRemoteDS --&gt; CalendarURLRepoImpl
+  NetworkInfo --&gt; CalendarURLRepoImpl
+  DiagnosisDS --&gt; DiagnosisRepoImpl
+  NetworkInfo --&gt; DiagnosisRepoImpl
+  ICalendarLocalDS --&gt; ICalendarRepoImpl
+  ICalendarRemoteDS --&gt; ICalendarRepoImpl
+  CalendarURLRepo --- ICalendarRepoImpl
+  NetworkInfo --&gt; ICalendarRepoImpl
+  LoginSettingsDS --&gt; LoginSettingsRepoImpl
+  NotificationSettingsDS --&gt; NotificationSettingsRepoImpl
+  TwitterLocalDS --&gt; PostRepoImpl
+  TwitterRemoteDS --&gt; PostRepoImpl
+  NetworkInfo --&gt; PostRepoImpl
+  GithubLocalDS --&gt; ReleasesRepoImpl
+  GithubRemoteDS --&gt; ReleasesRepoImpl
+  NetworkInfo --&gt; ReleasesRepoImpl
+  ZabbixRemoteDS --&gt; ZabbixHostsRepoImpl
+  SlackRemoteDS --&gt; ReportToSlack
+  PortailEMSERemoteDS --&gt; FetchPortailEmseCookies
+  PortailEMSERemoteDS --&gt; LoginToPortailEmse
+  ImprimanteRemoteDS --&gt; FetchPrinterCookies
+  ImprimanteRemoteDS --&gt; LoginToPrinter
+  StormshieldRemoteDS --&gt; FetchStormshieldStatus
+  StormshieldRemoteDS --&gt; LoginToStormshield
+
+  CalendarURLRepoImpl -.-&gt;|implements| CalendarURLRepo
+  DiagnosisRepoImpl -.-&gt;|implements| DiagnosisRepo
+  ICalendarRepoImpl -.-&gt;|implements| ICalendarRepo
+  LoginSettingsRepoImpl -.-&gt;|implements| LoginSettingsRepo
+  NotificationSettingsRepoImpl -.-&gt;|implements| NotificationSettingsRepo
+  PostRepoImpl -.-&gt;|implements| PostRepo
+  ReleasesRepoImpl -.-&gt;|implements| ReleasesRepo
+  ZabbixHostsRepoImpl -.-&gt;|implements| ZabbixHostsRepo
+
+  subgraph Domain Layer
+  CalendarURLRepo
+  DiagnosisRepo
+  ICalendarRepo
+  LoginSettingsRepo
+  NotificationSettingsRepo
+  PostRepo
+  ReleasesRepo
+  ZabbixHostsRepo
+  ReportToSlack
+  FetchPortailEmseCookies
+  FetchPrinterCookies
+  LoginToStormshield
+  LoginToPrinter
+  LoginToPortailEmse
+  FetchStormshieldStatus
+  end
+
+  ICalendarRepo --&gt; AgendaCubit
+  FlutterLocalNotificationsPlugin --&gt; AgendaCubit
+  NotificationDetails --&gt; AgendaCubit
+  NotificationSettingsCubit --&gt; AgendaCubit
+  ReleasesRepo --&gt; GithubReleasesCubit
+  NotificationSettingsRepo --&gt; NotificationSettingsCubit
+  PostRepo --&gt; TwitterFeedCubit
+  CalendarURLRepo --&gt; CalendarStatusCubit
+  FetchPrinterCookies --&gt; ImprimanteStatusCubit
+  FetchPortailEmseCookies --&gt; PortailEmseStatusCubit
+  LoginToStormshield --&gt; PortalLoginCubit
+  ICalendarRepo --&gt; PortalLoginCubit
+  LoginToPrinter --&gt; PortalLoginCubit
+  LoginToPortailEmse --&gt; PortalLoginCubit
+  FetchStormshieldStatus --&gt; StormshieldStatusCubit
+  LoginSettingsRepo --&gt; PortalCubit
+  DiagnosisRepo --&gt; DiagnosisCubit
+  ReportToSlack --&gt; ReportCubit
+  ZabbixHostsRepo --&gt; ZabbixHostsCubit
+
+  subgraph Presentation Layer
+  AgendaCubit
+  GithubReleasesCubit
+  NotificationSettingsCubit
+  TwitterFeedCubit
+  CalendarStatusCubit
+  ImprimanteStatusCubit
+  PortailEmseStatusCubit
+  PortalLoginCubit
+  StormshieldStatusCubit
+  PortalCubit
+  DiagnosisCubit
+  ReportCubit
+  ZabbixHostsCubit
+  ReportStatusCubit
+  end
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a class="md-footer__link md-footer__link--prev" href=".." rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+</div>
+</a>
+<a class="md-footer__link md-footer__link--next" href="../features/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              Détails sur les fonctionnalités
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+<script src="../assets/javascripts/bundle.d892486b.min.js"></script>
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({
+    theme: "dark"
+});</script></body>
+</html>
